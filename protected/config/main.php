@@ -22,6 +22,12 @@ return array(
 
     'modules'=>array(
         'user',
+		'gii'=>array(
+			'class'=>'system.gii.GiiModule',
+			'password'=>'zaq',
+			// If removed, Gii defaults to localhost only. Edit carefully to taste.
+			'ipFilters'=>array('127.0.0.1','192.168.126.1','::1'),
+		),
     ),
 
 	'defaultController'=>'quest',
@@ -60,16 +66,18 @@ return array(
 		'log'=>array(
 			'class'=>'CLogRouter',
 			'routes'=>array(
-				array(
-					'class'=>'CFileLogRoute',
-					'levels'=>'error, warning',
-				),
+			// 	array(
+			// 		'class'=>'CFileLogRoute',
+			// 		'levels'=>'trace, info, error, warning, vardump',
+			// 	),
 				// uncomment the following to show log messages on web pages
-				/*
+				
 				array(
 					'class'=>'CWebLogRoute',
+					'levels'=>'trace, info, error, warning, vardump',
+					'showInFireBug'=>true,
 				),
-				*/
+				
 			),
 		),
 	),

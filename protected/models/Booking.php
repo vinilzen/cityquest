@@ -37,7 +37,7 @@ class Booking extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('comment, status, time, email, phone, quest_id, competitor_id', 'required'),
+			array('comment, status, time, quest_id, competitor_id', 'required'),
 			array('status, create_time, result, quest_id, competitor_id', 'numerical', 'integerOnly'=>true),
 			array('email, phone', 'length', 'max'=>128),
 			// The following rule is used by search().
@@ -100,6 +100,8 @@ class Booking extends CActiveRecord
 		$criteria->compare('comment',$this->comment,true);
 		$criteria->compare('status',$this->status);
 		$criteria->compare('time',$this->time,true);
+		$criteria->compare('date',$this->date,true);
+		$criteria->compare('price',$this->price,true);
 		$criteria->compare('create_time',$this->create_time);
 		$criteria->compare('email',$this->email,true);
 		$criteria->compare('phone',$this->phone,true);

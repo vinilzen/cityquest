@@ -135,6 +135,7 @@ $this->widget('zii.widgets.CDetailView', array(
 
               ?><button type="button" 
                   data-time="<?php echo $time; ?>" 
+                  data-ymd="<?php echo $value['date']; ?>" 
                   data-date="<?php echo $value['day']; ?> <?php echo $value['month_name']; ?>" 
                   data-day="<?php echo $value['day_name']; ?>" 
                   data-price="<?php
@@ -142,7 +143,7 @@ $this->widget('zii.widgets.CDetailView', array(
                     else echo $k < 9 ? $priceAm : $pricePm; ?>" 
                   class="time btn btn-default btn-sm <?php
           echo (($value['date'] === date('Ymd') && $near) || $dis) ? 'disabled' : '';
-          if ($value['date'] != '20140612' && $value['date'] != '20140613' && $value['day_name'] != 'суббота' && $value['day_name'] != 'воскресенье' && $k > 2 && $k < 7 ) echo ' turnoff'; 
+          if ($value['date'] != '20140612' && $value['date'] != '20140613' && $value['day_name'] != 'суббота' && $value['day_name'] != 'воскресенье' && $k > 2 && $k < 7 ) echo ' invisible'; 
         ?>">
               <?php echo $time; ?></button> <?php } ?>
           <div class="clearfix"></div>
@@ -162,11 +163,16 @@ $this->widget('zii.widgets.CDetailView', array(
 	      <div class="modal-body">
 	         <form role="form">
 	         	<input type="hidden" value="" name="date" id="selected_date" />
+	         	<input type="hidden" value="<? echo $model->id; ?>" name="quest_id" id="quest_id" />
+	         	<input type="hidden" value="" name="ymd" id="selected_ymd" />
 	         	<input type="hidden" value="" name="time" id="selected_time" />
 	         	<input type="hidden" value="" name="price" id="selected_price" />
 	              <div class="form-group">
 	                <label for="name">Имя</label><input class="form-control input-lg" id="name"
 	                	value="<? echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->profile->getAttribute('firstname') : ''; ?>" type="text">
+	              </div>
+	              <div class="form-group">
+	              		<label for="mail">Примечание</label><textarea id="comment"></textarea>
 	              </div>
 	              <div class="form-group">
 	                <label for="phone">Телефон</label><input class="form-control input-lg" id="phone" 
@@ -177,7 +183,7 @@ $this->widget('zii.widgets.CDetailView', array(
 		                <label for="mail">Email</label><input class="form-control input-lg" value="" id="mail" type="text" value="" >
 		              </div>
 	              <? } ?>
-	              <button class="btn btn-default btn-block btn-lg" type="submit">Забронировать</button>
+	              <button class="btn btn-default btn-block btn-lg" id="book" type="submit">Забронировать</button>
 	            </form>
 	            <h4 class="text-center" style="display:none;">Ваша заяка успешно отправлена.</h4>
 	      </div>

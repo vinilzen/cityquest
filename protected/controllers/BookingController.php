@@ -31,12 +31,12 @@ class BookingController extends Controller
 				'actions'=>array('index','view'),
 				'users'=>array('*'),
 			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+			array('allow', // allow authenticated user to perform 'create' actions
+				'actions'=>array('create'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('admin','delete','update'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -62,21 +62,44 @@ class BookingController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Booking;
+		if(Yii::app()->request->isAjaxRequest){
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+			$this->layout=false;
+			header('Content-type: application/json');
 
-		if(isset($_POST['Booking']))
-		{
-			$model->attributes=$_POST['Booking'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
-		}
+			if (!Yii::app()->user->isGuest){
 
-		$this->render('create',array(
-			'model'=>$model,
-		));
+				if (isset($_POST['quest_id']) && is_numeric($_POST['quest_id'])){
+					$quest = Quest::model()->findByPk($_POST['quest_id']);
+
+					if ($quest) {
+						$model=new Booking;
+
+						// Uncomment the following line if AJAX validation is needed
+						// $this->performAjaxValidation($model);
+
+						$model->comment = $_POST['date'].' - '.$_POST['time'].' - '.$_POST['comment'];
+						$model->time = $_POST['time'];
+						$model->price = (int)$_POST['price'];
+						$model->date = (int)$_POST['ymd'];
+						$model->phone = $_POST['phone'];
+						$model->quest_id = (int)$_POST['quest_id'];
+						$model->competitor_id = (int)Yii::app()->user->id;
+
+						if($model->save())
+							echo CJavaScript::jsonEncode(array('success'=>1));
+						else {
+							// var_dump(implode(', ', $model->getErrors());	
+							echo CJavaScript::jsonEncode(array('success'=>0, 'message'=> 'Ошибка сохранения', 'errors'=>$model->getErrors()));
+						}
+
+					} else echo CJavaScript::jsonEncode(array('success'=>0, 'message'=> 'Квест не найден'));
+				} else echo CJavaScript::jsonEncode(array('success'=>0, 'message'=> 'Неправильный запрос'));
+			} else echo CJavaScript::jsonEncode(array('success'=>0, 'message'=> 'У вас нету доступа'));
+
+           	// Yii::app()->end();
+
+		} else throw new CHttpException(404, 'Страница не найдена');
 	}
 
 	/**
