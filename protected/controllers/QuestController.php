@@ -33,11 +33,7 @@ class QuestController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
-				'users'=>array('admin'),
-			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('create','update','admin','delete'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -89,13 +85,35 @@ class QuestController extends Controller
 	{
 		$model=$this->loadModel($id);
 
+		$bookings = array();
+		$bookings = Booking::model()->with('competitor')->findAllByAttributes(
+			array('quest_id'=>$id),
+			'date >= :start_date AND date <= :end_date',
+			array(
+				'start_date'=> date('Ymd', strtotime('now')),
+				'end_date'=> date('Ymd', strtotime('+1 week')),
+			));
+
+
+		$bookings_by_date = array();
+
+		foreach ($bookings as $booking) {
+			// echo $booking->date.',';
+
+			if (!isset($bookings_by_date[$booking->date]))
+				$bookings_by_date[$booking->date] = array();
+
+			$bookings_by_date[$booking->date][$booking->time] = $booking->attributes;
+			$bookings_by_date[$booking->date][$booking->time]['name'] = $booking->competitor->username;
+
+		}
+		// echo '<hr><pre>'; var_dump($bookings_by_date); die;
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['Quest']))
 		{
 			$model->attributes=$_POST['Quest'];
-
 
 			$model->image = CUploadedFile::getInstance($model,'image');
 
@@ -118,6 +136,7 @@ class QuestController extends Controller
 
 		$this->render('update',array(
 			'model'=>$model,
+			'booking' => $bookings_by_date,
 		));
 	}
 

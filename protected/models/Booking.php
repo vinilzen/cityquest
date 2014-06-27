@@ -53,9 +53,12 @@ class Booking extends CActiveRecord
 	{
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
+		
+		Yii::import('application.modules.user.models.*');
+
 		return array(
-			'quest' => array(self::BELONGS_TO, 'TblQuest', 'quest_id'),
-			'competitor' => array(self::BELONGS_TO, 'TblUser', 'competitor_id'),
+			'quest' => array(self::BELONGS_TO, 'Quest', 'quest_id'),
+			'competitor' => array(self::BELONGS_TO, 'User', 'competitor_id'),
 		);
 	}
 

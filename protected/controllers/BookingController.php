@@ -88,16 +88,19 @@ class BookingController extends Controller
 
 						if($model->save())
 							echo CJavaScript::jsonEncode(array('success'=>1));
-						else {
-							// var_dump(implode(', ', $model->getErrors());	
-							echo CJavaScript::jsonEncode(array('success'=>0, 'message'=> 'Ошибка сохранения', 'errors'=>$model->getErrors()));
-						}
-
+						else
+							echo CJavaScript::jsonEncode(
+								array(
+									'success'=>0, 
+									'message'=> 'Ошибка сохранения', 
+									'errors'=>$model->getErrors()
+								)
+							);
 					} else echo CJavaScript::jsonEncode(array('success'=>0, 'message'=> 'Квест не найден'));
 				} else echo CJavaScript::jsonEncode(array('success'=>0, 'message'=> 'Неправильный запрос'));
 			} else echo CJavaScript::jsonEncode(array('success'=>0, 'message'=> 'У вас нету доступа'));
 
-           	// Yii::app()->end();
+           	Yii::app()->end();
 
 		} else throw new CHttpException(404, 'Страница не найдена');
 	}

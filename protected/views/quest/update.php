@@ -39,6 +39,11 @@ $this->menu=array(
       $currDate = strtotime( 'now' );
       $dayArray = array();
 
+      $priceAm = 3000;
+      $pricePm = 3500;
+      $pricesStr = '';
+      $workday = 1;
+
         function makeDayArray( ){
           $days = array('понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота', 'воскресенье');
           $month = array('января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'ноября', 'октября', 'декабря' );
@@ -63,23 +68,17 @@ $this->menu=array(
 
           <table class="table">
             <?php foreach ($next_2week as $value) {
-              $priceAm = 3000;
-              $pricePm = 3500;
-              $pricesStr = '';
-              $workday = 1;
               if (
                 $value['day_name'] == 'суббота' || 
                 $value['day_name'] == 'воскресенье')
               {
                 $workday = 0;
-                $priceAm = 3000;
                 $pricePm = 3500;
                 $pricesStr =  '<span class="price"><span>'.$priceAm.' руб.</span></span>'.
                               ' <span class="price"><span>'.$pricePm.' руб.</span></span>';
 
               } else {
 
-                $priceAm = 3000;
                 $pricePm = 2000;
                 $pricesStr =  '<span class="price"><span>'.$priceAm.' руб.</span></span>'.
                               ' <span class="price"><span>'.$pricePm.' руб.</span></span>'.
@@ -99,9 +98,20 @@ $this->menu=array(
                   
                   $near = 0;
                   if ($time < date('h:i', strtotime( '+3 hours' )) ) $near = 1;
+                  // echo isset($booking[$value['date']]);
+                  // echo $value['date'];
+                  // data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." 
+                ?><button type="button" <?
+                 if (isset($booking[$value['date']]) && isset($booking[$value['date']][$time]) ) {
 
-                ?><button type="button" 
-                    data-trigger="click" data-toggle="popover" data-title="<?php echo $value['day']; ?> <?php echo $value['month_name']; ?> <?php echo $time; ?>  Вася Иванов" data-placement="top" data-container="body" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." 
+                  // var_dump($booking[$value['date']][$time]); die;
+
+                  echo 'data-name="'.$booking[$value['date']][$time]['name'].'"';
+                  echo 'data-phone="'.$booking[$value['date']][$time]['phone'].'"';
+                 }
+                ?>
+                    data-toggle="popover"
+                    data-title="<?php echo $value['day']; ?> <?php echo $value['month_name']; ?> <?php echo $time; ?>"
                     data-time="<?php echo $time; ?>" 
                     data-date="<?php echo $value['day']; ?> <?php echo $value['month_name']; ?>" 
                     data-day="<?php echo $value['day_name']; ?>" 
@@ -109,9 +119,19 @@ $this->menu=array(
                       if ($workday === 1) echo ($k>3 && $k<14) ? $pricePm : $priceAm;
                       else echo $k < 9 ? $priceAm : $pricePm; ?>" 
                     class="time btn btn-default btn-sm <?php
-            echo (($value['date'] === date('Ymd') && $near) || $dis) ? 'dis' : '';
-            if ($value['date'] != '20140612' && $value['date'] != '20140613' && $value['day_name'] != 'суббота' && $value['day_name'] != 'воскресенье' && $k > 2 && $k < 7 ) echo ' turnoff'; 
-          ?>">
+              // if ( ($value['date'] === date('Ymd') && $near) || $dis ) echo ' disabled';
+
+              if (isset($booking[$value['date']]) && isset($booking[$value['date']][$time]) )
+                echo ' btn-success';
+
+            if (
+              $value['date'] != '20140612' && 
+              $value['date'] != '20140613' && 
+              $value['day_name'] != 'суббота' && 
+              $value['day_name'] != 'воскресенье' && 
+              $k > 2 && $k < 7 )
+                echo ' turnoff'; 
+          ?>" >
                 <?php echo $time; ?></button> <?php } ?>
             <div class="clearfix"></div>
             <?php echo $pricesStr; ?>
@@ -127,8 +147,89 @@ $this->menu=array(
 </div>
 
 
-
-
-<div class="clearfix"></div>
-
-<hr>
+<script id="BookInfWrap" type="text/template">
+  <div class="checkBooking" id="BookInf">
+    <h3 style="margin-top: 0;" class="pop-row"><%= name %></h3>
+    <p class="phoneRow pop-row" id="phoneRow"><strong>Phone</strong>: <span><%= phone %></span></p>
+    <form class="form-horizontal pop-row" id="editBookingRow" role="form">
+      <div class="form-group">
+        <label for="inputName" class="col-sm-2 control-label">Name</label>
+        <div class="col-sm-7">
+          <input type="text" class="form-control input-sm inputName" placeholder="Ivan">
+        </div>
+        <div class="col-sm-2">
+          <button id="saveBooking" class="btn btn-default btn-sm" data-toggle="tooltip" title="Сохранить">
+            <span class="glyphicon glyphicon-ok"></span>
+          </button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputPhone" class="col-sm-2 control-label">Phone</label>
+        <div class="col-sm-7">
+          <input type="text" class="form-control input-sm inputPhone" placeholder="123-456-789">
+        </div>
+        <div class="col-sm-2">
+          <button id="cancelEditBooking" class="btn btn-default btn-sm" data-toggle="tooltip" title="Отменить">
+            <span class="glyphicon glyphicon-remove"></span>
+          </button>
+        </div>
+      </div>
+    </form>
+    <form class="form-horizontal pop-row" id="addBookingRow" role="form">
+      <div class="form-group">
+        <label for="inputName" class="col-sm-2 control-label">Name</label>
+        <div class="col-sm-7">
+          <input type="text" class="form-control input-sm inputName" placeholder="Ivan">
+        </div>
+        <div class="col-sm-2">
+          <button id="AddBooking" class="btn btn-default btn-sm" data-toggle="tooltip" title="Сохранить">
+            <span class="glyphicon glyphicon-ok"></span>
+          </button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputPhone" class="col-sm-2 control-label">Phone</label>
+        <div class="col-sm-7">
+          <input type="text" class="form-control input-sm inputPhone" placeholder="123-456-789">
+        </div>
+        <div class="col-sm-2">
+          <button id="cancelAddBooking" class="btn btn-default btn-sm" data-toggle="tooltip" title="Отменить">
+            <span class="glyphicon glyphicon-remove"></span>
+          </button>
+        </div>
+      </div>
+    </form>
+    <div class="pop-row" id="confirmRow">
+    <p class="text-center">
+      <strong>Вы уверены?</strong>
+      <button class="btn btn-default btn-sm" data-toggle="tooltip" title="Да, Удалить!">
+        <span class="glyphicon glyphicon-ok"></span>
+      </button>
+      <button class="btn btn-default btn-sm" data-toggle="tooltip" title="Отменить удаление">
+        <span class="glyphicon glyphicon-remove"></span>
+      </button>
+    </p>
+    </div>
+    <div class="pop-row" id="btnRow">
+    <p class="text-center">
+      <button class="btn btn-default btn-sm" id="confirmBooking" data-toggle="tooltip" title="Подтвердить бронирование">
+        <span class="glyphicon glyphicon-ok"></span>
+      </button>
+      <button class="btn btn-default btn-sm" id="removeBooking" data-toggle="tooltip" title="Удалить бронирование">
+        <span class="glyphicon glyphicon-remove"></span>
+      </button>
+      <button class="btn btn-default btn-sm" id="editBooking" data-toggle="tooltip" title="Редактировать бронирование">
+        <span class="glyphicon glyphicon-pencil"></span>
+      </button>
+    </p>
+    </div>
+    <div class="pop-row" id="addRow">
+      <p class="text-center">
+        <strong>Записать вручную</strong>
+        <button class="btn btn-default btn-sm" id="addBooking" data-toggle="tooltip" title="Добавить бронирование">
+          <span class="glyphicon glyphicon-plus"></span>
+        </button>
+      </p>
+    </div>
+  </div>
+</script>

@@ -44,6 +44,7 @@ return array(
 		'db'=>array(
 			'connectionString' => 'mysql:host=localhost;dbname=cityquest',
 			'emulatePrepare' => true,
+    		'enableParamLogging' => true,
 			'username' => 'cityquest',
 			'password' => 'cityquest123',
 			'charset' => 'utf8',
