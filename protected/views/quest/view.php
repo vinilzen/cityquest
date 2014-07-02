@@ -45,16 +45,9 @@ if ( file_exists('./images/q/'.$model->id.'.jpg') ){
 $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
-		// 'id',
-		// 'title',
 		'content',
 		'addres',
 		'metro',
-		// 'times',
-		// array( 'label' => 'Status', 'value' => $status_value, ),
-		// array( 'label' => 'create_time', 'value' => date('Y-m-d H:i:s', $model->create_time) ),
-		// array( 'label' => 'update_time', 'value' => date('Y-m-d H:i:s', $model->update_time) ),
-		// 'author_id',
 		array( 'label' => 'img', 'type'=>'raw', 'value' => $img )
 	),
 )); ?>
@@ -104,15 +97,15 @@ $this->widget('zii.widgets.CDetailView', array(
               $value['day_name'] == 'воскресенье')
             {
               $workday = 0;
-              $priceAm = 3000;
-              $pricePm = 3500;
+              $priceAm = Yii::app()->params['price_weekend_AM'];
+              $pricePm = Yii::app()->params['price_weekend_PM'];
               $pricesStr =  '<span class="price"><span>'.$priceAm.' руб.</span></span>'.
                             ' <span class="price"><span>'.$pricePm.' руб.</span></span>';
 
             } else {
 
-              $priceAm = 3000;
-              $pricePm = 2000;
+              $priceAm = Yii::app()->params['price_workday_AM'];
+              $pricePm = Yii::app()->params['price_workday_PM'];
               $pricesStr =  '<span class="price"><span>'.$priceAm.' руб.</span></span>'.
                             ' <span class="price"><span>'.$pricePm.' руб.</span></span>'.
                             ' <span class="price"><span>'.$priceAm.' руб.</span></span>';
@@ -131,10 +124,12 @@ $this->widget('zii.widgets.CDetailView', array(
                 
                 $near = 0;
                 if ($time < date('H:i', strtotime( '+0 hours' )) ) $near = 1;
-              	// data-trigger="click" data-toggle="modal" data-title="<?php echo $value['day'];  echo $value['month_name'];  echo $time;   Вася Иванов" data-placement="top" data-container="body" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." 
 
               ?><button type="button" 
+                  data-name="<?php echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->profile->getAttribute('firstname') : ''; ?>" 
+                  data-phone="<?php echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->profile->getAttribute('phone') : ''; ?>" 
                   data-time="<?php echo $time; ?>" 
+                  data-quest="<? echo $model->id; ?>" 
                   data-ymd="<?php echo $value['date']; ?>" 
                   data-date="<?php echo $value['day']; ?> <?php echo $value['month_name']; ?>" 
                   data-day="<?php echo $value['day_name']; ?>" 
@@ -143,8 +138,10 @@ $this->widget('zii.widgets.CDetailView', array(
                     else echo $k < 9 ? $priceAm : $pricePm; ?>" 
                   class="time btn btn-default btn-sm <?php
           echo (($value['date'] === date('Ymd') && $near) || $dis) ? 'disabled' : '';
-          if ($value['date'] != '20140612' && $value['date'] != '20140613' && $value['day_name'] != 'суббота' && $value['day_name'] != 'воскресенье' && $k > 2 && $k < 7 ) echo ' invisible'; 
-        ?>">
+          if ($value['date'] != '20140612' && $value['date'] != '20140613' && $value['day_name'] != 'суббота' && $value['day_name'] != 'воскресенье' && $k > 2 && $k < 7 )
+          	echo ' invisible';?>"
+		<?
+			if (isset($booking[$value['date']]) && isset($booking[$value['date']][$time]) ) echo ' disabled="disabled"'; ?>>
               <?php echo $time; ?></button> <?php } ?>
           <div class="clearfix"></div>
           <?php echo $pricesStr; ?>
@@ -152,43 +149,4 @@ $this->widget('zii.widgets.CDetailView', array(
       </tr>
       <?php } ?>
     </table>
-
-	<div aria-hidden="true" aria-labelledby="myModalLabel" class="formaModal modal fade" role="dialog" tabindex="-1">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	        <h4 class="modal-title">6 июня (пятница)   10:15<br><strong>3 000 </strong>руб.</h4>
-	      </div>
-	      <div class="modal-body">
-	         <form role="form">
-	         	<input type="hidden" value="" name="date" id="selected_date" />
-	         	<input type="hidden" value="<? echo $model->id; ?>" name="quest_id" id="quest_id" />
-	         	<input type="hidden" value="" name="ymd" id="selected_ymd" />
-	         	<input type="hidden" value="" name="time" id="selected_time" />
-	         	<input type="hidden" value="" name="price" id="selected_price" />
-	              <div class="form-group">
-	                <label for="name">Имя</label><input class="form-control input-lg" id="name"
-	                	value="<? echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->profile->getAttribute('firstname') : ''; ?>" type="text">
-	              </div>
-	              <div class="form-group">
-	              		<label for="mail">Примечание</label><textarea id="comment"></textarea>
-	              </div>
-	              <div class="form-group">
-	                <label for="phone">Телефон</label><input class="form-control input-lg" id="phone" 
-	                	value="<? echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->profile->getAttribute('phone') : ''; ?>" type="text">
-	              </div>
-	              <?php if (Yii::app()->user->isGuest) { ?>
-		              <div class="form-group">
-		                <label for="mail">Email</label><input class="form-control input-lg" value="" id="mail" type="text" value="" >
-		              </div>
-	              <? } ?>
-	              <button class="btn btn-default btn-block btn-lg" id="book" type="submit">Забронировать</button>
-	            </form>
-	            <h4 class="text-center" style="display:none;">Ваша заяка успешно отправлена.</h4>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-
 </div>

@@ -29,7 +29,7 @@ class QuestController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view', 'schedule'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -48,8 +48,34 @@ class QuestController extends Controller
 	 */
 	public function actionView($id)
 	{
+		$model=$this->loadModel($id);
+
+		$bookings = array();
+		$bookings = Booking::model()->with('competitor')->findAllByAttributes(
+			array('quest_id'=>$id),
+			'date >= :start_date AND date <= :end_date',
+			array(
+				'start_date'=> date('Ymd', strtotime('now')),
+				'end_date'=> date('Ymd', strtotime('+1 week')),
+			));
+
+
+		$bookings_by_date = array();
+
+		foreach ($bookings as $booking) {
+			if (!isset($bookings_by_date[$booking->date]))
+				$bookings_by_date[$booking->date] = array();
+
+			$bookings_by_date[$booking->date][$booking->time] = $booking->attributes;
+			$bookings_by_date[$booking->date][$booking->time]['name'] = $booking->competitor->username;
+
+		}
+
+		// echo '<pre>'; print_r($bookings_by_date); die;
+
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+			'model'=>$model,
+			'booking' => $bookings_by_date,
 		));
 	}
 
@@ -66,7 +92,12 @@ class QuestController extends Controller
 
 		if(isset($_POST['Quest']))
 		{
+
+			// var_dump(Yii::app()->user->id); die;
+
+			$_POST['Quest']['author_id'] = Yii::app()->user->id;
 			$model->attributes=$_POST['Quest'];
+			// $model->attributes->;
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -98,8 +129,6 @@ class QuestController extends Controller
 		$bookings_by_date = array();
 
 		foreach ($bookings as $booking) {
-			// echo $booking->date.',';
-
 			if (!isset($bookings_by_date[$booking->date]))
 				$bookings_by_date[$booking->date] = array();
 
@@ -107,11 +136,10 @@ class QuestController extends Controller
 			$bookings_by_date[$booking->date][$booking->time]['name'] = $booking->competitor->username;
 
 		}
-		// echo '<hr><pre>'; var_dump($bookings_by_date); die;
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Quest']))
+		if(isset($_POST['Quest']))	
 		{
 			$model->attributes=$_POST['Quest'];
 
@@ -162,6 +190,49 @@ class QuestController extends Controller
 		$dataProvider=new CActiveDataProvider('Quest');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
+		));
+	}
+
+
+	/**
+	 * Lists all schedule for models.
+	 */
+	public function actionSchedule($ymd = '')
+	{
+
+		if ($ymd === '' || !is_numeric($ymd) || strlen($ymd) !== 8)
+			$YMDate = date('Ymd', strtotime( "now" ));
+		else
+			$YMDate = (int)$ymd;
+
+		$quests=Quest::model()->findAllByAttributes(array('status' => 2));
+		$quests_array = array();
+
+		if (count($quests)>0){
+			$quest_ids = array();
+			foreach ($quests AS $quest){
+				$quest_ids[] = $quest->id;
+				$quests_array[$quest->id] = array();
+				$quests_array[$quest->id]['q'] = $quest;
+				$quests_array[$quest->id]['booking'] = array();
+			}
+
+			$bookings=Booking::model()->findAllByAttributes(
+				array(
+					'quest_id' => $quest_ids,
+					'date' => $YMDate,
+				)
+			);
+			if (count($bookings)>0){
+				foreach ($bookings as $b) {
+					$quests_array[$b->quest_id]['bookings'][$b->time] = $b;
+				}
+			}
+		}
+
+		$this->render('schedule',array(
+			'quests' => $quests_array,
+			'ymd' => $YMDate,
 		));
 	}
 

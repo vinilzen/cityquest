@@ -47,9 +47,9 @@ $this->menu=array(
         function makeDayArray( ){
           $days = array('понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота', 'воскресенье');
           $month = array('января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'ноября', 'октября', 'декабря' );
-          $endDate   = strtotime( '+14 day' );
-          $currDate  = strtotime( 'now' );
-          $dayArray  = array();
+          $endDate = strtotime( '+14 day' );
+          $currDate = strtotime( 'now' );
+          $dayArray = array();
 
           do{
             $dayArray[] = array(
@@ -68,18 +68,19 @@ $this->menu=array(
 
           <table class="table">
             <?php foreach ($next_2week as $value) {
-              if (
-                $value['day_name'] == 'суббота' || 
-                $value['day_name'] == 'воскресенье')
+              if ( $value['day_name'] == 'суббота' || $value['day_name'] == 'воскресенье')
               {
                 $workday = 0;
-                $pricePm = 3500;
+                $priceAm = Yii::app()->params['price_weekend_AM'];
+                $pricePm = Yii::app()->params['price_weekend_PM'];
                 $pricesStr =  '<span class="price"><span>'.$priceAm.' руб.</span></span>'.
                               ' <span class="price"><span>'.$pricePm.' руб.</span></span>';
 
               } else {
 
-                $pricePm = 2000;
+                $priceAm = Yii::app()->params['price_workday_AM'];
+                $pricePm = Yii::app()->params['price_workday_PM'];
+
                 $pricesStr =  '<span class="price"><span>'.$priceAm.' руб.</span></span>'.
                               ' <span class="price"><span>'.$pricePm.' руб.</span></span>'.
                               ' <span class="price"><span>'.$priceAm.' руб.</span></span>';
@@ -98,16 +99,12 @@ $this->menu=array(
                   
                   $near = 0;
                   if ($time < date('h:i', strtotime( '+3 hours' )) ) $near = 1;
-                  // echo isset($booking[$value['date']]);
-                  // echo $value['date'];
-                  // data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." 
                 ?><button type="button" <?
                  if (isset($booking[$value['date']]) && isset($booking[$value['date']][$time]) ) {
-
-                  // var_dump($booking[$value['date']][$time]); die;
-
-                  echo 'data-name="'.$booking[$value['date']][$time]['name'].'"';
-                  echo 'data-phone="'.$booking[$value['date']][$time]['phone'].'"';
+                  echo  'data-name="'.$booking[$value['date']][$time]['name'].'" '.
+                        'data-phone="'.$booking[$value['date']][$time]['phone'].'" '.
+                        'data-price="'.$booking[$value['date']][$time]['price'].'" '.
+                        'data-comment="'.$booking[$value['date']][$time]['comment'].'"';
                  }
                 ?>
                     data-toggle="popover"
@@ -115,14 +112,11 @@ $this->menu=array(
                     data-time="<?php echo $time; ?>" 
                     data-date="<?php echo $value['day']; ?> <?php echo $value['month_name']; ?>" 
                     data-day="<?php echo $value['day_name']; ?>" 
-                    data-price="<?php
-                      if ($workday === 1) echo ($k>3 && $k<14) ? $pricePm : $priceAm;
-                      else echo $k < 9 ? $priceAm : $pricePm; ?>" 
-                    class="time btn btn-default btn-sm <?php
+                   <? // data-price="<?php if ($workday === 1) echo ($k>3 && $k<14) ? $pricePm : $priceAm; else echo $k < 9 ? $priceAm : $pricePm; ?>
+                    class="btn btn-default btn-sm <?php
               // if ( ($value['date'] === date('Ymd') && $near) || $dis ) echo ' disabled';
 
-              if (isset($booking[$value['date']]) && isset($booking[$value['date']][$time]) )
-                echo ' btn-success';
+              if (isset($booking[$value['date']]) && isset($booking[$value['date']][$time]) ) echo ' btn-info';
 
             if (
               $value['date'] != '20140612' && 
@@ -174,6 +168,17 @@ $this->menu=array(
           </button>
         </div>
       </div>
+      <div class="form-group">
+        <label for="inputPrice" class="col-sm-2 control-label">Price</label>
+        <div class="col-sm-7">
+          <input type="text" class="form-control input-sm inputPrice" placeholder="3000">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-12">
+          <textarea type="text" class="form-control input-sm inputComment" placeholder="Дополнительный комментарий"></textarea>
+        </div>
+      </div>
     </form>
     <form class="form-horizontal pop-row" id="addBookingRow" role="form">
       <div class="form-group">
@@ -182,7 +187,7 @@ $this->menu=array(
           <input type="text" class="form-control input-sm inputName" placeholder="Ivan">
         </div>
         <div class="col-sm-2">
-          <button id="AddBooking" class="btn btn-default btn-sm" data-toggle="tooltip" title="Сохранить">
+          <button id="saveBooking" class="btn btn-default btn-sm" data-toggle="tooltip" title="Сохранить">
             <span class="glyphicon glyphicon-ok"></span>
           </button>
         </div>
@@ -198,14 +203,25 @@ $this->menu=array(
           </button>
         </div>
       </div>
+      <div class="form-group">
+        <label for="inputPrice" class="col-sm-2 control-label">Price</label>
+        <div class="col-sm-7">
+          <input type="text" class="form-control input-sm inputPrice" placeholder="3000">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-12">
+          <textarea type="text" class="form-control input-sm inputComment" placeholder="Дополнительный комментарий"></textarea>
+        </div>
+      </div>
     </form>
     <div class="pop-row" id="confirmRow">
     <p class="text-center">
       <strong>Вы уверены?</strong>
-      <button class="btn btn-default btn-sm" data-toggle="tooltip" title="Да, Удалить!">
+      <button class="btn btn-default btn-sm" data-toggle="tooltip" title="Да, Удалить!" id="confirmedDelete">
         <span class="glyphicon glyphicon-ok"></span>
       </button>
-      <button class="btn btn-default btn-sm" data-toggle="tooltip" title="Отменить удаление">
+      <button class="btn btn-default btn-sm" data-toggle="tooltip" title="Отменить удаление" id="cancelDelete">
         <span class="glyphicon glyphicon-remove"></span>
       </button>
     </p>
@@ -214,6 +230,9 @@ $this->menu=array(
     <p class="text-center">
       <button class="btn btn-default btn-sm" id="confirmBooking" data-toggle="tooltip" title="Подтвердить бронирование">
         <span class="glyphicon glyphicon-ok"></span>
+      </button>
+      <button class="btn btn-default btn-sm" id="undoBooking" data-toggle="tooltip" title="Отменить бронирование (неподтвержденное)">
+        <span class="glyphicon glyphicon-pause"></span>
       </button>
       <button class="btn btn-default btn-sm" id="removeBooking" data-toggle="tooltip" title="Удалить бронирование">
         <span class="glyphicon glyphicon-remove"></span>

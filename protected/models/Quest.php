@@ -72,6 +72,7 @@ class Quest extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'author' => array(self::BELONGS_TO, 'User', 'author_id'),
+			'booking' => array(self::HAS_MANY, 'Booking', 'quest_id'),
 		);
 	}
 

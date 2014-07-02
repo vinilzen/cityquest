@@ -21,6 +21,11 @@
  */
 class Booking extends CActiveRecord
 {
+
+
+	const STATUS_CONFIRMED=1;
+	const STATUS_NOTCONFIRMED=0;
+
 	/**
 	 * @return string the associated database table name
 	 */
