@@ -19,6 +19,7 @@ var PopoverView = Backbone.View.extend({
 	render:function(){
 
 		this.attr = {
+			id : $(this.parent).attr('data-id') || 0,
 			name :  $(this.parent).attr('data-name') || '',
 			phone :  $(this.parent).attr('data-phone') || '',
 			comment :  $(this.parent).attr('data-comment') || '',
@@ -29,7 +30,7 @@ var PopoverView = Backbone.View.extend({
 
 		$('.pop-row', this.$el).hide();
 
-		if ($(this.parent).hasClass('btn-info') && this.attr.name !== '') {
+		if (($(this.parent).hasClass('btn-info') || $(this.parent).hasClass('btn-success')) && this.attr.name !== '') {
 			$('#BookInf h3, #btnRow, #phoneRow', this.$el).show();
 		} else {
 			$('#addRow', this.$el).show();
@@ -42,11 +43,42 @@ var PopoverView = Backbone.View.extend({
 
 	undoBooking:function(){
 		console.log('undoBooking');
+		var self = this;
+
+		$.post('/booking/confirm', {
+			id : self.attr.id,
+			confirm : 0,
+		}, function(result){
+			if (result && result.success) {
+				// self.$el.removeClass('btn-success').addClass('btn-info');
+				location.reload();
+			} else {
+				console.log(result); // if (result && result.message) { }
+				alert('Ошибка!');
+			}
+		});
 		return false;
 	},
 
 	confirmBooking:function(){
 		console.log('confirmBooking');
+		var self = this;
+
+		$.post('/booking/confirm', {
+			id : self.attr.id,
+			confirm : 1,
+		}, function(result){
+			if (result && result.success) {
+				console.log('confirmed');
+				// self.$el.removeClass('btn-info').addClass('btn-success');
+				location.reload();
+	
+			} else {
+				console.log(result);// if (result && result.message) { }
+				alert('Ошибка!');
+			}
+		});
+
 		return false;
 	},
 

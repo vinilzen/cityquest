@@ -187,9 +187,24 @@ class QuestController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Quest');
+		$dataProvider=new CActiveDataProvider('Quest', array(
+    		'criteria'=>array(
+        		'condition'=>'status=2',
+        		'order'=>'sort DESC',
+        		'limit'=>20,
+        	)
+        ));
+
+		$dataProviderSoon=new CActiveDataProvider('Quest', array(
+    		'criteria'=>array(
+        		'condition'=>'status=3',
+        		'order'=>'sort DESC',
+        		'limit'=>20,
+        	)
+        ));
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
+			'dataProviderSoon'=>$dataProviderSoon,
 		));
 	}
 

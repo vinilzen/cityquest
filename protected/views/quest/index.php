@@ -20,3 +20,12 @@ if (Yii::app()->user->name == 'admin' ){
 	'itemView'=>'_view',
 	// 'htmlOptions'=>array('class'=>'row')
 )); ?>
+
+<hr>
+<h2>Вскоре</h2>
+
+<?php $this->widget('zii.widgets.CListView', array(
+	'dataProvider'=>$dataProviderSoon,
+	'itemView'=>'_view_soon',
+	// 'htmlOptions'=>array('class'=>'row')
+)); ?>

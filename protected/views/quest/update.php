@@ -95,8 +95,7 @@ $this->menu=array(
               </td>
               <td class="text-left">
                 <?php foreach ($times as $k=>$time) {
-                  $dis = 0;
-                  
+                  $dis = 0;                  
                   $near = 0;
                   if ($time < date('h:i', strtotime( '+3 hours' )) ) $near = 1;
                 ?><button type="button" <?
@@ -104,6 +103,7 @@ $this->menu=array(
                   echo  'data-name="'.$booking[$value['date']][$time]['name'].'" '.
                         'data-phone="'.$booking[$value['date']][$time]['phone'].'" '.
                         'data-price="'.$booking[$value['date']][$time]['price'].'" '.
+                        'data-id="'.$booking[$value['date']][$time]['id'].'" '. 
                         'data-comment="'.$booking[$value['date']][$time]['comment'].'"';
                  }
                 ?>
@@ -116,7 +116,14 @@ $this->menu=array(
                     class="btn btn-default btn-sm <?php
               // if ( ($value['date'] === date('Ymd') && $near) || $dis ) echo ' disabled';
 
-              if (isset($booking[$value['date']]) && isset($booking[$value['date']][$time]) ) echo ' btn-info';
+                  if (isset($booking[$value['date']]) && isset($booking[$value['date']][$time]) ) {
+                    if ($booking[$value['date']][$time]['status'] == 0)
+                      echo ' btn-info';
+
+                    if ($booking[$value['date']][$time]['status'] == 1)
+                      echo ' btn-success';
+
+                  }
 
             if (
               $value['date'] != '20140612' && 

@@ -36,7 +36,7 @@ class BookingController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete','update'),
+				'actions'=>array('admin','delete','update', 'confirm'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -97,6 +97,43 @@ class BookingController extends Controller
 								)
 							);
 					} else echo CJavaScript::jsonEncode(array('success'=>0, 'message'=> 'Квест не найден'));
+				} else echo CJavaScript::jsonEncode(array('success'=>0, 'message'=> 'Неправильный запрос'));
+			} else echo CJavaScript::jsonEncode(array('success'=>0, 'message'=> 'У вас нету доступа'));
+
+           	Yii::app()->end();
+
+		} else throw new CHttpException(404, 'Страница не найдена');
+	}
+
+
+	/**
+	 * Creates a new model.
+	 * If creation is successful, the browser will be redirected to the 'view' page.
+	 */
+	public function actionConfirm()
+	{
+
+		if(Yii::app()->request->isAjaxRequest){
+
+			$this->layout=false;
+			header('Content-type: application/json');
+
+			if (!Yii::app()->user->isGuest){
+
+				if (isset($_POST['id']) && is_numeric($_POST['id'])){
+					$model=$this->loadModel((int)$_POST['id']);
+					$model->status = (int)$_POST['confirm'];
+
+					if($model->save())
+						echo CJavaScript::jsonEncode(array('success'=>1));
+					else
+						echo CJavaScript::jsonEncode(
+							array(
+								'success'=>0, 
+								'message'=> 'Ошибка сохранения', 
+								'errors'=>$model->getErrors()
+							)
+						);
 				} else echo CJavaScript::jsonEncode(array('success'=>0, 'message'=> 'Неправильный запрос'));
 			} else echo CJavaScript::jsonEncode(array('success'=>0, 'message'=> 'У вас нету доступа'));
 
