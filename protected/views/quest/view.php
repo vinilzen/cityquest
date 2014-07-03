@@ -52,7 +52,7 @@ $this->widget('zii.widgets.CDetailView', array(
 	),
 )); ?>
 
-<div id="times-table" class="collapse in" style="min-width:1265px;">
+<div id="times-table" class="collapse in">
 	<?
 		$times = array('00:00', '01:15', '02:30', '04:00', '05:15', '06:30', 
                   '07:45', '09:00', '10:15', '11:30', '12:45', '14:00', 
@@ -136,7 +136,7 @@ $this->widget('zii.widgets.CDetailView', array(
                   data-price="<?php
                     if ($workday === 1) echo ($k>3 && $k<14) ? $pricePm : $priceAm;
                     else echo $k < 9 ? $priceAm : $pricePm; ?>" 
-                  class="time btn btn-default btn-sm <?php
+                  class="time btn btn-default btn-xs <?php
           echo (($value['date'] === date('Ymd') && $near) || $dis) ? 'disabled' : '';
           if ($value['date'] != '20140612' && $value['date'] != '20140613' && $value['day_name'] != 'суббота' && $value['day_name'] != 'воскресенье' && $k > 2 && $k < 7 )
           	echo ' invisible';?>"

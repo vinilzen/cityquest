@@ -16,7 +16,8 @@ $this->menu=array(
 );
 ?>
 
-<h1>#<?php echo $model->id; ?> <?php echo $model->title; ?> </h1>
+<h1>#<?php echo $model->id; ?> <?php echo $model->title; ?></h1>
+<input type="hidden" value="<?php echo $model->id; ?>" id="quest_id">
 
 <!-- Nav tabs -->
 <ul class="nav nav-tabs">
@@ -110,10 +111,11 @@ $this->menu=array(
                     data-toggle="popover"
                     data-title="<?php echo $value['day']; ?> <?php echo $value['month_name']; ?> <?php echo $time; ?>"
                     data-time="<?php echo $time; ?>" 
+                    data-ymd="<?php echo $value['date']; ?>" 
                     data-date="<?php echo $value['day']; ?> <?php echo $value['month_name']; ?>" 
                     data-day="<?php echo $value['day_name']; ?>" 
                    <? // data-price="<?php if ($workday === 1) echo ($k>3 && $k<14) ? $pricePm : $priceAm; else echo $k < 9 ? $priceAm : $pricePm; ?>
-                    class="btn btn-default btn-sm <?php
+                    class="btn btn-default btn-xs <?php
               // if ( ($value['date'] === date('Ymd') && $near) || $dis ) echo ' disabled';
 
                   if (isset($booking[$value['date']]) && isset($booking[$value['date']][$time]) ) {
@@ -238,7 +240,7 @@ $this->menu=array(
       <button class="btn btn-default btn-sm" id="confirmBooking" data-toggle="tooltip" title="Подтвердить бронирование">
         <span class="glyphicon glyphicon-ok"></span>
       </button>
-      <button class="btn btn-default btn-sm" id="undoBooking" data-toggle="tooltip" title="Отменить бронирование (неподтвержденное)">
+      <button class="btn btn-default btn-sm" id="undoBooking" data-toggle="tooltip" title="Удалить подтверждение">
         <span class="glyphicon glyphicon-pause"></span>
       </button>
       <button class="btn btn-default btn-sm" id="removeBooking" data-toggle="tooltip" title="Удалить бронирование">

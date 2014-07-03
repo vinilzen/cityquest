@@ -24,6 +24,9 @@ var PopoverView = Backbone.View.extend({
 			phone :  $(this.parent).attr('data-phone') || '',
 			comment :  $(this.parent).attr('data-comment') || '',
 			price :  $(this.parent).attr('data-price') || 0,
+			time :  $(this.parent).attr('data-time') || 0,
+			ymd :  $(this.parent).attr('data-ymd') || 0,
+			date :  $(this.parent).attr('data-date') || 0,
 		};
 
 		this.$el.html( _.template($('#BookInfWrap').html(), this.attr) );
@@ -83,7 +86,30 @@ var PopoverView = Backbone.View.extend({
 	},
 
 	saveBooking:function(){
-		console.log('save new booking');
+
+		var self = this;
+
+		$.post('/booking/create', {
+			quest_id : $('#quest_id').val(),
+			ymd : self.attr.ymd,
+			date : self.attr.date,
+			time : self.attr.time,
+			price : $('#addBookingRow .inputPrice').val(),
+			phone : $('#addBookingRow .inputPhone').val(),
+			comment : $('#addBookingRow .inputComment').val(),
+			name : $('#addBookingRow .inputName').val(),
+		}, function(result){
+			if (result && result.success) {
+				console.log('confirmed');
+				// self.$el.removeClass('btn-info').addClass('btn-success');
+				location.reload();
+	
+			} else {
+				console.log(result);// if (result && result.message) { }
+				alert('Ошибка!');
+			}
+		});
+
 		return false;
 	},
 
@@ -160,10 +186,22 @@ $(function() {
 			return $(this)[0].popover_view.render().el;
 		}
 	}).on('show.bs.popover', function (e) {
+		
 		$('[data-toggle="popover"]').each(function () {
 			if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0)
 				$(this).popover('hide');
 		});
+
+	}).on('shown.bs.popover', function (e) {
+
+		var self = this;
+
+		$('<button type="button" class="close"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>')
+			.css('margin-top', -4)
+			.appendTo('.popover-title')
+			.click(function(){
+				$(self).popover('hide');
+			});
 	});
 
 

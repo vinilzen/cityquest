@@ -22,7 +22,7 @@ if (Yii::app()->user->name == 'admin' ){
 </script>
 
 <br><br>
-<div class="btn-group">
+<div class="btn-group btn-group-justified">
 <?	$days = array('понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота', 'воскресенье');
 	$month = array('января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'ноября', 'октября', 'декабря' );
 	$times = array('00:00', '01:15', '02:30', '04:00', '05:15', '06:30', '07:45', '09:00', '10:15', '11:30', '12:45', '14:00', '15:15', '16:30', '17:45', '19:00', '20:15', '21:30', '22:45');
@@ -48,7 +48,7 @@ if (Yii::app()->user->name == 'admin' ){
 		$weekend = '';
 		if (date('w', $currDate) == 0 || date('w', $currDate) == 6) $weekend = ' btn-warning';
 
-		echo '<a title="'.date('d M Y', $currDate).'" href="/quest/schedule/ymd/'.date('Ymd', $currDate).'" type="button" class="btn btn-default'.$active.$weekend.'" '.$disabled.' >'.date('d', $currDate).'</a>';
+		echo '<a title="'.date('d M Y', $currDate).'" href="/quest/schedule/ymd/'.date('Ymd', $currDate).'" type="button" class="btn btn-sm btn-default'.$active.$weekend.'" '.$disabled.' >'.date('d', $currDate).'</a>';
 	}
 ?>
 </div>
@@ -80,7 +80,7 @@ if (Yii::app()->user->name == 'admin' ){
 	                data-date="<? echo date('d',$currDate); ?> <? echo date('M', $currDate); ?>" 
 	                data-day="<? echo $days[date('w',$currDate)]; ?>" 
 	                data-price="<? echo Yii::app()->params['price_weekend_AM']; ?>" 
-					class="time btn btn-default btn-sm <? echo $invisible;?>" <? echo $dis;?>>
+					class="time btn btn-default btn-xs <? echo $invisible;?>" <? echo $dis;?>>
 					<? echo $time; ?>
 				</span>
 			</td>

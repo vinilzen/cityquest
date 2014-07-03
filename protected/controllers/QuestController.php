@@ -181,7 +181,7 @@ class QuestController extends Controller
 				$bookings_by_date[$booking->date] = array();
 
 			$bookings_by_date[$booking->date][$booking->time] = $booking->attributes;
-			$bookings_by_date[$booking->date][$booking->time]['name'] = $booking->competitor->username;
+			$bookings_by_date[$booking->date][$booking->time]['name'] = $booking->name != '' ? $booking->name : $booking->competitor->username;
 
 		}
 		// Uncomment the following line if AJAX validation is needed

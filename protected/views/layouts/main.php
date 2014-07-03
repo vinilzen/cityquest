@@ -18,36 +18,48 @@
 </head>
 
 <body>
-	<div class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container">
-			<div id="header" class="navbar-header">
-				<div id="logo" class="navbar-brand"><?php echo CHtml::encode(Yii::app()->name); ?></div>
+
+	<div class="container" id="page">
+
+		<div class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
+				<div id="header" class="navbar-header">
+					<div id="logo" class="navbar-brand"><?php echo CHtml::encode(Yii::app()->name); ?></div>
+				</div>
+				<div class="navbar-collapse collapse" id="mainmenu">
+					<?php $this->widget('zii.widgets.CMenu',array(
+						'htmlOptions' => array( 'class' => 'nav navbar-nav'),
+						'items'=>array(
+							array('label'=>'Quests', 'url'=>array('/quest/index')),
+							array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
+							array('label'=>'Contact', 'url'=>array('/site/contact')),
+							array('label'=>'Расписание', 'url'=>array('/quest/schedule/ymd/')),
+							// array('label'=>'Quests', 'url'=>array('/quest/index', 'view'=>'quest')),	
+
+							array('url'=>Yii::app()->getModule('user')->loginUrl, 'label'=>Yii::app()->getModule('user')->t("Login"), 'visible'=>Yii::app()->user->isGuest),
+							array('url'=>Yii::app()->getModule('user')->registrationUrl, 'label'=>Yii::app()->getModule('user')->t("Register"), 'visible'=>Yii::app()->user->isGuest),
+							array('url'=>Yii::app()->getModule('user')->profileUrl, 'label'=>Yii::app()->getModule('user')->t("Profile"), 'visible'=>!Yii::app()->user->isGuest),
+							array('url'=>Yii::app()->getModule('user')->logoutUrl, 'label'=>Yii::app()->getModule('user')->t("Logout").' ('.Yii::app()->user->name.')', 'visible'=>!Yii::app()->user->isGuest),
+							
+							// array('label'=>'Login', 'url'=>array('site/login'), 'visible'=>Yii::app()->user->isGuest),
+							// array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+						),
+					)); ?>
+				</div><!-- navbar-collapse collapse -->
 			</div>
-			<div class="navbar-collapse collapse" id="mainmenu">
-				<?php $this->widget('zii.widgets.CMenu',array(
-					'htmlOptions' => array( 'class' => 'nav navbar-nav'),
-					'items'=>array(
-						array('label'=>'Quests', 'url'=>array('/quest/index')),
-						array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
-						array('label'=>'Contact', 'url'=>array('/site/contact')),
-						// array('label'=>'Quests', 'url'=>array('/quest/index', 'view'=>'quest')),	
-
-						array('url'=>Yii::app()->getModule('user')->loginUrl, 'label'=>Yii::app()->getModule('user')->t("Login"), 'visible'=>Yii::app()->user->isGuest),
-						array('url'=>Yii::app()->getModule('user')->registrationUrl, 'label'=>Yii::app()->getModule('user')->t("Register"), 'visible'=>Yii::app()->user->isGuest),
-						array('url'=>Yii::app()->getModule('user')->profileUrl, 'label'=>Yii::app()->getModule('user')->t("Profile"), 'visible'=>!Yii::app()->user->isGuest),
-						array('url'=>Yii::app()->getModule('user')->logoutUrl, 'label'=>Yii::app()->getModule('user')->t("Logout").' ('.Yii::app()->user->name.')', 'visible'=>!Yii::app()->user->isGuest),
-						
-						// array('label'=>'Login', 'url'=>array('site/login'), 'visible'=>Yii::app()->user->isGuest),
-						// array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('site/logout'), 'visible'=>!Yii::app()->user->isGuest)
-					),
-				)); ?>
-			</div><!-- navbar-collapse collapse -->
 		</div>
-	</div>
-
-	<div class="container-fluid" id="page">
-
-
+		
+		<div class="row">
+			<?php
+				// $this->beginWidget('zii.widgets.CPortlet', array(				'title'=>'Operations',			));
+				$this->beginWidget('zii.widgets.CMenu', array(
+					'items'=>$this->menu,
+					'htmlOptions'=>array('class'=>'nav nav-pills'),
+				));
+				$this->endWidget();
+			?>
+		</div>
+	
 		<?php $this->widget('zii.widgets.CBreadcrumbs', array(
 			'links'=>$this->breadcrumbs,
 		)); ?><!-- breadcrumbs -->
@@ -55,8 +67,7 @@
 		<?php echo $content; ?>
 
 		<div id="footer">
-			Copyright &copy; <?php echo date('Y'); ?> by CityQuest.<br/>
-			All Rights Reserved.<br/>
+			Copyright &copy; <?php echo date('Y'); ?> by CityQuest.
 		</div><!-- footer -->
 
 	</div><!-- page -->

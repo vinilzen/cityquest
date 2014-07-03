@@ -83,6 +83,7 @@ class BookingController extends Controller
 						$model->price = (int)$_POST['price'];
 						$model->date = (int)$_POST['ymd'];
 						$model->phone = $_POST['phone'];
+						$model->name = $_POST['name'];
 						$model->quest_id = (int)$_POST['quest_id'];
 						$model->competitor_id = (int)Yii::app()->user->id;
 
