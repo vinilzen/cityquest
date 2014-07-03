@@ -33,7 +33,7 @@ class QuestController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','admin','delete'),
+				'actions'=>array('create','update','admin','delete', 'sort'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -41,6 +41,54 @@ class QuestController extends Controller
 			),
 		);
 	}
+
+
+
+	/**
+	 * Sort
+	 */
+	public function actionSort()
+	{
+
+		if(Yii::app()->request->isAjaxRequest){
+
+			$this->layout=false;
+			header('Content-type: application/json');
+
+			if (!Yii::app()->user->isGuest){
+
+				if ( isset($_POST['sort']) && count($_POST['sort']) > 0 ) {
+
+
+					try {
+
+						foreach ($_POST['sort'] as $key => $value) {
+							$model=$this->loadModel((int)$key);
+							$model->sort = (int)$value;
+							$model->save();
+						}
+
+						echo CJavaScript::jsonEncode(array('success'=>1));
+
+					} catch (Exception $e) {
+						
+						echo CJavaScript::jsonEncode(
+							array(
+								'success'=>0, 
+								'message'=> 'Ошибка сохранения', 
+								'errors'=>$model->getErrors()
+							)
+						);
+					}
+
+				} else echo CJavaScript::jsonEncode(array('success'=>0, 'message'=> 'Неправильный запрос'));
+			} else echo CJavaScript::jsonEncode(array('success'=>0, 'message'=> 'У вас нету доступа'));
+
+           	Yii::app()->end();
+
+		} else throw new CHttpException(404, 'Страница не найдена');
+	}
+
 
 	/**
 	 * Displays a particular model.
@@ -190,7 +238,7 @@ class QuestController extends Controller
 		$dataProvider=new CActiveDataProvider('Quest', array(
     		'criteria'=>array(
         		'condition'=>'status=2',
-        		'order'=>'sort DESC',
+        		'order'=>'sort ASC',
         		'limit'=>20,
         	)
         ));
@@ -198,7 +246,7 @@ class QuestController extends Controller
 		$dataProviderSoon=new CActiveDataProvider('Quest', array(
     		'criteria'=>array(
         		'condition'=>'status=3',
-        		'order'=>'sort DESC',
+        		'order'=>'sort ASC',
         		'limit'=>20,
         	)
         ));
@@ -262,6 +310,7 @@ class QuestController extends Controller
 			$model->attributes=$_GET['Quest'];
 
 		$this->render('admin',array(
+			'models'=>Quest::model()->findAll(array('order'=>'sort')),
 			'model'=>$model,
 		));
 	}

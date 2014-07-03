@@ -63,6 +63,7 @@
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="/js/jquery.min.js"></script>
+<script src="/js/jquery-ui.js"></script>
 <script src="/js/underscore-min.js"></script>
 <script src="/js/backbone-min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
