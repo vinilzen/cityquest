@@ -104,7 +104,6 @@ $this->menu=array(
                   } else {
                     if ($k<10) $price = $priceAm;
                     else $price = $pricePm;
-
                   }
 
 

@@ -88,27 +88,16 @@ $this->widget('zii.widgets.CDetailView', array(
 
         <table class="table">
           <?php foreach ($next_2week as $value) {
-            $priceAm = 3000;
-            $pricePm = 3500;
-            $pricesStr = '';
-            $workday = 1;
-            if (
-              $value['day_name'] == 'суббота' || 
-              $value['day_name'] == 'воскресенье')
+            if ( $value['day_name'] == 'суббота' ||  $value['day_name'] == 'воскресенье')
             {
               $workday = 0;
               $priceAm = Yii::app()->params['price_weekend_AM'];
-              $pricePm = Yii::app()->params['price_weekend_PM'];
-              $pricesStr =  '<span class="price"><span>'.$priceAm.' руб.</span></span>'.
-                            ' <span class="price"><span>'.$pricePm.' руб.</span></span>';
+              $pricePm = Yii::app()->params['price_weekend_PM']; // $pricesStr =  '<span class="price"><span>'.$priceAm.' руб.</span></span>'.' <span class="price"><span>'.$pricePm.' руб.</span></span>';
 
             } else {
-
+              $workday = 1;
               $priceAm = Yii::app()->params['price_workday_AM'];
-              $pricePm = Yii::app()->params['price_workday_PM'];
-              $pricesStr =  '<span class="price"><span>'.$priceAm.' руб.</span></span>'.
-                            ' <span class="price"><span>'.$pricePm.' руб.</span></span>'.
-                            ' <span class="price"><span>'.$priceAm.' руб.</span></span>';
+              $pricePm = Yii::app()->params['price_workday_PM']; // $pricesStr =  '<span class="price"><span>'.$priceAm.' руб.</span></span>'.' <span class="price"><span>'.$pricePm.' руб.</span></span>'.' <span class="price"><span>'.$priceAm.' руб.</span></span>';
             }
 
             ?>
@@ -120,31 +109,36 @@ $this->widget('zii.widgets.CDetailView', array(
             </td>
             <td class="text-left">
               <?php foreach ($times as $k=>$time) {
-                $dis = 0;
-                
+
+                if ($workday){
+                  if ($k>6 && $k<14) $price = $priceAm;
+                  else $price = $pricePm;
+                } else {
+                  if ($k<10) $price = $priceAm;
+                  else $price = $pricePm;
+                }
+
+                $dis = 0;                
                 $near = 0;
                 if ($time < date('H:i', strtotime( '+0 hours' )) ) $near = 1;
 
               ?><button type="button" 
-                  data-name="<?php echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->profile->getAttribute('firstname') : ''; ?>" 
-                  data-phone="<?php echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->profile->getAttribute('phone') : ''; ?>" 
-                  data-time="<?php echo $time; ?>" 
+                  data-name="<? echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->profile->getAttribute('firstname') : ''; ?>" 
+                  data-phone="<? echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->profile->getAttribute('phone') : ''; ?>" 
+                  data-time="<? echo $time; ?>" 
                   data-quest="<? echo $model->id; ?>" 
-                  data-ymd="<?php echo $value['date']; ?>" 
-                  data-date="<?php echo $value['day']; ?> <?php echo $value['month_name']; ?>" 
-                  data-day="<?php echo $value['day_name']; ?>" 
-                  data-price="<?php
-                    if ($workday === 1) echo ($k>3 && $k<14) ? $pricePm : $priceAm;
-                    else echo $k < 9 ? $priceAm : $pricePm; ?>" 
+                  data-ymd="<? echo $value['date']; ?>" 
+                  data-date="<? echo $value['day']; ?> <? echo $value['month_name']; ?>" 
+                  data-day="<? echo $value['day_name']; ?>" 
+                  data-price="<? echo $price; ?>" 
                   class="time btn btn-default btn-xs <?php
           echo (($value['date'] === date('Ymd') && $near) || $dis) ? 'disabled' : '';
-          if ($value['date'] != '20140612' && $value['date'] != '20140613' && $value['day_name'] != 'суббота' && $value['day_name'] != 'воскресенье' && $k > 2 && $k < 7 )
+          if ($workday && $k > 2 && $k < 7 )
           	echo ' invisible';?>"
 		<?
-			if (isset($booking[$value['date']]) && isset($booking[$value['date']][$time]) ) echo ' disabled="disabled"'; ?>>
-              <?php echo $time; ?></button> <?php } ?>
+			if (isset($booking[$value['date']]) && isset($booking[$value['date']][$time]) )
+        echo ' disabled="disabled"'; ?>> <? echo $time; ?><br><small><? echo $price; ?>р.</small></button> <?php } ?>
           <div class="clearfix"></div>
-          <?php echo $pricesStr; ?>
         </td>
       </tr>
       <?php } ?>
