@@ -11,6 +11,7 @@
  * @property string $metro
  * @property integer $times
  * @property integer $status
+ * @property integer $sort
  * @property integer $create_time
  * @property integer $update_time
  * @property integer $author_id
@@ -48,18 +49,18 @@ class Quest extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('title, content, addres, metro, times, status, author_id', 'required'),
-			array('times, status, create_time, update_time, author_id', 'numerical', 'integerOnly'=>true),
+			array('times, status, sort, create_time, update_time, author_id', 'numerical', 'integerOnly'=>true),
 			array('title, addres, metro', 'length', 'max'=>128),
 			array('del_img', 'boolean'),
 			array('image', 'file',
-			'types'=>'jpg',
-			'maxSize'=>5000 * 5000 * 5, // 5MB
-			'allowEmpty'=>'true',
-			'tooLarge'=>'The file was larger than 5MB. Please upload a smaller file.',
+				'types'=>'jpg',
+				'maxSize'=>5000 * 5000 * 5, // 5MB
+				'allowEmpty'=>'true',
+				'tooLarge'=>'The file was larger than 5MB. Please upload a smaller file.',
             ),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, title, content, addres, metro, times, status, create_time, update_time, author_id', 'safe', 'on'=>'search'),
+			array('id, title, content, addres, metro, times, sort, status, create_time, update_time, author_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -72,6 +73,7 @@ class Quest extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'author' => array(self::BELONGS_TO, 'User', 'author_id'),
+			'booking' => array(self::HAS_MANY, 'Booking', 'quest_id'),
 		);
 	}
 
@@ -86,6 +88,7 @@ class Quest extends CActiveRecord
 			'content' => 'Content',
 			'addres' => 'Addres',
 			'metro' => 'Metro',
+			'sort' => 'Sort',
 			'times' => 'Times',
 			'status' => 'Status',
 			'create_time' => 'Create Time',
@@ -121,6 +124,7 @@ class Quest extends CActiveRecord
 		$criteria->compare('metro',$this->metro,true);
 		$criteria->compare('times',$this->times);
 		$criteria->compare('status',$this->status);
+		$criteria->compare('sort',$this->sort);
 		$criteria->compare('create_time',$this->create_time);
 		$criteria->compare('update_time',$this->update_time);
 		$criteria->compare('author_id',$this->author_id);

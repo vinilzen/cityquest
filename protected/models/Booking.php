@@ -21,6 +21,11 @@
  */
 class Booking extends CActiveRecord
 {
+
+
+	const STATUS_CONFIRMED=1;
+	const STATUS_NOTCONFIRMED=0;
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -39,7 +44,7 @@ class Booking extends CActiveRecord
 		return array(
 			array('comment, status, time, quest_id, competitor_id', 'required'),
 			array('status, create_time, result, quest_id, competitor_id', 'numerical', 'integerOnly'=>true),
-			array('email, phone', 'length', 'max'=>128),
+			array('email, phone, name', 'length', 'max'=>128),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, comment, status, time, create_time, email, phone, result, quest_id, competitor_id', 'safe', 'on'=>'search'),
@@ -74,6 +79,7 @@ class Booking extends CActiveRecord
 			'time' => 'Time',
 			'create_time' => 'Create Time',
 			'email' => 'Email',
+			'name' => 'Name',
 			'phone' => 'Phone',
 			'result' => 'Result',
 			'quest_id' => 'Quest',
@@ -105,6 +111,7 @@ class Booking extends CActiveRecord
 		$criteria->compare('time',$this->time,true);
 		$criteria->compare('date',$this->date,true);
 		$criteria->compare('price',$this->price,true);
+		$criteria->compare('name',$this->name,true);
 		$criteria->compare('create_time',$this->create_time);
 		$criteria->compare('email',$this->email,true);
 		$criteria->compare('phone',$this->phone,true);

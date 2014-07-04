@@ -3,7 +3,7 @@
 /* @var $data Quest */
 ?>
 
-<div class="col-sm-6 col-md-6">
+<div class="col-sm-4 col-md-4">
 	<div class="view thumbnail">
 		<img src="/images/q/<?php echo $data->id; ?>.jpg" alt="...">
 		<div class="caption">

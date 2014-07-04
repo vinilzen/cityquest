@@ -18,5 +18,14 @@ if (Yii::app()->user->name == 'admin' ){
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
 	'itemView'=>'_view',
-	// 'htmlOptions'=>array('class'=>'row')
+)); ?>
+
+<div class="clearfix"></div>
+
+<hr>
+<h2>Вскоре</h2>
+
+<?php $this->widget('zii.widgets.CListView', array(
+	'dataProvider'=>$dataProviderSoon,
+	'itemView'=>'_view_soon',
 )); ?>

@@ -36,7 +36,7 @@ class BookingController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete','update'),
+				'actions'=>array('admin','delete','update', 'confirm'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -83,6 +83,7 @@ class BookingController extends Controller
 						$model->price = (int)$_POST['price'];
 						$model->date = (int)$_POST['ymd'];
 						$model->phone = $_POST['phone'];
+						$model->name = $_POST['name'];
 						$model->quest_id = (int)$_POST['quest_id'];
 						$model->competitor_id = (int)Yii::app()->user->id;
 
@@ -105,28 +106,85 @@ class BookingController extends Controller
 		} else throw new CHttpException(404, 'Страница не найдена');
 	}
 
+
+	/**
+	 * Creates a new model.
+	 * If creation is successful, the browser will be redirected to the 'view' page.
+	 */
+	public function actionConfirm()
+	{
+
+		if(Yii::app()->request->isAjaxRequest){
+
+			$this->layout=false;
+			header('Content-type: application/json');
+
+			if (!Yii::app()->user->isGuest){
+
+				if (isset($_POST['id']) && is_numeric($_POST['id'])){
+					$model=$this->loadModel((int)$_POST['id']);
+					$model->status = (int)$_POST['confirm'];
+
+					if($model->save())
+						echo CJavaScript::jsonEncode(array('success'=>1));
+					else
+						echo CJavaScript::jsonEncode(
+							array(
+								'success'=>0, 
+								'message'=> 'Ошибка сохранения', 
+								'errors'=>$model->getErrors()
+							)
+						);
+				} else echo CJavaScript::jsonEncode(array('success'=>0, 'message'=> 'Неправильный запрос'));
+			} else echo CJavaScript::jsonEncode(array('success'=>0, 'message'=> 'У вас нету доступа'));
+
+           	Yii::app()->end();
+
+		} else throw new CHttpException(404, 'Страница не найдена');
+	}
+
 	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id the ID of the model to be updated
 	 */
-	public function actionUpdate($id)
+	public function actionUpdate()
 	{
-		$model=$this->loadModel($id);
+		if(Yii::app()->request->isAjaxRequest){
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+			$this->layout=false;
+			header('Content-type: application/json');
 
-		if(isset($_POST['Booking']))
-		{
-			$model->attributes=$_POST['Booking'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
-		}
+			if (!Yii::app()->user->isGuest){
 
-		$this->render('update',array(
-			'model'=>$model,
-		));
+				if (isset($_POST['id']) && is_numeric($_POST['id'])){
+
+					$model=$this->loadModel((int)$_POST['id']);
+					
+					$model->comment = $_POST['date'].' - '.$_POST['time'].' - '.$_POST['comment'];
+					$model->time = $_POST['time'];
+					$model->price = (int)$_POST['price'];
+					$model->date = (int)$_POST['ymd'];
+					$model->phone = $_POST['phone'];
+					$model->name = $_POST['name'];
+					$model->competitor_id = (int)Yii::app()->user->id;
+
+					if($model->save())
+						echo CJavaScript::jsonEncode(array('success'=>1));
+					else
+						echo CJavaScript::jsonEncode(
+							array(
+								'success'=>0, 
+								'message'=> 'Ошибка сохранения', 
+								'errors'=>$model->getErrors()
+							)
+						);
+				} else echo CJavaScript::jsonEncode(array('success'=>0, 'message'=> 'Неправильный запрос'));
+			} else echo CJavaScript::jsonEncode(array('success'=>0, 'message'=> 'У вас нет доступа'));
+
+           	Yii::app()->end();
+
+		} else throw new CHttpException(404, 'Страница не найдена');
 	}
 
 	/**
@@ -134,13 +192,42 @@ class BookingController extends Controller
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.
 	 * @param integer $id the ID of the model to be deleted
 	 */
-	public function actionDelete($id)
+	public function actionDelete()
 	{
-		$this->loadModel($id)->delete();
 
-		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+		if(Yii::app()->request->isAjaxRequest){
+
+			$this->layout=false;
+			header('Content-type: application/json');
+
+			if (!Yii::app()->user->isGuest){
+
+				if (isset($_POST['id']) && is_numeric($_POST['id'])){
+
+					try {
+
+						$this->loadModel((int)$_POST['id'])->delete();
+						echo CJavaScript::jsonEncode(array('success'=>1));
+
+					} catch (Exception $e) {
+
+						echo CJavaScript::jsonEncode(
+							array(
+								'success'=>0, 
+								'message'=> 'Ошибка Удаления', 
+								'errors'=>$e->getMessage()
+							)
+						);
+
+					} 
+					
+				} else echo CJavaScript::jsonEncode(array('success'=>0, 'message'=> 'Неправильный запрос'));
+			} else echo CJavaScript::jsonEncode(array('success'=>0, 'message'=> 'У вас нет доступа'));
+
+           	Yii::app()->end();
+
+		} else throw new CHttpException(404, 'Страница не найдена');
+
 	}
 
 	/**

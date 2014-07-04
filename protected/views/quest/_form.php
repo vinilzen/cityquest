@@ -54,11 +54,19 @@
 	</div>
 
 	<div class="form-group">
+		<?php echo $form->labelEx($model,'sort', array('class' => 'control-label col-sm-3')); ?>
+		<div class="col-sm-9">
+			<?php echo $form->textField($model,'sort',array('size'=>60,'maxlength'=>128,'class'=>'form-control')); ?>
+		</div>
+		<?php echo $form->error($model,'sort'); ?>
+	</div>
+
+	<div class="form-group">
 		<label class="control-label col-sm-3 required" for="status">Начало часа<span class="required">*</span></label>
 		<div class="col-sm-9">
 			<?php echo $form->dropDownList($model,'times', array(
 				1=>'начинаем квесты с 00:00',
-				2=>'начинаем квесты с 00:15',
+				2=>'начинаем квесты с 00:30',
 			),array('class'=>'form-control')); ?>
 			<p class="help-block">Нельзя менять если кто-то уже записался</p>
 		</div>

@@ -209,7 +209,7 @@
 
 
 body {
-  padding-top: 70px;
+  padding-top: 60px;
   padding-bottom: 30px;
 }
 
@@ -221,4 +221,8 @@ body {
 
 .theme-showcase > p > .btn {
   margin: 5px 0;
+}
+
+.popover {
+  z-index:1040;
 }
