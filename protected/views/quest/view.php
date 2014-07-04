@@ -54,14 +54,10 @@ $this->widget('zii.widgets.CDetailView', array(
 
 <div id="times-table" class="collapse in">
 	<?
-		$times = array('00:00', '01:15', '02:30', '04:00', '05:15', '06:30', 
-                  '07:45', '09:00', '10:15', '11:30', '12:45', '14:00', 
-                  '15:15', '16:30', '17:45', '19:00', '20:15', '21:30', '22:45');
-
-		$days = array('понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота', 'воскресенье');
-		$month = array('января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'ноября', 'октября', 'декабря' );
-		$endDate = strtotime( '+14 day' );
-		$currDate = strtotime( 'now' );
+    $days = Yii::app()->params['days'];
+    $month = Yii::app()->params['month'];
+    $endDate = strtotime( '+'.Yii::app()->params['offset'].' day' );
+    $currDate = strtotime( 'now' );
 		$dayArray = array();
 
 	    function makeDayArray( ){

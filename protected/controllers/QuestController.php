@@ -119,11 +119,15 @@ class QuestController extends Controller
 
 		}
 
-		// echo '<pre>'; print_r($bookings_by_date); die;
+		if (isset($model->times) && is_numeric($model->times) && isset(Yii::app()->params['times'][(int)$model->times]))
+			$times = Yii::app()->params['times'][(int)$model->times];
+		else 
+			$times = Yii::app()->params['times'][1];
 
 		$this->render('view',array(
 			'model'=>$model,
 			'booking' => $bookings_by_date,
+			'times' => $times,
 		));
 	}
 
@@ -210,9 +214,16 @@ class QuestController extends Controller
 			}
 		}
 
+
+		if (isset($model->times) && is_numeric($model->times) && isset(Yii::app()->params['times'][(int)$model->times]))
+			$times = Yii::app()->params['times'][(int)$model->times];
+		else 
+			$times = Yii::app()->params['times'][1];
+
 		$this->render('update',array(
 			'model'=>$model,
 			'booking' => $bookings_by_date,
+			'times' => $times,
 		));
 	}
 

@@ -23,10 +23,9 @@ if (Yii::app()->user->name == 'admin' ){
 
 <br><br>
 <div class="btn-group btn-group-justified">
-<?	$days = array('понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота', 'воскресенье');
-	$month = array('января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'ноября', 'октября', 'декабря' );
-	$times = array('00:00', '01:15', '02:30', '04:00', '05:15', '06:30', '07:45', '09:00', '10:15', '11:30', '12:45', '14:00', '15:15', '16:30', '17:45', '19:00', '20:15', '21:30', '22:45');
-	$times2 = array('00:30', '01:45', '03:00', '04:15', '05:30', '06:45', '08:00', '09:15', '10:30', '11:30', '12:45', '14:00', '15:15', '16:30', '17:45', '19:00', '20:15', '21:30', '22:45');
+<?	
+	$days = Yii::app()->params['days'];
+    $month = Yii::app()->params['month'];
 
 	$selectedDate = 0;
 
@@ -58,10 +57,36 @@ if (Yii::app()->user->name == 'admin' ){
 <div id="times-table">
 	<? foreach ($quests as $quest) {
 		
+		if (isset($quest['q']->times) && is_numeric($quest['q']->times) && isset(Yii::app()->params['times'][(int)$quest['q']->times]))
+			$times = Yii::app()->params['times'][(int)$quest['q']->times];
+		else 
+			$times = Yii::app()->params['times'][1];
+
 		echo '<table class="table"><tr><td style="width:150px;">';
 		echo $quest['q']->title.'</td>';
 
+		if (date('w', $selectedDate) == 0 || date('w', $selectedDate) == 6) $workday = 0;
+		else $workday = 1;
+
+        if ( !$workday)
+        {
+          $priceAm = Yii::app()->params['price_weekend_AM'];
+          $pricePm = Yii::app()->params['price_weekend_PM'];
+        } else {         
+          $priceAm = Yii::app()->params['price_workday_AM'];
+          $pricePm = Yii::app()->params['price_workday_PM'];
+        }
+
 		foreach ($times as $k=>$time) {
+
+
+            if ($workday){
+              if ($k>6 && $k<14) $price = $priceAm;
+              else $price = $pricePm;
+            } else {
+              if ($k<10) $price = $priceAm;
+              else $price = $pricePm;
+            }
 
 			$dis = '';
 			if ( isset($quest['bookings'][$time]) )
@@ -81,7 +106,7 @@ if (Yii::app()->user->name == 'admin' ){
 	                data-day="<? echo $days[date('w',$currDate)]; ?>" 
 	                data-price="<? echo Yii::app()->params['price_weekend_AM']; ?>" 
 					class="time btn btn-default btn-xs <? echo $invisible;?>" <? echo $dis;?>>
-					<? echo $time; ?>
+					<? echo $time; ?><br><small><? echo $price; ?>р.</small>
 				</span>
 			</td>
 

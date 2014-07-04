@@ -30,61 +30,52 @@ $this->menu=array(
   <div class="tab-pane active" id="times">
     <div id="times-table" style="padding-top:10px;">
     <?
-      $times = array('00:00', '01:15', '02:30', '04:00', '05:15', '06:30', 
-                    '07:45', '09:00', '10:15', '11:30', '12:45', '14:00', 
-                    '15:15', '16:30', '17:45', '19:00', '20:15', '21:30', '22:45');
-
-      $days = array('понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота', 'воскресенье');
-      $month = array('января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'ноября', 'октября', 'декабря' );
-      $endDate = strtotime( '+14 day' );
+      $days = Yii::app()->params['days'];
+      $month = Yii::app()->params['month'];
+      $endDate = strtotime( '+'.Yii::app()->params['offset'].' day' );
       $currDate = strtotime( 'now' );
       $dayArray = array();
 
       $pricesStr = '';
       $workday = 1;
 
-        function makeDayArray( ){
-          $days = array('понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота', 'воскресенье');
-          $month = array('января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'ноября', 'октября', 'декабря' );
-          $endDate = strtotime( '+14 day' );
-          $currDate = strtotime( 'now' );
-          $dayArray = array();
+      function makeDayArray( ){
+        $days = array('понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота', 'воскресенье');
+        $month = array('января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'ноября', 'октября', 'декабря' );
+        $endDate = strtotime( '+14 day' );
+        $currDate = strtotime( 'now' );
+        $dayArray = array();
 
-          do{
-            $dayArray[] = array(
-              'day_name' => $days[intval(date( 'N' , $currDate ))-1],
-              'month_name' => $month[intval(date( 'n' , $currDate ))-1],
-              'day' => date( 'j' , $currDate ),
-              'date' => date('Ymd', $currDate)
-            );
-            $currDate = strtotime( '+1 day' , $currDate );
-          } while( $currDate<=$endDate );
+        do{
+          $dayArray[] = array(
+            'day_name' => $days[intval(date( 'N' , $currDate ))-1],
+            'month_name' => $month[intval(date( 'n' , $currDate ))-1],
+            'day' => date( 'j' , $currDate ),
+            'date' => date('Ymd', $currDate)
+          );
+          $currDate = strtotime( '+1 day' , $currDate );
+        } while( $currDate<=$endDate );
 
-          return $dayArray;
-        }
+        return $dayArray;
+      }
 
-        $next_2week = makeDayArray(); ?>
+      $next_2week = makeDayArray(); ?>
+        <table class="table">
+          <?php foreach ($next_2week as $value) {
 
-          <table class="table">
-            <?php foreach ($next_2week as $value) {
+            if ( $value['day_name'] == 'суббота' || $value['day_name'] == 'воскресенье')
+            {
+              $workday = 0;
+              $priceAm = Yii::app()->params['price_weekend_AM'];
+              $pricePm = Yii::app()->params['price_weekend_PM'];
 
-              if ( $value['day_name'] == 'суббота' || $value['day_name'] == 'воскресенье')
-              {
-                $workday = 0;
-                $priceAm = Yii::app()->params['price_weekend_AM'];
-                $pricePm = Yii::app()->params['price_weekend_PM'];
-                // $pricesStr =  '<span class="price"><span>'.$priceAm.' руб.</span></span>'.' <span class="price"><span>'.$pricePm.' руб.</span></span>';
+            } else {
 
-              } else {
+              $workday = 1;
+              $priceAm = Yii::app()->params['price_workday_AM'];
+              $pricePm = Yii::app()->params['price_workday_PM'];
 
-                $workday = 1;
-                $priceAm = Yii::app()->params['price_workday_AM'];
-                $pricePm = Yii::app()->params['price_workday_PM'];
-
-                // $pricesStr =  '<span class="price"><span>'.$priceAm.' руб.</span></span>'.' <span class="price"><span>'.$pricePm.' руб.</span></span>'.' <span class="price"><span>'.$priceAm.' руб.</span></span>';
-              }
-
-              ?>
+            } ?>
             <tr class="<?php echo $value['day_name'] == 'суббота' || $value['day_name'] == 'воскресенье' ? 'danger' : ''; ?>">
               <td>
                 <p class="<?php echo $value['day_name'] == 'суббота' || $value['day_name'] == 'воскресенье' ? 'weekend' : ''; ?>">
