@@ -37,7 +37,7 @@ $('.search-form form').submit(function(){
 				'<div class="caption">'.
 					'<h3>'.$q->title.'</h3>'.
 					'<p style="overflow: hidden;height: 40px;">'.$q->content.'</p>'.
-					'<p><a href="/quest/update?id='.$q->id.'" class="btn btn-primary" role="button">Edit</a> <a href="/quest/delete?id='.$q->id.'" class="btn btn-default" role="button">Delete</a></p>'.
+					'<p><a href="/quest/update?id='.$q->id.'" class="btn btn-primary" role="button">Edit</a></p>'.
 				'</div>'.
 			'</div>'.
 		'</div>';

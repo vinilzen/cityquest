@@ -40,8 +40,6 @@ $this->menu=array(
       $currDate = strtotime( 'now' );
       $dayArray = array();
 
-      $priceAm = 3000;
-      $pricePm = 3500;
       $pricesStr = '';
       $workday = 1;
 
@@ -69,22 +67,21 @@ $this->menu=array(
 
           <table class="table">
             <?php foreach ($next_2week as $value) {
+
               if ( $value['day_name'] == 'суббота' || $value['day_name'] == 'воскресенье')
               {
                 $workday = 0;
                 $priceAm = Yii::app()->params['price_weekend_AM'];
                 $pricePm = Yii::app()->params['price_weekend_PM'];
-                $pricesStr =  '<span class="price"><span>'.$priceAm.' руб.</span></span>'.
-                              ' <span class="price"><span>'.$pricePm.' руб.</span></span>';
+                // $pricesStr =  '<span class="price"><span>'.$priceAm.' руб.</span></span>'.' <span class="price"><span>'.$pricePm.' руб.</span></span>';
 
               } else {
 
+                $workday = 1;
                 $priceAm = Yii::app()->params['price_workday_AM'];
                 $pricePm = Yii::app()->params['price_workday_PM'];
 
-                $pricesStr =  '<span class="price"><span>'.$priceAm.' руб.</span></span>'.
-                              ' <span class="price"><span>'.$pricePm.' руб.</span></span>'.
-                              ' <span class="price"><span>'.$priceAm.' руб.</span></span>';
+                // $pricesStr =  '<span class="price"><span>'.$priceAm.' руб.</span></span>'.' <span class="price"><span>'.$pricePm.' руб.</span></span>'.' <span class="price"><span>'.$priceAm.' руб.</span></span>';
               }
 
               ?>
@@ -100,12 +97,27 @@ $this->menu=array(
                   $near = 0;
                   if ($time < date('h:i', strtotime( '+3 hours' )) ) $near = 1;
                 ?><button type="button" <?
+
+                  if ($workday){
+                    if ($k>6 && $k<14) $price = $priceAm;
+                    else $price = $pricePm;
+                  } else {
+                    if ($k<10) $price = $priceAm;
+                    else $price = $pricePm;
+
+                  }
+
+
+
                  if (isset($booking[$value['date']]) && isset($booking[$value['date']][$time]) ) {
+
                   echo  'data-name="'.$booking[$value['date']][$time]['name'].'" '.
                         'data-phone="'.$booking[$value['date']][$time]['phone'].'" '.
                         'data-price="'.$booking[$value['date']][$time]['price'].'" '.
                         'data-id="'.$booking[$value['date']][$time]['id'].'" '. 
                         'data-comment="'.$booking[$value['date']][$time]['comment'].'"';
+                 } else {
+                    echo 'data-price="'.$price.'" ';
                  }
                 ?>
                     data-toggle="popover"
@@ -114,10 +126,8 @@ $this->menu=array(
                     data-ymd="<?php echo $value['date']; ?>" 
                     data-date="<?php echo $value['day']; ?> <?php echo $value['month_name']; ?>" 
                     data-day="<?php echo $value['day_name']; ?>" 
-                   <? // data-price="<?php if ($workday === 1) echo ($k>3 && $k<14) ? $pricePm : $priceAm; else echo $k < 9 ? $priceAm : $pricePm; ?>
                     class="btn btn-default btn-xs <?php
-              // if ( ($value['date'] === date('Ymd') && $near) || $dis ) echo ' disabled';
-
+              
                   if (isset($booking[$value['date']]) && isset($booking[$value['date']][$time]) ) {
                     if ($booking[$value['date']][$time]['status'] == 0)
                       echo ' btn-info';
@@ -127,17 +137,11 @@ $this->menu=array(
 
                   }
 
-            if (
-              $value['date'] != '20140612' && 
-              $value['date'] != '20140613' && 
-              $value['day_name'] != 'суббота' && 
-              $value['day_name'] != 'воскресенье' && 
-              $k > 2 && $k < 7 )
-                echo ' turnoff'; 
-          ?>" >
-                <?php echo $time; ?></button> <?php } ?>
+            if ($workday && $k > 2 && $k < 7 )
+                echo ' invisible'; 
+          ?>" ><? echo $time; ?><br><small><? echo $price; ?>р.</small></button> <?php } ?>
             <div class="clearfix"></div>
-            <?php echo $pricesStr; ?>
+            <? // echo $pricesStr; ?>
           </td>
         </tr>
         <?php } ?>
@@ -215,7 +219,7 @@ $this->menu=array(
       <div class="form-group">
         <label for="inputPrice" class="col-sm-2 control-label">Price</label>
         <div class="col-sm-7">
-          <input type="text" class="form-control input-sm inputPrice" placeholder="3000">
+          <input type="text" class="form-control input-sm inputPrice" value="<%= price %>" placeholder="3000">
         </div>
       </div>
       <div class="form-group">
@@ -243,7 +247,7 @@ $this->menu=array(
       <button class="btn btn-default btn-sm" id="undoBooking" data-toggle="tooltip" title="Удалить подтверждение">
         <span class="glyphicon glyphicon-pause"></span>
       </button>
-      <button class="btn btn-default btn-sm" id="removeBooking" data-toggle="tooltip" title="Удалить бронирование">
+      <button class="btn btn-default btn-sm" id="showRemoveBooking" data-toggle="tooltip" title="Удалить бронирование">
         <span class="glyphicon glyphicon-remove"></span>
       </button>
       <button class="btn btn-default btn-sm" id="editBooking" data-toggle="tooltip" title="Редактировать бронирование">

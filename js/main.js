@@ -6,11 +6,13 @@ var PopoverView = Backbone.View.extend({
 	
 	events: {
 		'click #confirmBooking':'confirmBooking',
-		'click #removeBooking':'removeBooking',
+		'click #showRemoveBooking':'showRemoveBooking',
 		'click #cancelDelete':'cancelDelete',
 		'click #editBooking':'showEdit',
 		'click #addBooking':'showAdd',
-		'click #saveBooking':'saveBooking',
+		'click #confirmedDelete':'removeBooking',
+		'click #addBookingRow #saveBooking':'saveBooking',
+		'click #editBookingRow #saveBooking':'saveEditedBooking',
 		'click #cancelAddBooking':'cancelAddBooking',
 		'click #cancelEditBooking':'cancelEditBooking',
 		'click #undoBooking':'undoBooking',
@@ -85,6 +87,52 @@ var PopoverView = Backbone.View.extend({
 		return false;
 	},
 
+	removeBooking:function(){
+		var self = this;
+
+		$.post('/booking/delete', {
+			id : self.attr.id
+		}, function(result){
+			if (result && result.success) {
+				console.log('removed');
+				// self.$el.removeClass('btn-info').addClass('btn-success');
+				location.reload();
+			} else {
+				console.log(result);// if (result && result.message) { }
+				alert('Ошибка!');
+			}
+		});
+
+		return false;
+	},
+
+	saveEditedBooking:function(){
+
+		var self = this;
+
+		$.post('/booking/update', {
+			id : self.attr.id,
+			ymd : self.attr.ymd,
+			date : self.attr.date,
+			time : self.attr.time,
+			price : $('#editBookingRow .inputPrice').val(),
+			phone : $('#editBookingRow .inputPhone').val(),
+			comment : $('#editBookingRow .inputComment').val(),
+			name : $('#editBookingRow .inputName').val(),
+		}, function(result){
+			if (result && result.success) {
+				console.log('confirmed');
+				// self.$el.removeClass('btn-info').addClass('btn-success');
+				location.reload();
+	
+			} else {
+				console.log(result);// if (result && result.message) { }
+				alert('Ошибка!');
+			}
+		});
+
+		return false;
+	},
 	saveBooking:function(){
 
 		var self = this;
@@ -113,7 +161,7 @@ var PopoverView = Backbone.View.extend({
 		return false;
 	},
 
-	removeBooking:function(){
+	showRemoveBooking:function(){
 		$('#btnRow, #BookInf h3, #phoneRow', this.$el).hide();
 		$('#confirmRow', this.$el).show();
 		$(this.parent).popover('setPosition');
