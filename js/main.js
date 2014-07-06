@@ -22,6 +22,7 @@ var PopoverView = Backbone.View.extend({
 
 		this.attr = {
 			id : $(this.parent).attr('data-id') || 0,
+			quest_id : $(this.parent).attr('data-quest') || 0,
 			name :  $(this.parent).attr('data-name') || '',
 			phone :  $(this.parent).attr('data-phone') || '',
 			comment :  $(this.parent).attr('data-comment') || '',
@@ -120,6 +121,9 @@ var PopoverView = Backbone.View.extend({
 			comment : $('#editBookingRow .inputComment').val(),
 			name : $('#editBookingRow .inputName').val(),
 		}, function(result){
+			
+			console.log(result);
+
 			if (result && result.success) {
 				console.log('confirmed');
 				// self.$el.removeClass('btn-info').addClass('btn-success');
@@ -138,7 +142,7 @@ var PopoverView = Backbone.View.extend({
 		var self = this;
 
 		$.post('/booking/create', {
-			quest_id : $('#quest_id').val(),
+			quest_id : self.attr.quest_id,
 			ymd : self.attr.ymd,
 			date : self.attr.date,
 			time : self.attr.time,
@@ -149,11 +153,10 @@ var PopoverView = Backbone.View.extend({
 		}, function(result){
 			if (result && result.success) {
 				console.log('confirmed');
-				// self.$el.removeClass('btn-info').addClass('btn-success');
 				location.reload();
 	
 			} else {
-				console.log(result);// if (result && result.message) { }
+				console.log(result);
 				alert('Ошибка!');
 			}
 		});
@@ -184,7 +187,7 @@ var PopoverView = Backbone.View.extend({
 	showEdit:function(){
 		var self = this;
 
-		$('#addRow, #btnRow, #BookInf h3, #phoneRow', this.$el).hide();
+		$('#addRow, #btnRow, #BookInf h3, #phoneRow', self.$el).hide();
 
 		$('#editBookingRow .inputName', this.$el).val(self.attr.name);
 		$('#editBookingRow .inputPhone', this.$el).val(self.attr.phone);
@@ -230,7 +233,7 @@ $(function() {
 			
 			if (!$(this)[0].popover_view)
 				$(this)[0].popover_view = new PopoverView({parent:this});
-			
+
 			return $(this)[0].popover_view.render().el;
 		}
 	}).on('show.bs.popover', function (e) {

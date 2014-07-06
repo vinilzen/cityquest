@@ -33,7 +33,7 @@ class QuestController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','admin','delete', 'sort'),
+				'actions'=>array('create','update','admin','delete', 'sort', 'adminschedule'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -58,7 +58,6 @@ class QuestController extends Controller
 			if (!Yii::app()->user->isGuest){
 
 				if ( isset($_POST['sort']) && count($_POST['sort']) > 0 ) {
-
 
 					try {
 
@@ -267,6 +266,53 @@ class QuestController extends Controller
 		));
 	}
 
+
+	/**
+	 *  all schedule for models.
+	 */
+	public function actionAdminschedule($ymd = '')
+	{
+
+		if ($ymd === '' || !is_numeric($ymd) || strlen($ymd) !== 8)
+			$YMDate = date('Ymd', strtotime( "now" ));
+		else
+			$YMDate = (int)$ymd;
+
+
+		$quests=Quest::model()->findAllByAttributes(array('status' => 2));
+		$quests_array = array();
+
+		if (count($quests)>0){
+
+			$quest_ids = array();
+
+			foreach ($quests AS $quest){
+				$quest_ids[] = $quest->id;
+				$quests_array[$quest->id] = array();
+				$quests_array[$quest->id]['q'] = $quest;
+				$quests_array[$quest->id]['booking'] = array();
+			}
+
+			$bookings=Booking::model()->findAllByAttributes(
+				array(
+					'quest_id' => $quest_ids,
+					'date' => $YMDate,
+				)
+			);
+
+			if (count($bookings)>0){
+				foreach ($bookings as $b) {
+					$quests_array[$b->quest_id]['bookings'][$b->time] = $b;
+				}
+			}
+		}
+
+
+		$this->render('adminschedule',array(
+			'quests' => $quests_array,
+			'ymd' => $YMDate,
+		));
+	}
 
 	/**
 	 * Lists all schedule for models.

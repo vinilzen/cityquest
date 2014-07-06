@@ -78,7 +78,7 @@ class BookingController extends Controller
 						// Uncomment the following line if AJAX validation is needed
 						// $this->performAjaxValidation($model);
 
-						$model->comment = $_POST['date'].' - '.$_POST['time'].' - '.$_POST['comment'];
+						$model->comment = $_POST['comment'];
 						$model->time = $_POST['time'];
 						$model->price = (int)$_POST['price'];
 						$model->date = (int)$_POST['ymd'];
@@ -161,7 +161,7 @@ class BookingController extends Controller
 
 					$model=$this->loadModel((int)$_POST['id']);
 					
-					$model->comment = $_POST['date'].' - '.$_POST['time'].' - '.$_POST['comment'];
+					$model->comment = $_POST['comment'];
 					$model->time = $_POST['time'];
 					$model->price = (int)$_POST['price'];
 					$model->date = (int)$_POST['ymd'];

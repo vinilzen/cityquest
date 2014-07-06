@@ -32,7 +32,7 @@ $('.search-form form').submit(function(){
 	<? foreach ($models AS $q) {
 
 	echo '<div class="col-sm-4 col-md-4 sortable_quest" data-id="'.$q->id.'" id="quest_'.$q->id.'">'.
-			'<div class="thumbnail">'.
+			'<div class="thumbnail" style="min-height:420px;">'.
 				'<img src="/images/q/'.$q->id.'.jpg" class="img-responsive" style="max-height:220px;">'.
 				'<div class="caption">'.
 					'<h3>'.$q->title.'</h3>'.
