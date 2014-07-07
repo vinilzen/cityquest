@@ -1,7 +1,10 @@
 <script id="BookInfWrap" type="text/template">
   <div class="checkBooking" id="BookInf">
-    <h3 style="margin-top: 0;" class="pop-row"><%= name %></h3>
-    <p class="phoneRow pop-row" id="phoneRow"><strong>Phone</strong>: <span><%= phone %></span></p>
+    <h3 style="margin-top: 0;" class="pop-row"><a href="<%= user_url %>"><%= name %></a></h3>
+    <p class="phoneRow pop-row" id="phoneRow">
+      <strong>Phone</strong>: <span><%= phone %></span><br>
+      <strong>Comment</strong>: <span><%= comment %></span>
+    </p>
     <form class="form-horizontal pop-row" id="editBookingRow" role="form">
       <div class="form-group">
         <label for="inputName" class="col-sm-2 control-label">Name</label>

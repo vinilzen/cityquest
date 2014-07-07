@@ -8,11 +8,12 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Quest', 'url'=>array('index')),
-	array('label'=>'Manage Quest', 'url'=>array('admin')),
+	array('label'=>'Сводная таблица', 'url'=>array('quest/adminschedule/ymd')),
+	array('label'=>'Управление квестами', 'url'=>array('admin')),
+	array('label'=>'Список квестов', 'url'=>array('index')),
 );
 ?>
 
-<h1>Create Quest</h1>
+<h1 class="page-header">Создать квест</h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

@@ -19,6 +19,18 @@ class CityController extends Controller
 		);
 	}
 
+
+	public function init() {
+		parent::init();
+		if (Yii::app()->user->name == 'admin' ){
+
+
+			$this->layout='//layouts/admin_column';
+
+		}
+	}
+
+
 	/**
 	 * Specifies the access control rules.
 	 * This method is used by the 'accessControl' filter.
@@ -32,11 +44,11 @@ class CityController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array(),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('admin','delete', 'create','update'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users

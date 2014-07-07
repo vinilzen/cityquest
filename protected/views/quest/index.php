@@ -8,13 +8,14 @@ $this->breadcrumbs=array(
 
 if (Yii::app()->user->name == 'admin' ){
 	$this->menu=array(
-		array('label'=>'Create Quest', 'url'=>array('create')),
-		array('label'=>'Manage Quest', 'url'=>array('admin')),
+		array('label'=>'Сводная таблица', 'url'=>array('quest/adminschedule/ymd')),
+		array('label'=>'Управление квестами', 'url'=>array('admin')),
+		array('label'=>'Создать новый квест', 'url'=>array('create')),
 	);
 }
 ?>
 
-<h1>Quests</h1>
+<h1 class="page-header">Квесты</h1>
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
 	'itemView'=>'_view',

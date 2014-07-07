@@ -8,15 +8,14 @@ $this->breadcrumbs=array(
 	'Update',
 );
 
-$this->menu=array(
-	array('label'=>'List Quest', 'url'=>array('index')),
-	array('label'=>'Create Quest', 'url'=>array('create')),
-	array('label'=>'View Quest', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage Quest', 'url'=>array('admin')),
+$this->quest_menu=array(
+  array('label'=>'Сводная таблица', 'url'=>array('quest/adminschedule/ymd')),
+  array('label'=>'Управление квестами', 'url'=>array('admin')),
+  array('label'=>'Создать новый квест', 'url'=>array('create')),
 );
 ?>
 
-<h1>#<?php echo $model->id; ?> <?php echo $model->title; ?></h1>
+<h1 class="page-header">#<?php echo $model->id; ?> <?php echo $model->title; ?></h1>
 <input type="hidden" value="<?php echo $model->id; ?>" id="quest_id">
 
 <!-- Nav tabs -->
@@ -28,7 +27,7 @@ $this->menu=array(
 <!-- Tab panes -->
 <div class="tab-content">
   <div class="tab-pane active" id="times">
-    <div id="times-table" style="padding-top:10px;">
+    <div id="times-table" class="table-responsive" style="padding-top:10px;">
     <?
       $days = Yii::app()->params['days'];
       $month = Yii::app()->params['month'];
@@ -40,15 +39,16 @@ $this->menu=array(
       $workday = 1;
 
       function makeDayArray( ){
-        $days = array('понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота', 'воскресенье');
-        $month = array('января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'ноября', 'октября', 'декабря' );
+        $days = Yii::app()->params['days'];
+        $days_short = Yii::app()->params['days_short'];
+        $month = Yii::app()->params['month'];
         $endDate = strtotime( '+14 day' );
         $currDate = strtotime( 'now' );
         $dayArray = array();
 
         do{
           $dayArray[] = array(
-            'day_name' => $days[intval(date( 'N' , $currDate ))-1],
+            'day_name' => $days_short[intval(date( 'N' , $currDate ))-1],
             'month_name' => $month[intval(date( 'n' , $currDate ))-1],
             'day' => date( 'j' , $currDate ),
             'date' => date('Ymd', $currDate)
@@ -60,10 +60,12 @@ $this->menu=array(
       }
 
       $next_2week = makeDayArray(); ?>
+
+        <style> .table>tbody>tr>td { padding:8px 1px; } </style>
         <table class="table">
           <?php foreach ($next_2week as $value) {
 
-            if ( $value['day_name'] == 'суббота' || $value['day_name'] == 'воскресенье')
+            if ( $value['day_name'] == 'Сб' || $value['day_name'] == 'Вс')
             {
               $workday = 0;
               $priceAm = Yii::app()->params['price_weekend_AM'];
@@ -76,18 +78,18 @@ $this->menu=array(
               $pricePm = Yii::app()->params['price_workday_PM'];
 
             } ?>
-            <tr class="<?php echo $value['day_name'] == 'суббота' || $value['day_name'] == 'воскресенье' ? 'danger' : ''; ?>">
+            <tr class="<?php echo $value['day_name'] == 'Сб' || $value['day_name'] == 'Вс' ? 'danger' : ''; ?>">
               <td>
-                <p class="<?php echo $value['day_name'] == 'суббота' || $value['day_name'] == 'воскресенье' ? 'weekend' : ''; ?>">
-                  <strong><?php echo $value['day']; ?> <?php echo $value['month_name']; ?></strong><br><span><?php echo $value['day_name']; ?></span>
+                <p class="<?php echo $value['day_name'] == 'Сб' || $value['day_name'] == 'Вс' ? 'weekend' : ''; ?>">
+                  <strong style="white-space:nowrap; padding-right:10px;"><?php echo $value['day']; ?> <?php echo $value['month_name']; ?></strong><br><small><?php echo $value['day_name']; ?></small>
                 </p>
               </td>
-              <td class="text-left">
+              
                 <?php foreach ($times as $k=>$time) {
                   $dis = 0;                  
                   $near = 0;
                   if ($time < date('h:i', strtotime( '+3 hours' )) ) $near = 1;
-                ?><button type="button" <?
+                ?><td><button type="button" <?
 
                   if ($workday){
                     if ($k>6 && $k<14) $price = $priceAm;
@@ -103,6 +105,7 @@ $this->menu=array(
                         'data-phone="'.$booking[$value['date']][$time]['phone'].'" '.
                         'data-price="'.$booking[$value['date']][$time]['price'].'" '.
                         'data-id="'.$booking[$value['date']][$time]['id'].'" '. 
+                        'data-user-id="'.$booking[$value['date']][$time]['user_id'].'" '. 
                         'data-comment="'.$booking[$value['date']][$time]['comment'].'"';
                  } else {
                     echo 'data-price="'.$price.'" ';
@@ -127,10 +130,7 @@ $this->menu=array(
 
             if ($workday && $k > 2 && $k < 7 )
                 echo ' invisible'; 
-          ?>" ><? echo $time; ?><br><small><? echo $price; ?>р.</small></button> <?php } ?>
-            <div class="clearfix"></div>
-            <? // echo $pricesStr; ?>
-          </td>
+          ?>" ><? echo $time; ?><br><small><? echo $price; ?>р.</small></button></td> <?php } ?>        
         </tr>
         <?php } ?>
       </table>

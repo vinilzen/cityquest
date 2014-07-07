@@ -8,8 +8,9 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Quest', 'url'=>array('index')),
-	array('label'=>'Create Quest', 'url'=>array('create')),
+	array('label'=>'Сводная таблица', 'url'=>array('quest/adminschedule/ymd')),
+	// array('label'=>'Управление квестами', 'url'=>array('admin')),
+	array('label'=>'Создать новый квест', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -26,18 +27,18 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Quests</h1>
+<h1 class="page-header">Управление квестами</h1>
 
 <div class="row" id="sortable">
 	<? foreach ($models AS $q) {
 
-	echo '<div class="col-sm-4 col-md-4 sortable_quest" data-id="'.$q->id.'" id="quest_'.$q->id.'">'.
-			'<div class="thumbnail" style="min-height:420px;">'.
-				'<img src="/images/q/'.$q->id.'.jpg" class="img-responsive" style="max-height:220px;">'.
+	echo '<div class="col-sm-6 col-md-4 col-lg-3 sortable_quest" data-id="'.$q->id.'" id="quest_'.$q->id.'">'.
+			'<div class="thumbnail" style="/*min-height:420px;*/">'.
+				'<img src="/images/q/'.$q->id.'.jpg" class="img-responsive" style="max-height:180px; height:180px;">'.
 				'<div class="caption">'.
-					'<h3>'.$q->title.'</h3>'.
+					'<h4 style="max-height: 37px; height: 37px; overflow: hidden;">'.$q->title.'</h4>'.
 					'<p style="overflow: hidden;height: 40px;">'.$q->content.'</p>'.
-					'<p><a href="/quest/update?id='.$q->id.'" class="btn btn-primary" role="button">Edit</a></p>'.
+					'<p><a href="/quest/update?id='.$q->id.'" class="btn btn-primary btn-sm" role="button">Редактировать</a></p>'.
 				'</div>'.
 			'</div>'.
 		'</div>';
@@ -53,12 +54,8 @@ $('.search-form form').submit(function(){
 					sort_result['sort'][$(v).attr('data-id')] = k;
 				});
 
-				console.log(sort_result);
-
 				$.post('/quest/sort', sort_result, function(result){
-
 					console.log(result);
-
 				});
 			}
 		});
@@ -66,7 +63,7 @@ $('.search-form form').submit(function(){
 	});
 </script>
 </div>
-
+<!-- 
 <hr>
 
 <p>
@@ -79,9 +76,9 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 <?php $this->renderPartial('_search',array(
 	'model'=>$model,
 )); ?>
-</div><!-- search-form -->
+</div>
 
-<?php $this->widget('zii.widgets.grid.CGridView', array(
+<?php /* $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'quest-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
@@ -96,4 +93,4 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 			'class'=>'CButtonColumn',
 		),
 	),
-)); ?>
+));  */?>-->

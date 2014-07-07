@@ -32,6 +32,8 @@ var PopoverView = Backbone.View.extend({
 			date :  $(this.parent).attr('data-date') || 0,
 		};
 
+		this.attr.user_url = $(this.parent).attr('data-user-id') != '' ? '/user/admin/view/id/'+$(this.parent).attr('data-user-id') : '#';
+
 		this.$el.html( _.template($('#BookInfWrap').html(), this.attr) );
 
 		$('.pop-row', this.$el).hide();

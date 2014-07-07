@@ -8,6 +8,9 @@ class DefaultController extends Controller
 	 */
 	public function actionIndex()
 	{
+
+		$this->layout = "//layouts/admin";
+		
 		$dataProvider=new CActiveDataProvider('User', array(
 			'criteria'=>array(
 		        'condition'=>'status>'.User::STATUS_BANED,

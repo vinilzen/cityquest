@@ -41,6 +41,8 @@ class UserController extends Controller
 	 */
 	public function actionView()
 	{
+	
+		$this->layout = "//layouts/admin";
 		$model = $this->loadModel();
 		$this->render('view',array(
 			'model'=>$model,
@@ -52,6 +54,10 @@ class UserController extends Controller
 	 */
 	public function actionIndex()
 	{
+
+		// var_dump($this->layout); die;
+		$this->layout = "//layouts/admin";
+
 		$dataProvider=new CActiveDataProvider('User', array(
 			'criteria'=>array(
 		        'condition'=>'status>'.User::STATUS_BANED,

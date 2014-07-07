@@ -11,6 +11,7 @@ $this->breadcrumbs=array(
 
 if (Yii::app()->user->name == 'admin' ){
 	$this->menu=array(
+    array('label'=>'Сводная таблица', 'url'=>array('quest/adminschedule/ymd')),
 		array('label'=>'List Quest', 'url'=>array('index')),
 		array('label'=>'Create Quest', 'url'=>array('create')),
 		array('label'=>'Update Quest', 'url'=>array('update', 'id'=>$model->id)),

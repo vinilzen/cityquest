@@ -17,8 +17,8 @@ class QuestController extends Controller
 			'accessControl', // perform access control for CRUD operations
 			'postOnly + delete', // we only allow deletion via POST request
 		);
-		// return array('rights',);
 	}
+
 
 	/**
 	 * Specifies the access control rules.
@@ -136,6 +136,7 @@ class QuestController extends Controller
 	 */
 	public function actionCreate()
 	{
+		$this->layout='//layouts/admin_column';
 		$model=new Quest;
 
 		// Uncomment the following line if AJAX validation is needed
@@ -165,6 +166,7 @@ class QuestController extends Controller
 	 */
 	public function actionUpdate($id)
 	{
+		$this->layout='//layouts/admin_column';
 		$model=$this->loadModel($id);
 
 		$bookings = array();
@@ -185,6 +187,7 @@ class QuestController extends Controller
 
 			$bookings_by_date[$booking->date][$booking->time] = $booking->attributes;
 			$bookings_by_date[$booking->date][$booking->time]['name'] = $booking->name != '' ? $booking->name : $booking->competitor->username;
+			$bookings_by_date[$booking->date][$booking->time]['user_id'] = $booking->competitor_id != 1 ? $booking->competitor->id : '';
 
 		}
 		// Uncomment the following line if AJAX validation is needed
@@ -272,6 +275,15 @@ class QuestController extends Controller
 	 */
 	public function actionAdminschedule($ymd = '')
 	{
+
+		$this->quest_menu=array(
+				array('label'=>'Сводная таблица', 'url'=>array('/quest/adminschedule/ymd'), 'active'=>true ),
+				array('label'=>'Управление квестами', 'url'=>array('/quest/admin')),
+				array('label'=>'Создать новый квест', 'url'=>array('/quest/create')),
+			);
+		
+		$this->layout='//layouts/admin_column';
+
 
 		if ($ymd === '' || !is_numeric($ymd) || strlen($ymd) !== 8)
 			$YMDate = date('Ymd', strtotime( "now" ));
@@ -361,6 +373,8 @@ class QuestController extends Controller
 	 */
 	public function actionAdmin()
 	{
+
+		$this->layout='//layouts/admin_column';
 		$model=new Quest('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Quest']))
