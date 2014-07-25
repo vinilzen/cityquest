@@ -2,14 +2,7 @@
 /* @var $this QuestController */
 /* @var $model Quest */
 
-$this->breadcrumbs=array(
-	// 'htmlOptions' => array( 'class' => 'breadcrumb'),
-	'Quests'=>array('index'),
-	$model->title,
-);
-
-
-if (Yii::app()->user->name == 'admin' ){
+if (0 && Yii::app()->user->name == 'admin' ){
 	$this->menu=array(
     array('label'=>'Сводная таблица', 'url'=>array('quest/adminschedule/ymd')),
 		array('label'=>'List Quest', 'url'=>array('index')),
@@ -21,70 +14,89 @@ if (Yii::app()->user->name == 'admin' ){
 }
 ?>
 
-<h1>#<?php echo $model->id; ?> <?php echo $model->title; ?> </h1>
+<div class="jumbotron quest" style="background-image: url(../images/q/<? echo $model->id; ?>.jpg);">
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1 col-sm-12">
+        <h1><? echo $model->title; ?></h1>
+        <p><? echo $model->content; ?></p>
+      </div>
+    </div>
+    <div class="row descr_quest">
+      <div class="col-xs-12 col-sm-4 col-md-3 tl">
+        <p> <i class="duration"></i>
+          <span> <em>60</em>минут</span>
+        </p>
+      </div>
+      <div class="col-xs-12 col-sm-4 col-md-3">
+        <p> <i class="ico-ppl"></i>
+          <i class="ico-ppl"></i>
+          <i class="ico-ppl noactive"></i>
+          <i class="ico-ppl noactive"></i>
+          <span class="people"> <em>2 - 4</em>игрока</span>
+        </p>
+      </div>
+      <div class="col-xs-12 col-sm-4 col-md-3 tr">
+        <p>
+          <i class="metro"></i>
+          <span class="metro-title"><? echo $model->metro; ?></span>
+        </p>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-3">
+        <p>
+          <i class="ico-loc"></i>
+          <span><? echo $model->addres; ?></span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
 
-<?php
+<div class="container container-xlg">
+  <div class="row">
+    <div class="col-xs-12 text-center">
+      <h2 class="twotab active">Расписание</h2>
+      <h2 class="twotab">Победители</h2>
+      <hr class="fadeOut">
+    </div>
+    <div class="clearfix"></div>
+    <div class="col-xs-12 ovs">
+      <div class="row quests_schedules quest_schedule">
+      
 
-switch ($model->status) {
-	case 3:
-		$status_value = 'Вскоре';
-		break;
-	case 2:
-		$status_value = 'Активен';
-		break;
-	default:
-		$status_value = 'Черновик';
-		break;
-}
 
-if ( file_exists('./images/q/'.$model->id.'.jpg') ){
-	$img = CHtml::image('/images/q/'.$model->id.'.jpg', $model->title, array('style'=>'width:200px;') );
-} else {
-	$img = 'Нет изображения!';
-}
 
-$this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
-	'attributes'=>array(
-		'content',
-		'addres',
-		'metro',
-		array( 'label' => 'img', 'type'=>'raw', 'value' => $img )
-	),
-)); ?>
-
-<div id="times-table" class="collapse in">
-	<?
+  <?
     $days = Yii::app()->params['days'];
     $month = Yii::app()->params['month'];
     $endDate = strtotime( '+'.Yii::app()->params['offset'].' day' );
     $currDate = strtotime( 'now' );
-		$dayArray = array();
+    $dayArray = array();
 
-	    function makeDayArray( ){
-	      $days = array('понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота', 'воскресенье');
-	      $month = array('января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'ноября', 'октября', 'декабря' );
-	      $endDate   = strtotime( '+14 day' );
-	      $currDate  = strtotime( 'now' );
-	      $dayArray  = array();
+      function makeDayArray( ){
+        $days = array('понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота', 'воскресенье');
+        $month = array('января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'ноября', 'октября', 'декабря' );
+        $endDate   = strtotime( '+14 day' );
+        $currDate  = strtotime( 'now' );
+        $dayArray  = array();
 
-	      do{
-	        $dayArray[] = array(
-	          'day_name' => $days[intval(date( 'N' , $currDate ))-1],
-	          'month_name' => $month[intval(date( 'n' , $currDate ))-1],
-	          'day' => date( 'j' , $currDate ),
-	          'date' => date('Ymd', $currDate)
-	        );
-	        $currDate = strtotime( '+1 day' , $currDate );
-	      } while( $currDate<=$endDate );
+        do{
+          $dayArray[] = array(
+            'day_name' => $days[intval(date( 'N' , $currDate ))-1],
+            'month_name' => $month[intval(date( 'n' , $currDate ))-1],
+            'day' => date( 'j' , $currDate ),
+            'date' => date('Ymd', $currDate),
+            'month' => date('m', $currDate),
+          );
+          $currDate = strtotime( '+1 day' , $currDate );
+        } while( $currDate<=$endDate );
 
-	      return $dayArray;
-	    }
+        return $dayArray;
+      }
 
-	    $next_2week = makeDayArray(); ?>
+      $next_2week = makeDayArray(); ?>
 
-        <table class="table">
-          <?php foreach ($next_2week as $value) {
+          <? foreach ($next_2week as $value) {
             if ( $value['day_name'] == 'суббота' ||  $value['day_name'] == 'воскресенье')
             {
               $workday = 0;
@@ -98,14 +110,16 @@ $this->widget('zii.widgets.CDetailView', array(
             }
 
             ?>
-          <tr class="<?php echo $value['day_name'] == 'суббота' || $value['day_name'] == 'воскресенье' ? 'danger' : ''; ?>">
-            <td>
-              <p class="<?php echo $value['day_name'] == 'суббота' || $value['day_name'] == 'воскресенье' ? 'weekend' : ''; ?>">
-                <strong><?php echo $value['day']; ?> <?php echo $value['month_name']; ?></strong><br><span><?php echo $value['day_name']; ?></span>
-              </p>
-            </td>
-            <td class="text-left">
-              <?php foreach ($times as $k=>$time) {
+              
+          <div class="col-xs-1 col-sm-1">
+            <div class="curent_date <? echo $value['day_name'] == 'суббота' || $value['day_name'] == 'воскресенье' ? 'weekend' : ''; ?>">
+              <span><em><? echo $value['day']; ?>.</em><? echo $value['month']; ?></span><small><? echo $value['day_name']; ?></small>
+            </div>
+          </div>
+          <div class="col-xs-12 times">
+            <div class="times-line">
+
+              <? foreach ($times as $k=>$time) {
 
                 if ($workday){
                   if ($k>6 && $k<14) $price = $priceAm;
@@ -117,27 +131,48 @@ $this->widget('zii.widgets.CDetailView', array(
 
                 $dis = 0;                
                 $near = 0;
-                if ($time < date('H:i', strtotime( '+0 hours' )) ) $near = 1;
+                if ($time < date('H:i', strtotime( '+0 hours' )) ) $near = 1; ?>
 
-              ?><button type="button" 
-                  data-name="<? echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->profile->getAttribute('firstname') : ''; ?>" 
-                  data-phone="<? echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->profile->getAttribute('phone') : ''; ?>" 
-                  data-time="<? echo $time; ?>" 
-                  data-quest="<? echo $model->id; ?>" 
-                  data-ymd="<? echo $value['date']; ?>" 
-                  data-date="<? echo $value['day']; ?> <? echo $value['month_name']; ?>" 
-                  data-day="<? echo $value['day_name']; ?>" 
-                  data-price="<? echo $price; ?>" 
-                  class="time btn btn-default btn-xs <?php
-          echo (($value['date'] === date('Ymd') && $near) || $dis) ? 'disabled' : '';
-          if ($workday && $k > 2 && $k < 7 )
-          	echo ' invisible';?>"
-		<?
-			if (isset($booking[$value['date']]) && isset($booking[$value['date']][$time]) )
-        echo ' disabled="disabled"'; ?>> <? echo $time; ?><br><small><? echo $price; ?>р.</small></button> <?php } ?>
+                <div  type="button" 
+                      data-name="<? echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->profile->getAttribute('firstname') : ''; ?>" 
+                      data-phone="<? echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->profile->getAttribute('phone') : ''; ?>" 
+                      data-time="<? echo $time; ?>" 
+                      data-quest="<? echo $model->id; ?>" 
+                      data-ymd="<? echo $value['date']; ?>" 
+                      data-date="<? echo $value['day']; ?> <? echo $value['month_name']; ?>" 
+                      data-day="<? echo $value['day_name']; ?>" 
+                      data-price="<? echo $price; ?>" 
+                      class="btn btn-q <? echo (($value['date'] === date('Ymd') && $near) || $dis) ? 'disabled' : '';
+                          if ($workday && $k > 2 && $k < 7 ) echo ' invisible';?>" <?
+                          if (isset($booking[$value['date']]) && isset($booking[$value['date']][$time]) )
+                          echo ' disabled="disabled"'; ?>>
+                  <? echo $time; ?>
+                </div>
+              <? } ?>
+
+            </div>
+            <div class="price-line <? echo $value['day_name'] == 'суббота' || $value['day_name'] == 'воскресенье' ? 'weekend' : ''; ?>">
+              <div class="priceTbl" style="width: 166px;">
+                <div class="priceRow">
+                  <span class="dashed"></span>
+                  <span class="price">3000 руб.</span>
+                  <span class="dashed"></span>
+                </div>
+              </div>
+              <div class="priceTbl" style="margin-left: 274px; width: 605px;">
+                <div class="priceRow">
+                  <span class="dashed"></span>
+                  <span class="price">4000 руб.</span>
+                  <span class="dashed"></span>
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="clearfix"></div>
-        </td>
-      </tr>
-      <?php } ?>
-    </table>
+      <? } ?>
+
+
+      </div>
+    </div>
+  </div>
 </div>

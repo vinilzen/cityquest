@@ -1,358 +1,158 @@
-var PopoverView = Backbone.View.extend({
-	
-	initialize:function(options){
-		this.parent = options.parent;
-	},
-	
-	events: {
-		'click #confirmBooking':'confirmBooking',
-		'click #showRemoveBooking':'showRemoveBooking',
-		'click #cancelDelete':'cancelDelete',
-		'click #editBooking':'showEdit',
-		'click #addBooking':'showAdd',
-		'click #confirmedDelete':'removeBooking',
-		'click #addBookingRow #saveBooking':'saveBooking',
-		'click #editBookingRow #saveBooking':'saveEditedBooking',
-		'click #cancelAddBooking':'cancelAddBooking',
-		'click #cancelEditBooking':'cancelEditBooking',
-		'click #undoBooking':'undoBooking',
-	},
-	
-	render:function(){
+window.mobilecheck = function() {
+var check = false;
+(function(a){if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(a)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0,4)))check = true})(navigator.userAgent||navigator.vendor||window.opera);
+return check; }
 
-		this.attr = {
-			id : $(this.parent).attr('data-id') || 0,
-			quest_id : $(this.parent).attr('data-quest') || 0,
-			name :  $(this.parent).attr('data-name') || '',
-			phone :  $(this.parent).attr('data-phone') || '',
-			comment :  $(this.parent).attr('data-comment') || '',
-			price :  $(this.parent).attr('data-price') || 0,
-			time :  $(this.parent).attr('data-time') || 0,
-			ymd :  $(this.parent).attr('data-ymd') || 0,
-			date :  $(this.parent).attr('data-date') || 0,
-		};
-
-		this.attr.user_url = $(this.parent).attr('data-user-id') != '' ? '/user/admin/view/id/'+$(this.parent).attr('data-user-id') : '#';
-
-		this.$el.html( _.template($('#BookInfWrap').html(), this.attr) );
-
-		$('.pop-row', this.$el).hide();
-
-		if (($(this.parent).hasClass('btn-info') || $(this.parent).hasClass('btn-success')) && this.attr.name !== '') {
-			$('#BookInf h3, #btnRow, #phoneRow', this.$el).show();
-		} else {
-			$('#addRow', this.$el).show();
-		}
-
-		$('[data-toggle="tooltip"]', this.$el).tooltip();
-
-		return this;
-	},
-
-	undoBooking:function(){
-		console.log('undoBooking');
-		var self = this;
-
-		$.post('/booking/confirm', {
-			id : self.attr.id,
-			confirm : 0,
-		}, function(result){
-			if (result && result.success) {
-				// self.$el.removeClass('btn-success').addClass('btn-info');
-				location.reload();
-			} else {
-				console.log(result); // if (result && result.message) { }
-				alert('Ошибка!');
-			}
-		});
-		return false;
-	},
-
-	confirmBooking:function(){
-		console.log('confirmBooking');
-		var self = this;
-
-		$.post('/booking/confirm', {
-			id : self.attr.id,
-			confirm : 1,
-		}, function(result){
-			if (result && result.success) {
-				console.log('confirmed');
-				// self.$el.removeClass('btn-info').addClass('btn-success');
-				location.reload();
-	
-			} else {
-				console.log(result);// if (result && result.message) { }
-				alert('Ошибка!');
-			}
-		});
-
-		return false;
-	},
-
-	removeBooking:function(){
-		var self = this;
-
-		$.post('/booking/delete', {
-			id : self.attr.id
-		}, function(result){
-			if (result && result.success) {
-				console.log('removed');
-				// self.$el.removeClass('btn-info').addClass('btn-success');
-				location.reload();
-			} else {
-				console.log(result);// if (result && result.message) { }
-				alert('Ошибка!');
-			}
-		});
-
-		return false;
-	},
-
-	saveEditedBooking:function(){
-
-		var self = this;
-
-		$.post('/booking/update', {
-			id : self.attr.id,
-			ymd : self.attr.ymd,
-			date : self.attr.date,
-			time : self.attr.time,
-			price : $('#editBookingRow .inputPrice').val(),
-			phone : $('#editBookingRow .inputPhone').val(),
-			comment : $('#editBookingRow .inputComment').val(),
-			name : $('#editBookingRow .inputName').val(),
-		}, function(result){
-			
-			console.log(result);
-
-			if (result && result.success) {
-				console.log('confirmed');
-				// self.$el.removeClass('btn-info').addClass('btn-success');
-				location.reload();
-	
-			} else {
-				console.log(result);// if (result && result.message) { }
-				alert('Ошибка!');
-			}
-		});
-
-		return false;
-	},
-	saveBooking:function(){
-
-		var self = this;
-
-		$.post('/booking/create', {
-			quest_id : self.attr.quest_id,
-			ymd : self.attr.ymd,
-			date : self.attr.date,
-			time : self.attr.time,
-			price : $('#addBookingRow .inputPrice').val(),
-			phone : $('#addBookingRow .inputPhone').val(),
-			comment : $('#addBookingRow .inputComment').val(),
-			name : $('#addBookingRow .inputName').val(),
-		}, function(result){
-			if (result && result.success) {
-				console.log('confirmed');
-				location.reload();
-	
-			} else {
-				console.log(result);
-				alert('Ошибка!');
-			}
-		});
-
-		return false;
-	},
-
-	showRemoveBooking:function(){
-		$('#btnRow, #BookInf h3, #phoneRow', this.$el).hide();
-		$('#confirmRow', this.$el).show();
-		$(this.parent).popover('setPosition');
-		return false;
-	},
-
-	cancelDelete:function(){
-		$('#confirmRow', this.$el).hide();
-		$('#btnRow, #BookInf h3, #phoneRow', this.$el).show();
-		$(this.parent).popover('setPosition');
-		return false;
-	},
-
-	confirmedDelete:function(){
-		//TODO delete booking
-		console.log('send del requet');
-		return false;
-	},
-
-	showEdit:function(){
-		var self = this;
-
-		$('#addRow, #btnRow, #BookInf h3, #phoneRow', self.$el).hide();
-
-		$('#editBookingRow .inputName', this.$el).val(self.attr.name);
-		$('#editBookingRow .inputPhone', this.$el).val(self.attr.phone);
-		$('#editBookingRow .inputComment', this.$el).val(self.attr.comment);
-		$('#editBookingRow .inputPrice', this.$el).val(self.attr.price);
-
-		$('#editBookingRow', this.$el).show();
-		$(this.parent).popover('setPosition');
-		return false;
-	},
-
-	showAdd:function(){
-		$('#addRow', this.$el).hide();
-		$('#addBookingRow', this.$el).show();
-		$(this.parent).popover('setPosition');
-		return false;
-	},
-
-	cancelAddBooking: function(){
-		$('.pop-row', this.$el).hide();
-		$('#addRow', this.$el).show();
-		$(this.parent).popover('setPosition');
-		return false;
-	},
-
-	cancelEditBooking: function(){
-		$('.pop-row', this.$el).hide();
-		$('#BookInf h3, #btnRow, #phoneRow', this.$el).show();
-		$(this.parent).popover('setPosition');
-		return false;
-	},
-});
 
 $(function() {
-	
-	$('#times-table button[data-toggle="popover"]').popover({
-		placement:'auto',
-		animation: false,
-		container: 'body',
-		trigger: 'click',
-		html: true,
-		content:function(){
-			
-			if (!$(this)[0].popover_view)
-				$(this)[0].popover_view = new PopoverView({parent:this});
-
-			return $(this)[0].popover_view.render().el;
-		}
-	}).on('show.bs.popover', function (e) {
-		
-		$('[data-toggle="popover"]').each(function () {
-			if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0)
-				$(this).popover('hide');
-		});
-
-	}).on('shown.bs.popover', function (e) {
-
-		var self = this;
-
-		$('<button type="button" class="close"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>')
-			.css('margin-top', -4)
-			.appendTo('.popover-title')
-			.click(function(){
-				$(self).popover('hide');
-			});
-	});
 
 
-var modal = '<div aria-hidden="true" aria-labelledby="myModalLabel" class="formaModal modal fade" role="dialog" tabindex="-1">'+
-				'<div class="modal-dialog">'+
-					'<div class="modal-content">'+
-						'<div class="modal-header">'+
-							'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>'+
-							'<h4 class="modal-title">6 июня (пятница)   10:15<br><strong>3 000 </strong>руб.</h4>'+
-						'</div>'+
-						'<div class="modal-body">'+
-							'<form role="form" class="form-horizontal">'+
-								'<input type="hidden" value="" name="date" id="selected_date" />'+
-								'<input type="hidden" value="" name="quest_id" id="quest_id" />'+
-								'<input type="hidden" value="" name="ymd" id="selected_ymd" />'+
-								'<input type="hidden" value="" name="time" id="selected_time" />'+
-								'<input type="hidden" value="" name="price" id="selected_price" />'+
-								'<div class="form-group">'+
-									'<label class="col-sm-3" for="name">Имя</label>'+
-									'<div class="col-sm-9">'+
-										'<input class="form-control input-sm" id="name" value="" type="text">'+
-									'</div>'+
-								'</div>'+
-								'<div class="form-group">'+
-									'<label class="col-sm-3" for="phone">Телефон</label>'+
-									'<div class="col-sm-9">'+
-										'<input class="form-control input-sm" id="phone" value="" type="text">'+
-									'</div>'+
-								'</div>'+
-								// '<div class="form-group isGuest">'+
-								// '<label class="col-sm-3" for="mail">Email</label>'+
-								// '<div class="col-sm-9"><input class="form-control input-sm" value="" id="mail" type="text" value="" ></div>'+
-								// '</div>'+
-								'<div class="form-group">'+
-									'<label for="mail" class="col-sm-3">Примечание</label>'+
-									'<div class="col-sm-9"><textarea class="form-control input-sm" id="comment"></textarea></div>'+
-								'</div>'+
-								'<button class="btn btn-default btn-block btn-success btn-sm" id="book" type="submit">Забронировать</button>'+
-							'</form>'+
-							'<span class="text-center alert alert-success" style="display:none;">Ваша заяка успешно отправлена.</span>'+
-							'<span class="text-center alert alert-danger" style="display:none;">Ошибка бронирования.</span>'+
-			'</div></div></div></div>';
+	$('.ico-pay').tooltip();
 
-	$('body').append(modal);
+	if ($('#bgr_video').length) {
 
-
-	$('.time:not(.turnoff, .disabled)').click(function(){
-
-		var str =	$(this).attr('data-date') +
-					' ('+ $(this).attr('data-day') +') '+
-					$(this).attr('data-time') +
-					'<br><strong>'+$(this).attr('data-price')+' </strong>руб.';
-
-		$('#name').val($(this).attr('data-name'));
-		$('#phone').val($(this).attr('data-phone'));
-		$('#selected_date').val($(this).attr('data-date'));
-		$('#selected_time').val($(this).attr('data-time'));
-		$('#selected_price').val($(this).attr('data-price'));
-		$('#selected_ymd').val($(this).attr('data-ymd'));
-		$('#quest_id').val($(this).attr('data-quest'));
-		$('.modal-title').html(str);
-
-		$('.formaModal .alert-success, .formaModal .alert-danger').hide();
-
-		$(this).addClass('active_time');
-
-		$('.formaModal').modal('show');
-	});
-
-	$('#book').click(function(){
-		$.post('/booking/create', {
-			quest_id : $('#quest_id').val(),
-			date : $('#selected_date').val(),
-			ymd : $('#selected_ymd').val(),
-			time : $('#selected_time').val(),
-			price : $('#selected_price').val(),
-			phone : $('#phone').val(),
-			comment : $('#comment').val(),
-			name : $('#name').val(),
-		}, function(result){
-			if (result && result.success) {
-				$('.active_time').attr('disabled','disabled');
-				$('.formaModal .alert-success').fadeIn('slow', function(){
-					$('.formaModal').fadeOut(function(){
-						$('#comment').val('');
-						$('.formaModal').modal('hide');
-					});
-				});
+		function set_video_bgr() {
+			if (document.body.clientWidth < 1025) {
+				$('#bgr_video').hide();
 			} else {
-				console.log(result);
+				var w = $('.jumbotron').outerWidth(),
+					video = document.getElementById('bgr_video');
 
-				if (result && result.message) {
-					$('.formaModal .alert-danger').html(result.message).fadeIn();
-				}
+				video.addEventListener('loadeddata', function() {
+					$('.jumbotron').css('backgroud', 'none');
+					$('#bgr_video')
+						.css({
+							width: w,
+							height: 'auto',
+							display: 'block',
+						});
+				}, false);
 
-				alert('Ошибка!');
+				video.src = '/img/Comp_1_3_1.mp4';
+				video.load();
 			}
-		});
-		return false;
+		}
+
+		set_video_bgr();
+	}
+
+	var supportsOrientationChange = "onorientationchange" in window,
+		orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
+
+	window.addEventListener(orientationEvent, function() {
+
+		if ($('#bgr_video').length) {
+			set_video_bgr();
+		}
+
+		if (document.body.clientWidth < 1024) {
+			$('#top_menu').appendTo('#top_menu_container');
+			$('#top_menu').hide();
+
+			if (document.body.clientWidth > 767) {
+
+				if ($('#for-login-pl').text() == '') {
+					$('.ico-lock').appendTo('#for-login-pl').show();
+					$('#for-login').html('');
+				}
+				if ($('#for-city').text() == '') {
+					$('.city-select').appendTo('#for-city').css('display', 'inline-block');
+					$('#for-select-city').html('');
+				}
+			} else {
+				$('.city-select, .ico-lock').hide();
+			}
+		}
+
+		$('#myModalMenu').modal('hide');
 	});
+
+
+	$('#show-menu').click(function() {
+
+		if (document.body.clientWidth < 768) {
+			if ($('#for-select-city').text() == '') {
+				$('.city-select').show().appendTo('#for-select-city');
+				$('#for-city').html('');
+			}
+
+			if ($('#for-login').text() == '') {
+				$('.ico-lock').show().css('display', 'inline-block').appendTo('#for-login');
+				$('#for-login-pl').html('');
+			}
+		} else {
+			if ($('#for-login-pl').text() == '') {
+				$('.ico-lock').hide().appendTo('#for-login-pl');
+				$('#for-login').html('')
+			}
+			if ($('#for-city').text() == '') {
+				$('.city-select').hide().appendTo('#for-city');
+				$('#for-select-city').html('');
+			}
+		}
+
+		if ($('#myModalMenu #for-menu').text() == '') {
+			$('#top_menu').show().appendTo('#myModalMenu #for-menu');
+		}
+
+		$('#myModalMenu').modal('toggle');
+	});
+
+
+	$('.curent_date').click(function() {
+		$('.curent_date').removeClass('active');
+		$(this).addClass('active');
+	});
+
+
+	if (window.mobilecheck()) {
+
+		$('.calendar_container').css('overflow', 'auto');
+		
+
+		$('.move-right').click(function(){
+			var step = $('.calendar_container').width();
+			$( ".calendar_container" ).scrollTo( '+='+step, 300 );
+		});
+
+
+		$('.move-left').click(function(){
+			var step = $('.calendar_container').width();
+			$( ".calendar_container" ).scrollTo( '-='+step, 300);
+		});			
+
+	} else {
+
+		$('.move-right').click(function(){
+
+			var step = $('.calendar_container').width(),
+				ml = parseInt($('.calendar').css('margin-left')) - step,
+				sum_w = 0;
+
+			$.each($('.curent_date'), function(i, el){ sum_w += $(el).outerWidth(); });
+
+			if ( -sum_w <= ml  ) $('.calendar').animate({ 'margin-left': '-='+step });
+		});
+
+		$('.move-left').click(function(){
+			var step = $('.calendar_container').width(),
+				ml = parseInt($('.calendar').css('margin-left'));
+
+			if ( ml < 0 ) $('.calendar').animate({ 'margin-left': '+='+step });
+		});		
+	}
+
+	$('#myModalBook').on('shown.bs.modal', function (e) {
+		if (document.body.clientWidth > 768) {
+			var h = $('#myModalBook .img-responsive').height();
+			$('.shad').height(h);
+		}
+	});
+
+
+	$('#myModalAuth .modal-title').click(function(){
+		$('#myModalAuth .modal-title').removeClass('active');
+		$(this).addClass('active');
+	});
+
 });

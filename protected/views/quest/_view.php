@@ -3,7 +3,23 @@
 /* @var $data Quest */
 ?>
 
-<div class="col-sm-4 col-md-4">
+<div class="col-xs-12 col-md-6 col-sm-12 col-lg-6 col-xlg-4 item">
+  <img alt="Generic placeholder image" class="featurette-image img-responsive" src="/images/q/<?php echo $data->id; ?>.jpg">
+  <a class="descr" href="/quest/view?id=<?php echo $data->id; ?>">
+      <h2><?php echo CHtml::encode($data->title); ?></h2>
+      <p>
+        <span>
+        	<i class="ico-ppl"></i>
+        	<i class="ico-ppl"></i>
+        	<i class="ico-ppl noactive"></i>
+        	<i class="ico-ppl noactive"></i>2 - 4 игрока</span><span>
+        	<i class="ico-loc"></i><?php echo CHtml::encode($data->addres); ?></span>
+      </p>
+    </a>
+</div>
+
+
+<div class="col-sm-4 col-md-4 hidden">
 	<div class="view thumbnail">
 		<img src="/images/q/<?php echo $data->id; ?>.jpg" alt="...">
 		<div class="caption">

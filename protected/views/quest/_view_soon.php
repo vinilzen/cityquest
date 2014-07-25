@@ -3,7 +3,17 @@
 /* @var $data Quest */
 ?>
 
-<div class="col-sm-4 col-md-4">
+<div class="col-xs-12 col-md-6 col-sm-12 col-lg-6 col-xlg-4 item">
+  <img alt="Generic placeholder image" class="featurette-image img-responsive" src="/images/q/<?php echo $data->id; ?>.jpg">
+  	<a class="descr inactive" href="#lab">
+      <h2><?php echo CHtml::encode($data->title); ?></h2>
+      <p><span class="glyphicon glyphicon-time"></span> </p>
+      <p>Квест в разработке </p>
+      <p>Выход запланирован на середину августа 2014 </p>
+    </a>
+</div>
+
+<div class="col-sm-4 col-md-4 hidden">
 	<div class="view thumbnail">
 		<img src="/images/q/<?php echo $data->id; ?>.jpg" alt="...">
 		<div class="caption">

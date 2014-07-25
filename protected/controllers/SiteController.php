@@ -2,7 +2,7 @@
 
 class SiteController extends Controller
 {
-	public $layout='column1';
+	public $layout='page';
 
 	/**
 	 * Declares class-based actions.
@@ -17,10 +17,23 @@ class SiteController extends Controller
 			),
 			// page action renders "static" pages stored under 'protected/views/site/pages'
 			// They can be accessed via: index.php?r=site/page&view=FileName
-			'page'=>array(
-				'class'=>'CViewAction',
-			),
+			// 'page'=>array( 'class'=>'CViewAction' ),
 		);
+	}
+
+	/**
+	 * This is the action to handle external exceptions.
+	 */
+	public function actionAbout()
+	{
+		$this->pageTitle = Yii::app()->name . ' - Правила игры';
+	    $this->render('pages/about');
+	}
+
+	public function actionFranchise()
+	{
+		$this->pageTitle = Yii::app()->name . ' - Франшиза';
+	    $this->render('pages/franchise');
 	}
 
 	/**
@@ -42,19 +55,29 @@ class SiteController extends Controller
 	 */
 	public function actionContact()
 	{
-		$model=new ContactForm;
-		if(isset($_POST['ContactForm']))
-		{
-			$model->attributes=$_POST['ContactForm'];
-			if($model->validate())
+		$this->pageTitle = Yii::app()->name . ' - Контакты';
+
+		if ( 0 ) {
+
+			$model=new ContactForm;
+			if(isset($_POST['ContactForm']))
 			{
-				$headers="From: {$model->email}\r\nReply-To: {$model->email}";
-				mail(Yii::app()->params['adminEmail'],$model->subject,$model->body,$headers);
-				Yii::app()->user->setFlash('contact','Thank you for contacting us. We will respond to you as soon as possible.');
-				$this->refresh();
+				$model->attributes=$_POST['ContactForm'];
+				if($model->validate())
+				{
+					$headers="From: {$model->email}\r\nReply-To: {$model->email}";
+					mail(Yii::app()->params['adminEmail'],$model->subject,$model->body,$headers);
+					Yii::app()->user->setFlash('contact','Thank you for contacting us. We will respond to you as soon as possible.');
+					$this->refresh();
+				}
 			}
+			
+			$this->render('contact',array('model'=>$model));
+		
+		} else {
+
+			$this->render('contact_map');
 		}
-		$this->render('contact',array('model'=>$model));
 	}
 
 	/**

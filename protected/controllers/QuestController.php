@@ -95,6 +95,8 @@ class QuestController extends Controller
 	 */
 	public function actionView($id)
 	{
+		$this->layout='//layouts/quest';
+		
 		$model=$this->loadModel($id);
 
 		$bookings = array();
@@ -263,6 +265,8 @@ class QuestController extends Controller
         		'limit'=>20,
         	)
         ));
+        
+        $this->layout = '//layouts/index';
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 			'dataProviderSoon'=>$dataProviderSoon,
@@ -331,6 +335,8 @@ class QuestController extends Controller
 	 */
 	public function actionSchedule($ymd = '')
 	{
+
+		$this->layout='//layouts/page';
 
 		if ($ymd === '' || !is_numeric($ymd) || strlen($ymd) !== 8)
 			$YMDate = date('Ymd', strtotime( "now" ));

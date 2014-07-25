@@ -61,6 +61,9 @@ return array(
 			'rules'=>array(
 				'post/<id:\d+>/<title:.*?>'=>'post/view',
 				'posts/<tag:.*?>'=>'post/index',
+				'rules'=>'site/about',
+				'franchise'=>'site/franchise',
+				'contact'=>'site/contact',
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 			),
 		),
