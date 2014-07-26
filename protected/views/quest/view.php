@@ -12,41 +12,36 @@ if (0 && Yii::app()->user->name == 'admin' ){
 		array('label'=>'Manage Quest', 'url'=>array('admin')),
 	);
 }
+
 ?>
+
+<script type="text/javascript">
+  var user_name = '<? echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->profile->getAttribute('firstname') : ''; ?>',
+      user_phone = '<? echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->profile->getAttribute('phone') : ''; ?>';
+</script>
 
 <div class="jumbotron quest" style="background-image: url(../images/q/<? echo $model->id; ?>.jpg);">
   <div class="container text-center">
     <div class="row">
       <div class="col-md-10 col-md-offset-1 col-sm-12">
-        <h1><? echo $model->title; ?></h1>
+        <h1 id='quest_title'><? echo $model->title; ?></h1>
         <p><? echo $model->content; ?></p>
       </div>
     </div>
     <div class="row descr_quest">
       <div class="col-xs-12 col-sm-4 col-md-3 tl">
-        <p> <i class="duration"></i>
-          <span> <em>60</em>минут</span>
-        </p>
+        <p><i class="duration"></i><span><em>60</em>минут</span></p>
       </div>
       <div class="col-xs-12 col-sm-4 col-md-3">
-        <p> <i class="ico-ppl"></i>
-          <i class="ico-ppl"></i>
-          <i class="ico-ppl noactive"></i>
-          <i class="ico-ppl noactive"></i>
-          <span class="people"> <em>2 - 4</em>игрока</span>
+        <p><i class="ico-ppl"></i><i class="ico-ppl"></i><i class="ico-ppl noactive"></i><i class="ico-ppl noactive"></i>
+          <span class="people"><em>2 - 4</em>игрока</span>
         </p>
       </div>
       <div class="col-xs-12 col-sm-4 col-md-3 tr">
-        <p>
-          <i class="metro"></i>
-          <span class="metro-title"><? echo $model->metro; ?></span>
-        </p>
+        <p><i class="metro"></i><span class="metro-title"><? echo $model->metro; ?></span></p>
       </div>
       <div class="col-xs-12 col-sm-12 col-md-3">
-        <p>
-          <i class="ico-loc"></i>
-          <span><? echo $model->addres; ?></span>
-        </p>
+        <p><i class="ico-loc"></i><span class="addr-quest"><? echo $model->addres; ?></span></p>
       </div>
     </div>
   </div>
@@ -141,13 +136,13 @@ if (0 && Yii::app()->user->name == 'admin' ){
                       data-ymd="<? echo $value['date']; ?>" 
                       data-date="<? echo $value['day']; ?> <? echo $value['month_name']; ?>" 
                       data-day="<? echo $value['day_name']; ?>" 
+                      data-d="<? echo $value['day']; ?>" 
+                      data-m="<? echo $value['month']; ?>" 
                       data-price="<? echo $price; ?>" 
                       class="btn btn-q <? echo (($value['date'] === date('Ymd') && $near) || $dis) ? 'disabled' : '';
                           if ($workday && $k > 2 && $k < 7 ) echo ' invisible';?>" <?
                           if (isset($booking[$value['date']]) && isset($booking[$value['date']][$time]) )
-                          echo ' disabled="disabled"'; ?>>
-                  <? echo $time; ?>
-                </div>
+                          echo ' disabled="disabled"'; ?>><? echo $time; ?></div>
               <? } ?>
 
             </div>

@@ -170,46 +170,6 @@
         </div>
       </div>
     </div>
-    <div aria-hidden="true" aria-labelledby="myModalLabelBook" class="ModalBook modal fade" id="myModalBook" role="dialog" tabindex="-1">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-sm-6 col-xs-12">
-                <img alt="" class="featurette-image img-responsive" src="">
-                <a class="descr" href="#lab">
-                  <h2>Лаборатория</h2>
-                  <p>
-                    <span>
-                      <i class="ico-ppl"></i>
-                      <i class="ico-ppl"></i>
-                      <i class="ico-ppl noactive"></i>
-                      <i class="ico-ppl noactive"></i>2 - 4 игрока
-                    </span>
-                    <span class="addr-to"><i class="ico-loc"></i>ул. Стасовой, д. 10, корп. 3</span>
-                  </p>
-                </a>
-              </div>
-              <div class="col-sm-6 col-xs-12 shad shadow">
-                <button class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <div class="text-center">
-                  <h3>Подтверждение</h3>
-                  <p class="book_time"></p>
-                  <!-- <small>Понедельник</small><span>30.07</span><em>в</em><span>10:45</span> -->
-                  <div class="priceTbl">
-                    <div class="priceRow">
-                      <span class="dashed"></span><span class="price">3000<em>руб.</em></span><span class="dashed"></span>
-                    </div>
-                  </div>
-                  <p class="you_phone">Ваш номер телефона:<a>+7 952 377-97-97</a></p>
-                  <div class="btn btn-default">Подтвердить бронь</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/main.js"></script>

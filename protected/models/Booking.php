@@ -42,7 +42,7 @@ class Booking extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('comment, status, time, quest_id, competitor_id', 'required'),
+			array('status, time, quest_id, competitor_id', 'required'),
 			array('status, create_time, result, quest_id, competitor_id', 'numerical', 'integerOnly'=>true),
 			array('email, phone, name', 'length', 'max'=>128),
 			// The following rule is used by search().

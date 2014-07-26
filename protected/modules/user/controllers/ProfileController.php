@@ -2,7 +2,7 @@
 
 class ProfileController extends Controller
 {
-    public $layout = "//layouts/main";
+    public $layout = "//layouts/profile";
 	public $defaultAction = 'profile';
 
 	/**

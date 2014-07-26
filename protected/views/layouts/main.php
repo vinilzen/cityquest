@@ -48,7 +48,11 @@
                     </div>
                   </div>
                   <div id="for-login-pl">
-                    <a class="btn btn-topline btn-default ico-lock" data-target="#myModalAuth" data-toggle="modal" href="#login">ВОЙТИ</a>
+                    <? if (Yii::app()->user->isGuest) {
+                      echo '<a class="btn btn-topline btn-default ico-lock" data-target="#myModalAuth" data-toggle="modal" href="#login">ВОЙТИ</a>';
+                    } else {
+                      echo '<a class="btn btn-topline btn-default ico-lock" data-toggle="modal" href="/user/profile">'.Yii::app()->getModule('user')->user()->profile->getAttribute('firstname').'</a>';
+                    } ?>                    
                   </div>
                 </div>
               </div>
@@ -211,7 +215,7 @@
           <div class="modal-body">
             <div class="row">
               <div class="col-sm-6 col-xs-12">
-                <img alt="Generic placeholder image" class="featurette-image img-responsive" src="">
+                <img alt="" class="featurette-image img-responsive" src="">
                 <a class="descr" href="#lab">
                   <h2>Лаборатория</h2>
                   <p>
@@ -221,7 +225,7 @@
                       <i class="ico-ppl noactive"></i>
                       <i class="ico-ppl noactive"></i>2 - 4 игрока
                     </span>
-                    <span><i class="ico-loc"></i>ул. Стасовой, д. 10, корп. 3</span>
+                    <span class="addr-to"><i class="ico-loc"></i>ул. Стасовой, д. 10, корп. 3</span>
                   </p>
                 </a>
               </div>
@@ -229,9 +233,8 @@
                 <button class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                 <div class="text-center">
                   <h3>Подтверждение</h3>
-                  <p>
-                    <small>Понедельник</small><span>30.07</span><em>в</em><span>10:45</span>
-                  </p>
+                  <p class="book_time"></p>
+                  <!-- <small>Понедельник</small><span>30.07</span><em>в</em><span>10:45</span> -->
                   <div class="priceTbl">
                     <div class="priceRow">
                       <span class="dashed"></span><span class="price">3000<em>руб.</em></span><span class="dashed"></span>

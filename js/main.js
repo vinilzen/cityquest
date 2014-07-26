@@ -155,4 +155,68 @@ $(function() {
 		$(this).addClass('active');
 	});
 
+
+	$('.btn.btn-q').click(function(e){
+		var ModalBook = $('#myModalBook'), btn = $(e.target),
+			data = {
+				quest_id : btn.attr('data-quest'),
+				addres : $('.addr-quest').text() || $('#quest_addr_'+btn.attr('data-quest')).val(),
+				title : $('#quest_title').text() || $('#quest_title_'+btn.attr('data-quest')).text(),
+				day : btn.attr('data-day'),
+				ymd : btn.attr('data-ymd'),
+				d : btn.attr('data-d'),
+				m : btn.attr('data-m'),
+				time : btn.attr('data-time'),
+				price : btn.attr('data-price'),
+				phone : user_phone, 
+				name : user_name,
+				comment : ' ',
+			};
+
+		$('img', ModalBook).attr('src', '/images/q/'+data.quest_id+'.jpg');
+		$('.addr-to', ModalBook).html('<i class="ico-loc"></i>'+data.addres);
+		$('h2', ModalBook).html('<i class="ico-loc"></i>'+data.title);
+		$('.book_time', ModalBook).html(
+			'<small>'+data.day+'</small>'+
+			'<span>'+data.d+'.'+data.m+'</span><em>в</em><span>'+data.time+'</span>');
+
+		$('.price', ModalBook).html( data.price +'<em>руб.</em>');
+		$('.you_phone a', ModalBook).html(user_phone);
+
+		$('.btn', ModalBook).click(function(event) {
+
+			$.post('/booking/create', 
+				data,
+				function(result){
+					if (result && result.success) {
+						btn.attr('disabled','disabled');
+						
+						/*
+						$('.formaModal .alert-success').fadeIn('slow', function(){
+							$('.formaModal').fadeOut(function(){
+								$('#comment').val('');
+								$('.formaModal').modal('hide');
+							});
+						});
+						*/
+						ModalBook.modal('hide');
+
+					} else {
+						console.log(result);
+
+						if (result && result.message) {
+							$('.formaModal .alert-danger').html(result.message).fadeIn();
+						}
+
+						alert('Ошибка!');
+					}
+				});
+
+			return false;
+
+		});
+
+
+		ModalBook.modal('show');
+	});
 });

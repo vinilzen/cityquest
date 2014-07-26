@@ -83,7 +83,8 @@ if (0 && Yii::app()->user->name == 'admin' ){
         <div class="col-xs-2 col-sm-2">
         	<div class="quest_preview">
                 <img src="/images/q/<? echo $quest['q']->id; ?>.jpg" />
-            	<h5><? echo $quest['q']->title; ?></h5>
+            	<h5 id="quest_title_<? echo $quest['q']->id; ?>"><? echo $quest['q']->title; ?></h5>
+            	<input id="quest_addr_<? echo $quest['q']->id; ?>" type="hidden" value="<? echo $quest['q']->addres; ?>">
             </div>
         </div>
         <div class="col-xs-10 col-sm-10 times">
@@ -119,17 +120,15 @@ if (0 && Yii::app()->user->name == 'admin' ){
 	        $invisible = '';
 	        if (date('w', $selectedDate) != 0 && date('w', $selectedDate) != 6 && $k > 2 && $k < 7) $invisible = ' invisible'; ?>
 
-				<div	data-name="<?php echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->profile->getAttribute('firstname') : ''; ?>" 
-						data-phone="<?php echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->profile->getAttribute('phone') : ''; ?>" 
-						data-time="<? echo $time; ?>" 
+				<div	data-time="<? echo $time; ?>" 
 						data-ymd="<? echo $ymd; ?>" 
+						data-d="<? echo date('d',$selectedDate); ?>" 
+						data-m="<? echo date('m', $selectedDate); ?>" 
 						data-quest="<? echo $quest['q']->id; ?>" 
-						data-date="<? echo date('d',$currDate); ?> <? echo date('M', $currDate); ?>" 
-						data-day="<? echo $days[date('w',$currDate)]; ?>" 
+						data-date="<? echo date('d',$selectedDate); ?> <? echo date('M', $selectedDate); ?>" 
+						data-day="<? echo $days[date('w',$selectedDate)]; ?>" 
 						data-price="<? echo Yii::app()->params['price_weekend_AM']; ?>" 
-						class="btn btn-q <? echo $invisible;?>" <? echo $dis;?> >
-					<? echo $time; ?> <!-- <? echo $price; ?>р. -->
-				</div>
+						class="btn btn-q <? echo $invisible;?>" <? echo $dis;?> ><? echo $time; ?></div>
 
 		<? } ?> 
 
@@ -145,7 +144,7 @@ if (0 && Yii::app()->user->name == 'admin' ){
 				<div class="priceTbl" style="margin-left: 219px; width: 660px;">
 					<div class="priceRow">
 						<span class="dashed"></span>
-						<span class="price">3000 руб.</span>
+						<span class="price">3500 руб.</span>
 						<span class="dashed"></span>
 					</div>
 				</div>

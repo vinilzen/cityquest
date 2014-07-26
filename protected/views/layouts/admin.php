@@ -6,7 +6,6 @@
 	<!--[if lt IE 8]>
 	 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie.css" media="screen, projection" />
 	<![endif]-->
-
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/_bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/dashboard.css" />
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
@@ -77,13 +76,11 @@
 		</div>
 	</div>
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="/js/jquery.min.js"></script>
 <script src="/js/jquery-ui.js"></script>
 <script src="/js/underscore-min.js"></script>
 <script src="/js/backbone-min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/js/bootstrap.js"></script>
-<script src="/js/main.js"></script>
+<script src="/js/admin_main.js"></script>
 </body>
 </html>
