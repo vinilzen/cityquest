@@ -29,10 +29,10 @@ if (0 && Yii::app()->user->name == 'admin' ){
 	<div class="row">
 		<div class="col-xs-12">
 			<div class="row date_schedules">
-				<div class="col-xs-2 col-sm-3 col-md-2 col-xlg-1">
+				<div class="col-xs-2 col-sm-3 col-md-2 hidden-lg">
 					<a class="move move-left"><i class="glyphicon glyphicon-chevron-left"></i></a>
 				</div>
-				<div class="col-xs-8 col-sm-6 col-md-8 col-xlg-10 calendar_container">
+				<div class="col-xs-8 col-sm-6 col-md-8 col-lg-12 calendar_container">
 				<div class="calendar">
 <?	
 	$days = Yii::app()->params['days'];
@@ -64,7 +64,7 @@ if (0 && Yii::app()->user->name == 'admin' ){
 ?>
 				</div>
 				</div>
-				<div class="col-xs-2 col-sm-3 col-md-2 col-xlg-1 text-right">
+				<div class="col-xs-2 col-sm-3 col-md-2 hidden-lg text-right">
 					<a class="move move-right"><i class="glyphicon glyphicon-chevron-right"></i></a>
 				</div>
 			</div>
@@ -81,11 +81,11 @@ if (0 && Yii::app()->user->name == 'admin' ){
 			$times = Yii::app()->params['times'][1];
 	?>
         <div class="col-xs-2 col-sm-2">
-        	<div class="quest_preview">
+        	<a href="/quest/view?id=<? echo $quest['q']->id; ?>" class="quest_preview">
                 <img src="/images/q/<? echo $quest['q']->id; ?>.jpg" />
             	<h5 id="quest_title_<? echo $quest['q']->id; ?>"><? echo $quest['q']->title; ?></h5>
             	<input id="quest_addr_<? echo $quest['q']->id; ?>" type="hidden" value="<? echo $quest['q']->addres; ?>">
-            </div>
+            </a>
         </div>
         <div class="col-xs-10 col-sm-10 times">
         	<div class="times-line">
@@ -137,14 +137,14 @@ if (0 && Yii::app()->user->name == 'admin' ){
 				<div class="priceTbl" style="width: 166px;">
 					<div class="priceRow">
 						<span class="dashed"></span>
-						<span class="price">3000 руб.</span>
+						<span class="price"><? echo $priceAm; ?> <em class="rur"><em>руб.</em></em></span>
 						<span class="dashed"></span>
 					</div>
 				</div>
 				<div class="priceTbl" style="margin-left: 219px; width: 660px;">
 					<div class="priceRow">
 						<span class="dashed"></span>
-						<span class="price">3500 руб.</span>
+						<span class="price"><? echo $pricePm; ?> <em class="rur"><em>руб.</em></em></span>
 						<span class="dashed"></span>
 					</div>
 				</div>

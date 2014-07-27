@@ -1,8 +1,8 @@
-<?php
+<?
 /* @var $this QuestController */
 /* @var $dataProvider CActiveDataProvider */
 
-if (Yii::app()->user->name == 'admin' ){
+if (0 && Yii::app()->user->name == 'admin' ){
 	$this->menu=array(
 		array('label'=>'Сводная таблица', 'url'=>array('quest/adminschedule/ymd')),
 		array('label'=>'Управление квестами', 'url'=>array('admin')),
@@ -10,46 +10,30 @@ if (Yii::app()->user->name == 'admin' ){
 	);
 }
 
+foreach ($quests as $quest) { ?>
+	<div class="col-xs-12 col-md-6 col-sm-12 col-lg-6 col-xlg-4 item">
+		<img alt="Generic placeholder image" class="featurette-image img-responsive" src="/images/q/<? echo $quest->id; ?>.jpg">
+		<? if ($quest->status == 2) { ?>
+			<a class="descr" href="/quest/view?id=<? echo $quest->id; ?>">
+				<h2><? echo CHtml::encode($quest->title); ?></h2>
+				<p>
+					<span>
+						<i class="ico-ppl"></i>
+						<i class="ico-ppl"></i>
+						<i class="ico-ppl noactive"></i>
+						<i class="ico-ppl noactive"></i>2 - 4 игрока
+					</span>
+					<span><i class="ico-loc"></i><? echo CHtml::encode($quest->addres); ?></span>
+				</p>
+			</a>
+		<? } else { ?>
+			<a class="descr inactive" href="#lab">
+				<h2><? echo CHtml::encode($quest->title); ?></h2>
+				<p><span class="glyphicon glyphicon-time"></span></p>
+				<p>Квест в разработке</p>
+				<p>Выход запланирован на середину августа 2014</p>
+			</a>
+		<? } ?>
+	</div>
 
-Yii::import('zii.widgets.CListView');
-
-class PlainCListView extends CListView
-{
-	public function renderItems()
-	{
-	    $data=$this->dataProvider->getData();
-	    if(($n=count($data))>0)
-	    {
-	        $owner=$this->getOwner();
-	        $render=$owner instanceof CController ? 'renderPartial' : 'render';
-	        $j=0;
-	        foreach($data as $i=>$item)
-	        {
-	            $data=$this->viewData;
-	            $data['index']=$i;
-	            $data['data']=$item;
-	            $data['widget']=$this;
-	            $owner->$render($this->itemView,$data);
-	            if($j++ < $n-1)
-	                echo $this->separator;
-	        }
-
-	    } else $this->renderEmptyText();
-	}
-}
-
-?>
-
-<?php $this->widget('zii.widgets.PlainCListView', array(
-	'dataProvider'=>$dataProvider,
-	'itemView'=>'_view'
-)); ?>
-
-<?php $this->widget('zii.widgets.CListView', array(
-	'dataProvider'=>$dataProviderSoon,
-	'itemView'=>'_view_soon',
-	'summaryText'=>'',
-    'enablePagination' => false,
-    'enableSorting' => false,
-	'template'   => '{items}'
-)); ?>
+<? } ?>

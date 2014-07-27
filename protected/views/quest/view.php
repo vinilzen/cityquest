@@ -150,14 +150,14 @@ if (0 && Yii::app()->user->name == 'admin' ){
               <div class="priceTbl" style="width: 166px;">
                 <div class="priceRow">
                   <span class="dashed"></span>
-                  <span class="price">3000 руб.</span>
+                  <span class="price"><? echo $priceAm; ?> <em class="rur"><em>руб.</em></em></span>
                   <span class="dashed"></span>
                 </div>
               </div>
               <div class="priceTbl" style="margin-left: 274px; width: 605px;">
                 <div class="priceRow">
                   <span class="dashed"></span>
-                  <span class="price">4000 руб.</span>
+                  <span class="price"><? echo $pricePm; ?> <em class="rur"><em>руб.</em></em></span>
                   <span class="dashed"></span>
                 </div>
               </div>

@@ -250,26 +250,17 @@ class QuestController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Quest', array(
-    		'criteria'=>array(
-        		'condition'=>'status=2',
-        		'order'=>'sort ASC',
-        		'limit'=>20,
-        	)
-        ));
+		$quests = Quest::model()->findAll(array(
+		    "condition" => "status > 1 ",
+		    "order" => "status ASC, sort ASC",
+		    "limit" => 12,
+		));
 
-		$dataProviderSoon=new CActiveDataProvider('Quest', array(
-    		'criteria'=>array(
-        		'condition'=>'status=3',
-        		'order'=>'sort ASC',
-        		'limit'=>20,
-        	)
-        ));
+		// foreach ($quests as $key => $value) { echo $value->id.'#'.$value->title.', '.$value->sort.' - '.$value->status.'<br>';	}
         
         $this->layout = '//layouts/index';
 		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-			'dataProviderSoon'=>$dataProviderSoon,
+			'quests'=>$quests
 		));
 	}
 
@@ -387,7 +378,11 @@ class QuestController extends Controller
 			$model->attributes=$_GET['Quest'];
 
 		$this->render('admin',array(
-			'models'=>Quest::model()->findAll(array('order'=>'sort')),
+			'models'=>	Quest::model()->findAll(array(
+						    "condition" => "status > 1 ",
+						    "order" => "status ASC, sort ASC",
+						    "limit" => 12,
+						)),
 			'model'=>$model,
 		));
 	}
