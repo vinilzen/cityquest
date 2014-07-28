@@ -57,6 +57,19 @@ class BookingController extends Controller
 	}
 
 	/**
+	 * Send mail method
+	 */
+	public static function sendMail($email,$subject,$message) {
+		$adminEmail = Yii::app()->params['adminEmail'];
+	    $headers = "MIME-Version: 1.0\r\nFrom: $adminEmail\r\nReply-To: $adminEmail\r\nContent-Type: text/html; charset=utf-8";
+	    $message = wordwrap($message, 70);
+	    $message = str_replace("\n.", "\n..", $message);
+	    return mail($email,'=?UTF-8?B?'.base64_encode($subject).'?=',$message,$headers);
+	    
+	}
+
+
+	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
@@ -88,7 +101,16 @@ class BookingController extends Controller
 						$model->competitor_id = (int)Yii::app()->user->id;
 
 						if($model->save())
+						{
+
+
+
+							$this->sendMail(
+								Yii::app()->getModule('user')->user()->email,
+								'Вы записались на квест!',
+								'Здравствуйте, ILYA! Ваша запись на CityQuest подтверждена: '.$quest->title.', '.$model->date.', '.$model->time.' Мы вас ждем по адресу '.$quest->addres.'. В вашей команде должно быть 2 — 4 игрока. И, пожалуйста, не опаздывайте! Будет совсем здорово, если вы придете за пять-десять минут до начала игры. Спасибо, CityQuest http://cityquest.ru/ \r\n 8 952 377-97-97');
 							echo CJavaScript::jsonEncode(array('success'=>1));
+						}
 						else
 							echo CJavaScript::jsonEncode(
 								array(

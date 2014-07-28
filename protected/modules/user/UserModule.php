@@ -74,12 +74,6 @@ class UserModule extends CWebModule
 	public $relations = array();
 	
 	/**
-	 * @var array
-	 * @desc Profile model relation from other models
-	 */
-	public $profileRelations = array();
-	
-	/**
 	 * @var boolean
 	 */
 	public $captcha = array('registration'=>true);
@@ -90,8 +84,6 @@ class UserModule extends CWebModule
 	//public $cacheEnable = false;
 	
 	public $tableUsers = '{{users}}';
-	public $tableProfiles = '{{profiles}}';
-	public $tableProfileFields = '{{profiles_fields}}';
 	
 	static private $_user;
 	static private $_admin;

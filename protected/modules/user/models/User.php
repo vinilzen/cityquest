@@ -12,6 +12,7 @@ class User extends CActiveRecord
 	 * @var string $username
 	 * @var string $password
 	 * @var string $email
+	 * @var string $phone
 	 * @var string $activkey
 	 * @var integer $createtime
 	 * @var integer $lastvisit
@@ -57,7 +58,7 @@ class User extends CActiveRecord
 			array('username, email, createtime, lastvisit, superuser, status', 'required'),
 			array('createtime, lastvisit, superuser, status', 'numerical', 'integerOnly'=>true),
 		):((Yii::app()->user->id==$this->id)?array(
-			array('username, email', 'required'),
+			array('username, email', 'phone', 'required'),
 			array('username', 'length', 'max'=>20, 'min' => 3,'message' => UserModule::t("Incorrect username (length between 3 and 20 characters).")),
 			array('email', 'email'),
 			array('username', 'unique', 'message' => UserModule::t("This user's name already exists.")),
@@ -71,9 +72,7 @@ class User extends CActiveRecord
 	 */
 	public function relations()
 	{
-		$relations = array(
-			'profile'=>array(self::HAS_ONE, 'Profile', 'user_id'),
-		);
+		$relations = array();
 		if (isset(Yii::app()->getModule('user')->relations)) $relations = array_merge($relations,Yii::app()->getModule('user')->relations);
 		return $relations;
 	}
@@ -122,7 +121,7 @@ class User extends CActiveRecord
 	public function defaultScope()
     {
         return array(
-            'select' => 'id, username, email, createtime, lastvisit, superuser, status',
+            'select' => 'id, username, phone, email, createtime, lastvisit, superuser, status',
         );
     }
 	

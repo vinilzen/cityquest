@@ -16,8 +16,8 @@ if (0 && Yii::app()->user->name == 'admin' ){
 ?>
 
 <script type="text/javascript">
-  var user_name = '<? echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->profile->getAttribute('firstname') : ''; ?>',
-      user_phone = '<? echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->profile->getAttribute('phone') : ''; ?>';
+    var user_name = '<? echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->username : ''; ?>',
+      user_phone = '<? echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->phone : ''; ?>';
 </script>
 
 <div class="jumbotron quest" style="background-image: url(../images/q/<? echo $model->id; ?>.jpg);">
@@ -96,12 +96,12 @@ if (0 && Yii::app()->user->name == 'admin' ){
             {
               $workday = 0;
               $priceAm = Yii::app()->params['price_weekend_AM'];
-              $pricePm = Yii::app()->params['price_weekend_PM']; // $pricesStr =  '<span class="price"><span>'.$priceAm.' руб.</span></span>'.' <span class="price"><span>'.$pricePm.' руб.</span></span>';
+              $pricePm = Yii::app()->params['price_weekend_PM'];
 
             } else {
               $workday = 1;
               $priceAm = Yii::app()->params['price_workday_AM'];
-              $pricePm = Yii::app()->params['price_workday_PM']; // $pricesStr =  '<span class="price"><span>'.$priceAm.' руб.</span></span>'.' <span class="price"><span>'.$pricePm.' руб.</span></span>'.' <span class="price"><span>'.$priceAm.' руб.</span></span>';
+              $pricePm = Yii::app()->params['price_workday_PM'];
             }
 
             ?>
@@ -129,8 +129,8 @@ if (0 && Yii::app()->user->name == 'admin' ){
                 if ($time < date('H:i', strtotime( '+0 hours' )) ) $near = 1; ?>
 
                 <div  type="button" 
-                      data-name="<? echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->profile->getAttribute('firstname') : ''; ?>" 
-                      data-phone="<? echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->profile->getAttribute('phone') : ''; ?>" 
+                      data-name="<? echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->username : ''; ?>" 
+                      data-phone="<? echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->phone : ''; ?>" 
                       data-time="<? echo $time; ?>" 
                       data-quest="<? echo $model->id; ?>" 
                       data-ymd="<? echo $value['date']; ?>" 
@@ -165,8 +165,6 @@ if (0 && Yii::app()->user->name == 'admin' ){
           </div>
           <div class="clearfix"></div>
       <? } ?>
-
-
       </div>
     </div>
   </div>

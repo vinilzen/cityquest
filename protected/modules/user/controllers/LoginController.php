@@ -10,31 +10,48 @@ class LoginController extends Controller
 	 */
 	public function actionLogin()
 	{
+		header('Content-type: application/json');
+
 		if (Yii::app()->user->isGuest) {
+
 			$model=new UserLogin;
-			// collect user input data
+
 			if(isset($_POST['UserLogin']))
 			{
 				$model->attributes=$_POST['UserLogin'];
 				// validate user input and redirect to previous page if valid
+				
 				if($model->validate()) {
-					$this->lastViset();
-					if (strpos(Yii::app()->user->returnUrl,'/index.php')!==false)
-						$this->redirect(Yii::app()->controller->module->returnUrl);
-					else
-						$this->redirect(Yii::app()->user->returnUrl);
-				}
-			}
-			// display the login form
-			$this->render('/user/login',array('model'=>$model));
+
+					echo CJSON::encode(array(
+		        			'success' => 1,
+		        			'error' => 0,
+		        			'msg' => 'Вы успешно авторизовались!'
+		        		));
+
+				} else
+					echo CJSON::encode(array(
+		        			'success' => 0,
+		        			'error' => 1,
+		        			'msg' => 'Ошибка авторизации',
+		        			'errors' => $model->getErrors(),
+		        		));
+			} else
+				echo CJSON::encode(array(
+	        			'success' => 0,
+	        			'error' => 1,
+	        			'msg' => 'Неверный запрос'
+	        		));
+			
 		} else
-			$this->redirect(Yii::app()->controller->module->returnUrl);
-	}
-	
-	private function lastViset() {
-		$lastVisit = User::model()->notsafe()->findByPk(Yii::app()->user->id);
-		$lastVisit->lastvisit = time();
-		$lastVisit->save();
+        	echo CJSON::encode(array(
+        			'success' => 0,
+        			'error' => 1,
+        			'msg' => 'Вы уже авторизованы!'
+        		));
+
+       	Yii::app()->end();
+			
 	}
 
 }

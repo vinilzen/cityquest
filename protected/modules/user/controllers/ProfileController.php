@@ -15,9 +15,15 @@ class ProfileController extends Controller
 	public function actionProfile()
 	{
 		$model = $this->loadUser();
+		$bookings = Booking::model()->with('quest')->findAllByAttributes(
+			array('competitor_id'=>Yii::app()->user->id),
+			'date >=:today',
+			array('today'=>date('Ymd'))
+		);
+
 	    $this->render('profile',array(
 	    	'model'=>$model,
-			'profile'=>$model->profile,
+	    	'bookings'=>$bookings
 	    ));
 	}
 

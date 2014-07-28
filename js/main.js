@@ -192,14 +192,6 @@ $(function() {
 					if (result && result.success) {
 						btn.attr('disabled','disabled');
 						
-						/*
-						$('.formaModal .alert-success').fadeIn('slow', function(){
-							$('.formaModal').fadeOut(function(){
-								$('#comment').val('');
-								$('.formaModal').modal('hide');
-							});
-						});
-						*/
 						ModalBook.modal('hide');
 
 					} else {
@@ -222,7 +214,7 @@ $(function() {
 	});
 
 
-	$('#reg_me').submit(function(){
+	$('#reg-form').submit(function(){
 
 		if ( $('#reg-name').val() !== '' && $('#reg-name').val().length > 2 ) {
 			if ( $('#reg-email').val() !== '' && re.test( $('#reg-email').val() ) ) {
@@ -230,24 +222,75 @@ $(function() {
 					if ( $('#reg-pass').val() !== '' && $('#reg-pass').val().length > 4 ) {
 						if ( $('#reg-rules').is(':checked') ) {
 
-	$.post(
-		"/user/registration",
-		{
-			name : $('#reg-name').val(),
-			email : $('#reg-email').val(),
-			phone : $('#reg-phone').val(),
-			pass : $('#reg-pass').val(),
-		},
-		function( data ) {
-			console.log(data);
-		}
-	);
+		$.post(
+			"/user/registration",
+			{
+				name : $('#reg-name').val(),
+				email : $('#reg-email').val(),
+				phone : $('#reg-phone').val(),
+				pass : $('#reg-pass').val(),
+			},
+			function( data ) {
+				if (data.error && data.error == 1) {
+					
+					if (data.msg) alert(data.msg);
+					
+					console.log(data);
+
+				} else if (data.success && data.success == 1) {
+
+					$('#auth-tab').click();
+					
+					if (data.msg) alert(data.msg);
+
+				}
+			}
+		);
 
 						} else alert('Чтобы зарегистрироваться, нужно принять наши условия пользования');
 					} else alert('Пароль должен содержать более 4 символов');
 				} else alert('Некорректный или неуказан номер телефона');
 			} else alert('Некорректный email');
 		} else alert('Имя должно содержать более 2 символов');
+
+		return false;
+	});
+
+	$('#auth-form').submit(function(){
+
+		if ( $('#auth-email').val() !== '' && re.test( $('#auth-email').val() ) ) {
+			if ( $('#auth-pass').val() !== '' && $('#auth-pass').val().length > 4 ) {
+
+		$.post( "/user/login",
+			{ 
+				'UserLogin[username]' : $('#auth-email').val(), 
+				'UserLogin[password]' : $('#auth-pass').val()
+			},
+			function( data ) {
+				console.log(data);
+			
+				if (data.error && data.error == 1) {
+					
+					if (data.msg) alert(data.msg);
+
+					if (data.msg && data.msg == 'Вы уже авторизованы!') {
+						$('#myModalAuth').modal('hide');
+						location.reload();
+					}
+
+				} else if (data.success && data.success == 1) {
+			
+					if (data.msg) alert(data.msg);
+						$('#myModalAuth').modal('hide');
+					
+					location.reload();
+
+				}
+			}
+		);
+
+			} else alert('Пароль должен содержать более 4 символов');
+		} else alert('Некорректный email');
 
 		return false;
 	});
