@@ -48,7 +48,7 @@
             $st = substr($book->date, -4, 2).'/'.substr($book->date, -2, 2).'/'.substr($book->date, 0, 4);
             $time = strtotime($st);
           ?>
-          <small><? echo $week[date('w',$time)];?></small>
+          <small><? echo $week[date('w',$time)]; ?></small>
           <span><? echo substr($book->date, -4, 2); ?>.<? echo substr($book->date, -2, 2); ?></span><em>в</em><span><? echo $book->time; ?></span>
         </p>
         <div class="priceTbl">
@@ -57,9 +57,8 @@
           </div>
         </div>
         <p class="you_phone">Ваш номер телефона:<a><? echo Yii::app()->getModule('user')->user()->phone; ?></a></p>
-        <div class="btn btn-default btn-success">ПОдтвержден<div class="glyphicon glyphicon-ok"></div>
-        </div>
-        <div class="btn btn-default btn-blank">снять бронь</div>
+        <div class="btn btn-default btn-success">ПОдтвержден<i class="glyphicon glyphicon-ok"></i></div>
+        <div class="btn btn-default btn-blank decline-book" data-book-id="<? echo $book->id; ?>">снять бронь</div>
       </div>
     </div>
   </div>

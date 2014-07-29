@@ -75,13 +75,13 @@
           <div class="tab-pane active" id="auth">
             <form role="form" id="auth-form">
               <div class="form-group">
-                <input class="form-control" placeholder="Email" id="auth-email" type="email">
+                <input class="form-control" placeholder="Email" id="auth-email" type="text">
               </div>
               <div class="form-group">
                 <input class="form-control" placeholder="Пароль" id="auth-pass" type="password">
               </div>
               <div class="checkbox invisible"><label></label></div>
-              <button class="btn btn-default btn-block btn-lg" type="submit">Авторизоваться</button>
+              <button class="btn btn-default btn-block btn-lg" type="submit">ВОЙТИ</button>
             </form>
           </div>
           <div class="tab-pane" id="reg">

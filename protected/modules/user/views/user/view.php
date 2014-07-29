@@ -1,9 +1,5 @@
-<?php
-$this->breadcrumbs=array(
-	UserModule::t('Users')=>array('index'),
-	$model->username,
-);
-?>
+
+
 <h1><?php echo UserModule::t('View User').' "'.$model->username.'"'; ?></h1>
 
 <ul class="actions">
@@ -17,16 +13,6 @@ $this->breadcrumbs=array(
 			'username',
 	);
 	
-	$profileFields=ProfileField::model()->forAll()->sort()->findAll();
-	if ($profileFields) {
-		foreach($profileFields as $field) {
-			array_push($attributes,array(
-					'label' => UserModule::t($field->title),
-					'name' => $field->varname,
-					'value' => $model->profile->getAttribute($field->varname),
-				));
-		}
-	}
 	array_push($attributes,
 		array(
 			'name' => 'createtime',

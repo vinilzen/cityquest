@@ -114,8 +114,14 @@ if (0 && Yii::app()->user->name == 'admin' ){
             }
 
 			$dis = '';
-			if ( isset($quest['bookings'][$time]) )
+			$my_quest = '';
+			if ( isset($quest['bookings'][$time]) ){
 	            $dis = 'disabled="disabled"';
+
+				if ( $quest['bookings'][$time]['competitor_id'] == Yii::app()->user->id ) {
+					$my_quest = ' myDate ';
+				}
+			}
 
 	        $invisible = '';
 	        if (date('w', $selectedDate) != 0 && date('w', $selectedDate) != 6 && $k > 2 && $k < 7) $invisible = ' invisible'; ?>
@@ -128,7 +134,7 @@ if (0 && Yii::app()->user->name == 'admin' ){
 						data-date="<? echo date('d',$selectedDate); ?> <? echo date('M', $selectedDate); ?>" 
 						data-day="<? echo $days[date('w',$selectedDate)]; ?>" 
 						data-price="<? echo Yii::app()->params['price_weekend_AM']; ?>" 
-						class="btn btn-q <? echo $invisible;?>" <? echo $dis;?> ><? echo $time; ?></div>
+						class="btn btn-q <? echo $invisible;?> <? echo $my_quest; ?>" <? echo $dis;?> ><? echo $time; ?></div>
 
 		<? } ?> 
 

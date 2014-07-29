@@ -124,10 +124,21 @@ if (0 && Yii::app()->user->name == 'admin' ){
                   else $price = $pricePm;
                 }
 
-                $dis = 0;                
+                $dis = 0;
                 $near = 0;
-                if ($time < date('H:i', strtotime( '+0 hours' )) ) $near = 1; ?>
+                if ($time < date('H:i', strtotime( '+0 hours' )) ) $near = 1;
 
+                $disabled = '';
+                $my_quest = '';
+                if (isset($booking[$value['date']]) && isset($booking[$value['date']][$time]) ) {
+                  $disabled = ' disabled="disabled"';
+                  if ( $booking[$value['date']][$time]['competitor_id'] == Yii::app()->user->id ) {
+                    $my_quest = ' myDate ';
+                  }
+                }
+
+
+              ?>
                 <div  type="button" 
                       data-name="<? echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->username : ''; ?>" 
                       data-phone="<? echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->phone : ''; ?>" 
@@ -139,10 +150,10 @@ if (0 && Yii::app()->user->name == 'admin' ){
                       data-d="<? echo $value['day']; ?>" 
                       data-m="<? echo $value['month']; ?>" 
                       data-price="<? echo $price; ?>" 
-                      class="btn btn-q <? echo (($value['date'] === date('Ymd') && $near) || $dis) ? 'disabled' : '';
+                      class="btn btn-q <? echo $my_quest; ?> <? echo (($value['date'] === date('Ymd') && $near) || $dis) ? 'disabled' : '';
                           if ($workday && $k > 2 && $k < 7 ) echo ' invisible';?>" <?
-                          if (isset($booking[$value['date']]) && isset($booking[$value['date']][$time]) )
-                          echo ' disabled="disabled"'; ?>><? echo $time; ?></div>
+                          
+                          echo $disabled; ?>><? echo $time; ?></div>
               <? } ?>
 
             </div>

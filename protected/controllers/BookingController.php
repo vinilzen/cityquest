@@ -32,7 +32,7 @@ class BookingController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' actions
-				'actions'=>array('create'),
+				'actions'=>array('create', 'decline'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -78,47 +78,67 @@ class BookingController extends Controller
 		if(Yii::app()->request->isAjaxRequest){
 
 			$this->layout=false;
+
 			header('Content-type: application/json');
 
 			if (!Yii::app()->user->isGuest){
 
-				if (isset($_POST['quest_id']) && is_numeric($_POST['quest_id'])){
+				if (isset($_POST['quest_id']) && is_numeric($_POST['quest_id']) && strlen($_POST['time']) == 5 ){
+
 					$quest = Quest::model()->findByPk($_POST['quest_id']);
 
 					if ($quest) {
-						$model=new Booking;
-
-						// Uncomment the following line if AJAX validation is needed
-						// $this->performAjaxValidation($model);
-
-						$model->comment = $_POST['comment'];
-						$model->time = $_POST['time'];
-						$model->price = (int)$_POST['price'];
-						$model->date = (int)$_POST['ymd'];
-						$model->phone = $_POST['phone'];
-						$model->name = $_POST['name'];
-						$model->quest_id = (int)$_POST['quest_id'];
-						$model->competitor_id = (int)Yii::app()->user->id;
-
-						if($model->save())
-						{
 
 
+						$booking = Booking::model()->findByAttributes(
+							array('quest_id'=>$quest->id),
+							'date =:today AND time =:time',
+							array(
+								'today'=>(int)$_POST['ymd'],
+								'time'=>$_POST['time']
+							)
+						);
 
-							$this->sendMail(
-								Yii::app()->getModule('user')->user()->email,
-								'Вы записались на квест!',
-								'Здравствуйте, ILYA! Ваша запись на CityQuest подтверждена: '.$quest->title.', '.$model->date.', '.$model->time.' Мы вас ждем по адресу '.$quest->addres.'. В вашей команде должно быть 2 — 4 игрока. И, пожалуйста, не опаздывайте! Будет совсем здорово, если вы придете за пять-десять минут до начала игры. Спасибо, CityQuest http://cityquest.ru/ \r\n 8 952 377-97-97');
-							echo CJavaScript::jsonEncode(array('success'=>1));
-						}
-						else
-							echo CJavaScript::jsonEncode(
-								array(
-									'success'=>0, 
-									'message'=> 'Ошибка сохранения', 
-									'errors'=>$model->getErrors()
-								)
-							);
+						if (!$booking) {
+
+							$model=new Booking;
+
+							$model->comment = $_POST['comment'];
+							$model->time = $_POST['time'];
+							$model->price = (int)$_POST['price'];
+							$model->date = (int)$_POST['ymd'];
+							$model->phone = $_POST['phone'];
+							$model->name = $_POST['name'];
+							$model->quest_id = (int)$_POST['quest_id'];
+							$model->competitor_id = (int)Yii::app()->user->id;
+
+							if($model->save())
+							{
+
+								/*
+									$this->sendMail(
+										Yii::app()->getModule('user')->user()->email,
+										'Вы записались на квест!',
+										"Здравствуйте, ILYA! \r\n \r\n
+										
+										Ваша запись на CityQuest подтверждена: ".$quest->title.", ".$model->date.", ".$model->time."
+
+										Мы вас ждем по адресу ".$quest->addres.". \r\n
+										В вашей команде должно быть 2 — 4 игрока. И, пожалуйста, не опаздывайте! Будет совсем здорово, если вы придете за пять-десять минут до начала игры. 
+										Спасибо, CityQuest http://cityquest.ru/ \r\n
+										8 952 377-97-97");
+								*/
+								echo CJavaScript::jsonEncode(array('success'=>1));
+							}
+							else
+								echo CJavaScript::jsonEncode(
+									array(
+										'success'=>0, 
+										'message'=> 'Ошибка сохранения', 
+										'errors'=>$model->getErrors()
+									)
+								);
+						} else echo CJavaScript::jsonEncode(array('success'=>0, 'message'=> 'Квест "'.$quest->title.'" на дату '.$_POST['ymd'].' и время '.$_POST['time'].' уже занят'));
 					} else echo CJavaScript::jsonEncode(array('success'=>0, 'message'=> 'Квест не найден'));
 				} else echo CJavaScript::jsonEncode(array('success'=>0, 'message'=> 'Неправильный запрос'));
 			} else echo CJavaScript::jsonEncode(array('success'=>0, 'message'=> 'У вас нету доступа'));
@@ -211,7 +231,6 @@ class BookingController extends Controller
 
 	/**
 	 * Deletes a particular model.
-	 * If deletion is successful, the browser will be redirected to the 'admin' page.
 	 * @param integer $id the ID of the model to be deleted
 	 */
 	public function actionDelete()
@@ -222,17 +241,57 @@ class BookingController extends Controller
 			$this->layout=false;
 			header('Content-type: application/json');
 
-			if (!Yii::app()->user->isGuest){
+			if (isset($_POST['id']) && is_numeric($_POST['id'])){
 
-				if (isset($_POST['id']) && is_numeric($_POST['id'])){
+				try {
 
-					try {
+					$this->loadModel((int)$_POST['id'])->delete();
+					echo CJavaScript::jsonEncode(array('success'=>1));
 
-						$this->loadModel((int)$_POST['id'])->delete();
+				} catch (Exception $e) {
+
+					echo CJavaScript::jsonEncode(
+						array(
+							'success'=>0, 
+							'message'=> 'Ошибка Удаления', 
+							'errors'=>$e->getMessage()
+						)
+					);
+
+				} 
+				
+			} else echo CJavaScript::jsonEncode(array('success'=>0, 'message'=> 'Неправильный запрос'));
+
+           	Yii::app()->end();
+
+		} else throw new CHttpException(404, 'Бронирование не найдено');
+	}
+
+	/**
+	 * Decline a particular model.
+	 * @param integer $id the ID of the model to be deleted
+	 */
+	public function actionDecline()
+	{
+
+		if(Yii::app()->request->isAjaxRequest){
+
+			$this->layout=false;
+			header('Content-type: application/json');
+
+			if (isset($_POST['id']) && is_numeric($_POST['id'])){
+
+				try {
+
+					$booking = $this->loadModel( (int)$_POST['id'] );
+
+					var_dump($booking->competitor_id); die;
+
+					if ($booking->competitor_id === Yii::app()->user->id ){
+						$booking->delete();
 						echo CJavaScript::jsonEncode(array('success'=>1));
 
-					} catch (Exception $e) {
-
+					} else {
 						echo CJavaScript::jsonEncode(
 							array(
 								'success'=>0, 
@@ -240,16 +299,26 @@ class BookingController extends Controller
 								'errors'=>$e->getMessage()
 							)
 						);
+					}
 
-					} 
-					
-				} else echo CJavaScript::jsonEncode(array('success'=>0, 'message'=> 'Неправильный запрос'));
-			} else echo CJavaScript::jsonEncode(array('success'=>0, 'message'=> 'У вас нет доступа'));
+
+				} catch (Exception $e) {
+
+					echo CJavaScript::jsonEncode(
+						array(
+							'success'=>0, 
+							'message'=> 'Ошибка Удаления', 
+							'errors'=>$e->getMessage()
+						)
+					);
+
+				} 
+				
+			} else echo CJavaScript::jsonEncode(array('success'=>0, 'message'=> 'Неправильный запрос'));
 
            	Yii::app()->end();
 
-		} else throw new CHttpException(404, 'Страница не найдена');
-
+		} else throw new CHttpException(404, 'Бронирование не найдено');
 	}
 
 	/**

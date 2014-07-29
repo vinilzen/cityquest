@@ -184,21 +184,44 @@ $(function() {
 		$('.price', ModalBook).html( data.price +'<em>руб.</em>');
 		$('.you_phone a', ModalBook).html(user_phone);
 
-		$('.btn', ModalBook).click(function(event) {
+		$('.btn', ModalBook).click(function(e) {
+
+			var btn_book = $(e.target);
 
 			$.post('/booking/create', 
 				data,
 				function(result){
+					
+					console.log(result);
+
 					if (result && result.success) {
-						btn.attr('disabled','disabled');
-						
+
 						ModalBook.modal('hide');
+						
+						btn.attr({
+								'disabled':'disabled',
+								'data-toggle':"tooltip",
+								'data-delay':"4000",
+								'title': 'Квест успешно забронирован',
+							})
+							.tooltip({
+								delay:{ show: 2000, hide: 3000 }
+							})
+							.tooltip('show')
+							.addClass('myDate');
+
+						setTimeout(function(){ btn.tooltip("hide"); }, 3000);
 
 					} else {
-						console.log(result);
 
 						if (result && result.message) {
-							$('.formaModal .alert-danger').html(result.message).fadeIn();
+
+							btn_book
+								.attr({
+									'data-toggle':"tooltip",
+									'title': result.message,
+								})
+								.tooltip('show');
 						}
 
 						alert('Ошибка!');
@@ -258,8 +281,8 @@ $(function() {
 
 	$('#auth-form').submit(function(){
 
-		if ( $('#auth-email').val() !== '' && re.test( $('#auth-email').val() ) ) {
-			if ( $('#auth-pass').val() !== '' && $('#auth-pass').val().length > 4 ) {
+		if ( $('#auth-email').val() !== '' && $('#auth-email').val().length > 3 ) {
+			if ( $('#auth-pass').val() !== '' && $('#auth-pass').val().length > 3 ) {
 
 		$.post( "/user/login",
 			{ 
@@ -294,4 +317,12 @@ $(function() {
 
 		return false;
 	});
+
+
+	$('.decline-book').click(function(){
+		$.post('', {
+
+		});
+	});
+
 });

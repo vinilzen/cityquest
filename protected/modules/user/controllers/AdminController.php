@@ -73,28 +73,23 @@ class AdminController extends Controller
 	public function actionCreate()
 	{
 		$model=new User;
-		$profile=new Profile;
 		if(isset($_POST['User']))
 		{
 			$model->attributes=$_POST['User'];
 			$model->activkey=Yii::app()->controller->module->encrypting(microtime().$model->password);
 			$model->createtime=time();
 			$model->lastvisit=time();
-			$profile->attributes=$_POST['Profile'];
-			$profile->user_id=0;
-			if($model->validate()&&$profile->validate()) {
+			if( $model->validate() ) {
+				
 				$model->password=Yii::app()->controller->module->encrypting($model->password);
-				if($model->save()) {
-					$profile->user_id=$model->id;
-					$profile->save();
-				}
+				$model->save();
+
 				$this->redirect(array('view','id'=>$model->id));
-			} else $profile->validate();
+			}
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
-			'profile'=>$profile,
 		));
 	}
 
@@ -105,27 +100,23 @@ class AdminController extends Controller
 	public function actionUpdate()
 	{
 		$model=$this->loadModel();
-		$profile=$model->profile;
 		if(isset($_POST['User']))
 		{
 			$model->attributes=$_POST['User'];
-			$profile->attributes=$_POST['Profile'];
 			
-			if($model->validate()&&$profile->validate()) {
+			if($model->validate()) {
 				$old_password = User::model()->notsafe()->findByPk($model->id);
 				if ($old_password->password!=$model->password) {
 					$model->password=Yii::app()->controller->module->encrypting($model->password);
 					$model->activkey=Yii::app()->controller->module->encrypting(microtime().$model->password);
 				}
 				$model->save();
-				$profile->save();
 				$this->redirect(array('view','id'=>$model->id));
-			} else $profile->validate();
+			}
 		}
 
 		$this->render('update',array(
 			'model'=>$model,
-			'profile'=>$profile,
 		));
 	}
 
