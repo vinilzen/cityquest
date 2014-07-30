@@ -79,7 +79,7 @@ return array(
 				
 				array(
 					'class'=>'CWebLogRoute',
-					// 'levels'=>'trace, info, error, warning, vardump',
+					//'levels'=>'trace, info, error, warning, vardump',
 					'levels'=>'error, warning',
 					//'showInFireBug'=>true,
 				),

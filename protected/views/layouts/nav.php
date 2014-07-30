@@ -26,7 +26,9 @@
               <div id="for-city">
                 <div class="btn-group city-select">
                   <button class="btn btn-topline ico-msq" disabled="disabled" data-toggle="dropdown" type="button"> Москва</button>
-                  <button class="btn btn-topline dropdown-toggle" disabled="disabled" data-toggle="dropdown" type="button"><span class="caret"></span><span class="sr-only">Выбрать город</span></button>
+                  <button class="btn btn-topline dropdown-toggle" disabled="disabled" data-toggle="dropdown" type="button">
+                    <span class="caret"></span><span class="sr-only">Выбрать город</span>
+                  </button>
                   <ul class="dropdown-menu" role="menu">
                     <li><a href="#">Питер</a></li>
                     <li><a href="#">Уфа</a></li>

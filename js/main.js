@@ -355,4 +355,46 @@ $(function() {
 		});
 	});
 
+
+	$('#edit-form').submit(function(){
+
+		var name = $('#edit-name').val(),
+			btn_edit = $('#editProfile'),
+			phone = $('#edit-phone').val();
+		
+		$.post('/user/profile/edit', {
+			username: name,
+			phone: phone,
+		}, function(result){
+						
+			if (result && result.success) {
+
+				btn_edit
+					.attr({
+						'title': result.message,
+					})
+					.tooltip('show');
+
+				$('.cabinet .name').html(name);
+				$('.cabinet .phone').html(phone);
+
+				setTimeout(function(){
+					$('#myModalEditProfile').modal('hide');
+					$('#editProfile').tooltip('destroy');
+				}, 2000);
+
+			} else {
+
+				btn_edit
+					.attr({
+						'data-toggle':"tooltip",
+						'title': 'Произошла ошибка, свяжитесь с администрацией',
+					})
+					.tooltip('show');
+			}
+		});
+
+		return false;
+	});
+
 });

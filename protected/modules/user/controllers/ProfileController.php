@@ -27,20 +27,57 @@ class ProfileController extends Controller
 	    ));
 	}
 
+	/**
+	 * Edit Profile ajax
+	 * @return json
+	 */
+	public function actionEdit()
+	{
+		if(Yii::app()->request->isAjaxRequest){
+
+
+			$this->layout=false;
+			header('Content-type: application/json');
+
+			if (Yii::app()->user->id) {
+
+				$model = Yii::app()->getModule('user')->user();
+				$model->username = $_POST['username'];
+				$model->phone = $_POST['phone'];
+
+				// var_dump($model->attributes); die;
+
+				if ( $model->save() ) {
+
+					echo CJavaScript::jsonEncode(array('success'=>1, 'message'=>'Изменения успешно сохранены'));
+
+				} else echo CJSON::encode(array(
+										'success' => 0,
+										'error' => 1,
+										'errors' => $model->getErrors(),
+									));
+
+			} else echo CJavaScript::jsonEncode(array('success'=>0, 'message'=> 'У вас нет доступа'));
+
+			Yii::app()->end();
+
+		} else echo 'Error Request!';
+
+		die;
+	}
 
 	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionEdit()
+	public function actionEdit_()
 	{
 		$model = $this->loadUser();
-		$profile=$model->profile;
 		
 		// ajax validator
 		if(isset($_POST['ajax']) && $_POST['ajax']==='profile-form')
 		{
-			echo UActiveForm::validate(array($model,$profile));
+			echo UActiveForm::validate(array($model));
 			Yii::app()->end();
 		}
 		
@@ -49,17 +86,15 @@ class ProfileController extends Controller
 			$model->attributes=$_POST['User'];
 			$profile->attributes=$_POST['Profile'];
 			
-			if($model->validate()&&$profile->validate()) {
+			if ( $model->validate() ) {
 				$model->save();
-				$profile->save();
 				Yii::app()->user->setFlash('profileMessage',UserModule::t("Changes is saved."));
 				$this->redirect(array('/user/profile'));
-			} else $profile->validate();
+			}
 		}
 
 		$this->render('edit',array(
-			'model'=>$model,
-			'profile'=>$profile,
+			'model'=>$model
 		));
 	}
 	

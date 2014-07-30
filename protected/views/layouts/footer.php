@@ -151,6 +151,38 @@
   </div>
 </div>
 
+<? if (!Yii::app()->user->isGuest) { ?>
+  <div aria-hidden="true" aria-labelledby="myModalLabelAuth" class="modal fade" id="myModalEditProfile" role="dialog" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button class="visible-xs close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h3 class="modal-title">Профиль</h3>
+          <hr class="fadeOut">
+        </div>
+        <div class="modal-body">
+          <form role="form" id="edit-form">
+            <div class="form-group">
+              <input required class="form-control" id="edit-email" disabled="disabled" type="email" value="<? echo Yii::app()->getModule('user')->user()->email; ?>">
+            </div>
+            <div class="form-group">
+              <input required class="form-control" autocomplete="off" id="edit-name" name="name" type="text" value="<? echo Yii::app()->getModule('user')->user()->username; ?>">
+            </div>
+            <div class="form-group">
+              <input required class="form-control" autocomplete="off" id="edit-phone" name="phone" type="text" value="<? echo Yii::app()->getModule('user')->user()->phone; ?>">
+            </div>
+            <div class="form-group hidden">
+              <input class="form-control" type="password" autocomplete="off" id="edit-pass" name="password">
+            </div>           
+            <div class="checkbox"></div>
+            <button class="btn btn-default btn-block btn-lg" id="editProfile" type="submit">СОХРАНИТЬ</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+<? } ?>
+
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/main.js"></script>

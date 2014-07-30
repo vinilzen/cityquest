@@ -11,7 +11,7 @@
       <span class="name"><? echo Yii::app()->getModule('user')->user()->username; ?></span>
       <span class="phone"><? echo Yii::app()->getModule('user')->user()->phone; ?></span>
       <img class="img-circle hidden-xs" height="135" src="/img/ava.jpg" width="135">
-      <span><a href="#"><i class="edit-ico"></i>Редактировать</a></span>
+      <span><a href="#" id="edit_profile" data-toggle="modal" data-target="#myModalEditProfile"><i class="edit-ico"></i>Редактировать</a></span>
       <span><a href="/user/logout"><i class="logout-ico"></i>Выйти</a></span>
     </div>
 
