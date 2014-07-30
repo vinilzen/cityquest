@@ -105,9 +105,8 @@ class QuestController extends Controller
 			'date >= :start_date AND date <= :end_date',
 			array(
 				'start_date'=> date('Ymd', strtotime('now')),
-				'end_date'=> date('Ymd', strtotime('+1 week')),
+				'end_date'=> date('Ymd', strtotime('+2 week')),
 			));
-
 
 		$bookings_by_date = array();
 

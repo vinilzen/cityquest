@@ -319,9 +319,39 @@ $(function() {
 	});
 
 
-	$('.decline-book').click(function(){
-		$.post('', {
+	$('.decline-book').click(function(e){
+		var btn_decline = $(e.target),
+			book_id = btn_decline.attr('data-book-id');
 
+		$.post('/booking/decline', {
+			id: book_id
+		}, function(result){
+			if (result && result.success) {
+
+				btn_decline
+					.attr({
+						'data-toggle':"tooltip",
+						'title': 'Бронирование отменено',
+					})
+					.tooltip('show');
+
+
+				$('#row_fade_'+book_id).animate({height:0}, 600, function() {
+					$('#row_fade_'+book_id).remove();
+				});
+				$('#row_book_'+book_id).animate({height:0}, 600, function() {
+					$('#row_book_'+book_id).remove();
+				});
+
+			} else {
+
+				btn_decline
+					.attr({
+						'data-toggle':"tooltip",
+						'title': 'Произошла ошибка, свяжитесь с администрацией',
+					})
+					.tooltip('show');
+			}
 		});
 	});
 

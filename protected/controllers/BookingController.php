@@ -285,9 +285,8 @@ class BookingController extends Controller
 
 					$booking = $this->loadModel( (int)$_POST['id'] );
 
-					var_dump($booking->competitor_id); die;
-
 					if ($booking->competitor_id === Yii::app()->user->id ){
+						
 						$booking->delete();
 						echo CJavaScript::jsonEncode(array('success'=>1));
 

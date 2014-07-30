@@ -60,8 +60,8 @@ if (0 && Yii::app()->user->name == 'admin' ){
       
 
 
-
   <?
+
     $days = Yii::app()->params['days'];
     $month = Yii::app()->params['month'];
     $endDate = strtotime( '+'.Yii::app()->params['offset'].' day' );

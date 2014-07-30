@@ -29,7 +29,7 @@
 
   <? if (isset($bookings)) foreach($bookings AS $book) { ?> 
 
-  <div class="row ModalBook">
+  <div class="row ModalBook" id="row_book_<? echo $book->id; ?>">
     <div class="col-sm-6 col-xs-12">
       <img alt="Generic placeholder image" class="featurette-image img-responsive" src="/images/q/<? echo $book->quest->id; ?>.jpg"><a class="descr" href="#lab">
           <h2><? echo $book->quest->title; ?></h2>
@@ -62,7 +62,7 @@
       </div>
     </div>
   </div>
-  <div class="row"><div class="col-xs-12"><hr class="fadeOut p10"></div></div>
+  <div class="row" id="row_fade_<? echo $book->id; ?>"><div class="col-xs-12"><hr class="fadeOut p10"></div></div>
 
   <? } ?>
 </div>
