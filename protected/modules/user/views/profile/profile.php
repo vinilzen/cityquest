@@ -49,7 +49,7 @@
             $time = strtotime($st);
           ?>
           <small><? echo $week[date('w',$time)]; ?></small>
-          <span><? echo substr($book->date, -4, 2); ?>.<? echo substr($book->date, -2, 2); ?></span><em>в</em><span><? echo $book->time; ?></span>
+          <span><? echo substr($book->date, -2, 2); ?>.<? echo substr($book->date, -4, 2); ?></span><em>в</em><span><? echo $book->time; ?></span>
         </p>
         <div class="priceTbl">
           <div class="priceRow">
