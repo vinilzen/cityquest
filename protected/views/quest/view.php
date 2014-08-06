@@ -157,22 +157,48 @@ if (0 && Yii::app()->user->name == 'admin' ){
               <? } ?>
 
             </div>
-            <div class="price-line <? echo $value['day_name'] == 'суббота' || $value['day_name'] == 'воскресенье' ? 'weekend' : ''; ?>">
-              <div class="priceTbl" style="width: 166px;">
-                <div class="priceRow">
-                  <span class="dashed"></span>
-                  <span class="price"><? echo $priceAm; ?> <em class="rur"><em>руб.</em></em></span>
-                  <span class="dashed"></span>
+            <?if ($workday) { ?>
+              <div class="price-line">
+                <div class="priceTbl workPrice1">
+                  <div class="priceRow">
+                    <span class="dashed"></span>
+                    <span class="price"><? echo $pricePm; ?> <em class="rur"><em>руб.</em></em></span>
+                    <span class="dashed"></span>
+                  </div>
+                </div>
+                <div class="priceTbl workPrice2">
+                  <div class="priceRow">
+                    <span class="dashed"></span>
+                    <span class="price"><? echo $priceAm; ?> <em class="rur"><em>руб.</em></em></span>
+                    <span class="dashed"></span>
+                  </div>
+                </div>
+                <div class="priceTbl workPrice3">
+                  <div class="priceRow">
+                    <span class="dashed"></span>
+                    <span class="price"><? echo $pricePm; ?> <em class="rur"><em>руб.</em></em></span>
+                    <span class="dashed"></span>
+                  </div>
                 </div>
               </div>
-              <div class="priceTbl" style="margin-left: 274px; width: 605px;">
-                <div class="priceRow">
-                  <span class="dashed"></span>
-                  <span class="price"><? echo $pricePm; ?> <em class="rur"><em>руб.</em></em></span>
-                  <span class="dashed"></span>
+            <? } else { ?>
+              <div class="price-line weekend">
+                <div class="priceTbl weekendPrice1">
+                  <div class="priceRow">
+                    <span class="dashed"></span>
+                    <span class="price"><? echo $priceAm; ?> <em class="rur"><em>руб.</em></em></span>
+                    <span class="dashed"></span>
+                  </div>
+                </div>
+                <div class="priceTbl weekendPrice2">
+                  <div class="priceRow">
+                    <span class="dashed"></span>
+                    <span class="price"><? echo $pricePm; ?> <em class="rur"><em>руб.</em></em></span>
+                    <span class="dashed"></span>
+                  </div>
                 </div>
               </div>
-            </div>
+            <? } ?>
           </div>
           <div class="clearfix"></div>
       <? } ?>

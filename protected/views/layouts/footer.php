@@ -138,7 +138,7 @@
               <!-- <small>Понедельник</small><span>30.07</span><em>в</em><span>10:45</span> -->
               <div class="priceTbl">
                 <div class="priceRow">
-                  <span class="dashed"></span><span class="price">3000<em>руб.</em></span><span class="dashed"></span>
+                  <span class="dashed"></span><span class="price">3000<em class="rur"><em>руб.</em></em></span><span class="dashed"></span>
                 </div>
               </div>
               <p class="you_phone">Ваш номер телефона:<a>+7 952 377-97-97</a></p>

@@ -53,7 +53,7 @@
         </p>
         <div class="priceTbl">
           <div class="priceRow">
-            <span class="dashed"></span><span class="price"><? echo $book->price; ?><em>руб.</em></span><span class="dashed"></span>
+            <span class="dashed"></span><span class="price"><? echo $book->price; ?><em class="rur"><em>руб.</em></em></span><span class="dashed"></span>
           </div>
         </div>
         <p class="you_phone">Ваш номер телефона:<a><? echo Yii::app()->getModule('user')->user()->phone; ?></a></p>

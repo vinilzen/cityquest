@@ -156,49 +156,51 @@ $(function() {
 		$(this).addClass('active');
 	});
 
+	var ModalBook = $('#myModalBook'), book_data = 0, btn_time;
 
 	$('.btn.btn-q').click(function(e){
-		var ModalBook = $('#myModalBook'), btn = $(e.target),
-			data = {
-				quest_id : btn.attr('data-quest'),
-				addres : $('.addr-quest').text() || $('#quest_addr_'+btn.attr('data-quest')).val(),
-				title : $('#quest_title').text() || $('#quest_title_'+btn.attr('data-quest')).text(),
-				day : btn.attr('data-day'),
-				ymd : btn.attr('data-ymd'),
-				d : btn.attr('data-d'),
-				m : btn.attr('data-m'),
-				time : btn.attr('data-time'),
-				price : btn.attr('data-price'),
-				phone : user_phone, 
-				name : user_name,
-				comment : ' ',
-			};
+		btn_time = $(e.target);
+		book_data = {
+			quest_id : btn_time.attr('data-quest'),
+			addres : $('.addr-quest').text() || $('#quest_addr_'+btn_time.attr('data-quest')).val(),
+			title : $('#quest_title').text() || $('#quest_title_'+btn_time.attr('data-quest')).text(),
+			day : btn_time.attr('data-day'),
+			ymd : btn_time.attr('data-ymd'),
+			d : btn_time.attr('data-d'),
+			m : btn_time.attr('data-m'),
+			time : btn_time.attr('data-time'),
+			price : btn_time.attr('data-price'),
+			phone : user_phone, 
+			name : user_name,
+			comment : ' ',
+		};
 
-		$('img', ModalBook).attr('src', '/images/q/'+data.quest_id+'.jpg');
-		$('.addr-to', ModalBook).html('<i class="ico-loc"></i>'+data.addres);
-		$('h2', ModalBook).html('<i class="ico-loc"></i>'+data.title);
+		$('img', ModalBook).attr('src', '/images/q/'+book_data.quest_id+'.jpg');
+		$('.addr-to', ModalBook).html('<i class="ico-loc"></i>'+book_data.addres);
+		$('h2', ModalBook).html('<i class="ico-loc"></i>'+book_data.title);
 		$('.book_time', ModalBook).html(
-			'<small>'+data.day+'</small>'+
-			'<span>'+data.d+'.'+data.m+'</span><em>в</em><span>'+data.time+'</span>');
+			'<small>'+book_data.day+'</small>'+
+			'<span>'+book_data.d+'.'+book_data.m+'</span><em>в</em><span>'+book_data.time+'</span>');
 
-		$('.price', ModalBook).html( data.price +'<em>руб.</em>');
+		$('.price', ModalBook).html( book_data.price +'<em class="rur"><em>руб.</em></em>');
 		$('.you_phone a', ModalBook).html(user_phone);
 
-		$('.btn', ModalBook).click(function(e) {
+		ModalBook.modal('show');
+	});
 
-			var btn_book = $(e.target);
+	$('.btn', ModalBook).click(function(e) {
 
-			$.post('/booking/create', 
-				data,
+		var btn_book = $(e.target);
+		if (book_data!=0)
+			$.post('/booking/create',
+				book_data,
 				function(result){
 					
-					console.log(result);
-
 					if (result && result.success) {
 
 						ModalBook.modal('hide');
 						
-						btn.attr({
+						btn_time.attr({
 								'disabled':'disabled',
 								'data-toggle':"tooltip",
 								'data-delay':"4000",
@@ -210,7 +212,7 @@ $(function() {
 							.tooltip('show')
 							.addClass('myDate');
 
-						setTimeout(function(){ btn.tooltip("hide"); }, 3000);
+						setTimeout(function(){ btn_time.tooltip("hide"); }, 3000);
 
 					} else {
 
@@ -226,16 +228,13 @@ $(function() {
 
 						alert('Ошибка!');
 					}
-				});
+				}
+			);
+		else console.log('пустой book_data');
 
-			return false;
+		return false;
 
-		});
-
-
-		ModalBook.modal('show');
 	});
-
 
 	$('#reg-form').submit(function(){
 
