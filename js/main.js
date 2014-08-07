@@ -311,16 +311,36 @@ $(function() {
 			}
 		);
 
-			} else alert('Пароль должен содержать более 4 символов');
-		} else alert('Некорректный email');
+			} else {
+
+				$('#form-group-username-auth').removeClass('input-error');
+				$('#form-group-username-auth span').tooltip('destroy');
+
+				$('#form-group-pass-auth').addClass('input-error');
+				$('#form-group-pass-auth span')
+					.attr({ 'title': 'Неверный логин или пароль' })
+					.on('shown.bs.tooltip', function () {
+						$('.tooltip-arrow').attr('style','');
+						$('.tooltip').css('left', $('.tooltip').position().left+12);
+					})
+					.tooltip('show');
+			}
+		} else {
+			$('#form-group-username-auth').addClass('input-error');
+			$('#form-group-username-auth span')
+				.attr({ 'title': 'Некорректное имя' })
+				.on('shown.bs.tooltip', function () {
+					$('.tooltip-arrow').attr('style','');
+					$('.tooltip').css('left', $('.tooltip').position().left+12);
+				})
+				.tooltip('show');
+		}
 
 		return false;
 	});
 
 
 	$('.decline-book').click(function(e){
-
-
 
 		var btn_decline = $(e.target),
 			book_id = btn_decline.attr('data-book-id');
@@ -396,6 +416,22 @@ $(function() {
 						'title': 'Произошла ошибка, свяжитесь с администрацией',
 					})
 					.tooltip('show');
+
+				if (result && result.errors) {
+					if (result.errors.username) {
+						$('#form-group-username').addClass('input-error');
+						$('#form-group-username span')
+							.attr({ 'title': result.errors.username.join(', ') })
+							.tooltip('show');
+					}
+					if (result.errors.phone) {
+						$('#form-group-phone').addClass('input-error');
+						$('#form-group-phone span')
+							.attr({ 'title': result.errors.phone.join(', ') })
+							.tooltip('show');
+					}
+				}
+
 			}
 		});
 

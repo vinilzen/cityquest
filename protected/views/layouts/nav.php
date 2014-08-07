@@ -40,7 +40,7 @@
                 <? if (Yii::app()->user->isGuest) {
                   echo '<a class="btn btn-topline btn-default ico-lock" data-target="#myModalAuth" data-toggle="modal" href="#login">ВОЙТИ</a>';
                 } else {
-                  echo '<a class="btn btn-topline btn-default ico-lock" data-toggle="modal" href="/user/profile">'.Yii::app()->getModule('user')->user()->username.'</a>';
+                  echo '<a class="btn btn-topline btn-default ico-lock" data-toggle="modal" href="/user/profile">КАБИНЕТ</a>';
                 } ?>                    
               </div>
             </div>

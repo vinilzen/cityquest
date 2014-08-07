@@ -139,7 +139,7 @@ class ProfileController extends Controller
 			if(Yii::app()->user->id)
 				$this->_model=Yii::app()->controller->module->user();
 			if($this->_model===null)
-				$this->redirect(Yii::app()->controller->module->loginUrl);
+				$this->redirect('/'); // Yii::app()->controller->module->loginUrl
 		}
 		return $this->_model;
 	}

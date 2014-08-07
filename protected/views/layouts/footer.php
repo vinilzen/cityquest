@@ -12,7 +12,7 @@
     </div>
     <div class="col-sm-2 col-xs-12">
       <p class="text-center">
-        <span class="brand"><strong>CITY</strong>QUEST 2014</span>
+        <img src="/img/Footer_Centr.png" class="footer_logo" alt="">
       </p>
     </div>
     <div class="col-sm-5 col-xs-12 hidden-xs">
@@ -74,11 +74,13 @@
         <div class="tab-content">
           <div class="tab-pane active" id="auth">
             <form role="form" id="auth-form">
-              <div class="form-group">
+              <div class="form-group" id="form-group-username-auth">
                 <input class="form-control" placeholder="Email" id="auth-email" type="text">
+                <span class="error-msg">?</span>
               </div>
-              <div class="form-group">
+              <div class="form-group" id="form-group-pass-auth">
                 <input class="form-control" placeholder="Пароль" id="auth-pass" type="password">
+                <span class="error-msg">?</span>
               </div>
               <div class="checkbox invisible"><label></label></div>
               <button class="btn btn-default btn-block btn-lg" type="submit">ВОЙТИ</button>
@@ -91,12 +93,15 @@
               </div>
               <div class="form-group">
                 <input required class="form-control" placeholder="Email" id="reg-email" name="Profile[email]" type="email">
+                <span class="error-msg">?</span>
               </div>
               <div class="form-group">
                 <input required class="form-control" placeholder="Номер телефона" id="reg-phone" name="Profile[phone]" type="text">
+                <span class="error-msg">?</span>
               </div>
               <div class="form-group">
                 <input required class="form-control" placeholder="Пароль" type="password" id="reg-pass" name="Profile[password]">
+                <span class="error-msg">?</span>
               </div>
               <div class="checkbox">
                 <label><input type="checkbox" required id="reg-rules">Я принимаю <a href="/rules">Условия использования</a></label>
@@ -165,11 +170,13 @@
             <div class="form-group">
               <input required class="form-control" id="edit-email" disabled="disabled" type="email" value="<? echo Yii::app()->getModule('user')->user()->email; ?>">
             </div>
-            <div class="form-group">
+            <div class="form-group" id="form-group-username">  <!-- input-error -->
               <input required class="form-control" autocomplete="off" id="edit-name" name="name" type="text" value="<? echo Yii::app()->getModule('user')->user()->username; ?>">
+              <span class="error-msg">?</span>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="form-group-phone">
               <input required class="form-control" autocomplete="off" id="edit-phone" name="phone" type="text" value="<? echo Yii::app()->getModule('user')->user()->phone; ?>">
+              <span class="error-msg">?</span>
             </div>
             <div class="form-group hidden">
               <input class="form-control" type="password" autocomplete="off" id="edit-pass" name="password">

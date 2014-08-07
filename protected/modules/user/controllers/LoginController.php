@@ -10,48 +10,51 @@ class LoginController extends Controller
 	 */
 	public function actionLogin()
 	{
-		header('Content-type: application/json');
+		if(Yii::app()->request->isAjaxRequest){
+			header('Content-type: application/json');
 
-		if (Yii::app()->user->isGuest) {
+			if (Yii::app()->user->isGuest) {
 
-			$model=new UserLogin;
+				$model=new UserLogin;
 
-			if(isset($_POST['UserLogin']))
-			{
-				$model->attributes=$_POST['UserLogin'];
-				// validate user input and redirect to previous page if valid
-				
-				if($model->validate()) {
+				if(isset($_POST['UserLogin']))
+				{
+					$model->attributes=$_POST['UserLogin'];
+					// validate user input and redirect to previous page if valid
+					
+					if($model->validate()) {
 
-					echo CJSON::encode(array(
-		        			'success' => 1,
-		        			'error' => 0,
-		        			'msg' => 'Вы успешно авторизовались!'
-		        		));
+						echo CJSON::encode(array(
+			        			'success' => 1,
+			        			'error' => 0,
+			        			'msg' => 'Вы успешно авторизовались!'
+			        		));
 
+					} else
+						echo CJSON::encode(array(
+			        			'success' => 0,
+			        			'error' => 1,
+			        			'msg' => 'Ошибка авторизации',
+			        			'errors' => $model->getErrors(),
+			        		));
 				} else
 					echo CJSON::encode(array(
 		        			'success' => 0,
 		        			'error' => 1,
-		        			'msg' => 'Ошибка авторизации',
-		        			'errors' => $model->getErrors(),
+		        			'msg' => 'Неверный запрос'
 		        		));
+				
 			} else
-				echo CJSON::encode(array(
+	        	echo CJSON::encode(array(
 	        			'success' => 0,
 	        			'error' => 1,
-	        			'msg' => 'Неверный запрос'
+	        			'msg' => 'Вы уже авторизованы!'
 	        		));
-			
-		} else
-        	echo CJSON::encode(array(
-        			'success' => 0,
-        			'error' => 1,
-        			'msg' => 'Вы уже авторизованы!'
-        		));
 
-       	Yii::app()->end();
-			
+	       	Yii::app()->end();
+		} else {
+			$this->redirect('/');
+		}
 	}
 
 }

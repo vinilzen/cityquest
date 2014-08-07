@@ -24,6 +24,7 @@ return array(
 	'Retype Password is incorrect.' => 'Пароли не совпадают.',
 	'Incorrect password (minimal length 4 symbols).' => 'Минимальная длина пароля 4 символа.',
 	'Incorrect username (length between 3 and 20 characters).' => 'Длина имени пользователя от 3 до 20 символов.',
+	'Incorrect phone (length between 5 and 12 characters).' => 'Длина номера телефона от 5 до 12 символов.',
 	"Incorrect symbols (A-z0-9)." => 'В имени пользователя допускаются только латинские буквы и цифры.',
 	'Variable name may consist of a-z, 0-9, underscores, begin with a letter.'=>'В название переменной допускаются только латинские буквы, цифры и символ подчеркивания.',
 	"Length of ' + n + ' must be between '+min+' and '+max+'."=>"Длинна ' + n + ' должна быть не меньше '+min+' и не более '+max+' символов.",
