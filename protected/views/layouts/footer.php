@@ -88,18 +88,19 @@
           </div>
           <div class="tab-pane" id="reg">
             <form role="form" id="reg-form">
-              <div class="form-group">
-                <input required class="form-control" placeholder="Имя" id="reg-name" name="Profile[name]" type="text">
-              </div>
-              <div class="form-group">
+              <div class="form-group" id="form-group-reg-email">
                 <input required class="form-control" placeholder="Email" id="reg-email" name="Profile[email]" type="email">
                 <span class="error-msg">?</span>
               </div>
-              <div class="form-group">
-                <input required class="form-control" placeholder="Номер телефона" id="reg-phone" name="Profile[phone]" type="text">
+              <div class="form-group" id="form-group-reg-name">
+                <input required class="form-control" placeholder="Имя" id="reg-name" name="Profile[name]" type="text">
                 <span class="error-msg">?</span>
               </div>
-              <div class="form-group">
+              <div class="form-group" id="form-group-reg-phone">
+                <input required class="form-control" placeholder="+7(___)-___-__-__" id="reg-phone" name="Profile[phone]" type="text">
+                <span class="error-msg">?</span>
+              </div>
+              <div class="form-group" id="form-group-reg-pass">
                 <input required class="form-control" placeholder="Пароль" type="password" id="reg-pass" name="Profile[password]">
                 <span class="error-msg">?</span>
               </div>
@@ -146,7 +147,7 @@
                   <span class="dashed"></span><span class="price">3000<em class="rur"><em>руб.</em></em></span><span class="dashed"></span>
                 </div>
               </div>
-              <p class="you_phone">Ваш номер телефона:<a>+7 952 377-97-97</a></p>
+              <p class="you_phone">Ваш номер телефона:<input type="text" id="book-phone" value=""> </p>
               <div class="btn btn-default">Подтвердить бронь</div>
             </div>
           </div>
@@ -191,5 +192,6 @@
 <? } ?>
 
 <script src="/js/jquery.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/jquery.mask.min.js"></script>
 <script src="/js/main.js"></script>

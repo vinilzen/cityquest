@@ -31,7 +31,7 @@ foreach ($quests as $quest) { ?>
 				<h2><? echo CHtml::encode($quest->title); ?></h2>
 				<p><span class="glyphicon glyphicon-time"></span></p>
 				<p>Квест в разработке</p>
-				<p>Выход запланирован на середину августа 2014</p>
+				<p>Выход запланирован на август 2014</p>
 			</a>
 		<? } ?>
 	</div>

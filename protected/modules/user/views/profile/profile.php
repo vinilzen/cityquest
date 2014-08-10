@@ -56,7 +56,7 @@
             <span class="dashed"></span><span class="price"><? echo $book->price; ?><em class="rur"><em>руб.</em></em></span><span class="dashed"></span>
           </div>
         </div>
-        <p class="you_phone">Ваш номер телефона:<a><? echo Yii::app()->getModule('user')->user()->phone; ?></a></p>
+        <p class="you_phone">Ваш номер телефона: <input type="text" disabled value="<? echo ($book->phone != '') ? $book->phone : Yii::app()->getModule('user')->user()->phone; ?>" ></p>
         <div class="btn btn-default btn-success">ПОдтвержден<i class="glyphicon glyphicon-ok"></i></div>
         <div class="btn btn-default btn-blank decline-book" data-book-id="<? echo $book->id; ?>">снять бронь</div>
       </div>

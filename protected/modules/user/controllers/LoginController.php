@@ -24,11 +24,15 @@ class LoginController extends Controller
 					
 					if($model->validate()) {
 
+						$user=User::model()->findByAttributes(array('email'=>$model->username));
+
 						echo CJSON::encode(array(
 			        			'success' => 1,
 			        			'error' => 0,
+			        			'admin' => (int)$user->superuser,
 			        			'msg' => 'Вы успешно авторизовались!'
 			        		));
+
 
 					} else
 						echo CJSON::encode(array(

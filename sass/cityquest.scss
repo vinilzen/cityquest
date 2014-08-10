@@ -1575,6 +1575,18 @@ h2.twotab {
 				border-bottom: 1px solid  rgba(255,255,255,.4);
 			}
 		}
+		input {						
+			color: #FFF;
+			background-color: #0C1C29;
+			border-color: #B1F3F7;
+			border-width: 1px;
+			padding: 2px 5px;
+			margin-left: 5px;
+			&:disabled {
+				border:none;
+				background-color: transparent;
+			}
+		}
 	}
 	.btn {
 		text-transform: uppercase;

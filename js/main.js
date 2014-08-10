@@ -148,6 +148,7 @@ $(function() {
 			var h = $('#myModalBook .img-responsive').height();
 			$('.shad').height(h);
 		}
+
 	});
 
 
@@ -159,7 +160,10 @@ $(function() {
 	var ModalBook = $('#myModalBook'), book_data = 0, btn_time;
 
 	$('.btn.btn-q').click(function(e){
+		$('.you_phone input', ModalBook).val(user_phone).mask('+7(000)-000-00-00');
+
 		btn_time = $(e.target);
+
 		book_data = {
 			quest_id : btn_time.attr('data-quest'),
 			addres : $('.addr-quest').text() || $('#quest_addr_'+btn_time.attr('data-quest')).val(),
@@ -170,7 +174,7 @@ $(function() {
 			m : btn_time.attr('data-m'),
 			time : btn_time.attr('data-time'),
 			price : btn_time.attr('data-price'),
-			phone : user_phone, 
+			phone : $('.you_phone input').val(), 
 			name : user_name,
 			comment : ' ',
 		};
@@ -183,60 +187,98 @@ $(function() {
 			'<span>'+book_data.d+'.'+book_data.m+'</span><em>в</em><span>'+book_data.time+'</span>');
 
 		$('.price', ModalBook).html( book_data.price +'<em class="rur"><em>руб.</em></em>');
-		$('.you_phone a', ModalBook).html(user_phone);
 
 		ModalBook.modal('show');
 	});
 
 	$('.btn', ModalBook).click(function(e) {
 
-		var btn_book = $(e.target);
-		if (book_data!=0)
-			$.post('/booking/create',
-				book_data,
-				function(result){
-					
-					if (result && result.success) {
+		// проверка авторизации
+		if (user_name && user_name != '') {
 
-						ModalBook.modal('hide');
+			book_data.phone = $('.you_phone input').val() || user_phone;
+
+			var btn_book = $(e.target);
+			if (book_data!=0)
+				$.post('/booking/create',
+					book_data,
+					function(result){
 						
-						btn_time.attr({
-								'disabled':'disabled',
-								'data-toggle':"tooltip",
-								'data-delay':"4000",
-								'title': 'Квест успешно забронирован',
-							})
-							.tooltip({
-								delay:{ show: 2000, hide: 3000 }
-							})
-							.tooltip('show')
-							.addClass('myDate');
+						if (result && result.success) {
 
-						setTimeout(function(){ btn_time.tooltip("hide"); }, 3000);
-
-					} else {
-
-						if (result && result.message) {
-
-							btn_book
-								.attr({
+							ModalBook.modal('hide');
+							
+							btn_time.attr({
+									'disabled':'disabled',
 									'data-toggle':"tooltip",
-									'title': result.message,
+									'data-delay':"4000",
+									'title': 'Квест успешно забронирован',
 								})
-								.tooltip('show');
-						}
+								.tooltip({
+									delay:{ show: 2000, hide: 3000 }
+								})
+								.tooltip('show')
+								.addClass('myDate');
 
-						alert('Ошибка!');
+							setTimeout(function(){ btn_time.tooltip("hide"); }, 3000);
+
+						} else {
+
+							if (result && result.message) {
+
+								btn_book
+									.attr({
+										'data-toggle':"tooltip",
+										'title': result.message,
+									})
+									.tooltip('show');
+							}
+
+							alert('Ошибка!');
+						}
 					}
-				}
-			);
-		else console.log('пустой book_data');
+				);
+			else console.log('пустой book_data');
+
+		} else {
+
+			ModalBook.modal('hide');
+			$('#myModalAuth').modal('show');
+
+		}
 
 		return false;
 
 	});
 
+
+	$('#reg-phone').mask('+7(000)-000-00-00');
+	$('.you_phone input').mask('+7(000)-000-00-00');
+
+	$('#form-group-reg-email input').keypress(function(){
+		$('#form-group-reg-email span').tooltip('destroy');
+		$('#form-group-reg-email').removeClass('input-error');
+	});
+
+	$('#form-group-reg-name input').keypress(function(){
+		$('#form-group-reg-name span').tooltip('destroy');
+		$('#form-group-reg-name').removeClass('input-error');
+	});
+
+	$('#form-group-reg-phone input').keypress(function(){
+		$('#form-group-reg-phone span').tooltip('destroy');
+		$('#form-group-reg-phone').removeClass('input-error');
+	});
+
+	$('#form-group-reg-pass input').keypress(function(){
+		$('#form-group-reg-pass span').tooltip('destroy');
+		$('#form-group-reg-pass').removeClass('input-error');
+	});
+
 	$('#reg-form').submit(function(){
+
+		$('#form-group-reg-pass, #form-group-reg-email, #form-group-reg-name, #form-group-reg-phone').removeClass('input-error');
+		$('#form-group-reg-email span, #form-group-reg-name span, #form-group-reg-phone span, #form-group-reg-pass span, #reg-form button').tooltip('destroy');
 
 		if ( $('#reg-name').val() !== '' && $('#reg-name').val().length > 2 ) {
 			if ( $('#reg-email').val() !== '' && re.test( $('#reg-email').val() ) ) {
@@ -244,95 +286,193 @@ $(function() {
 					if ( $('#reg-pass').val() !== '' && $('#reg-pass').val().length > 4 ) {
 						if ( $('#reg-rules').is(':checked') ) {
 
-		$.post(
-			"/user/registration",
-			{
-				name : $('#reg-name').val(),
-				email : $('#reg-email').val(),
-				phone : $('#reg-phone').val(),
-				pass : $('#reg-pass').val(),
-			},
-			function( data ) {
-				if (data.error && data.error == 1) {
-					
-					if (data.msg) alert(data.msg);
-					
-					console.log(data);
+							$.post(
+								"/user/registration",
+								{
+									name : $('#reg-name').val(),
+									email : $('#reg-email').val(),
+									phone : $('#reg-phone').val(),
+									pass : $('#reg-pass').val(),
+								},
+								function( data ) {
 
-				} else if (data.success && data.success == 1) {
+									if (data.success && data.success == 1) {
 
-					$('#auth-tab').click();
+										$('#reg-form button')
+											.attr({ 'title': 'Вы успешно зарегистрировались' })
+											.tooltip('show');
+
+										setTimeout(function(){
+											$('#reg-form button').tooltip('destroy');
+											$('#auth-tab').click();
+										}, 1000);
+										
+
+									}
+
+									if (data && data.error && data.errors){
+
+										if (data.errors.email){
+											$('#form-group-reg-email').addClass('input-error');
+											$('#form-group-reg-email span')
+												.attr({ 'title': data.errors.email.join(', ') })
+												.tooltip('show');
+										}
+
+										if (data.errors.username){
+											$('#form-group-reg-name').addClass('input-error');
+											$('#form-group-reg-name span')
+												.attr({ 'title': data.errors.email.join(', ') })
+												.tooltip('show');
+										}
+									}
+								
+									$('#reg-form button')
+										.attr({ 'title': 'Ошибка при регистрации' })
+										.tooltip('show');
+
+									// if (data.error && data.error == 1) console.log(data);
+								}
+							);
+
+						} else {
+
+							$('#reg-rules')
+								.attr({ title:'Чтобы зарегистрироваться, нужно принять наши условия пользования'})
+								.tooltip('show');
+						}
+							
+					} else {
+
+						$('#form-group-reg-pass').addClass('input-error');
+						$('#form-group-reg-pass span')
+							.attr({ 'title': 'Пароль должен содержать более 4 символов' })
+							.tooltip('show');
+					}
+				} else {
 					
-					if (data.msg) alert(data.msg);
+					$('#form-group-reg-phone').addClass('input-error');
 
+					$('#form-group-reg-phone span')
+						.attr({ 'title': 'Некорректный или неуказан номер телефона' })
+						.tooltip('show');
 				}
-			}
-		);
+			} else {
 
-						} else alert('Чтобы зарегистрироваться, нужно принять наши условия пользования');
-					} else alert('Пароль должен содержать более 4 символов');
-				} else alert('Некорректный или неуказан номер телефона');
-			} else alert('Некорректный email');
-		} else alert('Имя должно содержать более 2 символов');
+				$('#form-group-reg-email').addClass('input-error');
+
+				$('#form-group-reg-email span')
+					.attr({ 'title': 'Пустой или некорректный email' })
+					.tooltip('show');
+			} 
+		} else {
+
+			$('#form-group-reg-name').addClass('input-error');
+
+			$('#form-group-reg-name span')
+				.attr({ 'title': 'Имя не может быть пустым и должно содержать менее 2 символов' })
+				.tooltip('show');
+		}
 
 		return false;
 	});
 
+	$('#form-group-username-auth input').keypress(function(){
+		$('#auth-form button').tooltip('destroy');
+		$('#form-group-username-auth span').tooltip('destroy');
+		$('#form-group-username-auth').removeClass('input-error');
+	});
+
+	$('#form-group-pass-auth input').keypress(function(){
+		$('#auth-form button').tooltip('destroy');
+		$('#form-group-pass-auth span').tooltip('destroy');
+		$('#form-group-pass-auth').removeClass('input-error');
+	});
+
 	$('#auth-form').submit(function(){
 
-		if ( $('#auth-email').val() !== '' && $('#auth-email').val().length > 3 ) {
-			if ( $('#auth-pass').val() !== '' && $('#auth-pass').val().length > 3 ) {
+		$('#form-group-username-auth, #form-group-pass-auth').removeClass('input-error');
 
-		$.post( "/user/login",
-			{ 
-				'UserLogin[username]' : $('#auth-email').val(), 
-				'UserLogin[password]' : $('#auth-pass').val()
-			},
-			function( data ) {
-				console.log(data);
-			
-				if (data.error && data.error == 1) {
-					
-					if (data.msg) alert(data.msg);
+		$('#form-group-username-auth span').tooltip('destroy');
+		$('#form-group-pass-auth span').tooltip('destroy');
+		$('#auth-form button').tooltip('destroy');
 
-					if (data.msg && data.msg == 'Вы уже авторизованы!') {
-						$('#myModalAuth').modal('hide');
-						location.reload();
-					}
 
-				} else if (data.success && data.success == 1) {
-			
-					if (data.msg) alert(data.msg);
-						$('#myModalAuth').modal('hide');
-					
-					location.reload();
+		if ( $('#auth-email').val() !== '') {
 
-				}
-			}
-		);
-
-			} else {
+			if ( re.test( $('#auth-email').val() ) ) {
 
 				$('#form-group-username-auth').removeClass('input-error');
-				$('#form-group-username-auth span').tooltip('destroy');
 
-				$('#form-group-pass-auth').addClass('input-error');
-				$('#form-group-pass-auth span')
-					.attr({ 'title': 'Неверный логин или пароль' })
-					.on('shown.bs.tooltip', function () {
-						$('.tooltip-arrow').attr('style','');
-						$('.tooltip').css('left', $('.tooltip').position().left+12);
-					})
+				if ( $('#auth-pass').val() !== '' ) {
+
+					if ( $('#auth-pass').val().length > 3 ) {
+
+						$.post( "/user/login",
+							{ 
+								'UserLogin[username]' : $('#auth-email').val(), 
+								'UserLogin[password]' : $('#auth-pass').val()
+							},
+							function( data ) {
+								console.log(data);
+							
+								if (data.error && data.error == 1) {
+									
+									if (data.msg && data.msg == 'Вы уже авторизованы!') {
+										$('#myModalAuth').modal('hide');
+										location.reload();
+									} else {
+										$('#auth-form button')
+											.attr({ 'title': 'Неверный логин или пароль' })
+											.tooltip('show');
+									}
+
+								} else 
+								if (data.success && data.success == 1) {
+								
+									$('#auth-form button')
+										.attr({ 'title': 'Вы успешно авторизовались' })
+										.tooltip('show');
+
+									setTimeout(function(){
+										$('#myModalAuth').modal('hide');
+										if (data.admin){
+											window.location.href = '/quest/admin';
+										} else {
+											location.reload();
+										}
+									},1000);
+								}
+							}
+						);
+
+					} else {
+
+						$('#form-group-pass-auth').addClass('input-error');
+						$('#form-group-pass-auth span')
+							.attr({ 'title': 'Пароль должен содержать более 3 символов' })
+							.tooltip('show');
+					}
+
+				} else {
+
+					$('#form-group-pass-auth').addClass('input-error');
+					$('#form-group-pass-auth span')
+						.attr({ 'title': 'Пароль не может быть пустым' })
+						.tooltip('show');
+				}
+
+			} else {
+				$('#form-group-username-auth').addClass('input-error');
+				$('#form-group-username-auth span')
+					.attr({ 'title': 'Некорректный Email' })
 					.tooltip('show');
 			}
+
 		} else {
 			$('#form-group-username-auth').addClass('input-error');
 			$('#form-group-username-auth span')
-				.attr({ 'title': 'Некорректное имя' })
-				.on('shown.bs.tooltip', function () {
-					$('.tooltip-arrow').attr('style','');
-					$('.tooltip').css('left', $('.tooltip').position().left+12);
-				})
+				.attr({ 'title': 'Поле Email не может быть пустым' })
 				.tooltip('show');
 		}
 
@@ -395,9 +535,7 @@ $(function() {
 			if (result && result.success) {
 
 				btn_edit
-					.attr({
-						'title': result.message,
-					})
+					.attr({ 'title': result.message })
 					.tooltip('show');
 
 				$('.cabinet .name').html(name);

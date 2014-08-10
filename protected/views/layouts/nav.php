@@ -17,6 +17,9 @@
                 <li class="<? if (Yii::app()->request->url == '/rules') echo ' active '; ?>"><a href="/rules"> Правила</a></li>
                 <li class="<? if (Yii::app()->request->url == '/franchise') echo ' active '; ?>"><a href="/franchise"> Франшиза </a></li>
                 <li class="<? if (Yii::app()->request->url == '/contact') echo ' active '; ?>"><a href="/contact"> Контакты</a></li>
+                <? if (Yii::app()->getModule('user')->isAdmin()) { ?>
+                  <li style="margin:0;"><a href="/quest/admin" style="opacity: 1;" title="Панель администратора"><i style="font-size: 18px;" class="glyphicon glyphicon-cog"></i></a></li>
+                <? } ?>
               </ul>
             </div>
           </div>

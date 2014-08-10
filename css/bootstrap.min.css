@@ -8554,6 +8554,18 @@ h2.twotab.active, #myModalAuth .active.h4.modal-title {
 .ModalBook .you_phone a:hover {
   border-bottom: 1px solid rgba(255, 255, 255, 0.4);
 }
+.ModalBook .you_phone input {
+  color: #FFF;
+  background-color: #0C1C29;
+  border-color: #B1F3F7;
+  border-width: 1px;
+  padding: 2px 5px;
+  margin-left: 5px;
+}
+.ModalBook .you_phone input:disabled {
+  border: none;
+  background-color: transparent;
+}
 .ModalBook .btn {
   text-transform: uppercase;
   font-weight: bold;
