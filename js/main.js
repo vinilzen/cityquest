@@ -252,8 +252,7 @@ $(function() {
 	});
 
 
-	$('#reg-phone').mask('+7(000)-000-00-00');
-	$('.you_phone input').mask('+7(000)-000-00-00');
+	$('#reg-phone, .you_phone input, #edit-phone').mask('+7(000)-000-00-00');
 
 	$('#form-group-reg-email input').keypress(function(){
 		$('#form-group-reg-email span').tooltip('destroy');
@@ -521,57 +520,105 @@ $(function() {
 	});
 
 
+
+
+
+	$('#myModalEditProfile #form-group-username input').keypress(function(){
+		$('#myModalEditProfile #form-group-username span').tooltip('destroy');
+		$('#myModalEditProfile #form-group-username').removeClass('input-error');
+		
+		$('#editProfile').tooltip('destroy');
+	});
+
+	$('#myModalEditProfile #form-group-phone input').keypress(function(){
+		$('#myModalEditProfile #form-group-phone span').tooltip('destroy');
+		$('#myModalEditProfile #form-group-phone').removeClass('input-error');
+
+		$('#editProfile').tooltip('destroy');
+	});
+
 	$('#edit-form').submit(function(){
 
-		var name = $('#edit-name').val(),
-			btn_edit = $('#editProfile'),
-			phone = $('#edit-phone').val();
 		
-		$.post('/user/profile/edit', {
-			username: name,
-			phone: phone,
-		}, function(result){
-						
-			if (result && result.success) {
+		if ( $('#edit-name').val() !== '' && $('#edit-name').val().length > 2 ) {
+			if ( $('#edit-phone').val() !== '' && $('#edit-phone').val().length > 10 ) {
 
-				btn_edit
-					.attr({ 'title': result.message })
-					.tooltip('show');
+				var name = $('#edit-name').val(),
+					btn_edit = $('#editProfile'),
+					phone = $('#edit-phone').val();
 
-				$('.cabinet .name').html(name);
-				$('.cabinet .phone').html(phone);
+				$.post('/user/profile/edit', {
+					username: name,
+					phone: phone,
+				}, function(result){
+								
+					if (result && result.success) {
 
-				setTimeout(function(){
-					$('#myModalEditProfile').modal('hide');
-					$('#editProfile').tooltip('destroy');
-				}, 2000);
+						btn_edit
+							.attr({ 'title': result.message })
+							.tooltip('show');
 
+						$('.cabinet .name').html(name);
+						$('.cabinet .phone').html(phone);
+
+						setTimeout(function(){
+							$('#myModalEditProfile').modal('hide');
+							$('#editProfile').tooltip('destroy');
+						}, 2000);
+
+					} else {
+
+						btn_edit
+							.attr({
+								'data-toggle':"tooltip",
+								'title': 'Произошла ошибка, свяжитесь с администрацией',
+							})
+							.tooltip('show');
+
+						if (result && result.errors) {
+							if (result.errors.username) {
+								$('#form-group-username').addClass('input-error');
+								$('#form-group-username span')
+									.attr({ 'title': result.errors.username.join(', ') })
+									.tooltip('show');
+							}
+							if (result.errors.phone) {
+								$('#form-group-phone').addClass('input-error');
+								$('#form-group-phone span')
+									.attr({ 'title': result.errors.phone.join(', ') })
+									.tooltip('show');
+							}
+						} else {
+
+							btn_edit
+								.attr({
+									'data-toggle':"tooltip",
+									'title': 'Произошла ошибка, свяжитесь с администрацией',
+								})
+								.tooltip('show');
+						}
+
+					}
+				});
+			
 			} else {
 
-				btn_edit
-					.attr({
-						'data-toggle':"tooltip",
-						'title': 'Произошла ошибка, свяжитесь с администрацией',
-					})
+				$('#myModalEditProfile #form-group-phone').addClass('input-error');
+
+				$('#myModalEditProfile #form-group-phone span')
+					.attr({ 'title': 'Номер телефона должен содержать не менее 10 символов' })
 					.tooltip('show');
-
-				if (result && result.errors) {
-					if (result.errors.username) {
-						$('#form-group-username').addClass('input-error');
-						$('#form-group-username span')
-							.attr({ 'title': result.errors.username.join(', ') })
-							.tooltip('show');
-					}
-					if (result.errors.phone) {
-						$('#form-group-phone').addClass('input-error');
-						$('#form-group-phone span')
-							.attr({ 'title': result.errors.phone.join(', ') })
-							.tooltip('show');
-					}
-				}
-
 			}
-		});
+
+		} else {
+
+			$('#myModalEditProfile #form-group-username').addClass('input-error');
+
+			$('#myModalEditProfile #form-group-username span')
+				.attr({ 'title': 'Имя не может быть пустым и должно содержать менее 2 символов' })
+				.tooltip('show');
+
+		}
 
 		return false;
 	});
