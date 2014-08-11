@@ -595,9 +595,13 @@ $(function() {
 	});
 
 
+	$('#myModalEditProfile').on('shown.bs.modal', function(){
+		$('#edit-name').val( $('.cabinet .name').text() );
+		$('#edit-phone').val( $('.cabinet .phone').text() );
+	});
+
 	$('#edit-form').submit(function(){
 
-		
 		if ( $('#edit-name').val() !== '' && $('#edit-name').val().length > 2 ) {
 			if ( $('#edit-phone').val() !== '' && $('#edit-phone').val().length > 10 ) {
 
@@ -618,6 +622,7 @@ $(function() {
 
 						$('.cabinet .name').html(name);
 						$('.cabinet .phone').html(phone);
+						$('.you_phone input').val(phone);
 
 						setTimeout(function(){
 							$('#myModalEditProfile').modal('hide');

@@ -112,7 +112,10 @@ class BookingController extends Controller
 							$model->quest_id = (int)$_POST['quest_id'];
 							$model->competitor_id = (int)Yii::app()->user->id;
 
-							if($model->save())
+							$user_model = Yii::app()->getModule('user')->user();
+							$user_model->phone = $_POST['phone'];
+
+							if ( $user_model->save() && $model->save())
 							{
 
 								/*
