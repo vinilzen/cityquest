@@ -39,6 +39,9 @@ class RecoveryController extends Controller
 		    		}
 		    	} else {
 			    	if(isset($_POST['UserRecoveryForm'])) {
+
+						header('Content-type: application/json');
+
 			    		$form->attributes=$_POST['UserRecoveryForm'];
 			    		if($form->validate()) {
 			    			$user = User::model()->notsafe()->findbyPk($form->user_id);
@@ -54,13 +57,32 @@ class RecoveryController extends Controller
 			    						'{activation_url}'=>$activation_url,
 			    					));
 							
-			    			UserModule::sendMail($user->email,$subject,$message);
+//			    			UserModule::sendMail($user->email,$subject,$message);
+
+				        	echo CJSON::encode(array(
+				        			'success' => 1,
+				        			'error' => 0,
+				        			'msg' => UserModule::t("Please check your email. An instructions was sent to your email address."),
+				        			'subject' => $subject,
+				        			'message' => $message,
+				        		));
 			    			
-							Yii::app()->user->setFlash('recoveryMessage',UserModule::t("Please check your email. An instructions was sent to your email address."));
-			    			$this->refresh();
+
+			    			Yii::app()->end();
+							// Yii::app()->user->setFlash('recoveryMessage',UserModule::t("Please check your email. An instructions was sent to your email address."));
+			    			// $this->refresh();
+			    		} else {
+
+				        	echo CJSON::encode(array(
+				        			'success' => 0,
+				        			'error' => 1,
+				        			'msg' => 'Некорректные данные',
+				        			'errors' => $form->getErrors(),
+				        		));
 			    		}
+			    	} else {
+		    			$this->render('recovery',array('form'=>$form));
 			    	}
-		    		$this->render('recovery',array('form'=>$form));
 		    	}
 		    }
 	}

@@ -396,83 +396,135 @@ $(function() {
 		$('#form-group-pass-auth span').tooltip('destroy');
 		$('#auth-form button').tooltip('destroy');
 
+		if ($('#auth-form button').html().toLowerCase() == 'войти') {
 
-		if ( $('#auth-email').val() !== '') {
 
-			if ( re.test( $('#auth-email').val() ) ) {
+			if ( $('#auth-email').val() !== '') {
+				if ( re.test( $('#auth-email').val() ) ) {
+					$('#form-group-username-auth').removeClass('input-error');
 
-				$('#form-group-username-auth').removeClass('input-error');
+					if ( $('#auth-pass').val() !== '' ) {
 
-				if ( $('#auth-pass').val() !== '' ) {
+						if ( $('#auth-pass').val().length > 3 ) {
 
-					if ( $('#auth-pass').val().length > 3 ) {
-
-						$.post( "/user/login",
-							{ 
-								'UserLogin[username]' : $('#auth-email').val(), 
-								'UserLogin[password]' : $('#auth-pass').val()
-							},
-							function( data ) {
-								console.log(data);
-							
-								if (data.error && data.error == 1) {
-									
-									if (data.msg && data.msg == 'Вы уже авторизованы!') {
-										$('#myModalAuth').modal('hide');
-										location.reload();
-									} else {
-										$('#auth-form button')
-											.attr({ 'title': 'Неверный логин или пароль' })
-											.tooltip('show');
-									}
-
-								} else 
-								if (data.success && data.success == 1) {
+							$.post( "/user/login",
+								{ 
+									'UserLogin[username]' : $('#auth-email').val(), 
+									'UserLogin[password]' : $('#auth-pass').val()
+								},
+								function( data ) {
+									console.log(data);
 								
-									$('#auth-form button')
-										.attr({ 'title': 'Вы успешно авторизовались' })
-										.tooltip('show');
-
-									setTimeout(function(){
-										$('#myModalAuth').modal('hide');
-										if (data.admin){
-											window.location.href = '/quest/admin';
-										} else {
+									if (data.error && data.error == 1) {
+										
+										if (data.msg && data.msg == 'Вы уже авторизованы!') {
+											$('#myModalAuth').modal('hide');
 											location.reload();
+										} else {
+											$('#auth-form button')
+												.attr({ 'title': 'Неверный логин или пароль' })
+												.tooltip('show');
 										}
-									},1000);
+
+									} else 
+									if (data.success && data.success == 1) {
+									
+										$('#auth-form button')
+											.attr({ 'title': 'Вы успешно авторизовались' })
+											.tooltip('show');
+
+										setTimeout(function(){
+											$('#myModalAuth').modal('hide');
+											if (data.admin){
+												window.location.href = '/quest/admin';
+											} else {
+												location.reload();
+											}
+										},1000);
+									}
 								}
-							}
-						);
+							);
+
+						} else {
+
+							$('#form-group-pass-auth').addClass('input-error');
+							$('#form-group-pass-auth span')
+								.attr({ 'title': 'Пароль должен содержать более 3 символов' })
+								.tooltip('show');
+						}
 
 					} else {
 
 						$('#form-group-pass-auth').addClass('input-error');
 						$('#form-group-pass-auth span')
-							.attr({ 'title': 'Пароль должен содержать более 3 символов' })
+							.attr({ 'title': 'Пароль не может быть пустым' })
 							.tooltip('show');
 					}
-
 				} else {
-
-					$('#form-group-pass-auth').addClass('input-error');
-					$('#form-group-pass-auth span')
-						.attr({ 'title': 'Пароль не может быть пустым' })
+					$('#form-group-username-auth').addClass('input-error');
+					$('#form-group-username-auth span')
+						.attr({ 'title': 'Некорректный Email' })
 						.tooltip('show');
 				}
-
 			} else {
 				$('#form-group-username-auth').addClass('input-error');
 				$('#form-group-username-auth span')
-					.attr({ 'title': 'Некорректный Email' })
+					.attr({ 'title': 'Поле Email не может быть пустым' })
 					.tooltip('show');
 			}
 
+		// forgot password
 		} else {
-			$('#form-group-username-auth').addClass('input-error');
-			$('#form-group-username-auth span')
-				.attr({ 'title': 'Поле Email не может быть пустым' })
-				.tooltip('show');
+
+			$('#form-group-forgot-auth').removeClass('input-error');
+			$('#form-group-forgot-auth span').tooltip('destroy');
+			$('#auth-form button').tooltip('destroy');
+
+			if ( $('#auth-forgot').val() !== '') {
+				if ( re.test( $('#auth-forgot').val() ) ) {
+
+					$.post( "/user/recovery",
+						{ 'UserRecoveryForm[email]' : $('#auth-forgot').val() },
+						function( result ) {
+							console.log(result);
+							if (result && result.error && result.error == 1) {
+
+								if (result.errors.email) {
+									$('#form-group-forgot-auth').addClass('input-error');
+									$('#form-group-forgot-auth span')
+										.attr({ 'title': result.errors.email.join(', ') })
+										.tooltip('show');
+								} else {
+
+									$('#auth-form button')
+										.attr({ 'title': 'Неизвестная ошибка, свяжитесь с администрацией' })
+										.tooltip('show');
+								}
+							} else if (result && result.success && result.success == 1) {
+
+									$('#auth-form button')
+										.attr({ 'title': result.msg })
+										.tooltip('show');
+
+							}
+						}
+					);
+
+				} else {
+					
+					$('#form-group-forgot-auth').addClass('input-error');
+					$('#form-group-forgot-auth span')
+						.attr({ 'title': 'Некорректный Email' })
+						.tooltip('show');
+				}
+			} else {
+				
+				$('#form-group-forgot-auth').addClass('input-error');
+				$('#form-group-forgot-auth span')
+					.attr({ 'title': 'Поле Email не может быть пустым' })
+					.tooltip('show');
+			}
+
 		}
 
 		return false;
@@ -525,6 +577,13 @@ $(function() {
 		$('#myModalEditProfile #form-group-username').removeClass('input-error');
 
 		$('#editProfile').tooltip('destroy');
+	});
+
+	$('#form-group-forgot-auth input').keypress(function(){
+		$('#form-group-forgot-auth span').tooltip('destroy');
+		$('#form-group-forgot-auth').removeClass('input-error');
+
+		$('#auth-form button').tooltip('destroy');
 	});
 
 

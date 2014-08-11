@@ -2862,7 +2862,7 @@ select[multiple].input-lg,
   background-color: rgba(182, 248, 184, 0.1);
   opacity: 1;
 }
-.btn-q.disabled, .btn-q[disabled] {
+.btn-q.disabled, .btn-q[disabled]:not(.myDate) {
   color: rgba(255, 255, 255, 0.1);
   border: 2px solid rgba(0, 0, 0, 0.1);
 }
@@ -6893,6 +6893,14 @@ body.inner.contact {
 
 input {
   color: #000;
+  border-radius: 0;
+  background-color: transparent;
+  border-color: #23323E;
+  margin-top: -1px;
+  font-size: 16px;
+  color: #FFF;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
 .navbar-wrapper {

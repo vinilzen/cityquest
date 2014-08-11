@@ -6,7 +6,7 @@
  * user recovery form data. It is used by the 'recovery' action of 'UserController'.
  */
 class UserRecoveryForm extends CFormModel {
-	public $login_or_email, $user_id;
+	public $email, $user_id;
 	
 	/**
 	 * Declares the validation rules.
@@ -17,10 +17,10 @@ class UserRecoveryForm extends CFormModel {
 	{
 		return array(
 			// username and password are required
-			array('login_or_email', 'required'),
-			array('login_or_email', 'match', 'pattern' => '/^[A-Za-z0-9@.-\s,]+$/u','message' => UserModule::t("Incorrect symbols (A-z0-9).")),
+			array('email', 'required'),
+			array('email', 'email'),
 			// password needs to be authenticated
-			array('login_or_email', 'checkexists'),
+			array('email', 'checkexists'),
 		);
 	}
 	/**
@@ -29,29 +29,27 @@ class UserRecoveryForm extends CFormModel {
 	public function attributeLabels()
 	{
 		return array(
-			'login_or_email'=>UserModule::t("username or email"),
+			'email'=>UserModule::t("email"),
 		);
 	}
 	
 	public function checkexists($attribute,$params) {
 		if(!$this->hasErrors())  // we only want to authenticate when no input errors
 		{
-			if (strpos($this->login_or_email,"@")) {
-				$user=User::model()->findByAttributes(array('email'=>$this->login_or_email));
+
+
+			if (strpos($this->email,"@")) {
+				$user=User::model()->findByAttributes(array('email'=>$this->email));
+				
+
 				if ($user)
 					$this->user_id=$user->id;
-			} else {
-				$user=User::model()->findByAttributes(array('username'=>$this->login_or_email));
-				if ($user)
-					$this->user_id=$user->id;
+				
+				// var_dump($this->user_id); die;
 			}
 			
 			if($user===null)
-				if (strpos($this->login_or_email,"@")) {
-					$this->addError("login_or_email",UserModule::t("Email is incorrect."));
-				} else {
-					$this->addError("login_or_email",UserModule::t("Username is incorrect."));
-				}
+				$this->addError("email",UserModule::t("Email is incorrect."));
 		}
 	}
 	
