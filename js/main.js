@@ -181,7 +181,7 @@ $(function() {
 
 		$('img', ModalBook).attr('src', '/images/q/'+book_data.quest_id+'.jpg');
 		$('.addr-to', ModalBook).html('<i class="ico-loc"></i>'+book_data.addres);
-		$('h2', ModalBook).html('<i class="ico-loc"></i>'+book_data.title);
+		$('h2', ModalBook).html(book_data.title);
 		$('.book_time', ModalBook).html(
 			'<small>'+book_data.day+'</small>'+
 			'<span>'+book_data.d+'.'+book_data.m+'</span><em>в</em><span>'+book_data.time+'</span>');
@@ -520,15 +520,13 @@ $(function() {
 	});
 
 
-
-
-
 	$('#myModalEditProfile #form-group-username input').keypress(function(){
 		$('#myModalEditProfile #form-group-username span').tooltip('destroy');
 		$('#myModalEditProfile #form-group-username').removeClass('input-error');
-		
+
 		$('#editProfile').tooltip('destroy');
 	});
+
 
 	$('#myModalEditProfile #form-group-phone input').keypress(function(){
 		$('#myModalEditProfile #form-group-phone span').tooltip('destroy');
@@ -536,6 +534,7 @@ $(function() {
 
 		$('#editProfile').tooltip('destroy');
 	});
+
 
 	$('#edit-form').submit(function(){
 
@@ -621,6 +620,31 @@ $(function() {
 		}
 
 		return false;
+	});
+
+
+	/*  ВОССТАНОВИТЬ ПАРОЛЬ  */
+	$('#forgot').click(function(){
+
+		$(this).hide();
+		$('#auth_toogl').show();
+
+		$('#form-group-username-auth, #form-group-pass-auth').hide();
+		$('#form-group-forgot-auth').show();
+
+		$('#myModalAuth button.btn').html('ВОССТАНОВИТЬ');
+
+	});
+
+	$('#auth_toogl').click(function(event) {
+		$('#forgot').show();
+		$(this).hide();
+
+		$('#form-group-username-auth, #form-group-pass-auth').show();
+		$('#form-group-forgot-auth').hide();
+
+
+		$('#myModalAuth button.btn').html('войти');
 	});
 
 });

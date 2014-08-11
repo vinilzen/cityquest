@@ -1420,7 +1420,7 @@ h2.twotab {
 		}
 		@media (min-width: $screen-lg) {
 			margin-top: 10%;
-			max-width: 1648px;
+			max-width: 1400px;
 		}
 	}
 	.modal-content {
@@ -1465,6 +1465,10 @@ h2.twotab {
 		opacity: .8;
 		right: 30px;
 		top: 28px;
+		-webkit-transition: all .5s; 
+	     -moz-transition: all .5s;
+	       -o-transition: all .5s;
+	          transition: all .5s;
 		@media (max-width: $screen-xs-max) {
 			right: 10px;
 			top: 10px;
@@ -1483,6 +1487,12 @@ h2.twotab {
 			color:#575e64;
 			font-weight: normal;
 			text-shadow: none;
+		}
+		&:hover {
+			border-color: #fff;
+			span {
+				color: #FFF;
+			}
 		}
 	}
 	.shad {
@@ -1505,9 +1515,6 @@ h2.twotab {
 				text-transform: capitalize;
 				@media (min-width: $screen-lg) {
 					margin-bottom: 1%;
-				}
-				@media (min-width: $screen-xlg) {
-					margin-bottom: 2%;
 				}
 			}
 			span {
@@ -1535,10 +1542,6 @@ h2.twotab {
 		@media (min-width: $screen-lg) {
 			margin-top: 1%;
 			margin-bottom: 1%;
-		}
-		@media (min-width: $screen-xlg) {
-			margin-top: 2%;
-			margin-bottom: 2%;
 		}
 		.priceRow span.price {
 			font-size: 24px;
@@ -1612,9 +1615,12 @@ h2.twotab {
 		@media (min-width: $screen-lg) {
 			margin-top: 1.5%;
 		}
-		@media (min-width: $screen-xlg) {
-			margin-top: 4%;
+
+		&:hover {
+			border-color: #E2FDFF;
+			box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
 		}
+
 		&.btn-success {
 			color:#b1f7b3;
 			border-color: #b1f7b3;
@@ -1668,7 +1674,7 @@ h2.twotab {
 }
 
 .myQuests {
-	max-width: 1600px;
+	max-width: 1400px;
 }
 
 @media (max-width: $screen-xs-max) {
@@ -1906,13 +1912,21 @@ h2.twotab {
 		display: none;
 	}
 	.modal-content {
-		padding: 40px 30px 0;
+		padding: 0px 30px 0;
 		background-color: rgba(10,27,40,0.85);
 		box-shadow: 0 0 100px 10px rgba(255, 255, 255, 0.35);
 		border: none;
 		@media (max-width: $screen-xs-max) {
 			background-color: rgba(10,27,40,0.95);
 		}
+	}
+	h2 {
+		margin-top: 21px;
+		color: rgba(255, 255, 255, 0.8);
+		text-transform: uppercase;
+		font-size: 18px;
+		margin-bottom: 20px;
+		text-align: center;
 	}
 	.form-control {
 		height: 43px;
@@ -1973,6 +1987,11 @@ h2.twotab {
 		&:hover {
 			box-shadow: 0 0 10px rgba(255, 255, 255, 0.5)
 		}
+	}
+	.mail_label {
+		font-weight: normal;
+		margin-bottom: 10px;
+		padding-left: 12px;
 	}
 }
 
@@ -2079,6 +2098,19 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 			line-height: 18px;
 			border: 1px solid #F55E50;
 			cursor: pointer;
+		}
+	}
+}
+
+#myModalAuth .checkbox.forgot {
+	padding-left: 0;
+	margin-top: 15px;
+	margin-bottom: 25px;
+	label{
+		border-bottom: 1px dashed rgba(255, 255, 255, 0.6);
+		&:hover {
+			color: rgba(255, 255, 255, 0.9);
+			border-bottom: 1px dashed rgba(255, 255, 255, 0.9);
 		}
 	}
 }

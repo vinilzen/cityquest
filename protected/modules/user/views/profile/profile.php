@@ -22,7 +22,7 @@
   <div class="row">
     <div class="col-xs-12 text-center">
       <h2 class="twotab active">Активные квесты</h2>
-      <h2 class="twotab">предыдущие игры</h2>
+      <h2 class="twotab">прошедшие квесты</h2>
       <hr class="fadeOut">
     </div>
   </div>

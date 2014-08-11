@@ -83,7 +83,7 @@
     background-color: rgba(182, 248, 184, 0.1);
     opacity: 1;
   }
-  &.disabled {
+  &.disabled, &[disabled] {
     color: rgba(255,255,255,0.1);
     border: 2px solid rgba(0, 0, 0, 0.1);
   }

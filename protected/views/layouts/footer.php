@@ -78,11 +78,16 @@
                 <input class="form-control" placeholder="Email" id="auth-email" type="text">
                 <span class="error-msg">?</span>
               </div>
+              <div class="form-group" style="display:none;" id="form-group-forgot-auth">
+                <input class="form-control" placeholder="Email" autocomplete="off" id="auth-forgot" type="text" value=" ">
+                <p class="help-block"><small>Чтобы восстановить пароль, введите Email</small></p>
+                <span class="error-msg">?</span>
+              </div>
               <div class="form-group" id="form-group-pass-auth">
                 <input class="form-control" placeholder="Пароль" id="auth-pass" type="password">
                 <span class="error-msg">?</span>
               </div>
-              <div class="checkbox invisible"><label></label></div>
+              <div class="checkbox forgot"><label id="forgot">Забыли пароль?</label><label style="display:none;" id="auth_toogl">Авторизоваться</label></div>
               <button class="btn btn-default btn-block btn-lg" type="submit">ВОЙТИ</button>
             </form>
           </div>
@@ -168,15 +173,17 @@
         </div>
         <div class="modal-body">
           <form role="form" id="edit-form">
+            <h2 class="form-signin-heading">Редактирование профиля</h2>
+            <hr class="fadeOut">
             <div class="form-group">
-              <input required class="form-control" id="edit-email" disabled="disabled" type="email" value="<? echo Yii::app()->getModule('user')->user()->email; ?>">
+              <label class="mail_label"><? echo Yii::app()->getModule('user')->user()->email; ?></label>
             </div>
             <div class="form-group" id="form-group-username">  <!-- input-error -->
-              <input required class="form-control" autocomplete="off" id="edit-name" name="name" type="text" value="<? echo Yii::app()->getModule('user')->user()->username; ?>">
+              <input required class="form-control" autocomplete="off" id="edit-name" name="name" placeholder="Имя" type="text" value="<? echo Yii::app()->getModule('user')->user()->username; ?>">
               <span class="error-msg">?</span>
             </div>
             <div class="form-group" id="form-group-phone">
-              <input required class="form-control" autocomplete="off" id="edit-phone" name="phone" type="text" value="<? echo Yii::app()->getModule('user')->user()->phone; ?>">
+              <input required class="form-control" autocomplete="off" id="edit-phone" name="phone" placeholder="+7(___)-___-__-__" type="text" value="<? echo Yii::app()->getModule('user')->user()->phone; ?>">
               <span class="error-msg">?</span>
             </div>
             <div class="form-group hidden">

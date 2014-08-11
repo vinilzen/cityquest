@@ -47,7 +47,7 @@ class User extends CActiveRecord
 		
 		return ((Yii::app()->getModule('user')->isAdmin()) ? 
 			array(
-				array('username, password, email', 'required'),
+				array('username, email, phone', 'required'),
 				array('username', 'length', 'max'=>20, 'min' => 3,'message' => UserModule::t("Incorrect username (length between 3 and 20 characters).")),
 				array('phone', 'length', 'max'=>18, 'min' => 5,'message' => UserModule::t("Incorrect phone (length between 5 and 12 characters).")),
 				array('password', 'length', 'max'=>128, 'min' => 4,'message' => UserModule::t("Incorrect password (minimal length 4 symbols).")),

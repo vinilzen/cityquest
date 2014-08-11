@@ -24,20 +24,21 @@ $this->breadcrumbs=array('Quests');  ?>
 		}
 	}
 ?>
-<h1 class="page-header">Квесты на <? echo date('d M Y', $selectedDate); ?></h1>
-<h2 class="sub-header" style="text-transform: capitalize; border-bottom: none; margin-bottom:0;"><? echo $month_f[date('n', $selectedDate)-1]; ?></h2>
+<h1 class="page-header">Квесты на <? echo date('d', $selectedDate); ?> <? echo $month[date('n', $selectedDate)-1]; ?> <? echo date('Y', $selectedDate); ?></h1>
+<h2 class="sub-header hidden" style="text-transform: capitalize; border-bottom: none; margin-bottom:0;"><? echo $month_f[date('n', $selectedDate)-1]; ?></h2>
 
 <div class="btn-group btn-group-justified">
 <?
-
 	for ($i=0; $i<30; $i++) {
 		$currDate = strtotime( '+'.$i.' day' );
 
 		// выбранная дата
 		$disabled = '';
+		$disabled_class = '';
 		if ($ymd == date('Ymd', $currDate)) {
 			$disabled = ' disabled="disabled"';
 			$selectedDate = $currDate;
+			$disabled_class = ' btn-success ';
 		}
 
 		// сегодня 
@@ -48,7 +49,9 @@ $this->breadcrumbs=array('Quests');  ?>
 		$weekend = '';
 		if (date('w', $currDate) == 0 || date('w', $currDate) == 6) $weekend = ' btn-warning';
 
-		echo '<a title="'.date('d M Y', $currDate).'" href="/quest/adminschedule/ymd/'.date('Ymd', $currDate).'" type="button" class="btn btn-xs btn-default'.$active.$weekend.'" '.$disabled.' >'.date('d', $currDate).'</a>';
+		echo '<a title="'.date('d M Y', $currDate).'" href="/quest/adminschedule/ymd/'.date('Ymd', $currDate).'" type="button" class="text-center btn btn-xs btn-default'.$active.$weekend.$disabled_class.'" '.$disabled.' >'.
+		date('d', $currDate).'<br><small>'.mb_substr($month[date('n', $currDate)-1],0,6).'</small>'.
+		'</a>';
 	}
 ?>
 </div>
@@ -94,21 +97,22 @@ $this->breadcrumbs=array('Quests');  ?>
 
 			if ( isset($quest['bookings'][$time]) ) {
 
-	        if ($quest['bookings'][$time]->status == 0)
-	          $additionalClass = ' btn-info';
+				if ($quest['bookings'][$time]->status == 0)
+					$additionalClass = ' btn-info';
 
-	        if ($quest['bookings'][$time]->status == 1)
-	          $additionalClass = ' btn-success';
+				if ($quest['bookings'][$time]->status == 1)
+					$additionalClass = ' btn-success';
 
 				$data = ' data-id="'.$quest['bookings'][$time]->id.'" '.
-                'data-price="'.$quest['bookings'][$time]->price.'" '.
-                'data-phone="'.$quest['bookings'][$time]->phone.'" '.
-                'data-comment="'.$quest['bookings'][$time]->comment.'" '.
-                'data-user-id="'. $quest['bookings'][$time]->competitor->id.'" '.
-                'data-name="'.$quest['bookings'][$time]->name.'" ';
+						'data-price="'.$quest['bookings'][$time]->price.'" '.
+						'data-phone="'.$quest['bookings'][$time]->phone.'" '.
+						'data-comment="'.$quest['bookings'][$time]->comment.'" '.
+						'data-user-id="'. $quest['bookings'][$time]->competitor->id.'" '.
+						'data-name="'.$quest['bookings'][$time]->name.'" ';
+
 			} else {
-        $data = ' data-price="'.Yii::app()->params['price_weekend_AM'].'" ';
-      }
+				$data = ' data-price="'.Yii::app()->params['price_weekend_AM'].'" ';
+			}
 
 	        $invisible = '';
 	        if (date('w', $selectedDate) != 0 && date('w', $selectedDate) != 6 && $k > 2 && $k < 7) $invisible = ' invisible'; ?>

@@ -2862,7 +2862,7 @@ select[multiple].input-lg,
   background-color: rgba(182, 248, 184, 0.1);
   opacity: 1;
 }
-.btn-q.disabled {
+.btn-q.disabled, .btn-q[disabled] {
   color: rgba(255, 255, 255, 0.1);
   border: 2px solid rgba(0, 0, 0, 0.1);
 }
@@ -8384,7 +8384,7 @@ h2.twotab.active, #myModalAuth .active.h4.modal-title {
 @media (min-width: 1200px) {
   .ModalBook .modal-dialog {
     margin-top: 10%;
-    max-width: 1648px;
+    max-width: 1400px;
   }
 }
 .ModalBook .modal-content {
@@ -8429,6 +8429,10 @@ h2.twotab.active, #myModalAuth .active.h4.modal-title {
   opacity: .8;
   right: 30px;
   top: 28px;
+  -webkit-transition: all .5s;
+  -moz-transition: all .5s;
+  -o-transition: all .5s;
+  transition: all .5s;
 }
 @media (max-width: 767px) {
   .ModalBook .close {
@@ -8452,6 +8456,12 @@ h2.twotab.active, #myModalAuth .active.h4.modal-title {
   color: #575e64;
   font-weight: normal;
   text-shadow: none;
+}
+.ModalBook .close:hover {
+  border-color: #fff;
+}
+.ModalBook .close:hover span {
+  color: #FFF;
 }
 .ModalBook .shad {
   position: relative;
@@ -8478,11 +8488,6 @@ h2.twotab.active, #myModalAuth .active.h4.modal-title {
     margin-bottom: 1%;
   }
 }
-@media (min-width: 1650px) {
-  .ModalBook .shad p small {
-    margin-bottom: 2%;
-  }
-}
 .ModalBook .shad p span {
   font-size: 2.125em;
   font-weight: 100;
@@ -8507,12 +8512,6 @@ h2.twotab.active, #myModalAuth .active.h4.modal-title {
   .ModalBook .priceTbl {
     margin-top: 1%;
     margin-bottom: 1%;
-  }
-}
-@media (min-width: 1650px) {
-  .ModalBook .priceTbl {
-    margin-top: 2%;
-    margin-bottom: 2%;
   }
 }
 .ModalBook .priceTbl .priceRow span.price {
@@ -8595,10 +8594,9 @@ h2.twotab.active, #myModalAuth .active.h4.modal-title {
     margin-top: 1.5%;
   }
 }
-@media (min-width: 1650px) {
-  .ModalBook .btn {
-    margin-top: 4%;
-  }
+.ModalBook .btn:hover {
+  border-color: #E2FDFF;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
 }
 .ModalBook .btn.btn-success {
   color: #b1f7b3;
@@ -8653,7 +8651,7 @@ h2.twotab.active, #myModalAuth .active.h4.modal-title {
 }
 
 .myQuests {
-  max-width: 1600px;
+  max-width: 1400px;
 }
 
 @media (max-width: 767px) {
@@ -8908,7 +8906,7 @@ h2.twotab.active, #myModalAuth .active.h4.modal-title {
   display: none;
 }
 #myModalEditProfile .modal-content {
-  padding: 40px 30px 0;
+  padding: 0px 30px 0;
   background-color: rgba(10, 27, 40, 0.85);
   box-shadow: 0 0 100px 10px rgba(255, 255, 255, 0.35);
   border: none;
@@ -8917,6 +8915,14 @@ h2.twotab.active, #myModalAuth .active.h4.modal-title {
   #myModalEditProfile .modal-content {
     background-color: rgba(10, 27, 40, 0.95);
   }
+}
+#myModalEditProfile h2 {
+  margin-top: 21px;
+  color: rgba(255, 255, 255, 0.8);
+  text-transform: uppercase;
+  font-size: 18px;
+  margin-bottom: 20px;
+  text-align: center;
 }
 #myModalEditProfile .form-control {
   height: 43px;
@@ -8977,6 +8983,11 @@ h2.twotab.active, #myModalAuth .active.h4.modal-title {
 }
 #myModalEditProfile .btn-lg:hover, #myModalEditProfile .btn-group-lg > .btn:hover {
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+#myModalEditProfile .mail_label {
+  font-weight: normal;
+  margin-bottom: 10px;
+  padding-left: 12px;
 }
 
 input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
@@ -9086,6 +9097,19 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
   line-height: 18px;
   border: 1px solid #F55E50;
   cursor: pointer;
+}
+
+#myModalAuth .checkbox.forgot {
+  padding-left: 0;
+  margin-top: 15px;
+  margin-bottom: 25px;
+}
+#myModalAuth .checkbox.forgot label {
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.6);
+}
+#myModalAuth .checkbox.forgot label:hover {
+  color: rgba(255, 255, 255, 0.9);
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.9);
 }
 
 /*# sourceMappingURL=bootstrap.min.css.map */
