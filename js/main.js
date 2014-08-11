@@ -143,6 +143,15 @@ $(function() {
 		});		
 	}
 
+	$('#myModalBook').on('show.bs.modal', function (e) {
+		if (user_name && user_name != '') {
+			return true;
+		} else {
+			$('#myModalAuth').modal('show');
+			return false;
+		}
+	});
+
 	$('#myModalBook').on('shown.bs.modal', function (e) {
 		if (document.body.clientWidth > 768) {
 			var h = $('#myModalBook .img-responsive').height();

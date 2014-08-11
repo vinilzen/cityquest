@@ -7,6 +7,7 @@
  * @property integer $id
  * @property string $title
  * @property string $content
+ * @property string $start_text
  * @property string $addres
  * @property string $metro
  * @property integer $times
@@ -50,7 +51,7 @@ class Quest extends CActiveRecord
 		return array(
 			array('title, content, addres, metro, times, status, author_id', 'required'),
 			array('times, status, sort, create_time, update_time, author_id', 'numerical', 'integerOnly'=>true),
-			array('title, addres, metro', 'length', 'max'=>128),
+			array('title, addres, start_text, metro', 'length', 'max'=>128),
 			array('del_img', 'boolean'),
 			array('image', 'file',
 				'types'=>'jpg',
@@ -86,6 +87,7 @@ class Quest extends CActiveRecord
 			'id' => 'ID',
 			'title' => 'Title',
 			'content' => 'Content',
+			'start_text' => 'Текст перед запуском',
 			'addres' => 'Addres',
 			'metro' => 'Metro',
 			'sort' => 'Sort',

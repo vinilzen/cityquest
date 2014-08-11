@@ -75,6 +75,18 @@
 			),array('class'=>'form-control')); ?>
 		</div>
 	</div>
+
+
+
+	<div class="form-group">
+		<?php echo $form->labelEx($model,'start_text', array('class' => 'control-label col-sm-3')); ?>
+		<div class="col-sm-9">
+			<?php echo $form->textArea($model,'start_text',array('rows'=>2, 'cols'=>50,'class'=>'form-control')); ?>
+		</div>
+		<?php echo $form->error($model,'start_text'); ?>
+	</div>
+
+
 	<?
 		// $img_path = $_SERVER['DOCUMENT_ROOT'].Yii::app()->urlManager->baseUrl.'/images/q/'.$model->id.'.jpg';
 		$img_path = '/images/q/'.$model->id.'.jpg';
