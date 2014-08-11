@@ -8963,10 +8963,6 @@ h2.twotab.active, #myModalAuth .active.h4.modal-title {
 #myModalEditProfile .form-group input:-ms-input-placeholder {
   color: rgba(255, 255, 255, 0.6);
 }
-#myModalEditProfile .checkbox {
-  margin-top: 25px;
-  margin-bottom: 15px;
-}
 #myModalEditProfile .checkbox label {
   font-size: 14px;
 }
@@ -9107,15 +9103,18 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
   cursor: pointer;
 }
 
-#myModalAuth .checkbox.forgot {
+.checkbox.forgot {
   padding-left: 0;
   margin-top: 15px;
   margin-bottom: 25px;
 }
-#myModalAuth .checkbox.forgot label {
+.checkbox.forgot label, .checkbox.forgot a {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
   border-bottom: 1px dashed rgba(255, 255, 255, 0.6);
 }
-#myModalAuth .checkbox.forgot label:hover {
+.checkbox.forgot label:hover, .checkbox.forgot a:hover {
   color: rgba(255, 255, 255, 0.9);
   border-bottom: 1px dashed rgba(255, 255, 255, 0.9);
 }

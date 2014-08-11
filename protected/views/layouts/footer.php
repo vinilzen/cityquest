@@ -172,24 +172,49 @@
           <hr class="fadeOut">
         </div>
         <div class="modal-body">
-          <form role="form" id="edit-form">
+          <form role="form" id="edit-form" class="tab-content">
             <h2 class="form-signin-heading">Редактирование профиля</h2>
             <hr class="fadeOut">
+
+
             <div class="form-group">
               <label class="mail_label"><? echo Yii::app()->getModule('user')->user()->email; ?></label>
             </div>
-            <div class="form-group" id="form-group-username">  <!-- input-error -->
-              <input required class="form-control" autocomplete="off" id="edit-name" name="name" placeholder="Имя" type="text" value="<? echo Yii::app()->getModule('user')->user()->username; ?>">
-              <span class="error-msg">?</span>
+
+            <div class="tab-pane active" id="edit-my">
+              <div class="form-group" id="form-group-username">  <!-- input-error -->
+                <input required class="form-control" id="edit-name" name="name" placeholder="Имя" type="text" value="<? echo Yii::app()->getModule('user')->user()->username; ?>">
+                <span class="error-msg">?</span>
+              </div>
+              <div class="form-group" id="form-group-phone">
+                <input required class="form-control" id="edit-phone" name="phone" placeholder="+7(___)-___-__-__" type="text" value="<? echo Yii::app()->getModule('user')->user()->phone; ?>">
+                <span class="error-msg">?</span>
+              </div>
+              
+              <div class="checkbox forgot" role="tablist">
+                <a id="change-pass" href="#edit-pass" role="tab" data-toggle="tab">Поменять пароль</a>
+              </div>
             </div>
-            <div class="form-group" id="form-group-phone">
-              <input required class="form-control" autocomplete="off" id="edit-phone" name="phone" placeholder="+7(___)-___-__-__" type="text" value="<? echo Yii::app()->getModule('user')->user()->phone; ?>">
-              <span class="error-msg">?</span>
+
+            <div class="tab-pane" id="edit-pass">
+              <div class="form-group" id="form-group-origin-pass">
+                <input class="form-control" type="password" id="edit-pass" placeholder="Старый пароль">
+              </div>
+
+              <div class="form-group" id="form-group-new-pass" style="margin-top:20px;">
+                <input class="form-control" type="password" placeholder="Новый пароль">
+              </div>
+
+              <div class="form-group" id="form-group-new-confirm-pass">
+                <input class="form-control" type="password" placeholder="Повторите новый пароль">
+              </div>
+
+              <div class="checkbox forgot" role="tablist">
+                <a id="edit-name-phone" href="#edit-my" role="tab" data-toggle="tab">Редактировать профиль</a>
+              </div>
             </div>
-            <div class="form-group hidden">
-              <input class="form-control" type="password" autocomplete="off" id="edit-pass" name="password">
-            </div>           
-            <div class="checkbox"></div>
+
+
             <button class="btn btn-default btn-block btn-lg" id="editProfile" type="submit">СОХРАНИТЬ</button>
           </form>
         </div>

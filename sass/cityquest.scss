@@ -1968,8 +1968,6 @@ h2.twotab {
 		}
 	}
 	.checkbox {
-		margin-top: 25px;
-		margin-bottom: 15px;
 		label {
 			font-size: 14px;
 			a {
@@ -2110,11 +2108,14 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 	}
 }
 
-#myModalAuth .checkbox.forgot {
+.checkbox.forgot {
 	padding-left: 0;
 	margin-top: 15px;
 	margin-bottom: 25px;
-	label{
+	label, a {
+		text-decoration: none;
+		color: rgba(255, 255, 255, 0.6);
+		font-size: 14px;
 		border-bottom: 1px dashed rgba(255, 255, 255, 0.6);
 		&:hover {
 			color: rgba(255, 255, 255, 0.9);
