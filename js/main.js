@@ -609,57 +609,117 @@ $(function() {
 		$('#edit-phone').val( $('.cabinet .phone').text() );
 	});
 
+	$('#form-group-origin-pass input').keypress(function(){
+		$('#form-group-origin-pass span').tooltip('destroy');
+		$('#form-group-origin-pass').removeClass('input-error');
+
+		$('#editProfile').tooltip('destroy');
+	});
+
+	$('#form-group-new-pass input').keypress(function(){
+		$('#form-group-new-pass span').tooltip('destroy');
+		$('#form-group-new-pass').removeClass('input-error');
+
+		$('#editProfile').tooltip('destroy');
+	});
+
+	$('#form-group-new-confirm-pass input').keypress(function(){
+		$('#form-group-new-confirm-pass span').tooltip('destroy');
+		$('#form-group-new-confirm-pass').removeClass('input-error');
+
+		$('#editProfile').tooltip('destroy');
+	});
+
 	$('#edit-form').submit(function(){
 
-		if ( $('#edit-name').val() !== '' && $('#edit-name').val().length > 2 ) {
-			if ( $('#edit-phone').val() !== '' && $('#edit-phone').val().length > 10 ) {
+		// смена пароля
+		if ( $('#edit-pass').hasClass('active') ) {
 
-				var name = $('#edit-name').val(),
-					btn_edit = $('#editProfile'),
-					phone = $('#edit-phone').val();
+			if ( $('#form-group-origin-pass input').val() != '' && $('#form-group-origin-pass input').val().length > 4 ) {
 
-				$.post('/user/profile/edit', {
-					username: name,
-					phone: phone,
-				}, function(result){
-								
-					if (result && result.success) {
+				if ($('#form-group-new-pass input').val() != '' && $('#form-group-new-pass input').val().length > 4) {
 
-						btn_edit
-							.attr({ 'title': result.message })
-							.tooltip('show');
+					if ($('#form-group-new-pass input').val() == $('#form-group-new-confirm-pass input').val()) {
 
-						$('.cabinet .name').html(name);
-						$('.cabinet .phone').html(phone);
-						$('.you_phone input').val(phone);
+						$.post(
+							'/user/profile/changepassword',
+							{
+								'UserChangePassword[password]':$('#form-group-new-pass input').val(),
+								'UserChangePassword[verifyPassword]':$('#form-group-new-confirm-pass input').val(),
+								'UserChangePassword[oldpassword]':$('#form-group-origin-pass input').val(),
+							},
+							function(result){
+								if (result && result.success && result.success == 1) {
+									$('#editProfile')
+										.attr({ 'title': result.message })
+										.tooltip('show');
 
-						setTimeout(function(){
-							$('#myModalEditProfile').modal('hide');
-							$('#editProfile').tooltip('destroy');
-						}, 2000);
+									setTimeout(function(){
+										$('#myModalEditProfile').modal('hide');
+										$('#editProfile').tooltip('destroy');
+									}, 2000);
+								}
+							}
+						);
+
 
 					} else {
 
-						btn_edit
-							.attr({
-								'data-toggle':"tooltip",
-								'title': 'Произошла ошибка, свяжитесь с администрацией',
-							})
+						$('#form-group-new-confirm-pass').addClass('input-error');
+						$('#form-group-new-confirm-pass span')
+							.attr({ 'title': 'Пароли не совпадают' })
 							.tooltip('show');
+					}
 
-						if (result && result.errors) {
-							if (result.errors.username) {
-								$('#form-group-username').addClass('input-error');
-								$('#form-group-username span')
-									.attr({ 'title': result.errors.username.join(', ') })
-									.tooltip('show');
-							}
-							if (result.errors.phone) {
-								$('#form-group-phone').addClass('input-error');
-								$('#form-group-phone span')
-									.attr({ 'title': result.errors.phone.join(', ') })
-									.tooltip('show');
-							}
+
+				} else {
+
+					$('#form-group-new-pass').addClass('input-error');
+					$('#form-group-new-pass span')
+						.attr({ 'title': 'Новый пароль должен содержать более 4 символов' })
+						.tooltip('show');
+				}
+
+
+			} else {
+
+				$('#form-group-origin-pass').addClass('input-error');
+				$('#form-group-origin-pass span')
+					.attr({ 'title': 'Пароль должен содержать более 4 символов' })
+					.tooltip('show');
+
+			}
+
+		// смена имени и телефона
+		} else {
+
+			if ( $('#edit-name').val() !== '' && $('#edit-name').val().length > 2 ) {
+				if ( $('#edit-phone').val() !== '' && $('#edit-phone').val().length > 10 ) {
+
+					var name = $('#edit-name').val(),
+						btn_edit = $('#editProfile'),
+						phone = $('#edit-phone').val();
+
+					$.post('/user/profile/edit', {
+						username: name,
+						phone: phone,
+					}, function(result){
+									
+						if (result && result.success) {
+
+							btn_edit
+								.attr({ 'title': result.message })
+								.tooltip('show');
+
+							$('.cabinet .name').html(name);
+							$('.cabinet .phone').html(phone);
+							$('.you_phone input').val(phone);
+
+							setTimeout(function(){
+								$('#myModalEditProfile').modal('hide');
+								$('#editProfile').tooltip('destroy');
+							}, 2000);
+
 						} else {
 
 							btn_edit
@@ -668,29 +728,53 @@ $(function() {
 									'title': 'Произошла ошибка, свяжитесь с администрацией',
 								})
 								.tooltip('show');
-						}
 
-					}
-				});
-			
+							if (result && result.errors) {
+								if (result.errors.username) {
+									$('#form-group-username').addClass('input-error');
+									$('#form-group-username span')
+										.attr({ 'title': result.errors.username.join(', ') })
+										.tooltip('show');
+								}
+								if (result.errors.phone) {
+									$('#form-group-phone').addClass('input-error');
+									$('#form-group-phone span')
+										.attr({ 'title': result.errors.phone.join(', ') })
+										.tooltip('show');
+								}
+							} else {
+
+								btn_edit
+									.attr({
+										'data-toggle':"tooltip",
+										'title': 'Произошла ошибка, свяжитесь с администрацией',
+									})
+									.tooltip('show');
+							}
+
+						}
+					});
+				
+				} else {
+
+					$('#myModalEditProfile #form-group-phone').addClass('input-error');
+
+					$('#myModalEditProfile #form-group-phone span')
+						.attr({ 'title': 'Номер телефона должен содержать не менее 10 символов' })
+						.tooltip('show');
+				}
+
 			} else {
 
-				$('#myModalEditProfile #form-group-phone').addClass('input-error');
+				$('#myModalEditProfile #form-group-username').addClass('input-error');
 
-				$('#myModalEditProfile #form-group-phone span')
-					.attr({ 'title': 'Номер телефона должен содержать не менее 10 символов' })
+				$('#myModalEditProfile #form-group-username span')
+					.attr({ 'title': 'Имя не может быть пустым и должно содержать менее 2 символов' })
 					.tooltip('show');
+
 			}
-
-		} else {
-
-			$('#myModalEditProfile #form-group-username').addClass('input-error');
-
-			$('#myModalEditProfile #form-group-username span')
-				.attr({ 'title': 'Имя не может быть пустым и должно содержать менее 2 символов' })
-				.tooltip('show');
-
 		}
+
 
 		return false;
 	});

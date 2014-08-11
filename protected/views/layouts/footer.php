@@ -190,7 +190,7 @@
                 <input required class="form-control" id="edit-phone" name="phone" placeholder="+7(___)-___-__-__" type="text" value="<? echo Yii::app()->getModule('user')->user()->phone; ?>">
                 <span class="error-msg">?</span>
               </div>
-              
+
               <div class="checkbox forgot" role="tablist">
                 <a id="change-pass" href="#edit-pass" role="tab" data-toggle="tab">Поменять пароль</a>
               </div>
@@ -199,14 +199,17 @@
             <div class="tab-pane" id="edit-pass">
               <div class="form-group" id="form-group-origin-pass">
                 <input class="form-control" type="password" id="edit-pass" placeholder="Старый пароль">
+                <span class="error-msg">?</span>
               </div>
 
               <div class="form-group" id="form-group-new-pass" style="margin-top:20px;">
                 <input class="form-control" type="password" placeholder="Новый пароль">
+                <span class="error-msg">?</span>
               </div>
 
               <div class="form-group" id="form-group-new-confirm-pass">
                 <input class="form-control" type="password" placeholder="Повторите новый пароль">
+                <span class="error-msg">?</span>
               </div>
 
               <div class="checkbox forgot" role="tablist">

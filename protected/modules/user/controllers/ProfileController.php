@@ -102,29 +102,58 @@ class ProfileController extends Controller
 	 * Change password
 	 */
 	public function actionChangepassword() {
+		
 		$model = new UserChangePassword;
+
+		header('Content-type: application/json');
+
 		if (Yii::app()->user->id) {
 			
 			// ajax validator
-			if(isset($_POST['ajax']) && $_POST['ajax']==='changepassword-form')
-			{
-				echo UActiveForm::validate($model);
-				Yii::app()->end();
-			}
+			// if(isset($_POST['ajax']) && $_POST['ajax']==='changepassword-form') {
+			// 	echo UActiveForm::validate($model);
+			// 	Yii::app()->end();
+			// }
 			
 			if(isset($_POST['UserChangePassword'])) {
 					$model->attributes=$_POST['UserChangePassword'];
 					if($model->validate()) {
 						$new_password = User::model()->notsafe()->findbyPk(Yii::app()->user->id);
-						$new_password->password = UserModule::encrypting($model->password);
-						$new_password->activkey=UserModule::encrypting(microtime().$model->password);
-						$new_password->save();
-						Yii::app()->user->setFlash('profileMessage',UserModule::t("New password is saved."));
-						$this->redirect(array("profile"));
+
+						if (UserModule::encrypting($model->oldpassword) == $new_password->password) {					
+
+							$new_password->password = UserModule::encrypting($model->password);
+							$new_password->activkey=UserModule::encrypting(microtime().$model->password);
+							$new_password->save();
+
+				        	echo CJSON::encode(array(
+				        			'success' => 1,
+				        			'error' => 0,
+				        			'message' => UserModule::t("New password is saved.")
+				        		));
+
+						} else {
+				        	echo CJSON::encode(array(
+				        			'success' => 0,
+				        			'error' => 1,
+				        			'message' => 'Старый пароль не корректен!'
+				        		));
+						}
+						//Yii::app()->user->setFlash('profileMessage',UserModule::t("New password is saved."));
+						// $this->redirect(array("profile"));
 					}
 			}
-			$this->render('changepassword',array('model'=>$model));
-	    }
+			// $this->render('changepassword',array('model'=>$model));
+			
+	    } else {
+        	echo CJSON::encode(array(
+        			'success' => 0,
+        			'error' => 1,
+        			'message' => 'Вы не авторизованы!'
+        		));
+		}
+
+		Yii::app()->end();
 	}
 
 	/**

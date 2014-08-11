@@ -8,6 +8,47 @@ class RecoveryController extends Controller
 	/**
 	 * Recovery password
 	 */
+	public function actionChange () {
+
+		$form = new UserRecoveryForm;
+		
+		header('Content-type: application/json');
+
+
+		if (Yii::app()->user->id) {
+
+			if(isset($_POST['UserChangePassword'])) {
+
+				$form2 = new UserChangePassword;
+		    	$find = User::model()->notsafe()->findByAttributes(array('email'=>$email));
+
+				$form2->attributes=$_POST['UserChangePassword'];
+				if($form2->validate()) {
+					$find->password = Yii::app()->controller->module->encrypting($form2->password);
+					$find->activkey=Yii::app()->controller->module->encrypting(microtime().$form2->password);
+					if ($find->status==0) {
+						$find->status = 1;
+					}
+					$find->save();
+					Yii::app()->user->setFlash('recoveryMessage',UserModule::t("New password is saved."));
+					$this->redirect(Yii::app()->controller->module->recoveryUrl);
+				}
+			} 
+
+		} else {
+        	echo CJSON::encode(array(
+        			'success' => 0,
+        			'error' => 1,
+        			'msg' => 'Вы не авторизованы!'
+        		));
+		}
+
+		Yii::app()->end();
+	}
+
+	/**
+	 * Recovery password
+	 */
 	public function actionRecovery () {
 		$form = new UserRecoveryForm;
 		if (Yii::app()->user->id) {

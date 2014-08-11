@@ -34,7 +34,7 @@ class QuestController extends Controller
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create','update','admin','delete', 'sort', 'adminschedule'),
-				'users'=>array('admin'),
+				'expression'=>"Yii::app()->getModule('user')->user()->superuser",
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
