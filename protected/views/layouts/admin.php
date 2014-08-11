@@ -29,8 +29,6 @@
 				<?php $this->widget('zii.widgets.CMenu',array(
 					'htmlOptions' => array( 'class' => 'nav navbar-nav navbar-right'),
 					'items'=>array(
-						array('label'=>'О проекте', 'url'=>array('/site/page', 'view'=>'about')),
-						array('label'=>'Контакты', 'url'=>array('/site/contact')),
 						array('url'=>Yii::app()->getModule('user')->loginUrl, 'label'=>Yii::app()->getModule('user')->t("Войти"), 'visible'=>Yii::app()->user->isGuest),
 						array('url'=>Yii::app()->getModule('user')->registrationUrl, 'label'=>Yii::app()->getModule('user')->t("Регистрация"), 'visible'=>Yii::app()->user->isGuest),
 						array('url'=>Yii::app()->getModule('user')->profileUrl, 'label'=>Yii::app()->getModule('user')->t("Профиль"), 'visible'=>!Yii::app()->user->isGuest),

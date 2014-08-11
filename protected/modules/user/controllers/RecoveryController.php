@@ -57,7 +57,7 @@ class RecoveryController extends Controller
 			    						'{activation_url}'=>$activation_url,
 			    					));
 							
-//			    			UserModule::sendMail($user->email,$subject,$message);
+			    			UserModule::sendMail($user->email,$subject,$message);
 
 				        	echo CJSON::encode(array(
 				        			'success' => 1,
