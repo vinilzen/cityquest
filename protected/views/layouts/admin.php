@@ -23,6 +23,9 @@
 				<a class="navbar-brand" href="#"><?php echo CHtml::encode(Yii::app()->name); ?></a>
 			</div>
 			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<? include('menu.php'); ?>
+				</ul>
 				<?php $this->widget('zii.widgets.CMenu',array(
 					'htmlOptions' => array( 'class' => 'nav navbar-nav navbar-right'),
 					'items'=>array(

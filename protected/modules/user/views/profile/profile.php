@@ -2,15 +2,15 @@
 
 <div class="jumbotron">
   <div class="row">
-    
+    <!-- 
     <div class="col-xs-12 text-center cabinet visible-xs moveUp">
       <img class="img-circle" height="135" src="/img/ava.jpg" width="135">
     </div>
-
+ -->
     <div class="col-xs-12 text-center cabinet">
       <span class="name"><? echo Yii::app()->getModule('user')->user()->username; ?></span>
       <span class="phone"><? echo Yii::app()->getModule('user')->user()->phone; ?></span>
-      <img class="img-circle hidden-xs" height="135" src="/img/ava.jpg" width="135">
+      <!-- <img class="img-circle hidden-xs" height="135" src="/img/ava.jpg" width="135"> -->
       <span><a href="#" id="edit_profile" data-toggle="modal" data-target="#myModalEditProfile"><i class="edit-ico"></i>Редактировать</a></span>
       <span><a href="/user/logout"><i class="logout-ico"></i>Выйти</a></span>
     </div>

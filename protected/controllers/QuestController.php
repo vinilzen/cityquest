@@ -207,13 +207,10 @@ class QuestController extends Controller
 					if(file_exists('./images/q/'.$id.'.jpg'))
 						unlink('./images/q/'.$id.'.jpg');
 
-				
 				//сохранить файл на сервере в каталог /images/q/ под именем {id}.jpg
-				if ($model->image)
-					$model->image->saveAs('./images/q/'.$model->id.'.jpg');
+				if ($model->image) $model->image->saveAs('./images/q/'.$model->id.'.jpg');
 
-				
-				$this->redirect(array('view','id'=>$model->id));
+				// $this->redirect(array('view','id'=>$model->id));
 			}
 		}
 
