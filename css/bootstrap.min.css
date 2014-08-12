@@ -8086,7 +8086,7 @@ body.inner .jumbotron.quest1 {
   margin: 10px 0;
 }
 
-h2.twotab, #myModalAuth .h4.modal-title {
+h2.twotab, #myModalAuth .h4.modal-title, a.h2.twotab {
   display: inline-block;
   font-size: 18px;
   color: rgba(255, 255, 255, 0.3);
@@ -8095,8 +8095,9 @@ h2.twotab, #myModalAuth .h4.modal-title {
   padding: 0 0 15px 0;
   margin: 45px 8px 0;
   text-transform: uppercase;
+  text-decoration: none;
 }
-h2.twotab.active, #myModalAuth .active.h4.modal-title {
+h2.twotab.active, #myModalAuth .active.h4.modal-title, a.h2.twotab.active {
   color: rgba(255, 255, 255, 0.8);
   border-bottom: 5px solid rgba(255, 255, 255, 0.2);
 }

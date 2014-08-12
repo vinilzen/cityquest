@@ -804,4 +804,11 @@ $(function() {
 		$('#myModalAuth button.btn').html('войти');
 	});
 
+
+	$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+		$('a[data-toggle="tab"]').removeClass('active');
+		$(e.target).addClass('active'); // activated tab
+	  // $(e.relatedTarget) // previous tab
+	});
+
 });

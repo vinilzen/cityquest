@@ -20,10 +20,17 @@ class ProfileController extends Controller
 			'date >=:today',
 			array('today'=>date('Ymd'))
 		);
+		
+		$bookings_old = Booking::model()->with('quest')->findAllByAttributes(
+			array('competitor_id'=>Yii::app()->user->id),
+			'date <:today',
+			array('today'=>date('Ymd'))
+		);
 
 	    $this->render('profile',array(
 	    	'model'=>$model,
-	    	'bookings'=>$bookings
+	    	'bookings'=>$bookings,
+	    	'bookings_old'=>$bookings_old,
 	    ));
 	}
 

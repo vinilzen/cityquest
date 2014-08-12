@@ -1150,7 +1150,7 @@ body.inner .jumbotron.quest1 {
 	}
 }
 
-h2.twotab {
+h2.twotab, a.h2.twotab {
 	display: inline-block;
 	font-size: 18px;
 	color: rgba(255,255,255,0.3);
@@ -1159,6 +1159,7 @@ h2.twotab {
 	padding: 0 0 15px 0;
 	margin: 45px 8px 0;
 	text-transform: uppercase;
+	text-decoration: none;
 	&.active {
 		color: rgba(255,255,255,0.8);
 		border-bottom: 5px solid rgba(255,255,255,.2);
