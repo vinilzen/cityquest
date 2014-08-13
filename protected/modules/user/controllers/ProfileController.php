@@ -110,18 +110,12 @@ class ProfileController extends Controller
 	 */
 	public function actionChangepassword() {
 		
-		$model = new UserChangePassword;
+		$model = new UserChangePass;
 
 		header('Content-type: application/json');
 
 		if (Yii::app()->user->id) {
-			
-			// ajax validator
-			// if(isset($_POST['ajax']) && $_POST['ajax']==='changepassword-form') {
-			// 	echo UActiveForm::validate($model);
-			// 	Yii::app()->end();
-			// }
-			
+				
 			if(isset($_POST['UserChangePassword'])) {
 					$model->attributes=$_POST['UserChangePassword'];
 					if($model->validate()) {
@@ -147,7 +141,6 @@ class ProfileController extends Controller
 				        		));
 						}
 						//Yii::app()->user->setFlash('profileMessage',UserModule::t("New password is saved."));
-						// $this->redirect(array("profile"));
 					}
 			}
 			// $this->render('changepassword',array('model'=>$model));

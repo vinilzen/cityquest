@@ -10,7 +10,7 @@ class RecoveryController extends Controller
 	 */
 	public function actionChange () {
 
-		$form = new UserRecoveryForm;
+		$form = new UserChangePass;
 		
 		header('Content-type: application/json');
 
@@ -19,7 +19,7 @@ class RecoveryController extends Controller
 
 			if(isset($_POST['UserChangePassword'])) {
 
-				$form2 = new UserChangePassword;
+				$form2 = new UserChangePassForm;
 		    	$find = User::model()->notsafe()->findByAttributes(array('email'=>$email));
 
 				$form2->attributes=$_POST['UserChangePassword'];

@@ -60,7 +60,11 @@
             </div>
             <p class="you_phone">Ваш номер телефона: <input type="text" disabled value="<? echo Yii::app()->getModule('user')->user()->phone; ?>" ></p>
             <!-- <div class="btn btn-default btn-success">ПОдтвержден<i class="glyphicon glyphicon-ok"></i></div> -->
-            <div class="btn btn-default btn-blank" data-book-id="<? echo $book->id; ?>">Результат?</div>
+            <? if ($book->result == '00:00' || $book->result == '0' || $book->result == '00' || $book->result == '') { ?>
+              <div class="btn btn-default btn-blank">Квест не пройден</div>
+            <? } else { ?>
+              <div class="btn btn-default btn-success">Ваш результат <? echo $book->result ?></div>
+            <? } ?>
           </div>
         </div>
       </div>

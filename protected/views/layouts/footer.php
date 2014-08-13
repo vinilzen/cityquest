@@ -79,7 +79,7 @@
                 <span class="error-msg">?</span>
               </div>
               <div class="form-group" style="display:none;" id="form-group-forgot-auth">
-                <input class="form-control" placeholder="Email" autocomplete="off" id="auth-forgot" type="email" value="">
+                <input class="form-control" placeholder="Email" id="auth-forgot" type="email" value="">
                 <p class="help-block"><small>Чтобы восстановить пароль, введите Email</small></p>
                 <span class="error-msg">?</span>
               </div>

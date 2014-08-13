@@ -59,13 +59,17 @@ $this->quest_menu=array(
         return $dayArray;
       }
 
-      $first = 1;
-
       $next_2week = makeDayArray(); ?>
 
         <style> .table>tbody>tr>td { padding:8px 1px; } </style>
         <table class="table">
           <? foreach ($next_2week as $value) {
+
+            if ($value['date'] == date('Ymd',strtotime( 'now' )) ){
+              $first = 1;
+            } else {
+              $first = 0;
+            }
 
             if ( $value['day_name'] == 'Сб' || $value['day_name'] == 'Вс')
             {
@@ -88,8 +92,6 @@ $this->quest_menu=array(
               </td>
               
                 <?
-
-                $first = 0;
 
                 foreach ($times as $k=>$time) {
                   $dis = 0;                  
