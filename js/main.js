@@ -442,6 +442,7 @@ $(function() {
 											.attr({ 'title': 'Вы успешно авторизовались' })
 											.tooltip('show');
 
+
 										setTimeout(function(){
 											$('#myModalAuth').modal('hide');
 											if (data.admin){
@@ -449,7 +450,10 @@ $(function() {
 											} else {
 												location.reload();
 											}
-										},1000);
+										},500);
+
+										return true;
+
 									}
 								}
 							);

@@ -7289,17 +7289,17 @@ body.inner .footer {
   box-shadow: none;
 }
 body.inner .footer.dark-footer {
-  background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) 0%, black 100%);
+  background: -moz-linear-gradient(top, transparent 0%, black 100%);
   /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0)), color-stop(100%, black));
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, transparent), color-stop(100%, black));
   /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 0%, black 100%);
+  background: -webkit-linear-gradient(top, transparent 0%, black 100%);
   /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top, rgba(255, 255, 255, 0) 0%, black 100%);
+  background: -o-linear-gradient(top, transparent 0%, black 100%);
   /* Opera 11.10+ */
-  background: -ms-linear-gradient(top, rgba(255, 255, 255, 0) 0%, black 100%);
+  background: -ms-linear-gradient(top, transparent 0%, black 100%);
   /* IE10+ */
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, black 100%);
+  background: linear-gradient(to bottom, transparent 0%, black 100%);
   /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00ffffff', endColorstr='#a8000000',GradientType=0 );
   /* IE6-9 */
