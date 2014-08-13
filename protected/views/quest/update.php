@@ -42,8 +42,8 @@ $this->quest_menu=array(
         $days = Yii::app()->params['days'];
         $days_short = Yii::app()->params['days_short'];
         $month = Yii::app()->params['month'];
-        $endDate = strtotime( '+14 day' );
-        $currDate = strtotime( 'now' );
+        $endDate = strtotime( '+13 day' );
+        $currDate = strtotime( '-1 day' );
         $dayArray = array();
 
         do{
@@ -59,11 +59,13 @@ $this->quest_menu=array(
         return $dayArray;
       }
 
+      $first = 1;
+
       $next_2week = makeDayArray(); ?>
 
         <style> .table>tbody>tr>td { padding:8px 1px; } </style>
         <table class="table">
-          <?php foreach ($next_2week as $value) {
+          <? foreach ($next_2week as $value) {
 
             if ( $value['day_name'] == 'Сб' || $value['day_name'] == 'Вс')
             {
@@ -78,14 +80,18 @@ $this->quest_menu=array(
               $pricePm = Yii::app()->params['price_workday_PM'];
 
             } ?>
-            <tr class="<?php echo $value['day_name'] == 'Сб' || $value['day_name'] == 'Вс' ? 'danger' : ''; ?>">
+            <tr class="<? echo $value['day_name'] == 'Сб' || $value['day_name'] == 'Вс' ? 'danger' : ''; if ($first) echo 'active'; ?>">
               <td>
-                <p class="<?php echo $value['day_name'] == 'Сб' || $value['day_name'] == 'Вс' ? 'weekend' : ''; ?>">
-                  <strong style="white-space:nowrap; padding-right:10px;"><?php echo $value['day']; ?> <?php echo $value['month_name']; ?></strong><br><small><?php echo $value['day_name']; ?></small>
+                <p class="<? echo $value['day_name'] == 'Сб' || $value['day_name'] == 'Вс' ? 'weekend' : ''; ?>">
+                  <strong style="white-space:nowrap; padding-right:10px;"><? echo $value['day']; ?> <? echo $value['month_name']; ?></strong><br><small><? echo $value['day_name']; ?></small>
                 </p>
               </td>
               
-                <?php foreach ($times as $k=>$time) {
+                <?
+
+                $first = 0;
+
+                foreach ($times as $k=>$time) {
                   $dis = 0;                  
                   $near = 0;
                   if ($time < date('h:i', strtotime( '+3 hours' )) ) $near = 1;

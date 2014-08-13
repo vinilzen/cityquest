@@ -175,8 +175,8 @@ class QuestController extends Controller
 			array('quest_id'=>$id),
 			'date >= :start_date AND date <= :end_date',
 			array(
-				'start_date'=> date('Ymd', strtotime('now')),
-				'end_date'=> date('Ymd', strtotime('+1 week')),
+				'start_date'=> date('Ymd', strtotime('-1 day')),
+				'end_date'=> date('Ymd', strtotime('+13 day')),
 			));
 
 
