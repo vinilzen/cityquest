@@ -104,6 +104,7 @@ $this->quest_menu=array(
                   echo  'data-name="'.$booking[$value['date']][$time]['name'].'" '.
                         'data-phone="'.$booking[$value['date']][$time]['phone'].'" '.
                         'data-price="'.$booking[$value['date']][$time]['price'].'" '.
+                        'data-result="'.$booking[$value['date']][$time]['result'].'" '.
                         'data-id="'.$booking[$value['date']][$time]['id'].'" '. 
                         'data-user-id="'.$booking[$value['date']][$time]['user_id'].'" '. 
                         'data-comment="'.$booking[$value['date']][$time]['comment'].'"';
@@ -112,6 +113,7 @@ $this->quest_menu=array(
                  }
                 ?>
                     data-toggle="popover"
+                    data-quest="<? echo $model->id ?>" 
                     data-title="<?php echo $value['day']; ?> <?php echo $value['month_name']; ?> <?php echo $time; ?>"
                     data-time="<?php echo $time; ?>" 
                     data-ymd="<?php echo $value['date']; ?>" 

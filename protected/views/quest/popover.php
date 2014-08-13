@@ -35,6 +35,12 @@
         </div>
       </div>
       <div class="form-group">
+        <label for="inputResult" class="col-sm-2 control-label">Result</label>
+        <div class="col-sm-7">
+          <input type="text" class="form-control input-sm inputResult" placeholder="00:00">
+        </div>
+      </div>
+      <div class="form-group">
         <div class="col-sm-12">
           <textarea type="text" class="form-control input-sm inputComment" placeholder="Дополнительный комментарий"></textarea>
         </div>
@@ -67,6 +73,12 @@
         <label for="inputPrice" class="col-sm-2 control-label">Price</label>
         <div class="col-sm-7">
           <input type="text" class="form-control input-sm inputPrice" value="<%= price %>" placeholder="3000">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputResult" class="col-sm-2 control-label">Result</label>
+        <div class="col-sm-7">
+          <input type="text" class="form-control input-sm inputResult" value="<%= result %>" placeholder="00:00">
         </div>
       </div>
       <div class="form-group">

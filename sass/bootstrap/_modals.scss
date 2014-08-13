@@ -68,7 +68,12 @@
   background-color: $modal-backdrop-bg;
   // Fade for backdrop
   &.fade { @include opacity(0); }
-  &.in { @include opacity($modal-backdrop-opacity); }
+  &.in {
+    @include opacity($modal-backdrop-opacity);
+    @media (max-width: $screen-xs-max) {
+      opacity: 1;
+    }
+  }
 }
 
 // Modal header

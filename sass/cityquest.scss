@@ -463,7 +463,7 @@ body.inner {
 	}
 }
 a.descr {
-	background-color: rgba(0,0,0,0.4);
+	// background-color: rgba(0,0,0,0.4);
 	text-decoration: none;
 	width: 100%;
 	height: 100%;
@@ -749,7 +749,7 @@ a.descr {
 		height: 100%;
 		line-height: 100%;
 		margin: 0;
-		background-color: rgba(0, 0, 0, 0.4);
+		// background-color: rgba(0, 0, 0, 0.4);
 		padding: 0;
 		padding-top:25%;
 		color:#fff;
@@ -993,7 +993,7 @@ body.inner .jumbotron.quest {
 	background-size: cover;
 	//box-shadow: inset 0 -50px 200px 200px rgba(0, 0, 0, 0.5);
 	//box-shadow: inset 0 0px 300px 100px #000, inset 0 0 100px #000;
-	box-shadow: inset 0 0px 300px 100px #000, inset 0 0 0 5000px rgba(0, 0, 0, 0.3);
+	//box-shadow: inset 0 0px 300px 100px #000, inset 0 0 0 5000px rgba(0, 0, 0, 0.3);
 
 	@media (max-width: $screen-xs-max) {
 		padding-bottom: 25px;
@@ -1255,7 +1255,8 @@ h2.twotab, a.h2.twotab {
 		box-shadow: 0 0 100px 10px rgba(255, 255, 255, 0.35);
 		border: none;
 		@media (max-width: $screen-xs-max) {
-			background-color: rgba(10,27,40,0.95);
+			box-shadow: none;
+			background-color: rgba(10,27,40,1);
 		}
 	}
 	.h4.modal-title {

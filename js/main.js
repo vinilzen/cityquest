@@ -635,9 +635,9 @@ $(function() {
 		// смена пароля
 		if ( $('#edit-pass').hasClass('active') ) {
 
-			if ( $('#form-group-origin-pass input').val() != '' && $('#form-group-origin-pass input').val().length > 4 ) {
+			if ( $('#form-group-origin-pass input').val() != '' && $('#form-group-origin-pass input').val().length > 3 ) {
 
-				if ($('#form-group-new-pass input').val() != '' && $('#form-group-new-pass input').val().length > 4) {
+				if ($('#form-group-new-pass input').val() != '' && $('#form-group-new-pass input').val().length > 3) {
 
 					if ($('#form-group-new-pass input').val() == $('#form-group-new-confirm-pass input').val()) {
 

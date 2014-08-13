@@ -43,11 +43,12 @@ class Booking extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('status, time, quest_id, competitor_id', 'required'),
-			array('status, create_time, result, quest_id, competitor_id', 'numerical', 'integerOnly'=>true),
+			array('status, create_time, quest_id, competitor_id', 'numerical', 'integerOnly'=>true),
 			array('email, phone, name', 'length', 'max'=>128),
+			array('result', 'length', 'max'=>5),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, comment, status, time, create_time, email, phone, result, quest_id, competitor_id', 'safe', 'on'=>'search'),
+			array('id, comment, status, time, result, create_time, email, phone, quest_id, competitor_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -115,7 +116,7 @@ class Booking extends CActiveRecord
 		$criteria->compare('create_time',$this->create_time);
 		$criteria->compare('email',$this->email,true);
 		$criteria->compare('phone',$this->phone,true);
-		$criteria->compare('result',$this->result);
+		// $criteria->compare('result',$this->result, true);
 		$criteria->compare('quest_id',$this->quest_id);
 		$criteria->compare('competitor_id',$this->competitor_id);
 

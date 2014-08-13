@@ -25,6 +25,7 @@ var PopoverView = Backbone.View.extend({
 			quest_id : $(this.parent).attr('data-quest') || 0,
 			name :  $(this.parent).attr('data-name') || '',
 			phone :  $(this.parent).attr('data-phone') || '',
+			result :  $(this.parent).attr('data-result') || '',
 			comment :  $(this.parent).attr('data-comment') || '',
 			price :  $(this.parent).attr('data-price') || 0,
 			time :  $(this.parent).attr('data-time') || 0,
@@ -119,6 +120,7 @@ var PopoverView = Backbone.View.extend({
 			date : self.attr.date,
 			time : self.attr.time,
 			price : $('#editBookingRow .inputPrice').val(),
+			result : $('#editBookingRow .inputResult').val(),
 			phone : $('#editBookingRow .inputPhone').val(),
 			comment : $('#editBookingRow .inputComment').val(),
 			name : $('#editBookingRow .inputName').val(),
@@ -149,6 +151,7 @@ var PopoverView = Backbone.View.extend({
 			date : self.attr.date,
 			time : self.attr.time,
 			price : $('#addBookingRow .inputPrice').val(),
+			result : $('#addBookingRow .inputResult').val(),
 			phone : $('#addBookingRow .inputPhone').val(),
 			comment : $('#addBookingRow .inputComment').val(),
 			name : $('#addBookingRow .inputName').val(),
@@ -193,6 +196,7 @@ var PopoverView = Backbone.View.extend({
 
 		$('#editBookingRow .inputName', this.$el).val(self.attr.name);
 		$('#editBookingRow .inputPhone', this.$el).val(self.attr.phone);
+		$('#editBookingRow .inputResult', this.$el).val(self.attr.result);
 		$('#editBookingRow .inputComment', this.$el).val(self.attr.comment);
 		$('#editBookingRow .inputPrice', this.$el).val(self.attr.price);
 
@@ -284,6 +288,12 @@ var modal = '<div aria-hidden="true" aria-labelledby="myModalLabel" class="forma
 										'<input class="form-control input-sm" id="phone" value="" type="text">'+
 									'</div>'+
 								'</div>'+
+								'<div class="form-group">'+
+									'<label class="col-sm-3" for="result">Результат</label>'+
+									'<div class="col-sm-9">'+
+										'<input class="form-control input-sm" id="result" value="" type="text">'+
+									'</div>'+
+								'</div>'+
 								// '<div class="form-group isGuest">'+
 								// '<label class="col-sm-3" for="mail">Email</label>'+
 								// '<div class="col-sm-9"><input class="form-control input-sm" value="" id="mail" type="text" value="" ></div>'+
@@ -310,6 +320,7 @@ var modal = '<div aria-hidden="true" aria-labelledby="myModalLabel" class="forma
 
 		$('#name').val($(this).attr('data-name'));
 		$('#phone').val($(this).attr('data-phone'));
+		$('#result').val($(this).attr('data-result'));
 		$('#selected_date').val($(this).attr('data-date'));
 		$('#selected_time').val($(this).attr('data-time'));
 		$('#selected_price').val($(this).attr('data-price'));
@@ -332,6 +343,7 @@ var modal = '<div aria-hidden="true" aria-labelledby="myModalLabel" class="forma
 			time : $('#selected_time').val(),
 			price : $('#selected_price').val(),
 			phone : $('#phone').val(),
+			result : $('#result').val(),
 			comment : $('#comment').val(),
 			name : $('#name').val(),
 		}, function(result){

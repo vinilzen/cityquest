@@ -106,6 +106,7 @@ $this->breadcrumbs=array('Quests');  ?>
 				$data = ' data-id="'.$quest['bookings'][$time]->id.'" '.
 						'data-price="'.$quest['bookings'][$time]->price.'" '.
 						'data-phone="'.$quest['bookings'][$time]->phone.'" '.
+						'data-result="'.$quest['bookings'][$time]->result.'" '.
 						'data-comment="'.$quest['bookings'][$time]->comment.'" '.
 						'data-user-id="'. $quest['bookings'][$time]->competitor->id.'" '.
 						'data-name="'.$quest['bookings'][$time]->name.'" ';

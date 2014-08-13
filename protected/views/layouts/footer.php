@@ -109,7 +109,7 @@
                 <input required class="form-control" placeholder="Пароль" type="password" id="reg-pass" name="Profile[password]">
                 <span class="error-msg">?</span>
               </div>
-              <div class="checkbox">
+              <div class="checkbox invisible" style="margin: 0;height: 20px;">
                 <label><input type="checkbox" required id="reg-rules">Я принимаю <a href="/rules">Условия использования</a></label>
               </div>
               <button class="btn btn-default btn-block btn-lg" type="submit">Зарегистрироваться</button>

@@ -37,7 +37,7 @@ class BookingController extends Controller
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete','update', 'confirm'),
-				'users'=>array('admin'),
+				'expression'=>"Yii::app()->getModule('user')->user()->superuser",
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -108,6 +108,7 @@ class BookingController extends Controller
 							$model->price = (int)$_POST['price'];
 							$model->date = (int)$_POST['ymd'];
 							$model->phone = $_POST['phone'];
+							$model->result = $_POST['result'];
 							$model->name = $_POST['name'];
 							$model->quest_id = (int)$_POST['quest_id'];
 							$model->competitor_id = (int)Yii::app()->user->id;
@@ -211,6 +212,7 @@ class BookingController extends Controller
 					$model->price = (int)$_POST['price'];
 					$model->date = (int)$_POST['ymd'];
 					$model->phone = $_POST['phone'];
+					$model->result = $_POST['result'];
 					$model->name = $_POST['name'];
 					$model->competitor_id = (int)Yii::app()->user->id;
 
