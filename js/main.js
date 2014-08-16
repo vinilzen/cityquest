@@ -292,63 +292,58 @@ $(function() {
 			if ( $('#reg-email').val() !== '' && re.test( $('#reg-email').val() ) ) {
 				if ( $('#reg-phone').val() !== '' && $('#reg-phone').val().length > 5 ) {
 					if ( $('#reg-pass').val() !== '' && $('#reg-pass').val().length > 4 ) {
-						if ( $('#reg-rules').is(':checked') ) {
+						//if ( $('#reg-rules').is(':checked') ) {
 
-							$.post(
-								"/user/registration",
-								{
-									name : $('#reg-name').val(),
-									email : $('#reg-email').val(),
-									phone : $('#reg-phone').val(),
-									pass : $('#reg-pass').val(),
-								},
-								function( data ) {
+						$.post(
+							"/user/registration",
+							{
+								name : $('#reg-name').val(),
+								email : $('#reg-email').val(),
+								phone : $('#reg-phone').val(),
+								pass : $('#reg-pass').val(),
+							},
+							function( data ) {
 
-									if (data.success && data.success == 1) {
+								if (data.success && data.success == 1) {
 
-										$('#reg-form button')
-											.attr({ 'title': 'Вы успешно зарегистрировались' })
-											.tooltip('show');
-
-										setTimeout(function(){
-											$('#reg-form button').tooltip('destroy');
-											$('#auth-tab').click();
-										}, 1000);
-										
-
-									}
-
-									if (data && data.error && data.errors){
-
-										if (data.errors.email){
-											$('#form-group-reg-email').addClass('input-error');
-											$('#form-group-reg-email span')
-												.attr({ 'title': data.errors.email.join(', ') })
-												.tooltip('show');
-										}
-
-										if (data.errors.username){
-											$('#form-group-reg-name').addClass('input-error');
-											$('#form-group-reg-name span')
-												.attr({ 'title': data.errors.email.join(', ') })
-												.tooltip('show');
-										}
-									}
-								
 									$('#reg-form button')
-										.attr({ 'title': 'Ошибка при регистрации' })
+										.attr({ 'title': 'Вы успешно зарегистрировались' })
 										.tooltip('show');
 
-									// if (data.error && data.error == 1) console.log(data);
+									setTimeout(function(){
+										$('#reg-form button').tooltip('destroy');
+										$('#auth-tab').click();
+									}, 1000);
+									
+
 								}
-							);
 
-						} else {
+								if (data && data.error && data.errors){
 
-							$('#reg-rules')
-								.attr({ title:'Чтобы зарегистрироваться, нужно принять наши условия пользования'})
-								.tooltip('show');
-						}
+									if (data.errors.email){
+										$('#form-group-reg-email').addClass('input-error');
+										$('#form-group-reg-email span')
+											.attr({ 'title': data.errors.email.join(', ') })
+											.tooltip('show');
+									}
+
+									if (data.errors.username){
+										$('#form-group-reg-name').addClass('input-error');
+										$('#form-group-reg-name span')
+											.attr({ 'title': data.errors.email.join(', ') })
+											.tooltip('show');
+									}
+								}
+							
+								$('#reg-form button')
+									.attr({ 'title': 'Ошибка при регистрации' })
+									.tooltip('show');
+
+								// if (data.error && data.error == 1) console.log(data);
+							}
+						);
+
+						// } else { $('#reg-rules').attr({ title:'Чтобы зарегистрироваться, нужно принять наши условия пользования'}).tooltip('show'); }
 							
 					} else {
 

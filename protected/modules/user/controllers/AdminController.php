@@ -26,7 +26,7 @@ class AdminController extends Controller
 		return array(
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete','create','update','view'),
-				'users'=>UserModule::getAdmins(),
+				'expression'=> "(Yii::app()->getModule('user')->user()->superuser == 1)",
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -127,19 +127,10 @@ class AdminController extends Controller
 	 */
 	public function actionDelete()
 	{
-		if(Yii::app()->request->isPostRequest)
-		{
 			// we only allow deletion via POST request
 			$model = $this->loadModel();
-			$profile = Profile::model()->findByPk($model->id);
-			$profile->delete();
 			$model->delete();
-			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-			if(!isset($_POST['ajax']))
-				$this->redirect(array('/user/admin'));
-		}
-		else
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+			$this->redirect(array('/user/admin'));
 	}
 	
 	

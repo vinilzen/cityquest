@@ -44,6 +44,25 @@
 		),
 		array(
 			'class'=>'CButtonColumn',
+			'template' => '{view} {update} {delete}',
+			'htmlOptions' => array('style'=> 'white-space:nowrap;'),
+			'buttons'=>array(
+				'view' => array(
+					'options' => array('class'=>'view btn btn-default btn-xs', 'title'=>'Смотреть'),
+					'label' => '<i class="glyphicon glyphicon-eye-open"></i>',
+					'imageUrl' => false,
+				),
+				'update' => array(
+					'options' => array('class'=>'update btn btn-default btn-xs', 'title'=>'Редактировать'),
+					'label' => '<i class="glyphicon glyphicon-pencil"></i>',
+					'imageUrl' => false,
+				),
+				'delete' => array(
+					'options' => array('class'=>'delete btn btn-default btn-xs', 'title'=>'Удалить'),
+					'label' => '<i class="glyphicon glyphicon-trash"></i>',
+					'imageUrl' => false,
+				)
+			)
 		),
 	),
 )); ?>

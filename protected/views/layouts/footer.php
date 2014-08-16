@@ -84,7 +84,7 @@
                 <span class="error-msg">?</span>
               </div>
               <div class="form-group" id="form-group-pass-auth">
-                <input class="form-control" placeholder="Пароль" id="auth-pass" type="password">
+                <input class="form-control" placeholder="Пароль" id="auth-pass" name="Profile[password]" type="password">
                 <span class="error-msg">?</span>
               </div>
               <div class="checkbox forgot"><label id="forgot">Забыли пароль?</label><label style="display:none;" id="auth_toogl">Авторизоваться</label></div>
@@ -110,7 +110,7 @@
                 <span class="error-msg">?</span>
               </div>
               <div class="checkbox invisible" style="margin: 0;height: 20px;">
-                <label><input type="checkbox" required id="reg-rules">Я принимаю <a href="/rules">Условия использования</a></label>
+                <label><input type="checkbox" id="reg-rules">Я принимаю <a href="/rules">Условия использования</a></label>
               </div>
               <button class="btn btn-default btn-block btn-lg" type="submit">Зарегистрироваться</button>
             </form>
