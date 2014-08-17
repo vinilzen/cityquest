@@ -51,6 +51,7 @@
 
 	<div class="container-fluid">
 		<div class="row">
+		<? if (Yii::app()->getModule('user')->user()->superuser == 1) { ?>
 			<div class="col-sm-3 col-md-2 sidebar">
 
 				<ul class="nav nav-sidebar" style="margin-bottom:0;"><li><a><strong>Квесты</strong></a></li></ul>
@@ -82,6 +83,9 @@
 
 			</div>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+		<? 	} else { ?>
+			<div class="col-xs-12 main">
+		<? 	} ?>
 				<?php echo $content; ?>
 			</div>
 		</div>

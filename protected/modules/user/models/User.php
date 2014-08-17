@@ -42,9 +42,7 @@ class User extends CActiveRecord
 	 */
 	public function rules()
 	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
-		
+	
 		return ((Yii::app()->getModule('user')->isAdmin()) ? 
 			array(
 				array('username, email, phone', 'required'),
@@ -56,7 +54,7 @@ class User extends CActiveRecord
 				array('email', 'unique', 'message' => UserModule::t("This user's email address already exists.")),
 				// array('username', 'match', 'pattern' => '/^[A-Za-z0-9_]+$/u','message' => UserModule::t("Incorrect symbols (A-z0-9).")),
 				array('status', 'in', 'range'=>array(self::STATUS_NOACTIVE,self::STATUS_ACTIVE,self::STATUS_BANED)),
-				array('superuser', 'in', 'range'=>array(0,1)),
+				array('superuser', 'in', 'range'=>array(0,1,2)),
 				array('username, email, createtime, lastvisit, superuser, status', 'required'),
 				array('createtime, lastvisit, superuser, status', 'numerical', 'integerOnly'=>true),
 			)
@@ -102,7 +100,8 @@ class User extends CActiveRecord
 			'activkey' => UserModule::t("activation key"),
 			'createtime' => UserModule::t("Registration date"),
 			'lastvisit' => UserModule::t("Last visit"),
-			'superuser' => UserModule::t("Superuser"),
+			'superuser' => 'Роль',
+			'moderator' => 'Модератор',
 			'status' => UserModule::t("Status"),
 		);
 	}
@@ -121,6 +120,12 @@ class User extends CActiveRecord
             ),
             'superuser'=>array(
                 'condition'=>'superuser=1',
+            ),
+            'admin'=>array(
+                'condition'=>'superuser=1',
+            ),
+            'moderator'=>array(
+                'condition'=>'superuser=2',
             ),
             'notsafe'=>array(
             	'select' => 'id, username, password, email, activkey, createtime, lastvisit, superuser, status',
@@ -143,8 +148,9 @@ class User extends CActiveRecord
 				self::STATUS_BANED => UserModule::t('Banned'),
 			),
 			'AdminStatus' => array(
-				'0' => UserModule::t('No'),
-				'1' => UserModule::t('Yes'),
+				'0' => UserModule::t('Пользователь'),
+				'1' => UserModule::t('Админ'),
+				'2' => UserModule::t('Модератор'),
 			),
 		);
 		if (isset($code))

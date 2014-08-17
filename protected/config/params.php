@@ -6,6 +6,7 @@ return array(
 	'title'=>'City Quest',
 	// this is used in error pages
 	'adminEmail'=>'marchukilya@gmail.com',
+	'helloEmail'=>'hello@cityquest.ru',
 	// number of posts displayed per page
 	'postsPerPage'=>10,
 	// maximum number of comments that can be displayed in recent comments portlet

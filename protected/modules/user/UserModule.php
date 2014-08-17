@@ -171,12 +171,27 @@ class UserModule extends CWebModule
 			return false;
 		else {
 			if (!isset(self::$_admin)) {
-				if(self::user()->superuser)
+				if(self::user()->superuser == 1)
 					self::$_admin = true;
 				else
 					self::$_admin = false;	
 			}
 			return self::$_admin;
+		}
+	}
+
+	/**
+	 * Return moderator status.
+	 * @return boolean
+	 */
+	public static function isModerator() {
+		if(Yii::app()->user->isGuest)
+			return false;
+		else {
+			if(self::user()->superuser == 2)
+				self::$_admin = true;
+			else
+				self::$_admin = false;
 		}
 	}
 
@@ -199,8 +214,8 @@ class UserModule extends CWebModule
 	 * Send mail method
 	 */
 	public static function sendMail($email,$subject,$message) {
-    	$adminEmail = Yii::app()->params['adminEmail'];
-	    $headers = "MIME-Version: 1.0\r\nFrom: $adminEmail\r\nReply-To: $adminEmail\r\nContent-Type: text/html; charset=utf-8";
+    	$helloEmail = Yii::app()->params['helloEmail'];
+	    $headers = "MIME-Version: 1.0\r\nFrom: $helloEmail\r\nReply-To: $helloEmail\r\nContent-Type: text/html; charset=utf-8";
 	    $message = wordwrap($message, 70);
 	    $message = str_replace("\n.", "\n..", $message);
 	    return mail($email,'=?UTF-8?B?'.base64_encode($subject).'?=',$message,$headers);

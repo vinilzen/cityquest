@@ -440,8 +440,8 @@ $(function() {
 
 										setTimeout(function(){
 											$('#myModalAuth').modal('hide');
-											if (data.admin){
-												window.location.href = '/quest/admin';
+											if (data.admin > 0 ){
+												window.location.href = '/quest/adminschedule/ymd';
 											} else {
 												location.reload();
 											}
