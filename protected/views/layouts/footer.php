@@ -226,11 +226,6 @@
   </div>
 <? } ?>
 
-<script src="/js/jquery.min.js"></script>
-<script src="/js/bootstrap.js"></script>
-<script src="/js/jquery.mask.min.js"></script>
-<script src="/js/main.js"></script>
-<!-- Yandex.Metrika informer --><!-- /Yandex.Metrika informer --><!-- Yandex.Metrika counter -->
 <script type="text/javascript">
   (function (d, w, c) {
   (w[c] = w[c] || []).push(function() {
@@ -257,4 +252,9 @@
 </script>
 <noscript>
   <div><img alt="" src="//mc.yandex.ru/watch/25221941" style="position:absolute; left:-9999px;"></div>
-</noscript><!-- /Yandex.Metrika counter -->
+</noscript>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/jquery.mask.min.js"></script>
+<script src="/js/main.js"></script>

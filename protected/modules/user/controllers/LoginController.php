@@ -26,6 +26,8 @@ class LoginController extends Controller
 
 						$user=User::model()->findByAttributes(array('email'=>$model->username));
 
+						$this->lastViset();
+
 						echo CJSON::encode(array(
 			        			'success' => 1,
 			        			'error' => 0,
@@ -61,4 +63,9 @@ class LoginController extends Controller
 		}
 	}
 
+	private function lastViset() {
+		$lastVisit = User::model()->notsafe()->findByPk(Yii::app()->user->id);
+		$lastVisit->lastvisit = time();
+		$lastVisit->save();
+	}
 }

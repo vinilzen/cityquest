@@ -153,6 +153,9 @@ $(function() {
 	});
 
 	$('#myModalBook').on('shown.bs.modal', function (e) {
+
+		yaCounter25221941.reachGoal('openBookWindow');
+
 		if (document.body.clientWidth > 768) {
 			var h = $('#myModalBook .img-responsive').height();
 			$('.shad').height(h);
@@ -214,6 +217,8 @@ $(function() {
 					function(result){
 						
 						if (result && result.success) {
+
+							yaCounter25221941.reachGoal('confirmBook');
 
 							ModalBook.modal('hide');
 							
@@ -305,6 +310,8 @@ $(function() {
 							function( data ) {
 
 								if (data.success && data.success == 1) {
+
+									yaCounter25221941.reachGoal('registrationSuccess');
 
 									$('#reg-form button')
 										.attr({ 'title': 'Вы успешно зарегистрировались' })
