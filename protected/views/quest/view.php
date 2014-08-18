@@ -1,18 +1,7 @@
 <?php
 /* @var $this QuestController */
 /* @var $model Quest */
-
-if (0 && Yii::app()->user->name == 'admin' ){
-	$this->menu=array(
-    array('label'=>'Сводная таблица', 'url'=>array('quest/adminschedule/ymd')),
-		array('label'=>'List Quest', 'url'=>array('index')),
-		array('label'=>'Create Quest', 'url'=>array('create')),
-		array('label'=>'Update Quest', 'url'=>array('update', 'id'=>$model->id)),
-		array('label'=>'Delete Quest', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-		array('label'=>'Manage Quest', 'url'=>array('admin')),
-	);
-}
-
+$this->pageTitle= Yii::app()->name.' - '.$model->title;
 ?>
 
 <script type="text/javascript">

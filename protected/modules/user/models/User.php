@@ -50,7 +50,7 @@ class User extends CActiveRecord
 				array('phone', 'length', 'max'=>18, 'min' => 5,'message' => UserModule::t("Incorrect phone (length between 5 and 12 characters).")),
 				array('password', 'length', 'max'=>128, 'min' => 4,'message' => UserModule::t("Incorrect password (minimal length 4 symbols).")),
 				array('email', 'email'),
-				array('username', 'unique', 'message' => UserModule::t("This user's name already exists.")),
+				// array('username', 'unique', 'message' => UserModule::t("This user's name already exists.")),
 				array('email', 'unique', 'message' => UserModule::t("This user's email address already exists.")),
 				// array('username', 'match', 'pattern' => '/^[A-Za-z0-9_]+$/u','message' => UserModule::t("Incorrect symbols (A-z0-9).")),
 				array('status', 'in', 'range'=>array(self::STATUS_NOACTIVE,self::STATUS_ACTIVE,self::STATUS_BANED)),
@@ -67,7 +67,7 @@ class User extends CActiveRecord
 					array('username', 'length', 'max'=>20, 'min' => 3,'message' => UserModule::t("Incorrect username (length between 3 and 20 characters).")),
 					array('phone', 'length', 'max'=>18, 'min' => 5,'message' => UserModule::t("Incorrect phone (length between 5 and 12 characters).")),
 					array('email', 'email'),
-					array('username', 'unique', 'message' => UserModule::t("This user's name already exists.")),
+					// array('username', 'unique', 'message' => UserModule::t("This user's name already exists.")),
 					// array('username', 'match', 'pattern' => '/^[A-Za-z0-9_]+$/u','message' => UserModule::t("Incorrect symbols (A-z0-9).")),
 					array('email', 'unique', 'message' => UserModule::t("This user's email address already exists.")),
 

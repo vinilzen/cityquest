@@ -2,13 +2,7 @@
 /* @var $this QuestController */
 /* @var $dataProvider CActiveDataProvider */
 
-if (0 && Yii::app()->user->name == 'admin' ){
-	$this->menu=array(
-		array('label'=>'Сводная таблица', 'url'=>array('quest/adminschedule/ymd')),
-		array('label'=>'Управление квестами', 'url'=>array('admin')),
-		array('label'=>'Создать новый квест', 'url'=>array('create')),
-	);
-}
+$this->pageTitle= Yii::app()->name.' - Квесты';
 
 foreach ($quests as $quest) { ?>
 	<div class="col-xs-12 col-md-6 col-sm-12 col-lg-6 col-xlg-4 item">

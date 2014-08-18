@@ -55,6 +55,7 @@ return array(
 	'Thank you for your registration. Please check your email.' => 'Регистрация завершена. Пожалуйста проверьте свой электронный ящик.',
 	'Please check your email. An instructions was sent to your email address.' => 'На Ваш адрес электронной почты было отправлено письмо с инструкциями.',
 	'Thank you for your registration. Please {{login}}.' => 'Регистрация завершена. {{login}}.',
+	'You have requested the password recovery site {{site_name}}. To receive a new password, go to {{activation_url}}.' => "Вы запросили восстановление пароля для сайта {{site_name}}.\r\n Чтобы получить новый пароль, перейдите по ссылке {{activation_url}}",
 	'Thank you for your registration. Contact Admin to activate your account.' => 'Регистрация завершена. Пожалуйста свяжитесь с администрацией сайта для активации аккаунта.',
 	'Restore' => 'Восстановить',
 	'Please enter your login or email addres.' => 'Пожалуйста, введите Ваш логин или адрес электронной почты.',

@@ -120,6 +120,10 @@ class RegistrationController extends Controller
 
 				if ($model->save()) {
 	
+					$identity=new UserIdentity($model->username,$soucePassword);
+					$identity->authenticate();
+					Yii::app()->user->login($identity,0);
+
 		        	echo CJSON::encode(array(
 		        			'success' => 1,
 		        			'error' => 0,

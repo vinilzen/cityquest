@@ -17,7 +17,7 @@ $this->breadcrumbs=array('Quests');  ?>
 	$selectedDate = 0;
 
 
-	for ($i=0; $i<30; $i++) {
+	for ($i=-1; $i<30; $i++) {
 		$currDate = strtotime( '+'.$i.' day' );
 		if ($ymd == date('Ymd', $currDate)) {
 			$selectedDate = $currDate;
@@ -29,7 +29,7 @@ $this->breadcrumbs=array('Quests');  ?>
 
 <div class="btn-group btn-group-justified">
 <?
-	for ($i=0; $i<30; $i++) {
+	for ($i=-1; $i<30; $i++) {
 		$currDate = strtotime( '+'.$i.' day' );
 
 		// выбранная дата

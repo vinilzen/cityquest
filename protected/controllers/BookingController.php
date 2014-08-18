@@ -64,7 +64,7 @@ class BookingController extends Controller
 	    $headers = "MIME-Version: 1.0\r\nFrom: $helloEmail\r\nReply-To: $helloEmail\r\nContent-Type: text/html; charset=utf-8";
 	    $message = wordwrap($message, 70);
 	    $message = str_replace("\n.", "\n..", $message);
-	    return mail($email,'=?UTF-8?B?'.base64_encode($subject).'?=',$message,$headers);
+	    return mail($email,"=?UTF-8?B?".base64_encode($subject)."?=",$message,$headers);
 	    
 	}
 
@@ -113,26 +113,37 @@ class BookingController extends Controller
 							$model->quest_id = (int)$_POST['quest_id'];
 							$model->competitor_id = (int)Yii::app()->user->id;
 
+
+
 							$user_model = Yii::app()->getModule('user')->user();
 							$user_model->phone = $_POST['phone'];
 
 							if ( $user_model->save() && $model->save())
 							{
+							    // $addres = str_replace(" ", "+", $addres);
+							    // $addres = str_replace(",", "%2C", $addres);
 
-								/*
-									$this->sendMail(
-										Yii::app()->getModule('user')->user()->email,
-										'Вы записались на квест!',
-										"Здравствуйте, ILYA! \r\n \r\n
-										
-										Ваша запись на CityQuest подтверждена: ".$quest->title.", ".$model->date.", ".$model->time."
+								$this->sendMail(
+									Yii::app()->getModule('user')->user()->email,
+									"Cityquest. Бронирование квеста «".$quest->title."» ".substr($model->date, -4, 2)."/".substr($model->date, -2, 2)."/".substr($model->date, 0, 4)." ".$model->time,
+									"Здравствуйте, ".Yii::app()->getModule('user')->user()->username."! <br><br>
+									
+									Вы записались на квест <a href='http://cityquest.ru/quest/view?id=".$quest->id."' target='_blank' >«".$quest->title."»</a> ".substr($model->date, -4, 2)."/".substr($model->date, -2, 2)."/".substr($model->date, 0, 4)." ".$model->time." <br>
+									Не забудьте, для участия вам понадобится команда от 2 до 4 человек. <br><br>
 
-										Мы вас ждем по адресу ".$quest->addres.". \r\n
-										В вашей команде должно быть 2 — 4 игрока. И, пожалуйста, не опаздывайте! Будет совсем здорово, если вы придете за пять-десять минут до начала игры. 
-										Спасибо, CityQuest http://cityquest.ru/ \r\n
-										8 952 377-97-97");
-								*/
-								echo CJavaScript::jsonEncode(array('success'=>1));
+									Мы ждем вас по адресу <a href='https://www.google.com/maps/preview?q=москва,+".urlencode($quest->addres)."' target='_blank'>".$quest->addres.".</a> <br>
+									И, пожалуйста, не опаздывайте! У вас будет меньше времени на прохождение квеста. <br>
+									Будет совсем здорово, если вы придете за пять-десять минут до начала игры. <br><br>
+
+									До встречи,<br>
+									Команда CityQuest <br>
+									<a href='http://cityquest.ru' target='_blank'>www.cityquest.ru</a> <br>
+									8 952 377-97-97");
+
+								echo CJavaScript::jsonEncode(array(
+									'success'=>1,
+									'a' => urlencode($quest->addres)
+									));
 							}
 							else
 								echo CJavaScript::jsonEncode(

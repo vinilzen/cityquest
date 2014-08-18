@@ -312,7 +312,8 @@ $(function() {
 
 									setTimeout(function(){
 										$('#reg-form button').tooltip('destroy');
-										$('#auth-tab').click();
+										// $('#auth-tab').click();
+										location.reload();
 									}, 1000);
 									
 

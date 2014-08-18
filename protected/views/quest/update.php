@@ -2,12 +2,6 @@
 /* @var $this QuestController */
 /* @var $model Quest */
 
-$this->breadcrumbs=array(
-	'Quests'=>array('index'),
-	$model->title=>array('view','id'=>$model->id),
-	'Update',
-);
-
 $this->quest_menu=array(
   array('label'=>'Сводная таблица', 'url'=>array('quest/adminschedule/ymd')),
   array('label'=>'Управление квестами', 'url'=>array('admin')),
