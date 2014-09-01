@@ -17,7 +17,7 @@
     </div>
     <div class="col-sm-5 col-xs-12 hidden-xs">
       <p class="pull-right right-soc">
-        <span class="weinsoc hidden-sm">мы в социальных сетях<em>&mdash;</em></span><a class="btn-soc" target="_blank" href="https://www.facebook.com/cityquestru"><i class="ico-soc ico-fb"></i></a><a class="btn-soc" href="#"><i class="ico-soc ico-tw"></i></a><a class="btn-soc" href="#"><i class="ico-soc ico-vk"></i></a>
+        <span class="weinsoc hidden-sm">мы в социальных сетях<em>&mdash;</em></span><a class="btn-soc" target="_blank" href="https://www.facebook.com/cityquestru"><i class="ico-soc ico-fb"></i></a><a class="btn-soc" href="http://vk.com/cityquestru" target="_blank"><i class="ico-soc ico-vk"></i></a>
       </p>
     </div>
   </div>
@@ -92,7 +92,7 @@
             </form>
           </div>
           <div class="tab-pane" id="reg">
-            <form role="form" id="reg-form">
+            <form role="form" id="reg-form" action="">
               <div class="form-group" id="form-group-reg-email">
                 <input required class="form-control" placeholder="Email" id="reg-email" name="Profile[email]" type="email">
                 <span class="error-msg">?</span>

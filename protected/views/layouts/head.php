@@ -4,9 +4,7 @@
 	<meta content="width=device-width, initial-scale=1" name="viewport">
 	<meta name="language" content="ru" />
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
-	<meta content="<?php echo CHtml::encode($this->
-	pageTitle); ?>" name="description">
-	<meta content="marchukilya@gmail.com" name="author">
+	<meta content="<?php echo CHtml::encode($this->pageTitle); ?>" name="description">
 	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
 	<!--[if lt IE 9]
 		<script src="/js/ie8-responsive-file-warning.js"></script>-->

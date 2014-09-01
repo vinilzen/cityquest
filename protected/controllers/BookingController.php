@@ -125,19 +125,19 @@ class BookingController extends Controller
 
 								$this->sendMail(
 									Yii::app()->getModule('user')->user()->email,
-									"Cityquest. Бронирование квеста «".$quest->title."» ".substr($model->date, -4, 2)."/".substr($model->date, -2, 2)."/".substr($model->date, 0, 4)." ".$model->time,
+									//Cityquest. Бронирование квеста «НАЗВАНИЕ КВЕСТА» ДАТА ВРЕМЯ
+									"Cityquest. Бронирование квеста «".$quest->title."» ".substr($model->date, -2, 2)."/".substr($model->date, -4, 2)."/".substr($model->date, 0, 4)." ".$model->time,
 									"Здравствуйте, ".Yii::app()->getModule('user')->user()->username."! <br><br>
 									
-									Вы записались на квест <a href='http://cityquest.ru/quest/view?id=".$quest->id."' target='_blank' >«".$quest->title."»</a> ".substr($model->date, -4, 2)."/".substr($model->date, -2, 2)."/".substr($model->date, 0, 4)." ".$model->time." <br>
-									Не забудьте, для участия вам понадобится команда от 2 до 4 человек. <br><br>
+									Вы записались на квест <a href='http://cityquest.ru/quest/view?id=".$quest->id."' target='_blank' >«".$quest->title."»</a> ".substr($model->date, -2, 2)."/".substr($model->date, -4, 2)."/".substr($model->date, 0, 4)." в ".$model->time." <br>
+									Не забудьте, для участия вам понадобится команда от 2 до 4 человек.<br><br>
 
-									Мы ждем вас по адресу <a href='https://www.google.com/maps/preview?q=москва,+".urlencode($quest->addres)."' target='_blank'>".$quest->addres.".</a> <br>
-									И, пожалуйста, не опаздывайте! У вас будет меньше времени на прохождение квеста. <br>
-									Будет совсем здорово, если вы придете за пять-десять минут до начала игры. <br><br>
+									Мы ждем вас по адресу <a href='https://www.google.com/maps/preview?q=москва,+".urlencode($quest->addres)."' target='_blank'>".$quest->addres.".</a> <br><br>
+									Игра начнется, когда вся команда соберется. Мы просим не опаздывать, иначе у вас останется меньше времени на прохождение.<br><br>
 
 									До встречи,<br>
-									Команда CityQuest <br>
-									<a href='http://cityquest.ru' target='_blank'>www.cityquest.ru</a> <br>
+									Команда CityQuest<br>
+									<a href='http://cityquest.ru' target='_blank'>www.cityquest.ru</a><br>
 									8 952 377-97-97");
 
 								echo CJavaScript::jsonEncode(array(

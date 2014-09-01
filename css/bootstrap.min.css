@@ -7163,23 +7163,28 @@ ul.nav.navbar-nav li:hover a {
 .jumbotron h1 {
   font-family: "Bebas Neue", "Helvetica Neue", Helvetica, sans-serif;
   font-weight: normal;
-  font-size: 56px;
+  font-size: 55px;
   color: #fff;
 }
 @media (min-width: 992px) and (max-width: 1199px) {
   .jumbotron h1 {
-    font-size: 48px;
+    font-size: 45px;
   }
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .jumbotron h1 {
-    font-size: 42px;
+    font-size: 41px;
   }
 }
 @media (max-width: 767px) {
   .jumbotron h1 {
-    font-size: 32px;
+    font-size: 31px;
     margin-top: 0;
+  }
+}
+@media (max-width: 400px) {
+  .jumbotron h1 {
+    font-size: 28px;
   }
 }
 .jumbotron h1:after {
@@ -9121,6 +9126,37 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 .checkbox.forgot label:hover, .checkbox.forgot a:hover {
   color: rgba(255, 255, 255, 0.9);
   border-bottom: 1px dashed rgba(255, 255, 255, 0.9);
+}
+
+.btn-primary {
+  color: #B1F7B3;
+  border-color: #B1F7B3;
+  box-shadow: none;
+  background-color: #253E45;
+  font-weight: 300;
+  padding: .5em 2em;
+  text-transform: uppercase;
+}
+.btn-primary:hover {
+  color: #B1F7B3;
+  border-color: #B1F7B3;
+  background-color: #253E45;
+  box-shadow: 0 0 10px rgba(177, 247, 179, 0.5);
+}
+
+.form-control {
+  border-radius: 0;
+  background-color: rgba(10, 27, 40, 0.24);
+  border-color: #23323E;
+  color: #fff;
+}
+
+h1 {
+  color: rgba(255, 255, 255, 0.8);
+  text-transform: uppercase;
+  font-size: 36px;
+  font-weight: 300;
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 }
 
 /*# sourceMappingURL=bootstrap.min.css.map */
