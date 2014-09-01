@@ -58,6 +58,7 @@
 		<div class="col-sm-9">
 			<?php echo $form->dropDownList($model,'times', array(
 				1=>'начинаем квесты с 00:00',
+				3=>'начинаем квесты с 00:15',
 				2=>'начинаем квесты с 00:30',
 			),array('class'=>'form-control')); ?>
 			<p class="help-block">Нельзя менять если кто-то уже записался</p>

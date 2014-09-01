@@ -108,7 +108,7 @@ class BookingController extends Controller
 							$model->price = (int)$_POST['price'];
 							$model->date = (int)$_POST['ymd'];
 							$model->phone = $_POST['phone'];
-							$model->result = $_POST['result'];
+							$model->result = isset($_POST['result'])?$_POST['result']:0;
 							$model->name = $_POST['name'];
 							$model->quest_id = (int)$_POST['quest_id'];
 							$model->competitor_id = (int)Yii::app()->user->id;
@@ -122,23 +122,24 @@ class BookingController extends Controller
 							{
 							    // $addres = str_replace(" ", "+", $addres);
 							    // $addres = str_replace(",", "%2C", $addres);
+								if (0) {
+									$this->sendMail(
+										Yii::app()->getModule('user')->user()->email,
+										//Cityquest. Бронирование квеста «НАЗВАНИЕ КВЕСТА» ДАТА ВРЕМЯ
+										"Cityquest. Бронирование квеста «".$quest->title."» ".substr($model->date, -2, 2)."/".substr($model->date, -4, 2)."/".substr($model->date, 0, 4)." ".$model->time,
+										"Здравствуйте, ".Yii::app()->getModule('user')->user()->username."! <br><br>
+										
+										Вы записались на квест <a href='http://cityquest.ru/quest/view?id=".$quest->id."' target='_blank' >«".$quest->title."»</a> ".substr($model->date, -2, 2)."/".substr($model->date, -4, 2)."/".substr($model->date, 0, 4)." в ".$model->time." <br>
+										Не забудьте, для участия вам понадобится команда от 2 до 4 человек.<br><br>
 
-								$this->sendMail(
-									Yii::app()->getModule('user')->user()->email,
-									//Cityquest. Бронирование квеста «НАЗВАНИЕ КВЕСТА» ДАТА ВРЕМЯ
-									"Cityquest. Бронирование квеста «".$quest->title."» ".substr($model->date, -2, 2)."/".substr($model->date, -4, 2)."/".substr($model->date, 0, 4)." ".$model->time,
-									"Здравствуйте, ".Yii::app()->getModule('user')->user()->username."! <br><br>
-									
-									Вы записались на квест <a href='http://cityquest.ru/quest/view?id=".$quest->id."' target='_blank' >«".$quest->title."»</a> ".substr($model->date, -2, 2)."/".substr($model->date, -4, 2)."/".substr($model->date, 0, 4)." в ".$model->time." <br>
-									Не забудьте, для участия вам понадобится команда от 2 до 4 человек.<br><br>
+										Мы ждем вас по адресу <a href='https://www.google.com/maps/preview?q=москва,+".urlencode($quest->addres)."' target='_blank'>".$quest->addres.".</a> <br><br>
+										Игра начнется, когда вся команда соберется. Мы просим не опаздывать, иначе у вас останется меньше времени на прохождение.<br><br>
 
-									Мы ждем вас по адресу <a href='https://www.google.com/maps/preview?q=москва,+".urlencode($quest->addres)."' target='_blank'>".$quest->addres.".</a> <br><br>
-									Игра начнется, когда вся команда соберется. Мы просим не опаздывать, иначе у вас останется меньше времени на прохождение.<br><br>
-
-									До встречи,<br>
-									Команда CityQuest<br>
-									<a href='http://cityquest.ru' target='_blank'>www.cityquest.ru</a><br>
-									8 952 377-97-97");
+										До встречи,<br>
+										Команда CityQuest<br>
+										<a href='http://cityquest.ru' target='_blank'>www.cityquest.ru</a><br>
+										8 952 377-97-97");
+								}
 
 								echo CJavaScript::jsonEncode(array(
 									'success'=>1,
