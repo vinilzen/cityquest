@@ -119,7 +119,12 @@ $this->pageTitle= Yii::app()->name.' - '.$model->title;
 
                 $disabled = '';
                 $my_quest = '';
-                if (isset($booking[$value['date']]) && isset($booking[$value['date']][$time]) ) {
+                if (
+                   
+                   (isset($booking[$value['date']]) && isset($booking[$value['date']][$time])) || ( $model->id == 3 && $k<8 )
+
+
+                   ) {
                   $disabled = ' disabled="disabled"';
                   if ( $booking[$value['date']][$time]['competitor_id'] == Yii::app()->user->id ) {
                     $my_quest = ' myDate ';

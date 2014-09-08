@@ -115,10 +115,10 @@ if (0 && Yii::app()->user->name == 'admin' ){
 
 			$dis = '';
 			$my_quest = '';
-			if ( isset($quest['bookings'][$time]) ){
+			if ( isset($quest['bookings'][$time]) || ($quest['q']->id == 3 && $k < 8 )){
 	            $dis = 'disabled="disabled"';
 
-				if ( $quest['bookings'][$time]['competitor_id'] == Yii::app()->user->id ) {
+				if (  isset($quest['bookings'][$time]) && $quest['bookings'][$time]['competitor_id'] == Yii::app()->user->id ) {
 					$my_quest = ' myDate ';
 				}
 			}

@@ -17,13 +17,13 @@ class UserModule extends CWebModule
 	 * @var int
 	 * @desc items on page
 	 */
-	public $user_page_size = 10;
+	public $user_page_size = 30;
 	
 	/**
 	 * @var int
 	 * @desc items on page
 	 */
-	public $fields_page_size = 10;
+	public $fields_page_size = 30;
 	
 	/**
 	 * @var string
