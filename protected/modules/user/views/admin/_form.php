@@ -14,7 +14,13 @@
 
 	<div class="row">
 		<?php echo CHtml::activeLabelEx($model,'password'); ?>
-		<?php echo CHtml::activePasswordField($model,'password',array('size'=>60,'maxlength'=>128)); ?>
+		<?php 
+			//if (!$model->isNewRecord){ //$model->password=''; }
+			
+			echo CHtml::activePasswordField($model,'password',array('size'=>60,'maxlength'=>128));
+			
+		?>
+
 		<?php echo CHtml::error($model,'password'); ?>
 	</div>
 

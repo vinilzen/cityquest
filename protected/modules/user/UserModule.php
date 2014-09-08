@@ -185,6 +185,7 @@ class UserModule extends CWebModule
 	 * @return boolean
 	 */
 	public static function isModerator() {
+
 		if(Yii::app()->user->isGuest)
 			return false;
 		else {
@@ -192,6 +193,8 @@ class UserModule extends CWebModule
 				self::$_admin = true;
 			else
 				self::$_admin = false;
+
+			return self::$_admin;
 		}
 	}
 

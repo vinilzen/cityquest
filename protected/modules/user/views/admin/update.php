@@ -1,10 +1,4 @@
-<?php
-$this->breadcrumbs=array(
-	(UserModule::t('Users'))=>array('admin'),
-	$model->username=>array('view','id'=>$model->id),
-	(UserModule::t('Update')),
-);
-?>
+<?php ?>
 
 <h1><?php echo  UserModule::t('Update User')." ".$model->id; ?></h1>
 
