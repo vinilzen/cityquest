@@ -126,8 +126,9 @@ $this->pageTitle= Yii::app()->name.' - '.$model->title;
                   }
                 }
 
-                if ($model->id == 3 && $k<8){
-                  $disabled = ' disabled="disabled"';
+                $empty = '';
+                if ($model->id == 3 && ($k != 0 && $k<8)) {
+                  $empty = ' empty_btn ';
                 }
 
 
@@ -143,7 +144,7 @@ $this->pageTitle= Yii::app()->name.' - '.$model->title;
                       data-d="<? echo $value['day']; ?>" 
                       data-m="<? echo $value['month']; ?>" 
                       data-price="<? echo $price; ?>" 
-                      class="btn btn-q <? echo $my_quest; ?> <? echo (($value['date'] === date('Ymd') && $near) || $dis) ? 'disabled' : '';
+                      class="btn btn-q <? echo $my_quest.$empty; ?> <? echo (($value['date'] === date('Ymd') && $near) || $dis) ? 'disabled' : '';
                           if ($workday && $k > 2 && $k < 7 ) echo ' invisible';?>" <?
                           
                           echo $disabled; ?>><? echo $time; ?></div>
