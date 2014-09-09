@@ -2158,6 +2158,6 @@ h1 {
 	font-weight: 300;
 	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 }
-.btn-q.empty_btn{
+.btn-q.empty_btn.disabled, .btn-q.empty_btn[disabled]:not(.myDate) {
 	color: rgba(0, 0, 0, 0);
 }

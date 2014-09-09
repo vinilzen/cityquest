@@ -129,6 +129,7 @@ $this->pageTitle= Yii::app()->name.' - '.$model->title;
                 $empty = '';
                 if ($model->id == 3 && ($k != 0 && $k<8)) {
                   $empty = ' empty_btn ';
+                  $disabled = ' disabled="disabled"';
                 }
 
 
