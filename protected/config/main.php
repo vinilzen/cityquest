@@ -7,7 +7,7 @@
 // CWebApplication properties can be configured here.
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'CityQuest - Квесты «выберись из команты» ',
+	'name'=>'CityQuest - Квесты «выберись из комнаты» ',
 
     'language' => 'ru',
 	// preloading 'log' component

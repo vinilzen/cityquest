@@ -61,7 +61,7 @@ class BookingController extends Controller
 	 */
 	public static function sendMail($email,$subject,$message) {
 		$helloEmail = Yii::app()->params['helloEmail'];
-	    $headers = "MIME-Version: 1.0\r\nFrom: $helloEmail\r\nReply-To: $helloEmail\r\nContent-Type: text/html; charset=utf-8";
+	    $headers = "MIME-Version: 1.0\r\nFrom: CityQuest <$helloEmail>\r\nReply-To: $helloEmail\r\nContent-Type: text/html; charset=utf-8";
 	    $message = wordwrap($message, 70);
 	    $message = str_replace("\n.", "\n..", $message);
 	    return mail($email,"=?UTF-8?B?".base64_encode($subject)."?=",$message,$headers);
@@ -120,13 +120,12 @@ class BookingController extends Controller
 
 							if ( $user_model->save() && $model->save())
 							{
-							    // $addres = str_replace(" ", "+", $addres);
-							    // $addres = str_replace(",", "%2C", $addres);
-								if (0) {
+							    // $addres = str_replace(" ", "+", $addres); $addres = str_replace(",", "%2C", $addres);
+								if (1) {
 									$this->sendMail(
 										Yii::app()->getModule('user')->user()->email,
 										//Cityquest. Бронирование квеста «НАЗВАНИЕ КВЕСТА» ДАТА ВРЕМЯ
-										"Cityquest. Бронирование квеста «".$quest->title."» ".substr($model->date, -2, 2)."/".substr($model->date, -4, 2)."/".substr($model->date, 0, 4)." ".$model->time,
+										"CityQuest. Бронирование квеста «".$quest->title."» ".substr($model->date, -2, 2)."/".substr($model->date, -4, 2)."/".substr($model->date, 0, 4)." ".$model->time,
 										"Здравствуйте, ".Yii::app()->getModule('user')->user()->username."! <br><br>
 										
 										Вы записались на квест <a href='http://cityquest.ru/quest/view?id=".$quest->id."' target='_blank' >«".$quest->title."»</a> ".substr($model->date, -2, 2)."/".substr($model->date, -4, 2)."/".substr($model->date, 0, 4)." в ".$model->time." <br>
@@ -138,15 +137,13 @@ class BookingController extends Controller
 										До встречи,<br>
 										Команда CityQuest<br>
 										<a href='http://cityquest.ru' target='_blank'>www.cityquest.ru</a><br>
-										8 952 377-97-97");
+										8 906 798-94-33");
 								}
 
-								echo CJavaScript::jsonEncode(array(
-									'success'=>1,
-									'a' => urlencode($quest->addres)
-									));
-							}
-							else
+								echo CJavaScript::jsonEncode(array('success'=>1, 'a' => urlencode($quest->addres)));
+
+							} else {
+
 								echo CJavaScript::jsonEncode(
 									array(
 										'success'=>0, 
@@ -154,6 +151,7 @@ class BookingController extends Controller
 										'errors'=>$model->getErrors()
 									)
 								);
+							}
 						} else echo CJavaScript::jsonEncode(array('success'=>0, 'message'=> 'Квест "'.$quest->title.'" на дату '.$_POST['ymd'].' и время '.$_POST['time'].' уже занят'));
 					} else echo CJavaScript::jsonEncode(array('success'=>0, 'message'=> 'Квест не найден'));
 				} else echo CJavaScript::jsonEncode(array('success'=>0, 'message'=> 'Неправильный запрос'));

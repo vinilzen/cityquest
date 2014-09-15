@@ -3,7 +3,7 @@
 // this contains the application parameters that can be maintained via GUI
 return array(
 	// this is displayed in the header section
-	'title'=>'CityQuest - Квесты «выберись из команты» ',
+	'title'=>'CityQuest - Квесты «выберись из комнаты» ',
 	// this is used in error pages
 	'adminEmail'=>'marchukilya@gmail.com',
 	'helloEmail'=>'hello@cityquest.ru',
