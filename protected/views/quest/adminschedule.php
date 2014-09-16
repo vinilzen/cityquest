@@ -54,16 +54,18 @@ $this->breadcrumbs=array('Quests');  ?>
 
 		$style="";
 		$title="";
+		$badge = '<span class="badge" style="font-size: 13px;font-family: \'Open Sans\';font-weight: normal;">0</span>';
 		if (isset($twoweek_bookings_arr[date('Ymd', $currDate)])) {	
 			$style = 'style="box-shadow: inset 0px -10px 0px -7px #000; padding-bottom: 3px;';
 			$title = '(Всего броней - '.count($twoweek_bookings_arr[date('Ymd', $currDate)]).')';
+			$badge = '<span class="badge" style="font-size: 13px;font-family: \'Open Sans\';font-weight: normal;">'.count($twoweek_bookings_arr[date('Ymd', $currDate)]).'</span>';
 		}
 
 		echo '<a '.$style.' data-="body" data-toggle="tooltip" title="'.date('d M Y', $currDate).' '.$title.'" href="/quest/adminschedule/ymd/'.date('Ymd', $currDate).'" type="button" 
 					class="text-center btn btn-xs btn-default'.$active.$weekend.$disabled_class.'" '.$disabled.'>'.
 				'<span style="display:block;line-height:1;">'.date('d', $currDate).'</span>'.
 				'<small style="display:block;line-height:1;">'.$days_short[date('N', $currDate)-1].'</small>'.
-				'<small style="display:block;line-height:1;">'.mb_substr($month[date('n', $currDate)-1],0,6).'</small>'.
+				'<small style="display:block;line-height:1;">'.mb_substr($month[date('n', $currDate)-1],0,6).'</small>'.$badge.
 			 '</a>';
 	}
 ?>
