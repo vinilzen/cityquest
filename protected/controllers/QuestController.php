@@ -286,6 +286,25 @@ class QuestController extends Controller
 			$YMDate = (int)$ymd;
 
 
+		$twoweek_bookings = Booking::model()->findAllByAttributes(
+			array(),
+			'date >=:today && date < :twoweek',
+			array(
+				'today'=>date('Ymd'),
+				'twoweek'=> date('Ymd', strtotime( '+15 day' ))
+			)
+		);
+		if (count($twoweek_bookings)>0){
+			$twoweek_bookings_arr = array();
+			foreach ($twoweek_bookings as $booking) {
+
+				if (!isset($twoweek_bookings_arr[$booking->date])){
+					$twoweek_bookings_arr[$booking->date] = array();
+				}
+					$twoweek_bookings_arr[$booking->date][] = $booking;
+			}
+		}
+
 		$quests=Quest::model()->findAllByAttributes(array('status' => 2));
 		$quests_array = array();
 
@@ -316,6 +335,7 @@ class QuestController extends Controller
 
 
 		$this->render('adminschedule',array(
+			'twoweek_bookings_arr' => $twoweek_bookings_arr,
 			'quests' => $quests_array,
 			'ymd' => $YMDate,
 		));

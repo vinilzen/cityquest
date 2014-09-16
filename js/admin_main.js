@@ -228,7 +228,11 @@ var PopoverView = Backbone.View.extend({
 });
 
 $(function() {
-	
+
+	$('.btn-group a.btn').tooltip({
+		container:'body'
+	});
+
 	$('#times-table button[data-toggle="popover"]').popover({
 		placement:'auto',
 		animation: false,

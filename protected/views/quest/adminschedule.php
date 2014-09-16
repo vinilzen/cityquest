@@ -11,6 +11,7 @@ $this->breadcrumbs=array('Quests');  ?>
 
 <?	
 	$days = Yii::app()->params['days'];
+	$days_short = Yii::app()->params['days_short'];
     $month = Yii::app()->params['month'];
     $month_f = Yii::app()->params['month_f'];
 
@@ -43,15 +44,27 @@ $this->breadcrumbs=array('Quests');  ?>
 
 		// сегодня 
 		$active = '';
-		if (date('Ymd', $currDate) === date('Ymd', strtotime('now'))) $active = ' active';
+		if (date('Ymd', $currDate) === date('Ymd', strtotime('now')))
+			$active = ' active';
 
 		// weekend
 		$weekend = '';
-		if (date('w', $currDate) == 0 || date('w', $currDate) == 6) $weekend = ' btn-warning';
+		if (date('w', $currDate) == 0 || date('w', $currDate) == 6)
+			$weekend = ' btn-warning';
 
-		echo '<a title="'.date('d M Y', $currDate).'" href="/quest/adminschedule/ymd/'.date('Ymd', $currDate).'" type="button" class="text-center btn btn-xs btn-default'.$active.$weekend.$disabled_class.'" '.$disabled.' >'.
-		date('d', $currDate).'<br><small>'.mb_substr($month[date('n', $currDate)-1],0,6).'</small>'.
-		'</a>';
+		$style="";
+		$title="";
+		if (isset($twoweek_bookings_arr[date('Ymd', $currDate)])) {	
+			$style = 'style="box-shadow: inset 0px -10px 0px -7px #000; padding-bottom: 3px;';
+			$title = '(Всего броней - '.count($twoweek_bookings_arr[date('Ymd', $currDate)]).')';
+		}
+
+		echo '<a '.$style.' data-="body" data-toggle="tooltip" title="'.date('d M Y', $currDate).' '.$title.'" href="/quest/adminschedule/ymd/'.date('Ymd', $currDate).'" type="button" 
+					class="text-center btn btn-xs btn-default'.$active.$weekend.$disabled_class.'" '.$disabled.'>'.
+				'<span style="display:block;line-height:1;">'.date('d', $currDate).'</span>'.
+				'<small style="display:block;line-height:1;">'.$days_short[date('N', $currDate)-1].'</small>'.
+				'<small style="display:block;line-height:1;">'.mb_substr($month[date('n', $currDate)-1],0,6).'</small>'.
+			 '</a>';
 	}
 ?>
 </div>
@@ -98,10 +111,14 @@ $this->breadcrumbs=array('Quests');  ?>
 			if ( isset($quest['bookings'][$time]) ) {
 
 				if ($quest['bookings'][$time]->status == 0)
-					$additionalClass = ' btn-info';
+					$additionalClass = 'btn-info btn-gr';
 
-				if ($quest['bookings'][$time]->status == 1)
-					$additionalClass = ' btn-success';
+				if ($quest['bookings'][$time]->status == 1){	
+					$additionalClass = ' btn-info';
+					if ($time < date('H:i', strtotime( '+0 hours' )) ) {
+						$additionalClass = '  btn-info btn-danger ';
+					}
+				}
 
 				$data = ' data-id="'.$quest['bookings'][$time]->id.'" '.
 						'data-price="'.$quest['bookings'][$time]->price.'" '.
@@ -110,6 +127,9 @@ $this->breadcrumbs=array('Quests');  ?>
 						'data-comment="'.$quest['bookings'][$time]->comment.'" '.
 						'data-user-id="'. $quest['bookings'][$time]->competitor->id.'" '.
 						'data-name="'.$quest['bookings'][$time]->name.'" ';
+
+				if ($quest['bookings'][$time]->result != 0 && $quest['bookings'][$time]->result != '0' && $quest['bookings'][$time]->result != '00' && $quest['bookings'][$time]->result != ' ' && $quest['bookings'][$time]->result != '')
+					$additionalClass = ' btn-success';
 
 			} else {
 				$data = ' data-price="'.Yii::app()->params['price_weekend_AM'].'" ';

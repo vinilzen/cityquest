@@ -149,7 +149,9 @@
               <!-- <small>Понедельник</small><span>30.07</span><em>в</em><span>10:45</span> -->
               <div class="priceTbl">
                 <div class="priceRow">
-                  <span class="dashed"></span><span class="price">3000<em class="rur"><em>руб.</em></em></span><span class="dashed"></span>
+                  <span class="dashed"></span>
+                  <span class="price">3000<em class="rur"><em>руб.</em></em><small style="font-size: 12px;font-family: 'Open Sans', Helvetica, Arial, sans-serif;position: absolute;top: 24px;left: 18px;">с команды</small></span>
+                  <span class="dashed"></span>
                 </div>
               </div>
               <p class="you_phone">Ваш номер телефона:<input type="text" id="book-phone" value=""> </p>

@@ -198,7 +198,7 @@ $(function() {
 			'<small>'+book_data.day+'</small>'+
 			'<span>'+book_data.d+'.'+book_data.m+'</span><em>в</em><span>'+book_data.time+'</span>');
 
-		$('.price', ModalBook).html( book_data.price +'<em class="rur"><em>руб.</em></em>');
+		$('.price', ModalBook).html( book_data.price +'<em class="rur"><em>руб.</em></em><small style="font-size: 12px;font-family: \'Open Sans\',sans-serif;position: absolute;top: 24px;left: 18px;">с команды</small>');
 
 		ModalBook.modal('show');
 	});
