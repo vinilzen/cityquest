@@ -117,10 +117,8 @@ $this->breadcrumbs=array('Quests');  ?>
 
 				if ($quest['bookings'][$time]->status == 1){	
 					$additionalClass = ' btn-info';
-					if ($time < date('H:i', strtotime( '+0 hours' )) ) {
-						$additionalClass = '  btn-info btn-danger ';
-					}
 				}
+
 
 				$data = ' data-id="'.$quest['bookings'][$time]->id.'" '.
 						'data-price="'.$quest['bookings'][$time]->price.'" '.
@@ -130,8 +128,20 @@ $this->breadcrumbs=array('Quests');  ?>
 						'data-user-id="'. $quest['bookings'][$time]->competitor->id.'" '.
 						'data-name="'.$quest['bookings'][$time]->name.'" ';
 
-				if ($quest['bookings'][$time]->result != 0 && $quest['bookings'][$time]->result != '0' && $quest['bookings'][$time]->result != '00' && $quest['bookings'][$time]->result != ' ' && $quest['bookings'][$time]->result != '')
+				if ($quest['bookings'][$time]->result != 0 && 
+					$quest['bookings'][$time]->result != '0' && 
+					$quest['bookings'][$time]->result != '00' && 
+					$quest['bookings'][$time]->result != '60:00' && 
+					$quest['bookings'][$time]->result != '60' && 
+					$quest['bookings'][$time]->result != ' ' && 
+					$quest['bookings'][$time]->result != '')
+				{
 					$additionalClass = ' btn-success';
+				} else {
+					if ($time < date('H:i', strtotime( '+0 hours' )) && $quest['bookings'][$time]->date <= date('Ymd', strtotime( '+0 hours' ) ) ) {
+						$additionalClass = '  btn-info btn-danger ';
+					}
+				}
 
 			} else {
 				$data = ' data-price="'.Yii::app()->params['price_weekend_AM'].'" ';
