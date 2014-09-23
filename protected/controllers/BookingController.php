@@ -137,7 +137,7 @@ class BookingController extends Controller
 										До встречи,<br>
 										Команда CityQuest<br>
 										<a href='http://cityquest.ru' target='_blank'>www.cityquest.ru</a><br>
-										8 906 798-94-33");
+										8 (495) 749-96-09");
 								}
 
 								echo CJavaScript::jsonEncode(array('success'=>1, 'a' => urlencode($quest->addres)));
