@@ -26,7 +26,7 @@ class ProfileController extends Controller
 		
 		$bookings_old = Booking::model()->with('quest')->findAllByAttributes(
 			array('competitor_id'=>Yii::app()->user->id),
-			'date < :today AND time < :time ',
+			'date <= :today AND time < :time ',
 			array(
 				'today'=>date('Ymd'),
 				'time'=>date('H:i'),

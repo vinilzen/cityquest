@@ -224,7 +224,7 @@ class BookingController extends Controller
 					$model->phone = $_POST['phone'];
 					$model->result = $_POST['result'];
 					$model->name = $_POST['name'];
-					$model->competitor_id = (int)Yii::app()->user->id;
+					// $model->competitor_id = (int)Yii::app()->user->id;
 
 					if($model->save())
 						echo CJavaScript::jsonEncode(array('success'=>1));
