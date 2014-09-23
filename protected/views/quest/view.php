@@ -2,6 +2,7 @@
 /* @var $this QuestController */
 /* @var $model Quest */
 $this->pageTitle= Yii::app()->name.' - '.$model->title;
+$this->pageImg= '/images/q/'.$model->id.'.jpg';
 ?>
 
 <script type="text/javascript">
@@ -45,7 +46,7 @@ $this->pageTitle= Yii::app()->name.' - '.$model->title;
     </div>
     <div class="clearfix"></div>
     <div class="col-xs-12 ovs">
-      <div class="row quests_schedules quest_schedule">
+      <div class="row quests_schedules quest_schedule" style="width: 800px;">
       
 
 
@@ -135,20 +136,22 @@ $this->pageTitle= Yii::app()->name.' - '.$model->title;
 
               ?>
                 <div  type="button" 
-                      data-name="<? echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->username : ''; ?>" 
-                      data-phone="<? echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->phone : ''; ?>" 
-                      data-time="<? echo $time; ?>" 
-                      data-quest="<? echo $model->id; ?>" 
-                      data-ymd="<? echo $value['date']; ?>" 
-                      data-date="<? echo $value['day']; ?> <? echo $value['month_name']; ?>" 
-                      data-day="<? echo $value['day_name']; ?>" 
-                      data-d="<? echo $value['day']; ?>" 
-                      data-m="<? echo $value['month']; ?>" 
-                      data-price="<? echo $price; ?>" 
-                      class="btn btn-q <? echo $my_quest.$empty; ?> <? echo (($value['date'] === date('Ymd') && $near) || $dis) ? 'disabled' : '';
-                          if ($workday && $k > 2 && $k < 7 ) echo ' invisible';?>" <?
-                          
-                          echo $disabled; ?>><? echo $time; ?></div>
+                  data-name="<? echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->username : ''; ?>" 
+                  data-phone="<? echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->phone : ''; ?>" 
+                  data-time="<? echo $time; ?>" 
+                  data-quest="<? echo $model->id; ?>" 
+                  data-ymd="<? echo $value['date']; ?>" 
+                  data-date="<? echo $value['day']; ?> <? echo $value['month_name']; ?>" 
+                  data-day="<? echo $value['day_name']; ?>" 
+                  data-d="<? echo $value['day']; ?>" 
+                  data-m="<? echo $value['month']; ?>" 
+                  data-price="<? echo $price; ?>" 
+                  class="btn btn-q <? echo $my_quest.$empty; ?>
+                      <? echo (($value['date'] === date('Ymd') && $near) || $dis) ? 'disabled' : '';
+                      if ($workday && $k > 2 && $k < 7 ) echo ' invisible';?>" 
+                      <? if (($workday && $k > 2 && $k < 7) || ($empty != '')) echo ' style="display:none;" '; ?>
+                      <? echo $disabled; ?>><? echo $time; ?>
+                </div>
               <? } ?>
 
             </div>
@@ -156,40 +159,40 @@ $this->pageTitle= Yii::app()->name.' - '.$model->title;
               <div class="price-line">
                 <div class="priceTbl workPrice1">
                   <div class="priceRow">
-                    <span class="dashed"></span>
-                    <span class="price"><? echo $pricePm; ?> <em class="rur"><em>руб.</em></em></span>
-                    <span class="dashed"></span>
+                    <!-- <span class="dashed">&nbsp;</span> -->
+                    <span class="price" style="padding:0;"><? echo $pricePm; ?> <em class="rur"><em>руб.</em></em></span>
+                    <!-- <span class="dashed">&nbsp;</span> -->
                   </div>
                 </div>
-                <div class="priceTbl workPrice2">
+                <div class="priceTbl workPrice2" style="width: 320px; margin-left:0; ">
                   <div class="priceRow">
-                    <span class="dashed"></span>
+                    <span class="dashed">&nbsp;</span>
                     <span class="price"><? echo $priceAm; ?> <em class="rur"><em>руб.</em></em></span>
-                    <span class="dashed"></span>
+                    <span class="dashed">&nbsp;</span>
                   </div>
                 </div>
                 <div class="priceTbl workPrice3">
                   <div class="priceRow">
-                    <span class="dashed"></span>
+                    <span class="dashed">&nbsp;</span>
                     <span class="price"><? echo $pricePm; ?> <em class="rur"><em>руб.</em></em></span>
-                    <span class="dashed"></span>
+                    <span class="dashed">&nbsp;</span>
                   </div>
                 </div>
               </div>
             <? } else { ?>
-              <div class="price-line weekend">
-                <div class="priceTbl weekendPrice1">
+              <div class="price-line weekend" style="float:left; padding-left:130px;">
+                <div class="priceTbl weekendPrice1" style="width:164px;">
                   <div class="priceRow">
-                    <span class="dashed"></span>
+                    <span class="dashed">&nbsp;</span>
                     <span class="price"><? echo $priceAm; ?> <em class="rur"><em>руб.</em></em></span>
-                    <span class="dashed"></span>
+                    <span class="dashed">&nbsp;</span>
                   </div>
                 </div>
                 <div class="priceTbl weekendPrice2">
                   <div class="priceRow">
-                    <span class="dashed"></span>
+                    <span class="dashed">&nbsp;</span>
                     <span class="price"><? echo $pricePm; ?> <em class="rur"><em>руб.</em></em></span>
-                    <span class="dashed"></span>
+                    <span class="dashed">&nbsp;</span>
                   </div>
                 </div>
               </div>

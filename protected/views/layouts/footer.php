@@ -7,7 +7,8 @@
     </div>
     <div class="col-xs-12 visible-xs">
       <p class="text-center">
-        <a class="btn-soc" href="#"><i class="ico-soc ico-fb"></i></a><a class="btn-soc" href="#"><i class="ico-soc ico-tw"></i></a><a class="btn-soc" href="#"><i class="ico-soc ico-vk"></i></a>
+        <a class="btn-soc" target="_blank" href="https://www.facebook.com/cityquestru"><i class="ico-soc ico-fb"></i></a>
+        <a class="btn-soc" target="_blank" href="http://vk.com/cityquestru"><i class="ico-soc ico-vk"></i></a>
       </p>
     </div>
     <div class="col-sm-2 col-xs-12">
@@ -17,7 +18,9 @@
     </div>
     <div class="col-sm-5 col-xs-12 hidden-xs">
       <p class="pull-right right-soc">
-        <span class="weinsoc hidden-sm">мы в социальных сетях<em>&mdash;</em></span><a class="btn-soc" target="_blank" href="https://www.facebook.com/cityquestru"><i class="ico-soc ico-fb"></i></a><a class="btn-soc" href="http://vk.com/cityquestru" target="_blank"><i class="ico-soc ico-vk"></i></a>
+        <span class="weinsoc hidden-sm">мы в социальных сетях<em>&mdash;</em></span>
+        <a class="btn-soc" target="_blank" href="https://www.facebook.com/cityquestru"><i class="ico-soc ico-fb"></i></a>
+        <a class="btn-soc" href="http://vk.com/cityquestru" target="_blank"><i class="ico-soc ico-vk"></i></a>
       </p>
     </div>
   </div>
@@ -149,9 +152,10 @@
               <!-- <small>Понедельник</small><span>30.07</span><em>в</em><span>10:45</span> -->
               <div class="priceTbl">
                 <div class="priceRow">
-                  <span class="dashed"></span>
-                  <span class="price">3000<em class="rur"><em>руб.</em></em><small style="font-size: 12px;font-family: 'Open Sans', Helvetica, Arial, sans-serif;position: absolute;top: 24px;left: 18px;">с команды</small></span>
-                  <span class="dashed"></span>
+                  <span class="dashed">&nbsp;</span>
+                  <span class="price">3000<em class="rur"><em>руб.</em></em>
+                    <small style="font-size: 12px;font-family: 'Open Sans', Helvetica, Arial, sans-serif;position: absolute;top: 24px;left: -24px;">(Цена указана за команду)</small></span>
+                  <span class="dashed">&nbsp;</span>
                 </div>
               </div>
               <p class="you_phone">Ваш номер телефона:<input type="text" id="book-phone" value=""> </p>

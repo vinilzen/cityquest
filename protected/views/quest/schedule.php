@@ -144,23 +144,23 @@ if (0 && Yii::app()->user->name == 'admin' ){
 	              <div class="price-line">
 	                <div class="priceTbl workPrice1">
 	                  <div class="priceRow">
-	                    <span class="dashed"></span>
+	                    <span class="dashed">&nbsp;</span>
 	                    <span class="price"><? echo $pricePm; ?> <em class="rur"><em>руб.</em></em></span>
-	                    <span class="dashed"></span>
+	                    <span class="dashed">&nbsp;</span>
 	                  </div>
 	                </div>
 	                <div class="priceTbl workPrice2">
 	                  <div class="priceRow">
-	                    <span class="dashed"></span>
+	                    <span class="dashed">&nbsp;</span>
 	                    <span class="price"><? echo $priceAm; ?> <em class="rur"><em>руб.</em></em></span>
-	                    <span class="dashed"></span>
+	                    <span class="dashed">&nbsp;</span>
 	                  </div>
 	                </div>
 	                <div class="priceTbl workPrice3">
 	                  <div class="priceRow">
-	                    <span class="dashed"></span>
+	                    <span class="dashed">&nbsp;</span>
 	                    <span class="price"><? echo $pricePm; ?> <em class="rur"><em>руб.</em></em></span>
-	                    <span class="dashed"></span>
+	                    <span class="dashed">&nbsp;</span>
 	                  </div>
 	                </div>
 	              </div>
@@ -168,16 +168,16 @@ if (0 && Yii::app()->user->name == 'admin' ){
 	              <div class="price-line weekend">
 	                <div class="priceTbl weekendPrice1">
 	                  <div class="priceRow">
-	                    <span class="dashed"></span>
+	                    <span class="dashed">&nbsp;</span>
 	                    <span class="price"><? echo $priceAm; ?> <em class="rur"><em>руб.</em></em></span>
-	                    <span class="dashed"></span>
+	                    <span class="dashed">&nbsp;</span>
 	                  </div>
 	                </div>
 	                <div class="priceTbl weekendPrice2">
 	                  <div class="priceRow">
-	                    <span class="dashed"></span>
+	                    <span class="dashed">&nbsp;</span>
 	                    <span class="price"><? echo $pricePm; ?> <em class="rur"><em>руб.</em></em></span>
-	                    <span class="dashed"></span>
+	                    <span class="dashed">&nbsp;</span>
 	                  </div>
 	                </div>
 	              </div>

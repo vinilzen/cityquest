@@ -159,5 +159,7 @@ $this->breadcrumbs=array('Quests');  ?>
 		echo '</tr></table>';
 	} ?>
 </div>
-
+<script  type="text/javascript">
+	var adminschedule = 1;
+</script>
 <? include('popover.php'); ?>

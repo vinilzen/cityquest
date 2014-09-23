@@ -21,6 +21,7 @@
 		'password',
 		'email',
 		'activkey',
+		'phone',
 		array(
 			'name' => 'createtime',
 			'value' => date("d.m.Y H:i:s",$model->createtime),

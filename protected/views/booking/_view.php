@@ -33,4 +33,19 @@
 	<?php echo CHtml::encode($data->phone); ?>
 	<br />
 
+	<?php /*
+	<b><?php echo CHtml::encode($data->getAttributeLabel('result')); ?>:</b>
+	<?php echo CHtml::encode($data->result); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('quest_id')); ?>:</b>
+	<?php echo CHtml::encode($data->quest_id); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('competitor_id')); ?>:</b>
+	<?php echo CHtml::encode($data->competitor_id); ?>
+	<br />
+
+	*/ ?>
+
 </div>

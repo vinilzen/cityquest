@@ -8,6 +8,8 @@ class QuestController extends Controller
 	 */
 	public $layout='//layouts/column2';
 
+	public $pageImg=NULL;
+
 	/**
 	 * @return array action filters
 	 */

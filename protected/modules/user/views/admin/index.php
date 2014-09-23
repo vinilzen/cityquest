@@ -22,6 +22,11 @@
 			'value' => 'CHtml::link(CHtml::encode($data->username),array("admin/view","id"=>$data->id))',
 		),
 		array(
+			'name' => 'phone',
+			'type'=>'raw',
+			'value'=>'CHtml::link(CHtml::encode($data->phone), "tel:".$data->phone)',
+		),
+		array(
 			'name'=>'email',
 			'type'=>'raw',
 			'value'=>'CHtml::link(CHtml::encode($data->email), "mailto:".$data->email)',
