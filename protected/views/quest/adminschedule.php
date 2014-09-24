@@ -144,7 +144,7 @@ $this->breadcrumbs=array('Quests');  ?>
 				}
 
 			} else {
-				$data = ' data-price="'.Yii::app()->params['price_weekend_AM'].'" ';
+				$data = ' data-price="'.$price.'" ';
 			}
 
 	        $invisible = '';

@@ -35,6 +35,8 @@ var PopoverView = Backbone.View.extend({
 
 		this.attr.user_url = $(this.parent).attr('data-user-id') != '' ? '/user/admin/view/id/'+$(this.parent).attr('data-user-id') : '#';
 
+		console.log(this.attr);
+
 		this.$el.html( _.template($('#BookInfWrap').html(), this.attr) );
 
 		$('.pop-row', this.$el).hide();
@@ -252,7 +254,6 @@ $(function() {
 			if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0)
 				$(this).popover('hide');
 		});
-
 	}).on('shown.bs.popover', function (e) {
 
 		var self = this;
@@ -266,7 +267,7 @@ $(function() {
 	});
 
 
-var modal = '<div aria-hidden="true" aria-labelledby="myModalLabel" class="formaModal modal fade" role="dialog" tabindex="-1">'+
+	var modal = '<div aria-hidden="true" aria-labelledby="myModalLabel" class="formaModal modal fade" role="dialog" tabindex="-1">'+
 				'<div class="modal-dialog">'+
 					'<div class="modal-content">'+
 						'<div class="modal-header">'+
@@ -371,4 +372,22 @@ var modal = '<div aria-hidden="true" aria-labelledby="myModalLabel" class="forma
 		});
 		return false;
 	});
+
+
+	if (adminschedule) {
+	    var time = new Date().getTime();
+	     $(document.body).bind("mousemove keypress", function(e) {
+	         time = new Date().getTime();
+	     });
+
+	     function refresh() {
+	         if(new Date().getTime() - time >= 10000)
+	             window.location.reload(true);
+	         else 
+	             setTimeout(refresh, 10000);
+	     }
+
+	     setTimeout(refresh, 10000);
+	}
+
 });
