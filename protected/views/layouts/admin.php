@@ -52,7 +52,7 @@
 	<div class="container-fluid">
 		<div class="row">
 		<? if (Yii::app()->getModule('user')->user()->superuser == 1) { ?>
-			<div class="col-xs-12 col-sm-12 col-md-3">
+			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-2">
 
 				<ul class="nav nav-sidebar" style="margin-bottom:0;"><li><a><strong>Квесты</strong></a></li></ul>
 				<?
@@ -82,7 +82,7 @@
 				?>
 
 			</div>
-			<div class="col-xs-12 col-sm-12 col-md-9 main">
+			<div class="col-xs-12 col-sm-12 col-md-9 col-lg-10 main">
 		<? 	} else { ?>
 			<div class="col-xs-12 main">
 		<? 	} ?>

@@ -61,7 +61,7 @@ $this->breadcrumbs=array('Quests');  ?>
 			$badge = '<span class="badge" style="font-size: 13px;font-family: \'Open Sans\';font-weight: normal;">'.count($twoweek_bookings_arr[date('Ymd', $currDate)]).'</span>';
 		}
 
-		echo '<a '.$style.' data-="body" data-toggle="tooltip" title="'.date('d M Y', $currDate).' '.$title.'" href="/quest/adminschedule/ymd/'.date('Ymd', $currDate).'" type="button" 
+		echo '<a '.$style.' data-container="body" data-toggle="tooltip" title="'.date('d M Y', $currDate).' '.$title.'" href="/quest/adminschedule/ymd/'.date('Ymd', $currDate).'" type="button" 
 					class="text-center btn btn-xs btn-default'.$active.$weekend.$disabled_class.'" '.$disabled.'>'.
 				'<span style="display:block;line-height:1;">'.date('d', $currDate).'</span>'.
 				'<small style="display:block;line-height:1;">'.$days_short[date('N', $currDate)-1].'</small>'.

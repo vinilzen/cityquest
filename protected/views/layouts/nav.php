@@ -5,7 +5,7 @@
         <div class="row">
           <div class="col-md-3 col-sm-4 col-xs-7">
             <div class="navbar-header">
-              <a class="navbar-brand" href="/"><img src="/img/logo1.png"></a>
+              <a class="navbar-brand" href="/"><img alt="CityQuest - ВЫБЕРИСЬ ИЗ КОМНАТЫ КВЕСТЫ В РЕАЛЬНОЙ ЖИЗНИ" src="/img/logo1.png"></a>
             </div>
           </div>
           <div class="col-md-6 col-sm-1 hidden-xs navbar-inner" id="top_menu_container">

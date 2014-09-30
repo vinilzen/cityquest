@@ -1,0 +1,535 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta content="IE=edge" http-equiv="X-UA-Compatible">
+	<meta content="width=device-width, initial-scale=1" name="viewport">
+	<meta name="language" content="ru" />
+	<!--[if lt IE 8]>
+	 <link rel="stylesheet" type="text/css" href="/css/ie.css" media="screen, projection" />
+	<![endif]-->
+	<link rel="stylesheet" type="text/css" href="css/_bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/dashboard.css" />
+	<title>CityQuest - Квесты «выберись из комнаты»  - Adminschedule Quest</title>
+	<link href="/favico.png" rel="icon">
+</head>
+<body>
+	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">CityQuest - Квесты «выберись из комнаты» </a>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li class="hidden hidden-lg">
+	<a id="close_top_menu" type="button">
+		<span aria-hidden="true">×</span><span class="sr-only">Close</span>
+	</a>
+</li>
+
+<li class="">
+	<a href="/">Квесты</a>
+</li>
+
+<!-- <li class=""><a href="/quest/schedule/ymd/">Расписание</a></li> -->
+
+<li class="">
+	<a href="/rules">Правила</a>
+</li>
+
+<li class="">
+	<a href="/franchise">Франшиза </a>
+</li>
+
+<li class="">
+	<a href="/contact">Контакты</a>
+</li>
+
+  <li style="margin:0;">
+  	<a href="/quest/adminschedule/ymd" style="opacity: 1;" title="Панель администратора">
+  		<i style="font-size: 18px;" class="glyphicon glyphicon-cog"></i>
+  	</a>
+  </li>
+
+				</ul>
+				<ul class="nav navbar-nav navbar-right" id="yw0">
+<li><a href="/user/profile">Профиль</a></li>
+<li><a href="/user/logout">Выйти (Админ)</a></li>
+</ul>			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-3 col-lg-2">
+
+				<ul class="nav nav-sidebar" style="margin-bottom:0;"><li><a><strong>Квесты</strong></a></li></ul>
+				<ul class="nav nav-sidebar" id="yw1">
+<li class="active"><a href="/quest/adminschedule/ymd">Сводная таблица</a></li>
+<li><a href="/quest/admin">Управление квестами</a></li>
+<li><a href="/quest/create">Создать новый квест</a></li>
+</ul>
+				<ul class="nav nav-sidebar" style="margin-bottom:0;"><li><a><strong>Пользователи</strong></a></li></ul>
+				<ul class="nav nav-sidebar" id="yw2">
+<li><a href="/user/admin">Управление пользователями</a></li>
+<li><a href="/user/admin/create">Добавить пользователя</a></li>
+</ul>
+				<ul class="nav nav-sidebar" style="margin-bottom:0;"><li><a><strong>Города</strong></a></li></ul>
+				<ul class="nav nav-sidebar" id="yw3">
+<li><a href="/city/admin">Управление городами</a></li>
+<li><a href="/city/create">Создать новый город</a></li>
+</ul>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-9 col-lg-10 main">
+						<div style="min-height:300px; min-width:1024px; overflow:auto;">
+					
+<script type="text/javascript">
+	var user_name = 'Админ',
+		user_phone = '+7(323)-232-11-11';
+</script>
+
+<h1 class="page-header">Квесты на 01 ноября 2014</h1>
+<h2 class="sub-header hidden" style="text-transform: capitalize; border-bottom: none; margin-bottom:0;">ноябрь</h2>
+
+<div class="btn-group btn-group-justified">
+<a  data-="body" data-toggle="tooltip" title="30 Sep 2014 " href="/quest/adminschedule/ymd/20140930" type="button"  class="text-center btn btn-xs btn-default" ><span style="display:block;line-height:1;">30</span><small style="display:block;line-height:1;">Вт</small><small style="display:block;line-height:1;">сен</small><span class="badge" style="font-size: 13px;font-family: 'Open Sans';font-weight: normal;">0</span></a><a style="box-shadow: inset 0px -10px 0px -7px #000; padding-bottom: 3px; data-="body" data-toggle="tooltip" title="01 Oct 2014 (Всего броней - 2)" href="/quest/adminschedule/ymd/20141001" type="button" 
+					class="text-center btn btn-xs btn-default active btn-success "  disabled="disabled"><span style="display:block;line-height:1;">01</span><small style="display:block;line-height:1;">Ср</small><small style="display:block;line-height:1;">ноя</small><span class="badge" style="font-size: 13px;font-family: 'Open Sans';font-weight: normal;">2</span></a><a style="box-shadow: inset 0px -10px 0px -7px #000; padding-bottom: 3px; data-="body" data-toggle="tooltip" title="02 Oct 2014 (Всего броней - 3)" href="/quest/adminschedule/ymd/20141002" type="button" 
+					class="text-center btn btn-xs btn-default" ><span style="display:block;line-height:1;">02</span><small style="display:block;line-height:1;">Чт</small><small style="display:block;line-height:1;">ноя</small><span class="badge" style="font-size: 13px;font-family: 'Open Sans';font-weight: normal;">3</span></a><a style="box-shadow: inset 0px -10px 0px -7px #000; padding-bottom: 3px; data-="body" data-toggle="tooltip" title="03 Oct 2014 (Всего броней - 3)" href="/quest/adminschedule/ymd/20141003" type="button" 
+					class="text-center btn btn-xs btn-default" ><span style="display:block;line-height:1;">03</span><small style="display:block;line-height:1;">Птн</small><small style="display:block;line-height:1;">ноя</small><span class="badge" style="font-size: 13px;font-family: 'Open Sans';font-weight: normal;">3</span></a><a style="box-shadow: inset 0px -10px 0px -7px #000; padding-bottom: 3px; data-="body" data-toggle="tooltip" title="04 Oct 2014 (Всего броней - 2)" href="/quest/adminschedule/ymd/20141004" type="button" 
+					class="text-center btn btn-xs btn-default btn-warning" ><span style="display:block;line-height:1;">04</span><small style="display:block;line-height:1;">Сб</small><small style="display:block;line-height:1;">ноя</small><span class="badge" style="font-size: 13px;font-family: 'Open Sans';font-weight: normal;">2</span></a><a style="box-shadow: inset 0px -10px 0px -7px #000; padding-bottom: 3px; data-="body" data-toggle="tooltip" title="05 Oct 2014 (Всего броней - 2)" href="/quest/adminschedule/ymd/20141005" type="button" 
+					class="text-center btn btn-xs btn-default btn-warning" ><span style="display:block;line-height:1;">05</span><small style="display:block;line-height:1;">Вс</small><small style="display:block;line-height:1;">ноя</small><span class="badge" style="font-size: 13px;font-family: 'Open Sans';font-weight: normal;">2</span></a><a style="box-shadow: inset 0px -10px 0px -7px #000; padding-bottom: 3px; data-="body" data-toggle="tooltip" title="06 Oct 2014 (Всего броней - 1)" href="/quest/adminschedule/ymd/20141006" type="button" 
+					class="text-center btn btn-xs btn-default" ><span style="display:block;line-height:1;">06</span><small style="display:block;line-height:1;">Пн</small><small style="display:block;line-height:1;">ноя</small><span class="badge" style="font-size: 13px;font-family: 'Open Sans';font-weight: normal;">1</span></a><a style="box-shadow: inset 0px -10px 0px -7px #000; padding-bottom: 3px; data-="body" data-toggle="tooltip" title="07 Oct 2014 (Всего броней - 3)" href="/quest/adminschedule/ymd/20141007" type="button" 
+					class="text-center btn btn-xs btn-default" ><span style="display:block;line-height:1;">07</span><small style="display:block;line-height:1;">Вт</small><small style="display:block;line-height:1;">ноя</small><span class="badge" style="font-size: 13px;font-family: 'Open Sans';font-weight: normal;">3</span></a><a style="box-shadow: inset 0px -10px 0px -7px #000; padding-bottom: 3px; data-="body" data-toggle="tooltip" title="08 Oct 2014 (Всего броней - 1)" href="/quest/adminschedule/ymd/20141008" type="button" 
+					class="text-center btn btn-xs btn-default" ><span style="display:block;line-height:1;">08</span><small style="display:block;line-height:1;">Ср</small><small style="display:block;line-height:1;">ноя</small><span class="badge" style="font-size: 13px;font-family: 'Open Sans';font-weight: normal;">1</span></a><a  data-="body" data-toggle="tooltip" title="09 Oct 2014 " href="/quest/adminschedule/ymd/20141009" type="button"  class="text-center btn btn-xs btn-default" ><span style="display:block;line-height:1;">09</span><small style="display:block;line-height:1;">Чт</small><small style="display:block;line-height:1;">ноя</small><span class="badge" style="font-size: 13px;font-family: 'Open Sans';font-weight: normal;">0</span></a><a style="box-shadow: inset 0px -10px 0px -7px #000; padding-bottom: 3px; data-="body" data-toggle="tooltip" title="10 Oct 2014 (Всего броней - 1)" href="/quest/adminschedule/ymd/20141010" type="button" 
+					class="text-center btn btn-xs btn-default" ><span style="display:block;line-height:1;">10</span><small style="display:block;line-height:1;">Птн</small><small style="display:block;line-height:1;">ноя</small><span class="badge" style="font-size: 13px;font-family: 'Open Sans';font-weight: normal;">1</span></a><a  data-="body" data-toggle="tooltip" title="11 Oct 2014 " href="/quest/adminschedule/ymd/20141011" type="button" 
+					class="text-center btn btn-xs btn-default btn-warning" ><span style="display:block;line-height:1;">11</span><small style="display:block;line-height:1;">Сб</small><small style="display:block;line-height:1;">ноя</small><span class="badge" style="font-size: 13px;font-family: 'Open Sans';font-weight: normal;">0</span></a><a  data-="body" data-toggle="tooltip" title="12 Oct 2014 " href="/quest/adminschedule/ymd/20141012" type="button" 
+					class="text-center btn btn-xs btn-default btn-warning" ><span style="display:block;line-height:1;">12</span><small style="display:block;line-height:1;">Вс</small><small style="display:block;line-height:1;">ноя</small><span class="badge" style="font-size: 13px;font-family: 'Open Sans';font-weight: normal;">0</span></a><a  data-="body" data-toggle="tooltip" title="13 Oct 2014 " href="/quest/adminschedule/ymd/20141013" type="button" 
+					class="text-center btn btn-xs btn-default" ><span style="display:block;line-height:1;">13</span><small style="display:block;line-height:1;">Пн</small><small style="display:block;line-height:1;">ноя</small><span class="badge" style="font-size: 13px;font-family: 'Open Sans';font-weight: normal;">0</span></a><a  data-="body" data-toggle="tooltip" title="14 Oct 2014 " href="/quest/adminschedule/ymd/20141014" type="button" 
+					class="text-center btn btn-xs btn-default" ><span style="display:block;line-height:1;">14</span><small style="display:block;line-height:1;">Вт</small><small style="display:block;line-height:1;">ноя</small><span class="badge" style="font-size: 13px;font-family: 'Open Sans';font-weight: normal;">0</span></a><a  data-="body" data-toggle="tooltip" title="15 Oct 2014 " href="/quest/adminschedule/ymd/20141015" type="button" 
+					class="text-center btn btn-xs btn-default" ><span style="display:block;line-height:1;">15</span><small style="display:block;line-height:1;">Ср</small><small style="display:block;line-height:1;">ноя</small><span class="badge" style="font-size: 13px;font-family: 'Open Sans';font-weight: normal;">0</span></a><a  data-="body" data-toggle="tooltip" title="16 Oct 2014 " href="/quest/adminschedule/ymd/20141016" type="button" 
+					class="text-center btn btn-xs btn-default" ><span style="display:block;line-height:1;">16</span><small style="display:block;line-height:1;">Чт</small><small style="display:block;line-height:1;">ноя</small><span class="badge" style="font-size: 13px;font-family: 'Open Sans';font-weight: normal;">0</span></a><a  data-="body" data-toggle="tooltip" title="17 Oct 2014 " href="/quest/adminschedule/ymd/20141017" type="button" 
+					class="text-center btn btn-xs btn-default" ><span style="display:block;line-height:1;">17</span><small style="display:block;line-height:1;">Птн</small><small style="display:block;line-height:1;">ноя</small><span class="badge" style="font-size: 13px;font-family: 'Open Sans';font-weight: normal;">0</span></a><a  data-="body" data-toggle="tooltip" title="18 Oct 2014 " href="/quest/adminschedule/ymd/20141018" type="button" 
+					class="text-center btn btn-xs btn-default btn-warning" ><span style="display:block;line-height:1;">18</span><small style="display:block;line-height:1;">Сб</small><small style="display:block;line-height:1;">ноя</small><span class="badge" style="font-size: 13px;font-family: 'Open Sans';font-weight: normal;">0</span></a><a  data-="body" data-toggle="tooltip" title="19 Oct 2014 " href="/quest/adminschedule/ymd/20141019" type="button" 
+					class="text-center btn btn-xs btn-default btn-warning" ><span style="display:block;line-height:1;">19</span><small style="display:block;line-height:1;">Вс</small><small style="display:block;line-height:1;">ноя</small><span class="badge" style="font-size: 13px;font-family: 'Open Sans';font-weight: normal;">0</span></a><a  data-="body" data-toggle="tooltip" title="20 Oct 2014 " href="/quest/adminschedule/ymd/20141020" type="button" 
+					class="text-center btn btn-xs btn-default" ><span style="display:block;line-height:1;">20</span><small style="display:block;line-height:1;">Пн</small><small style="display:block;line-height:1;">ноя</small><span class="badge" style="font-size: 13px;font-family: 'Open Sans';font-weight: normal;">0</span></a><a  data-="body" data-toggle="tooltip" title="21 Oct 2014 " href="/quest/adminschedule/ymd/20141021" type="button" 
+					class="text-center btn btn-xs btn-default" ><span style="display:block;line-height:1;">21</span><small style="display:block;line-height:1;">Вт</small><small style="display:block;line-height:1;">ноя</small><span class="badge" style="font-size: 13px;font-family: 'Open Sans';font-weight: normal;">0</span></a><a  data-="body" data-toggle="tooltip" title="22 Oct 2014 " href="/quest/adminschedule/ymd/20141022" type="button" 
+					class="text-center btn btn-xs btn-default" ><span style="display:block;line-height:1;">22</span><small style="display:block;line-height:1;">Ср</small><small style="display:block;line-height:1;">ноя</small><span class="badge" style="font-size: 13px;font-family: 'Open Sans';font-weight: normal;">0</span></a><a  data-="body" data-toggle="tooltip" title="23 Oct 2014 " href="/quest/adminschedule/ymd/20141023" type="button" 
+					class="text-center btn btn-xs btn-default" ><span style="display:block;line-height:1;">23</span><small style="display:block;line-height:1;">Чт</small><small style="display:block;line-height:1;">ноя</small><span class="badge" style="font-size: 13px;font-family: 'Open Sans';font-weight: normal;">0</span></a><a  data-="body" data-toggle="tooltip" title="24 Oct 2014 " href="/quest/adminschedule/ymd/20141024" type="button" 
+					class="text-center btn btn-xs btn-default" ><span style="display:block;line-height:1;">24</span><small style="display:block;line-height:1;">Птн</small><small style="display:block;line-height:1;">ноя</small><span class="badge" style="font-size: 13px;font-family: 'Open Sans';font-weight: normal;">0</span></a><a  data-="body" data-toggle="tooltip" title="25 Oct 2014 " href="/quest/adminschedule/ymd/20141025" type="button" 
+					class="text-center btn btn-xs btn-default btn-warning" ><span style="display:block;line-height:1;">25</span><small style="display:block;line-height:1;">Сб</small><small style="display:block;line-height:1;">ноя</small><span class="badge" style="font-size: 13px;font-family: 'Open Sans';font-weight: normal;">0</span></a><a  data-="body" data-toggle="tooltip" title="26 Oct 2014 " href="/quest/adminschedule/ymd/20141026" type="button" 
+					class="text-center btn btn-xs btn-default btn-warning" ><span style="display:block;line-height:1;">26</span><small style="display:block;line-height:1;">Вс</small><small style="display:block;line-height:1;">ноя</small><span class="badge" style="font-size: 13px;font-family: 'Open Sans';font-weight: normal;">0</span></a><a  data-="body" data-toggle="tooltip" title="27 Oct 2014 " href="/quest/adminschedule/ymd/20141027" type="button" 
+					class="text-center btn btn-xs btn-default" ><span style="display:block;line-height:1;">27</span><small style="display:block;line-height:1;">Пн</small><small style="display:block;line-height:1;">ноя</small><span class="badge" style="font-size: 13px;font-family: 'Open Sans';font-weight: normal;">0</span></a><a  data-="body" data-toggle="tooltip" title="28 Oct 2014 " href="/quest/adminschedule/ymd/20141028" type="button" 
+					class="text-center btn btn-xs btn-default" ><span style="display:block;line-height:1;">28</span><small style="display:block;line-height:1;">Вт</small><small style="display:block;line-height:1;">ноя</small><span class="badge" style="font-size: 13px;font-family: 'Open Sans';font-weight: normal;">0</span></a><a  data-="body" data-toggle="tooltip" title="29 Oct 2014 " href="/quest/adminschedule/ymd/20141029" type="button" 
+					class="text-center btn btn-xs btn-default" ><span style="display:block;line-height:1;">29</span><small style="display:block;line-height:1;">Ср</small><small style="display:block;line-height:1;">ноя</small><span class="badge" style="font-size: 13px;font-family: 'Open Sans';font-weight: normal;">0</span></a><a  data-="body" data-toggle="tooltip" title="30 Oct 2014 " href="/quest/adminschedule/ymd/20141030" type="button" 
+					class="text-center btn btn-xs btn-default" ><span style="display:block;line-height:1;">30</span><small style="display:block;line-height:1;">Чт</small><small style="display:block;line-height:1;">ноя</small><span class="badge" style="font-size: 13px;font-family: 'Open Sans';font-weight: normal;">0</span></a></div>
+<hr>
+<style> .table>tbody>tr>td { padding:8px 1px; } </style>
+<div id="times-table" class="table-responsive">
+	<table class="table"><tr><td style="width:100px;"><small style="width:100px; overflow:hidden; display:block;">Ограбление банка</small></td>
+			<td>
+				<button data-toggle="popover"
+            		data-title="01 Oct 00:00"
+				    data-time="00:00" 
+		            data-ymd="20141001" 
+		            data-quest="3" 
+		            data-date="01 Oct" 
+		            data-day="среда" 
+					class="btn btn-default btn-xs   btn-info btn-danger "  data-id="171" data-price="3000" data-phone="+7(926)-599-28-42" data-result="0" data-comment=" СИТИКВЕСТ" data-user-id="21" data-name="anton" >
+					00:00<br><small>3000р.</small>
+				</button>
+			</td>
+
+			
+			<td>
+				<button data-toggle="popover"
+            		data-title="01 Oct 01:15"
+				    data-time="01:15" 
+		            data-ymd="20141001" 
+		            data-quest="3" 
+		            data-date="01 Oct" 
+		            data-day="среда" 
+					class="btn btn-default btn-xs "  data-price="3000" >
+					01:15<br><small>3000р.</small>
+				</button>
+			</td>
+
+			
+			<td>
+				<button data-toggle="popover"
+            		data-title="01 Oct 02:30"
+				    data-time="02:30" 
+		            data-ymd="20141001" 
+		            data-quest="3" 
+		            data-date="01 Oct" 
+		            data-day="среда" 
+					class="btn btn-default btn-xs "  data-price="3000" >
+					02:30<br><small>3000р.</small>
+				</button>
+			</td>
+
+			
+			<td>
+				<button data-toggle="popover"
+            		data-title="01 Oct 04:00"
+				    data-time="04:00" 
+		            data-ymd="20141001" 
+		            data-quest="3" 
+		            data-date="01 Oct" 
+		            data-day="среда" 
+					class="btn btn-default btn-xs  invisible"  data-price="3000" >
+					04:00<br><small>3000р.</small>
+				</button>
+			</td>
+
+			
+			<td>
+				<button data-toggle="popover"
+            		data-title="01 Oct 05:15"
+				    data-time="05:15" 
+		            data-ymd="20141001" 
+		            data-quest="3" 
+		            data-date="01 Oct" 
+		            data-day="среда" 
+					class="btn btn-default btn-xs  invisible"  data-price="3000" >
+					05:15<br><small>3000р.</small>
+				</button>
+			</td>
+
+			
+			<td>
+				<button data-toggle="popover"
+            		data-title="01 Oct 06:30"
+				    data-time="06:30" 
+		            data-ymd="20141001" 
+		            data-quest="3" 
+		            data-date="01 Oct" 
+		            data-day="среда" 
+					class="btn btn-default btn-xs  invisible"  data-price="3000" >
+					06:30<br><small>3000р.</small>
+				</button>
+			</td>
+
+			
+			<td>
+				<button data-toggle="popover"
+            		data-title="01 Oct 07:45"
+				    data-time="07:45" 
+		            data-ymd="20141001" 
+		            data-quest="3" 
+		            data-date="01 Oct" 
+		            data-day="среда" 
+					class="btn btn-default btn-xs  invisible"  data-price="3000" >
+					07:45<br><small>3000р.</small>
+				</button>
+			</td>
+
+			
+			<td>
+				<button data-toggle="popover"
+            		data-title="01 Oct 09:00"
+				    data-time="09:00" 
+		            data-ymd="20141001" 
+		            data-quest="3" 
+		            data-date="01 Oct" 
+		            data-day="среда" 
+					class="btn btn-default btn-xs "  data-price="2500" >
+					09:00<br><small>2500р.</small>
+				</button>
+			</td>
+
+			
+			<td>
+				<button data-toggle="popover"
+            		data-title="01 Oct 10:15"
+				    data-time="10:15" 
+		            data-ymd="20141001" 
+		            data-quest="3" 
+		            data-date="01 Oct" 
+		            data-day="среда" 
+					class="btn btn-default btn-xs "  data-price="2500" >
+					10:15<br><small>2500р.</small>
+				</button>
+			</td>
+
+			
+			<td>
+				<button data-toggle="popover"
+            		data-title="01 Oct 11:30"
+				    data-time="11:30" 
+		            data-ymd="20141001" 
+		            data-quest="3" 
+		            data-date="01 Oct" 
+		            data-day="среда" 
+					class="btn btn-default btn-xs "  data-price="2500" >
+					11:30<br><small>2500р.</small>
+				</button>
+			</td>
+
+			
+			<td>
+				<button data-toggle="popover"
+            		data-title="01 Oct 12:45"
+				    data-time="12:45" 
+		            data-ymd="20141001" 
+		            data-quest="3" 
+		            data-date="01 Oct" 
+		            data-day="среда" 
+					class="btn btn-default btn-xs "  data-price="2500" >
+					12:45<br><small>2500р.</small>
+				</button>
+			</td>
+
+			
+			<td>
+				<button data-toggle="popover"
+            		data-title="01 Oct 14:00"
+				    data-time="14:00" 
+		            data-ymd="20141001" 
+		            data-quest="3" 
+		            data-date="01 Oct" 
+		            data-day="среда" 
+					class="btn btn-default btn-xs "  data-price="2500" >
+					14:00<br><small>2500р.</small>
+				</button>
+			</td>
+
+			
+			<td>
+				<button data-toggle="popover"
+            		data-title="01 Oct 15:15"
+				    data-time="15:15" 
+		            data-ymd="20141001" 
+		            data-quest="3" 
+		            data-date="01 Oct" 
+		            data-day="среда" 
+					class="btn btn-default btn-xs "  data-price="2500" >
+					15:15<br><small>2500р.</small>
+				</button>
+			</td>
+
+			
+			<td>
+				<button data-toggle="popover"
+            		data-title="01 Oct 16:30"
+				    data-time="16:30" 
+		            data-ymd="20141001" 
+		            data-quest="3" 
+		            data-date="01 Oct" 
+		            data-day="среда" 
+					class="btn btn-default btn-xs "  data-price="2500" >
+					16:30<br><small>2500р.</small>
+				</button>
+			</td>
+
+			
+			<td>
+				<button data-toggle="popover"
+            		data-title="01 Oct 17:45"
+				    data-time="17:45" 
+		            data-ymd="20141001" 
+		            data-quest="3" 
+		            data-date="01 Oct" 
+		            data-day="среда" 
+					class="btn btn-default btn-xs "  data-price="3000" >
+					17:45<br><small>3000р.</small>
+				</button>
+			</td>
+
+			
+			<td>
+				<button data-toggle="popover"
+            		data-title="01 Oct 19:00"
+				    data-time="19:00" 
+		            data-ymd="20141001" 
+		            data-quest="3" 
+		            data-date="01 Oct" 
+		            data-day="среда" 
+					class="btn btn-default btn-xs btn-info btn-gr"  data-id="196" data-price="0" data-phone="+79252728118" data-result="" data-comment="партнеры - очень стараемся - денег не берем" data-user-id="20" data-name="Надежда  - Smile" >
+					19:00<br><small>3000р.</small>
+				</button>
+			</td>
+
+			
+			<td>
+				<button data-toggle="popover"
+            		data-title="01 Oct 20:15"
+				    data-time="20:15" 
+		            data-ymd="20141001" 
+		            data-quest="3" 
+		            data-date="01 Oct" 
+		            data-day="среда" 
+					class="btn btn-default btn-xs "  data-price="3000" >
+					20:15<br><small>3000р.</small>
+				</button>
+			</td>
+
+			
+			<td>
+				<button data-toggle="popover"
+            		data-title="01 Oct 21:30"
+				    data-time="21:30" 
+		            data-ymd="20141001" 
+		            data-quest="3" 
+		            data-date="01 Oct" 
+		            data-day="среда" 
+					class="btn btn-default btn-xs "  data-price="3000" >
+					21:30<br><small>3000р.</small>
+				</button>
+			</td>
+
+			
+			<td>
+				<button data-toggle="popover"
+            		data-title="01 Oct 22:45"
+				    data-time="22:45" 
+		            data-ymd="20141001" 
+		            data-quest="3" 
+		            data-date="01 Oct" 
+		            data-day="среда" 
+					class="btn btn-default btn-xs "  data-price="3000" >
+					22:45<br><small>3000р.</small>
+				</button>
+			</td>
+
+			</tr></table></div>
+<script  type="text/javascript">
+	var adminschedule = 1;
+</script>
+<script id="BookInfWrap" type="text/template">
+  <div class="checkBooking" id="BookInf">
+    <h3 style="margin-top: 0;" class="pop-row"><a href="<%= user_url %>"><%= name %></a></h3>
+    <p class="phoneRow pop-row" id="phoneRow">
+      <strong>Phone</strong>: <span><%= phone %></span><br>
+      <strong>Comment</strong>: <span><%= comment %></span>
+    </p>
+    <form class="form-horizontal pop-row" id="editBookingRow" role="form">
+      <div class="form-group">
+        <label for="inputName" class="col-sm-2 control-label">Name</label>
+        <div class="col-sm-7">
+          <input type="text" class="form-control input-sm inputName" placeholder="Ivan">
+        </div>
+        <div class="col-sm-2">
+          <button id="saveBooking" class="btn btn-default btn-sm" data-toggle="tooltip" title="Сохранить">
+            <span class="glyphicon glyphicon-ok"></span>
+          </button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputPhone" class="col-sm-2 control-label">Phone</label>
+        <div class="col-sm-7">
+          <input type="text" class="form-control input-sm inputPhone" placeholder="123-456-789">
+        </div>
+        <div class="col-sm-2">
+          <button id="cancelEditBooking" class="btn btn-default btn-sm" data-toggle="tooltip" title="Отменить">
+            <span class="glyphicon glyphicon-remove"></span>
+          </button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputPrice" class="col-sm-2 control-label">Price</label>
+        <div class="col-sm-7">
+          <input type="text" class="form-control input-sm inputPrice" placeholder="3000">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputResult" class="col-sm-2 control-label">Result</label>
+        <div class="col-sm-7">
+          <input type="text" class="form-control input-sm inputResult" placeholder="00:00">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-12">
+          <textarea type="text" class="form-control input-sm inputComment" placeholder="Дополнительный комментарий"></textarea>
+        </div>
+      </div>
+    </form>
+    <form class="form-horizontal pop-row" id="addBookingRow" role="form">
+      <div class="form-group">
+        <label for="inputName" class="col-sm-2 control-label">Name</label>
+        <div class="col-sm-7">
+          <input type="text" class="form-control input-sm inputName" placeholder="Ivan">
+        </div>
+        <div class="col-sm-2">
+          <button id="saveBooking" class="btn btn-default btn-sm" data-toggle="tooltip" title="Сохранить">
+            <span class="glyphicon glyphicon-ok"></span>
+          </button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputPhone" class="col-sm-2 control-label">Phone</label>
+        <div class="col-sm-7">
+          <input type="text" class="form-control input-sm inputPhone" placeholder="123-456-789">
+        </div>
+        <div class="col-sm-2">
+          <button id="cancelAddBooking" class="btn btn-default btn-sm" data-toggle="tooltip" title="Отменить">
+            <span class="glyphicon glyphicon-remove"></span>
+          </button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputPrice" class="col-sm-2 control-label">Price</label>
+        <div class="col-sm-7">
+          <input type="text" class="form-control input-sm inputPrice" value="<%= price %>" placeholder="3000">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputResult" class="col-sm-2 control-label">Result</label>
+        <div class="col-sm-7">
+          <input type="text" class="form-control input-sm inputResult" value="<%= result %>" placeholder="00:00">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-12">
+          <textarea type="text" class="form-control input-sm inputComment" placeholder="Дополнительный комментарий"></textarea>
+        </div>
+      </div>
+    </form>
+    <div class="pop-row" id="confirmRow">
+    <p class="text-center">
+      <strong>Вы уверены?</strong>
+      <button class="btn btn-default btn-sm" data-toggle="tooltip" title="Да, Удалить!" id="confirmedDelete">
+        <span class="glyphicon glyphicon-ok"></span>
+      </button>
+      <button class="btn btn-default btn-sm" data-toggle="tooltip" title="Отменить удаление" id="cancelDelete">
+        <span class="glyphicon glyphicon-remove"></span>
+      </button>
+    </p>
+    </div>
+    <div class="pop-row" id="btnRow">
+    <p class="text-center">
+      <button class="btn btn-default btn-sm" id="confirmBooking" data-toggle="tooltip" title="Подтвердить бронирование">
+        <span class="glyphicon glyphicon-ok-circle"></span>
+      </button>
+      <button class="btn btn-default btn-sm" id="undoBooking" data-toggle="tooltip" title="Удалить подтверждение">
+        <span class="glyphicon glyphicon-remove-circle"></span>
+      </button>
+      <button class="btn btn-default btn-sm" id="showRemoveBooking" data-toggle="tooltip" title="Удалить бронирование">
+        <span class="glyphicon glyphicon-remove"></span>
+      </button>
+      <button class="btn btn-default btn-sm" id="editBooking" data-toggle="tooltip" title="Редактировать бронирование">
+        <span class="glyphicon glyphicon-pencil"></span>
+      </button>
+    </p>
+    </div>
+    <div class="pop-row" id="addRow">
+      <p class="text-center">
+        <strong>Записать вручную</strong>
+        <button class="btn btn-default btn-sm" id="addBooking" data-toggle="tooltip" title="Добавить бронирование">
+          <span class="glyphicon glyphicon-plus"></span>
+        </button>
+      </p>
+    </div>
+  </div>
+</script>				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
