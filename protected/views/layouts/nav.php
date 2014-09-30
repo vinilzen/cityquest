@@ -20,16 +20,16 @@
               <button class="btn navbar-toggle btn-topline" id="show-menu" type="button"><span class="icos"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></span><span>Меню</span></button>
               <div id="for-city">
                 <div class="btn-group city-select">
-                  <button class="btn btn-topline ico-msq" disabled="disabled" data-toggle="dropdown" type="button"> Москва</button>
+                  <button class="btn btn-topline ico-msq" disabled="disabled" data-toggle="dropdown" type="button">Москва</button>
                   <button class="btn btn-topline dropdown-toggle" disabled="disabled" data-toggle="dropdown" type="button">
                     <span class="caret"></span><span class="sr-only">Выбрать город</span>
                   </button>
-                  <ul class="dropdown-menu" role="menu">
+                  <?/*<ul class="dropdown-menu" role="menu">
                     <li><a href="#">Питер</a></li>
                     <li><a href="#">Уфа</a></li>
                     <li><a href="#">Владивосток</a></li>
-                  </ul>
-                </div>
+                  </ul> */
+                ?></div>
               </div>
               <div id="for-login-pl">
                 <? if (Yii::app()->user->isGuest) {
