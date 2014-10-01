@@ -43,7 +43,7 @@
         </div>
         <div class="col-sm-6 col-xs-12 shad">
           <div class="text-center">
-            <h3>Мы ждем вас</h3>
+            <h3>Вы играли</h3>
             <p>
               <?
                 $week=array(0=>"Воскресенье", "Понедельник","Вторник","Среда","Четверг","Пятница","Суббота");
@@ -60,7 +60,7 @@
             </div>
             <p class="you_phone">Ваш номер телефона: <input type="text" disabled value="<? echo Yii::app()->getModule('user')->user()->phone; ?>" ></p>
             <!-- <div class="btn btn-default btn-success">ПОдтвержден<i class="glyphicon glyphicon-ok"></i></div> -->
-            <? if ($book->result == '00:00' || $book->result == '0' || $book->result == '00' || $book->result == '') { ?>
+            <? if ($book->result == '00:00' || $book->result == '60' || $book->result == '0' || $book->result == '00' || $book->result == '') { ?>
               <div class="btn btn-default btn-blank">Квест не пройден</div>
             <? } else { ?>
               <div class="btn btn-default btn-success">Ваш результат <? echo $book->result ?></div>
