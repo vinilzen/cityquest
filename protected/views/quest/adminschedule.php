@@ -131,8 +131,8 @@ $this->breadcrumbs=array('Quests');  ?>
 				if ($quest['bookings'][$time]->result != 0 && 
 					$quest['bookings'][$time]->result != '0' && 
 					$quest['bookings'][$time]->result != '00' && 
-					$quest['bookings'][$time]->result != '60:00' && 
-					$quest['bookings'][$time]->result != '60' && 
+					//$quest['bookings'][$time]->result != '60:00' && 
+					//$quest['bookings'][$time]->result != '60' && 
 					$quest['bookings'][$time]->result != ' ' && 
 					$quest['bookings'][$time]->result != '')
 				{
