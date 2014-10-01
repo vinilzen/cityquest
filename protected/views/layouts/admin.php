@@ -52,35 +52,44 @@
 	<div class="container-fluid">
 		<div class="row">
 		<? if (Yii::app()->getModule('user')->user()->superuser == 1) { ?>
+			<div class="navbar-default">
+				<button type="button" class="navbar-toggle collapsed pull-left" data-toggle="collapse" data-target="#left-sidebar">
+					<span class="sr-only">Toggle sidebar</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
 			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-2">
 
-				<ul class="nav nav-sidebar" style="margin-bottom:0;"><li><a><strong>Квесты</strong></a></li></ul>
-				<?
-					$this->beginWidget('zii.widgets.CMenu', array(
-						'items'=>$this->quest_menu,
-						'htmlOptions'=>array('class'=>'nav nav-sidebar'),
-					));
-					$this->endWidget();
-				?>
+				<div class="navbar-collapse collapse" id="left-sidebar">
+					<ul class="nav nav-sidebar" style="margin-bottom:0;"><li><a><strong>Квесты</strong></a></li></ul>
+					<?
+						$this->beginWidget('zii.widgets.CMenu', array(
+							'items'=>$this->quest_menu,
+							'htmlOptions'=>array('class'=>'nav nav-sidebar'),
+						));
+						$this->endWidget();
+					?>
 
-				<ul class="nav nav-sidebar" style="margin-bottom:0;"><li><a><strong>Пользователи</strong></a></li></ul>
-				<?
-					$this->beginWidget('zii.widgets.CMenu', array(
-						'items'=>$this->user_menu,
-						'htmlOptions'=>array('class'=>'nav nav-sidebar'),
-					));
-					$this->endWidget();
-				?>
+					<ul class="nav nav-sidebar" style="margin-bottom:0;"><li><a><strong>Пользователи</strong></a></li></ul>
+					<?
+						$this->beginWidget('zii.widgets.CMenu', array(
+							'items'=>$this->user_menu,
+							'htmlOptions'=>array('class'=>'nav nav-sidebar'),
+						));
+						$this->endWidget();
+					?>
 
-				<ul class="nav nav-sidebar" style="margin-bottom:0;"><li><a><strong>Города</strong></a></li></ul>
-				<?
-					$this->beginWidget('zii.widgets.CMenu', array(
-						'items'=>$this->city_menu,
-						'htmlOptions'=>array('class'=>'nav nav-sidebar'),
-					));
-					$this->endWidget();
-				?>
-
+					<ul class="nav nav-sidebar" style="margin-bottom:0;"><li><a><strong>Города</strong></a></li></ul>
+					<?
+						$this->beginWidget('zii.widgets.CMenu', array(
+							'items'=>$this->city_menu,
+							'htmlOptions'=>array('class'=>'nav nav-sidebar'),
+						));
+						$this->endWidget();
+					?>
+				</div>	
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-9 col-lg-10 main">
 		<? 	} else { ?>
