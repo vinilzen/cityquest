@@ -6,6 +6,7 @@ $this->breadcrumbs=array('Quests');  ?>
 
 <script type="text/javascript">
 	var user_name = '<? echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->username : ''; ?>',
+		hash = '<? echo $arr_hash ?>',
 		user_phone = '<? echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->phone : ''; ?>';
 </script>
 

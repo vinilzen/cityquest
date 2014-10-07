@@ -375,19 +375,29 @@ $(function() {
 
 
 	if (adminschedule) {
-	    var time = new Date().getTime();
-	     $(document.body).bind("mousemove keypress", function(e) {
-	         time = new Date().getTime();
-	     });
+		var time = new Date().getTime();
 
-	     function refresh() {
-	         if(new Date().getTime() - time >= 10000)
-	             window.location.reload(true);
-	         else 
-	             setTimeout(refresh, 10000);
-	     }
+		$(document.body).bind("mousemove keypress", function(e) {
+			time = new Date().getTime();
+		});
 
-	     setTimeout(refresh, 10000);
+		function refresh() {
+			
+			if(new Date().getTime() - time >= 10000){
+
+				$.get('', {'hash':hash}, function(a,b,c){
+					if (a != hash){
+			    		window.location.reload(true);
+					} else {
+			    		setTimeout(refresh, 10000);
+					}
+				});				
+			} else {
+			    setTimeout(refresh, 10000);
+			}
+		}
+
+		setTimeout(refresh, 10000);
 	}
 
 });

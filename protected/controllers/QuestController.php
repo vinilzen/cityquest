@@ -122,7 +122,6 @@ class QuestController extends Controller
 
 			$bookings_by_date[$booking->date][$booking->time] = $booking->attributes;
 			$bookings_by_date[$booking->date][$booking->time]['name'] = $booking->competitor->username;
-
 		}
 
 		if (isset($model->times) && is_numeric($model->times) && isset(Yii::app()->params['times'][(int)$model->times]))
@@ -296,6 +295,7 @@ class QuestController extends Controller
 				'twoweek'=> date('Ymd', strtotime( '+15 day' ))
 			)
 		);
+
 		if (count($twoweek_bookings)>0){
 			$twoweek_bookings_arr = array();
 			foreach ($twoweek_bookings as $booking) {
@@ -307,40 +307,47 @@ class QuestController extends Controller
 			}
 		}
 
-		$quests=Quest::model()->findAllByAttributes(array('status' => 2));
-		$quests_array = array();
+		if(Yii::app()->request->isAjaxRequest){
+			echo md5(serialize($twoweek_bookings_arr));
+			Yii::app()->end();
+		} else {
 
-		if (count($quests)>0){
+			$quests=Quest::model()->findAllByAttributes(array('status' => 2));
+			$quests_array = array();
 
-			$quest_ids = array();
+			if (count($quests)>0){
 
-			foreach ($quests AS $quest){
-				$quest_ids[] = $quest->id;
-				$quests_array[$quest->id] = array();
-				$quests_array[$quest->id]['q'] = $quest;
-				$quests_array[$quest->id]['booking'] = array();
-			}
+				$quest_ids = array();
 
-			$bookings=Booking::model()->findAllByAttributes(
-				array(
-					'quest_id' => $quest_ids,
-					'date' => $YMDate,
-				)
-			);
+				foreach ($quests AS $quest){
+					$quest_ids[] = $quest->id;
+					$quests_array[$quest->id] = array();
+					$quests_array[$quest->id]['q'] = $quest;
+					$quests_array[$quest->id]['booking'] = array();
+				}
 
-			if (count($bookings)>0){
-				foreach ($bookings as $b) {
-					$quests_array[$b->quest_id]['bookings'][$b->time] = $b;
+				$bookings=Booking::model()->findAllByAttributes(
+					array(
+						'quest_id' => $quest_ids,
+						'date' => $YMDate,
+					)
+				);
+
+				if (count($bookings)>0){
+					foreach ($bookings as $b) {
+						$quests_array[$b->quest_id]['bookings'][$b->time] = $b;
+					}
 				}
 			}
+
+
+			$this->render('adminschedule',array(
+				'twoweek_bookings_arr' => $twoweek_bookings_arr,
+				'quests' => $quests_array,
+				'ymd' => $YMDate,
+				'arr_hash' => md5(serialize($twoweek_bookings_arr)),
+			));
 		}
-
-
-		$this->render('adminschedule',array(
-			'twoweek_bookings_arr' => $twoweek_bookings_arr,
-			'quests' => $quests_array,
-			'ymd' => $YMDate,
-		));
 	}
 
 	/**
