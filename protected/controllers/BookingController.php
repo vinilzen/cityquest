@@ -137,6 +137,17 @@ class BookingController extends Controller
 										Команда CityQuest<br>
 										<a href='http://cityquest.ru' target='_blank'>www.cityquest.ru</a><br>
 										8 (495) 749-96-09");
+									
+									// copy
+									$this->sendMail(
+										'ilya@cityquest.ru',
+										"CityQuest. Бронирование квеста «".$quest->title."» ".substr($model->date, -2, 2)."/".substr($model->date, -4, 2)."/".substr($model->date, 0, 4)." ".$model->time,
+										"Здравствуйте, ".Yii::app()->getModule('user')->user()->username."! <br><br>
+										
+										Вы записались на квест <a href='http://cityquest.ru/quest/view?id=".$quest->id."' target='_blank' >«".$quest->title."»</a> ".substr($model->date, -2, 2)."/".substr($model->date, -4, 2)."/".substr($model->date, 0, 4)." в ".$model->time." <br>
+										Не забудьте, для участия вам понадобится команда от 2 до 4 человек.<br><br>
+
+										Мы ждем вас по адресу <a href='https://www.google.com/maps/preview?q=москва,+".urlencode($quest->addres)."' target='_blank'>".$quest->addres.".</a>");
 								}
 
 								echo CJavaScript::jsonEncode(array('success'=>1, 'a' => urlencode($quest->addres)));

@@ -9,14 +9,6 @@ return array(
 	'helloEmail'=>'hello@cityquest.ru',
 	// number of posts displayed per page
 	'postsPerPage'=>10,
-	// maximum number of comments that can be displayed in recent comments portlet
-	'recentCommentCount'=>10,
-	// maximum number of tags that can be displayed in tag cloud portlet
-	'tagCloudCount'=>20,
-	// whether post comments need to be approved before published
-	'commentNeedApproval'=>true,
-	// the copyright information displayed in the footer section
-	'copyrightInfo'=>'Copyright &copy; 2009 by Pandra ru.',
 
 	// цена в будние до обеда
 	'price_workday_AM' => 2500,
@@ -41,8 +33,8 @@ return array(
     'days' => array('воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота'),
     'days_short' => array('Пн', 'Вт', 'Ср', 'Чт', 'Птн', 'Сб', 'Вс'),
 
-    'month' => array('января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'ноября', 'октября', 'декабря' ),
-    'month_f' => array('январь', 'февраль', 'март', 'апрель', 'май', 'июнь', 'июль', 'август', 'сентябрь', 'ноябрь', 'октябрь', 'декабрь' ),
+    'month' => array('января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря' ),
+    'month_f' => array('январь', 'февраль', 'март', 'апрель', 'май', 'июнь', 'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь' ),
 
     // сколько след дней доступно для записи
     'offset' => 14
