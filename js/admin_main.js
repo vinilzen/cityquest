@@ -157,6 +157,7 @@ var PopoverView = Backbone.View.extend({
 			phone : $('#addBookingRow .inputPhone').val(),
 			comment : $('#addBookingRow .inputComment').val(),
 			name : $('#addBookingRow .inputName').val(),
+			user : $('#selectUser select').val(),
 		}, function(result){
 			if (result && result.success) {
 				console.log('confirmed');
@@ -210,6 +211,8 @@ var PopoverView = Backbone.View.extend({
 	showAdd:function(){
 		$('#addRow', this.$el).hide();
 		$('#addBookingRow', this.$el).show();
+		$('#selectUser select', this.$el).styler({selectSearch:true});
+
 		$(this.parent).popover('setPosition');
 		return false;
 	},

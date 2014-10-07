@@ -340,11 +340,13 @@ class QuestController extends Controller
 				}
 			}
 
+			$users = User::model()->findALL(array("condition"=>"superuser = 0"));
 
 			$this->render('adminschedule',array(
 				'twoweek_bookings_arr' => $twoweek_bookings_arr,
 				'quests' => $quests_array,
 				'ymd' => $YMDate,
+				'users' => $users,
 				'arr_hash' => md5(serialize($twoweek_bookings_arr)),
 			));
 		}

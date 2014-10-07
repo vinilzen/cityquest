@@ -114,7 +114,6 @@ class BookingController extends Controller
 							$model->competitor_id = (int)Yii::app()->user->id;
 
 
-
 							$user_model = Yii::app()->getModule('user')->user();
 							$user_model->phone = $_POST['phone'];
 

@@ -10,6 +10,7 @@
 	<![endif]-->
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/_bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/dashboard.css" />
+	<link rel="stylesheet" type="text/css" href="/css/jquery.formstyler.css" />
 	<!--[if lt IE 9]
 		<script src="/js/ie8-responsive-file-warning.js"></script>-->
 	<script src="/js/ie-emulation-modes-warning.js"></script>
@@ -108,6 +109,7 @@
 <script src="/js/backbone-min.js"></script>
 <script src="/js/bootstrap.js"></script>
 <script src="/js/admin_main.js"></script>
+<script src="/js/jquery.formstyler.min.js"></script>  
 <!-- Yandex.Metrika informer --><!-- /Yandex.Metrika informer --><!-- Yandex.Metrika counter -->
 <script type="text/javascript">
   (function (d, w, c) {
@@ -134,9 +136,7 @@
   })(document, window, "yandex_metrika_callbacks");
 </script>
 <noscript>
-  <div>
-    <img alt="" src="//mc.yandex.ru/watch/25221941" style="position:absolute; left:-9999px;">
-  </div>
+  <div><img alt="" src="//mc.yandex.ru/watch/25221941" style="position:absolute; left:-9999px;"></div>
 </noscript><!-- /Yandex.Metrika counter -->
 </body>
 </html>

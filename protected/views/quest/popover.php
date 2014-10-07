@@ -82,6 +82,16 @@
         </div>
       </div>
       <div class="form-group">
+        <div class="col-sm-9" id="selectUser">
+          <select name="user">
+            <option value="0">Пользователь</option>
+            <?php if (isset($users)) foreach ($users as $user) {
+                echo '<option value="'.$user->id.'" title="'.$user->email.'">'.$user->username.' ('. $user->email .')</option>';
+            } ?>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
         <div class="col-sm-12">
           <textarea type="text" class="form-control input-sm inputComment" placeholder="Дополнительный комментарий"></textarea>
         </div>
