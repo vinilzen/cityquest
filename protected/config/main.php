@@ -63,6 +63,7 @@ return array(
 				'post/<id:\d+>/<title:.*?>'=>'post/view',
 				'posts/<tag:.*?>'=>'post/index',
 				'rules'=>'site/about',
+				'giftcard'=>'site/giftcard',
 				'franchise'=>'site/franchise',
 				'contact'=>'site/contact',
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',

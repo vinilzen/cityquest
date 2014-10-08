@@ -73,6 +73,11 @@ input {
   *zoom:1; /* hasLayout ie7 trigger */
   vertical-align: top;
 }
+@media (max-width: 1200px) and (min-width: 991px) {
+	.navbar .nav {
+		margin-left: -35px;
+	}
+}
 
 .navbar-inner {
   text-align:center;

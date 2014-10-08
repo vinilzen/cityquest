@@ -818,4 +818,29 @@ $(function() {
 	  // $(e.relatedTarget) // previous tab
 	});
 
+	$('#bookgift-phone').mask('+7(000)-000-00-00');
+
+	$('#bookgift-form').submit(function(){
+		if ( $('#bookgift-name').val() != '' ){
+			if ( $('#bookgift-phone').val() != '' ){
+				if ( $('bookgift-addres').val() != '' ){
+					return true;
+				} else {
+
+					alert('Зполните пожалуйсто поле "Адрес"');
+					$('#bookgift-addres').focus();
+					return false;
+				}
+			} else {
+				alert('Зполните пожалуйсто поле "Телефон"');
+				$('#bookgift-phone').focus();
+				return false;
+			}
+		} else {
+			alert('Зполните пожалуйсто поле "Имя"');
+			$('#bookgift-name').focus();
+			return false;
+		}
+	});
+
 });

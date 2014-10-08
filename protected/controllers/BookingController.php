@@ -57,15 +57,14 @@ class BookingController extends Controller
 	}
 
 	/**
-	 * Send mail method
-	 */
+	* Send mail method
+	*/
 	public static function sendMail($email,$subject,$message) {
 		$helloEmail = Yii::app()->params['helloEmail'];
-	    $headers = "MIME-Version: 1.0\r\nFrom: CityQuest <$helloEmail>\r\nReply-To: $helloEmail\r\nContent-Type: text/html; charset=utf-8";
-	    $message = wordwrap($message, 70);
-	    $message = str_replace("\n.", "\n..", $message);
-	    return mail($email,"=?UTF-8?B?".base64_encode($subject)."?=",$message,$headers);
-	    
+		$headers = "MIME-Version: 1.0\r\nFrom: CityQuest <$helloEmail>\r\nReply-To: $helloEmail\r\nContent-Type: text/html; charset=utf-8";
+		$message = wordwrap($message, 70);
+		$message = str_replace("\n.", "\n..", $message);
+		return mail($email,"=?UTF-8?B?".base64_encode($subject)."?=",$message,$headers);
 	}
 
 
@@ -111,11 +110,22 @@ class BookingController extends Controller
 							$model->result = isset($_POST['result'])?$_POST['result']:0;
 							$model->name = $_POST['name'];
 							$model->quest_id = (int)$_POST['quest_id'];
+
 							$model->competitor_id = (int)Yii::app()->user->id;
 
-
-							$user_model = Yii::app()->getModule('user')->user();
-							$user_model->phone = $_POST['phone'];
+							if (isset($_POST['user']) && $_POST['user'] != '' && $_POST['user'] != 0){
+								$user_model = Yii::app()->getModule('user')->user($_POST['user']);
+								
+								if($user_model){
+									$model->competitor_id = $user_model->id;
+								} else {									
+									$user_model = Yii::app()->getModule('user')->user();
+									$user_model->phone = $_POST['phone'];	
+								}
+							} else {
+								$user_model = Yii::app()->getModule('user')->user();
+								$user_model->phone = $_POST['phone'];
+							}
 
 							if ( $user_model->save() && $model->save())
 							{
@@ -140,7 +150,7 @@ class BookingController extends Controller
 									
 									// copy
 									$this->sendMail(
-										'ilya@cityquest.ru',
+										'ilya@cityquest.ru, e.roslovets@cityquest.ru',
 										"CityQuest. Бронирование квеста «".$quest->title."» ".substr($model->date, -2, 2)."/".substr($model->date, -4, 2)."/".substr($model->date, 0, 4)." ".$model->time,
 										"Здравствуйте, ".Yii::app()->getModule('user')->user()->username."! <br><br>
 										

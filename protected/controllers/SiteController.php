@@ -15,9 +15,6 @@ class SiteController extends Controller
 				'class'=>'CCaptchaAction',
 				'backColor'=>0xFFFFFF,
 			),
-			// page action renders "static" pages stored under 'protected/views/site/pages'
-			// They can be accessed via: index.php?r=site/page&view=FileName
-			// 'page'=>array( 'class'=>'CViewAction' ),
 		);
 	}
 
@@ -28,6 +25,37 @@ class SiteController extends Controller
 	{
 		$this->pageTitle = Yii::app()->name . ' - Правила игры';
 	    $this->render('pages/about');
+	}
+
+	/**
+	* Send mail method
+	*/
+	public static function sendMail($email,$subject,$message) {
+		$helloEmail = Yii::app()->params['helloEmail'];
+		$headers = "MIME-Version: 1.0\r\nFrom: CityQuest <$helloEmail>\r\nReply-To: $helloEmail\r\nContent-Type: text/html; charset=utf-8";
+		$message = wordwrap($message, 70);
+		$message = str_replace("\n.", "\n..", $message);
+		return mail($email,"=?UTF-8?B?".base64_encode($subject)."?=",$message,$headers);
+	}
+
+	public function actionGiftcard()
+	{
+		$msg = '';
+		if (isset($_POST['name']) && $_POST['name'] != '' && isset($_POST['phone']) 
+			&& $_POST['phone'] != '' && isset($_POST['addres']) && $_POST['addres'] != ''
+		){
+			$this->sendMail(
+				'ilya@cityquest.ru, e.roslovets@cityquest.ru',
+				//'marchukilya@gmail.com',
+				"CityQuest. Заказ подарочной карты",
+				"Имя - ".$_POST['name']."<br>".
+				"Телефон -  ".$_POST['phone']."<br>".
+				"Адрес - ".$_POST['addres'] );
+			$msg = 'Мы получили ваш заказ, в ближайшее время с вами свяжутся по указаному номеру!';
+		}
+
+		$this->pageTitle = Yii::app()->name . ' - Подарочные карты';
+	    $this->render('giftcard',array('msg'=>$msg));
 	}
 
 	public function actionFranchise()

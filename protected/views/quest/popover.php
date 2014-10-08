@@ -86,7 +86,7 @@
           <select name="user">
             <option value="0">Пользователь</option>
             <?php if (isset($users)) foreach ($users as $user) {
-                echo '<option value="'.$user->id.'" title="'.$user->email.'">'.$user->username.' ('. $user->email .')</option>';
+                echo '<option value="'.$user->id.'" title="'.$user->email.'" data-name="'.$user->username.'" data-phone="'.$user->phone.'">'.$user->username.' ('. $user->email .')</option>';
             } ?>
           </select>
         </div>
