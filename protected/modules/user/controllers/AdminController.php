@@ -61,8 +61,29 @@ class AdminController extends Controller
 	public function actionView()
 	{
 		$model = $this->loadModel();
+
+		$bookings = Booking::model()->with('quest')->findAllByAttributes(
+			array('competitor_id'=>$model->id),
+			'date >:today OR (date = :today AND time >:time) ',
+			array(
+				'today'=>date('Ymd'),
+				'time'=>date('H:i'),
+			)
+		);
+		
+		$bookings_old = Booking::model()->with('quest')->findAllByAttributes(
+			array('competitor_id'=>$model->id),
+			'date < :today OR (date = :today AND time < :time) ',
+			array(
+				'today'=>date('Ymd'),
+				'time'=>date('H:i'),
+			)
+		);
+
 		$this->render('view',array(
 			'model'=>$model,
+			'bookings'=>$bookings,
+			'bookings_old'=>$bookings_old,
 		));
 	}
 
