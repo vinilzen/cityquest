@@ -10,7 +10,7 @@ $this->pageImg= '/images/q/'.$model->id.'.jpg';
       user_phone = '<? echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->phone : ''; ?>';
 </script>
 
-<div class="jumbotron quest" style="background-image: url(../images/q/<? echo $model->id; ?>.jpg);">
+<div class="jumbotron quest" style="background-image: url(../images/q/<? echo $model->id; ?>.jpg); <? if ($model->id == 2) { echo 'background-position: left 45%;'; } ?> " >
   <div class="container text-center">
     <div class="row">
       <div class="col-md-10 col-md-offset-1 col-sm-12">
@@ -128,7 +128,7 @@ $this->pageImg= '/images/q/'.$model->id.'.jpg';
                 }
 
                 $empty = '';
-                if ($model->id == 3 && ($k != 0 && $k<8)) {
+                if (($model->id == 3 || $model->id == 2) && ($k != 0 && $k<8)) {
                   $empty = ' empty_btn ';
                   $disabled = ' disabled="disabled"';
                 }

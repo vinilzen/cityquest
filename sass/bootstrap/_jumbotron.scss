@@ -26,6 +26,10 @@
 
   .container {
     max-width: 100%;
+    @media screen and (min-width: 1670px) {
+      padding-top: 5%;
+      padding-bottom: 5%;
+    }
   }
 
   padding-top:    ($jumbotron-padding * 3);
