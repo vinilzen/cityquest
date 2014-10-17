@@ -296,8 +296,8 @@ class QuestController extends Controller
 			)
 		);
 
+		$twoweek_bookings_arr = array();
 		if (count($twoweek_bookings)>0){
-			$twoweek_bookings_arr = array();
 			foreach ($twoweek_bookings as $booking) {
 
 				if (!isset($twoweek_bookings_arr[$booking->date])){

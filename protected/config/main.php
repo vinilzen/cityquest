@@ -47,7 +47,7 @@ return array(
 			'emulatePrepare' => true,
     		'enableParamLogging' => true,
 			'username' => 'cityquest',
-			'password' => 'cityquest123',
+			'password' => 'cityquest',
 			'charset' => 'utf8',
 			'tablePrefix' => 'tbl_',
 		),
