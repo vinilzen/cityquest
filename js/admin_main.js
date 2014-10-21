@@ -251,7 +251,7 @@ $(function() {
 	});
 
 	$('#times-table button[data-toggle="popover"]').popover({
-		placement:'auto',
+		placement:'auto left',
 		animation: false,
 		container: 'body',
 		trigger: 'click',

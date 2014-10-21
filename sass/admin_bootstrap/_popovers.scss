@@ -9,7 +9,8 @@
   left: 0;
   z-index: $zindex-popover;
   display: none;
-  max-width: $popover-max-width;
+  // max-width: $popover-max-width;
+  max-width: 376px;
   padding: 1px;
   text-align: left; // Reset given new insertion method
   background-color: $popover-bg;

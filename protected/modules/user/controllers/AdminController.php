@@ -28,6 +28,10 @@ class AdminController extends Controller
 				'actions'=>array('admin','delete','create','update','view'),
 				'expression'=> "(Yii::app()->getModule('user')->user()->superuser == 1)",
 			),
+			array('allow',
+				'actions'=>array('view'),
+				'expression'=>"Yii::app()->getModule('user')->user()->superuser == 2",
+			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),

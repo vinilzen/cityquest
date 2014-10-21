@@ -38,7 +38,7 @@ class QuestController extends Controller
 				'actions'=>array('create','update','admin','delete', 'sort', 'adminschedule'),
 				'expression'=>"Yii::app()->getModule('user')->user()->superuser == 1",
 			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
+			array('allow',
 				'actions'=>array('adminschedule'),
 				'expression'=>"Yii::app()->getModule('user')->user()->superuser == 2",
 			),
@@ -312,7 +312,13 @@ class QuestController extends Controller
 			Yii::app()->end();
 		} else {
 
-			$quests=Quest::model()->findAllByAttributes(array('status' => 2));
+			// $quests=Quest::model()->findAllByAttributes(array('status' => 2));
+			$quests = Quest::model()->findAll(array(
+			    "condition" => "status = 2 ",
+			    "order" => "status ASC, sort ASC",
+			    "limit" => 12,
+			));
+
 			$quests_array = array();
 
 			if (count($quests)>0){
