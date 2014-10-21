@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 Disallow: /forum
-Sitemap: /sitemap.xml
+Sitemap: http://cityquest.ru/sitemap.xml

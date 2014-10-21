@@ -152,7 +152,7 @@ $this->breadcrumbs=array('Quests');  ?>
 	        if (date('w', $selectedDate) != 0 && date('w', $selectedDate) != 6 && $k > 2 && $k < 7) $invisible = ' invisible'; ?>
 
 			<td>
-				<button data-toggle="popover"
+				<button data-toggle="popover"  
             		data-title="<? echo date('d',$selectedDate); ?> <? echo date('M', $selectedDate); ?> <?php echo $time; ?>"
 				    data-time="<? echo $time; ?>" 
 		            data-ymd="<? echo $ymd; ?>" 
@@ -170,6 +170,21 @@ $this->breadcrumbs=array('Quests');  ?>
 		echo '</tr></table>';
 	} ?>
 </div>
+
+
+<!-- Modal -->
+<div class="modal" id="addBookModal" tabindex="-1" role="dialog" aria-labelledby="addBookModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel"></h4>
+      </div>
+      <div class="modal-body"></div>
+    </div>
+  </div>
+</div>
+
 <script  type="text/javascript">
 	var adminschedule = 1;
 </script>

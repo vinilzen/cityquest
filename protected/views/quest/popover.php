@@ -7,82 +7,82 @@
     </p>
     <form class="form-horizontal pop-row" id="editBookingRow" role="form">
       <div class="form-group">
-        <label for="inputName" class="col-sm-2 control-label">Name</label>
-        <div class="col-sm-7">
+        <label for="inputName" class="col-xs-2 control-label">Name</label>
+        <div class="col-xs-7">
           <input type="text" class="form-control input-sm inputName" placeholder="Ivan">
         </div>
-        <div class="col-sm-2">
+        <div class="col-xs-2">
           <button id="saveBooking" class="btn btn-default btn-sm" data-toggle="tooltip" title="Сохранить">
             <span class="glyphicon glyphicon-ok"></span>
           </button>
         </div>
       </div>
       <div class="form-group">
-        <label for="inputPhone" class="col-sm-2 control-label">Phone</label>
-        <div class="col-sm-7">
+        <label for="inputPhone" class="col-xs-2 control-label">Phone</label>
+        <div class="col-xs-7">
           <input type="text" class="form-control input-sm inputPhone" placeholder="123-456-789">
         </div>
-        <div class="col-sm-2">
+        <div class="col-xs-2">
           <button id="cancelEditBooking" class="btn btn-default btn-sm" data-toggle="tooltip" title="Отменить">
             <span class="glyphicon glyphicon-remove"></span>
           </button>
         </div>
       </div>
       <div class="form-group">
-        <label for="inputPrice" class="col-sm-2 control-label">Price</label>
-        <div class="col-sm-7">
+        <label for="inputPrice" class="col-xs-2 control-label">Price</label>
+        <div class="col-xs-7">
           <input type="text" class="form-control input-sm inputPrice" placeholder="3000">
         </div>
       </div>
       <div class="form-group">
-        <label for="inputResult" class="col-sm-2 control-label">Result</label>
-        <div class="col-sm-7">
+        <label for="inputResult" class="col-xs-2 control-label">Result</label>
+        <div class="col-xs-7">
           <input type="text" class="form-control input-sm inputResult" placeholder="00:00">
         </div>
       </div>
       <div class="form-group">
-        <div class="col-sm-12">
+        <div class="col-xs-12">
           <textarea type="text" class="form-control input-sm inputComment" placeholder="Дополнительный комментарий"></textarea>
         </div>
       </div>
     </form>
     <form class="form-horizontal pop-row" id="addBookingRow" role="form">
       <div class="form-group">
-        <label for="inputName" class="col-sm-2 control-label">Name</label>
-        <div class="col-sm-7">
+        <label for="inputName" class="col-xs-2 control-label">Name</label>
+        <div class="col-xs-7">
           <input type="text" class="form-control input-sm inputName" placeholder="Ivan">
         </div>
-        <div class="col-sm-2">
+        <div class="col-xs-2">
           <button id="saveBooking" class="btn btn-default btn-sm" data-toggle="tooltip" title="Сохранить">
             <span class="glyphicon glyphicon-ok"></span>
           </button>
         </div>
       </div>
       <div class="form-group">
-        <label for="inputPhone" class="col-sm-2 control-label">Phone</label>
-        <div class="col-sm-7">
+        <label for="inputPhone" class="col-xs-2 control-label">Phone</label>
+        <div class="col-xs-7">
           <input type="text" class="form-control input-sm inputPhone" placeholder="123-456-789">
         </div>
-        <div class="col-sm-2">
+        <div class="col-xs-2">
           <button id="cancelAddBooking" class="btn btn-default btn-sm" data-toggle="tooltip" title="Отменить">
             <span class="glyphicon glyphicon-remove"></span>
           </button>
         </div>
       </div>
       <div class="form-group">
-        <label for="inputPrice" class="col-sm-2 control-label">Price</label>
-        <div class="col-sm-7">
+        <label for="inputPrice" class="col-xs-2 control-label">Price</label>
+        <div class="col-xs-7">
           <input type="text" class="form-control input-sm inputPrice" value="<%= price %>" placeholder="3000">
         </div>
       </div>
       <div class="form-group">
-        <label for="inputResult" class="col-sm-2 control-label">Result</label>
-        <div class="col-sm-7">
+        <label for="inputResult" class="col-xs-2 control-label">Result</label>
+        <div class="col-xs-7">
           <input type="text" class="form-control input-sm inputResult" value="<%= result %>" placeholder="00:00">
         </div>
       </div>
       <div class="form-group">
-        <div class="col-sm-9" id="selectUser">
+        <div class="col-xs-9" id="selectUser">
           <select name="user">
             <option value="0">Пользователь</option>
             <?php if (isset($users)) foreach ($users as $user) {
@@ -92,7 +92,7 @@
         </div>
       </div>
       <div class="form-group">
-        <div class="col-sm-12">
+        <div class="col-xs-12">
           <textarea type="text" class="form-control input-sm inputComment" placeholder="Дополнительный комментарий"></textarea>
         </div>
       </div>

@@ -250,36 +250,47 @@ $(function() {
 		container:'body'
 	});
 
-	$('#times-table button[data-toggle="popover"]').popover({
-		placement:'auto left',
-		animation: false,
-		container: 'body',
-		trigger: 'click',
-		html: true,
-		content:function(){
-			
-			if (!$(this)[0].popover_view)
-				$(this)[0].popover_view = new PopoverView({parent:this});
+	if (document.body.clientWidth < 769) {
 
-			return $(this)[0].popover_view.render().el;
-		}
-	}).on('show.bs.popover', function (e) {
-		
-		$('[data-toggle="popover"]').each(function () {
-			if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0)
-				$(this).popover('hide');
+		$('#times-table button[data-toggle="popover"]').click(function () {
+			$(this)[0].popover_view = new PopoverView({parent:this});
+			$('#addBookModal .modal-title').html( $(this).attr('data-title') );
+			$('#addBookModal .modal-body').html($(this)[0].popover_view.render().el);
+			$('#addBookModal').modal('show');
 		});
-	}).on('shown.bs.popover', function (e) {
 
-		var self = this;
+	} else {
+		$('#times-table button[data-toggle="popover"]').popover({
+			placement:'auto left',
+			animation: false,
+			container: 'body',
+			trigger: 'click',
+			html: true,
+			content:function(){
+				
+				if (!$(this)[0].popover_view)
+					$(this)[0].popover_view = new PopoverView({parent:this});
 
-		$('<button type="button" class="close"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>')
-			.css('margin-top', -4)
-			.appendTo('.popover-title')
-			.click(function(){
-				$(self).popover('hide');
+				return $(this)[0].popover_view.render().el;
+			}
+		}).on('show.bs.popover', function (e) {
+			
+			$('[data-toggle="popover"]').each(function () {
+				if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0)
+					$(this).popover('hide');
 			});
-	});
+		}).on('shown.bs.popover', function (e) {
+
+			var self = this;
+
+			$('<button type="button" class="close"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>')
+				.css('margin-top', -4)
+				.appendTo('.popover-title')
+				.click(function(){
+					$(self).popover('hide');
+				});
+		});
+	}
 
 
 	var modal = '<div aria-hidden="true" aria-labelledby="myModalLabel" class="formaModal modal fade" role="dialog" tabindex="-1">'+
