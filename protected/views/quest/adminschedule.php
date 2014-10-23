@@ -50,8 +50,11 @@ $this->breadcrumbs=array('Quests');  ?>
 
 		// weekend
 		$weekend = '';
-		if (date('w', $currDate) == 0 || date('w', $currDate) == 6)
+		$holiday = 0;
+		if (date('w', $currDate) == 0 || date('w', $currDate) == 6 || in_array(date('Ymd', $currDate), $holidays)){
+			$holiday = 1;
 			$weekend = ' btn-warning';
+		}
 
 		$style="";
 		$title="";
@@ -62,13 +65,22 @@ $this->breadcrumbs=array('Quests');  ?>
 			$badge = '<span class="badge" style="font-size: 13px;font-family: \'Open Sans\';font-weight: normal;">'.count($twoweek_bookings_arr[date('Ymd', $currDate)]).'</span>';
 		}
 
-		echo '<a '.$style.' data-container="body" data-toggle="tooltip" title="'.date('d M Y', $currDate).' '.$title.'" href="/quest/adminschedule/ymd/'.date('Ymd', $currDate).'" type="button" 
-					class="text-center btn btn-xs btn-default'.$active.$weekend.$disabled_class.'" '.$disabled.'>'.
-				'<span style="display:block;line-height:1;">'.date('d', $currDate).'</span>'.
-				'<small style="display:block;line-height:1;">'.$days_short[date('N', $currDate)-1].'</small>'.
-				'<small style="display:block;line-height:1;">'.mb_substr($month[date('n', $currDate)-1],0,6).'</small>'.$badge.
-				'<span class="label label-danger glyphicon glyphicon-star setHoliday" data-date="'.date('Ymd', $currDate).'" title="Пометить как выходной"> </span>'.
-			 '</a>';
+		if (date('w', $currDate) == 0 || date('w', $currDate) == 6){
+			echo '<a '.$style.' data-container="body" data-toggle="tooltip" title="'.date('d M Y', $currDate).' '.$title.'" href="/quest/adminschedule/ymd/'.date('Ymd', $currDate).'" type="button" 
+						class="text-center btn btn-xs btn-default'.$active.$weekend.$disabled_class.'" '.$disabled.'>'.
+					'<span style="display:block;line-height:1;">'.date('d', $currDate).'</span>'.
+					'<small style="display:block;line-height:1;">'.$days_short[date('N', $currDate)-1].'</small>'.
+					'<small style="display:block;line-height:1;">'.mb_substr($month[date('n', $currDate)-1],0,6).'</small>'.$badge.
+				 '</a>';
+		} else {
+			echo '<a '.$style.' data-container="body" data-toggle="tooltip" title="'.date('d M Y', $currDate).' '.$title.'" href="/quest/adminschedule/ymd/'.date('Ymd', $currDate).'" type="button" 
+						class="text-center btn btn-xs btn-default'.$active.$weekend.$disabled_class.'" '.$disabled.'>'.
+					'<span style="display:block;line-height:1;">'.date('d', $currDate).'</span>'.
+					'<small style="display:block;line-height:1;">'.$days_short[date('N', $currDate)-1].'</small>'.
+					'<small style="display:block;line-height:1;">'.mb_substr($month[date('n', $currDate)-1],0,6).'</small>'.$badge.
+					'<span class="label label-danger glyphicon glyphicon-star setHoliday" data-holiday="'.$holiday.'" data-date="'.date('Ymd', $currDate).'" title="Пометить как выходной"> </span>'.
+				 '</a>';
+		}
 	}
 ?>
 </div>
@@ -85,10 +97,12 @@ $this->breadcrumbs=array('Quests');  ?>
 		echo '<table class="table"><tr><td style="width:100px;"><small style="width:100px; overflow:hidden; display:block;">';
 		echo $quest['q']->title.'</small></td>';
 
-		if (date('w', $selectedDate) == 0 || date('w', $selectedDate) == 6) $workday = 0;
-		else $workday = 1;
+		if (date('w', $selectedDate) == 0 || date('w', $selectedDate) == 6 || in_array(date('Ymd', $selectedDate), $holidays))
+			$workday = 0;
+		else
+			$workday = 1;
 
-        if ( !$workday)
+        if (!$workday)
         {
           $priceAm = Yii::app()->params['price_weekend_AM'];
           $pricePm = Yii::app()->params['price_weekend_PM'];
@@ -98,7 +112,6 @@ $this->breadcrumbs=array('Quests');  ?>
         }
 
 		foreach ($times as $k=>$time) {
-
 
             if ($workday){
               if ($k>6 && $k<14) $price = $priceAm;
@@ -133,8 +146,6 @@ $this->breadcrumbs=array('Quests');  ?>
 				if ($quest['bookings'][$time]->result != 0 && 
 					$quest['bookings'][$time]->result != '0' && 
 					$quest['bookings'][$time]->result != '00' && 
-					//$quest['bookings'][$time]->result != '60:00' && 
-					//$quest['bookings'][$time]->result != '60' && 
 					$quest['bookings'][$time]->result != ' ' && 
 					$quest['bookings'][$time]->result != '')
 				{
@@ -150,7 +161,10 @@ $this->breadcrumbs=array('Quests');  ?>
 			}
 
 	        $invisible = '';
-	        if (date('w', $selectedDate) != 0 && date('w', $selectedDate) != 6 && $k > 2 && $k < 7) $invisible = ' invisible'; ?>
+	        if ($workday && $k > 2 && $k < 7)
+	        	$invisible = ' invisible';
+
+	        ?>
 
 			<td>
 				<button data-toggle="popover"  

@@ -250,6 +250,29 @@ $(function() {
 		container:'body'
 	});
 
+	$('.setHoliday').click(function(e){
+		console.log(
+			$(e.target).attr('data-date'),
+			$(e.target).attr('data-holiday')
+		);
+
+		$.post(
+			'/holiday/update',
+			{
+				id:1,
+				is_holiday:$(e.target).attr('data-holiday'),
+				date:$(e.target).attr('data-date')
+			},
+			function(r){
+				if (r.success){
+					if (r.message)	alert(r.message);
+					window.location.reload(true);
+				}
+			});
+
+		return false;
+	});
+
 	if (document.body.clientWidth < 769) {
 
 		$('#times-table button[data-toggle="popover"]').click(function () {
@@ -387,7 +410,6 @@ $(function() {
 					});
 				});
 			} else {
-				console.log(result);
 
 				if (result && result.message) {
 					$('.formaModal .alert-danger').html(result.message).fadeIn();

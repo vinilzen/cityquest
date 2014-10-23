@@ -56,20 +56,63 @@ class HolidayController extends Controller
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id the ID of the model to be updated
 	 */
-	public function actionUpdate($id)
+	public function actionUpdate()
 	{
-		$model=$this->loadModel($id);
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+		$this->layout=false;
 
-		if(isset($_POST['holiday']))
-		{
-			$model->attributes=$_POST['holiday'];
+		header('Content-type: application/json');
+
+		$model=Holiday::model()->findByAttributes(array(
+			'holiday_date'=>(int)$_POST['date']
+		));
+
+		if ($model && $_POST['is_holiday']==1){
+			if ($model->delete())
+				echo CJavaScript::jsonEncode(
+					array(
+						'success'=>1, 
+						'message'=> 'Выходной удалён!'
+					)
+				);
+			else
+				echo CJavaScript::jsonEncode(
+					array(
+						'success'=>0, 
+						'message'=> 'Ошибка удаления выходного', 
+						'errors'=>$model->getErrors()
+					)
+				);
+		} else if (!$model && $_POST['is_holiday']==0){
+			$model=new Holiday;
+			$model->city = 1;
+			$model->holiday_date = (int)$_POST['date'];
+
 			if($model->save())
-				echo 'update';
+				echo CJavaScript::jsonEncode(
+					array(
+						'success'=>1, 
+						'message'=> 'Выходной добавлен!'
+					)
+				);
+			else
+				echo CJavaScript::jsonEncode(
+					array(
+						'success'=>0, 
+						'message'=> 'Ошибка сохранения', 
+						'errors'=>$model->getErrors()
+					)
+				);
+		} else {
+			echo CJavaScript::jsonEncode(
+				array(
+					'success'=>1, 
+					'message'=> 'Все и так ок!'
+				)
+			);
 		}
-		die;
+
+		Yii::app()->end();
 	}
 
 	/**
@@ -121,7 +164,7 @@ class HolidayController extends Controller
 	 */
 	public function loadModel($id)
 	{
-		$model=City::model()->findByPk($id);
+		$model=Holiday::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;

@@ -60,6 +60,12 @@
 	&:hover {
 		.label {
 			display: block;
+			cursor: pointer;
+		}
+	}
+	&.btn-warning {
+		.label {
+			color:#f0ad4e;
 		}
 	}
 }

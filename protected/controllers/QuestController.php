@@ -102,6 +102,12 @@ class QuestController extends Controller
 	public function actionView($id)
 	{
 		$this->layout='//layouts/quest';
+
+		$holidays = Holiday::model()->findAll();
+		$holiday_list = array();
+		foreach ($holidays as $holiday) {
+			array_push($holiday_list, $holiday->holiday_date);
+		}
 		
 		$model=$this->loadModel($id);
 
@@ -133,6 +139,7 @@ class QuestController extends Controller
 			'model'=>$model,
 			'booking' => $bookings_by_date,
 			'times' => $times,
+			'holidays' => $holiday_list
 		));
 	}
 
@@ -271,13 +278,11 @@ class QuestController extends Controller
 	 */
 	public function actionAdminschedule($ymd = '')
 	{
-
-
 		$holidays = Holiday::model()->findAll();
-
-		var_dump($holidays);
-
-		die;
+		$holiday_list = array();
+		foreach ($holidays as $holiday) {
+			array_push($holiday_list, $holiday->holiday_date);
+		}
 
 		$this->quest_menu=array(
 				array('label'=>'Сводная таблица', 'url'=>array('/quest/adminschedule/ymd'), 'active'=>true ),
@@ -318,7 +323,6 @@ class QuestController extends Controller
 			Yii::app()->end();
 		} else {
 
-			// $quests=Quest::model()->findAllByAttributes(array('status' => 2));
 			$quests = Quest::model()->findAll(array(
 			    "condition" => "status = 2 ",
 			    "order" => "status ASC, sort ASC",
@@ -359,6 +363,7 @@ class QuestController extends Controller
 				'quests' => $quests_array,
 				'ymd' => $YMDate,
 				'users' => $users,
+				'holidays' => $holiday_list,
 				'arr_hash' => md5(serialize($twoweek_bookings_arr)),
 			));
 		}

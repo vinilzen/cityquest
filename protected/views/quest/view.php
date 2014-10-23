@@ -40,15 +40,12 @@ $this->pageImg= '/images/q/'.$model->id.'.jpg';
 <div class="container container-xlg">
   <div class="row">
     <div class="col-xs-12 text-center">
-      <h2 class="twotab active">Расписание</h2>
-      <!-- <h2 class="twotab">Победители</h2> -->
+      <h2 class="twotab active">Расписание</h2><!-- <h2 class="twotab">Победители</h2> -->
       <hr class="fadeOut">
     </div>
     <div class="clearfix"></div>
     <div class="col-xs-12 ovs">
       <div class="row quests_schedules quest_schedule" style="width: 800px;">
-      
-
 
   <?
 
@@ -82,7 +79,8 @@ $this->pageImg= '/images/q/'.$model->id.'.jpg';
       $next_2week = makeDayArray(); ?>
 
           <? foreach ($next_2week as $value) {
-            if ( $value['day_name'] == 'суббота' ||  $value['day_name'] == 'воскресенье')
+
+            if ( $value['day_name'] == 'суббота' ||  $value['day_name'] == 'воскресенье' || in_array($value['date'], $holidays))
             {
               $workday = 0;
               $priceAm = Yii::app()->params['price_weekend_AM'];
@@ -97,7 +95,7 @@ $this->pageImg= '/images/q/'.$model->id.'.jpg';
             ?>
               
           <div class="col-xs-1 col-sm-1">
-            <div class="curent_date <? echo $value['day_name'] == 'суббота' || $value['day_name'] == 'воскресенье' ? 'weekend' : ''; ?>">
+            <div class="curent_date <? echo !$workday ? 'weekend' : ''; ?>">
               <span><em><? echo $value['day']; ?>.</em><? echo $value['month']; ?></span><small><? echo $value['day_name']; ?></small>
             </div>
           </div>
@@ -199,7 +197,7 @@ $this->pageImg= '/images/q/'.$model->id.'.jpg';
             <? } ?>
           </div>
           <div class="clearfix"></div>
-      <? } ?>
+      <?  } ?>
       </div>
     </div>
   </div>
