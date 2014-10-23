@@ -48,3 +48,18 @@
 // Utility classes
 @import "admin_bootstrap/utilities";
 @import "admin_bootstrap/responsive-utilities";
+
+
+.btn-group .btn {
+	.label {
+		display: none;
+		position: absolute;
+		top: 100%;
+		left: 6px;
+	}
+	&:hover {
+		.label {
+			display: block;
+		}
+	}
+}

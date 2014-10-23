@@ -77,14 +77,14 @@ return array(
 			// 		'levels'=>'trace, info, error, warning, vardump',
 			// 	),
 				// uncomment the following to show log messages on web pages
-			/*	
+			
 				array(
 					'class'=>'CWebLogRoute',
 					'levels'=>'trace, info, error, warning, vardump',
 					//'levels'=>'error, warning',
 					'showInFireBug'=>true,
 				),
-			*/	
+			
 			),
 		),
 	),

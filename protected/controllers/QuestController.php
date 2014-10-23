@@ -272,6 +272,13 @@ class QuestController extends Controller
 	public function actionAdminschedule($ymd = '')
 	{
 
+
+		$holidays = Holiday::model()->findAll();
+
+		var_dump($holidays);
+
+		die;
+
 		$this->quest_menu=array(
 				array('label'=>'Сводная таблица', 'url'=>array('/quest/adminschedule/ymd'), 'active'=>true ),
 				array('label'=>'Управление квестами', 'url'=>array('/quest/admin')),
@@ -285,7 +292,6 @@ class QuestController extends Controller
 			$YMDate = date('Ymd', strtotime( "now" ));
 		else
 			$YMDate = (int)$ymd;
-
 
 		$twoweek_bookings = Booking::model()->findAllByAttributes(
 			array(),

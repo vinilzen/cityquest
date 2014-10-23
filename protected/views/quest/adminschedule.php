@@ -67,6 +67,7 @@ $this->breadcrumbs=array('Quests');  ?>
 				'<span style="display:block;line-height:1;">'.date('d', $currDate).'</span>'.
 				'<small style="display:block;line-height:1;">'.$days_short[date('N', $currDate)-1].'</small>'.
 				'<small style="display:block;line-height:1;">'.mb_substr($month[date('n', $currDate)-1],0,6).'</small>'.$badge.
+				'<span class="label label-danger glyphicon glyphicon-star setHoliday" data-date="'.date('Ymd', $currDate).'" title="Пометить как выходной"> </span>'.
 			 '</a>';
 	}
 ?>

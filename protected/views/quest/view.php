@@ -41,7 +41,7 @@ $this->pageImg= '/images/q/'.$model->id.'.jpg';
   <div class="row">
     <div class="col-xs-12 text-center">
       <h2 class="twotab active">Расписание</h2>
-      <h2 class="twotab">Победители</h2>
+      <!-- <h2 class="twotab">Победители</h2> -->
       <hr class="fadeOut">
     </div>
     <div class="clearfix"></div>
