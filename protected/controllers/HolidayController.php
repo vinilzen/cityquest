@@ -106,8 +106,9 @@ class HolidayController extends Controller
 		} else {
 			echo CJavaScript::jsonEncode(
 				array(
-					'success'=>1, 
-					'message'=> 'Все и так ок!'
+					'success'=>1,
+					'same'=>1,
+					'message'=> 'Суббота и Воскресенье всегда выходные!'
 				)
 			);
 		}

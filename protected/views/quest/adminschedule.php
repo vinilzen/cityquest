@@ -25,8 +25,21 @@ $this->breadcrumbs=array('Quests');  ?>
 			$selectedDate = $currDate;
 		}
 	}
+	$today_holiday = 0;
+	if (date('w', $selectedDate) == 0 || date('w', $selectedDate) == 6 || in_array(date('Ymd', $selectedDate), $holidays)){
+		$today_holiday = 1;
+	}
+
 ?>
-<h1 class="page-header">Квесты на <? echo date('d', $selectedDate); ?> <? echo $month[date('n', $selectedDate)-1]; ?> <? echo date('Y', $selectedDate); ?></h1>
+<h1 class="page-header" data-toggle="tooltip" data-placement="left" title="<? echo $today_holiday ? 'Выходной' : 'Рабочий'; ?> день">
+	Квесты на <? echo date('d', $selectedDate); ?> <? echo $month[date('n', $selectedDate)-1]; ?> <? echo date('Y', $selectedDate); ?>
+	<span	class="glyphicon glyphicon-star<? echo $today_holiday ? '' : '-empty'; ?> setHoliday"
+			data-holiday="<? echo $today_holiday; ?>" 
+			style="cursor:pointer;" data-toggle="tooltip" 
+			data-date="<? echo date('Ymd', $selectedDate) ?>"
+			title="<? echo $today_holiday ? 'Сделать рабочим' : 'Сделать выходным'; ?>"></span>
+
+</h1>
 <h2 class="sub-header hidden" style="text-transform: capitalize; border-bottom: none; margin-bottom:0;"><? echo $month_f[date('n', $selectedDate)-1]; ?></h2>
 
 <div class="btn-group btn-group-justified">
@@ -78,7 +91,6 @@ $this->breadcrumbs=array('Quests');  ?>
 					'<span style="display:block;line-height:1;">'.date('d', $currDate).'</span>'.
 					'<small style="display:block;line-height:1;">'.$days_short[date('N', $currDate)-1].'</small>'.
 					'<small style="display:block;line-height:1;">'.mb_substr($month[date('n', $currDate)-1],0,6).'</small>'.$badge.
-					'<span class="label label-danger glyphicon glyphicon-star setHoliday" data-holiday="'.$holiday.'" data-date="'.date('Ymd', $currDate).'" title="Пометить как выходной"> </span>'.
 				 '</a>';
 		}
 	}

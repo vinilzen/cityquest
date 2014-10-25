@@ -96,7 +96,7 @@
 		<? 	} else { ?>
 			<div class="col-xs-12 main">
 		<? 	} ?>
-				<div style="min-height:300px; min-width:1024px; overflow:auto;">
+				<div style="min-height:300px;">
 					<?php echo $content; ?>
 				</div>
 			</div>

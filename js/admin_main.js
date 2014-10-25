@@ -246,16 +246,11 @@ var PopoverView = Backbone.View.extend({
 
 $(function() {
 
-	$('.btn-group a.btn').tooltip({
+	$('.setHoliday, .page-header, .btn-group a.btn').tooltip({
 		container:'body'
 	});
 
 	$('.setHoliday').click(function(e){
-		console.log(
-			$(e.target).attr('data-date'),
-			$(e.target).attr('data-holiday')
-		);
-
 		$.post(
 			'/holiday/update',
 			{
@@ -265,8 +260,12 @@ $(function() {
 			},
 			function(r){
 				if (r.success){
-					if (r.message)	alert(r.message);
-					window.location.reload(true);
+					if (r.same){
+						if (r.message)	alert(r.message);
+					} else {
+						if (r.message)	alert(r.message);
+						window.location.reload(true);
+					}
 				}
 			});
 
