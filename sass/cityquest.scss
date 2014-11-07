@@ -1024,7 +1024,8 @@ body.inner .jumbotron.quest {
 			}
 		}
 	}
-	p {
+	p, h2 {
+		font-weight: 300;
 		font-size: 24px;
 		color: rgba(255,255,255,.8);
 		@media (max-width: $screen-sm-max) {
@@ -1174,7 +1175,7 @@ h2.twotab, a.h2.twotab {
 	}
 }
 .quests_schedules.quest_schedule {
-	width: 1200px;
+	width: 600px;
 	.curent_date {
 		padding-top: 6px;
 		padding-left: 0;
@@ -1215,14 +1216,17 @@ h2.twotab, a.h2.twotab {
 		padding-top: 5px;
 		margin-left: -5px;
 	}
-	@media (max-width: $screen-xs-max) {
-		width: 900px;
+	@media (min-width: $screen-sm-min) and (max-width: $screen-md-max) {
+		width: 750px;
 	}
-	@media (min-width: 1100px) and  (max-width: 1279px)  {
-		width: 1170px;
+	@media (max-width: $screen-xs-max) {
+		// width: 900px;
+	}
+	@media (min-width: 1100px)  {
+		width: 750px;
 	}
 	@media (min-width: 1025px) and  (max-width: 1099px)  {
-		width: 940px;
+		width: 650px;
 		.btn-q {
 			font-size: 11px;
 			border-radius: 0;
@@ -2020,11 +2024,10 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 	width: 75px;
 }
 .workPrice2 {
-	margin-left: 220px;
-	width: 385px;
+	width: 245px;
 }
 .workPrice3 {
-	width: 275px;
+	width: 215px;
 }
 .weekendPrice1 {
 	width: 548px;
@@ -2032,11 +2035,11 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 	margin-left: 15px;
 }
 .weekendPrice2 {
-	width: 660px;
+	width: 515px;
 	margin-left: 16px;
 }
 
-@media (max-width: 1099px) and (min-width: 1025px) {
+/* @media (max-width: 1099px) and (min-width: 1025px) {
 	.quests_schedules.quest_schedule {
 		.workPrice1 {
 			width: 128px;
@@ -2056,16 +2059,16 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 			width: 387px;
 		}
 	}
-}
+} */
 
 @media (max-width: 767px) {
 
 	.workPrice1 {
-		width: 125px;
+		width: 45px;
 	}
 	.workPrice2 {
-		margin-left: 161px;
-		width: 289px;
+		margin-left: 0px;
+		width: 245px;
 	}
 	.workPrice3 {
 		width: 204px;
@@ -2075,10 +2078,33 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 		margin-right: 0px;
 	}
 	.weekendPrice2 {
-		width: 368px;
+		width: 490px;
 	}
 }
-
+@media (min-width: 1100px)  {
+	.workPrice2 {
+		margin-left: 0px;
+		width: 320px;
+	}
+	.workPrice3 {
+		width: 275px;
+	}
+	.weekendPrice2 {
+		width: 660px;
+	}
+}
+@media (min-width: 768px) and (max-width: 1099px) {
+	.workPrice3 {
+		width: 275px;
+	}
+	.workPrice2 {
+		margin-left: 0;
+		width: 320px;
+	}
+	.weekendPrice2 {
+		width: 660px;
+	}
+}
 .footer_logo {
 	padding-top: 10px;
 }

@@ -7,7 +7,7 @@ $this->pageImg= '/images/q/'.$model->id.'.jpg';
 
 <script type="text/javascript">
     var user_name = '<? echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->username : ''; ?>',
-      user_phone = '<? echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->phone : ''; ?>';
+        user_phone = '<? echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->phone : ''; ?>';
 </script>
 
 <div class="jumbotron quest" style="background-image: url(../images/q/<? echo $model->id; ?>.jpg); <? if ($model->id == 2) { echo 'background-position: left 45%;'; } ?> " >
@@ -15,7 +15,7 @@ $this->pageImg= '/images/q/'.$model->id.'.jpg';
     <div class="row">
       <div class="col-md-10 col-md-offset-1 col-sm-12">
         <h1 id='quest_title'><? echo $model->title; ?></h1>
-        <p><? echo $model->content; ?></p>
+        <h2><? echo $model->content; ?></h2>
       </div>
     </div>
     <div class="row descr_quest">
@@ -45,7 +45,7 @@ $this->pageImg= '/images/q/'.$model->id.'.jpg';
     </div>
     <div class="clearfix"></div>
     <div class="col-xs-12 ovs">
-      <div class="row quests_schedules quest_schedule" style="width: 800px;">
+      <div class="row quests_schedules quest_schedule">
 
   <?
 
@@ -80,23 +80,22 @@ $this->pageImg= '/images/q/'.$model->id.'.jpg';
 
           <? foreach ($next_2week as $value) {
 
-            if ( $value['day_name'] == 'суббота' ||  $value['day_name'] == 'воскресенье' || in_array($value['date'], $holidays))
-            {
+            if ( $value['day_name'] == 'суббота' ||  $value['day_name'] == 'воскресенье' || in_array($value['date'], $holidays)) {
               $workday = 0;
               $priceAm = Yii::app()->params['price_weekend_AM'];
               $pricePm = Yii::app()->params['price_weekend_PM'];
-
             } else {
               $workday = 1;
               $priceAm = Yii::app()->params['price_workday_AM'];
               $pricePm = Yii::app()->params['price_workday_PM'];
             }
 
-            ?>
+          ?>
               
           <div class="col-xs-1 col-sm-1">
             <div class="curent_date <? echo !$workday ? 'weekend' : ''; ?>">
-              <span><em><? echo $value['day']; ?>.</em><? echo $value['month']; ?></span><small><? echo $value['day_name']; ?></small>
+              <span><em><? echo $value['day']; ?>.</em><? echo $value['month']; ?></span>
+              <small><? echo $value['day_name']; ?></small>
             </div>
           </div>
           <div class="col-xs-12 times">
@@ -155,21 +154,21 @@ $this->pageImg= '/images/q/'.$model->id.'.jpg';
             </div>
             <?if ($workday) { ?>
               <div class="price-line">
-                <div class="priceTbl workPrice1">
+                <div class="priceTbl workPrice1" title="Цена за команду" data-toggle="tooltip">
                   <div class="priceRow">
                     <!-- <span class="dashed">&nbsp;</span> -->
                     <span class="price" style="padding:0;"><? echo $pricePm; ?> <em class="rur"><em>руб.</em></em></span>
                     <!-- <span class="dashed">&nbsp;</span> -->
                   </div>
                 </div>
-                <div class="priceTbl workPrice2" style="width: 320px; margin-left:0; ">
+                <div class="priceTbl workPrice2" title="Цена за команду" data-toggle="tooltip">
                   <div class="priceRow">
                     <span class="dashed">&nbsp;</span>
                     <span class="price"><? echo $priceAm; ?> <em class="rur"><em>руб.</em></em></span>
                     <span class="dashed">&nbsp;</span>
                   </div>
                 </div>
-                <div class="priceTbl workPrice3">
+                <div class="priceTbl workPrice3" title="Цена за команду" data-toggle="tooltip">
                   <div class="priceRow">
                     <span class="dashed">&nbsp;</span>
                     <span class="price"><? echo $pricePm; ?> <em class="rur"><em>руб.</em></em></span>
@@ -178,15 +177,15 @@ $this->pageImg= '/images/q/'.$model->id.'.jpg';
                 </div>
               </div>
             <? } else { ?>
-              <div class="price-line weekend" style="float:left; padding-left:130px;">
-                <!-- <div class="priceTbl weekendPrice1" style="width:164px;">
+              <div class="price-line weekend">
+                <!-- <div class="priceTbl weekendPrice1" style="width:164px;" title="Цена за команду" data-toggle="tooltip">
                   <div class="priceRow">
                     <span class="dashed">&nbsp;</span>
                     <span class="price"><? echo $priceAm; ?> <em class="rur"><em>руб.</em></em></span>
                     <span class="dashed">&nbsp;</span>
                   </div>
                 </div> -->
-                <div class="priceTbl weekendPrice2">
+                <div class="priceTbl weekendPrice2" title="Цена за команду" data-toggle="tooltip">
                   <div class="priceRow">
                     <span class="dashed">&nbsp;</span>
                     <span class="price"><? echo $pricePm; ?> <em class="rur"><em>руб.</em></em></span>

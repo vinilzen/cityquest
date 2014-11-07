@@ -849,4 +849,6 @@ $(function() {
 		}
 	});
 
+	$('.priceTbl').tooltip();
+
 });
