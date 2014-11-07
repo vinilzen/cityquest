@@ -30,7 +30,9 @@ $this->breadcrumbs=array('Quests');  ?>
 		$today_holiday = 1;
 	}
 
+ echo '<!-- '.date('Y/m/d H:i', strtotime('now')).' -->';
 ?>
+
 <h1 class="page-header" data-toggle="tooltip" data-placement="left" title="<? echo $today_holiday ? 'Выходной' : 'Рабочий'; ?> день">
 	Квесты на <? echo date('d', $selectedDate); ?> <? echo $month[date('n', $selectedDate)-1]; ?> <? echo date('Y', $selectedDate); ?>
 	<span	class="glyphicon glyphicon-star<? echo $today_holiday ? '' : '-empty'; ?> setHoliday"
@@ -163,7 +165,15 @@ $this->breadcrumbs=array('Quests');  ?>
 				{
 					$additionalClass = ' btn-success';
 				} else {
-					if ($time < date('H:i', strtotime( '+0 hours' )) && $quest['bookings'][$time]->date <= date('Ymd', strtotime( '+0 hours' ) ) ) {
+					if (
+						(	
+							$time < date('H:i', strtotime( '+0 hours' )) && 
+							$quest['bookings'][$time]->date == date('Ymd', strtotime( '+0 hours' ))
+						)
+						|| 
+						$quest['bookings'][$time]->date < date('Ymd', strtotime( '+0 hours' ))
+
+					) {
 						$additionalClass = '  btn-info btn-danger ';
 					}
 				}

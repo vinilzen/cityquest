@@ -155,6 +155,9 @@ $(function() {
 	$('#myModalBook').on('shown.bs.modal', function (e) {
 
 		yaCounter25221941.reachGoal('openBookWindow');
+		ga('send', 'event', 'book', 'openWindow');
+		gaq.push(['_trackEvent', 'book', 'openWindow']);
+		//_gaq.push(['_trackEvent', 'Book', 'openWindow', 'open Book Window']);
 
 		if (document.body.clientWidth > 768) {
 			var h = $('#myModalBook .img-responsive').height();
@@ -219,6 +222,8 @@ $(function() {
 						if (result && result.success) {
 
 							yaCounter25221941.reachGoal('confirmBook');
+							ga('send', 'event', 'book', 'confirmBook');
+							//_gaq.push(['_trackEvent', 'Book', 'confirmBook', 'confirm Booking']);
 
 							ModalBook.modal('hide');
 							
@@ -312,6 +317,7 @@ $(function() {
 								if (data.success && data.success == 1) {
 
 									yaCounter25221941.reachGoal('registrationSuccess');
+									ga('send', 'event', 'registration', 'registrationSuccess');
 
 									$('#reg-form button')
 										.attr({ 'title': 'Вы успешно зарегистрировались' })

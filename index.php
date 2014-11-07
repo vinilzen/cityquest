@@ -1,6 +1,6 @@
 <?php
 
-
+date_default_timezone_set("Europe/Minsk");
 // change the following paths if necessary
 $yii= '../yii/framework/yii.php';
 $config='protected/config/main.php';

@@ -1909,7 +1909,7 @@ h2.twotab, a.h2.twotab {
 	            transform: scale( 1, -1 );
 		font-style: normal;
 		font-size: 12px;
-		top: 2px;
+		top: -2px;
 		display: inline-block;
 		position: relative;
 	}
@@ -2032,7 +2032,8 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 	margin-left: 15px;
 }
 .weekendPrice2 {
-	width: 494px;
+	width: 660px;
+	margin-left: 16px;
 }
 
 @media (max-width: 1099px) and (min-width: 1025px) {

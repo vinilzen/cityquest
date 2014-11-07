@@ -179,13 +179,13 @@ $this->pageImg= '/images/q/'.$model->id.'.jpg';
               </div>
             <? } else { ?>
               <div class="price-line weekend" style="float:left; padding-left:130px;">
-                <div class="priceTbl weekendPrice1" style="width:164px;">
+                <!-- <div class="priceTbl weekendPrice1" style="width:164px;">
                   <div class="priceRow">
                     <span class="dashed">&nbsp;</span>
                     <span class="price"><? echo $priceAm; ?> <em class="rur"><em>руб.</em></em></span>
                     <span class="dashed">&nbsp;</span>
                   </div>
-                </div>
+                </div> -->
                 <div class="priceTbl weekendPrice2">
                   <div class="priceRow">
                     <span class="dashed">&nbsp;</span>
