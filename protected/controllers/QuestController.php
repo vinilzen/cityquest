@@ -298,12 +298,22 @@ class QuestController extends Controller
 		else
 			$YMDate = (int)$ymd;
 
+		$offset = 30;
+		$prev = 0;
+		$next = $prev + $offset;
+
+		if (isset($_GET['d'])) {
+			$start = (int)$_GET['d'];
+			$prev = ((int)$_GET['d']/$offset - 1)*$offset;
+			$next = $prev + 2*$offset;
+		}
+
 		$twoweek_bookings = Booking::model()->findAllByAttributes(
 			array(),
 			'date >=:today && date < :twoweek',
 			array(
-				'today'=>date('Ymd'),
-				'twoweek'=> date('Ymd', strtotime( '+15 day' ))
+				'today'=>date('Ymd', strtotime( '+'.$prev.' day' )),
+				'twoweek'=> date('Ymd', strtotime( '+'.$next.' day' ))
 			)
 		);
 
