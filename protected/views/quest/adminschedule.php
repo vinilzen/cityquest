@@ -44,9 +44,34 @@ $this->breadcrumbs=array('Quests');  ?>
 </h1>
 <h2 class="sub-header hidden" style="text-transform: capitalize; border-bottom: none; margin-bottom:0;"><? echo $month_f[date('n', $selectedDate)-1]; ?></h2>
 
+<?
+	$offset = 30;
+	$start = 0;
+	$prev = -1*$offset;
+	$next = $offset;
+
+	if (isset($_GET['d'])) {
+		$start = $_GET['d'];
+		$prev = ($_GET['d']/$offset - 1)*$offset;
+		$next = $prev + 2*$offset;
+		// echo '<!-- '.$_GET['d'].','.$prev.','.$next.' -->';
+	}
+
+?>
+
+<div class="pull-left">
+	<a href="?d=<? echo $prev; ?>" class="btn" title="<? echo $offset; ?> дней назад">
+		<i class="glyphicon glyphicon-arrow-left"></i>
+	</a>
+</div>
+<div class="pull-right">
+	<a href="?d=<? echo $next; ?>" class="btn" title="<? echo $offset; ?> дней вперед">
+		<i class="glyphicon glyphicon-arrow-right"></i>
+	</a>
+</div>
 <div class="btn-group btn-group-justified">
 <?
-	for ($i=-1; $i<30; $i++) {
+	for ($i=$start-1; $i<$start+$offset; $i++) {
 		$currDate = strtotime( '+'.$i.' day' );
 
 		// выбранная дата
