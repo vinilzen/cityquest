@@ -10,7 +10,8 @@ $this->pageImg= '/images/q/'.$model->id.'.jpg';
         user_phone = '<? echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->phone : ''; ?>';
 </script>
 
-<div class="jumbotron quest" style="background-image: url(../images/q/<? echo $model->id; ?>.jpg); <? if ($model->id == 2) { echo 'background-position: left 45%;'; } ?> " >
+<div class="jumbotron quest" style="background-image: url(../images/q/<? echo $model->id; ?>.jpg); 
+  <? if ($model->id == 2) { echo 'background-position: center 45%;'; } ?> " >
   <div class="container text-center">
     <div class="row">
       <div class="col-md-10 col-md-offset-1 col-sm-12">
