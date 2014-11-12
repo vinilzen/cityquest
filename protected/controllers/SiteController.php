@@ -35,7 +35,7 @@ class SiteController extends Controller
 		$headers = "MIME-Version: 1.0\r\nFrom: CityQuest <$helloEmail>\r\nReply-To: $helloEmail\r\nContent-Type: text/html; charset=utf-8";
 		$message = wordwrap($message, 70);
 		$message = str_replace("\n.", "\n..", $message);
-		return mail($email,"=?UTF-8?B?".base64_encode($subject)."?=",$message,$headers);
+		return 1; //mail($email,"=?UTF-8?B?".base64_encode($subject)."?=",$message,$headers);
 	}
 
 	public function actionGiftcard()
