@@ -25,6 +25,12 @@
 	</div>
 
 	<div class="row">
+		<?php echo CHtml::activeLabelEx($model,'phone'); ?>
+		<?php echo CHtml::activeTextField($model,'phone',array('size'=>60,'maxlength'=>18)); ?>
+		<?php echo CHtml::error($model,'phone'); ?>
+	</div>
+
+	<div class="row">
 		<?php echo CHtml::activeLabelEx($model,'email'); ?>
 		<?php echo CHtml::activeTextField($model,'email',array('size'=>60,'maxlength'=>128)); ?>
 		<?php echo CHtml::error($model,'email'); ?>

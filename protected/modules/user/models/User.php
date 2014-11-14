@@ -100,6 +100,7 @@ class User extends CActiveRecord
 			'activkey' => UserModule::t("activation key"),
 			'createtime' => UserModule::t("Registration date"),
 			'lastvisit' => UserModule::t("Last visit"),
+			'phone' => UserModule::t("Phone"),
 			'superuser' => 'Роль',
 			'moderator' => 'Модератор',
 			'status' => UserModule::t("Status"),
