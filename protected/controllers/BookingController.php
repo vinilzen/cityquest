@@ -246,9 +246,11 @@ class BookingController extends Controller
 					$model->name = $_POST['name'];
 					// $model->competitor_id = (int)Yii::app()->user->id;
 
-					if($model->save())
+					if($model->save()){
+						//Yii::log(CJSON::encode($model->getAttributes()), 'info', 'bookingController.update');
+
 						echo CJavaScript::jsonEncode(array('success'=>1));
-					else
+					} else {
 						echo CJavaScript::jsonEncode(
 							array(
 								'success'=>0, 
@@ -256,6 +258,7 @@ class BookingController extends Controller
 								'errors'=>$model->getErrors()
 							)
 						);
+					}
 				} else echo CJavaScript::jsonEncode(array('success'=>0, 'message'=> 'Неправильный запрос'));
 			} else echo CJavaScript::jsonEncode(array('success'=>0, 'message'=> 'У вас нет доступа'));
 
@@ -280,7 +283,12 @@ class BookingController extends Controller
 
 				try {
 
-					$this->loadModel((int)$_POST['id'])->delete();
+					$model = $this->loadModel( (int)$_POST['id'] );
+
+					Yii::log(json_encode($model->getAttributes(), JSON_UNESCAPED_UNICODE), 'info', 'bookingController.delete');
+
+					$model->delete();
+
 					echo CJavaScript::jsonEncode(array('success'=>1));
 
 				} catch (Exception $e) {

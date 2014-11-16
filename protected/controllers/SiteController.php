@@ -13,10 +13,23 @@ class SiteController extends Controller
 			// captcha action renders the CAPTCHA image displayed on the contact page
 			'captcha'=>array(
 				'class'=>'CCaptchaAction',
-				'backColor'=>0xFFFFFF,
+				// 'captchaAction'=> 'User/captcha',
+				'backColor'=>0x0a1630,
+				'transparent'=>true,
+				'foreColor'=>0xFFFFFF,
+				'maxLength'=>6,
+				'minLength'=>3,
+				'height'=>39,
+				'width'=>140,
+				'offset'=>1,
+				// 'backend'=>'imagick',
 			),
 		);
 	}
+
+    public function accessRules() {
+        return array('allow', 'actions' => array('captcha'), 'users' => array('*'));
+    }
 
 	/**
 	 * This is the action to handle external exceptions.
@@ -35,27 +48,63 @@ class SiteController extends Controller
 		$headers = "MIME-Version: 1.0\r\nFrom: CityQuest <$helloEmail>\r\nReply-To: $helloEmail\r\nContent-Type: text/html; charset=utf-8";
 		$message = wordwrap($message, 70);
 		$message = str_replace("\n.", "\n..", $message);
-		return 1; //mail($email,"=?UTF-8?B?".base64_encode($subject)."?=",$message,$headers);
+		return mail($email,"=?UTF-8?B?".base64_encode($subject)."?=",$message,$headers);
 	}
 
 	public function actionGiftcard()
 	{
 		$msg = '';
-		if (isset($_POST['name']) && $_POST['name'] != '' && isset($_POST['phone']) 
-			&& $_POST['phone'] != '' && isset($_POST['addres']) && $_POST['addres'] != ''
-		){
-			$this->sendMail(
-				'ilya@cityquest.ru, e.roslovets@cityquest.ru',
-				//'marchukilya@gmail.com',
-				"CityQuest. Заказ подарочной карты",
-				"Имя - ".$_POST['name']."<br>".
-				"Телефон -  ".$_POST['phone']."<br>".
-				"Адрес - ".$_POST['addres'] );
-			$msg = 'Мы получили ваш заказ, в ближайшее время с вами свяжутся по указаному номеру!';
+		$show_captcha = 0;
+		$code = 0;
+		$test_text = "us_".time();
+
+		Yii::app()->user->setFlash('notice', md5($test_text));
+		$cookie = Yii::app()->request->cookies['myuid']->value;
+
+		if (isset($_POST['message'])){
+
+			if ( 	$_POST['message'] != '' || isset($_POST['captcha']) || 
+					md5($cookie) != $_POST['my_text'] || Yii::app()->request->isAjaxRequest
+			) { // пусто от людей и куки и js
+				$show_captcha = 1;
+				$captcha=Yii::app()->getController()->createAction("captcha");
+				$code = $captcha->verifyCode;
+			}
+
+			if (isset($_POST['name']) && $_POST['name'] != '' && isset($_POST['phone']) 
+				&& $_POST['phone'] != '' && isset($_POST['addres']) && $_POST['addres'] != ''
+			){
+				if ($show_captcha == 0 || (isset($_POST['captcha']) && $_POST['captcha'] == $code)){
+					$this->sendMail(
+						'ilya@cityquest.ru, e.roslovets@cityquest.ru',
+						//'marchukilya@gmail.com',
+						"CityQuest. Заказ подарочной карты",
+						"Имя - ".$_POST['name']."<br>".
+						"Телефон -  ".$_POST['phone']."<br>".
+						"Адрес - ".$_POST['addres'] );
+					$msg = 'Мы получили ваш заказ, в ближайшее время с вами свяжутся по указаному номеру!';
+					Yii::app()->user->setFlash('success', $msg);
+					$_POST['name'] = '';
+					$_POST['phone'] = '';
+					$_POST['addres'] = '';
+					$show_captcha = 0;
+				} else {
+					if (isset($_POST['captcha']) && $_POST['captcha'] != $code){
+						Yii::app()->user->setFlash('error', 'Не верный код с картинки');
+					}
+				}
+			}
 		}
 
+		Yii::app()->request->cookies['myuid'] = new CHttpCookie('myuid', $test_text);
 		$this->pageTitle = Yii::app()->name . ' - Подарочные карты';
-	    $this->render('giftcard',array('msg'=>$msg));
+	    $this->render('giftcard',array(
+	    	'msg'=>$msg,
+	    	'show_captcha'=>$show_captcha,
+	    	'name' => isset($_POST['name']) ? $_POST['name'] : '',
+			'phone' => isset($_POST['phone']) ? $_POST['phone'] : '',
+			'addres' => isset($_POST['addres']) ? $_POST['addres'] : '',
+	    ));
 	}
 
 	public function actionFranchise()

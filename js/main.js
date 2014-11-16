@@ -827,12 +827,14 @@ $(function() {
 	$('#bookgift-phone').mask('+7(000)-000-00-00');
 
 	$('#bookgift-form').submit(function(){
+
+		$('#mytxt').val(my_text);
+
 		if ( $('#bookgift-name').val() != '' ){
 			if ( $('#bookgift-phone').val() != '' ){
 				if ( $('bookgift-addres').val() != '' ){
 					return true;
 				} else {
-
 					alert('Зполните пожалуйсто поле "Адрес"');
 					$('#bookgift-addres').focus();
 					return false;

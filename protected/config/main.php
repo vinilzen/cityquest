@@ -1,5 +1,7 @@
 <?php
 
+$local_config = require(dirname(__FILE__).'/local.php');
+
 // uncomment the following to define a path alias
 // Yii::setPathOfAlias('local','path/to/local-folder');
 
@@ -23,12 +25,12 @@ return array(
 
     'modules'=>array(
         'user',
-		'gii'=>array(
-			'class'=>'system.gii.GiiModule',
-			'password'=>'zaq',
-			// If removed, Gii defaults to localhost only. Edit carefully to taste.
-			'ipFilters'=>array('127.0.0.1','192.168.126.1','::1'),
-		),
+		// 'gii'=>array(
+		// 	'class'=>'system.gii.GiiModule',
+		// 	'password'=>'zaq',
+		// 	// If removed, Gii defaults to localhost only. Edit carefully to taste.
+		// 	'ipFilters'=>array('127.0.0.1','192.168.126.1','::1'),
+		// ),
     ),
 
 	'defaultController'=>'quest',
@@ -40,17 +42,7 @@ return array(
 			'loginUrl' => array('/user/login'),
 		),
 
-
-
-		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=cityquest',
-			'emulatePrepare' => true,
-    		'enableParamLogging' => true,
-			'username' => 'cityquest',
-			'password' => 'cityquest',
-			'charset' => 'utf8',
-			'tablePrefix' => 'tbl_',
-		),
+		'db'=>$local_config['db'],
 		
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
@@ -72,16 +64,14 @@ return array(
 		'log'=>array(
 			'class'=>'CLogRouter',
 			'routes'=>array(
-			// 	array(
-			// 		'class'=>'CFileLogRoute',
-			// 		'levels'=>'trace, info, error, warning, vardump',
-			// 	),
-				// uncomment the following to show log messages on web pages
-			
+				array(
+				 		'class'=>'CFileLogRoute',
+				 		'levels'=>'info',
+				 		'logFile'=>'info.log',
+				),
 				array(
 					'class'=>'CWebLogRoute',
-					'levels'=>'trace, info, error, warning, vardump',
-					//'levels'=>'error, warning',
+					'levels'=>'trace, error, warning, vardump',
 					'showInFireBug'=>true,
 				),
 			
