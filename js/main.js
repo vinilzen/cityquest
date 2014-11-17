@@ -835,17 +835,17 @@ $(function() {
 				if ( $('bookgift-addres').val() != '' ){
 					return true;
 				} else {
-					alert('Зполните пожалуйсто поле "Адрес"');
+					alert('Зполните пожалуйста поле "Адрес"');
 					$('#bookgift-addres').focus();
 					return false;
 				}
 			} else {
-				alert('Зполните пожалуйсто поле "Телефон"');
+				alert('Зполните пожалуйста поле "Телефон"');
 				$('#bookgift-phone').focus();
 				return false;
 			}
 		} else {
-			alert('Зполните пожалуйсто поле "Имя"');
+			alert('Зполните пожалуйста поле "Имя"');
 			$('#bookgift-name').focus();
 			return false;
 		}

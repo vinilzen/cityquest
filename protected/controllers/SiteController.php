@@ -51,6 +51,19 @@ class SiteController extends Controller
 		return mail($email,"=?UTF-8?B?".base64_encode($subject)."?=",$message,$headers);
 	}
 
+	private function getUserIP() {
+		if( array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER) && !empty($_SERVER['HTTP_X_FORWARDED_FOR']) ) {
+			if (strpos($_SERVER['HTTP_X_FORWARDED_FOR'], ',')>0) {
+				$addr = explode(",",$_SERVER['HTTP_X_FORWARDED_FOR']);
+				return trim($addr[0]);
+			} else {
+				return $_SERVER['HTTP_X_FORWARDED_FOR'];
+			}
+		} else {
+			return $_SERVER['REMOTE_ADDR'];
+		}
+	}
+
 	public function actionGiftcard()
 	{
 		$msg = '';
@@ -63,7 +76,23 @@ class SiteController extends Controller
 
 		if (isset($_POST['message'])){
 
-			if ( 	$_POST['message'] != '' || isset($_POST['captcha']) || 
+			// log
+			$captcha_model = new Captcha;
+			$captcha_model->ip = $this->getUserIP();
+			$captcha_model->name = $_POST['name'];
+			$captcha_model->info = $_SERVER['HTTP_USER_AGENT'];
+			$captcha_model->time_attempt = time();
+			$captcha_model->save();
+
+
+			$count_try = Captcha::model()->count("time_attempt>:time_attempt AND ip=:ip",
+				array(
+					"time_attempt" => time()-60*1, // 10 min
+					"ip" => $captcha_model->ip,
+			));
+
+
+			if ( 	$_POST['message'] != '' || isset($_POST['captcha']) || $count_try > 5 ||
 					md5($cookie) != $_POST['my_text'] || Yii::app()->request->isAjaxRequest
 			) { // пусто от людей и куки и js
 				$show_captcha = 1;
