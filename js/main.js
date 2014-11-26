@@ -154,16 +154,13 @@ $(function() {
 
 	$('#myModalBook').on('shown.bs.modal', function (e) {
 
-		yaCounter25221941.reachGoal('openBookWindow');
-		ga('send', 'event', 'book', 'openWindow');
-		gaq.push(['_trackEvent', 'book', 'openWindow']);
-		//_gaq.push(['_trackEvent', 'Book', 'openWindow', 'open Book Window']);
-
-		if (document.body.clientWidth > 768) {
+		if (document.body.clientWidth > 767) {
 			var h = $('#myModalBook .img-responsive').height();
 			$('.shad').height(h);
 		}
 
+		yaCounter25221941.reachGoal('openBookWindow');
+		ga('send', 'event', 'book', 'openWindow');
 	});
 
 

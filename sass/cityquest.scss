@@ -457,17 +457,19 @@ body.inner {
 .item {
 	position: relative;
 	overflow: hidden;
-	img {
-		-webkit-transition: -webkit-transform 3s ease-out; 
-	     -moz-transition: -moz-transform 3s ease-out;
-	       -o-transition: -o-transform 3s ease-out;
-	          transition: transform 3s ease-out;
-	}
-	&:hover img {
-		-webkit-transform: scale(1.1);
-		 -moz-transform: scale(1.1);
-		   -o-transform: scale(1.1);
-		      transform: scale(1.1);
+	@media (min-width: $screen-sm) {
+		img {
+			-webkit-transition: -webkit-transform 3s ease-out; 
+		     -moz-transition: -moz-transform 3s ease-out;
+		       -o-transition: -o-transform 3s ease-out;
+		          transition: transform 3s ease-out;
+		}
+		&:hover img {
+			-webkit-transform: scale(1.1);
+			 -moz-transform: scale(1.1);
+			   -o-transform: scale(1.1);
+			      transform: scale(1.1);
+		}
 	}
 }
 a.descr {
@@ -1516,6 +1518,37 @@ h2.twotab, a.h2.twotab {
 				color: #FFF;
 			}
 		}
+	}	
+	.you_phone {
+		font-weight: 300;
+		font-size: 15px;
+		color: rgba(255,255,255,.4);
+		display: inline-block;
+		margin-top: 7px;
+		width: 100%;
+		a {
+			text-decoration: none;	
+			font-weight: 300;
+			font-size: 15px;
+			color: rgba(255,255,255,1);
+			margin-left: 26px;
+			cursor: pointer;
+			&:hover {
+				border-bottom: 1px solid  rgba(255,255,255,.4);
+			}
+		}
+		input {						
+			color: #FFF;
+			background-color: #0C1C29;
+			border-color: #B1F3F7;
+			border-width: 1px;
+			padding: 2px 5px;
+			margin-left: 5px;
+			&:disabled {
+				border:none;
+				background-color: transparent;
+			}
+		}
 	}
 	.shad {
 		position: relative;
@@ -1548,6 +1581,33 @@ h2.twotab, a.h2.twotab {
 		}
 		&.shadow {
 			box-shadow: 0 0 100px 10px rgba(255, 255, 255, 0.35);
+		}
+		@media (min-width: $screen-xs-max) and (max-width: $screen-sm-min) {
+			p {
+				margin-bottom: 5px;
+				em {
+					font-size: 1.5em;
+				}
+				small {
+					font-size: .65em;
+				}
+				span {
+					font-size: 1.5em;
+				}
+			}
+			.you_phone {
+				margin-top: 15px;
+			}
+		}
+		@media (min-width: 769px) and (max-width: $screen-sm-max) {
+			p {
+				margin-bottom: 5px;
+			}
+			.you_phone {
+				margin-top: 35px;
+				margin-bottom: 20px;
+			}
+
 		}
 	}
 	.priceTbl {
@@ -1582,34 +1642,6 @@ h2.twotab, a.h2.twotab {
 				@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
 					font-size: 15px;
 				}
-			}
-		}
-	}
-	.you_phone {
-		font-weight: 300;
-		font-size: 15px;
-		color: rgba(255,255,255,.4);
-		a {
-			text-decoration: none;	
-			font-weight: 300;
-			font-size: 15px;
-			color: rgba(255,255,255,1);
-			margin-left: 26px;
-			cursor: pointer;
-			&:hover {
-				border-bottom: 1px solid  rgba(255,255,255,.4);
-			}
-		}
-		input {						
-			color: #FFF;
-			background-color: #0C1C29;
-			border-color: #B1F3F7;
-			border-width: 1px;
-			padding: 2px 5px;
-			margin-left: 5px;
-			&:disabled {
-				border:none;
-				background-color: transparent;
 			}
 		}
 	}

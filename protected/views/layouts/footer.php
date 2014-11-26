@@ -78,11 +78,11 @@
           <div class="tab-pane active" id="auth">
             <form role="form" id="auth-form" action="">
               <div class="form-group" id="form-group-username-auth">
-                <input class="form-control" placeholder="Email" id="auth-email" name="email" type="text">
+                <input class="form-control" placeholder="Email" id="auth-email" name="email" type="email">
                 <span class="error-msg">?</span>
               </div>
               <div class="form-group" style="display:none;" id="form-group-forgot-auth">
-                <input class="form-control" placeholder="Email" id="auth-forgot" type="email" value="">
+                <input class="form-control" placeholder="Email" id="auth-forgot" type="forgot_email" name="email">
                 <p class="help-block"><small>Чтобы восстановить пароль, введите Email</small></p>
                 <span class="error-msg">?</span>
               </div>
@@ -97,11 +97,11 @@
           <div class="tab-pane" id="reg">
             <form role="form" id="reg-form" action="">
               <div class="form-group" id="form-group-reg-email">
-                <input required class="form-control" placeholder="Email" id="reg-email" name="Profile[email]" type="email">
+                <input required class="form-control" placeholder="Email" id="reg-email" name="email" type="email">
                 <span class="error-msg">?</span>
               </div>
               <div class="form-group" id="form-group-reg-name">
-                <input required class="form-control" placeholder="Имя" id="reg-name" name="Profile[name]" type="text">
+                <input required class="form-control" placeholder="Имя" id="reg-name" name="username" type="text">
                 <span class="error-msg">?</span>
               </div>
               <div class="form-group" id="form-group-reg-phone">

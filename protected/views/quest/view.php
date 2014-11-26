@@ -12,11 +12,11 @@ $this->pageImg= '/images/q/'.$model->id.'.jpg';
 
 <div class="jumbotron quest" style="background-image: url(../images/q/<? echo $model->id; ?>.jpg); 
   <? if ($model->id == 2) { echo 'background-position: center 45%;'; } ?> " >
-  <div class="container text-center">
+  <div itemscope itemtype="http://schema.org/Product" class="container text-center">
     <div class="row">
       <div class="col-md-10 col-md-offset-1 col-sm-12">
-        <h1 id='quest_title'><? echo $model->title; ?></h1>
-        <h2><? echo $model->content; ?></h2>
+        <h1 itemprop="name" id='quest_title'><? echo $model->title; ?></h1>
+        <h2 itemprop="description"><? echo $model->content; ?></h2>
       </div>
     </div>
     <div class="row descr_quest">
@@ -100,6 +100,7 @@ $this->pageImg= '/images/q/'.$model->id.'.jpg';
             </div>
           </div>
           <div class="col-xs-12 times">
+            <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
             <div class="times-line">
 
               <? foreach ($times as $k=>$time) {
@@ -157,44 +158,36 @@ $this->pageImg= '/images/q/'.$model->id.'.jpg';
               <div class="price-line">
                 <div class="priceTbl workPrice1" title="Цена за команду" data-toggle="tooltip">
                   <div class="priceRow">
-                    <!-- <span class="dashed">&nbsp;</span> -->
-                    <span class="price" style="padding:0;"><? echo $pricePm; ?> <em class="rur"><em>руб.</em></em></span>
-                    <!-- <span class="dashed">&nbsp;</span> -->
+                    <span class="price" itemprop="price" content="<? echo $pricePm?>" style="padding:0;"><? echo $pricePm; ?> <em itemprop="priceCurrency" content="RUB" class="rur"><em>руб.</em></em></span>
                   </div>
                 </div>
                 <div class="priceTbl workPrice2" title="Цена за команду" data-toggle="tooltip">
                   <div class="priceRow">
                     <span class="dashed">&nbsp;</span>
-                    <span class="price"><? echo $priceAm; ?> <em class="rur"><em>руб.</em></em></span>
+                    <span class="price" itemprop="price" content="<? echo $priceAm?>"><? echo $priceAm; ?> <em itemprop="priceCurrency" content="RUB" class="rur"><em>руб.</em></em></span>
                     <span class="dashed">&nbsp;</span>
                   </div>
                 </div>
                 <div class="priceTbl workPrice3" title="Цена за команду" data-toggle="tooltip">
                   <div class="priceRow">
                     <span class="dashed">&nbsp;</span>
-                    <span class="price"><? echo $pricePm; ?> <em class="rur"><em>руб.</em></em></span>
+                    <span class="price" itemprop="price" content="<? echo $pricePm?>"><? echo $pricePm; ?> <em itemprop="priceCurrency" content="RUB" class="rur"><em>руб.</em></em></span>
                     <span class="dashed">&nbsp;</span>
                   </div>
                 </div>
               </div>
             <? } else { ?>
               <div class="price-line weekend">
-                <!-- <div class="priceTbl weekendPrice1" style="width:164px;" title="Цена за команду" data-toggle="tooltip">
-                  <div class="priceRow">
-                    <span class="dashed">&nbsp;</span>
-                    <span class="price"><? echo $priceAm; ?> <em class="rur"><em>руб.</em></em></span>
-                    <span class="dashed">&nbsp;</span>
-                  </div>
-                </div> -->
                 <div class="priceTbl weekendPrice2" title="Цена за команду" data-toggle="tooltip">
                   <div class="priceRow">
                     <span class="dashed">&nbsp;</span>
-                    <span class="price"><? echo $pricePm; ?> <em class="rur"><em>руб.</em></em></span>
+                    <span class="price" itemprop="price" content="<? echo $pricePm?>"><? echo $pricePm; ?> <em itemprop="priceCurrency" content="RUB" class="rur"><em>руб.</em></em></span>
                     <span class="dashed">&nbsp;</span>
                   </div>
                 </div>
               </div>
             <? } ?>
+            </div>
           </div>
           <div class="clearfix"></div>
       <?  } ?>

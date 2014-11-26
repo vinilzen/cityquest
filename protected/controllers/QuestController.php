@@ -299,7 +299,7 @@ class QuestController extends Controller
 			$YMDate = (int)$ymd;
 
 		$offset = 30;
-		$prev = 0;
+		$prev = -1;
 		$next = $prev + $offset;
 
 		if (isset($_GET['d'])) {
