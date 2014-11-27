@@ -70,6 +70,7 @@ $this->pageImg= '/images/q/'.$model->id.'.jpg';
             'day' => date( 'j' , $currDate ),
             'date' => date('Ymd', $currDate),
             'month' => date('m', $currDate),
+            'year' => date('Y', $currDate),
           );
           $currDate = strtotime( '+1 day' , $currDate );
         } while( $currDate<=$endDate );
@@ -115,7 +116,8 @@ $this->pageImg= '/images/q/'.$model->id.'.jpg';
 
                 $dis = 0;
                 $near = 0;
-                if ($time < date('H:i', strtotime( '+0 hours' )) ) $near = 1;
+                $timastamp_quest_start = strtotime( $value['year'].'-'.$value['month'].'-'.$value['day'].' '.$time);
+                if ( $timastamp_quest_start < strtotime( '-40 minutes' ) ) $near = 1;
 
                 $disabled = '';
                 $my_quest = '';
@@ -146,7 +148,7 @@ $this->pageImg= '/images/q/'.$model->id.'.jpg';
                   data-m="<? echo $value['month']; ?>" 
                   data-price="<? echo $price; ?>" 
                   class="btn btn-q <? echo $my_quest.$empty; ?>
-                      <? echo (($value['date'] === date('Ymd') && $near) || $dis) ? 'disabled' : '';
+                      <? echo ($near || $dis) ? 'disabled' : '';
                       if ($workday && $k > 2 && $k < 7 ) echo ' invisible';?>" 
                       <? if (($workday && $k > 2 && $k < 7) || ($empty != '')) echo ' style="display:none;" '; ?>
                       <? echo $disabled; ?>><? echo $time; ?>
