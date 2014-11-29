@@ -158,11 +158,8 @@ class QuestController extends Controller
 		if(isset($_POST['Quest']))
 		{
 
-			// var_dump(Yii::app()->user->id); die;
-
 			$_POST['Quest']['author_id'] = Yii::app()->user->id;
 			$model->attributes=$_POST['Quest'];
-			// $model->attributes->;
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -278,6 +275,7 @@ class QuestController extends Controller
 	 */
 	public function actionAdminschedule($ymd = '')
 	{
+
 		$holidays = Holiday::model()->findAll();
 		$holiday_list = array();
 		foreach ($holidays as $holiday) {
@@ -293,10 +291,11 @@ class QuestController extends Controller
 		$this->layout='//layouts/admin_column';
 
 
-		if ($ymd === '' || !is_numeric($ymd) || strlen($ymd) !== 8)
+		if ($ymd === '' || !is_numeric($ymd) || strlen($ymd) !== 8){
 			$YMDate = date('Ymd', strtotime( "now" ));
-		else
+		} else {
 			$YMDate = (int)$ymd;
+		}
 
 		$offset = 30;
 		$prev = -1;
@@ -333,11 +332,22 @@ class QuestController extends Controller
 			Yii::app()->end();
 		} else {
 
-			$quests = Quest::model()->findAll(array(
-			    "condition" => "status = 2 ",
-			    "order" => "status ASC, sort ASC",
-			    "limit" => 12,
+			$criteria=new CDbCriteria(array(
+				'condition'=>"status = 2 ",
+				'limit'=>12,
+				'order'=>"status ASC, sort ASC"
 			));
+			
+			if (UserModule::isModerator()){
+
+				$moderator_quests = Yii::app()->getModule('user')->user()->quests;
+
+				if ($moderator_quests && $moderator_quests != ''){
+					$criteria->addInCondition("id", explode(',', $moderator_quests));
+				}
+			}
+
+			$quests = Quest::model()->findAll($criteria);
 
 			$quests_array = array();
 
@@ -364,18 +374,20 @@ class QuestController extends Controller
 						$quests_array[$b->quest_id]['bookings'][$b->time] = $b;
 					}
 				}
+
+				$users = User::model()->findALL(array("condition"=>"superuser = 0"));
+
+				$this->render('adminschedule',array(
+					'twoweek_bookings_arr' => $twoweek_bookings_arr,
+					'quests' => $quests_array,
+					'ymd' => $YMDate,
+					'users' => $users,
+					'holidays' => $holiday_list,
+					'arr_hash' => md5(serialize($twoweek_bookings_arr)),
+				));
+			} else {
+				throw new CHttpException(404,'У вас нет доступных квестов');
 			}
-
-			$users = User::model()->findALL(array("condition"=>"superuser = 0"));
-
-			$this->render('adminschedule',array(
-				'twoweek_bookings_arr' => $twoweek_bookings_arr,
-				'quests' => $quests_array,
-				'ymd' => $YMDate,
-				'users' => $users,
-				'holidays' => $holiday_list,
-				'arr_hash' => md5(serialize($twoweek_bookings_arr)),
-			));
 		}
 	}
 

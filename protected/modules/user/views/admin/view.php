@@ -16,30 +16,59 @@
 		'username',
 	);
 	
+	if ($model->superuser == 2){
+		array_push($attributes,
+			'password',
+			'email',
+			'activkey',
+			'phone',
+			array(
+				'name' => 'createtime',
+				'value' => date("d.m.Y H:i:s",$model->createtime),
+			),
+			array(
+				'name' => 'lastvisit',
+				'value' => (($model->lastvisit)?date("d.m.Y H:i:s",$model->lastvisit):UserModule::t("Not visited")),
+			),
+			array(
+				'name' => 'superuser',
+				'value' => User::itemAlias("AdminStatus",$model->superuser),
+			),
+			array(
+				'name' => 'status',
+				'value' => User::itemAlias("UserStatus",$model->status),
+			),
+			array(
+				'name' => 'quests',
+				'value' => User::listQuests($quests),
+			)
+		);
+	} else {
+
+		array_push($attributes,
+			'password',
+			'email',
+			'activkey',
+			'phone',
+			array(
+				'name' => 'createtime',
+				'value' => date("d.m.Y H:i:s",$model->createtime),
+			),
+			array(
+				'name' => 'lastvisit',
+				'value' => (($model->lastvisit)?date("d.m.Y H:i:s",$model->lastvisit):UserModule::t("Not visited")),
+			),
+			array(
+				'name' => 'superuser',
+				'value' => User::itemAlias("AdminStatus",$model->superuser),
+			),
+			array(
+				'name' => 'status',
+				'value' => User::itemAlias("UserStatus",$model->status),
+			)
+		);
 	
-	array_push($attributes,
-		'password',
-		'email',
-		'activkey',
-		'phone',
-		array(
-			'name' => 'createtime',
-			'value' => date("d.m.Y H:i:s",$model->createtime),
-		),
-		array(
-			'name' => 'lastvisit',
-			'value' => (($model->lastvisit)?date("d.m.Y H:i:s",$model->lastvisit):UserModule::t("Not visited")),
-		),
-		array(
-			'name' => 'superuser',
-			'value' => User::itemAlias("AdminStatus",$model->superuser),
-		),
-		array(
-			'name' => 'status',
-			'value' => User::itemAlias("UserStatus",$model->status),
-		)
-	);
-	
+	}
 	$this->widget('zii.widgets.CDetailView', array(
 		'data'=>$model,
 		'attributes'=>$attributes,

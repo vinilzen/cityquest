@@ -29,17 +29,15 @@
 </li>
 
 <? if (Yii::app()->getModule('user')->isAdmin()) { ?>
-<li style="margin:0;">
-	<a href="/quest/adminschedule/ymd" style="opacity: 1;" title="Панель администратора">
-		<i style="font-size: 18px;" class="glyphicon glyphicon-cog"></i>
-	</a>
-</li>
-<? } ?>
-
-<? if (Yii::app()->getModule('user')->isModerator()) { ?>
-<li style="margin:0;">
-	<a href="/quest/adminschedule/ymd" style="opacity: 1;" title="Панель модератора">
-		<i style="font-size: 18px;" class="glyphicon glyphicon-cog"></i>
-	</a>
-</li>
+	<li style="margin:0;">
+		<a href="/quest/adminschedule/ymd" style="opacity: 1;" title="Панель администратора">
+			<i style="font-size: 18px;" class="glyphicon glyphicon-cog"></i>
+		</a>
+	</li>
+<? } else if (Yii::app()->getModule('user')->isModerator()) { ?>
+	<li style="margin:0;">
+		<a href="/quest/adminschedule/ymd" style="opacity: 1;" title="Панель модератора">
+			<i style="font-size: 18px;" class="glyphicon glyphicon-cog"></i>
+		</a>
+	</li>
 <? } ?>

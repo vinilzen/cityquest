@@ -65,6 +65,19 @@ class AdminController extends Controller
 	public function actionView()
 	{
 		$model = $this->loadModel();
+		$quests = array();
+
+		if ($model->superuser == 2 && $model->quests){
+			$quests_list = explode(',',$model->quests);
+			if ($quests_list && count($quests_list)>0){
+				foreach ($quests_list as $key => $value) {
+					$quest = Quest::model()->findByPk((int)$value);
+					if ($quest){
+						$quests[$quest->id] = $quest;
+					}
+				}
+			}
+		}
 
 		$bookings = Booking::model()->with('quest')->findAllByAttributes(
 			array('competitor_id'=>$model->id),
@@ -88,6 +101,7 @@ class AdminController extends Controller
 			'model'=>$model,
 			'bookings'=>$bookings,
 			'bookings_old'=>$bookings_old,
+			'quests'=>$quests,
 		));
 	}
 
@@ -126,15 +140,17 @@ class AdminController extends Controller
 	{
 		$model=$this->loadModel();
 
-
 		$old_password = User::model()->notsafe()->findByPk($model->id);
 		
-		// echo '<pre>'; var_dump($old_password->password); echo '</pre>'; die;
-
-		if(isset($_POST['User']))
-		{
+		if(isset($_POST['User'])) {
 			$model->attributes=$_POST['User'];
 			
+			if ($_POST['User']['quests']){
+				$model->quests = implode(',', $_POST['User']['quests']);
+			} else {
+				$model->quests = '';
+			}
+
 			if($model->validate()) {
 				$old_password = User::model()->notsafe()->findByPk($model->id);
 
@@ -148,8 +164,19 @@ class AdminController extends Controller
 			}
 		}
 
+		$quest_titels = array();
+
+		$quests = Quest::model()->findAll();
+		if ($quests && count($quests)>0){
+			foreach ($quests as $q) {
+				$status_str = $q->status==1?'Черновик':$q->status==2?'Активен':'Вскоре';
+				$quest_titels[$q->id] = $q->title.' ('.$status_str.')';
+			}
+		}
+
 		$this->render('update',array(
 			'model'=>$model,
+			'quests'=>$quest_titels
 		));
 	}
 

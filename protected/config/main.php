@@ -69,12 +69,11 @@ return array(
 				 		'levels'=>'info',
 				 		'logFile'=>'info.log',
 				),
-				array(
+				/*array(
 					'class'=>'CWebLogRoute',
 					'levels'=>'trace, error, warning, vardump',
 					'showInFireBug'=>true,
-				),
-			
+				),*/
 			),
 		),
 	),

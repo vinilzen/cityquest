@@ -116,8 +116,11 @@ $this->pageImg= '/images/q/'.$model->id.'.jpg';
 
                 $dis = 0;
                 $near = 0;
+                $time_str = $value['year'].'-'.$value['month'].'-'.$value['day'].' '.$time;
                 $timastamp_quest_start = strtotime( $value['year'].'-'.$value['month'].'-'.$value['day'].' '.$time);
-                if ( $timastamp_quest_start < strtotime( '-40 minutes' ) ) $near = 1;
+                if ( $timastamp_quest_start < (strtotime( 'now' )+(40*60)) ) $near = 1;
+
+                echo '<!--('.$time_str.') '.$timastamp_quest_start.' = '.(strtotime( 'now' )+(40*60)).' -->';
 
                 $disabled = '';
                 $my_quest = '';
