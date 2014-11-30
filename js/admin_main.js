@@ -448,18 +448,13 @@ $(function() {
 	}
 
 	if ($('#User_superuser').length > 0){
-
 		$('#User_superuser').change(function(){
-			
-			console.log('change', $(this).val());
-
 			if ( $(this).val() != 2 ) {
 				$('.set_moderator_quests').hide();
 			} else {
 				$('.set_moderator_quests').show();
 			}
 		});
-
 	}
 
 });

@@ -10,6 +10,7 @@
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'dataProvider'=>$dataProvider,
+	// 'filter'=>$model,
 	'columns'=>array(
 		array(
 			'name' => 'id',

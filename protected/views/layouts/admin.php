@@ -104,6 +104,7 @@
 	</div>
 
 <script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.ba-bbq.js"></script>
 <script src="/js/jquery-ui.js"></script>
 <script src="/js/underscore-min.js"></script>
 <script src="/js/backbone-min.js"></script>

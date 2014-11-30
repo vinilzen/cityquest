@@ -55,6 +55,7 @@ class AdminController extends Controller
 
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
+			'model'=> new User('search')
 		));
 	}
 
@@ -166,7 +167,11 @@ class AdminController extends Controller
 
 		$quest_titels = array();
 
-		$quests = Quest::model()->findAll();
+		$criteria=new CDbCriteria(array(
+			'order'=>"status ASC, sort ASC"
+		));
+
+		$quests = Quest::model()->findAll($criteria);
 		if ($quests && count($quests)>0){
 			foreach ($quests as $q) {
 				$status_str = $q->status==1?'Черновик':$q->status==2?'Активен':'Вскоре';
