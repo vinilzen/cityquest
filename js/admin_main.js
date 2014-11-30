@@ -198,7 +198,7 @@ var PopoverView = Backbone.View.extend({
 		$('#addRow, #btnRow, #BookInf h3, #phoneRow', self.$el).hide();
 
 		$('#editBookingRow .inputName', this.$el).val(self.attr.name);
-		$('#editBookingRow .inputPhone', this.$el).val(self.attr.phone);
+		$('#editBookingRow .inputPhone', this.$el).val(self.attr.phone).mask('+7(000)-000-00-00');
 		$('#editBookingRow .inputResult', this.$el).val(self.attr.result);
 		$('#editBookingRow .inputComment', this.$el).val(self.attr.comment);
 		$('#editBookingRow .inputPrice', this.$el).val(self.attr.price);
@@ -224,6 +224,8 @@ var PopoverView = Backbone.View.extend({
 			$('.inputPhone', self.$el).val( phone );
 			$('.inputName', self.$el).val( name );
 		});
+
+		$('.inputPhone', self.$el).mask('+7(000)-000-00-00');
 
 		$(this.parent).popover('setPosition');
 		return false;

@@ -110,6 +110,7 @@
 <script src="/js/backbone-min.js"></script>
 <script src="/js/bootstrap.js"></script>
 <script src="/js/admin_main.js"></script>
+<script src="/js/jquery.mask.min.js"></script>
 <script src="/js/jquery.formstyler.min.js"></script>  
 <!-- Yandex.Metrika informer --><!-- /Yandex.Metrika informer --><!-- Yandex.Metrika counter -->
 <script type="text/javascript">

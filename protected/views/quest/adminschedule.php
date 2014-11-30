@@ -141,8 +141,7 @@ echo '<!-- '.date('Y/m/d H:i', strtotime('now')).','.$ymd.','.$selectedDate.' --
 		else 
 			$times = Yii::app()->params['times'][1];
 
-		echo '<table class="table"><tr><td style="width:100px;"><small style="width:100px; overflow:hidden; display:block;">';
-		echo $quest['q']->title.'</small></td>';
+		echo '<table class="table"><tr><td style="width:100px;">'.$quest['q']->title.'</td>';
 
 		if (date('w', $selectedDate) == 0 || date('w', $selectedDate) == 6 || in_array(date('Ymd', $selectedDate), $holidays))
 			$workday = 0;
@@ -223,7 +222,7 @@ echo '<!-- '.date('Y/m/d H:i', strtotime('now')).','.$ymd.','.$selectedDate.' --
 
 			<td>
 				<button data-toggle="popover"  
-            		data-title="<? echo date('d',$selectedDate); ?> <? echo date('M', $selectedDate); ?> <?php echo $time; ?>"
+            		data-title="<? echo date('d',$selectedDate); ?> <? echo $month[date('n', $selectedDate)-1]; ?> <?php echo $time; ?>"
 				    data-time="<? echo $time; ?>" 
 		            data-ymd="<? echo $ymd; ?>" 
 		            data-quest="<? echo $quest['q']->id; ?>" 

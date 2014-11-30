@@ -20,7 +20,7 @@
       <div class="form-group">
         <label for="inputPhone" class="col-xs-2 control-label">Phone</label>
         <div class="col-xs-7">
-          <input type="text" class="form-control input-sm inputPhone" placeholder="123-456-789">
+          <input type="text" class="form-control input-sm inputPhone" placeholder="+7(123)-456-78-90">
         </div>
         <div class="col-xs-2">
           <button id="cancelEditBooking" class="btn btn-default btn-sm" data-toggle="tooltip" title="Отменить">
@@ -61,7 +61,7 @@
       <div class="form-group">
         <label for="inputPhone" class="col-xs-2 control-label">Phone</label>
         <div class="col-xs-7">
-          <input type="text" class="form-control input-sm inputPhone" placeholder="123-456-789">
+          <input type="text" class="form-control input-sm inputPhone" placeholder="+7(123)-456-78-90">
         </div>
         <div class="col-xs-2">
           <button id="cancelAddBooking" class="btn btn-default btn-sm" data-toggle="tooltip" title="Отменить">
