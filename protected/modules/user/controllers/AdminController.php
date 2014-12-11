@@ -120,10 +120,8 @@ class AdminController extends Controller
 			$model->createtime=time();
 			$model->lastvisit=time();
 			if( $model->validate() ) {
-				
 				$model->password=Yii::app()->controller->module->encrypting($model->password);
 				$model->save();
-
 				$this->redirect(array('view','id'=>$model->id));
 			}
 		}

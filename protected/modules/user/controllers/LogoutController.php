@@ -9,6 +9,7 @@ class LogoutController extends Controller
 	 */
 	public function actionLogout()
 	{
+		Yii::app()->request->cookies['cookie_name'] = new CHttpCookie('logout', 1);
 		Yii::app()->user->logout();
 		$this->redirect('/');
 	}

@@ -5,6 +5,8 @@ protected/runtime/*
 protected/data/*.db
 themes/classic/views/
 protected/config/local.php
+protected/config/vk.php
+protected/config/fb.php
 *.sublime-project
 *.sublime-workspace
 prepros.cfg

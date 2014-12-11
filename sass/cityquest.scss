@@ -1360,6 +1360,8 @@ h2.twotab, a.h2.twotab {
 	}
 	.form-group {
 		margin-bottom: 0;
+		position: relative;
+		height:42px;
 		input {
 			border-radius:0;
 			background-color: rgba(0,0,0,0);
@@ -1369,6 +1371,7 @@ h2.twotab, a.h2.twotab {
 			color:#fff;
 			padding-top: 8px;
 			padding-bottom: 8px;
+			position: absolute;
 			&:focus {
 				background-color: rgba(24, 40, 52, .3);
 			}
@@ -2225,4 +2228,14 @@ h1 {
 }
 .btn-q.empty_btn.disabled, .btn-q.empty_btn[disabled]:not(.myDate) {
 	color: rgba(0, 0, 0, 0);
+}
+#fb_logincustom_btn {
+	background: left top url(../img/soc_big_btn.png) no-repeat;
+	width: 58px;
+	height: 58px;
+	display: inline-block;
+	cursor:pointer;
+	span {
+		opacity:0;
+	}
 }

@@ -19,18 +19,13 @@ return array(
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
+		'application.components.Facebook.*',
         'application.modules.user.models.*',
         'application.modules.user.components.*',
 	),
 
     'modules'=>array(
         'user',
-		// 'gii'=>array(
-		// 	'class'=>'system.gii.GiiModule',
-		// 	'password'=>'zaq',
-		// 	// If removed, Gii defaults to localhost only. Edit carefully to taste.
-		// 	'ipFilters'=>array('127.0.0.1','192.168.126.1','::1'),
-		// ),
     ),
 
 	'defaultController'=>'quest',
@@ -42,10 +37,13 @@ return array(
 			'loginUrl' => array('/user/login'),
 		),
 
+		'Facebook'=>array(
+			'class' => 'application.components.Facebook'
+		),
+
 		'db'=>$local_config['db'],
 		
 		'errorHandler'=>array(
-			// use 'site/error' action to display errors
 			'errorAction'=>'site/error',
 		),
 		'urlManager'=>array(
@@ -65,15 +63,14 @@ return array(
 			'class'=>'CLogRouter',
 			'routes'=>array(
 				array(
-				 		'class'=>'CFileLogRoute',
-				 		'levels'=>'info',
-				 		'logFile'=>'info.log',
+					'class'=>'CFileLogRoute',
+					'levels'=>'info',
+					'logFile'=>'info.log',
 				),
-				/*array(
-					'class'=>'CWebLogRoute',
-					'levels'=>'trace, error, warning, vardump',
-					'showInFireBug'=>true,
-				),*/
+		        // array(
+		        //     'class'=>'CWebLogRoute',
+		        //     'levels'=>'error, warning, trace, log, vardump',
+		        // ),
 			),
 		),
 	),

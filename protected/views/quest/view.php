@@ -59,7 +59,7 @@ $this->pageImg= '/images/q/'.$model->id.'.jpg';
       function makeDayArray( ){
         $days = array('понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота', 'воскресенье');
         $month = array('января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'ноября', 'октября', 'декабря' );
-        $endDate   = strtotime( '+14 day' );
+        $endDate   = strtotime( '+'.Yii::app()->params['offset'].' day' );
         $currDate  = strtotime( 'now' );
         $dayArray  = array();
 
