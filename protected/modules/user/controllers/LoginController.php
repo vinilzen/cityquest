@@ -80,14 +80,15 @@ class LoginController extends Controller
 				$user = $this->getUserByEmail($_POST['email']);
 				if ($user){
 					$user->fb_id=$_POST['id'];
+					$user->fb_link=$_POST['link'];
 					if ($user->save()){
-
 						$this->fb_authenticate($user->email);
 					}
 				} else {
 					$user = new User;
 					//$user->access_token=$_POST['access_token'];
 					$user->fb_id=$_POST['fb_id'];
+					$user->fb_link=$_POST['link'];
 					$user->expires_in = time();// + $_POST['expires_in'];
 					$user->createtime=time();
 					$user->lastvisit=time();
