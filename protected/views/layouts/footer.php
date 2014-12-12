@@ -228,12 +228,10 @@
             <div class="text-center">
               <h3>Подтверждение</h3>
               <p class="book_time"></p>
-              <!-- <small>Понедельник</small><span>30.07</span><em>в</em><span>10:45</span> -->
               <div class="priceTbl">
                 <div class="priceRow">
                   <span class="dashed">&nbsp;</span>
-                  <span class="price">3000<em class="rur"><em>руб.</em></em>
-                    <small style="font-size: 12px;font-family: 'Open Sans', Helvetica, Arial, sans-serif;position: absolute;top: 24px;left: -24px;">(Цена указана за команду)</small></span>
+                  <span class="price">3000<em class="rur"><em>руб.</em></em> <b class="team">за команду</b></span>
                   <span class="dashed">&nbsp;</span>
                 </div>
               </div>

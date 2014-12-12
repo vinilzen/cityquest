@@ -35,8 +35,6 @@ var PopoverView = Backbone.View.extend({
 
 		this.attr.user_url = $(this.parent).attr('data-user-id') != '' ? '/user/admin/view/id/'+$(this.parent).attr('data-user-id') : '#';
 
-		console.log(this.attr);
-
 		this.$el.html( _.template($('#BookInfWrap').html(), this.attr) );
 
 		$('.pop-row', this.$el).hide();
@@ -72,9 +70,7 @@ var PopoverView = Backbone.View.extend({
 	},
 
 	confirmBooking:function(){
-		console.log('confirmBooking');
 		var self = this;
-
 		$.post('/booking/confirm', {
 			id : self.attr.id,
 			confirm : 1,

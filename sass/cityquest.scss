@@ -1527,7 +1527,8 @@ h2.twotab, a.h2.twotab {
 		font-size: 15px;
 		color: rgba(255,255,255,.4);
 		display: inline-block;
-		margin-top: 7px;
+		margin-top: 0;
+		margin-bottom: 6px;
 		width: 100%;
 		a {
 			text-decoration: none;	
@@ -1542,11 +1543,14 @@ h2.twotab, a.h2.twotab {
 		}
 		input {						
 			color: #FFF;
-			background-color: #0C1C29;
-			border-color: #B1F3F7;
 			border-width: 1px;
 			padding: 2px 5px;
 			margin-left: 5px;
+			width: 160px;
+			height: 36px;
+			line-height: 36px;
+			background-color: rgba(0,0,0,0);
+			border-color:rgba(255, 255, 255, 0.1);
 			&:disabled {
 				border:none;
 				background-color: transparent;
@@ -1592,14 +1596,15 @@ h2.twotab, a.h2.twotab {
 					font-size: 1.5em;
 				}
 				small {
-					font-size: .65em;
+					font-size: .85em;
 				}
 				span {
 					font-size: 1.5em;
 				}
 			}
 			.you_phone {
-				margin-top: 15px;
+				margin-top: 10px;
+				margin-bottom: 10px;
 			}
 		}
 		@media (min-width: 769px) and (max-width: $screen-sm-max) {
@@ -1636,6 +1641,9 @@ h2.twotab, a.h2.twotab {
 			@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
 				font-size: 16px;
 				top: -2px;
+				.team {
+					font-size: 16px;
+				}
 			}
 			em {
 				font-style: normal;
@@ -1727,6 +1735,49 @@ h2.twotab, a.h2.twotab {
 	.rur:before {
 		font-size: 18px;
 		top: 0;
+	}
+	@media (min-width: 1366px) {
+		h3 {
+			margin-top: 60px;
+			font-size: 30px;
+		}
+		.shad {
+			p {
+				em {
+					position: relative;
+					top: -5px;
+					font-size: 35px;
+				}
+				span {					
+					top: -7px;
+					position: relative;
+				}
+				small {
+					margin-bottom: 0;
+				}
+			}
+		}
+		.priceTbl {
+			margin: 3px 45px;
+			width: 610px;
+			.priceRow span.price {
+				padding: 0 20px;
+			}
+		}
+		.you_phone {
+			margin-top: 0px;
+			margin-bottom: 7px;
+			input {
+				margin-left: 8px;
+				width: 160px;
+				font-weight: 300;
+				height: 42px;
+				padding: 0px 9px;
+				line-height: 42px;
+				background-color: rgba(0,0,0,0);
+				border-color:rgba(255, 255, 255, 0.1);
+			}
+		}
 	}
 }
 
@@ -1955,6 +2006,10 @@ h2.twotab, a.h2.twotab {
 	em {
 		display: none;
 	}
+}
+.team {
+	font-size: 20px;
+	font-weight: normal;
 }
 
 
