@@ -31,6 +31,8 @@ var PopoverView = Backbone.View.extend({
 			time :  $(this.parent).attr('data-time') || 0,
 			ymd :  $(this.parent).attr('data-ymd') || 0,
 			date :  $(this.parent).attr('data-date') || 0,
+			vk_id : $(this.parent).attr('data-vk-id') || 0,
+			fb_id : $(this.parent).attr('data-fb-id') || 0,
 		};
 
 		this.attr.user_url = $(this.parent).attr('data-user-id') != '' ? '/user/admin/view/id/'+$(this.parent).attr('data-user-id') : '#';

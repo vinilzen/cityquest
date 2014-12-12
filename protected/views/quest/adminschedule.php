@@ -187,6 +187,8 @@ echo '<!-- '.date('Y/m/d H:i', strtotime('now')).','.$ymd.','.$selectedDate.' --
 						'data-result="'.$quest['bookings'][$time]->result.'" '.
 						'data-comment="'.$quest['bookings'][$time]->comment.'" '.
 						'data-user-id="'. $quest['bookings'][$time]->competitor->id.'" '.
+						'data-fb-id="'. (int)$quest['bookings'][$time]->competitor->fb_id.'" '.
+						'data-vk-id="'. (int)$quest['bookings'][$time]->competitor->vk_id.'" '.
 						'data-name="'.$quest['bookings'][$time]->name.'" ';
 
 				if ($quest['bookings'][$time]->result != 0 && 
