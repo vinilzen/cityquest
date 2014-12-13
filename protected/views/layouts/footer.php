@@ -63,19 +63,7 @@
             <div class="col-xs-6 text-left">
               <script>
                 function statusChangeCallback(response) {
-
-                  if (response.status === 'connected') {// Logged into your app and Facebook.
-                    if ($.cookie("logout") != 1){
-                      testAPI();
-                    }
-                  } else if (response.status === 'not_authorized') {
-                    // The person is logged into Facebook, but not your app.
-                    // document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
-                  } else {
-                    // The person is not logged into Facebook, so we're not sure if
-                    // they are logged into this app or not.
-                    // document.getElementById('status').innerHTML = 'Please log ' + 'into Facebook.';
-                  }
+                  if (response.status === 'connected' && $.cookie("logout") != 1) goAuth();
                 }
 
                 function checkLoginState() {
@@ -106,7 +94,7 @@
                   fjs.parentNode.insertBefore(js, fjs);
                 }(document, 'script', 'facebook-jssdk'));
 
-                function testAPI() {
+                function goAuth() {
                   FB.api('/me', function(response) {
                     $.post(
                       "/user/login/fbauth",
@@ -125,20 +113,14 @@
                 }
 
                 function loginFb(){
-                  $.removeCookie('logout');
-                  FB.login(function(response) { checkLoginState(); }, {scope: 'email, public_profile'});
+                  $.cookie('logout',0);
+                  FB.login(function(response) {
+                    console.log(response);
+                    checkLoginState();
+                  }, {scope: 'email, public_profile'});
                 }
               </script>
-    <div id="fb_logincustom_btn" onclick="loginFb();"></div>
-
-        <!-- <fb:login-button scope="public_profile,email"
-                id="fb_logincustom_btn"
-                data-max-rows="1"
-                data-size="xlarge" 
-                data-show-faces="false" 
-                data-display-type="popup" 
-                data-auto-logout-link="true"
-                onlogin="checkLoginState();"></fb:login-button> -->
+              <div id="fb_logincustom_btn" onclick="loginFb();"></div>
             </div>
             <div class="col-xs-12">
               <div class="orTbl">
@@ -219,7 +201,7 @@
                   <i class="ico-ppl noactive"></i>
                   <i class="ico-ppl noactive"></i>2 - 4 игрока
                 </span>
-                <span class="addr-to"><i class="ico-loc"></i>ул. Стасовой, д. 10, корп. 3</span>
+                <span class="addr-to"><i class="ico-loc"></i></span>
               </p>
             </a>
           </div>
@@ -333,9 +315,7 @@
   } else { f(); }
   })(document, window, "yandex_metrika_callbacks");
 </script>
-<noscript>
-  <div><img alt="" src="//mc.yandex.ru/watch/25221941" style="position:absolute; left:-9999px;"></div>
-</noscript>
+<noscript><div><img alt="" src="//mc.yandex.ru/watch/25221941" style="position:absolute; left:-9999px;"></div></noscript>
 
 
 <script>

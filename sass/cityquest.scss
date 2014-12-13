@@ -1219,13 +1219,13 @@ h2.twotab, a.h2.twotab {
 		margin-left: -5px;
 	}
 	@media (min-width: $screen-sm-min) and (max-width: $screen-md-max) {
-		width: 750px;
+		width: 770px;
 	}
 	@media (max-width: $screen-xs-max) {
 		// width: 900px;
 	}
 	@media (min-width: 1100px)  {
-		width: 750px;
+		width: 770px;
 	}
 	@media (min-width: 1025px) and  (max-width: 1099px)  {
 		width: 650px;
@@ -2010,8 +2010,8 @@ h2.twotab, a.h2.twotab {
 .team {
 	font-size: 20px;
 	font-weight: normal;
+	font-family: 'Open Sans';
 }
-
 
 #myModalEditProfile {
 	.modal-dialog {
