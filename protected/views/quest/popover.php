@@ -120,12 +120,15 @@
     </div>
     <div class="pop-row" id="btnRow">
     <p class="text-center">
-      <button class="btn btn-default btn-sm" id="confirmBooking" data-toggle="tooltip" title="Подтвердить бронирование">
-        <span class="glyphicon glyphicon-ok-circle"></span>
-      </button>
-      <button class="btn btn-default btn-sm" id="undoBooking" data-toggle="tooltip" title="Удалить подтверждение">
-        <span class="glyphicon glyphicon-remove-circle"></span>
-      </button>
+      <% if (status == 0) { %>
+        <button class="btn btn-default btn-sm" id="confirmBooking" data-toggle="tooltip" title="Подтвердить бронирование">
+          <span class="glyphicon glyphicon-ok-circle"></span>
+        </button>
+      <% } else { %>
+        <button class="btn btn-default btn-sm" id="undoBooking" data-toggle="tooltip" title="Удалить подтверждение">
+          <span class="glyphicon glyphicon-remove-circle"></span>
+        </button>
+      <% } %>
       <button class="btn btn-default btn-sm" id="showRemoveBooking" data-toggle="tooltip" title="Удалить бронирование">
         <span class="glyphicon glyphicon-remove"></span>
       </button>

@@ -893,8 +893,7 @@ $(function() {
 
 	$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 		$('a[data-toggle="tab"]').removeClass('active');
-		$(e.target).addClass('active'); // activated tab
-	  // $(e.relatedTarget) // previous tab
+		$(e.target).addClass('active');
 	});
 
 	$('#bookgift-phone').mask('+7(000)-000-00-00');
@@ -926,4 +925,10 @@ $(function() {
 
 	$('.priceTbl').tooltip();
 
+	$(window).load(function() {
+		if (typeof ordergiftcard != 'undefined' && ordergiftcard == 1){
+			yaCounter25221941.reachGoal("ordergiftcard");
+			ga("send", "event", "order", "giftcard");
+		}
+	});
 });

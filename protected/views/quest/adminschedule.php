@@ -41,7 +41,7 @@ $this->breadcrumbs=array('Quests');  ?>
 		$today_holiday = 1;
 	}
 
-echo '<!-- '.date('Y/m/d H:i', strtotime('now')).','.$ymd.','.$selectedDate.' -->';
+//echo '<!-- '.date('Y/m/d H:i', strtotime('now')).','.$ymd.','.$selectedDate.' -->';
 ?>
 
 <h1 class="page-header" data-toggle="tooltip" data-placement="left" title="<? echo $today_holiday ? 'Выходной' : 'Рабочий'; ?> день">
@@ -182,6 +182,7 @@ echo '<!-- '.date('Y/m/d H:i', strtotime('now')).','.$ymd.','.$selectedDate.' --
 
 
 				$data = ' data-id="'.$quest['bookings'][$time]->id.'" '.
+						'data-status="'.$quest['bookings'][$time]->status.'" '.
 						'data-price="'.$quest['bookings'][$time]->price.'" '.
 						'data-phone="'.$quest['bookings'][$time]->phone.'" '.
 						'data-result="'.$quest['bookings'][$time]->result.'" '.

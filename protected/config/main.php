@@ -67,15 +67,12 @@ return array(
 					'levels'=>'info',
 					'logFile'=>'info.log',
 				),
-		        // array(
-		        //     'class'=>'CWebLogRoute',
-		        //     'levels'=>'error, warning, trace, log, vardump',
-		        // ),
+		       /* array(
+			    	'class'=>'CWebLogRoute',
+			        'levels'=>'error, warning, trace, log, vardump',
+		        ),*/
 			),
 		),
 	),
-
-	// application-level parameters that can be accessed
-	// using Yii::app()->params['paramName']
 	'params'=>require(dirname(__FILE__).'/params.php'),
 );

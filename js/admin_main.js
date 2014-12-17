@@ -5,7 +5,6 @@ var PopoverView = Backbone.View.extend({
 	},
 	
 	events: {
-		'click #confirmBooking':'confirmBooking',
 		'click #showRemoveBooking':'showRemoveBooking',
 		'click #cancelDelete':'cancelDelete',
 		'click #editBooking':'showEdit',
@@ -16,6 +15,7 @@ var PopoverView = Backbone.View.extend({
 		'click #cancelAddBooking':'cancelAddBooking',
 		'click #cancelEditBooking':'cancelEditBooking',
 		'click #undoBooking':'undoBooking',
+		'click #confirmBooking':'confirmBooking',
 	},
 	
 	render:function(){
@@ -23,6 +23,7 @@ var PopoverView = Backbone.View.extend({
 		this.attr = {
 			id : $(this.parent).attr('data-id') || 0,
 			quest_id : $(this.parent).attr('data-quest') || 0,
+			status : $(this.parent).attr('data-status') || 0,
 			name :  $(this.parent).attr('data-name') || '',
 			phone :  $(this.parent).attr('data-phone') || '',
 			result :  $(this.parent).attr('data-result') || '',
@@ -35,7 +36,9 @@ var PopoverView = Backbone.View.extend({
 			fb_id : $(this.parent).attr('data-fb-id') || 0,
 		};
 
-		this.attr.user_url = $(this.parent).attr('data-user-id') != '' ? '/user/admin/view/id/'+$(this.parent).attr('data-user-id') : '#';
+		this.attr.user_url = $(this.parent).attr('data-user-id') != ''
+								? '/user/admin/view/id/'+$(this.parent).attr('data-user-id') 
+								: '#';
 
 		this.$el.html( _.template($('#BookInfWrap').html(), this.attr) );
 
@@ -53,18 +56,15 @@ var PopoverView = Backbone.View.extend({
 	},
 
 	undoBooking:function(){
-		console.log('undoBooking');
 		var self = this;
-
 		$.post('/booking/confirm', {
 			id : self.attr.id,
 			confirm : 0,
 		}, function(result){
 			if (result && result.success) {
-				// self.$el.removeClass('btn-success').addClass('btn-info');
 				location.reload();
 			} else {
-				console.log(result); // if (result && result.message) { }
+				console.log(result);
 				alert('Ошибка!');
 			}
 		});
@@ -79,18 +79,16 @@ var PopoverView = Backbone.View.extend({
 		}, function(result){
 			if (result && result.success) {
 				console.log('confirmed');
-				// self.$el.removeClass('btn-info').addClass('btn-success');
 				location.reload();
 	
 			} else {
-				console.log(result);// if (result && result.message) { }
+				console.log(result);
 				alert('Ошибка!');
 			}
 		});
 
 		return false;
 	},
-
 	removeBooking:function(){
 		var self = this;
 
@@ -99,14 +97,12 @@ var PopoverView = Backbone.View.extend({
 		}, function(result){
 			if (result && result.success) {
 				console.log('removed');
-				// self.$el.removeClass('btn-info').addClass('btn-success');
 				location.reload();
 			} else {
-				console.log(result);// if (result && result.message) { }
+				console.log(result);
 				alert('Ошибка!');
 			}
 		});
-
 		return false;
 	},
 
@@ -185,7 +181,6 @@ var PopoverView = Backbone.View.extend({
 	},
 
 	confirmedDelete:function(){
-		//TODO delete booking
 		console.log('send del requet');
 		return false;
 	},

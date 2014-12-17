@@ -72,7 +72,7 @@ class SiteController extends Controller
 		$test_text = "us_".time();
 
 		Yii::app()->user->setFlash('notice', md5($test_text));
-		$cookie = Yii::app()->request->cookies['myuid']->value;
+		$cookie = isset(Yii::app()->request->cookies['myuid']) ? Yii::app()->request->cookies['myuid']->value : '';
 
 		if (isset($_POST['message'])){
 
