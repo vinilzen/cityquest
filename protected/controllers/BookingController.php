@@ -130,7 +130,7 @@ class BookingController extends Controller
 							if ( $user_model->save() && $model->save())
 							{
 							    // $addres = str_replace(" ", "+", $addres); $addres = str_replace(",", "%2C", $addres);
-								if (1) {
+								if (1 && !Yii::app()->getModule('user')->user()->superuser > 0) {
 									$this->sendMail(
 										Yii::app()->getModule('user')->user()->email,
 										//Cityquest. Бронирование квеста «НАЗВАНИЕ КВЕСТА» ДАТА ВРЕМЯ
