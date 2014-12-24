@@ -127,7 +127,7 @@ class QuestController extends Controller
 				$bookings_by_date[$booking->date] = array();
 
 			$bookings_by_date[$booking->date][$booking->time] = $booking->attributes;
-			$bookings_by_date[$booking->date][$booking->time]['name'] = $booking->competitor->username;
+			$bookings_by_date[$booking->date][$booking->time]['name'] = isset($booking->competitor)?$booking->competitor->username:'';
 		}
 
 		if (isset($model->times) && is_numeric($model->times) && isset(Yii::app()->params['times'][(int)$model->times]))

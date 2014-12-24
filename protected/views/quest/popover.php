@@ -84,6 +84,11 @@
         <div class="col-xs-7">
           <input type="text" class="form-control input-sm inputPrice" value="<%= price %>" placeholder="3000">
         </div>
+        <div class="col-xs-2">
+          <button id="reservation" class="btn btn-default btn-sm" data-toggle="tooltip" title="Зарезервировать">
+            <span class="glyphicon glyphicon-ban-circle"></span>
+          </button>
+        </div>
       </div>
       <div class="form-group">
         <label for="inputResult" class="col-xs-2 control-label">Result</label>

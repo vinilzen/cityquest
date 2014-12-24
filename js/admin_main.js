@@ -14,17 +14,25 @@ var PopoverView = Backbone.View.extend({
 		'click #editBookingRow #saveBooking':'saveEditedBooking',
 		'click #cancelAddBooking':'cancelAddBooking',
 		'click #cancelEditBooking':'cancelEditBooking',
+		'click #reservation':'reservation',
 		'click #undoBooking':'undoBooking',
 		'click #confirmBooking':'confirmBooking',
+		'focus .inputPhone':'addSeven'
 	},
 	
 	render:function(){
+		var name = '';
+		if ($('#addBookingRow .inputPhone').val() == '0000000' ) {
+			name = 'CQ';
+		} else {
+			name = $(this.parent).attr('data-name') || '';
+		}
 
 		this.attr = {
 			id : $(this.parent).attr('data-id') || 0,
 			quest_id : $(this.parent).attr('data-quest') || 0,
 			status : $(this.parent).attr('data-status') || 0,
-			name :  $(this.parent).attr('data-name') || '',
+			name :  name,
 			phone :  $(this.parent).attr('data-phone') || '',
 			result :  $(this.parent).attr('data-result') || '',
 			comment :  $(this.parent).attr('data-comment') || '',
@@ -50,9 +58,19 @@ var PopoverView = Backbone.View.extend({
 			$('#addRow', this.$el).show();
 		}
 
+
+
 		$('[data-toggle="tooltip"]', this.$el).tooltip();
 
 		return this;
+	},
+
+	addSeven:function(e){
+		if ($(e.target).val() == ''){
+			$(e.target).mask('+7(000)-000-00-00').val('+7(');
+		} else {
+			$(e.target).mask('+7(000)-000-00-00');
+		}
 	},
 
 	undoBooking:function(){
@@ -64,7 +82,6 @@ var PopoverView = Backbone.View.extend({
 			if (result && result.success) {
 				location.reload();
 			} else {
-				console.log(result);
 				alert('Ошибка!');
 			}
 		});
@@ -137,9 +154,16 @@ var PopoverView = Backbone.View.extend({
 
 		return false;
 	},
-	saveBooking:function(){
 
-		var self = this;
+	reservation:function(){
+		this.saveBooking({reservation:1});
+		return false;
+	},
+
+	saveBooking:function(options){
+
+		var self = this,
+			reservation = options.reservation || false;
 
 		$.post('/booking/create', {
 			quest_id : self.attr.quest_id,
@@ -148,15 +172,14 @@ var PopoverView = Backbone.View.extend({
 			time : self.attr.time,
 			price : $('#addBookingRow .inputPrice').val(),
 			result : $('#addBookingRow .inputResult').val(),
-			phone : $('#addBookingRow .inputPhone').val(),
+			phone : reservation ? '0000000' : $('#addBookingRow .inputPhone').val(),
 			comment : $('#addBookingRow .inputComment').val(),
-			name : $('#addBookingRow .inputName').val(),
-			user : $('#selectUser select').val(),
+			name : $('#addBookingRow .inputName').val()!=''?$('#addBookingRow .inputName').val() : 'CQ',
+			user : reservation ? -1 : $('#selectUser select').val(),
 		}, function(result){
 			if (result && result.success) {
 				console.log('confirmed');
 				location.reload();
-	
 			} else {
 				console.log(result);
 				alert('Ошибка!');
@@ -191,7 +214,16 @@ var PopoverView = Backbone.View.extend({
 		$('#addRow, #btnRow, #BookInf h3, #phoneRow', self.$el).hide();
 
 		$('#editBookingRow .inputName', this.$el).val(self.attr.name);
-		$('#editBookingRow .inputPhone', this.$el).val(self.attr.phone).mask('+7(000)-000-00-00');
+		$('#editBookingRow .inputPhone', this.$el)
+			.val(self.attr.phone)
+			.mask('+7(000)-000-00-00')
+			.focus(function(){
+				var val = $(this).val();
+				$(this).unmask().blur(function(){
+					$(this).mask('+7(000)-000-00-00');			
+				}).val(val);
+			})
+
 		$('#editBookingRow .inputResult', this.$el).val(self.attr.result);
 		$('#editBookingRow .inputComment', this.$el).val(self.attr.comment);
 		$('#editBookingRow .inputPrice', this.$el).val(self.attr.price);
@@ -218,7 +250,9 @@ var PopoverView = Backbone.View.extend({
 			$('.inputName', self.$el).val( name );
 		});
 
-		$('.inputPhone', self.$el).mask('+7(000)-000-00-00');
+		$('.inputPhone', self.$el).blur(function(){
+			$(this).mask('+7(000)-000-00-00');				
+		});
 
 		$(this.parent).popover('setPosition');
 		return false;

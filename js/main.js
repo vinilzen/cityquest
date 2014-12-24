@@ -349,7 +349,11 @@ $(function() {
 	});
 
 
-	$('#reg-phone, .you_phone input, #edit-phone').mask('+7(000)-000-00-00');
+	$('#reg-phone, .you_phone input, #edit-phone')
+		.mask('+7(000)-000-00-00')
+		.focus(function(e) {
+			if ($(e.target).val() == '') $(e.target).val('+7(');
+		});
 
 	$('#form-group-reg-email input').keypress(function(){
 		$('#form-group-reg-email span').tooltip('destroy');

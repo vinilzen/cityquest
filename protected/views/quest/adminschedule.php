@@ -180,6 +180,9 @@ $this->breadcrumbs=array('Quests');  ?>
 					$additionalClass = ' btn-info';
 				}
 
+				$competitor_id = isset($quest['bookings'][$time]->competitor) ? $quest['bookings'][$time]->competitor->id : 0;
+				$competitor_fb_id = isset($quest['bookings'][$time]->competitor) ? $quest['bookings'][$time]->competitor->fb_id : 0;
+				$competitor_vk_id = isset($quest['bookings'][$time]->competitor) ? $quest['bookings'][$time]->competitor->vk_id : 0;
 
 				$data = ' data-id="'.$quest['bookings'][$time]->id.'" '.
 						'data-status="'.$quest['bookings'][$time]->status.'" '.
@@ -187,9 +190,9 @@ $this->breadcrumbs=array('Quests');  ?>
 						'data-phone="'.$quest['bookings'][$time]->phone.'" '.
 						'data-result="'.$quest['bookings'][$time]->result.'" '.
 						'data-comment="'.$quest['bookings'][$time]->comment.'" '.
-						'data-user-id="'. $quest['bookings'][$time]->competitor->id.'" '.
-						'data-fb-id="'. (int)$quest['bookings'][$time]->competitor->fb_id.'" '.
-						'data-vk-id="'. (int)$quest['bookings'][$time]->competitor->vk_id.'" '.
+						'data-user-id="'. $competitor_id .'" '.
+						'data-fb-id="'. $competitor_fb_id .'" '.
+						'data-vk-id="'. $competitor_fb_id .'" '.
 						'data-name="'.$quest['bookings'][$time]->name.'" ';
 
 				if ($quest['bookings'][$time]->result != 0 && 

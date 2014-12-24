@@ -70,14 +70,13 @@ class BookingController extends Controller
 
 	/**
 	 * Creates a new model.
-	 * If creation is successful, the browser will be redirected to the 'view' page.
+	 * 
 	 */
 	public function actionCreate()
 	{
 		if(Yii::app()->request->isAjaxRequest){
 
 			$this->layout=false;
-
 			header('Content-type: application/json');
 
 			if (!Yii::app()->user->isGuest){
@@ -87,8 +86,6 @@ class BookingController extends Controller
 					$quest = Quest::model()->findByPk($_POST['quest_id']);
 
 					if ($quest) {
-
-
 						$booking = Booking::model()->findByAttributes(
 							array('quest_id'=>$quest->id),
 							'date =:today AND time =:time',
@@ -111,26 +108,29 @@ class BookingController extends Controller
 							$model->name = $_POST['name'];
 							$model->quest_id = (int)$_POST['quest_id'];
 
-							$model->competitor_id = (int)Yii::app()->user->id;
+							$model->competitor_id = (isset($_POST['user']) && $_POST['user'] == -1) ? -1 : (int)Yii::app()->user->id;
 
-							if (isset($_POST['user']) && $_POST['user'] != '' && $_POST['user'] != 0){
-								$user_model = Yii::app()->getModule('user')->user($_POST['user']);
-								
-								if($user_model){
-									$model->competitor_id = $user_model->id;
-								} else {									
+							if ( isset($_POST['user']) && $_POST['user'] != -1){
+								if ($_POST['user'] != '' && $_POST['user'] != 0 ){
+									$user_model = Yii::app()->getModule('user')->user($_POST['user']);
+									
+									if($user_model){
+										$model->competitor_id = $user_model->id;
+									} else {									
+										$user_model = Yii::app()->getModule('user')->user();
+										$user_model->phone = $_POST['phone'];	
+									}
+								} else {
 									$user_model = Yii::app()->getModule('user')->user();
-									$user_model->phone = $_POST['phone'];	
+									$user_model->phone = $_POST['phone'];
 								}
 							} else {
 								$user_model = Yii::app()->getModule('user')->user();
 								$user_model->phone = $_POST['phone'];
 							}
 
-							if ( $user_model->save() && $model->save())
-							{
-							    // $addres = str_replace(" ", "+", $addres); $addres = str_replace(",", "%2C", $addres);
-								if (1 && !Yii::app()->getModule('user')->user()->superuser > 0) {
+							if ( $user_model->save() && $model->save() ){
+								if (!Yii::app()->getModule('user')->user()->superuser > 0) {
 									$this->sendMail(
 										Yii::app()->getModule('user')->user()->email,
 										//Cityquest. Бронирование квеста «НАЗВАНИЕ КВЕСТА» ДАТА ВРЕМЯ
@@ -147,8 +147,9 @@ class BookingController extends Controller
 										Команда CityQuest<br>
 										<a href='http://cityquest.ru' target='_blank'>www.cityquest.ru</a><br>
 										8 (495) 749-96-09");
-									
-									// copy
+								}
+
+								if (!isset($_POST['user']) || (isset($_POST['user']) && $_POST['user'] != -1)){
 									$this->sendMail(
 										'ilya@cityquest.ru, e.roslovets@cityquest.ru',
 										"CityQuest. Бронирование квеста «".$quest->title."» ".substr($model->date, -2, 2)."/".substr($model->date, -4, 2)."/".substr($model->date, 0, 4)." ".$model->time,
@@ -159,6 +160,7 @@ class BookingController extends Controller
 
 										Мы ждем вас по адресу <a href='https://www.google.com/maps/preview?q=москва,+".urlencode($quest->addres)."' target='_blank'>".$quest->addres.".</a>");
 								}
+							
 
 								echo CJavaScript::jsonEncode(array('success'=>1, 'a' => urlencode($quest->addres)));
 
