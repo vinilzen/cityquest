@@ -309,7 +309,7 @@ class QuestController extends Controller
 
 		$twoweek_bookings = Booking::model()->findAllByAttributes(
 			array(),
-			'date >=:today && date < :twoweek',
+			'date >=:today && date < :twoweek && competitor_id > -1',
 			array(
 				'today'=>date('Ymd', strtotime( '+'.$prev.' day' )),
 				'twoweek'=> date('Ymd', strtotime( '+'.$next.' day' ))

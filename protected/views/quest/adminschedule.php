@@ -192,7 +192,7 @@ $this->breadcrumbs=array('Quests');  ?>
 						'data-comment="'.$quest['bookings'][$time]->comment.'" '.
 						'data-user-id="'. $competitor_id .'" '.
 						'data-fb-id="'. $competitor_fb_id .'" '.
-						'data-vk-id="'. $competitor_fb_id .'" '.
+						'data-vk-id="'. $competitor_vk_id .'" '.
 						'data-name="'.$quest['bookings'][$time]->name.'" ';
 
 				if ($quest['bookings'][$time]->result != 0 && 

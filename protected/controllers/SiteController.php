@@ -13,7 +13,6 @@ class SiteController extends Controller
 			// captcha action renders the CAPTCHA image displayed on the contact page
 			'captcha'=>array(
 				'class'=>'CCaptchaAction',
-				// 'captchaAction'=> 'User/captcha',
 				'backColor'=>0x0a1630,
 				'transparent'=>true,
 				'foreColor'=>0xFFFFFF,
@@ -22,7 +21,6 @@ class SiteController extends Controller
 				'height'=>39,
 				'width'=>140,
 				'offset'=>1,
-				// 'backend'=>'imagick',
 			),
 		);
 	}
