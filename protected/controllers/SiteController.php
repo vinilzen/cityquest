@@ -26,7 +26,16 @@ class SiteController extends Controller
 	}
 
     public function accessRules() {
-        return array('allow', 'actions' => array('captcha'), 'users' => array('*'));
+        return array(
+        	array('allow', 
+        		'actions' => array('captcha'),
+        		'users' => array('*')
+        	),
+        	array('allow',
+				'actions'=>array('editmailtpl'),
+				'expression'=>"Yii::app()->getModule('user')->user()->superuser == 2",
+			),
+        );
     }
 
 	/**
@@ -220,5 +229,27 @@ class SiteController extends Controller
 	{
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
+	}
+
+	public function actionEditmailtpl($success = 1)
+	{
+		$this->layout='//layouts/admin_column';
+
+		$filename = $success ? 'result_success' : 'result_notqualify';
+
+		$file_tpl = dirname(__FILE__).'/../views/mail/'.$filename.'.php';
+		$msg = '';
+		if (isset($_POST['tpl'])){
+			file_put_contents($file_tpl, $_POST['tpl']);
+			$msg = 'Изменения успешно сохранены';
+		}
+
+		$mail_tpl = file_get_contents($file_tpl, true);
+
+		$this->render('edit_mail',array(
+			'not' => $success ? '' : 'не ',
+			'text' => $mail_tpl,
+			'msg' => $msg,
+		));
 	}
 }

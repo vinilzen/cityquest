@@ -90,6 +90,16 @@
 						));
 						$this->endWidget();
 					?>
+					<ul class="nav nav-sidebar" style="margin-bottom:0;"><li><a><strong>Шаблон письма</strong></a></li></ul>
+					<ul class="nav nav-sidebar">
+						<li>
+							<a>Рус</a>
+							<ul>
+								<li><a href="/site/editmailtpl/success/1">Прошел</a></li>
+								<li><a href="/site/editmailtpl/success/0">Не прошел</a></li>
+							</ul>
+						</li>
+					</ul>
 				</div>	
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-9 col-lg-10 main">
