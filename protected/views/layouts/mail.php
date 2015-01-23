@@ -7,10 +7,8 @@
 <body>
   <h1>Здравствуйте, <?php echo $data['username']; ?>!</h1>
   <?php echo $content ?>
-  <p>Фотографии вашей команды вы можете найти в наших альбомах в соц. сетях: <a href="https://www.facebook.com/cityquestru/photos_stream">https://www.facebook.com/cityquestru/photos_stream</a> и <a href="https://vk.com/albums-75922071">https://vk.com/albums-75922071</a>
-  </p>
    
-  <p>Приглашаем Вас посетить другой наш квест: <?php echo $data['list_quests']; ?>. <br>
+  <p>Приглашаем Вас посетить другой наш квест: "<?php echo $data['list_quests']; ?>". <br>
   Следите за открытием новых квестов на нашем сайте и в наших соц. сетях:<br>
   <a href="https://www.facebook.com/cityquestru">https://www.facebook.com/cityquestru</a><br>
   <a href="http://vk.com/cityquestru">http://vk.com/cityquestru</a>
