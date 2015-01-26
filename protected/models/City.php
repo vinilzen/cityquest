@@ -32,9 +32,10 @@ class City extends CActiveRecord
 			array('name', 'required'),
 			array('active', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>128),
+			array('languages', 'length', 'max'=>128),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, active', 'safe', 'on'=>'search'),
+			array('id, name, active, languages', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -46,7 +47,7 @@ class City extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'quests' => array(self::HAS_MANY, 'Quest', 'city_id'),
+			'quest' => array(self::HAS_MANY, 'Quest', 'city_id'),
 		);
 	}
 
@@ -57,8 +58,9 @@ class City extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'name' => 'Name',
-			'active' => 'Active',
+			'name' => 'Название',
+			'active' => 'Активность',
+			'languages' => 'Язык',
 		);
 	}
 

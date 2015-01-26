@@ -38,17 +38,24 @@ $this->pageImg= '/images/q/'.$model->id.'.jpg';
   </div>
 </div>
 
+
+
 <div class="container container-xlg">
   <div class="row">
     <div class="col-xs-12 text-center">
-      <h2 class="twotab active">Расписание</h2><!-- <h2 class="twotab">Победители</h2> -->
+      <? if ($model->status == 2) { ?>
+        <h2 class="twotab active">Расписание</h2><!-- <h2 class="twotab">Победители</h2> -->
+      <? } else { ?>
+        <h2 class="twotab active">Неактивный квест</h2><!-- <h2 class="twotab">Победители</h2> -->
+      <? } ?>
       <hr class="fadeOut">
     </div>
+    <? if ($model->status == 2) { ?>
     <div class="clearfix"></div>
     <div class="col-xs-12 ovs">
       <div class="row quests_schedules quest_schedule">
 
-  <?
+    <?
 
     $days = Yii::app()->params['days'];
     $month = Yii::app()->params['month'];
@@ -198,5 +205,6 @@ $this->pageImg= '/images/q/'.$model->id.'.jpg';
       <?  } ?>
       </div>
     </div>
+    <? } ?>
   </div>
 </div>

@@ -6,7 +6,7 @@ class CityController extends Controller
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout='//layouts/column2';
+	public $layout='//layouts/admin_column';
 
 	/**
 	 * @return array action filters
@@ -22,12 +22,6 @@ class CityController extends Controller
 
 	public function init() {
 		parent::init();
-		if (Yii::app()->user->name == 'admin' ){
-
-
-			$this->layout='//layouts/admin_column';
-
-		}
 	}
 
 
@@ -40,7 +34,7 @@ class CityController extends Controller
 	{
 		return array(
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete', 'create','update'),
+				'actions'=>array('admin','delete', 'create','update', 'view'),
 				'expression'=>"Yii::app()->getModule('user')->user()->superuser == 1",
 			),
 			array('deny',  // deny all users

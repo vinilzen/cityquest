@@ -147,7 +147,7 @@ $this->quest_menu=array(
     </div>
   </div>
   <div class="tab-pane" id="edit">
-    <?php $this->renderPartial('_form', array('model'=>$model)); ?>
+    <?php $this->renderPartial('_form', array('model'=>$model, 'cities'=>$cities)); ?>
   </div>
 </div>
 

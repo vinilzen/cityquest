@@ -16,6 +16,7 @@
  * @property integer $create_time
  * @property integer $update_time
  * @property integer $author_id
+ * @property integer $city_id
  *
  * The followings are the available model relations:
  * @property TblUser $author
@@ -75,6 +76,7 @@ class Quest extends CActiveRecord
 		return array(
 			'author' => array(self::BELONGS_TO, 'User', 'author_id'),
 			'booking' => array(self::HAS_MANY, 'Booking', 'quest_id'),
+			'city' => array(self::BELONGS_TO, 'City', 'city_id'),
 		);
 	}
 
@@ -96,6 +98,7 @@ class Quest extends CActiveRecord
 			'create_time' => 'Create Time',
 			'update_time' => 'Update Time',
 			'author_id' => 'Author',
+			'city_id' => 'City',
 			'image' => 'Image',
 			'del_img'=>'Delete image?',
 		);

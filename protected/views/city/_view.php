@@ -17,5 +17,9 @@
 	<?php echo CHtml::encode($data->active); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('languages')); ?>:</b>
+	<?php echo CHtml::encode($data->languages); ?>
+	<br />
+
 
 </div>

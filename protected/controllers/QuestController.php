@@ -177,7 +177,7 @@ class QuestController extends Controller
 	public function actionUpdate($id)
 	{
 		$this->layout='//layouts/admin_column';
-		$model=$this->loadModel($id);
+		$model= Quest::model()->with('city')->findByPk($id);
 
 		$bookings = array();
 		$bookings = Booking::model()->with('competitor')->findAllByAttributes(
@@ -188,6 +188,7 @@ class QuestController extends Controller
 				'end_date'=> date('Ymd', strtotime('+13 day')),
 			));
 
+		$cities = City::model()->findAllByAttributes( array('active'=>1) );
 
 		$bookings_by_date = array();
 
@@ -207,20 +208,31 @@ class QuestController extends Controller
 		{
 			$model->attributes=$_POST['Quest'];
 
-			$model->image = CUploadedFile::getInstance($model,'image');
+			if (
+				isset($_POST['Quest']['city_id']) && 
+				City::model()->findByPk($_POST['Quest']['city_id'])
+			) {
 
-			if($model->save()){
+				$model->city_id = $_POST['Quest']['city_id'];
 
-				//Если отмечен чекбокс «удалить файл» 
-				if($model->del_img)
-					if(file_exists('./images/q/'.$id.'.jpg'))
-						unlink('./images/q/'.$id.'.jpg');
+				$model->image = CUploadedFile::getInstance($model,'image');
 
-				//сохранить файл на сервере в каталог /images/q/ под именем {id}.jpg
-				if ($model->image) $model->image->saveAs('./images/q/'.$model->id.'.jpg');
+				if($model->save()){
+					//Если отмечен чекбокс «удалить файл» 
+					if($model->del_img)
+						if(file_exists('./images/q/'.$id.'.jpg'))
+							unlink('./images/q/'.$id.'.jpg');
 
-				// $this->redirect(array('view','id'=>$model->id));
+					//сохранить файл на сервере в каталог /images/q/ под именем {id}.jpg
+					if ($model->image) $model->image->saveAs('./images/q/'.$model->id.'.jpg');
+				} else {
+					throw new CHttpException(500, 'Ошибка сохранения');
+				}
+			} else {
+				throw new CHttpException(500, 'Не найден город квеста!');
 			}
+
+			$model= Quest::model()->with('city')->findByPk($id);
 		}
 
 
@@ -233,6 +245,7 @@ class QuestController extends Controller
 			'model'=>$model,
 			'booking' => $bookings_by_date,
 			'times' => $times,
+			'cities' => $cities
 		));
 	}
 
@@ -438,22 +451,26 @@ class QuestController extends Controller
 	/**
 	 * Manages all models.
 	 */
-	public function actionAdmin()
+	public function actionAdmin($selected_city = 1)
 	{
-
 		$this->layout='//layouts/admin_column';
 		$model=new Quest('search');
+		$cities = City::model()->findAllByAttributes( array('active'=>1) );
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Quest']))
 			$model->attributes=$_GET['Quest'];
 
 		$this->render('admin',array(
-			'models'=>	Quest::model()->findAll(array(
-						    "condition" => "status > 1 ",
+			'models'=>Quest::model()->findAll(
+						array(
+						    "condition" => "status>1 AND city_id=".(int)$selected_city,
 						    "order" => "status ASC, sort ASC",
 						    "limit" => 12,
-						)),
+						)
+					),
 			'model'=>$model,
+			'selected_city'=>$selected_city,
+			'cities'=>$cities,
 		));
 	}
 

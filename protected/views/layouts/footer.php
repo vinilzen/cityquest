@@ -61,65 +61,66 @@
               <a class="vk" href="https://oauth.vk.com/authorize?client_id=4659293&scope=uid,first_name,last_name,sex,bdate,email&redirect_uri=http://<? echo $_SERVER['SERVER_NAME']; ?>/user/login/vkauth&response_type=code"></a>
             </div>
             <div class="col-xs-6 text-left">
-              <script>
-                function statusChangeCallback(response) {
-                  if (response.status === 'connected' && $.cookie("logout") != 1) goAuth();
-                }
+              <? if ($_SERVER['HTTP_HOST'] != 'cq.il') { ?>
+                <script>
+                  function statusChangeCallback(response) {
+                    if (response.status === 'connected' && $.cookie("logout") != 1) goAuth();
+                  }
 
-                function checkLoginState() {
-                  FB.getLoginStatus(function(response) {
-                    statusChangeCallback(response);
-                  });
-                }
-
-                window.fbAsyncInit = function() {
-                  FB.init({
-                    appId      : '748253021885085',
-                    cookie     : true,
-                    xfbml      : true,
-                    version    : 'v2.1'
-                  });
-
-                  FB.getLoginStatus(function(response) {
-                    statusChangeCallback(response);
-                  });
-
-                };
-
-                (function(d, s, id) {
-                  var js, fjs = d.getElementsByTagName(s)[0];
-                  if (d.getElementById(id)) return;
-                  js = d.createElement(s); js.id = id;
-                  js.src = "//connect.facebook.net/en_US/sdk.js";
-                  fjs.parentNode.insertBefore(js, fjs);
-                }(document, 'script', 'facebook-jssdk'));
-
-                function goAuth() {
-                  FB.api('/me', function(response) {
-                    $.post(
-                      "/user/login/fbauth",
-                      response,
-                      function(data){
-                        try {
-                          var data = JSON.parse(data);
-                          if (data && data.auth && data.auth == 1){
-                            location.reload();
-                          }
-                        } catch (e) {
-                          console.log(e);
-                        }
+                  function checkLoginState() {
+                    FB.getLoginStatus(function(response) {
+                      statusChangeCallback(response);
                     });
-                  });
-                }
+                  }
 
-                function loginFb(){
-                  $.cookie('logout',0);
-                  FB.login(function(response) {
-                    console.log(response);
-                    checkLoginState();
-                  }, {scope: 'email, public_profile'});
-                }
-              </script>
+                  window.fbAsyncInit = function() {
+                    FB.init({
+                      appId      : '748253021885085',
+                      cookie     : true,
+                      xfbml      : true,
+                      version    : 'v2.1'
+                    });
+
+                    FB.getLoginStatus(function(response) {
+                      statusChangeCallback(response);
+                    });
+
+                  };
+
+                  (function(d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id)) return;
+                    js = d.createElement(s); js.id = id;
+                    js.src = "//connect.facebook.net/en_US/sdk.js";
+                    fjs.parentNode.insertBefore(js, fjs);
+                  }(document, 'script', 'facebook-jssdk'));
+
+                  function goAuth() {
+                    FB.api('/me', function(response) {
+                      $.post(
+                        "/user/login/fbauth",
+                        response,
+                        function(data){
+                          try {
+                            var data = JSON.parse(data);
+                            if (data && data.auth && data.auth == 1){
+                              location.reload();
+                            }
+                          } catch (e) {
+                            console.log(e);
+                          }
+                      });
+                    });
+                  }
+
+                  function loginFb(){
+                    $.cookie('logout',0);
+                    FB.login(function(response) {
+                      checkLoginState();
+                    }, {scope: 'email, public_profile'});
+                  }
+                </script>
+              <? } ?>
               <div id="fb_logincustom_btn" onclick="loginFb();"></div>
             </div>
             <div class="col-xs-12">
@@ -291,42 +292,43 @@
   </div>
 <? } ?>
 
-<script type="text/javascript">
-  (function (d, w, c) {
-  (w[c] = w[c] || []).push(function() {
-      try {
-          w.yaCounter25221941 = new Ya.Metrika({id:25221941,
-                  webvisor:true,
-                  clickmap:true,
-                  trackLinks:true,
-                  accurateTrackBounce:true});
-      } catch(e) { }
-  });
-  
-  var n = d.getElementsByTagName("script")[0],
-      s = d.createElement("script"),
-      f = function () { n.parentNode.insertBefore(s, n); };
-  s.type = "text/javascript";
-  s.async = true;
-  s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
-  
-  if (w.opera == "[object Opera]") {
-      d.addEventListener("DOMContentLoaded", f, false);
-  } else { f(); }
-  })(document, window, "yandex_metrika_callbacks");
-</script>
-<noscript><div><img alt="" src="//mc.yandex.ru/watch/25221941" style="position:absolute; left:-9999px;"></div></noscript>
+<? if ($_SERVER['HTTP_HOST'] != 'cq.il') { ?>
+  <script type="text/javascript">
+    (function (d, w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+            w.yaCounter25221941 = new Ya.Metrika({id:25221941,
+                    webvisor:true,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true});
+        } catch(e) { }
+    });
+    
+    var n = d.getElementsByTagName("script")[0],
+        s = d.createElement("script"),
+        f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+    
+    if (w.opera == "[object Opera]") {
+        d.addEventListener("DOMContentLoaded", f, false);
+    } else { f(); }
+    })(document, window, "yandex_metrika_callbacks");
+  </script>
+  <noscript><div><img alt="" src="//mc.yandex.ru/watch/25221941" style="position:absolute; left:-9999px;"></div></noscript>
 
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-56033342-1', 'auto');
-  ga('send', 'pageview');
-</script>
+    ga('create', 'UA-56033342-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+<? } ?>
 
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.js"></script>

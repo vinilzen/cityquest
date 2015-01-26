@@ -16,6 +16,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Update City <?php echo $model->id; ?></h1>
+<h1>Редактировать город "<?php echo $model->name; ?>"</h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

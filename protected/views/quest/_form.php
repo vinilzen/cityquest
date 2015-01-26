@@ -78,6 +78,13 @@
 		</div>
 	</div>
 
+	<div class="form-group">
+		<label class="control-label col-sm-3 required" for="city_id">Город <span class="required">*</span></label>
+		<div class="col-sm-9">
+			<?php echo $form->dropDownList($model,'city_id', CHtml::listData($cities, 'id', 'name'), array('class'=>'form-control')); ?>
+		</div>
+	</div>
+
 
 
 	<div class="form-group">

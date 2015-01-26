@@ -26,30 +26,43 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Cities</h1>
-
-<p>
-You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
-</p>
+<h1>Управление городами</h1>
 
 <?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">
-<?php $this->renderPartial('_search',array(
-	'model'=>$model,
-)); ?>
+<?php $this->renderPartial('_search',array('model'=>$model)); ?>
 </div><!-- search-form -->
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'city-grid',
 	'dataProvider'=>$model->search(),
-	'filter'=>$model,
+	// 'filter'=>$model,
 	'columns'=>array(
 		'id',
 		'name',
 		'active',
+		'languages',
 		array(
 			'class'=>'CButtonColumn',
+			'template' => '{update} {delete} {view}',
+			'htmlOptions' => array('style'=> 'white-space:nowrap;'),
+			'buttons'=>array(
+				'update' => array(
+					'options' => array('class'=>'update btn btn-default btn-xs', 'title'=>'Редактировать'),
+					'label' => '<i class="glyphicon glyphicon-pencil"></i>',
+					'imageUrl' => false,
+				),
+				'delete' => array(
+					'options' => array('class'=>'delete btn btn-default btn-xs', 'title'=>'Удалить'),
+					'label' => '<i class="glyphicon glyphicon-trash"></i>',
+					'imageUrl' => false,
+				),
+				'view' => array(
+					'options' => array('class'=>'view btn btn-default btn-xs', 'title'=>'Смотреть'),
+					'label' => '<i class="glyphicon glyphicon-eye-open"></i>',
+					'imageUrl' => false,
+				),
+			)
 		),
 	),
 )); ?>
