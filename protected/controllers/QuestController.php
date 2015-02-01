@@ -10,6 +10,8 @@ class QuestController extends Controller
 
 	public $pageImg=NULL;
 
+	public $cities;
+
 	/**
 	 * @return array action filters
 	 */
@@ -268,6 +270,15 @@ class QuestController extends Controller
 	 */
 	public function actionIndex()
 	{
+		$this->cities = City::model()->findAll();
+		/*
+			echo Yii::app()->getLanguage(); die;
+			ByAttributes(array(
+				array('languages'=>Yii::app()->getLanguage())
+			));
+		*/
+
+
 		$quests = Quest::model()->findAll(array(
 		    "condition" => "status > 1 ",
 		    "order" => "status ASC, sort ASC",
@@ -278,7 +289,7 @@ class QuestController extends Controller
         
         $this->layout = '//layouts/index';
 		$this->render('index',array(
-			'quests'=>$quests
+			'quests'=>$quests,
 		));
 	}
 

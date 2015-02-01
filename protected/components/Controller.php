@@ -20,18 +20,35 @@ class Controller extends CController
 	 * @var array context menu items. This property will be assigned to {@link CMenu::items}.
 	 */
 	public $quest_menu=array(
-				array('label'=>'Сводная таблица', 'url'=>array('/quest/adminschedule/ymd')),
-				array('label'=>'Управление квестами', 'url'=>array('/quest/admin')),
-				array('label'=>'Создать новый квест', 'url'=>array('/quest/create')),
+				array(
+					'label'=>'Сводная таблица',
+					'url'=>array('/quest/adminschedule/ymd')
+				),
+				array(
+					'label'=>'Управление квестами',
+					'url'=>array('/quest/admin')
+				),
+				array(
+					'label'=>'Создать новый квест',
+					'url'=>array('/quest/create')
+				),
 			);
 	
 	/**
 	 * @var array context menu items. This property will be assigned to {@link CMenu::items}.
 	 */
-	public $user_menu=array(
-				array('label'=>'Управление пользователями', 'url'=>array('/user/admin')),
-				array('label'=>'Добавить пользователя', 'url'=>array('/user/admin/create')),
-			);
+	public $user_menu = array(
+								array(
+									'label'=>'Управление пользователями',
+									'url'=>array('/user/admin'
+								)
+							),
+								array(
+									'label'=>'Добавить пользователя',
+									'url'=>array('/user/admin/create'
+								)
+							),
+						);
 	
 	/**
 	 * @var array context menu items. This property will be assigned to {@link CMenu::items}.
@@ -47,4 +64,15 @@ class Controller extends CController
 	 * for more details on how to specify this property.
 	 */
 	public $breadcrumbs=array();
+
+	public function init()
+	{
+		if (strpos($_SERVER['HTTP_HOST'], '.kz') > 0){
+			$language = 'kz';
+		} else {
+			$language = 'ru';
+		}
+		Yii::app()->setLanguage($language);
+
+	}
 }

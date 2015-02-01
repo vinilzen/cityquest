@@ -255,7 +255,7 @@ ul.nav.navbar-nav {
 			}
 			.dropdown-menu {
 				a {
-					&:hover {
+					&:hover, &.selected {
 						background-color: #19242c;
 					}
 				}

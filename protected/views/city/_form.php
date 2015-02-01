@@ -26,6 +26,12 @@
 	</div>
 
 	<div class="row">
+		<?php echo $form->labelEx($model,'country'); ?>
+		<?php echo $form->textField($model,'country'); ?>
+		<?php echo $form->error($model,'country'); ?>
+	</div>
+
+	<div class="row">
 		<?php echo $form->labelEx($model,'active'); ?>
 		<?php echo $form->textField($model,'active'); ?>
 		<?php echo $form->error($model,'active'); ?>

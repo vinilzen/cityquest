@@ -41,6 +41,7 @@ $('.search-form form').submit(function(){
 		'id',
 		'name',
 		'active',
+		'country',
 		'languages',
 		array(
 			'class'=>'CButtonColumn',

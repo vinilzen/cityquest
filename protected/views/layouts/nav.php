@@ -23,23 +23,57 @@
               <button class="btn navbar-toggle btn-topline" id="show-menu" type="button"><span class="icos"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></span><span>Меню</span></button>
               <div id="for-city">
                 <div class="btn-group city-select">
-                  <button class="btn btn-topline ico-msq" disabled="disabled" data-toggle="dropdown" type="button">Москва</button>
-                  <button class="btn btn-topline dropdown-toggle" disabled="disabled" data-toggle="dropdown" type="button">
+                
+                  <?
+                    $domen2 = explode('.', $_SERVER['HTTP_HOST'])[1];
+                    if (strpos($_SERVER['HTTP_HOST'], '.kz') > 0){
+                      $default_city = 'Астана';
+                    } else {
+                      $default_city = 'Москва';
+                    }
+                  ?>
+                  <button class="btn btn-topline ico-msq" data-toggle="dropdown" type="button"><?
+                    echo $default_city;
+                  ?></button>
+                  <button class="btn btn-topline dropdown-toggle" data-toggle="dropdown" type="button">
                     <span class="caret"></span><span class="sr-only">Выбрать город</span>
                   </button>
-                  <?/*<ul class="dropdown-menu" role="menu">
-                    <li><a href="#">Питер</a></li>
-                    <li><a href="#">Уфа</a></li>
-                    <li><a href="#">Владивосток</a></li>
-                  </ul> */
-                ?></div>
+                  <ul class="dropdown-menu" role="menu">
+                  <? 
+                    foreach($this->cities AS $city){
+                      $domen1 = explode('.', $_SERVER['HTTP_HOST'])[0];
+                      $domen2 = $city->country;
+
+                      // only for local
+                      if ($domen1 == 'cq'){
+                        if ($city->country == 'ru') {
+                          $domen2 = 'il';
+                        } else {
+                          $domen2 = 'kzil';
+                        }
+                      }
+
+                      if (strtolower($city->name) == strtolower($default_city)){
+                        $class = 'class="selected"';
+                      } else {
+                        $class = '';
+                      }
+
+                      echo '<li><a href="http://'.$domen1.'.'.$domen2.'/city/change?id='.$city->id.'" 
+                        '.$class.'
+                      >'.
+                        $city->name.'</a></li>';
+                    }
+                   ?>
+                  </ul>
+                </div>
               </div>
               <div id="for-login-pl">
                 <? if (Yii::app()->user->isGuest) {
                   echo '<a class="btn btn-topline btn-default ico-lock" data-target="#myModalAuth" data-toggle="modal" href="#login">ВОЙТИ</a>';
                 } else {
                   echo '<a class="btn btn-topline btn-default ico-lock" data-toggle="modal" href="/user/profile">КАБИНЕТ</a>';
-                } ?>                    
+                } ?>
               </div>
             </div>
           </div>

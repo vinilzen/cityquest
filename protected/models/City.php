@@ -6,6 +6,8 @@
  * The followings are the available columns in table '{{city}}':
  * @property integer $id
  * @property string $name
+ * @property string $languages
+ * @property string $country
  * @property integer $active
  *
  * The followings are the available model relations:
@@ -29,9 +31,9 @@ class City extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name', 'required'),
+			array('name, country', 'required'),
 			array('active', 'numerical', 'integerOnly'=>true),
-			array('name', 'length', 'max'=>128),
+			array('name, country', 'length', 'max'=>128),
 			array('languages', 'length', 'max'=>128),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -60,6 +62,7 @@ class City extends CActiveRecord
 			'id' => 'ID',
 			'name' => 'Название',
 			'active' => 'Активность',
+			'country' => 'Страна',
 			'languages' => 'Язык',
 		);
 	}

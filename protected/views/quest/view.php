@@ -127,7 +127,7 @@ $this->pageImg= '/images/q/'.$model->id.'.jpg';
                 $timastamp_quest_start = strtotime( $value['year'].'-'.$value['month'].'-'.$value['day'].' '.$time);
                 if ( $timastamp_quest_start < (strtotime( 'now' )+(40*60)) ) $near = 1;
 
-                echo '<!--('.$time_str.') '.$timastamp_quest_start.' = '.(strtotime( 'now' )+(40*60)).' -->';
+               // echo '<!--('.$time_str.') '.$timastamp_quest_start.' = '.(strtotime( 'now' )+(40*60)).' -->';
 
                 $disabled = '';
                 $my_quest = '';
@@ -139,7 +139,7 @@ $this->pageImg= '/images/q/'.$model->id.'.jpg';
                 }
 
                 $empty = '';
-                if (($model->id == 3 || $model->id == 2) && ($k != 0 && $k<8)) {
+                if (($model->id == 3 || $model->id == 2 || $model->id == 4) && ($k != 0 && $k<8)) {
                   $empty = ' empty_btn ';
                   $disabled = ' disabled="disabled"';
                 }
