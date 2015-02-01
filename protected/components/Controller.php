@@ -65,14 +65,23 @@ class Controller extends CController
 	 */
 	public $breadcrumbs=array();
 
+
+
+	public $cities;
+	
+	public $language;
+
+
 	public function init()
 	{
+		$this->cities = City::model()->findAll();
+
 		if (strpos($_SERVER['HTTP_HOST'], '.kz') > 0){
-			$language = 'kz';
+			$this->language = 'kz';
 		} else {
-			$language = 'ru';
+			$this->language = 'ru';
 		}
-		Yii::app()->setLanguage($language);
+		Yii::app()->setLanguage($this->language);
 
 	}
 }
