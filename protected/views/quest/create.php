@@ -16,4 +16,4 @@ $this->menu=array(
 
 <h1 class="page-header">Создать квест</h1>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php $this->renderPartial('_form', array('model'=>$model, 'cities' => $cities)); ?>

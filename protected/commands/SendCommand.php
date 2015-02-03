@@ -89,28 +89,29 @@ EOD;
 
     public static function sendYiiMail($options)
     {
-        if ($options['result'] <'60:00' ) {
-          $tamplate_name = 'result_success';
-          $subj = 'Ваш результат квеста "'.$options['title'].'": '.$options['result'];
-        } else { 
-          $tamplate_name = 'result_notqualify';
-          $subj = 'Спасибо, что посетили CityQuest!';
-        }
+        if ($options['result'] != '00:00' && $options['result'] != '0' && $options['result'] != '') {
+          if ($options['result'] <'60:00' ) {
+            $tamplate_name = 'result_success';
+            $subj = 'Ваш результат квеста "'.$options['title'].'": '.$options['result'];
+          } else { 
+            $tamplate_name = 'result_notqualify';
+            $subj = 'Спасибо, что посетили CityQuest!';
+          }
 
+          $mail = new YiiMailer($tamplate_name, $options);
+          $mail->setFrom(Yii::app()->params['helloEmail'], 'CityQuest');
+          $mail->setTo($options['email']);
+          //$mail->setTo('marchukilya@gmail.com');
+          $mail->setBcc('marchukilya@gmail.com');
+          $mail->setBcc('ilya@cityquest.ru');
+          $mail->setSubject($subj);
 
-        $mail = new YiiMailer($tamplate_name, $options);
-        $mail->setFrom(Yii::app()->params['helloEmail'], 'CityQuest');
-        $mail->setTo($options['email']);
-        //$mail->setTo('marchukilya@gmail.com');
-        $mail->setBcc('marchukilya@gmail.com');
-        $mail->setBcc('ilya@cityquest.ru');
-        $mail->setSubject($subj);
-
-        if ($mail->send()) {
-            echo 'Mail send to '.$options['email'].'.'."\r\n";
-        } else {
-            echo 'Error while sending email: '.$mail->getError();
-            echo "\r\n";
+          if ($mail->send()) {
+              echo 'Mail send to '.$options['email'].'.'."\r\n";
+          } else {
+              echo 'Error while sending email: '.$mail->getError();
+              echo "\r\n";
+          }
         }
     }
 }

@@ -208,3 +208,29 @@ $this->pageImg= '/images/q/'.$model->id.'.jpg';
     <? } ?>
   </div>
 </div>
+
+<? if (isset($other_quests) && count($other_quests) > 0) { ?>
+<div class="container-fluid" id="quests">
+  <div class="row">
+  <? foreach ($other_quests as $quest) { ?>
+    <div class="col-xs-12 col-md-6 col-sm-12 col-lg-6 col-xlg-4 item">
+      <img class="featurette-image img-responsive"
+        alt="<? echo CHtml::encode($quest->title); ?>" 
+        src="/images/q/<? echo $quest->id; ?>.jpg">
+      <a class="descr" href="/quest/view?id=<? echo $quest->id; ?>">
+        <h2><? echo CHtml::encode($quest->title); ?></h2>
+        <p>
+            <span>
+                <i class="ico-ppl"></i>
+                <i class="ico-ppl"></i>
+                <i class="ico-ppl noactive"></i>
+                <i class="ico-ppl noactive"></i>2 - 4 игрока
+            </span>
+            <span><i class="ico-loc"></i><? echo CHtml::encode($quest->addres); ?></span>
+        </p>
+      </a>
+    </div>
+  <? } ?>
+  </div>
+</div>
+<? } ?>

@@ -108,8 +108,23 @@ class QuestController extends Controller
 		foreach ($holidays as $holiday) {
 			array_push($holiday_list, $holiday->holiday_date);
 		}
+
+		$quests = Quest::model()->findAll(array(
+		    "condition" => "status = 2 AND city_id = ".$this->city,
+		    "order" => "status ASC, sort ASC",
+		    "limit" => 12,
+		));
+
+		$other_quests = array();
 		
-		$model=$this->loadModel($id);
+		foreach ($quests AS $quest){
+			if ($quest->id == $id){
+				$model = $quest;
+			} else {
+				$other_quests[$quest->id] = $quest;
+			}
+		}
+
 
 		$bookings = array();
 		$bookings = Booking::model()->with('competitor')->findAllByAttributes(
@@ -139,7 +154,8 @@ class QuestController extends Controller
 			'model'=>$model,
 			'booking' => $bookings_by_date,
 			'times' => $times,
-			'holidays' => $holiday_list
+			'holidays' => $holiday_list,
+			'other_quests' => $other_quests
 		));
 	}
 
@@ -151,6 +167,7 @@ class QuestController extends Controller
 	{
 		$this->layout='//layouts/admin_column';
 		$model=new Quest;
+		$cities = City::model()->findAllByAttributes( array('active'=>1) );
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -166,6 +183,7 @@ class QuestController extends Controller
 
 		$this->render('create',array(
 			'model'=>$model,
+			'cities' => $cities
 		));
 	}
 
@@ -177,7 +195,9 @@ class QuestController extends Controller
 	public function actionUpdate($id)
 	{
 		$this->layout='//layouts/admin_column';
-		$model= Quest::model()->with('city')->findByPk($id);
+		$model= Quest::model()->
+					//with('city')->
+					findByPk($id);
 
 		$bookings = array();
 		$bookings = Booking::model()->with('competitor')->findAllByAttributes(
@@ -232,7 +252,9 @@ class QuestController extends Controller
 				throw new CHttpException(500, 'Не найден город квеста!');
 			}
 
-			$model= Quest::model()->with('city')->findByPk($id);
+			$model= Quest::model()->
+					//with('city')->
+					findByPk($id);
 		}
 
 
@@ -274,14 +296,11 @@ class QuestController extends Controller
 				array('languages'=>Yii::app()->getLanguage())
 			));
 		*/
-		if ($this->language == 'ru'){
-			$city_id = 1;
-		} else {
-			$city_id = 2;
-		}
 
-		$quests = Quest::model()->with('city')->findAll(array(
-		    "condition" => "status > 1 AND city_id = ".$city_id,
+		$quests = Quest::model()->
+					//with('city')->
+					findAll(array(
+		    "condition" => "status > 1 AND city_id = ".$this->city,
 		    "order" => "status ASC, sort ASC",
 		    "limit" => 12,
 		));

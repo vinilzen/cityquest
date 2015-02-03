@@ -32,10 +32,10 @@
                       $default_city = 'Москва';
                     }
                   ?>
-                  <button class="btn btn-topline ico-msq" data-toggle="dropdown" type="button"><?
+                  <button class="btn btn-topline ico-msq" disabled="disabled" data-toggle="dropdown" type="button"><?
                     echo $default_city;
                   ?></button>
-                  <button class="btn btn-topline dropdown-toggle" data-toggle="dropdown" type="button">
+                  <button class="btn btn-topline dropdown-toggle" disabled="disabled" data-toggle="dropdown" type="button">
                     <span class="caret"></span><span class="sr-only">Выбрать город</span>
                   </button>
                   <ul class="dropdown-menu" role="menu">
@@ -59,7 +59,7 @@
                         $class = '';
                       }
 
-                      echo '<li><a href="http://'.$domen1.'.'.$domen2.'/city/change?id='.$city->id.'" 
+                      echo '<li><a href="http://'.$domen1.'.'.$domen2.'/" 
                         '.$class.'
                       >'.
                         $city->name.'</a></li>';

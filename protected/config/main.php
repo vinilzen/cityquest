@@ -55,6 +55,7 @@ return array(
 				'rules'=>'site/about',
 				'giftcard'=>'site/giftcard',
 				'franchise'=>'site/franchise',
+				'press_about_us'=>'site/press',
 				'contact'=>'site/contact',
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 			),

@@ -149,6 +149,12 @@ class SiteController extends Controller
 	    $this->render('pages/franchise');
 	}
 
+	public function actionPress()
+	{
+		$this->pageTitle = Yii::app()->name . ' - Пресса о нас';
+	    $this->render('press');
+	}
+
 	/**
 	 * This is the action to handle external exceptions.
 	 */

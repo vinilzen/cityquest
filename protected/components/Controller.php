@@ -68,6 +68,7 @@ class Controller extends CController
 
 
 	public $cities;
+	public $city = 1;
 	
 	public $language;
 
@@ -78,8 +79,10 @@ class Controller extends CController
 
 		if (strpos($_SERVER['HTTP_HOST'], '.kz') > 0){
 			$this->language = 'kz';
+			$this->city = 2;
 		} else {
 			$this->language = 'ru';
+			$this->city = 1;
 		}
 		Yii::app()->setLanguage($this->language);
 

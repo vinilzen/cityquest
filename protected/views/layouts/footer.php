@@ -14,6 +14,7 @@
     <div class="col-sm-2 col-xs-12">
       <p class="text-center">
         <img src="/img/Footer_Centr.png" class="footer_logo" alt="">
+        <a href="/press_about_us" class="about_us">ПРЕССА О НАС</a>
       </p>
     </div>
     <div class="col-sm-5 col-xs-12 hidden-xs">
