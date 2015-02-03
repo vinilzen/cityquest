@@ -10,7 +10,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'Сводная таблица', 'url'=>array('quest/adminschedule/ymd')),
 	// array('label'=>'Управление квестами', 'url'=>array('admin')),
-	array('label'=>'Создать новый квест', 'url'=>array('create')),
+	// array('label'=>'Создать новый квест', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -27,7 +27,14 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1 class="page-header">Управление квестами</h1>
+<h1 class="page-header">
+	Управление квестами
+	<small>
+		<a href="/quest/create">
+			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+		</a>
+	</small>
+</h1>
 
 <?php
 	echo CHtml::dropDownList(

@@ -1,5 +1,5 @@
 <div class="row rules">
-	<div class="col-xs-12 col-lg-10 col-lg-offset-1">
+	<div class="col-xs-10 col-xs-offset-1">
 		<h3 class="text-center">Пресса о нас</h3>
 		<dl class="dl-horizontal first">
 			<dt>

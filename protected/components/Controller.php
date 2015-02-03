@@ -28,10 +28,6 @@ class Controller extends CController
 					'label'=>'Управление квестами',
 					'url'=>array('/quest/admin')
 				),
-				array(
-					'label'=>'Создать новый квест',
-					'url'=>array('/quest/create')
-				),
 			);
 	
 	/**
