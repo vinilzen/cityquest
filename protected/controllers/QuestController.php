@@ -325,15 +325,8 @@ class QuestController extends Controller
 		foreach ($holidays as $holiday) {
 			array_push($holiday_list, $holiday->holiday_date);
 		}
-
-		$this->quest_menu=array(
-				array('label'=>'Сводная таблица', 'url'=>array('/quest/adminschedule/ymd'), 'active'=>true ),
-				array('label'=>'Управление квестами', 'url'=>array('/quest/admin')),
-				array('label'=>'Создать новый квест', 'url'=>array('/quest/create')),
-			);
 		
 		$this->layout='//layouts/admin_column';
-
 
 		if ($ymd === '' || !is_numeric($ymd) || strlen($ymd) !== 8){
 			$YMDate = date('Ymd', strtotime( "now" ));
