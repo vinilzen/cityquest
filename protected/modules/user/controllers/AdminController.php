@@ -42,10 +42,7 @@ class AdminController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$this->user_menu=array(
-				array('label'=>'Управление пользователями', 'url'=>array('/user/admin'), 'active' => true),
-				array('label'=>'Добавить пользователя', 'url'=>array('/user/admin/create')),
-			);
+		$this->user_menu=array();
 
 		$dataProvider=new CActiveDataProvider('User', array(
 			'pagination'=>array(

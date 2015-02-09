@@ -13,7 +13,7 @@
     </div>
     <div class="col-sm-2 col-xs-12">
       <p class="text-center">
-        <img src="/img/Footer_Centr.png" class="footer_logo" alt="">
+        <span class="copy">&copy; 2014-2015 <strong>CITYQUEST</strong></span>
         <a href="/press_about_us" class="about_us">ПРЕССА О НАС</a>
       </p>
     </div>

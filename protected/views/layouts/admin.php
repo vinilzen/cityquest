@@ -35,8 +35,18 @@
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
+					<li class="dropdown">
+						<a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+							Москва
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu" role="menu">
+							<? foreach ($this->cities AS $city) {
+								echo '<li><a href="/city/set/?id='.$city->id.'">'.$city->name.'</a></li>';
+							} ?>
+		                </ul>
+					</li>
 					<? include('menu.php'); ?>
-				</ul>
 				<?php $this->widget('zii.widgets.CMenu',array(
 					'htmlOptions' => array( 'class' => 'nav navbar-nav navbar-right'),
 					'items'=>array(
@@ -46,6 +56,7 @@
 						array('url'=>Yii::app()->getModule('user')->logoutUrl, 'label'=>Yii::app()->getModule('user')->t("Выйти").' ('.Yii::app()->user->name.')', 'visible'=>!Yii::app()->user->isGuest),
 					),
 				)); ?>
+				</ul>
 			</div>
 		</div>
 	</div>

@@ -210,10 +210,12 @@ $this->pageImg= '/images/q/'.$model->id.'.jpg';
 </div>
 
 <? if (isset($other_quests) && count($other_quests) > 0) { ?>
-<div class="container-fluid" id="quests">
+<div class="container-fluid bottom_quest" id="quests">
   <div class="row">
-  <? foreach ($other_quests as $quest) { ?>
-    <div class="col-xs-12 col-md-6 col-sm-12 col-lg-6 col-xlg-4 item">
+  <? $counter = 1;
+    foreach ($other_quests as $quest) { ?>
+    <div class="col-xs-12 col-md-6 col-sm-12 col-lg-6 col-xlg-4 <? echo $counter ? 'col-xlg-offset-2' : ''; ?> item">
+    <? $counter = 0; ?>
       <img class="featurette-image img-responsive"
         alt="<? echo CHtml::encode($quest->title); ?>" 
         src="/images/q/<? echo $quest->id; ?>.jpg">

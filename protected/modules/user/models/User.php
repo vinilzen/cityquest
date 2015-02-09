@@ -19,6 +19,7 @@ class User extends CActiveRecord
 	 * @var integer $superuser
 	 * @var integer $status
 	 * @var string $quests
+	 * @var string $city_id
 	 */
 
 	/**

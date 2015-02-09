@@ -1,16 +1,15 @@
 
-<h1><?php echo UserModule::t("Manage Users"); ?></h1>
-
-<?php echo $this->renderPartial('_menu', array(
-		'list'=> array(
-			CHtml::link(UserModule::t('Create User'),array('create')),
-		),
-	));
-?>
+<h1>
+	<?php echo UserModule::t("Manage Users"); ?>
+	<small>
+		<a href="/user/admin/create">
+			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+		</a>
+	</small>
+</h1>
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'dataProvider'=>$dataProvider,
-	// 'filter'=>$model,
 	'columns'=>array(
 		array(
 			'name' => 'id',

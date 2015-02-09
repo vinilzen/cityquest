@@ -33,26 +33,12 @@ class Controller extends CController
 	/**
 	 * @var array context menu items. This property will be assigned to {@link CMenu::items}.
 	 */
-	public $user_menu = array(
-								array(
-									'label'=>'Управление пользователями',
-									'url'=>array('/user/admin'
-								)
-							),
-								array(
-									'label'=>'Добавить пользователя',
-									'url'=>array('/user/admin/create'
-								)
-							),
-						);
+	public $user_menu = array(array('label'=>'Управление пользователями','url'=>array('/user/admin')));
 	
 	/**
 	 * @var array context menu items. This property will be assigned to {@link CMenu::items}.
 	 */
-	public $city_menu=array(
-				array('label'=>'Управление городами', 'url'=>array('/city/admin')),
-				array('label'=>'Создать новый город', 'url'=>array('/city/create')),
-			);
+	public $city_menu=array(array('label'=>'Управление городами', 'url'=>array('/city/admin')));
 
 	/**
 	 * @var array the breadcrumbs of the current page. The value of this property will

@@ -17,10 +17,10 @@ return array(
 	'price_workday_PM' => 3000,
 
 	// цена в выходные до обеда
-	'price_weekend_AM' => 3500,
+	'price_weekend_AM' => 4000,
 
 	// цена в выходные после обеда
-	'price_weekend_PM' => 3500,
+	'price_weekend_PM' => 4000,
 
 	// времена начала квестов
 	'times' => array(

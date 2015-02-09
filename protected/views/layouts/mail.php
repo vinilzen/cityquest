@@ -8,7 +8,14 @@
   <h1>Здравствуйте, <?php echo $data['username']; ?>!</h1>
   <?php echo $content ?>
    
-  <p>Приглашаем Вас посетить другой наш квест: "<?php echo $data['list_quests']; ?>". <br>
+  <? if ($data['count_quests'] > 0) { ?>
+  <p>Приглашаем Вас посетить <?
+    if ($data['count_quests'] > 1) {
+      echo 'другие наши квесты';
+    } else { 
+      echo 'другой наш квест';
+    } ?>: <?php echo $data['list_quests']; ?>. <br>
+  <? } ?>
   Следите за открытием новых квестов на нашем сайте и в наших соц. сетях:<br>
   <a href="https://www.facebook.com/cityquestru">https://www.facebook.com/cityquestru</a><br>
   <a href="http://vk.com/cityquestru">http://vk.com/cityquestru</a>

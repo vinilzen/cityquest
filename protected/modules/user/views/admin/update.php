@@ -4,7 +4,6 @@
 
 <?php echo $this->renderPartial('_menu', array(
 		'list'=> array(
-			// CHtml::link(UserModule::t('Create User'),array('create')),
 			CHtml::link(UserModule::t('View User'),array('view','id'=>$model->id)),
 		),
 	)); 
