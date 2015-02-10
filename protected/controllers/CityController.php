@@ -57,13 +57,14 @@ class CityController extends Controller
 	public function actionSet($id)
 	{
 		$model=$this->loadModel($id);
+
 		if ($model){
-			var_dump($model);
+			Yii::app()->getModule('user')->user()->city_id = $id;
+			Yii::app()->getModule('user')->user()->save();
+			$this->redirect(Yii::app()->user->returnUrl);
 		} else {
 			echo 'Нет такого города!';
 		}
-		var_dump($id);
-		die;
 	}
 
 	/**
@@ -72,7 +73,7 @@ class CityController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new City;
+		$model = new City;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -180,4 +181,11 @@ class CityController extends Controller
 			Yii::app()->end();
 		}
 	}
+
+	public function beforeAction($action)
+	{
+	    Yii::app()->user->returnUrl = Yii::app()->request->urlReferrer;
+	    return parent::beforeAction($action);
+	}
+
 }

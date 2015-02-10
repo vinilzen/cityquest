@@ -104,6 +104,7 @@ class User extends CActiveRecord
 			'quests' => 'Квесты',
 			'superuser' => 'Роль',
 			'moderator' => 'Модератор',
+			'city_id' => 'Город',
 			'status' => UserModule::t("Status"),
 		);
 	}
@@ -137,7 +138,7 @@ class User extends CActiveRecord
 	
 	public function defaultScope() {
         return array(
-            'select' => 'id, username, email, phone, createtime, lastvisit, superuser, status, quests, fb_link, fb_id, vk_id',
+            'select' => 'id, username, email, phone, createtime, lastvisit, superuser, status, quests, fb_link, fb_id, vk_id, city_id',
         );
     }
 

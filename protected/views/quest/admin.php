@@ -36,17 +36,6 @@ $('.search-form form').submit(function(){
 	</small>
 </h1>
 
-<?php
-	echo CHtml::dropDownList(
-		'cities',
-		$selected_city,
-		CHtml::listData($cities, 'id', 'name'),
-		array(
-			'onchange'=>'window.location.href = "/quest/admin?selected_city="+this.value;'
-		)
-	);
-?>
-
 <div class="row" id="sortable">
 	<? if (count($models)>0) {
 		foreach ($models AS $q) {

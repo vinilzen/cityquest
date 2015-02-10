@@ -319,14 +319,16 @@ class QuestController extends Controller
 	 */
 	public function actionAdminschedule($ymd = '')
 	{
+		$this->layout='//layouts/admin_column';
 
+		$user_city_id = Yii::app()->getModule('user')->user()->city_id;
+		
 		$holidays = Holiday::model()->findAll();
 		$holiday_list = array();
 		foreach ($holidays as $holiday) {
 			array_push($holiday_list, $holiday->holiday_date);
 		}
 		
-		$this->layout='//layouts/admin_column';
 
 		if ($ymd === '' || !is_numeric($ymd) || strlen($ymd) !== 8){
 			$YMDate = date('Ymd', strtotime( "now" ));
@@ -346,7 +348,7 @@ class QuestController extends Controller
 
 		$twoweek_bookings = Booking::model()->findAllByAttributes(
 			array(),
-			'date >=:today && date < :twoweek && competitor_id > -1',
+			'date >=:today && date < :twoweek && competitor_id > -1 ',
 			array(
 				'today'=>date('Ymd', strtotime( '+'.$prev.' day' )),
 				'twoweek'=> date('Ymd', strtotime( '+'.$next.' day' ))
@@ -370,7 +372,7 @@ class QuestController extends Controller
 		} else {
 
 			$criteria=new CDbCriteria(array(
-				'condition'=>"status = 2 ",
+				'condition'=>"status = 2 && city_id = ".$user_city_id,
 				'limit'=>12,
 				'order'=>"status ASC, sort ASC"
 			));
@@ -384,8 +386,9 @@ class QuestController extends Controller
 				}
 			}
 
-			$quests = Quest::model()->findAll($criteria);
+			$users = User::model()->findALL(array("condition"=>"superuser = 0"));
 
+			$quests = Quest::model()->findAll($criteria);
 			$quests_array = array();
 
 			if (count($quests)>0){
@@ -412,8 +415,6 @@ class QuestController extends Controller
 					}
 				}
 
-				$users = User::model()->findALL(array("condition"=>"superuser = 0"));
-
 				$this->render('adminschedule',array(
 					'twoweek_bookings_arr' => $twoweek_bookings_arr,
 					'quests' => $quests_array,
@@ -423,7 +424,14 @@ class QuestController extends Controller
 					'arr_hash' => md5(serialize($twoweek_bookings_arr)),
 				));
 			} else {
-				throw new CHttpException(404,'У вас нет доступных квестов');
+				$this->render('adminschedule',array(
+					'twoweek_bookings_arr' => $twoweek_bookings_arr,
+					'quests' => array(),
+					'ymd' => $YMDate,
+					'users' => $users,
+					'holidays' => $holiday_list,
+					'arr_hash' => md5(serialize($twoweek_bookings_arr)),
+				));
 			}
 		}
 	}
@@ -478,8 +486,10 @@ class QuestController extends Controller
 	public function actionAdmin($selected_city = 1)
 	{
 		$this->layout='//layouts/admin_column';
+
+		$user_city_id = Yii::app()->getModule('user')->user()->city_id;
+
 		$model=new Quest('search');
-		$cities = City::model()->findAllByAttributes( array('active'=>1) );
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Quest']))
 			$model->attributes=$_GET['Quest'];
@@ -487,14 +497,12 @@ class QuestController extends Controller
 		$this->render('admin',array(
 			'models'=>Quest::model()->findAll(
 						array(
-						    "condition" => "status>1 AND city_id=".(int)$selected_city,
+						    "condition" => "status>1 AND city_id=".(int)$user_city_id,
 						    "order" => "status ASC, sort ASC",
 						    "limit" => 12,
 						)
 					),
-			'model'=>$model,
-			'selected_city'=>$selected_city,
-			'cities'=>$cities,
+			'model'=>$model
 		));
 	}
 

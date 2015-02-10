@@ -134,115 +134,119 @@ $this->breadcrumbs=array('Quests');  ?>
 <hr>
 <style> .table>tbody>tr>td { padding:8px 1px; } </style>
 <div id="times-table" class="table-responsive">
-	<? foreach ($quests as $quest) {
-		
-		if (isset($quest['q']->times) && is_numeric($quest['q']->times) && isset(Yii::app()->params['times'][(int)$quest['q']->times]))
-			$times = Yii::app()->params['times'][(int)$quest['q']->times];
-		else 
-			$times = Yii::app()->params['times'][1];
+	<? if (count($quests)>0) {
+		foreach ($quests as $quest) {
 
-		echo '<table class="table"><tr><td style="width:100px;">'.$quest['q']->title.'</td>';
+			if (isset($quest['q']->times) && is_numeric($quest['q']->times) && isset(Yii::app()->params['times'][(int)$quest['q']->times]))
+				$times = Yii::app()->params['times'][(int)$quest['q']->times];
+			else 
+				$times = Yii::app()->params['times'][1];
 
-		if (date('w', $selectedDate) == 0 || date('w', $selectedDate) == 6 || in_array(date('Ymd', $selectedDate), $holidays))
-			$workday = 0;
-		else
-			$workday = 1;
+			echo '<table class="table"><tr><td style="width:100px;">'.$quest['q']->title.'</td>';
 
-        if (!$workday)
-        {
-          $priceAm = Yii::app()->params['price_weekend_AM'];
-          $pricePm = Yii::app()->params['price_weekend_PM'];
-        } else {         
-          $priceAm = Yii::app()->params['price_workday_AM'];
-          $pricePm = Yii::app()->params['price_workday_PM'];
-        }
+			if (date('w', $selectedDate) == 0 || date('w', $selectedDate) == 6 || in_array(date('Ymd', $selectedDate), $holidays))
+				$workday = 0;
+			else
+				$workday = 1;
 
-		foreach ($times as $k=>$time) {
+	        if (!$workday)
+	        {
+	          $priceAm = Yii::app()->params['price_weekend_AM'];
+	          $pricePm = Yii::app()->params['price_weekend_PM'];
+	        } else {         
+	          $priceAm = Yii::app()->params['price_workday_AM'];
+	          $pricePm = Yii::app()->params['price_workday_PM'];
+	        }
 
-            if ($workday){
-              if ($k>6 && $k<14) $price = $priceAm;
-              else $price = $pricePm;
-            } else {
-              if ($k<10) $price = $priceAm;
-              else $price = $pricePm;
-            }
+			foreach ($times as $k=>$time) {
 
-			$dis = '';
-			$data = '';
-      		$additionalClass = '';
+	            if ($workday){
+	              if ($k>6 && $k<14) $price = $priceAm;
+	              else $price = $pricePm;
+	            } else {
+	              if ($k<10) $price = $priceAm;
+	              else $price = $pricePm;
+	            }
 
-			if ( isset($quest['bookings'][$time]) ) {
+				$dis = '';
+				$data = '';
+	      		$additionalClass = '';
 
-				if ($quest['bookings'][$time]->status == 0)
-					$additionalClass = 'btn-info btn-gr';
+				if ( isset($quest['bookings'][$time]) ) {
 
-				if ($quest['bookings'][$time]->status == 1){	
-					$additionalClass = ' btn-info';
-				}
+					if ($quest['bookings'][$time]->status == 0)
+						$additionalClass = 'btn-info btn-gr';
 
-				$competitor_id = isset($quest['bookings'][$time]->competitor) ? $quest['bookings'][$time]->competitor->id : 0;
-				$competitor_fb_id = isset($quest['bookings'][$time]->competitor) ? $quest['bookings'][$time]->competitor->fb_id : 0;
-				$competitor_vk_id = isset($quest['bookings'][$time]->competitor) ? $quest['bookings'][$time]->competitor->vk_id : 0;
-
-				$data = ' data-id="'.$quest['bookings'][$time]->id.'" '.
-						'data-status="'.$quest['bookings'][$time]->status.'" '.
-						'data-price="'.$quest['bookings'][$time]->price.'" '.
-						'data-phone="'.$quest['bookings'][$time]->phone.'" '.
-						'data-result="'.$quest['bookings'][$time]->result.'" '.
-						'data-comment="'.$quest['bookings'][$time]->comment.'" '.
-						'data-user-id="'. $competitor_id .'" '.
-						'data-fb-id="'. $competitor_fb_id .'" '.
-						'data-vk-id="'. $competitor_vk_id .'" '.
-						'data-name="'.$quest['bookings'][$time]->name.'" ';
-
-				if ($quest['bookings'][$time]->result != 0 && 
-					$quest['bookings'][$time]->result != '0' && 
-					$quest['bookings'][$time]->result != '00' && 
-					$quest['bookings'][$time]->result != ' ' && 
-					$quest['bookings'][$time]->result != '')
-				{
-					$additionalClass = ' btn-success';
-				} else {
-					if (
-						(	
-							$time < date('H:i', strtotime( '+0 hours' )) && 
-							$quest['bookings'][$time]->date == date('Ymd', strtotime( '+0 hours' ))
-						)
-						|| 
-						$quest['bookings'][$time]->date < date('Ymd', strtotime( '+0 hours' ))
-
-					) {
-						$additionalClass = '  btn-info btn-danger ';
+					if ($quest['bookings'][$time]->status == 1){	
+						$additionalClass = ' btn-info';
 					}
+
+					$competitor_id = isset($quest['bookings'][$time]->competitor) ? $quest['bookings'][$time]->competitor->id : 0;
+					$competitor_fb_id = isset($quest['bookings'][$time]->competitor) ? $quest['bookings'][$time]->competitor->fb_id : 0;
+					$competitor_vk_id = isset($quest['bookings'][$time]->competitor) ? $quest['bookings'][$time]->competitor->vk_id : 0;
+
+					$data = ' data-id="'.$quest['bookings'][$time]->id.'" '.
+							'data-status="'.$quest['bookings'][$time]->status.'" '.
+							'data-price="'.$quest['bookings'][$time]->price.'" '.
+							'data-phone="'.$quest['bookings'][$time]->phone.'" '.
+							'data-result="'.$quest['bookings'][$time]->result.'" '.
+							'data-comment="'.$quest['bookings'][$time]->comment.'" '.
+							'data-user-id="'. $competitor_id .'" '.
+							'data-fb-id="'. $competitor_fb_id .'" '.
+							'data-vk-id="'. $competitor_vk_id .'" '.
+							'data-name="'.$quest['bookings'][$time]->name.'" ';
+
+					if ($quest['bookings'][$time]->result != 0 && 
+						$quest['bookings'][$time]->result != '0' && 
+						$quest['bookings'][$time]->result != '00' && 
+						$quest['bookings'][$time]->result != ' ' && 
+						$quest['bookings'][$time]->result != '')
+					{
+						$additionalClass = ' btn-success';
+					} else {
+						if (
+							(	
+								$time < date('H:i', strtotime( '+0 hours' )) && 
+								$quest['bookings'][$time]->date == date('Ymd', strtotime( '+0 hours' ))
+							)
+							|| 
+							$quest['bookings'][$time]->date < date('Ymd', strtotime( '+0 hours' ))
+
+						) {
+							$additionalClass = '  btn-info btn-danger ';
+						}
+					}
+
+				} else {
+					$data = ' data-price="'.$price.'" ';
 				}
 
-			} else {
-				$data = ' data-price="'.$price.'" ';
+		        $invisible = '';
+		        if ($workday && $k > 2 && $k < 7)
+		        	$invisible = ' invisible';
+
+		        ?>
+
+				<td>
+					<button data-toggle="popover"  
+	            		data-title="<? echo date('d',$selectedDate); ?> <? echo $month[date('n', $selectedDate)-1]; ?> <?php echo $time; ?>"
+					    data-time="<? echo $time; ?>" 
+			            data-ymd="<? echo $ymd; ?>" 
+			            data-quest="<? echo $quest['q']->id; ?>" 
+			            data-date="<? echo date('d',$selectedDate); ?> <? echo date('M', $selectedDate); ?>" 
+			            data-day="<? echo $days[date('w',$selectedDate)]; ?>" 
+						class="btn btn-default btn-xs <? echo $invisible.$additionalClass;?>" <? echo $dis.$data;?>>
+						<? echo $time; ?><br><small><? echo $price; ?>р.</small>
+					</button>
+				</td>
+
+				<?
 			}
 
-	        $invisible = '';
-	        if ($workday && $k > 2 && $k < 7)
-	        	$invisible = ' invisible';
-
-	        ?>
-
-			<td>
-				<button data-toggle="popover"  
-            		data-title="<? echo date('d',$selectedDate); ?> <? echo $month[date('n', $selectedDate)-1]; ?> <?php echo $time; ?>"
-				    data-time="<? echo $time; ?>" 
-		            data-ymd="<? echo $ymd; ?>" 
-		            data-quest="<? echo $quest['q']->id; ?>" 
-		            data-date="<? echo date('d',$selectedDate); ?> <? echo date('M', $selectedDate); ?>" 
-		            data-day="<? echo $days[date('w',$selectedDate)]; ?>" 
-					class="btn btn-default btn-xs <? echo $invisible.$additionalClass;?>" <? echo $dis.$data;?>>
-					<? echo $time; ?><br><small><? echo $price; ?>р.</small>
-				</button>
-			</td>
-
-			<?
+			echo '</tr></table>';
 		}
-
-		echo '</tr></table>';
+	} else {
+		echo '<p>Квесты не найдены</p>';
 	} ?>
 </div>
 
