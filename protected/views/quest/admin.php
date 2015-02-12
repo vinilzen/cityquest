@@ -26,17 +26,18 @@ $('.search-form form').submit(function(){
 });
 ");
 ?>
+<div class="pagetitle-wrap">
+	<h1 class="page-header pagetitle">
+		Управление квестами
+		<small>
+			<a href="/quest/create">
+				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+			</a>
+		</small>
+	</h1>
+</div>
 
-<h1 class="page-header">
-	Управление квестами
-	<small>
-		<a href="/quest/create">
-			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-		</a>
-	</small>
-</h1>
-
-<div class="row" id="sortable">
+<div class="row workarea" id="sortable">
 	<? if (count($models)>0) {
 		foreach ($models AS $q) {
 			echo '<div class="col-sm-6 col-md-4 col-lg-3 sortable_quest" data-id="'.$q->id.'" id="quest_'.$q->id.'">'.

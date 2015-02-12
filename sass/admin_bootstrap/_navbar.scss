@@ -182,6 +182,11 @@
     text-decoration: none;
   }
 
+  span {
+    font-size: 24px;
+    font-family: OpenSans-Semibold, sans-serif;
+  }
+
   @media (min-width: $grid-float-breakpoint) {
     .navbar > .container &,
     .navbar > .container-fluid & {
@@ -665,4 +670,114 @@
       }
     }
   }
+}
+.nav>li>a.menu-item-link {
+  border-bottom: none;
+  margin: 0 0 0 -21px;
+  padding: 2px 0 0 41px;
+  color: #535c69;
+  display: inline-block;
+  font-size: 14px;
+  height: 29px;
+  line-height: 24px;
+  outline: none;
+  position: relative;
+  text-decoration: none;
+  width: 100%;
+}
+.menu-item-link-text {
+  display: inline-block;
+  max-width: 160px;
+  margin-left: -11px;
+  overflow: hidden;
+  padding: 0 11px;
+  position: relative;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.menu-item-active {
+  border-bottom: none;
+  margin: 0 0 0 -21px;
+  padding: 5px 12px 0 41px;
+  color: #535c69;
+  display: inline-block;
+  font-size: 14px;
+  height: 29px;
+  line-height: 24px;
+  outline: none;
+  position: relative;
+  text-decoration: none;
+  width: 187px;
+  .menu-item-link-text {
+    background-color: #aeb6bd !important;
+    border-radius: 13px;
+    color: #fff !important;
+    height: 26px;
+    font-weight: bold;
+    width: auto !important;
+  }
+}
+
+
+.menu-item-block > .menu-item-link:hover {
+  background-color: #e3e8eb;
+  border-bottom: none;
+  color: #000;
+  text-decoration: none;
+}
+
+.menu-favorites-editable .menu-item-block > .menu-item-link:hover {
+  background: none;
+  color: #535c69;
+}
+
+.menu-item-active .menu-item-link:hover {
+  background: none;
+}
+
+.menu-item-index-wrap {
+  display: none;
+  line-height: normal;
+  margin: 2px 0 0 0;
+  vertical-align: top;
+}
+.menu-item-index {
+  background-color: #d5dbdf;
+  border-radius: 10px;
+  color: #5f666e;
+  display: inline-block;
+  height: 22px;
+  line-height: 22px;
+  font-family: "OpenSans-Bold", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  min-width: 14px;
+  padding: 0 7px;
+  text-align: center;
+}
+
+.menu-items-title-text {
+  display: inline-block;
+  vertical-align: top;
+}
+.menu-items-title {
+  color: #535c69;
+  cursor: pointer;
+  font-family: "OpenSans-Bold", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  overflow: hidden;
+  padding: 4px 0 11px 23px;
+  position: relative;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.menu-favorites:before {
+  background-position: -85px 1px;
+}
+#left-sidebar {
+  padding-top: 50px;
+  padding-left: 20px;
+  padding-right: 0;
+  width: 207px;
 }

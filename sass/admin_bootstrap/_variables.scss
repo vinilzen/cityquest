@@ -107,9 +107,9 @@ $padding-xs-horizontal:     5px !default;
 $line-height-large:         1.33 !default;
 $line-height-small:         1.5 !default;
 
-$border-radius-base:        4px !default;
-$border-radius-large:       6px !default;
-$border-radius-small:       3px !default;
+$border-radius-base:        0px !default;
+$border-radius-large:       0px !default;
+$border-radius-small:       0px !default;
 
 //** Global color for active items (e.g., navs or dropdowns).
 $component-active-color:    #fff !default;
@@ -343,7 +343,7 @@ $container-lg:                 $container-large-desktop !default;
 //##
 
 // Basics of a navbar
-$navbar-height:                    50px !default;
+$navbar-height:                    63px !default;
 $navbar-margin-bottom:             $line-height-computed !default;
 $navbar-border-radius:             $border-radius-base !default;
 $navbar-padding-horizontal:        floor(($grid-gutter-width / 2)) !default;
@@ -377,11 +377,11 @@ $navbar-default-toggle-border-color:       #ddd !default;
 // Inverted navbar
 // Reset inverted navbar basics
 $navbar-inverse-color:                      $gray-light !default;
-$navbar-inverse-bg:                         #222 !default;
+$navbar-inverse-bg:                         #535c69 !default;
 $navbar-inverse-border:                     darken($navbar-inverse-bg, 10%) !default;
 
 // Inverted navbar links
-$navbar-inverse-link-color:                 $gray-light !default;
+$navbar-inverse-link-color:                 #fff !default;
 $navbar-inverse-link-hover-color:           #fff !default;
 $navbar-inverse-link-hover-bg:              transparent !default;
 $navbar-inverse-link-active-color:          $navbar-inverse-link-hover-color !default;

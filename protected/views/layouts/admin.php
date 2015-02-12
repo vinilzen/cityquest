@@ -32,7 +32,7 @@
 					<span class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="#">
-					<strong>CITYQUEST</strong>	
+					<span>CityQuest</span>	
 					<? //echo CHtml::encode(Yii::app()->name); ?>
 				</a>
 			</div>
@@ -55,15 +55,18 @@
 		                </ul>
 					</li>
 					<? include('menu.php'); ?>
-				<?php $this->widget('zii.widgets.CMenu',array(
-					'htmlOptions' => array( 'class' => 'nav navbar-nav navbar-left'),
-					'items'=>array(
-						array('url'=>Yii::app()->getModule('user')->loginUrl, 'label'=>Yii::app()->getModule('user')->t("Войти"), 'visible'=>Yii::app()->user->isGuest),
-						array('url'=>Yii::app()->getModule('user')->registrationUrl, 'label'=>Yii::app()->getModule('user')->t("Регистрация"), 'visible'=>Yii::app()->user->isGuest),
-						array('url'=>Yii::app()->getModule('user')->profileUrl, 'label'=>Yii::app()->getModule('user')->t("Профиль"), 'visible'=>!Yii::app()->user->isGuest),
-						array('url'=>Yii::app()->getModule('user')->logoutUrl, 'label'=>Yii::app()->getModule('user')->t("Выйти").' ('.Yii::app()->user->name.')', 'visible'=>!Yii::app()->user->isGuest),
-					),
-				)); ?>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle profile_nav" data-toggle="dropdown" role="button" aria-expanded="false">
+							<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+							<? echo Yii::app()->user->name; ?>
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu profile_dropdown" role="menu">
+							<li><a href="<? echo Yii::app()->getModule('user')->profileUrl[0]; ?>"><? echo Yii::app()->getModule('user')->t("Профиль"); ?></a></li>
+							<li class="divider"></li>
+							<li><a href="<? echo Yii::app()->getModule('user')->logoutUrl[0]; ?>"><? echo Yii::app()->getModule('user')->t("Выйти"); ?></a></li>
+						</ul>
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -83,34 +86,65 @@
 			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-2">
 
 				<div class="navbar-collapse collapse" id="left-sidebar">
-					<ul class="nav nav-sidebar" style="margin-bottom:0;"><li><a><strong>Квесты</strong></a></li></ul>
-					<?
-						$this->beginWidget('zii.widgets.CMenu', array(
-							'items'=>$this->quest_menu,
-							'htmlOptions'=>array('class'=>'nav nav-sidebar'),
-						));
-						$this->endWidget();
-					?>
-
-					<ul class="nav nav-sidebar" style="margin-bottom:0;"><li><a><strong>Пользователи</strong></a></li></ul>
+					<ul class="nav nav-sidebar menu-items" style="margin-bottom:0;">
+						<li>
+							<div class="menu-items-title menu-favorites">
+								<span class="menu-items-title-text">Квесты</span>
+							</div>
+						</li>
+					</ul>
+					<ul class="nav nav-sidebar">
+						<li class="menu-item-block menu-item-live-feed">
+							<a href="/quest/adminschedule/ymd" class="menu-item-link">
+								<span class="menu-item-link-text">Сводная таблица</span>
+							</a>
+						</li>
+						<li class="menu-item-block menu-item-live-feed">
+							<a href="/quest/admin" class="menu-item-link">
+								<span class="menu-item-link-text">Управление квестами</span>
+							</a>
+						</li>
+					</ul>
+					<ul class="nav nav-sidebar menu-items" style="margin-bottom:0;">
+						<li>
+							<div class="menu-items-title menu-favorites">
+								<span class="menu-items-title-text">Пользователи</span>
+							</div>
+						</li>
+					</ul>
 					<?
 						$this->beginWidget('zii.widgets.CMenu', array(
 							'items'=>$this->user_menu,
+							'itemTemplate' => '<span class="menu-item-link-text">{menu}</span>',
 							'htmlOptions'=>array('class'=>'nav nav-sidebar'),
 						));
 						$this->endWidget();
 					?>
 
-					<ul class="nav nav-sidebar" style="margin-bottom:0;"><li><a><strong>Города</strong></a></li></ul>
+					<ul class="nav nav-sidebar menu-items" style="margin-bottom:0;">
+						<li>
+							<div class="menu-items-title menu-favorites">
+								<span class="menu-items-title-text">Города</span>
+							</div>
+						</li>
+					</ul>
 					<?
 						$this->beginWidget('zii.widgets.CMenu', array(
 							'items'=>$this->city_menu,
-							'htmlOptions'=>array('class'=>'nav nav-sidebar'),
+							'itemTemplate' => '<span class="menu-item-link-text">{menu}</span>',
+							'htmlOptions'=>array('class'=>'nav nav-sidebar menu-item-link'),
 						));
 						$this->endWidget();
 					?>
-					<ul class="nav nav-sidebar" style="margin-bottom:0;"><li><a><strong>Шаблон письма</strong></a></li></ul>
-					<ul class="nav nav-sidebar">
+					
+					<ul class="nav nav-sidebar menu-items" style="margin-bottom:0;">
+						<li>
+							<div class="menu-items-title menu-favorites">
+								<span class="menu-items-title-text">Шаблон письма</span>
+							</div>
+						</li>
+					</ul>
+					<ul class="nav nav-sidebar menu-items">
 						<li>
 							<a>Рус</a>
 							<ul>

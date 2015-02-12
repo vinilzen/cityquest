@@ -1,12 +1,13 @@
-
-<h1>
-	<?php echo UserModule::t("Manage Users"); ?>
-	<small>
-		<a href="/user/admin/create">
-			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-		</a>
-	</small>
-</h1>
+<div class="pagetitle-wrap">
+	<h1 class="page-header pagetitle">
+		<?php echo UserModule::t("Manage Users"); ?>
+		<small>
+			<a href="/user/admin/create">
+				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+			</a>
+		</small>
+	</h1>
+</div>
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'dataProvider'=>$dataProvider,

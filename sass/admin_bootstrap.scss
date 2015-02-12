@@ -48,6 +48,7 @@
 // Utility classes
 @import "admin_bootstrap/utilities";
 @import "admin_bootstrap/responsive-utilities";
+@import "admin_bootstrap/dashboard";
 
 
 .btn-group .btn {
@@ -78,4 +79,42 @@
 }
 .my_form_control {
 	width: 300px;
+}
+.pagetitle {
+	color: #000;
+	font-size: 34px;
+	font-family: "OpenSans-Light", sans-serif;
+	margin: -9px 0 0;
+	padding: 0;
+	text-shadow: 0 1px 0 #ffffff;
+}
+.pagetitle-wrap {
+	background-color: #eef2f4;
+	margin: 0 -3px 0 -1px;
+	min-height: 50px;
+	padding: 27px 0 16px 0;
+	position: relative;
+}
+#workarea, .workarea {
+	padding: 15px;
+	background-color: #fff;
+}
+.nav>li>a.profile_nav {
+	padding-left: 60px;
+	margin-left: 10px;
+	margin-right: 0;
+	padding-right: 25px;
+	.glyphicon {
+		font-size: 32px;
+		position: absolute;
+		top:14px;
+		left: 14px;
+	}
+}
+.dropdown-menu.profile_dropdown {
+	min-width: 174px;
+	&>li>a {
+		text-align: right;
+		padding-right: 37px;
+	}
 }
