@@ -30,6 +30,10 @@ class UserController extends Controller
 				'actions'=>array('index','view'),
 				'users'=>array('*'),
 			),
+			array('allow',
+				'actions'=>array('list'),
+				'expression'=>"Yii::app()->getModule('user')->user()->superuser == 1",
+			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
@@ -89,7 +93,6 @@ class UserController extends Controller
 		return $this->_model;
 	}
 
-
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
@@ -105,5 +108,24 @@ class UserController extends Controller
 				throw new CHttpException(404,'The requested page does not exist.');
 		}
 		return $this->_model;
+	}
+
+	public function actionList()
+	{
+		if(Yii::app()->request->isAjaxRequest){
+
+			$this->layout=false;
+			header('Content-type: application/json');
+			
+			$users = User::model()->findALL(array("condition"=>"superuser = 0"));
+
+			echo CJavaScript::jsonEncode(
+				array(
+					'success'=>1,
+					'data'=>$users,
+				)
+			);
+		} else echo CJavaScript::jsonEncode(array('success'=>0, 'message'=> 'Неправильный запрос'));
+
 	}
 }

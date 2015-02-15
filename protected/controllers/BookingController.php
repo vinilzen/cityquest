@@ -74,6 +74,7 @@ class BookingController extends Controller
 	 */
 	public function actionCreate()
 	{
+		Yii::beginProfile('actionCreate');
 		if(Yii::app()->request->isAjaxRequest){
 
 			$this->layout=false;
@@ -83,9 +84,14 @@ class BookingController extends Controller
 
 				if (isset($_POST['quest_id']) && is_numeric($_POST['quest_id']) && strlen($_POST['time']) == 5 ){
 
+
+					Yii::beginProfile('get_quest');
 					$quest = Quest::model()->findByPk($_POST['quest_id']);
+					Yii::endProfile('get_quest');
 
 					if ($quest) {
+
+						Yii::beginProfile('get_booking');
 						$booking = Booking::model()->findByAttributes(
 							array('quest_id'=>$quest->id),
 							'date =:today AND time =:time',
@@ -94,6 +100,7 @@ class BookingController extends Controller
 								'time'=>$_POST['time']
 							)
 						);
+						Yii::endProfile('get_booking');
 
 						if (!$booking) {
 
@@ -131,6 +138,8 @@ class BookingController extends Controller
 
 							if ( $user_model->save() && $model->save() ){
 								if (!Yii::app()->getModule('user')->user()->superuser > 0) {
+
+									Yii::beginProfile('sendMail');
 									$this->sendMail(
 										Yii::app()->getModule('user')->user()->email,
 										//Cityquest. Бронирование квеста «НАЗВАНИЕ КВЕСТА» ДАТА ВРЕМЯ
@@ -147,9 +156,12 @@ class BookingController extends Controller
 										Команда CityQuest<br>
 										<a href='http://cityquest.ru' target='_blank'>www.cityquest.ru</a><br>
 										8 (495) 749-96-09");
+									Yii::endProfile('sendMail');
 								}
 
 								if (!isset($_POST['user']) || (isset($_POST['user']) && $_POST['user'] != -1)){
+									
+									Yii::beginProfile('sendMail_2');
 									$this->sendMail(
 										'ilya@cityquest.ru, e.roslovets@cityquest.ru',
 										"CityQuest. Бронирование квеста «".$quest->title."» ".substr($model->date, -2, 2)."/".substr($model->date, -4, 2)."/".substr($model->date, 0, 4)." ".$model->time,
@@ -159,6 +171,8 @@ class BookingController extends Controller
 										Не забудьте, для участия вам понадобится команда от 2 до 4 человек.<br><br>
 
 										Мы ждем вас по адресу <a href='https://www.google.com/maps/preview?q=москва,+".urlencode($quest->addres)."' target='_blank'>".$quest->addres.".</a>");
+
+									Yii::endProfile('sendMail_2');
 								}
 							
 
@@ -182,6 +196,8 @@ class BookingController extends Controller
            	Yii::app()->end();
 
 		} else throw new CHttpException(404, 'Страница не найдена');
+
+		Yii::endProfile('actionCreate');
 	}
 
 

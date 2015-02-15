@@ -17,7 +17,8 @@ var PopoverView = Backbone.View.extend({
 		'click #reservation':'reservation',
 		'click #undoBooking':'undoBooking',
 		'click #confirmBooking':'confirmBooking',
-		'focus .inputPhone':'addSeven'
+		'focus .inputPhone':'addSeven',
+		'click #showUserList':'showUserList'
 	},
 	
 	render:function(){
@@ -63,6 +64,42 @@ var PopoverView = Backbone.View.extend({
 		$('[data-toggle="tooltip"]', this.$el).tooltip();
 
 		return this;
+	},
+
+	showUserList:function(){
+		var self = this,
+			showUserList = $('#showUserList').attr({
+								'class': 'progress-bar progress-bar-striped active',
+							}).html(' ');
+
+		$.get('/user/user/list', function(r){
+			if (r && r.success && r.data && r.data.length>0) {
+				var select_container = $('#selectUser')
+						.html('<select name="user"><option value="0">Пользователь</option></select>'),
+					select_div = select_container.find('select');
+
+				_.each(r.data, function(user){
+					select_div.append(
+						'<option value="'+user.id+'" title="'+user.email+'" data-name="'+user.username+'" data-phone="'+user.phone+'">'
+							+user.username+' ('+user.email+')</option>'
+					);
+				});
+
+				select_div.styler({selectSearch:true});
+				$('.jq-selectbox').css('display','block');
+				$('#users_progress').remove();
+
+				select_div.on('change', function(){
+					var val = $(this).val(),
+						phone = $('option[value="'+val+'"]', this).attr('data-phone'),
+						name = $('option[value="'+val+'"]', this).attr('data-name');
+
+					$('.inputPhone', self.$el).val( phone );
+					$('.inputName', self.$el).val( name );
+				});
+
+			}
+		});
 	},
 
 	addSeven:function(e){
@@ -238,17 +275,6 @@ var PopoverView = Backbone.View.extend({
 
 		$('#addRow', this.$el).hide();
 		$('#addBookingRow', this.$el).show();
-		$('#selectUser select', this.$el)
-			.styler({selectSearch:true});
-
-		$('#selectUser select', this.$el).on('change', function(){
-			var val = $(this).val(),
-				phone = $('option[value="'+val+'"]', this).attr('data-phone'),
-				name = $('option[value="'+val+'"]', this).attr('data-name');
-
-			$('.inputPhone', self.$el).val( phone );
-			$('.inputName', self.$el).val( name );
-		});
 
 		$('.inputPhone', self.$el).blur(function(){
 			$(this).mask('+7(000)-000-00-00');				
@@ -391,7 +417,6 @@ $(function() {
 			'</div></div></div></div>';
 
 	$('body').append(modal);
-
 
 	$('.time:not(.turnoff, .disabled)').click(function(){
 

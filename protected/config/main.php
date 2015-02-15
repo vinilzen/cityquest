@@ -68,7 +68,12 @@ return array(
 					'levels'=>'info',
 					'logFile'=>'info.log',
 				),
-		       /* array(
+				array(
+					'class' => 'application.extensions.ExtendedLogger.ExtendedLogger',
+					'levels'=>'profile',
+					'logFile'=>'profile.log',
+				),
+		        /*array(
 			    	'class'=>'CWebLogRoute',
 			        'levels'=>'error, warning, trace, log, vardump',
 		        ),*/

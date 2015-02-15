@@ -297,13 +297,15 @@ class QuestController extends Controller
 			));
 		*/
 
-		$quests = Quest::model()->
-					//with('city')->
-					findAll(array(
+		Yii::beginProfile('quest_index');
+		
+		$quests = Quest::model()->findAll(array(
 		    "condition" => "status > 1 AND city_id = ".$this->city,
 		    "order" => "status ASC, sort ASC",
 		    "limit" => 12,
 		));
+
+		Yii::endProfile('quest_index');
 
 		// foreach ($quests as $key => $value) { echo $value->id.'#'.$value->title.', '.$value->sort.' - '.$value->status.'<br>';	}
         

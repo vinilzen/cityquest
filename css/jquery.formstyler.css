@@ -118,6 +118,7 @@
 .jq-selectbox {
 	vertical-align: middle;
 	cursor: pointer;
+	width: 285px;
 }
 .jq-selectbox__select {
 	height: 30px;
@@ -413,4 +414,7 @@ input[type="submit"].styler[disabled] {
 	background: #F5F5F5;
 	box-shadow: none;
 	color: #888;
+}
+#selectUser select {
+	max-width: 285px;
 }

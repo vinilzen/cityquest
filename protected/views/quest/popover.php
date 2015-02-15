@@ -97,14 +97,12 @@
         </div>
       </div>
       <div class="form-group">
-        <div class="col-xs-9" id="selectUser">
-          <select name="user">
-            <option value="0">Пользователь</option>
-            <?php if (isset($users)) foreach ($users as $user) {
-                echo '<option value="'.$user->id.'" title="'.$user->email.'" data-name="'.$user->username.'" data-phone="'.$user->phone.'">'.$user->username.' ('. $user->email .')</option>';
-            } ?>
-          </select>
+        <div class="col-xs-12" id="users_progress">
+          <div class="progress" style="height:33px; margin-bottom:10px;">
+            <span class="btn btn-default btn-block" role="progressbar" aria-valuenow="100" style="width: 100%" id="showUserList">Выбрать из зарегестрированных</span>
+          </div>
         </div>
+        <div class="col-xs-9" id="selectUser"></div>
       </div>
       <div class="form-group">
         <div class="col-xs-12">

@@ -9,7 +9,6 @@
 	 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie.css" media="screen, projection" />
 	<![endif]-->
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/_bootstrap.min.css" />
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/dashboard.css" />
 	<link rel="stylesheet" type="text/css" href="/css/jquery.formstyler.css" />
 	<!--[if lt IE 9]
 		<script src="/js/ie8-responsive-file-warning.js"></script>-->
@@ -32,8 +31,7 @@
 					<span class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="#">
-					<span>CityQuest</span>	
-					<? //echo CHtml::encode(Yii::app()->name); ?>
+					<span>CityQuest</span>
 				</a>
 			</div>
 			<div class="navbar-collapse collapse">
