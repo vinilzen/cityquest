@@ -78,10 +78,7 @@ return check; };
 }));
 
 $(function() {
-
-
 	$('.ico-pay').tooltip();
-
 	if ($('#bgr_video').length) {
 
 		function set_video_bgr() {
@@ -224,9 +221,9 @@ $(function() {
 		}
 	});
 
-	$('#myModalBook').on('shown.bs.modal', function (e) {
+	$('#myModalBook').on('shown.bs.modal', function(e){
 
-		if (document.body.clientWidth > 767) {
+		if (document.body.clientWidth > 767){
 			var h = $('#myModalBook .img-responsive').height();
 			$('.shad').height(h);
 		}
@@ -279,13 +276,9 @@ $(function() {
 	});
 
 	$('.btn', ModalBook).click(function(e) {
-
-		// проверка авторизации
 		if (user_name && user_name != '') {
-
 			book_data.phone = $('.you_phone input').val() || user_phone;
 			var btn_book = $(e.target);
-
 			if (book_data.phone == '00000' || book_data.phone == ''){
 				$('.you_phone input')
 					.attr({
@@ -297,12 +290,22 @@ $(function() {
 					$.post('/booking/create',
 						book_data,
 						function(result){
-							
 							if (result && result.success) {
-
 								yaCounter25221941.reachGoal('confirmBook');
 								ga('send', 'event', 'book', 'confirmBook');
-								//_gaq.push(['_trackEvent', 'Book', 'confirmBook', 'confirm Booking']);
+								
+								var asite = 'cityquest.ru',
+									order_id = result.id,
+									price = book_data.price;
+
+								(function(){
+									var aa = document.createElement("script");
+									aa.type = "text/javascript";
+									aa.async = true;
+									aa.src = document.location.protocol+"//advaction.ru/js/ec_action.js";
+									var s = document.getElementsByTagName("script")[0];
+									s.parentNode.insertBefore(aa, s); 
+								})();
 
 								ModalBook.modal('hide');
 								

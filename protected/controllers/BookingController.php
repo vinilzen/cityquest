@@ -176,7 +176,11 @@ class BookingController extends Controller
 								}
 							
 
-								echo CJavaScript::jsonEncode(array('success'=>1, 'a' => urlencode($quest->addres)));
+								echo CJavaScript::jsonEncode(array(
+									'success'=>1,
+									'id'=>$model->id,
+									'a' => urlencode($quest->addres)
+								));
 
 							} else {
 

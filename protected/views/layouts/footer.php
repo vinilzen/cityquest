@@ -293,7 +293,7 @@
   </div>
 <? } ?>
 
-<? if ($_SERVER['HTTP_HOST'] != 'cq.il') { ?>
+<? if (1 || $_SERVER['HTTP_HOST'] != 'cq.il') { ?>
   <script type="text/javascript">
     (function (d, w, c) {
     (w[c] = w[c] || []).push(function() {
@@ -328,6 +328,20 @@
 
     ga('create', 'UA-56033342-1', 'auto');
     ga('send', 'pageview');
+  </script>
+  <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    var advaction_params = advaction_params || {};
+    advaction_params.asite = 'cityquest.ru';
+    (function(){
+      var aa = document.createElement("script");
+      aa.type = "text/javascript";
+      aa.async = true;
+      aa.src = document.location.protocol+"//advaction.ru/js/advertiser.js";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(aa, s); 
+    })();
+    //-->!]>]
   </script>
 <? } ?>
 
