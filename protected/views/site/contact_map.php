@@ -14,6 +14,8 @@
 
     <p><i class="ico4"></i><a itemprop="address" href="https://goo.gl/maps/1Vuuv" target="_blank">ул. Летниковская, дом 4, строение 2</a></p>
 
-    <p>Бесплатная парковка на территории.</p>
+    <p style="margin-top: -30px;">Бесплатная парковка на территории.</p>
+
+    <p>ООО «Сити Квест»   ОГРН  5147746030900</p>
   </div>
 </div>
