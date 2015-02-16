@@ -56,10 +56,8 @@ var PopoverView = Backbone.View.extend({
 		if (($(this.parent).hasClass('btn-info') || $(this.parent).hasClass('btn-success')) && this.attr.name !== '') {
 			$('#BookInf h3, #btnRow, #phoneRow', this.$el).show();
 		} else {
-			$('#addRow', this.$el).show();
+			this.showAdd();
 		}
-
-
 
 		$('[data-toggle="tooltip"]', this.$el).tooltip();
 
@@ -357,6 +355,7 @@ $(function() {
 				if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0)
 					$(this).popover('hide');
 			});
+
 		}).on('shown.bs.popover', function (e) {
 
 			var self = this;
