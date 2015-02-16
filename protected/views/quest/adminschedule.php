@@ -5,6 +5,7 @@
 <script type="text/javascript">
 	var user_name = '<? echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->username : ''; ?>',
 		hash = '<? echo $arr_hash ?>',
+		city_id = '<? echo Yii::app()->getModule('user')->user()->city_id; ?>',
 		user_phone = '<? echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->phone : ''; ?>';
 </script>
 

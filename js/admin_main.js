@@ -310,6 +310,7 @@ $(function() {
 			'/holiday/update',
 			{
 				id:1,
+				city:city_id,
 				is_holiday:$(e.target).attr('data-holiday'),
 				date:$(e.target).attr('data-date')
 			},

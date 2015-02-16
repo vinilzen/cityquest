@@ -325,7 +325,7 @@ class QuestController extends Controller
 
 		$user_city_id = Yii::app()->getModule('user')->user()->city_id;
 		
-		$holidays = Holiday::model()->findAll();
+		$holidays = Holiday::model()->findAllByAttributes( array('city'=>$user_city_id));
 		$holiday_list = array();
 		foreach ($holidays as $holiday) {
 			array_push($holiday_list, $holiday->holiday_date);

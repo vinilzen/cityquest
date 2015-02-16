@@ -85,7 +85,7 @@ class HolidayController extends Controller
 				);
 		} else if (!$model && $_POST['is_holiday']==0){
 			$model=new Holiday;
-			$model->city = 1;
+			$model->city = (int)$_POST['city'];
 			$model->holiday_date = (int)$_POST['date'];
 
 			if($model->save())
