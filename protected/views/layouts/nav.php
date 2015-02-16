@@ -23,7 +23,6 @@
               <button class="btn navbar-toggle btn-topline" id="show-menu" type="button"><span class="icos"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></span><span>Меню</span></button>
               <div id="for-city">
                 <div class="btn-group city-select">
-                
                   <?
                     $domen2 = explode('.', $_SERVER['HTTP_HOST'])[1];
                     if (strpos($_SERVER['HTTP_HOST'], '.kz') > 0){
@@ -32,10 +31,10 @@
                       $default_city = 'Москва';
                     }
                   ?>
-                  <button class="btn btn-topline ico-msq" disabled="disabled" data-toggle="dropdown" type="button"><?
+                  <button class="btn btn-topline ico-msq" data-toggle="dropdown" type="button"><?
                     echo $default_city;
                   ?></button>
-                  <button class="btn btn-topline dropdown-toggle" disabled="disabled" data-toggle="dropdown" type="button">
+                  <button class="btn btn-topline dropdown-toggle" data-toggle="dropdown" type="button">
                     <span class="caret"></span><span class="sr-only">Выбрать город</span>
                   </button>
                   <ul class="dropdown-menu" role="menu">
@@ -67,8 +66,17 @@
                    ?>
                   </ul>
                 </div>
-              </div>
-              <div id="for-login-pl">
+              </div><div id="for-local">
+                <div class="btn-group local-select">
+                  <button class="btn btn-topline ico-earth" data-toggle="dropdown" type="button">RU</button>
+                  <button class="btn btn-topline dropdown-toggle" data-toggle="dropdown" type="button">
+                    <span class="caret"></span><span class="sr-only">Выбрать язык</span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="kz">KZ</a></li>
+                  </ul>
+                </div>
+              </div><div id="for-login-pl">
                 <? if (Yii::app()->user->isGuest) {
                   echo '<a class="btn btn-topline btn-default ico-lock" data-target="#myModalAuth" data-toggle="modal" href="#login">ВОЙТИ</a>';
                 } else {
