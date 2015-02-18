@@ -66,7 +66,7 @@
                    ?>
                   </ul>
                 </div>
-              </div><div id="for-local">
+              </div><div id="for-local" style="display:none;">
                 <div class="btn-group local-select">
                   <button class="btn btn-topline ico-earth" data-toggle="dropdown" type="button">RU</button>
                   <button class="btn btn-topline dropdown-toggle" data-toggle="dropdown" type="button">

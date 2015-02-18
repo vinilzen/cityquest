@@ -110,14 +110,18 @@
 							</div>
 						</li>
 					</ul>
-					<?
-						$this->beginWidget('zii.widgets.CMenu', array(
-							'items'=>$this->user_menu,
-							'itemTemplate' => '<span class="menu-item-link-text">{menu}</span>',
-							'htmlOptions'=>array('class'=>'nav nav-sidebar'),
-						));
-						$this->endWidget();
-					?>
+					<ul class="nav nav-sidebar">
+						<li class="menu-item-block menu-item-live-feed">
+							<a href="/user/user/export" class="menu-item-link">
+								<span class="menu-item-link-text">Экспорт</span>
+							</a>
+						</li>
+						<li class="menu-item-block menu-item-live-feed">
+							<a href="/user/admin" class="menu-item-link">
+								<span class="menu-item-link-text">Управление пользователями</span>
+							</a>
+						</li>
+					</ul>
 
 					<ul class="nav nav-sidebar menu-items" style="margin-bottom:0;">
 						<li>

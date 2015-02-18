@@ -31,7 +31,7 @@ class UserController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow',
-				'actions'=>array('list'),
+				'actions'=>array('list', 'export'),
 				'expression'=>"Yii::app()->getModule('user')->user()->superuser == 1",
 			),
 			array('deny',  // deny all users
@@ -126,6 +126,21 @@ class UserController extends Controller
 				)
 			);
 		} else echo CJavaScript::jsonEncode(array('success'=>0, 'message'=> 'Неправильный запрос'));
+	}
 
+	public function actionExport()
+	{
+		$this->layout=false;
+		header("Content-type: text/csv");
+		header("Content-Disposition: attachment; filename=export_user.csv");
+		header("Pragma: no-cache");
+		header("Expires: 0");
+
+		$users = User::model()->findALL(array("condition"=>"superuser = 0"));
+
+		foreach ($users as $user) {
+			echo $user->username.','.$user->email.','.$user->phone."\r\n";
+		}
+		die;
 	}
 }

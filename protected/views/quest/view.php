@@ -139,7 +139,7 @@ $this->pageImg= '/images/q/'.$model->id.'.jpg';
                 }
 
                 $empty = '';
-                if (($model->id == 3 || $model->id == 2 || $model->id == 4) && ($k != 0 && $k<8)) {
+                if ($k != 0 && $k<8) {
                   $empty = ' empty_btn ';
                   $disabled = ' disabled="disabled"';
                 }
