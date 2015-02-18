@@ -31,10 +31,11 @@
                       $default_city = 'Москва';
                     }
                   ?>
-                  <button class="btn btn-topline ico-msq" data-toggle="dropdown" type="button"><?
+                  <? $domen_loc = explode('.', $_SERVER['HTTP_HOST'])[1]; ?>
+                  <button class="btn btn-topline ico-msq" <? if ($domen_loc=='ru') echo 'disabled="disabled"'; ?> data-toggle="dropdown" type="button"><?
                     echo $default_city;
                   ?></button>
-                  <button class="btn btn-topline dropdown-toggle" data-toggle="dropdown" type="button">
+                  <button class="btn btn-topline dropdown-toggle" <? if ($domen_loc=='ru') echo 'disabled="disabled"'; ?> data-toggle="dropdown" type="button">
                     <span class="caret"></span><span class="sr-only">Выбрать город</span>
                   </button>
                   <ul class="dropdown-menu" role="menu">
