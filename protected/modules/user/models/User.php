@@ -57,6 +57,7 @@ class User extends CActiveRecord
 				array('superuser', 'in', 'range'=>array(0,1,2)),
 				array('username, email, createtime, lastvisit, superuser, status', 'required'),
 				array('createtime, lastvisit, superuser, status', 'numerical', 'integerOnly'=>true),
+				array('username, email, phone', 'safe', 'on'=>'search'),
 			)
 			:
 			(
@@ -112,24 +113,12 @@ class User extends CActiveRecord
 	public function scopes()
     {
         return array(
-            'active'=>array(
-                'condition'=>'status='.self::STATUS_ACTIVE,
-            ),
-            'notactvie'=>array(
-                'condition'=>'status='.self::STATUS_NOACTIVE,
-            ),
-            'banned'=>array(
-                'condition'=>'status='.self::STATUS_BANED,
-            ),
-            'superuser'=>array(
-                'condition'=>'superuser=1',
-            ),
-            'admin'=>array(
-                'condition'=>'superuser=1',
-            ),
-            'moderator'=>array(
-                'condition'=>'superuser=2',
-            ),
+            'active'=>array('condition'=>'status='.self::STATUS_ACTIVE),
+            'notactvie'=>array('condition'=>'status='.self::STATUS_NOACTIVE),
+            'banned'=>array('condition'=>'status='.self::STATUS_BANED),
+            'superuser'=>array('condition'=>'superuser=1'),
+            'admin'=>array('condition'=>'superuser=1'),
+            'moderator'=>array('condition'=>'superuser=2'),
             'notsafe'=>array(
             	'select' => 'id, username, password, email, activkey, createtime, lastvisit, superuser, status',
             ),
@@ -168,4 +157,29 @@ class User extends CActiveRecord
 		else
 			return isset($_items[$type]) ? $_items[$type] : false;
 	}
+
+	/**
+     * Retrieves a list of models based on the current search/filter conditions.
+     * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+     */
+    public function search()
+    {
+        // Warning: Please modify the following code to remove attributes that
+        // should not be searched.
+        $criteria=new CDbCriteria;
+        
+        $criteria->compare('id',$this->id, true);
+        $criteria->compare('username',$this->username,true);
+        $criteria->compare('email',$this->email,true);
+        $criteria->compare('phone',$this->phone,true);
+        $criteria->compare('superuser',$this->superuser);
+        $criteria->compare('status',$this->status);
+        return new CActiveDataProvider(get_class($this), array(
+            'criteria'=>$criteria,
+        	'pagination'=>array(
+				'pageSize'=>Yii::app()->getModule('user')->user_page_size,
+			),
+        ));
+    }
+
 }

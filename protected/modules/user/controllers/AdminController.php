@@ -43,16 +43,15 @@ class AdminController extends Controller
 	public function actionAdmin()
 	{
 		$this->user_menu=array();
+		$model=new User('search');
+		$model->unsetAttributes();
 
-		$dataProvider=new CActiveDataProvider('User', array(
-			'pagination'=>array(
-				'pageSize'=>Yii::app()->controller->module->user_page_size,
-			),
-		));
+		if(isset($_GET['User']))
+            $model->attributes=$_GET['User'];
 
 		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-			'model'=> new User('search')
+			//'dataProvider'=>$dataProvider,
+			'model'=>$model
 		));
 	}
 
