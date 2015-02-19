@@ -22,7 +22,8 @@ var PopoverView = Backbone.View.extend({
 	},
 	
 	render:function(){
-		var name = '';
+		var self = this,
+			name = '';
 		if ($('#addBookingRow .inputPhone').val() == '0000000' ) {
 			name = 'CQ';
 		} else {
@@ -43,7 +44,9 @@ var PopoverView = Backbone.View.extend({
 			date :  $(this.parent).attr('data-date') || 0,
 			vk_id : $(this.parent).attr('data-vk-id') || 0,
 			fb_id : $(this.parent).attr('data-fb-id') || 0,
+			affiliate : $(this.parent).attr('data-affiliate') || '',
 		};
+
 
 		this.attr.user_url = $(this.parent).attr('data-user-id') != ''
 								? '/user/admin/view/id/'+$(this.parent).attr('data-user-id') 
@@ -57,6 +60,11 @@ var PopoverView = Backbone.View.extend({
 			$('#BookInf h3, #btnRow, #phoneRow', this.$el).show();
 		} else {
 			this.showAdd();
+		}
+
+		if (this.attr.affiliate != '' ){
+			$('#phoneRow', this.$el)
+				.append('<br><strong>Affiliate</strong>: <span>'+self.attr.affiliate+'</span>');
 		}
 
 		$('[data-toggle="tooltip"]', this.$el).tooltip();

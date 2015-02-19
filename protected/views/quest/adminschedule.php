@@ -192,6 +192,7 @@
 								'data-phone="'.$quest['bookings'][$time]->phone.'" '.
 								'data-result="'.$quest['bookings'][$time]->result.'" '.
 								'data-comment="'.$quest['bookings'][$time]->comment.'" '.
+								'data-affiliate="'.$quest['bookings'][$time]->affiliate.'" '.
 								'data-user-id="'. $competitor_id .'" '.
 								'data-fb-id="'. $competitor_fb_id .'" '.
 								'data-vk-id="'. $competitor_vk_id .'" '.

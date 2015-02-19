@@ -404,7 +404,7 @@ class QuestController extends Controller
 					$quests_array[$quest->id]['booking'] = array();
 				}
 
-				$bookings=Booking::model()->findAllByAttributes(
+				$bookings = Booking::model()->findAllByAttributes(
 					array(
 						'quest_id' => $quest_ids,
 						'date' => $YMDate,
