@@ -136,6 +136,10 @@ class BookingController extends Controller
 								$user_model->phone = $_POST['phone'];
 							}
 
+							if (isset(Yii::app()->request->cookies['from'])){
+								$model->affiliate = Yii::app()->request->cookies['from'];
+							}
+
 							if ( $user_model->save() && $model->save() ){
 								if (!Yii::app()->getModule('user')->user()->superuser > 0) {
 

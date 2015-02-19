@@ -14,6 +14,7 @@
  * @property integer $result
  * @property integer $quest_id
  * @property integer $competitor_id
+ * @property string  $affiliate
  *
  * The followings are the available model relations:
  * @property TblQuest $quest
@@ -45,7 +46,7 @@ class Booking extends CActiveRecord
 			array('status, time, quest_id, competitor_id', 'required'),
 			array('status, create_time, quest_id', 'numerical', 'integerOnly'=>true),
 			array('competitor_id', 'numerical', 'integerOnly'=>false),
-			array('email, phone, name', 'length', 'max'=>128),
+			array('email, phone, name,affiliate', 'length', 'max'=>128),
 			array('result', 'length', 'max'=>5),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -86,6 +87,7 @@ class Booking extends CActiveRecord
 			'result' => 'Result',
 			'quest_id' => 'Quest',
 			'competitor_id' => 'Competitor',
+			'affiliate' => 'Affiliate',
 		);
 	}
 
@@ -117,7 +119,7 @@ class Booking extends CActiveRecord
 		$criteria->compare('create_time',$this->create_time);
 		$criteria->compare('email',$this->email,true);
 		$criteria->compare('phone',$this->phone,true);
-		// $criteria->compare('result',$this->result, true);
+		$criteria->compare('affiliate',$this->affiliate);
 		$criteria->compare('quest_id',$this->quest_id);
 		$criteria->compare('competitor_id',$this->competitor_id);
 

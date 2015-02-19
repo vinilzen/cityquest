@@ -66,7 +66,13 @@ class Controller extends CController
 			$this->language = 'ru';
 			$this->city = 1;
 		}
-		Yii::app()->setLanguage($this->language);
 
+		if (isset($_GET['from']) && $_GET['from'] == 'advaction'){
+			$cookie = new CHttpCookie('from', 'advaction');
+			$cookie->expire = time()+60*60*24*7;
+			Yii::app()->request->cookies['from'] = $cookie;
+		}
+
+		Yii::app()->setLanguage($this->language);
 	}
 }
