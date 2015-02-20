@@ -31,7 +31,7 @@ class UserController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow',
-				'actions'=>array('list', 'export'),
+				'actions'=>array('list', 'export', 'exportlab'),
 				'expression'=>"Yii::app()->getModule('user')->user()->superuser == 1",
 			),
 			array('deny',  // deny all users
@@ -140,6 +140,31 @@ class UserController extends Controller
 
 		foreach ($users as $user) {
 			echo $user->username.','.$user->email.','.$user->phone."\r\n";
+		}
+		die;
+	}
+
+	public function actionExportLab()
+	{
+		$this->layout=false;
+		header("Content-type: text/csv");
+		header("Content-Disposition: attachment; filename=export_wlab_user.csv");
+		header("Pragma: no-cache");
+		header("Expires: 0");
+
+		$sql = "SELECT DISTINCT(competitor_id) FROM tbl_booking WHERE quest_id = 4;";
+    	$list = Yii::app()->db->createCommand($sql)->queryAll();
+    	$func = function($value) {
+			return $value['competitor_id'];
+		};
+
+		$b = array_map($func, $list);
+    	$ids = implode(",", $b);
+    	$sql = "SELECT * FROM tbl_users WHERE superuser=0 AND id NOT IN (".$ids.") ;";
+		$users = Yii::app()->db->createCommand($sql)->queryAll();
+		// var_dump($users); die;
+    	foreach ($users as $user) {
+			echo $user['id'].','.$user['username'].','.$user['email'].','.$user['phone']."\r\n";
 		}
 		die;
 	}

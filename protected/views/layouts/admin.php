@@ -117,6 +117,11 @@
 							</a>
 						</li>
 						<li class="menu-item-block menu-item-live-feed">
+							<a href="/user/user/exportlab" class="menu-item-link" title="Экспорт кто не прошел Лабораторию">
+								<span class="menu-item-link-text">Экспорт кто не прошел Лабораторию</span>
+							</a>
+						</li>
+						<li class="menu-item-block menu-item-live-feed">
 							<a href="/user/admin" class="menu-item-link">
 								<span class="menu-item-link-text">Управление пользователями</span>
 							</a>
