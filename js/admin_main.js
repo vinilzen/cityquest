@@ -64,7 +64,7 @@ var PopoverView = Backbone.View.extend({
 
 		if (this.attr.affiliate != '' ){
 			$('#phoneRow', this.$el)
-				.append('<br><strong>Affiliate</strong>: <span>'+self.attr.affiliate+'</span>');
+				.append('<br><strong>Affiliate</strong>: <span>#'+self.attr.id+' '+self.attr.affiliate+'</span>');
 		}
 
 		$('[data-toggle="tooltip"]', this.$el).tooltip();
