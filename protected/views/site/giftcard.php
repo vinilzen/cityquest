@@ -33,6 +33,9 @@
 				<input required="" value="<? echo $addres; ?>" class="form-control" 
 					placeholder="Адрес" id="bookgift-addres" name="addres" type="addres">
 			</div>
+			<div class="form-group">
+				<textarea name="comment" class="form-control" id="bookgift-comment" placeholder="Комментарий" rows="4"><? echo $comment; ?></textarea>
+			</div>
 			<div style="display:none;">
 				<input type="text" name="message" value="">
 				<input type="text" id="mytxt" name="my_text" value="">
@@ -42,19 +45,16 @@
 				<div class="row">
 					<div class="col-xs-12 text-center">
 						<label>Необходимо вписать код с картинки</label>
-						<? $error = Yii::app()->user->getFlash('error');
-							if ( $error != '') { 
-								echo '<p class="text-danger">'.$error.'</p>';
-						 	} ?>
+						<?
+							$error = Yii::app()->user->getFlash('error');
+							if ( $error != '') echo '<p class="text-danger">'.$error.'</p>';
+						?>
 					</div>
 					<div class="col-xs-6">
 						<input required="" class="form-control" placeholder="Код с картинки" id="bookgift-captcha" name="captcha" type="text">
 					</div>
 					<div class="col-xs-6 text-right">
-						<? $this->widget('CCaptcha', array(
-							'clickableImage' =>true,
-							'buttonLabel' =>'')
-						   ); ?>
+						<? $this->widget('CCaptcha',array('clickableImage' =>true,'buttonLabel' =>'')); ?>
 					</div>
 				</div>
 			</div>

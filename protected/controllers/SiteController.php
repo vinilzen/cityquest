@@ -82,15 +82,12 @@ class SiteController extends Controller
 		$cookie = isset(Yii::app()->request->cookies['myuid']) ? Yii::app()->request->cookies['myuid']->value : '';
 
 		if (isset($_POST['message'])){
-
-			// log
 			$captcha_model = new Captcha;
 			$captcha_model->ip = $this->getUserIP();
 			$captcha_model->name = $_POST['name'];
 			$captcha_model->info = $_SERVER['HTTP_USER_AGENT'];
 			$captcha_model->time_attempt = time();
 			$captcha_model->save();
-
 
 			$count_try = Captcha::model()->count("time_attempt>:time_attempt AND ip=:ip",
 				array(
@@ -117,12 +114,15 @@ class SiteController extends Controller
 						"CityQuest. Заказ подарочной карты",
 						"Имя - ".$_POST['name']."<br>".
 						"Телефон -  ".$_POST['phone']."<br>".
-						"Адрес - ".$_POST['addres'] );
+						"Адрес - ".$_POST['addres']."<br>".
+						"Комментарий - ".$_POST['comment']);
+
 					$msg = 'Мы получили ваш заказ, в ближайшее время с вами свяжутся по указаному номеру!';
 					Yii::app()->user->setFlash('success', $msg);
 					$_POST['name'] = '';
 					$_POST['phone'] = '';
 					$_POST['addres'] = '';
+					$_POST['comment'] = '';
 					$show_captcha = 0;
 				} else {
 					if (isset($_POST['captcha']) && $_POST['captcha'] != $code){
@@ -140,6 +140,7 @@ class SiteController extends Controller
 	    	'name' => isset($_POST['name']) ? $_POST['name'] : '',
 			'phone' => isset($_POST['phone']) ? $_POST['phone'] : '',
 			'addres' => isset($_POST['addres']) ? $_POST['addres'] : '',
+			'comment' => isset($_POST['comment']) ? $_POST['comment'] : '',
 	    ));
 	}
 
