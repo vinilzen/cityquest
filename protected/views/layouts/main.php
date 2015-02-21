@@ -16,9 +16,9 @@ echo ' inner ';  if (Yii::app()->request->url == '/contact') echo ' contact ';?>
       <div class="container text-center">
         <div class="row">
           <div class="col-md-10 col-md-offset-1 col-sm-12">
-            <h1>«ВЫБЕРИСЬ ИЗ КОМНАТЫ» КВЕСТЫ В РЕАЛЬНОСТИ</h1>
-            <p>CityQuest заставит вас погрузиться на час в атмосферу Игры, из которой есть только один выход. И найти его нужно вам – команде, запертой в помещении, наполненном загадками и хитроумными приспособлениями, которые отделяют вас от заветной цели.</p>           
-            <small>Для участия нужно собрать команду от 2 до 4 человек и записаться на игру</small>
+            <h1><?=Yii::t('app', 'slogan')?></h1>
+            <p><?=Yii::t('app', 'introdaction')?></p>
+            <small><?=Yii::t('app', 'To participate you need a team')?></small>
           </div>
         </div>
       </div>

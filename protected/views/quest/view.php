@@ -25,7 +25,7 @@ $this->pageImg= '/images/q/'.$model->id.'.jpg';
       </div>
       <div class="col-xs-12 col-sm-4 col-md-3">
         <p><i class="ico-ppl"></i><i class="ico-ppl"></i><i class="ico-ppl noactive"></i><i class="ico-ppl noactive"></i>
-          <span class="people"><em>2 - 4</em>игрока</span>
+          <span class="people"><em>2 - 4</em><?=Yii::t('app','players')?></span>
         </p>
       </div>
       <div class="col-xs-12 col-sm-4 col-md-3 tr">
@@ -44,9 +44,9 @@ $this->pageImg= '/images/q/'.$model->id.'.jpg';
   <div class="row">
     <div class="col-xs-12 text-center">
       <? if ($model->status == 2) { ?>
-        <h2 class="twotab active">Расписание</h2><!-- <h2 class="twotab">Победители</h2> -->
+        <h2 class="twotab active"><?Yii::t('app','Schedule')?></h2>
       <? } else { ?>
-        <h2 class="twotab active">Неактивный квест</h2><!-- <h2 class="twotab">Победители</h2> -->
+        <h2 class="twotab active"><?=Yii::t('app','Inactive quest')?></h2>
       <? } ?>
       <hr class="fadeOut">
     </div>
@@ -226,7 +226,7 @@ $this->pageImg= '/images/q/'.$model->id.'.jpg';
                 <i class="ico-ppl"></i>
                 <i class="ico-ppl"></i>
                 <i class="ico-ppl noactive"></i>
-                <i class="ico-ppl noactive"></i>2 - 4 игрока
+                <i class="ico-ppl noactive"></i>2 - 4 <?=Yii::t('app','players')?>
             </span>
             <span><i class="ico-loc"></i><? echo CHtml::encode($quest->addres); ?></span>
         </p>

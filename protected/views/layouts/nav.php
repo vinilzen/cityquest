@@ -6,7 +6,7 @@
           <div class="col-md-3 col-sm-4 col-xs-7">
             <div class="navbar-header" itemscope itemtype="http://schema.org/Brand">
               <a class="navbar-brand" itemprop="url" href="http://cityquest.ru/">
-                <img itemprop="logo" alt="CityQuest - ВЫБЕРИСЬ ИЗ КОМНАТЫ КВЕСТЫ В РЕАЛЬНОЙ ЖИЗНИ" src="/img/logo1.png">
+                <img itemprop="logo" alt="CityQuest - <?=Yii::t('app','Escape Room, quests in real life')?>" src="/img/logo1.png">
               </a>
               <span style="display:none;" itemprop="name">cityquest</span>
             </div>
@@ -36,7 +36,7 @@
                     echo $default_city;
                   ?></button>
                   <button class="btn btn-topline dropdown-toggle" <? if ($domen_loc=='ru') echo 'disabled="disabled"'; ?> data-toggle="dropdown" type="button">
-                    <span class="caret"></span><span class="sr-only">Выбрать город</span>
+                    <span class="caret"></span><span class="sr-only"><?=Yii::t('app','Choose a city')?></span>
                   </button>
                   <ul class="dropdown-menu" role="menu">
                   <? 
@@ -59,10 +59,7 @@
                         $class = '';
                       }
 
-                      echo '<li><a href="http://'.$domen1.'.'.$domen2.'/" 
-                        '.$class.'
-                      >'.
-                        $city->name.'</a></li>';
+                      echo '<li><a href="http://'.$domen1.'.'.$domen2.'/"'.$class.'>'.$city->name.'</a></li>';
                     }
                    ?>
                   </ul>
@@ -71,7 +68,7 @@
                 <div class="btn-group local-select">
                   <button class="btn btn-topline ico-earth" data-toggle="dropdown" type="button">RU</button>
                   <button class="btn btn-topline dropdown-toggle" data-toggle="dropdown" type="button">
-                    <span class="caret"></span><span class="sr-only">Выбрать язык</span>
+                    <span class="caret"></span><span class="sr-only"><?=Yii::t('app','Select your language')?></span>
                   </button>
                   <ul class="dropdown-menu" role="menu">
                     <li><a href="kz">KZ</a></li>
@@ -79,9 +76,9 @@
                 </div>
               </div><div id="for-login-pl">
                 <? if (Yii::app()->user->isGuest) {
-                  echo '<a class="btn btn-topline btn-default ico-lock" data-target="#myModalAuth" data-toggle="modal" href="#login">ВОЙТИ</a>';
+                  echo '<a class="btn btn-topline btn-default ico-lock" data-target="#myModalAuth" data-toggle="modal" href="#login">'.Yii::t('app','LOGIN').'</a>';
                 } else {
-                  echo '<a class="btn btn-topline btn-default ico-lock" data-toggle="modal" href="/user/profile">КАБИНЕТ</a>';
+                  echo '<a class="btn btn-topline btn-default ico-lock" data-toggle="modal" href="/user/profile">'.Yii::t('app','CABINET').'</a>';
                 } ?>
               </div>
             </div>

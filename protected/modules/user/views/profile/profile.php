@@ -42,7 +42,7 @@
           <img alt="Generic placeholder image" class="featurette-image img-responsive" src="/images/q/<? echo $book->quest->id; ?>.jpg"><a class="descr" href="#lab">
               <h2><? echo $book->quest->title; ?></h2>
               <p>
-                <span><i class="ico-ppl"></i><i class="ico-ppl"></i><i class="ico-ppl noactive"></i><i class="ico-ppl noactive"></i>2 - 4 игрока</span>
+                <span><i class="ico-ppl"></i><i class="ico-ppl"></i><i class="ico-ppl noactive"></i><i class="ico-ppl noactive"></i>2 - 4 <?=Yii::t('app','players')?></span>
                 <span><i class="ico-loc"></i><? echo $book->quest->addres; ?></span>
               </p>
             </a>
@@ -87,7 +87,7 @@
           <img alt="Profile" class="featurette-image img-responsive" src="/images/q/<? echo $book->quest->id; ?>.jpg"><a class="descr" href="#lab">
               <h2><? echo $book->quest->title; ?></h2>
               <p>
-                <span><i class="ico-ppl"></i><i class="ico-ppl"></i><i class="ico-ppl noactive"></i><i class="ico-ppl noactive"></i>2 - 4 игрока</span>
+                <span><i class="ico-ppl"></i><i class="ico-ppl"></i><i class="ico-ppl noactive"></i><i class="ico-ppl noactive"></i>2 - 4 <?=Yii::t('app','players')?></span>
                 <span><i class="ico-loc"></i><? echo $book->quest->addres; ?></span>
               </p>
             </a>
