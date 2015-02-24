@@ -40,6 +40,7 @@ return array(
 	'Choose a city'=>'Выбрать город',
 	'Select your language'=>'Выбрать язык',
 	'CABINET'=>'КАБИНЕТ',
+	'Name'=>'Имя',
 	'Quests'=>'Квесты',
 	'Rules'=>'Правила',
 	'Gift Card'=>'Подарочная карта',

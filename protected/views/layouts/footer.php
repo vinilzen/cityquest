@@ -163,7 +163,7 @@
                   <span class="error-msg">?</span>
                 </div>
                 <div class="form-group" id="form-group-reg-name">
-                  <input required class="form-control" placeholder="Имя" id="reg-name" name="username" type="text">
+                  <input required class="form-control" placeholder="<?=Yii::t('app','Name')?>" id="reg-name" name="username" type="text">
                   <span class="error-msg">?</span>
                 </div>
                 <div class="form-group" id="form-group-reg-phone">
@@ -171,7 +171,7 @@
                   <span class="error-msg">?</span>
                 </div>
                 <div class="form-group" id="form-group-reg-pass">
-                  <input required class="form-control" placeholder="Пароль" type="password" id="reg-pass" name="Profile[password]">
+                  <input required class="form-control" placeholder="<?=Yii::t('app','Password')?>" type="password" id="reg-pass" name="Profile[password]">
                   <span class="error-msg">?</span>
                 </div>
                 <div class="checkbox invisible" style="margin: 0;height: 20px;">
@@ -243,14 +243,13 @@
             <h2 class="form-signin-heading"><?=Yii::t('app','Edit Profile'); ?></h2>
             <hr class="fadeOut">
 
-
             <div class="form-group">
               <label class="mail_label"><?=Yii::app()->getModule('user')->user()->email; ?></label>
             </div>
 
             <div class="tab-pane active" id="edit-my">
               <div class="form-group" id="form-group-username">
-                <input required class="form-control" id="edit-name" name="name" placeholder="Имя" type="text" value="<?=Yii::app()->getModule('user')->user()->username; ?>">
+                <input required class="form-control" id="edit-name" name="name" placeholder="<?=Yii::t('app','Name')?>" type="text" value="<?=Yii::app()->getModule('user')->user()->username; ?>">
                 <span class="error-msg">?</span>
               </div>
               <div class="form-group" id="form-group-phone">
