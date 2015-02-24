@@ -34,7 +34,7 @@
 					placeholder="Адрес" id="bookgift-addres" name="addres" type="addres">
 			</div>
 			<div class="form-group">
-				<textarea name="comment" class="form-control" id="bookgift-comment" placeholder="Комментарий" rows="4"><? echo $comment; ?></textarea>
+				<textarea name="comment" class="form-control" id="bookgift-comment" placeholder="Комментарий" rows="1"><? echo $comment; ?></textarea>
 			</div>
 			<div style="display:none;">
 				<input type="text" name="message" value="">

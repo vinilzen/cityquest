@@ -106,6 +106,8 @@ $(function() {
 		set_video_bgr();
 	}
 
+	$('#bookgift-comment').elastic();
+
 	var supportsOrientationChange = "onorientationchange" in window,
 		orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
 
