@@ -60,9 +60,9 @@
               </div><div id="for-local" <? if ($domen_loc=='ru' || $domen_loc=='il') echo 'style="display:none;"'; ?>>
                 <div class="btn-group local-select">
                   <button class="btn btn-link ico-earth" data-toggle="dropdown" type="button">
-                    <span><?=($this->language == 'kz')?'Қаз':'Рус'?></span></button>
+                    <span><?=($this->language == 'kz')?'Kz':'Ru'?></span></button>
                   <ul class="dropdown-menu" role="menu">
-                    <li><a href="/<?=($this->language == 'kz')?'ru':'kz'?>"><?=($this->language == 'kz')?'Рус':'Қаз'?></a></li>
+                    <li><a href="/<?=($this->language == 'kz')?'ru':'kz'?>"><?=($this->language == 'kz')?'Russian':'Kazakh'?></a></li>
                   </ul>
                 </div>
               </div><div id="for-login-pl">

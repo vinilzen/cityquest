@@ -58,12 +58,12 @@ class Controller extends CController
 	public function init()
 	{
 		$this->cities = City::model()->findAll();
+		$this->language = 'ru';
 
 		if (strpos($_SERVER['HTTP_HOST'], '.kz') > 0){
-			$this->language = 'kz';
+			// $this->language = 'kz';
 			$this->city = 2;
 		} else {
-			$this->language = 'ru';
 			$this->city = 1;
 		}
 
