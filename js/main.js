@@ -1,3 +1,6 @@
+var asite = 'cityquest.ru',
+	order_id = 0,
+	price = 0;
 var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 window.mobilecheck = function() {
 var check = false;
@@ -296,9 +299,8 @@ $(function() {
 								yaCounter25221941.reachGoal('confirmBook');
 								ga('send', 'event', 'book', 'confirmBook');
 								
-								var asite = 'cityquest.ru',
-									order_id = result.id,
-									price = book_data.price;
+								order_id = result.id;
+								price = book_data.price;
 
 								(function(){
 									var aa = document.createElement("script");
@@ -938,6 +940,14 @@ $(function() {
 		if (typeof ordergiftcard != 'undefined' && ordergiftcard == 1){
 			yaCounter25221941.reachGoal("ordergiftcard");
 			ga("send", "event", "order", "giftcard");
+		}
+	});
+
+	$('.city-select').on('show.bs.dropdown', function () {
+		var dropdown_menu = parseInt($('.city-select .dropdown-menu').width()  ); // -56px
+		var abtn_link = parseInt($('.ico-msq').width() );
+		if (dropdown_menu > abtn_link) {
+			$('.ico-msq').width(dropdown_menu - 56);
 		}
 	});
 });

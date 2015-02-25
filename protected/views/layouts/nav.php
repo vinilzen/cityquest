@@ -32,11 +32,8 @@
                     }
                   ?>
                   <? $domen_loc = explode('.', $_SERVER['HTTP_HOST'])[1]; ?>
-                  <button class="btn btn-topline ico-msq" <? if ($domen_loc=='ru') echo 'disabled="disabled"'; ?> data-toggle="dropdown" type="button"><?
-                    echo $default_city;
-                  ?></button>
-                  <button class="btn btn-topline dropdown-toggle" <? if ($domen_loc=='ru') echo 'disabled="disabled"'; ?> data-toggle="dropdown" type="button">
-                    <span class="caret"></span><span class="sr-only"><?=Yii::t('app','Choose a city')?></span>
+                  <button class="btn btn-link ico-msq" <? if ($domen_loc=='ru') echo 'disabled="disabled"'; ?> data-toggle="dropdown" type="button">
+                    <span><?=$default_city?></span>
                   </button>
                   <ul class="dropdown-menu" role="menu">
                   <? 
@@ -53,23 +50,18 @@
                         }
                       }
 
-                      if (strtolower($city->name) == strtolower($default_city)){
-                        $class = 'class="selected"';
-                      } else {
-                        $class = '';
+                      if (strtolower($city->name) != strtolower($default_city)){
+                        echo '<li><a href="http://'.$domen1.'.'.$domen2.'/">'.$city->name.'</a></li>';
                       }
 
-                      echo '<li><a href="http://'.$domen1.'.'.$domen2.'/"'.$class.'>'.$city->name.'</a></li>';
                     }
                    ?>
                   </ul>
                 </div>
-              </div><div id="for-local" style="display:none;">
+              </div><div id="for-local">
                 <div class="btn-group local-select">
-                  <button class="btn btn-topline ico-earth" data-toggle="dropdown" type="button">RU</button>
-                  <button class="btn btn-topline dropdown-toggle" data-toggle="dropdown" type="button">
-                    <span class="caret"></span><span class="sr-only"><?=Yii::t('app','Select your language')?></span>
-                  </button>
+                  <button class="btn btn-link ico-earth" data-toggle="dropdown" type="button">
+                    <span>Рус</span></button>
                   <ul class="dropdown-menu" role="menu">
                     <li><a href="kz">KZ</a></li>
                   </ul>
