@@ -47,4 +47,14 @@ return array(
 	'Contacts'=>'Контакты',
 	'Admin panel'=>'Панель администратора',
 	'Moderator panel'=>'Панель модератора',
+	'Schedule'=>'Расписание',
+	'Inactive quest'=>'Неактивный квест',
+	'The quest to develop'=>'Квест в разработке',
+	'Active'=>'Активен',
+	'Draft'=>'Черновик',
+	'In development'=>'В разработке',
+	'Editing quest'=>'Редактирование квеста',
+	'Time table'=>'Времена для записи',
+	'For all the questions and reservations quests write!'=>'Барлық сұрақтар мен ескертпелер қонақтары жазу үшін!',
+	'Free on-site parking'=>'Тегін автотұрақ'
 );

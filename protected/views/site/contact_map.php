@@ -1,7 +1,7 @@
 <div class="row" itemscope itemtype="http://schema.org/LocalBusiness">
   <span itemprop="name" style="display:none">cityquest</span>
   <div class="col-xs-12 col-md-5 col-lg-6 col-md-offset-7 col-lg-offset-6 contacts">
-    <h5>По всем интересующим вопросам и бронированию квестов пишите!</h5>
+    <h5><?=Yii::t('app','For all the questions and reservations quests write!')?></h5>
 
     <p><i class="ico1"></i><a itemprop="telephone" href="tel:8 495 749-96-09">8 (495) 749-96-09</a></p>
 
@@ -14,7 +14,7 @@
 
     <p><i class="ico4"></i><a itemprop="address" href="https://goo.gl/maps/1Vuuv" target="_blank">ул. Летниковская, дом 4, строение 2</a></p>
 
-    <p style="margin-top: -30px;">Бесплатная парковка на территории.</p>
+    <p style="margin-top: -30px;"><?=Yii::t('app','Free on-site parking')?>.</p>
 
     <p>ООО «Сити Квест»   ОГРН  5147746030900</p>
   </div>

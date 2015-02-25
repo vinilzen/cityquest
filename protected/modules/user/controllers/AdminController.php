@@ -168,7 +168,7 @@ class AdminController extends Controller
 		$quests = Quest::model()->findAll($criteria);
 		if ($quests && count($quests)>0){
 			foreach ($quests as $q) {
-				$status_str = $q->status==1?'Черновик':$q->status==2?'Активен':'Вскоре';
+				$status_str = $q->status==1?Yii::t('app','Draft'):$q->status==2?Yii::t('app','Active'):Yii::t('app','In development');
 				$quest_titels[$q->id] = $q->title.' ('.$status_str.')';
 			}
 		}

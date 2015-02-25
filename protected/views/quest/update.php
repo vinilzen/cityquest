@@ -20,13 +20,13 @@ $this->quest_menu=array(
 
 <!-- Nav tabs -->
 <ul class="nav nav-tabs">
-  <li class="active"><a href="#times" data-toggle="tab">Времена для записи</a></li>
-  <li><a href="#edit" data-toggle="tab">Реадктирование квеста</a></li>
+  <li><a href="#times" data-toggle="tab"><?=Yii::t('app','Time table')?></a></li>
+  <li class="active"><a href="#edit" data-toggle="tab"><?=Yii::t('app','Editing quest')?></a></li>
 </ul>
 
 <!-- Tab panes -->
 <div class="tab-content">
-  <div class="tab-pane active" id="times">
+  <div class="tab-pane" id="times">
     <div id="times-table" class="table-responsive" style="padding-top:10px;">
     <?
       $days = Yii::app()->params['days'];
@@ -140,13 +140,13 @@ $this->quest_menu=array(
 
             if ($workday && $k > 2 && $k < 7 )
                 echo ' invisible'; 
-          ?>" ><? echo $time; ?><br><small><? echo $price; ?>р.</small></button></td> <?php } ?>        
+          ?>" ><?=$time?><br><small><?=$price?>р.</small></button></td> <?php } ?>        
         </tr>
         <?php } ?>
       </table>
     </div>
   </div>
-  <div class="tab-pane" id="edit">
+  <div class="tab-pane active" id="edit">
     <?php $this->renderPartial('_form', array('model'=>$model, 'cities'=>$cities)); ?>
   </div>
 </div>

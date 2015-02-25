@@ -71,9 +71,9 @@
 		<label class="control-label col-sm-3 required" for="status">Статус <span class="required">*</span></label>
 		<div class="col-sm-9">
 			<?php echo $form->dropDownList($model,'status', array(
-				1=>'Черновик',
-				2=>'Активен',
-				3=>'Вскоре',
+				1=>Yii::t('app','Draft'),
+				2=>Yii::t('app','Active'),
+				3=>Yii::t('app','In development'),
 			),array('class'=>'form-control')); ?>
 		</div>
 	</div>
@@ -81,18 +81,17 @@
 	<div class="form-group">
 		<label class="control-label col-sm-3 required" for="city_id">Город <span class="required">*</span></label>
 		<div class="col-sm-9">
-			<?php echo $form->dropDownList($model,'city_id', CHtml::listData($cities, 'id', 'name'), array('class'=>'form-control')); ?>
+			<?=$form->dropDownList($model,'city_id', CHtml::listData($cities, 'id', 'name'), array('class'=>'form-control'))?>
 		</div>
 	</div>
 
 
-
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'start_text', array('class' => 'control-label col-sm-3')); ?>
+		<?=$form->labelEx($model,'start_text', array('class' => 'control-label col-sm-3'))?>
 		<div class="col-sm-9">
-			<?php echo $form->textArea($model,'start_text',array('rows'=>2, 'cols'=>50,'class'=>'form-control')); ?>
+			<?=$form->textArea($model,'start_text',array('rows'=>2, 'cols'=>50,'class'=>'form-control'))?>
 		</div>
-		<?php echo $form->error($model,'start_text'); ?>
+		<?=$form->error($model,'start_text')?>
 	</div>
 
 
@@ -111,7 +110,7 @@
 				?>
 			<div class="checkbox">
 				<label>
-					<?php echo $form->checkBox($model,'del_img' );  echo $form->labelEx($model,'del_img');?>
+					<?=$form->checkBox($model,'del_img' )?><?=$form->labelEx($model,'del_img')?>
 				</label>
 			</div>
 		</div>
@@ -120,13 +119,13 @@
 
 	<div class="form-group">
 		<div class="col-sm-offset-3 col-sm-9">
-			<?php echo CHtml::activeFileField($model, 'image'); ?>
+			<?=CHtml::activeFileField($model, 'image'); ?>
 		</div>
 	</div>
 
 	<div class="form-group buttons">
 		<div class="col-sm-offset-3 col-sm-9">
-			<?php echo CHtml::submitButton($model->isNewRecord ? 'Создать' : 'Сохранить'); ?>
+			<?=CHtml::submitButton($model->isNewRecord ? 'Создать' : 'Сохранить')?>
 		</div>
 	</div>
 

@@ -32,7 +32,7 @@
                     }
                   ?>
                   <? $domen_loc = explode('.', $_SERVER['HTTP_HOST'])[1]; ?>
-                  <button class="btn btn-link ico-msq" <? if ($domen_loc=='ru') echo 'disabled="disabled"'; ?> data-toggle="dropdown" type="button">
+                  <button class="btn btn-link ico-msq" data-toggle="dropdown" type="button">
                     <span><?=$default_city?></span>
                   </button>
                   <ul class="dropdown-menu" role="menu">
@@ -53,25 +53,23 @@
                       if (strtolower($city->name) != strtolower($default_city)){
                         echo '<li><a href="http://'.$domen1.'.'.$domen2.'/">'.$city->name.'</a></li>';
                       }
-
                     }
                    ?>
                   </ul>
                 </div>
-              </div><div id="for-local">
+              </div><div id="for-local" <? if ($domen_loc=='ru' || $domen_loc=='il') echo 'style="display:none;"'; ?>>
                 <div class="btn-group local-select">
                   <button class="btn btn-link ico-earth" data-toggle="dropdown" type="button">
-                    <span>Рус</span></button>
+                    <span><?=($this->language == 'kz')?'Қаз':'Рус'?></span></button>
                   <ul class="dropdown-menu" role="menu">
-                    <li><a href="kz">KZ</a></li>
+                    <li><a href="/<?=($this->language == 'kz')?'ru':'kz'?>"><?=($this->language == 'kz')?'Рус':'Қаз'?></a></li>
                   </ul>
                 </div>
               </div><div id="for-login-pl">
-                <? if (Yii::app()->user->isGuest) {
-                  echo '<a class="btn btn-topline btn-default ico-lock" data-target="#myModalAuth" data-toggle="modal" href="#login">'.Yii::t('app','LOGIN').'</a>';
-                } else {
-                  echo '<a class="btn btn-topline btn-default ico-lock" data-toggle="modal" href="/user/profile">'.Yii::t('app','CABINET').'</a>';
-                } ?>
+                <?=(Yii::app()->user->isGuest)?
+                  '<a class="btn btn-topline btn-default ico-lock" data-target="#myModalAuth" data-toggle="modal" href="#login">'.Yii::t('app','LOGIN').'</a>'
+                  :
+                  '<a class="btn btn-topline btn-default ico-lock" data-toggle="modal" href="/user/profile">'.Yii::t('app','CABINET').'</a>'?>
               </div>
             </div>
           </div>

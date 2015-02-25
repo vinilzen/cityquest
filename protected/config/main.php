@@ -53,6 +53,7 @@ return array(
 				'post/<id:\d+>/<title:.*?>'=>'post/view',
 				'posts/<tag:.*?>'=>'post/index',
 				'rules'=>'site/about',
+				'<lang:kz|ru>'=>'site/lang',
 				'giftcard'=>'site/giftcard',
 				'franchise'=>'site/franchise',
 				'press_about_us'=>'site/press',

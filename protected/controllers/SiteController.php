@@ -259,4 +259,18 @@ class SiteController extends Controller
 			'msg' => $msg,
 		));
 	}
+
+	public function actionLang($lang)
+	{
+		$cookie = new CHttpCookie('lang', $lang);
+		$cookie->expire = time()+60*60*24*7;
+		Yii::app()->request->cookies['lang'] = $cookie;
+		$this->redirect(Yii::app()->user->returnUrl);
+	}
+	
+	public function beforeAction($action)
+	{
+	    Yii::app()->user->returnUrl = Yii::app()->request->urlReferrer;
+	    return parent::beforeAction($action);
+	}
 }

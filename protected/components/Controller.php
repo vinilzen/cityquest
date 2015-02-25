@@ -67,6 +67,10 @@ class Controller extends CController
 			$this->city = 1;
 		}
 
+		if (isset( Yii::app()->request->cookies['lang'] )){
+			$this->language = Yii::app()->request->cookies['lang']->value;
+		}
+
 		if (isset($_GET['from']) && $_GET['from'] == 'advaction'){
 			$cookie = new CHttpCookie('from', 'advaction');
 			$cookie->expire = time()+60*60*24*7;

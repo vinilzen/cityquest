@@ -51,4 +51,11 @@ return array(
 	'Schedule'=>'Расписание',
 	'Inactive quest'=>'Неактивный квест',
 	'The quest to develop'=>'Квест в разработке',
+	'Active'=>'Активен',
+	'Draft'=>'Черновик',
+	'In development'=>'В разработке',
+	'Editing quest'=>'Редактирование квеста',
+	'Time table'=>'Времена для записи',
+	'For all the questions and reservations quests write!'=>'По всем интересующим вопросам и бронированию квестов пишите!',
+	'Free on-site parking'=>'Бесплатная парковка на территории'
 );
