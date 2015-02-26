@@ -521,8 +521,8 @@ a.descr {
 	top: 0;
 	position: absolute;
 	h2 	{
-		margin-top: 15%;
-		font-size: 32px;
+		margin-top: 12%;
+		font-size: 26px;
 		color:#fff;
 		width: 100%;
 		text-align: center;
@@ -531,6 +531,9 @@ a.descr {
 		@media (max-width: $screen-xs-max) {
 			font-size: 21px;
 			margin-top: 7%;
+		}
+		@media (min-width: $screen-xlg) {
+			font-size: 32px;
 		}
 		&:after {
 			content: ' ';
@@ -569,8 +572,13 @@ a.descr {
 			text-align: center;
 			padding-left: 50px;
 			padding-right: 50px;
-			margin:3% 0;
+			margin:2% 0;
 
+			&.add_descr {
+				font-size: 16px;
+				margin: -2px 0 0 0;
+				font-weight: 300;
+			}
 			span {
 				margin: 15px 0;
 				background-image: url(../img/clock_w.png);
@@ -583,9 +591,6 @@ a.descr {
 				&:after, &:before {
 					display: none;
 				}
-			}
-			&:last-child {
-				font-weight: 300;
 			}
 			@media (max-width: $screen-xs-max) {
 				font-size: 14px;
