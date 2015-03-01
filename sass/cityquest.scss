@@ -581,7 +581,7 @@ a.descr {
 			}
 			span {
 				margin: 15px 0;
-				background-image: url(../img/clock_w.png);
+				background-image: url(../img/Time.svg);
 				background-repeat: no-repeat;
 				background-position: center top;
 				width: 33px;
@@ -608,16 +608,16 @@ a.descr {
 }
 
 .ico-loc {
-	width: 22px;
+	width: 26px;
 	height: 29px;
 	display: inline-block;
-	background-image: url(../img/location.png);
+	background-image: url(../img/Pin.svg);
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: top left;
 	position: relative;
 	top: 8px;
-	margin-left: 2px;
+	margin-left: -2px;
 	margin-right: 5px;
 	@media (max-width: $screen-xs-max) {
 		width: 17px;
@@ -629,7 +629,7 @@ a.descr {
 	width: 29px;
 	height: 30px;
 	display: inline-block;
-	background-image: url(../img/ppl.png);
+	background-image: url(../img/Man.svg);
 	background-size: cover;	
 	background-repeat: no-repeat;
 	background-position: top left;
@@ -1140,16 +1140,16 @@ body.inner .jumbotron.quest1 {
 		}
 	}
 	.ico-ppl {
-		background-image: url(../img/ppl_bl.png);
+		background-image: url(../img/Man.svg);
 		top: 1px;
 	}
 	.ico-loc {
-		background-image: url(../img/place_bl.png);
+		background-image: url(../img/Pin.svg);
 		margin-right: 0;
-		margin-left: 0;
+		margin-left: -4px;
 		top: 0;
 		height: 32px;
-		width: 23px;
+		width: 28px;
 	}
 	.metro {
 		margin-top: 3px;
@@ -1182,7 +1182,7 @@ body.inner .jumbotron.quest1 {
 .duration {
 	width: 32px;
 	height: 32px;
-	background: url(../img/clock_bl.png) left top no-repeat;
+	background: url(../img/Time.svg) left top no-repeat;
 	display: inline-block;
 }
 .metro {
