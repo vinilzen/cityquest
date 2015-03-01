@@ -135,14 +135,14 @@
 							</div>
 						</li>
 					</ul>
-					<?
-						$this->beginWidget('zii.widgets.CMenu', array(
-							'items'=>$this->city_menu,
-							'itemTemplate' => '<span class="menu-item-link-text">{menu}</span>',
-							'htmlOptions'=>array('class'=>'nav nav-sidebar menu-item-link'),
-						));
-						$this->endWidget();
-					?>
+					<ul class="nav nav-sidebar menu-items">
+
+						<li class="menu-item-block menu-item-live-feed">
+							<a href="/city/admin" class="menu-item-link">
+								<span class="menu-item-link-text">Управление городами</span>
+							</a>
+						</li>
+					</ul>
 					
 					<ul class="nav nav-sidebar menu-items" style="margin-bottom:0;">
 						<li>
@@ -150,14 +150,23 @@
 								<span class="menu-items-title-text">Шаблон письма</span>
 							</div>
 						</li>
+						<li class="menu-item-block menu-item-live-feed">
+							<div class="menu-items-title menu-favorites">
+								<span class="menu-items-subtitle-text">Рус</span>
+							</div>
+						</li>
 					</ul>
 					<ul class="nav nav-sidebar menu-items">
-						<li>
-							<a>Рус</a>
-							<ul>
-								<li><a href="/site/editmailtpl/success/1">Прошел</a></li>
-								<li><a href="/site/editmailtpl/success/0">Не прошел</a></li>
-							</ul>
+
+						<li class="menu-item-block menu-item-live-feed">
+							<a href="/site/editmailtpl/success/1" class="menu-item-link">
+								<span class="menu-item-link-text">Прошел</span>
+							</a>
+						</li>
+						<li class="menu-item-block menu-item-live-feed">
+							<a href="/site/editmailtpl/success/0" class="menu-item-link">
+								<span class="menu-item-link-text">Не прошел</span>
+							</a>
 						</li>
 					</ul>
 				</div>	

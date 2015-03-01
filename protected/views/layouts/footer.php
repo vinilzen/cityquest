@@ -62,7 +62,7 @@
               <a class="vk" href="https://oauth.vk.com/authorize?client_id=4659293&scope=uid,first_name,last_name,sex,bdate,email&redirect_uri=http://<?=$_SERVER['SERVER_NAME']; ?>/user/login/vkauth&response_type=code"></a>
             </div>
             <div class="col-xs-6 text-left">
-              <? if ($_SERVER['HTTP_HOST'] != 'cq.il') { ?>
+              <? if ($_SERVER['HTTP_HOST'] != 'cq.il' && $_SERVER['HTTP_HOST'] != 'cq.kzil') { ?>
                 <script>
                   function statusChangeCallback(response) {
                     if (response.status === 'connected' && $.cookie("logout") != 1) goAuth();
@@ -291,7 +291,7 @@
   </div>
 <? } ?>
 
-<? if (1 || $_SERVER['HTTP_HOST'] != 'cq.il') { ?>
+<? if ($_SERVER['HTTP_HOST'] != 'cq.il' && $_SERVER['HTTP_HOST'] != 'cq.kzil') { ?>
   <script type="text/javascript">
     (function (d, w, c) {
     (w[c] = w[c] || []).push(function() {
@@ -327,20 +327,23 @@
     ga('create', 'UA-56033342-1', 'auto');
     ga('send', 'pageview');
   </script>
-  <script type="text/javascript">
-    <!--//--><![CDATA[//><!--
-    var advaction_params = advaction_params || {};
-    advaction_params.asite = 'cityquest.ru';
-    (function(){
-      var aa = document.createElement("script");
-      aa.type = "text/javascript";
-      aa.async = true;
-      aa.src = document.location.protocol+"//advaction.ru/js/advertiser.js";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(aa, s); 
-    })();
-    //-->!]>]
-  </script>
+
+  <? if ($_SERVER['HTTP_HOST'] != 'cq.il' && $_SERVER['HTTP_HOST'] != 'cq.kzil') { ?>
+    <script type="text/javascript">
+      <!--//--><![CDATA[//><!--
+      var advaction_params = advaction_params || {};
+      advaction_params.asite = 'cityquest.ru';
+      (function(){
+        var aa = document.createElement("script");
+        aa.type = "text/javascript";
+        aa.async = true;
+        aa.src = document.location.protocol+"//advaction.ru/js/advertiser.js";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(aa, s); 
+      })();
+      //-->!]>]
+    </script>
+  <? } ?>
 <? } ?>
 
 <script src="/js/jquery.min.js"></script>

@@ -56,5 +56,10 @@ return array(
 	'Editing quest'=>'Редактирование квеста',
 	'Time table'=>'Времена для записи',
 	'For all the questions and reservations quests write!'=>'Барлық сұрақтар мен ескертпелер қонақтары жазу үшін!',
-	'Free on-site parking'=>'Тегін автотұрақ'
+	'Free on-site parking'=>'Тегін автотұрақ',
+	'Create'=>'Создать',
+	'Save'=>'Сохранить',
+	'start'=>'от',
+	'end'=>'до',
+	'summary'=>'всего',
 );
