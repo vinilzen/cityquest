@@ -1,3 +1,43 @@
+@font-face {
+	font-family: 'icomoon';
+	src:url('../fonts/icomoon.eot?-15v4ui');
+	src:url('../fonts/icomoon.eot?#iefix-15v4ui') format('embedded-opentype'),
+		url('../fonts/icomoon.woff?-15v4ui') format('woff'),
+		url('../fonts/icomoon.ttf?-15v4ui') format('truetype'),
+		url('../fonts/icomoon.svg?-15v4ui#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+[class^="iconm-"], [class*=" iconm-"] {
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.iconm-Call:before {
+	content: "\e600";
+}
+
+.iconm-Man:before {
+	content: "\e601";
+}
+
+.iconm-Pin:before {
+	content: "\e602";
+}
+
+.iconm-Time:before {
+	content: "\e603";
+}
+
 html {
 	position: relative;
 	min-height: 100%;
@@ -41,7 +81,7 @@ input {
 
 .navbar-brand {
 	opacity:.9;
-	margin-top: 5px;
+	margin-top: 1px;
 	@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
 		margin-top: 9px;
 	}
@@ -105,7 +145,7 @@ ul.nav.navbar-nav {
 		       -o-transition: all .5s;
 		          transition: all .5s;
 			opacity:0.4;
-			padding-top: 25px;
+			padding-top: 24px;
 			padding-left: 0;
 			padding-right: 0;
 			&:hover {
@@ -343,7 +383,8 @@ ul.nav.navbar-nav {
 			width: 64px;
 		}
 	}
-	p {
+
+	p.lead-p {
 		color: rgba(255,255,255, 0.7);
 		font-size: 28px;
 		font-weight: 300;
@@ -614,9 +655,6 @@ a.descr {
 	width: 26px;
 	height: 29px;
 	display: inline-block;
-	background-image: url(../img/Pin.svg);
-	background-repeat: no-repeat;
-	background-size: cover;
 	background-position: top left;
 	position: relative;
 	top: 8px;
@@ -629,17 +667,13 @@ a.descr {
 	}
 }
 .ico-ppl {
-	width: 29px;
-	height: 30px;
+	width: 23px;
 	display: inline-block;
-	background-image: url(../img/Man.svg);
-	background-size: cover;	
-	background-repeat: no-repeat;
-	background-position: top left;
 	position: relative;
-	top: 8px;
 	margin-left: 0px;
-	margin-right: 4px;
+	margin-right: 3px;
+	font-size: 23px;
+	color:#fff;
 	@media (max-width: $screen-xs-max) {
 		width: 21px;
 		height: 22px;
@@ -649,7 +683,7 @@ a.descr {
 		margin-right: 10px;
 	}
 	&.noactive {
-		opacity: 0.4;
+		color:#6bcceb;
 	}
 }
 
@@ -1051,23 +1085,24 @@ hr.gradient {
 
 /* Страница квеста */
 body.inner .jumbotron.quest {
-	background-position: center top;
-	background-repeat: no-repeat;
-	background-size: cover;
-	//box-shadow: inset 0 -50px 200px 200px rgba(0, 0, 0, 0.5);
-	//box-shadow: inset 0 0px 300px 100px #000, inset 0 0 100px #000;
-	//box-shadow: inset 0 0px 300px 100px #000, inset 0 0 0 5000px rgba(0, 0, 0, 0.3);
-
+	padding-bottom: 0;
+	position: relative;
+	.container {
+		width: 100%;
+	}
 	@media (max-width: $screen-xs-max) {
 		padding-bottom: 25px;
 	}
 	h1 {
-		font-size: 72px;
+		font-size: 36px;
 		font-weight: bold;
+		margin-top: 0;
 		&:after {
 			width: 70px;
 			height: 6px;
 			background-color: #fff;
+			margin-top: 17px;
+			margin-bottom: 20px;
 		}
 		@media (max-width: $screen-xs-max) {
 			font-size: 32px;
@@ -1079,9 +1114,14 @@ body.inner .jumbotron.quest {
 			}
 		}
 	}
-	p, h2 {
+	h2 {
+		margin-top: 28px;
+		text-align: left;
 		font-weight: 300;
-		font-size: 24px;
+		font-size: 13px;
+		line-height: 20px;
+		padding-left: 30px;
+		padding-right: 30px;
 		color: rgba(255,255,255,.8);
 		@media (max-width: $screen-sm-max) {
 			font-size: 21px;
@@ -1095,11 +1135,41 @@ body.inner .jumbotron.quest {
 		}
 	}
 }
+.img-container {
+	position: absolute;
+	top:0;
+	right: 0;
+	width: 871px;// for screen width 1400px
+	height: 532px;// for screen width 1400px
+	background-position: center top;
+	background-repeat: no-repeat;
+	background-size: cover;
+	-webkit-box-shadow: inset 0px -90px 90px -30px rgba(0,0,0,0.75);
+	-moz-box-shadow: inset 0px -90px 90px -30px rgba(0,0,0,0.75);
+	box-shadow: inset 0px -90px 90px -30px rgba(0,0,0,0.75);
+}
+.col-black {
+	background-color:#000;
+	margin-left: -30px;
+	margin-top: -90px;
+	padding:100px 85px;
+	min-width: 514px;
+}
+.col-br {
+	position: absolute;
+	right:0;
+	bottom: 0;
+	bottom: 52px;
+	width: 366px;
+}
 body.inner .jumbotron.quest1 {
 	background-image: url(../img/Photos/Bank.jpg); 
 }
 
 .descr_quest {
+	text-align: left;
+	margin-left: -4px;
+	margin-top: 35px;
 	p {
 		font-size: 16px;
 		height: 32px;
@@ -1119,7 +1189,7 @@ body.inner .jumbotron.quest1 {
 		}
 		em {
 			font-style: normal;
-			font-size: 30px;
+			font-size: 23px;
 			font-family: 'Gotham A';
 			margin-right: 6px;
 		}
@@ -1128,13 +1198,15 @@ body.inner .jumbotron.quest1 {
 			display: inline-block;
 			top: -4px;
 			position: relative;
-			font-size: 16px;
-			margin-left: 15px;
+			font-size: 14px;
+			margin-left: 12px;
 			font-weight: normal;
-			line-height: 32px;
-			height: 32px;
+			line-height: 20px;
 			&.people {
-				top: -2px;
+				top: 1px;
+			}
+			&.time-mt {
+				top: -1px;
 			}
 			&.metro-title {
 				top: -2px;
@@ -1146,16 +1218,14 @@ body.inner .jumbotron.quest1 {
 		}
 	}
 	.ico-ppl {
-		background-image: url(../img/Man.svg);
 		top: 1px;
 	}
 	.ico-loc {
-		background-image: url(../img/Pin.svg);
+		color: #6bcceb;
+		font-size: 28px;
 		margin-right: 0;
-		margin-left: -4px;
-		top: 0;
-		height: 32px;
-		width: 28px;
+		margin-left: 0px;
+		top: -40px;
 	}
 	.metro {
 		margin-top: 3px;
@@ -1184,17 +1254,36 @@ body.inner .jumbotron.quest1 {
 		}
 	}
 }
-
+.text-pin {
+	padding-top: 5px;
+}
+.descr_quest p .addr-quest {
+	a {
+		font-size: 14px;
+		color:#6bcceb;
+		padding-left: 0;
+		margin-left: 0;
+		margin-top: 3px;
+		&:hover {
+			color:#fff;
+			text-decoration: none;
+		}
+	}
+}
+.descr_quest .text-pin p span {
+	// margin-left: 18px;
+}
 .duration {
-	width: 32px;
-	height: 32px;
-	background: url(../img/Time.svg) left top no-repeat;
+	width: 24px;
+	height: 24px;
 	display: inline-block;
+	font-size: 26px;
+	color:#6bcceb;
 }
 .metro {
-	width: 39px;
-	height: 28px;
-	background: url(../img/metro_bl.png) left top no-repeat;
+	width: 28px;
+	height: 22px;
+	background: url(../img/metro.png) left top no-repeat;
 	display: inline-block;
 }
 

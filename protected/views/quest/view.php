@@ -1,8 +1,8 @@
 <?php
-/* @var $this QuestController */
-/* @var $model Quest */
-$this->pageTitle= Yii::app()->name.' - '.$model->title;
-$this->pageImg= '/images/q/'.$model->id.'.jpg';
+  /* @var $this QuestController */
+  /* @var $model Quest */
+  $this->pageTitle= Yii::app()->name.' - '.$model->title;
+  $this->pageImg= '/images/q/'.$model->id.'.jpg';
 ?>
 
 <script type="text/javascript">
@@ -10,29 +10,36 @@ $this->pageImg= '/images/q/'.$model->id.'.jpg';
         user_phone = '<? echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->phone : ''; ?>';
 </script>
 
-<div class="jumbotron quest" style="background-image: url(../images/q/<? echo $model->id; ?>.jpg); 
-  <? if ($model->id == 2) { echo 'background-position: center 45%;'; } ?> " >
+<div class="jumbotron quest">
   <div itemscope itemtype="http://schema.org/Product" class="container text-center">
     <div class="row">
-      <div class="col-md-10 col-md-offset-1 col-sm-12">
-        <h1 itemprop="name" id='quest_title'><? echo $model->title; ?></h1>
-        <h2 itemprop="description"><? echo $model->content; ?></h2>
+      <div class="img-container" style="background-image: url(../images/q/<?=$model->id?>.jpg);"></div>
+      <div class="col-lg-4 col-md-6 col-sm-12 col-black">
+
+        <h1 itemprop="name" id='quest_title'><?=$model->title?></h1>
+        <h2 itemprop="description"><?=$model->content?></h2>
+
+        <div class="descr_quest">
+          <p><i class="duration iconm-Time"></i><span class="time-mt"><em>60</em>минут</span></p>
+          <p class="pull-right"><i class="ico-ppl iconm-Man"></i><i class="ico-ppl iconm-Man"></i><i class="ico-ppl iconm-Man noactive"></i><i class="ico-ppl iconm-Man noactive"></i>
+            <span class="people"><em>2-4</em><?=Yii::t('app','players')?></span>
+          </p>
+        </div>
       </div>
-    </div>
-    <div class="row descr_quest">
-      <div class="col-xs-12 col-sm-4 col-md-3 tl">
-        <p><i class="duration"></i><span><em>60</em>минут</span></p>
-      </div>
-      <div class="col-xs-12 col-sm-4 col-md-3">
-        <p><i class="ico-ppl"></i><i class="ico-ppl"></i><i class="ico-ppl noactive"></i><i class="ico-ppl noactive"></i>
-          <span class="people"><em>2 - 4</em><?=Yii::t('app','players')?></span>
-        </p>
-      </div>
-      <div class="col-xs-12 col-sm-4 col-md-3 tr">
-        <p><i class="metro"></i><span class="metro-title"><? echo $model->metro; ?></span></p>
-      </div>
-      <div class="col-xs-12 col-sm-12 col-md-3">
-        <p><i class="ico-loc"></i><span class="addr-quest"><? echo $model->addres; ?></span></p>
+      <div class="col-br descr_quest">
+          <div class="text-left tr">
+            <p><i class="metro"></i><span class="metro-title"><?=$model->metro?></span></p>
+          </div>
+          <div class="text-left text-pin">
+            <p>
+              <i class="ico-loc iconm-Pin"></i>
+              <span class="addr-quest">
+                <?=$model->addres?><br>
+                Бесплатная парковка. 5 минут от метро.<br>
+                <a href="">Как добраться?</a>
+              </span>
+            </p>
+          </div>
       </div>
     </div>
   </div>
@@ -43,11 +50,9 @@ $this->pageImg= '/images/q/'.$model->id.'.jpg';
 <div class="container container-xlg">
   <div class="row">
     <div class="col-xs-12 text-center">
-      <? if ($model->status == 2) { ?>
-        <h2 class="twotab active"><?Yii::t('app','Schedule')?></h2>
-      <? } else { ?>
-        <h2 class="twotab active"><?=Yii::t('app','Inactive quest')?></h2>
-      <? } ?>
+      <h2 class="twotab active">
+        <?=($model->status == 2)?Yii::t('app','Schedule'):Yii::t('app','Inactive quest')?>
+      </h2>
       <hr class="fadeOut">
     </div>
     <? if ($model->status == 2) { ?>

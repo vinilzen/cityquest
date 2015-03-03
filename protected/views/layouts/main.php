@@ -17,7 +17,7 @@ echo ' inner ';  if (Yii::app()->request->url == '/contact') echo ' contact ';?>
         <div class="row">
           <div class="col-md-10 col-md-offset-1 col-sm-12">
             <h1><?=Yii::t('app', 'slogan')?></h1>
-            <p><?=Yii::t('app', 'introdaction')?></p>
+            <p class="lead-p"><?=Yii::t('app', 'introdaction')?></p>
             <small><?=Yii::t('app', 'To participate you need a team')?></small>
           </div>
         </div>
