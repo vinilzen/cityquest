@@ -944,10 +944,14 @@ $(function() {
 	});
 
 	$('.city-select').on('show.bs.dropdown', function () {
-		var dropdown_menu = parseInt($('.city-select .dropdown-menu').width()  ); // -56px
-		var abtn_link = parseInt($('.ico-msq').width() );
+		var dropdown_menu = parseInt($('.city-select .dropdown-menu').width()  ), // -56px
+			abtn_link = parseInt($('.ico-msq').outerWidth() );
+
 		if (dropdown_menu > abtn_link) {
+			var imw = $('.ico-msq').width();
 			$('.ico-msq').width(dropdown_menu - 56);
+			var mr = $('.ico-msq').width() - imw;
+			$('.city-select').css('margin-right','-'+mr+'px');
 		}
 	});
 });

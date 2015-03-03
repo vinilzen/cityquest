@@ -189,8 +189,8 @@ ul.nav.navbar-nav {
 		&.ico-earth {
 			background-image: url(../img/flag.png);
 			background-repeat: no-repeat;
-			background-position: 14px 8px;
-			padding: 1px 18px 6px 33px;
+			background-position: 3px 8px;
+			padding: 1px 18px 6px 22px;
 			margin-right: 5px;
 			font-weight: 300;
 			text-align: left;
@@ -212,9 +212,8 @@ ul.nav.navbar-nav {
 			}
 		}
 	}
-
 	.city-select, .local-select {
-		transition: all .5s;
+		transition: height .5s;
 		.btn.btn-link {
 			span {
 				color:#fff;
@@ -291,6 +290,10 @@ ul.nav.navbar-nav {
 				}
 			}
 		}
+	}
+	.city-select {
+		padding-right: 8px;
+		transition: none;
 	}
 	.local-select .dropdown-menu {
 		min-width: 65px;
@@ -723,8 +726,11 @@ a.descr {
 	display: inline-block;
 }
 #for-city {
-	position: absolute;
-	left: 28px;
+	/* position: absolute;
+	left: 28px; */
+}
+#for-local {
+	padding-right: 3px;
 }
 .rules {
 	padding-bottom: 50px;
