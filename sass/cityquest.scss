@@ -1087,6 +1087,7 @@ hr.gradient {
 body.inner .jumbotron.quest {
 	padding-bottom: 0;
 	position: relative;
+	overflow: hidden;
 	.container {
 		width: 100%;
 	}
@@ -1135,41 +1136,16 @@ body.inner .jumbotron.quest {
 		}
 	}
 }
-.img-container {
-	position: absolute;
-	top:0;
-	right: 0;
-	width: 871px;// for screen width 1400px
-	height: 532px;// for screen width 1400px
-	background-position: center top;
-	background-repeat: no-repeat;
-	background-size: cover;
-	-webkit-box-shadow: inset 0px -90px 90px -30px rgba(0,0,0,0.75);
-	-moz-box-shadow: inset 0px -90px 90px -30px rgba(0,0,0,0.75);
-	box-shadow: inset 0px -90px 90px -30px rgba(0,0,0,0.75);
-}
-.col-black {
-	background-color:#000;
-	margin-left: -30px;
-	margin-top: -90px;
-	padding:100px 85px;
-	min-width: 514px;
-}
-.col-br {
-	position: absolute;
-	right:0;
-	bottom: 0;
-	bottom: 52px;
-	width: 366px;
-}
-body.inner .jumbotron.quest1 {
-	background-image: url(../img/Photos/Bank.jpg); 
-}
 
 .descr_quest {
 	text-align: left;
 	margin-left: -4px;
 	margin-top: 35px;
+	.tr p {
+		@media (max-width: $screen-xs-max) {
+			margin-bottom: 25px;
+		}
+	}
 	p {
 		font-size: 16px;
 		height: 32px;
@@ -1186,6 +1162,9 @@ body.inner .jumbotron.quest1 {
 		@media (max-width: $screen-xs-max) {
 			width: 275px;
 			text-align: left;
+			&.pull-right {
+			    float: left !important;
+			}
 		}
 		em {
 			font-style: normal;
@@ -1202,6 +1181,9 @@ body.inner .jumbotron.quest1 {
 			margin-left: 12px;
 			font-weight: normal;
 			line-height: 20px;
+			@media (max-width: $screen-xs-max) {
+				font-size: 13px;
+			}
 			&.people {
 				top: 1px;
 			}
@@ -1248,12 +1230,108 @@ body.inner .jumbotron.quest1 {
 			margin-left: -20px;
 		}
 	}
+	@media (max-width: 1023px) {
+		margin-left: 30px;
+	}
 	@media (max-width: $screen-xs-max) {
 		.col-md-3:last-child {
 			margin-top: 5px;
 		}
+		margin-left: 0;
 	}
 }
+@media (max-width: 1023px) {
+	body.inner .jumbotron.quest h2 {
+		font-size: 14px;
+	}
+	.col-br.descr_quest {
+		margin-left: 20px;
+		.tr {
+			width: 170px;
+			float: left;
+		}
+		.text-pin {
+			padding-top: 12px;
+		}
+	}
+}
+
+@media (max-width: $screen-xs-max) {
+	body.inner .jumbotron.quest h2 {
+		padding-left: 0;
+		padding-right: 0;
+	}
+	.col-br.descr_quest {
+		margin-left: 0;
+	}
+}
+.img-container {
+	position: absolute;
+	top:0;
+	right: 0;
+	width: 871px;// for screen width 1400px
+	height: 532px;// for screen width 1400px
+	background-position: center top;
+	background-repeat: no-repeat;
+	background-size: cover;
+	-webkit-box-shadow: inset 0px -90px 90px -30px rgba(0,0,0,0.75);
+	-moz-box-shadow: inset 0px -90px 90px -30px rgba(0,0,0,0.75);
+	box-shadow: inset 0px -90px 90px -30px rgba(0,0,0,0.75);
+	// @media (min-width: 1024px) {
+	// 	width: 618px;
+	// }
+	@media (max-width: 1023px) {
+		width: 100%;
+	}
+	@media (max-width: $screen-xs-max) {
+		height: 660px;
+	}
+}
+.col-black {
+	background-color:#000;
+	margin-left: -30px;
+	margin-top: -90px;
+	padding:100px 85px;
+	width: 514px;
+	height: 532px;
+	@media (min-width: 1670px) {
+		margin-top: -180px;
+		width: 600px;
+	}
+	@media (max-width: 1023px) {
+		background:none;
+		padding-left: 20px;
+	}
+	@media (max-width: $screen-xs-max) {
+		width: 100%;
+		padding-left: 0;
+		padding-right: 0;
+		margin-left: 0;
+	}
+}
+.col-br {
+	margin-top: -100px;
+	@media (min-width: 1024px){
+		margin-top: 0;
+		position: absolute;
+		right:0;
+		bottom: 52px;
+		width: 366px;
+	}
+	@media (min-width: 1670px) {
+		bottom: 100px;
+	}
+
+	@media (width: 1024px){
+		.tr {
+			padding-left: 10px;
+		}
+	}
+}
+body.inner .jumbotron.quest1 {
+	background-image: url(../img/Photos/Bank.jpg); 
+}
+
 .text-pin {
 	padding-top: 5px;
 }
@@ -1269,9 +1347,6 @@ body.inner .jumbotron.quest1 {
 			text-decoration: none;
 		}
 	}
-}
-.descr_quest .text-pin p span {
-	// margin-left: 18px;
 }
 .duration {
 	width: 24px;

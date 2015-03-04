@@ -14,7 +14,7 @@
   <div itemscope itemtype="http://schema.org/Product" class="container text-center">
     <div class="row">
       <div class="img-container" style="background-image: url(../images/q/<?=$model->id?>.jpg);"></div>
-      <div class="col-lg-4 col-md-6 col-sm-12 col-black">
+      <div class="col-sm-12 col-black">
 
         <h1 itemprop="name" id='quest_title'><?=$model->title?></h1>
         <h2 itemprop="description"><?=$model->content?></h2>
@@ -26,7 +26,7 @@
           </p>
         </div>
       </div>
-      <div class="col-br descr_quest">
+      <div class="col-sm-12 col-br descr_quest">
           <div class="text-left tr">
             <p><i class="metro"></i><span class="metro-title"><?=$model->metro?></span></p>
           </div>

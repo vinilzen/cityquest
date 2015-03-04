@@ -954,4 +954,18 @@ $(function() {
 			$('.city-select').css('margin-right','-'+mr+'px');
 		}
 	});
+
+	if($('.img-container').length>0){
+		function setSize(resize){
+			var ww = $(window).width();
+			if (ww>1023){
+				$('.img-container').width(ww-514);
+			} else {
+				$('.img-container').width('100%');
+			}
+		}
+
+		setSize();
+		window.addEventListener(orientationEvent, setSize);
+	}
 });
