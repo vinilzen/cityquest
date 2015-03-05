@@ -24,7 +24,7 @@ foreach ($quests as $quest) {
 		<? } else { ?>
 			<a class="descr inactive" href="#lab">
 				<h2><?=CHtml::encode($quest->title)?></h2>
-				<p><span class="glyphicon glyphicon-time"></span></p>
+				<p><i class="iconm iconm-Time"></i></p>
 				<p><?=Yii::t('app','The quest to develop')?></p>
 				<p class="add_descr"><?=CHtml::encode($quest->start_text)?></p>
 			</a>
