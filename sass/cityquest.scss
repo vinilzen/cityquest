@@ -660,6 +660,8 @@ a.descr {
 	top: 8px;
 	margin-left: -2px;
 	margin-right: 5px;
+	font-size: 28px;
+	color:#6bcceb;
 	@media (max-width: $screen-xs-max) {
 		width: 17px;
 		height: 22px;
@@ -1171,6 +1173,7 @@ body.inner .jumbotron.quest {
 			font-size: 23px;
 			font-family: 'Gotham A';
 			margin-right: 6px;
+			font-weight: bold;
 		}
 		span, a {
 			color:#fff;
@@ -1192,6 +1195,9 @@ body.inner .jumbotron.quest {
 			}
 			&.metro-title {
 				top: -2px;
+			}
+			span {
+				margin-left: 0;
 			}
 		}
 		&:after {
@@ -1315,11 +1321,11 @@ body.inner .jumbotron.quest {
 		margin-top: 0;
 		position: absolute;
 		right:0;
-		bottom: 52px;
+		bottom: 79px;
 		width: 366px;
 	}
-	@media (min-width: 1670px) {
-		bottom: 100px;
+	@media (min-width: 1440px) {
+		bottom: 10px;
 	}
 
 	@media (width: 1024px){
@@ -1683,9 +1689,15 @@ h2.twotab, a.h2.twotab {
 			}
 			font-weight: bold;
 		}
+		p {
+			padding-right: 15%;
+			text-align: center;
+		}
 	}
 	.ico-loc {
 		margin-right: 10px;
+		color: #6bcceb;
+  		font-size: 30px;
 	}
 	h3 {
 		font-weight: bold;
@@ -1696,8 +1708,6 @@ h2.twotab, a.h2.twotab {
 		text-align: center;
 		text-transform: uppercase;
 		text-decoration: none;
-
-
 	}
 	.close {
 		position: absolute;

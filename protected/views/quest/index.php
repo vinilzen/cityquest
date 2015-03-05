@@ -13,12 +13,12 @@ foreach ($quests as $quest) {
 				<h2><?=CHtml::encode($quest->title)?></h2>
 				<p>
 					<span>
-						<i class="ico-ppl"></i>
-						<i class="ico-ppl"></i>
-						<i class="ico-ppl noactive"></i>
-						<i class="ico-ppl noactive"></i>2 - 4 <?=Yii::t('app','players')?>
+						<i class="ico-ppl iconm-Man"></i>
+						<i class="ico-ppl iconm-Man"></i>
+						<i class="ico-ppl iconm-Man noactive"></i>
+						<i class="ico-ppl iconm-Man noactive"></i>2 - 4 <?=Yii::t('app','players')?>
 					</span>
-					<span><i class="ico-loc"></i><?=CHtml::encode($quest->addres)?></span>
+					<span><i class="ico-loc iconm-Pin"></i><?=CHtml::encode($quest->addres)?></span>
 				</p>
 			</a>
 		<? } else { ?>

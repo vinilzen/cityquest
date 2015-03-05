@@ -255,7 +255,7 @@ $(function() {
 
 		book_data = {
 			quest_id : btn_time.attr('data-quest'),
-			addres : $('.addr-quest').text() || $('#quest_addr_'+btn_time.attr('data-quest')).val(),
+			addres : $('.addr-quest span').text() || $('#quest_addr_'+btn_time.attr('data-quest')).val(),
 			title : $('#quest_title').text() || $('#quest_title_'+btn_time.attr('data-quest')).text(),
 			day : btn_time.attr('data-day'),
 			ymd : btn_time.attr('data-ymd'),
@@ -269,7 +269,7 @@ $(function() {
 		};
 
 		$('img', ModalBook).attr('src', '/images/q/'+book_data.quest_id+'.jpg');
-		$('.addr-to', ModalBook).html('<i class="ico-loc"></i>'+book_data.addres);
+		$('.addr-to', ModalBook).html('<i class="ico-loc iconm-Pin"></i>'+book_data.addres);
 		$('h2', ModalBook).html(book_data.title);
 		$('.book_time', ModalBook).html(
 			'<small>'+book_data.day+'</small>'+
@@ -284,11 +284,11 @@ $(function() {
 		if (user_name && user_name != '') {
 			book_data.phone = $('.you_phone input').val() || user_phone;
 			var btn_book = $(e.target);
-			if (book_data.phone == '00000' || book_data.phone == ''){
+			if (book_data.phone == '00000' || book_data.phone == '' || book_data.phone.length != 17){
 				$('.you_phone input')
 					.attr({
 						'data-toggle':"tooltip",
-						'title': 'Необходимо указать номер телефона',
+						'title': 'Необходимо указать корректный номер телефона',
 					}).tooltip('show');
 			} else {
 				if (book_data!=0)
