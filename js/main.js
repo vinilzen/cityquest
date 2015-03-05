@@ -791,7 +791,7 @@ $(function() {
 		} else {
 
 			if ( $('#edit-name').val() !== '' && $('#edit-name').val().length > 2 ) {
-				if ( $('#edit-phone').val() !== '' && $('#edit-phone').val().length > 10 ) {
+				if ( $('#edit-phone').val() !== '' && $('#edit-phone').val().length == 17 ) {
 
 					var name = $('#edit-name').val(),
 						btn_edit = $('#editProfile'),
@@ -857,7 +857,7 @@ $(function() {
 					$('#myModalEditProfile #form-group-phone').addClass('input-error');
 
 					$('#myModalEditProfile #form-group-phone span')
-						.attr({ 'title': 'Номер телефона должен содержать не менее 10 символов' })
+						.attr({ 'title': 'Номер телефона должен содержать 10 символов' })
 						.tooltip('show');
 				}
 
