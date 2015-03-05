@@ -27,11 +27,12 @@
   .container {
     max-width: 100%;
     @media screen and (min-width: 1670px) {
-      padding-top: 90px;
+      padding-top: 0;
       padding-bottom: 0;
-      
     }
   }
+
+
 
   padding-top:    ($jumbotron-padding * 3);
   padding-bottom: ($jumbotron-padding * 1.6);
@@ -46,6 +47,13 @@
     h1,
     .h1 {
       font-size: ($font-size-base * 4.5);
+    }
+  }
+}
+.jumbotron.quest {
+  .container {
+    @media screen and (min-width: 1670px) {
+      padding-top: 90px;
     }
   }
 }

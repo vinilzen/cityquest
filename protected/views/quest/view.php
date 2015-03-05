@@ -25,6 +25,23 @@
             <span class="people"><em>2-4</em><?=Yii::t('app','players')?></span>
           </p>
         </div>
+        <? if (isset($other_quests) && count($other_quests) > 0) {
+            $counter = 1;
+            foreach ($other_quests as $quest) {
+              if ($counter==1 || $counter == 2){
+
+                if ($model->id == 4 || $model->id == 3){
+                  $arrow = ($counter==2)?'left':'right';
+                } else {
+                  $arrow = ($counter==1)?'left':'right';
+                }
+
+                echo '<a class="arrow-quest arrow-'.$arrow.'" title="'.$quest->title.'" href="/quest/view?id='.$quest->id.'">'.
+                      '<span class="glyphicon glyphicon-menu-'.$arrow.'"></span></a>';
+              }
+              $counter++;
+            }
+           } ?>
       </div>
       <div class="col-sm-12 col-br descr_quest">
           <div class="text-left tr">
@@ -36,7 +53,7 @@
               <span class="addr-quest">
                 <span><?=$model->addres?></span><br>
                 Бесплатная парковка.<br>
-                <a href="">Как добраться?</a>
+                <a href="https://www.google.com/maps/preview?q=<?=$cities[$model->city_id]->name?>,+<?=urlencode($model->addres)?>">Как добраться?</a>
               </span>
             </p>
           </div>
@@ -44,8 +61,6 @@
     </div>
   </div>
 </div>
-
-
 
 <div class="container container-xlg">
   <div class="row">
@@ -219,13 +234,13 @@
   <div class="row">
   <? $counter = 1;
     foreach ($other_quests as $quest) { ?>
-    <div class="col-xs-12 col-md-6 col-sm-12 col-lg-6 col-xlg-4 <? echo $counter ? 'col-xlg-offset-2' : ''; ?> item">
+    <div class="col-xs-12 col-md-6 col-sm-12 col-lg-6 col-xlg-4 <?=($counter)?'col-xlg-offset-2':''; ?> item">
     <? $counter = 0; ?>
       <img class="featurette-image img-responsive"
-        alt="<? echo CHtml::encode($quest->title); ?>" 
-        src="/images/q/<? echo $quest->id; ?>.jpg">
-      <a class="descr" href="/quest/view?id=<? echo $quest->id; ?>">
-        <h2><? echo CHtml::encode($quest->title); ?></h2>
+        alt="<?=CHtml::encode($quest->title)?>" 
+        src="/images/q/<?=$quest->id?>.jpg">
+      <a class="descr" href="/quest/view?id=<?=$quest->id?>">
+        <h2><?=CHtml::encode($quest->title)?></h2>
         <p>
             <span>
                 <i class="ico-ppl iconm-Man"></i>
@@ -233,7 +248,7 @@
                 <i class="ico-ppl iconm-Man noactive"></i>
                 <i class="ico-ppl iconm-Man noactive"></i>2 - 4 <?=Yii::t('app','players')?>
             </span>
-            <span><i class="ico-loc"></i><? echo CHtml::encode($quest->addres); ?></span>
+            <span><i class="ico-loc iconm-Pin"></i><?=CHtml::encode($quest->addres)?></span>
         </p>
       </a>
     </div>

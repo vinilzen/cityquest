@@ -20,6 +20,9 @@
 	/* Better Font Rendering =========== */
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	@media (max-width: 767px) {
+		font-size: 20px;
+	}
 }
 
 .iconm-Call:before {
@@ -591,6 +594,9 @@ a.descr {
 	p {
 		text-decoration: none;
 		padding-left: 15%;
+		@media (max-width: $screen-xs-max) {
+			padding-left: 10%;	
+		}
 		span {
 			display: block;
 			text-decoration: none;
@@ -667,6 +673,8 @@ a.descr {
 		width: 17px;
 		height: 22px;
 		top: 6px;
+		margin-right: 10px;
+		font-size: 20px;
 	}
 }
 .ico-ppl {
@@ -680,7 +688,9 @@ a.descr {
 	@media (max-width: $screen-xs-max) {
 		width: 21px;
 		height: 22px;
-		top: 6px;
+		top: 1px;
+		font-size: 20px;
+		margin-right: 0;
 	}
 	&:last-child {
 		margin-right: 10px;
@@ -1281,12 +1291,9 @@ body.inner .jumbotron.quest {
 	background-position: center top;
 	background-repeat: no-repeat;
 	background-size: cover;
-	-webkit-box-shadow: inset 0px -90px 90px -30px rgba(0,0,0,0.75);
-	-moz-box-shadow: inset 0px -90px 90px -30px rgba(0,0,0,0.75);
-	box-shadow: inset 0px -90px 90px -30px rgba(0,0,0,0.75);
-	// @media (min-width: 1024px) {
-	// 	width: 618px;
-	// }
+	-webkit-box-shadow: inset 0px -90px 90px -30px rgba(0,0,0,1);
+	-moz-box-shadow: inset 0px -90px 90px -30px rgba(0,0,0,1);
+	box-shadow: inset 0px -90px 90px -30px rgba(0,0,0,1);
 	@media (max-width: 1023px) {
 		width: 100%;
 	}
@@ -1303,7 +1310,7 @@ body.inner .jumbotron.quest {
 	height: 532px;
 	@media (min-width: 1670px) {
 		margin-top: -180px;
-		width: 600px;
+		// width: 600px;
 	}
 	@media (max-width: 1023px) {
 		background:none;
@@ -2586,5 +2593,30 @@ h1 {
 @media (min-width: 1650px){
 	#quests.bottom_quest {
 		box-shadow: none;
+	}
+}
+.arrow-quest {
+	position: absolute;
+	top:102px;
+	display: inline-block;
+	color:#fff;
+	opacity: .5;
+	font-size: 22px;
+	&:hover, &:focus {
+		opacity: 1;
+		color:#fff;
+	}
+	&.arrow-left {
+		left:50px;
+	}
+	&.arrow-right {
+		right:50px;
+	}
+}
+@media (min-width: 1024px) {
+	#top_menu_container {
+		margin-left: -40px;
+		margin-right: -40px;
+		min-width: 650px;
 	}
 }

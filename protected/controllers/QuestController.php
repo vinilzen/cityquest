@@ -115,6 +115,12 @@ class QuestController extends Controller
 		    "limit" => 12,
 		));
 
+		$cities = City::model()->findAll();
+		$city_array = array();
+		foreach ($cities AS $city){
+			$city_array[$city->id] = $city;
+		}
+
 		$other_quests = array();
 		
 		foreach ($quests AS $quest){
@@ -124,7 +130,6 @@ class QuestController extends Controller
 				$other_quests[$quest->id] = $quest;
 			}
 		}
-
 
 		$bookings = array();
 		$bookings = Booking::model()->with('competitor')->findAllByAttributes(
@@ -152,6 +157,7 @@ class QuestController extends Controller
 
 		$this->render('view',array(
 			'model'=>$model,
+			'cities'=>$city_array,
 			'booking' => $bookings_by_date,
 			'times' => $times,
 			'holidays' => $holiday_list,
