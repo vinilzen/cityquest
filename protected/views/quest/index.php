@@ -22,7 +22,7 @@ foreach ($quests as $quest) {
 				</p>
 			</a>
 		<? } else { ?>
-			<a class="descr inactive" href="#lab">
+			<a class="descr inactive">
 				<h2><?=CHtml::encode($quest->title)?></h2>
 				<p><i class="iconm iconm-Time"></i></p>
 				<p><?=Yii::t('app','The quest to develop')?></p>

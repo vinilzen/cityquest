@@ -8,4 +8,9 @@
 		),
 	)); 
 
-	echo $this->renderPartial('_form', array('model'=>$model, 'quests'=>$quests)); ?>
+	echo $this->renderPartial('_form', array(
+			'model'=>$model,
+			'quests'=>$quests,
+			'quests_obj'=>$quests_obj,
+			'cities'=>$cities,
+		)); ?>

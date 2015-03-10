@@ -519,4 +519,22 @@ $(function() {
 		});
 	}
 
+	$('input[name="City"]').change(function(e) {
+		var city_id = $(this).val();
+		$('input[data-city="'+city_id+'"]').prop('checked', $(this).is(":checked"));
+	});
+
+	$('.show_qs').click(function(){
+		var city_id = $(this).data('city'),
+			showed = $('.city-list-'+city_id).css('height');
+
+		if (showed=='0px' || showed=='0' || showed==0) {
+			$(this).html('-');
+		} else {
+			$(this).html('+');
+		}
+
+		$('.city-list-'+city_id).css('height',(showed=='0px' || showed=='0' || showed==0)?'auto':'0');
+	});
+
 });

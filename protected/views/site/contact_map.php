@@ -6,15 +6,15 @@
     <p><i class="ico1"></i><a itemprop="telephone" href="tel:8 495 749-96-09">8 (495) 749-96-09</a></p>
 
     <p><i class="ico2"></i>
-    	<span>Общие вопросы:&nbsp;<a itemprop="email" href="mailto:hello@cityquest.ru" target="_blank">hello@cityquest.ru</a><br></span>
-    	<span>Франшиза:&nbsp;<a itemprop="email" href="mailto:franchise@cityquest.ru" target="_blank">franchise@cityquest.ru</a><br></span>
-    	<span>Для журналистов:&nbsp;<a itemprop="email" href="mailto:pr@cityquest.ru" target="_blank">pr@cityquest.ru</a></span></p>
+    	<span><?=Yii::t('app','General questions')?>:&nbsp;<a itemprop="email" href="mailto:hello@cityquest.ru" target="_blank">hello@cityquest.ru</a><br></span>
+    	<span><?=Yii::t('app','Franchise')?>:&nbsp;<a itemprop="email" href="mailto:franchise@cityquest.ru" target="_blank">franchise@cityquest.ru</a><br></span>
+    	<span><?=Yii::t('app','For journalists')?>:&nbsp;<a itemprop="email" href="mailto:pr@cityquest.ru" target="_blank">pr@cityquest.ru</a></span></p>
 
     <p><i class="ico3"></i>Павелецкая</p>
 
     <p><i class="ico4"></i><a itemprop="address" href="https://goo.gl/maps/1Vuuv" target="_blank">ул. Летниковская, дом 4, строение 2</a></p>
 
-    <p style="margin-top: -30px;"><?=Yii::t('app','Free on-site parking')?>.</p>
+    <p class="parking"><?=Yii::t('app','Free on site parking is 1.5 hours')?>.</p>
 
     <p>ООО «Сити Квест»   ОГРН  5147746030900</p>
   </div>

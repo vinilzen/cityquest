@@ -165,6 +165,8 @@ class AdminController extends Controller
 			'order'=>"status ASC, sort ASC"
 		));
 
+		$cities = City::model()->findAll();
+
 		$quests = Quest::model()->findAll($criteria);
 		if ($quests && count($quests)>0){
 			foreach ($quests as $q) {
@@ -175,7 +177,9 @@ class AdminController extends Controller
 
 		$this->render('update',array(
 			'model'=>$model,
-			'quests'=>$quest_titels
+			'quests'=>$quest_titels,
+			'quests_obj'=>$quests,
+			'cities'=>$cities,
 		));
 	}
 

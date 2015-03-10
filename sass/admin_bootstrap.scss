@@ -118,3 +118,9 @@
 		padding-right: 37px;
 	}
 }
+.container>.navbar-header,
+.container-fluid>.navbar-header {
+	@media (max-width: 1199px) and (min-width: 992px){
+		max-width: 300px;
+	}
+}

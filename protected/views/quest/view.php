@@ -16,7 +16,26 @@
       <div class="img-container" style="background-image: url(../images/q/<?=$model->id?>.jpg);"></div>
       <div class="col-sm-12 col-black">
 
-        <h1 itemprop="name" id='quest_title'><?=$model->title?></h1>
+        <h1 itemprop="name" id='quest_title'>
+          <?=$model->title?>
+          <? if (isset($other_quests) && count($other_quests) > 0) {
+              $counter = 1;
+              foreach ($other_quests as $quest) {
+                if ($counter==1 || $counter == 2){
+
+                  if ($model->id == 4 || $model->id == 3){
+                    $arrow = ($counter==2)?'left':'right';
+                  } else {
+                    $arrow = ($counter==1)?'left':'right';
+                  }
+
+                  echo '<a class="arrow-quest arrow-'.$arrow.'" title="'.$quest->title.'" href="/quest/view?id='.$quest->id.'">'.
+                        '<span class="glyphicon glyphicon-menu-'.$arrow.'"></span></a>';
+                }
+                $counter++;
+              }
+             } ?>
+        </h1>
         <h2 itemprop="description"><?=$model->content?></h2>
 
         <div class="descr_quest">
@@ -25,23 +44,6 @@
             <span class="people"><em>2-4</em><?=Yii::t('app','players')?></span>
           </p>
         </div>
-        <? if (isset($other_quests) && count($other_quests) > 0) {
-            $counter = 1;
-            foreach ($other_quests as $quest) {
-              if ($counter==1 || $counter == 2){
-
-                if ($model->id == 4 || $model->id == 3){
-                  $arrow = ($counter==2)?'left':'right';
-                } else {
-                  $arrow = ($counter==1)?'left':'right';
-                }
-
-                echo '<a class="arrow-quest arrow-'.$arrow.'" title="'.$quest->title.'" href="/quest/view?id='.$quest->id.'">'.
-                      '<span class="glyphicon glyphicon-menu-'.$arrow.'"></span></a>';
-              }
-              $counter++;
-            }
-           } ?>
       </div>
       <div class="col-sm-12 col-br descr_quest">
           <div class="text-left tr">
@@ -52,8 +54,8 @@
               <i class="ico-loc iconm-Pin"></i>
               <span class="addr-quest">
                 <span><?=$model->addres?></span><br>
-                Бесплатная парковка.<br>
-                <a href="https://www.google.com/maps/preview?q=<?=$cities[$model->city_id]->name?>,+<?=urlencode($model->addres)?>">Как добраться?</a>
+                <?=Yii::t('app','Free on site parking is 1.5 hours')?>.<br>
+                <a href="https://www.google.com/maps/preview?q=<?=$cities[$model->city_id]->name?>,+<?=urlencode($model->addres)?>"><?=Yii::t('app','How to get there')?>?</a>
               </span>
             </p>
           </div>

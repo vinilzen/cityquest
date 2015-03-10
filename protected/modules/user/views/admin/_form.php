@@ -63,11 +63,51 @@
 		</div>
 
 		<?php if ($model->superuser == 2) { ?>
+
 			<div class="form-group set_moderator_quests">
 				<?php echo CHtml::activeLabelEx($model,'quests',array('class'=>'control-label my_form_label col-sm-5')); ?>
-				<div class="my_form_control col-sm-7 ">
+				<!-- <div class="my_form_control col-sm-7 ">
 					<?php echo CHtml::checkBoxList('User[quests][]', explode(',', $model->quests), $quests); ?>
 					<?php echo CHtml::error($model,'quests'); ?>
+				</div> -->
+				<? $user_quests_array = explode(',', $model->quests); ?>
+				<div class="my_form_control col-sm-7 ">
+					<ul class="list-unstyled">
+					<? foreach ($cities as $city) {
+						$quests_str = '';
+
+						foreach ($quests_obj as $quest) {
+							if ($quest->city_id == $city->id) {
+								$checked = '';
+								if (in_array($quest->id, $user_quests_array)){
+									$checked = 'checked';
+								}
+								$quests_str .= '<li>';
+								$quests_str .=  '<input value="'.$quest->id.'" id="User_quests_'.$quest->id.'" type="checkbox" '.
+												'name="User[quests][]" data-city="'.$city->id.'" '.$checked.'> ';
+								$quests_str .=  '<label for="User_quests_'.$quest->id.'">'.$quest->title.''.
+												'</label>';
+								$quests_str .= '</li>';
+							}
+						}
+
+						$dis = '';
+						if ($quests_str == '') {
+							$dis = 'disabled="disabled"';
+						}
+						echo '<li>'.
+								'<input value="'.$city->id.'" id="City_'.$city->id.'" '.$dis.' type="checkbox" name="City"> '.
+								'<label for="City_'.$city->id.'">'.$city->name.'</label>'.
+								' <span style="cursor:pointer;font-size: 16px;line-height: 1;color:blue;padding-bottom: 3px;" class="show_qs btn btn-default btn-xs" data-city="'.$city->id.'">+</span>';
+
+						if ($quests_str != '') {
+							echo '<ul class="list-unstyled city-list-'.$city->id.'" style="padding-left:10px; overflow:hidden; height:0;">'.$quests_str.'</ul>';
+						}
+
+
+						echo '</li>';
+					} ?>
+					</ul>
 				</div>
 			</div>
 		<?php } ?>

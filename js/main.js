@@ -389,7 +389,7 @@ $(function() {
 
 		if ( $('#reg-name').val() !== '' && $('#reg-name').val().length > 2 ) {
 			if ( $('#reg-email').val() !== '' && re.test( $('#reg-email').val() ) ) {
-				if ( $('#reg-phone').val() !== '' && $('#reg-phone').val().length > 5 ) {
+				if ( $('#reg-phone').val() !== '' && $('#reg-phone').val().length == 17 ) {
 					if ( $('#reg-pass').val() !== '' && $('#reg-pass').val().length > 4 ) {
 						//if ( $('#reg-rules').is(':checked') ) {
 

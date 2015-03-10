@@ -109,7 +109,7 @@ class SiteController extends Controller
 			){
 				if ($show_captcha == 0 || (isset($_POST['captcha']) && $_POST['captcha'] == $code)){
 					$this->sendMail(
-						'ilya@cityquest.ru, e.roslovets@cityquest.ru',
+						'ilya@cityquest.ru, e.roslovets@cityquest.ru, roslovets.elena@gmail.com',
 						//'marchukilya@gmail.com',
 						"CityQuest. Заказ подарочной карты",
 						"Имя - ".$_POST['name']."<br>".
