@@ -17,6 +17,10 @@
  * @property integer $update_time
  * @property integer $author_id
  * @property integer $city_id
+ * 
+ * @property integer $page_title
+ * @property integer $description
+ * @property integer $keywords
  *
  * The followings are the available model relations:
  * @property TblUser $author
@@ -52,7 +56,8 @@ class Quest extends CActiveRecord
 		return array(
 			array('title, content, addres, metro, times, status, author_id', 'required'),
 			array('times, status, sort, create_time, update_time, author_id', 'numerical', 'integerOnly'=>true),
-			array('title, addres, start_text, metro', 'length', 'max'=>128),
+			array('title, addres, start_text, metro, page_title', 'length', 'max'=>128),
+			array('description, keywords', 'length', 'max'=>256),
 			array('del_img', 'boolean'),
 			array('image', 'file',
 				'types'=>'jpg',
@@ -101,6 +106,9 @@ class Quest extends CActiveRecord
 			'city_id' => 'City',
 			'image' => 'Image',
 			'del_img'=>'Delete image?',
+			'page_title'=>'Page Title',
+			'description'=>'Description',
+			'keywords'=>'Keywords',
 		);
 	}
 

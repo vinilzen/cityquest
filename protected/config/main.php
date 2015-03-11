@@ -9,7 +9,7 @@ $local_config = require(dirname(__FILE__).'/local.php');
 // CWebApplication properties can be configured here.
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'CityQuest - Квесты «выберись из комнаты» ',
+	'name'=>'CityQuest',
 
     'language' => 'ru',
 	// preloading 'log' component

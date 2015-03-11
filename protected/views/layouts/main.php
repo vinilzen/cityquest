@@ -3,7 +3,7 @@
   
   <? include('head.php'); ?>
 
-<body class="<? if (!(Yii::app()->controller->id == 'quest' && Yii::app()->controller->action->id == 'index'))
+<body itemscope itemtype="http://schema.org/WebPage" class="<? if (!(Yii::app()->controller->id == 'quest' && Yii::app()->controller->action->id == 'index'))
 echo ' inner ';  if (Yii::app()->request->url == '/contact') echo ' contact ';?>">
 
     <? if (Yii::app()->controller->id == 'quest' && Yii::app()->controller->action->id == 'index')
@@ -23,6 +23,12 @@ echo ' inner ';  if (Yii::app()->request->url == '/contact') echo ' contact ';?>
         </div>
       </div>
       <? } ?>
+    </div>
+
+    <div style="display: none;" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+      <meta itemprop="bestRating" content="5" />
+      <meta itemprop="ratingValue" content="5" />
+      <meta itemprop="ratingCount" content="436" />
     </div>
 
 		<?php echo $content; ?>

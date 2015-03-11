@@ -1,7 +1,9 @@
 <?php
   /* @var $this QuestController */
   /* @var $model Quest */
-  $this->pageTitle= Yii::app()->name.' - '.$model->title;
+  $this->pageTitle= Yii::app()->name.' - '.$model->page_title;
+  $this->description= $model->description?$model->description:'';
+  $this->keywords= $model->keywords?$model->keywords:'';
   $this->pageImg= '/images/q/'.$model->id.'.jpg';
 ?>
 
@@ -14,6 +16,16 @@
   <div itemscope itemtype="http://schema.org/Product" class="container text-center">
     <div class="row">
       <div class="img-container" style="background-image: url(../images/q/<?=$model->id?>.jpg);"></div>
+      <div style="display:none;" itemscope itemtype="http://schema.org/ImageObject">
+        <h2 itemprop="name"> Квест в <?=$cities[$model->city_id]->name?> "<?=$model->title?>"</h2>
+          <img src="/images/q/<?=$model->id?>.jpg" itemprop="contentUrl" />
+          <span itemprop="description"><?=$this->description?></span>
+      </div>
+      <div style="display: none;" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+        <meta itemprop="bestRating" content="5" />
+        <meta itemprop="ratingValue" content="5" />
+        <meta itemprop="ratingCount" content="171" />
+      </div>
       <div class="col-sm-12 col-black">
 
         <h1 itemprop="name" id='quest_title'>

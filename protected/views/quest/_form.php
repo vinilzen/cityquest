@@ -94,6 +94,29 @@
 		<?=$form->error($model,'start_text')?>
 	</div>
 
+	
+	<div class="form-group">
+		<?=$form->labelEx($model,'page_title', array('class' => 'control-label col-sm-3'))?>
+		<div class="col-sm-9">
+			<?=$form->textArea($model,'page_title',array('rows'=>2, 'cols'=>50,'class'=>'form-control'))?>
+		</div>
+		<?=$form->error($model,'page_title')?>
+	</div>
+	<div class="form-group">
+		<?=$form->labelEx($model,'description', array('class' => 'control-label col-sm-3'))?>
+		<div class="col-sm-9">
+			<?=$form->textArea($model,'description',array('rows'=>2, 'cols'=>50,'class'=>'form-control'))?>
+		</div>
+		<?=$form->error($model,'description')?>
+	</div>
+	<div class="form-group">
+		<?=$form->labelEx($model,'keywords', array('class' => 'control-label col-sm-3'))?>
+		<div class="col-sm-9">
+			<?=$form->textArea($model,'keywords',array('rows'=>2, 'cols'=>50,'class'=>'form-control'))?>
+		</div>
+		<?=$form->error($model,'keywords')?>
+	</div>
+
 	<? $img_path = '/images/q/'.$model->id.'.jpg'; ?>
 
 	<div class="form-group">

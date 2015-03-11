@@ -1,13 +1,14 @@
 <?
-/* @var $this QuestController */
-/* @var $dataProvider CActiveDataProvider */
-
 $this->pageTitle= Yii::app()->name.' - '.Yii::t('app','Quests');
+
 $i=0;
+
 foreach ($quests as $quest) {
 	$i++;
 	?> <div class="col-xs-12 col-md-6 col-sm-12 col-lg-4 col-xlg-4 item">
-		<img alt="<?=CHtml::encode($quest->title)?>" class="featurette-image img-responsive" src="/images/q/<?=$quest->id?>.jpg">
+		<img	alt="<?=CHtml::encode($quest->title)?>"
+					class="featurette-image img-responsive"
+					src="/images/q/<?=$quest->id?>.jpg"	/>
 		<? if ($quest->status == 2) { ?>
 			<a class="descr" href="/quest/view?id=<? echo $quest->id; ?>">
 				<h2><?=CHtml::encode($quest->title)?></h2>

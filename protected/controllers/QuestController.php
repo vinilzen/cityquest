@@ -7,7 +7,6 @@ class QuestController extends Controller
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
 	public $layout='//layouts/column2';
-
 	public $pageImg=NULL;
 
 	/**
@@ -201,9 +200,7 @@ class QuestController extends Controller
 	public function actionUpdate($id)
 	{
 		$this->layout='//layouts/admin_column';
-		$model= Quest::model()->
-					//with('city')->
-					findByPk($id);
+		$model= Quest::model()->findByPk($id);
 
 		$bookings = array();
 		$bookings = Booking::model()->with('competitor')->findAllByAttributes(
@@ -258,9 +255,7 @@ class QuestController extends Controller
 				throw new CHttpException(500, 'Не найден город квеста!');
 			}
 
-			$model= Quest::model()->
-					//with('city')->
-					findByPk($id);
+			$model= Quest::model()->findByPk($id);
 		}
 
 
@@ -296,12 +291,6 @@ class QuestController extends Controller
 	 */
 	public function actionIndex()
 	{
-		/*
-			echo Yii::app()->getLanguage(); die;
-			ByAttributes(array(
-				array('languages'=>Yii::app()->getLanguage())
-			));
-		*/
 
 		Yii::beginProfile('quest_index');
 		
