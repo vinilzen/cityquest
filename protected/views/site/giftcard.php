@@ -1,10 +1,13 @@
+<?
+	$this->pageTitle= Yii::app()->name.' - Подарочная карта по играм room escape в Москве';
+	$this->description= 'Подарочная карта CityQuest. Реальные игры secret room escape в Москве. Лучший подарок на день рождения и другой веселый праздник!';
+	$this->keywords= 'escape room, room escape games, escape room Москва, комната room escape, подарок, подарочная карта';
+?>
 <div class="row rules">
 	<div class="col-xs-10 col-xs-offset-1 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
 		<h3 class="text-center">Подарочная карта</h3>
 		<p>Вы можете подарить впечатления от наших квестов своим близким, друзьям и коллегам! Для этого достаточно приобрести нашу фирменную подарочную карту, действующую во всех локациях CityQuest.  Для того, чтобы воспользоваться картой, просто приносите ее с собой на игру.<br></p>
-
 		<p>Карту можно приобрести у нас на квесте, либо воспользоваться доставкой в пределах МКАД.  Подробности Вы можете уточнить по телефону 8 (495) 749-96-09</p>
-
 		<p>Стоимость подарочной карты 4000 руб, стоимость доставки 300 руб.</p>
 	</div>
 </div>
@@ -13,13 +16,8 @@
 	<script> var my_text = '<? echo Yii::app()->user->getFlash('notice'); ?>'; </script>
 	
 	<div class="col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
-		<?
-			if (isset($msg) && $msg != '') {
-				echo '<p style="color:#efefef; padding-bottom: 16px;">'.$msg.'</p>';
-
-				echo '<script>	var ordergiftcard = 1; </script>';
-			}
-		?>
+		<?=(isset($msg) && $msg != '')?'<p style="color:#efefef; padding-bottom: 16px;">'.$msg.'</p>'
+			:'<script>	var ordergiftcard = 1; </script>'?>
 		<form role="form" id="bookgift-form" action="" method="POST">
 			<div class="form-group" id="form-group-reg-name">
 				<input required="" class="form-control" placeholder="Имя" 
@@ -63,5 +61,12 @@
 				<button class="btn btn-default btn-block btn-lg" type="submit">Заказать</button>
 			</div>
 		</form>
+
+
+		<div style="display: none;" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+			<meta itemprop="bestRating" content="5" />
+			<meta itemprop="ratingValue" content="5" />
+			<meta itemprop="ratingCount" content="42" />
+		</div>
 	</div>
 </div>

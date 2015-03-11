@@ -1,3 +1,9 @@
+<?
+  $this->pageTitle= Yii::app()->name.' - организация интересных квестов для большой компании в Москве';
+  $this->description= 'Организация самых интересных квестов в Москве. Реальные игровые квесты по выходу из комнаты для большой компании. Квесты в Москве по низким ценам специально для вас!';
+  $this->keywords= 'квест для большой компании Москва, организация квестов Москва, интересные квесты в Москве, квесты в Москве цена';
+?>
+
 <div class="row rules">
 	<div class="col-xs-10 col-xs-offset-1 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
 		<h3 class="text-center">Правила игры CityQuest</h3>
@@ -16,5 +22,13 @@
 		<p>
 			<br>Пожалуй, это даже больше, чем нужно знать для участия в игре. Записывайтесь скорее на квест и почувствуйте все на себе...
 		</p>
+
+
+		<div style="display: none;" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+			<meta itemprop="bestRating" content="5" />
+			<meta itemprop="ratingValue" content="5" />
+			<meta itemprop="ratingCount" content="34" />
+		</div>
+
 	</div>
 </div>

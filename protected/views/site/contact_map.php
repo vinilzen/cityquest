@@ -1,6 +1,27 @@
+<?
+  $this->pageTitle= Yii::app()->name.' - Квесты в Москве. Контакты';
+  $this->description= 'Лучшие квесты в Москве. ул. Летниковская, дом 4, строение 2 hello@cityquest.ru 8 (495) 749-96-09';
+  $this->keywords= 'лучшие квесты в Москве, ул. Летниковская, дом 4, строение 2 hello@cityquest.ru 8 495 749-96-09, контакты, CityQuest';
+?>
 <div class="row" itemscope itemtype="http://schema.org/LocalBusiness">
-  <span itemprop="name" style="display:none">cityquest</span>
-  <div class="col-xs-12 col-md-5 col-lg-6 col-md-offset-7 col-lg-offset-6 contacts">
+  <meta itemprop="name" content="CityQuest" />
+  <meta itemprop="telephone" content="+7 (495) 749-96-09" />
+  <meta itemprop="logo" content="http://cityquest.ru/img/logo1.png" />
+  <meta itemprop="url" content="http://cityquest.ru/" />
+  <meta itemprop="address" content="Россия, Москва, ул. Летниковская, дом 4, строение 2" />
+  <meta itemprop="openinghours" content="Mo-Su" />
+
+  <div style="display: none;" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+    <meta itemprop="bestRating" content="5" />
+    <meta itemprop="ratingValue" content="5" />
+    <meta itemprop="ratingCount" content="12" />
+  </div>
+
+  <div class="col-xs-12 col-md-5 col-lg-6 col-md-offset-7 col-lg-offset-6 contacts" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="url" content="http://cityquest.ru/" />
+    <meta itemprop="logo" content="http://cityquest.ru/img/logo1.png" />
+    <meta itemprop="name" content="CityQuest. Москва" />
+
     <h5><?=Yii::t('app','For all the questions and reservations quests write!')?></h5>
 
     <p><i class="ico1"></i><a itemprop="telephone" href="tel:8 495 749-96-09">8 (495) 749-96-09</a></p>
@@ -16,6 +37,14 @@
 
     <p class="parking"><?=Yii::t('app','Free on site parking is 1.5 hours')?>.</p>
 
+    <div itemscope itemprop="itemType" content="http://schema.org/PostalAddress" />
+      <meta itemprop="addresslocality" content="Москва" />
+      <meta itemprop="streetaddress" content="ул. Летниковская, дом 4, строение 2" />
+      <meta itemprop="telephone" content="+7 (495) 749-96-09" />
+      <meta itemprop="faxnumber" content="+7 (495) 749-96-09" />
+      <meta itemprop="email" content="hello@cityquest.ru" />
+    </div>
+    
     <p>ООО «Сити Квест»   ОГРН  5147746030900</p>
   </div>
 </div>
