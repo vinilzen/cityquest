@@ -13,11 +13,10 @@
 </div>
 <div class="row">
 	
-	<script> var my_text = '<? echo Yii::app()->user->getFlash('notice'); ?>'; </script>
+	<script>var my_text='<?=Yii::app()->user->getFlash('notice')?>';</script>
 	
 	<div class="col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
-		<?=(isset($msg) && $msg != '')?'<p style="color:#efefef; padding-bottom: 16px;">'.$msg.'</p>'
-			:'<script>	var ordergiftcard = 1; </script>'?>
+		<?=(isset($msg) && $msg != '')?'<p style="color:#efefef;padding-bottom:16px;">'.$msg.'</p><script>var ordergiftcard=1;</script>':''?>
 		<form role="form" id="bookgift-form" action="" method="POST">
 			<div class="form-group" id="form-group-reg-name">
 				<input required="" class="form-control" placeholder="Имя" 
