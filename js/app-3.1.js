@@ -18,11 +18,6 @@ var App = function() {
             }), $('[data-toggle="popover"], .enable-popover').popover({
                 container: "body",
                 animation: !0
-            }), $('[data-toggle="lightbox-image"]').magnificPopup({
-                type: "image",
-                image: {
-                    titleSrc: "title"
-                }
             }), $('[data-toggle="lightbox-gallery"]').each(function() {
                 $(this).magnificPopup({
                     delegate: "a.gallery-link",
@@ -41,39 +36,13 @@ var App = function() {
                 })
             });
             var c = ["Afghanistan", "Albania", "Algeria", "American Samoa", "Andorra", "Angola", "Anguilla", "Antarctica", "Antigua and Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Bouvet Island", "Brazil", "British Indian Ocean Territory", "British Virgin Islands", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "CΓ΄te d'Ivoire", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands", "Central African Republic", "Chad", "Chile", "China", "Christmas Island", "Cocos (Keeling) Islands", "Colombia", "Comoros", "Congo", "Cook Islands", "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czech Republic", "Democratic Republic of the Congo", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Timor", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Faeroe Islands", "Falkland Islands", "Fiji", "Finland", "Former Yugoslav Republic of Macedonia", "France", "French Guiana", "French Polynesia", "French Southern Territories", "Gabon", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guadeloupe", "Guam", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Heard Island and McDonald Islands", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macau", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Martinique", "Mauritania", "Mauritius", "Mayotte", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montserrat", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "Netherlands Antilles", "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "Niue", "Norfolk Island", "North Korea", "Northern Marianas", "Norway", "Oman", "Pakistan", "Palau", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Pitcairn Islands", "Poland", "Portugal", "Puerto Rico", "Qatar", "RΓ©union", "Romania", "Russia", "Rwanda", "SΓ£o TomΓ© and PrΓ­ncipe", "Saint Helena", "Saint Kitts and Nevis", "Saint Lucia", "Saint Pierre and Miquelon", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Saudi Arabia", "Senegal", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Georgia and the South Sandwich Islands", "South Korea", "Spain", "Sri Lanka", "Sudan", "Suriname", "Svalbard and Jan Mayen", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "The Bahamas", "The Gambia", "Togo", "Tokelau", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks and Caicos Islands", "Tuvalu", "US Virgin Islands", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "United States Minor Outlying Islands", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Wallis and Futuna", "Western Sahara", "Yemen", "Yugoslavia", "Zambia", "Zimbabwe"];
-            $(".input-typeahead").typeahead({
-                source: c
-            }), $(".select-chosen").chosen({
-                width: "100%"
-            }), $(".select-select2").select2(), $(".input-colorpicker").colorpicker({
-                format: "hex"
-            }), $(".input-colorpicker-rgba").colorpicker({
-                format: "rgba"
-            }), $(".input-slider").slider(), $(".input-tags").tagsInput({
-                width: "auto",
-                height: "auto"
-            }), $(".input-datepicker, .input-daterange").datepicker({
+            $(".input-datepicker, .input-daterange").datepicker({
                 weekStart: 1
             }), $(".input-datepicker-close").datepicker({
                 weekStart: 1
             }).on("changeDate", function() {
                 $(this).datepicker("hide")
-            }), $(".input-timepicker").timepicker({
-                minuteStep: 1,
-                showSeconds: !0,
-                showMeridian: !0
-            }), $(".input-timepicker24").timepicker({
-                minuteStep: 1,
-                showSeconds: !0,
-                showMeridian: !1
-            }), $(".pie-chart").easyPieChart({
-                barColor: $(this).data("bar-color") ? $(this).data("bar-color") : "#777777",
-                trackColor: $(this).data("track-color") ? $(this).data("track-color") : "#eeeeee",
-                lineWidth: $(this).data("line-width") ? $(this).data("line-width") : 3,
-                size: $(this).data("size") ? $(this).data("size") : "80",
-                animate: 800,
-                scaleColor: !1
-            }), $("input, textarea").placeholder()
+            })
         },
         d = function() {
             var a = $("#page-wrapper");
@@ -204,28 +173,7 @@ var App = function() {
                 }, 400), !1
             })
         },
-        f = function() {
-            var a = $(".chat-users"),
-                e = $(".chat-talk"),
-                i = $(".chat-talk-messages"),
-                s = $("#sidebar-chat-message"),
-                t = "";
-            $(".chat-talk-messages").slimScroll({
-                height: 210,
-                color: "#fff",
-                size: "3px",
-                position: "left",
-                touchScrollStep: 100
-            }), $("a", a).click(function() {
-                return a.slideUp(), e.slideDown(), s.focus(), !1
-            }), $("#chat-talk-close-btn").click(function() {
-                return e.slideUp(), a.slideDown(), !1
-            }), $("#sidebar-chat-form").submit(function(a) {
-                t = s.val(), t && (i.append('<li class="chat-talk-msg chat-talk-msg-highlight themed-border animation-slideLeft">' + $("<div />").text(t).html() + "</li>"), i.animate({
-                    scrollTop: i[0].scrollHeight
-                }, 500), s.val("")), a.preventDefault()
-            })
-        },
+        f = function() { },
         v = function() {
             var e, s = $(".sidebar-themes"),
                 t = $("#theme-link"),

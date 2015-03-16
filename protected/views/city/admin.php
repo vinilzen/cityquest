@@ -37,15 +37,11 @@ $('.search-form form').submit(function(){
 	</div>
 	<div class="row">
 		<div class="col-sm-12">
-			<?=CHtml::link('Advanced Search','#',array('class'=>'search-button'))?>
-			<div class="search-form" style="display:none">
-			<?php $this->renderPartial('_search',array('model'=>$model)); ?>
-			</div><!-- search-form -->
-
 			<?php $this->widget('zii.widgets.grid.CGridView', array(
 				'id'=>'city-grid',
 				'dataProvider'=>$model->search(),
-				// 'filter'=>$model,
+				'cssFile'=>'',
+				'itemsCssClass' => 'table table-striped',
 				'columns'=>array(
 					'id',
 					'name',
@@ -55,7 +51,7 @@ $('.search-form form').submit(function(){
 					array(
 						'class'=>'CButtonColumn',
 						'template' => '{update} {delete} {view}',
-						'htmlOptions' => array('style'=> 'white-space:nowrap;'),
+						'htmlOptions' => array('style'=> 'white-space:nowrap;text-align:right;'),
 						'buttons'=>array(
 							'update' => array(
 								'options' => array('class'=>'update btn btn-default btn-xs', 'title'=>'Редактировать'),

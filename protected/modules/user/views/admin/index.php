@@ -31,6 +31,9 @@ $('.search-form form').submit(function(){
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
+	// 'pagerCssClass' => 'pagination',
+	'cssFile'=>'',
+	'itemsCssClass' => 'table table-striped',
 	'columns'=>array(
 		array(
 			'name' => 'id',
@@ -63,7 +66,7 @@ $('.search-form form').submit(function(){
 			'value' => '(($data->lastvisit)?date("d.m.Y H:i:s",$data->lastvisit):UserModule::t("Not visited"))',
 			'filter'=>'',
 		),
-	/*	array(
+		/*array(
 			'name'=>'status',
 			'value'=>'User::itemAlias("UserStatus",$data->status)',
 			'filter'=>'',
@@ -76,7 +79,7 @@ $('.search-form form').submit(function(){
 		array(
 			'class'=>'CButtonColumn',
 			'template' => '{update} {delete} {view} {viewfb} {viewvk}',
-			'htmlOptions' => array('style'=> 'white-space:nowrap;'),
+			'htmlOptions' => array('style'=> 'max-width:85px;'),
 			'buttons'=>array(
 				'update' => array(
 					'options' => array('class'=>'update btn btn-default btn-xs', 'title'=>'Редактировать'),
