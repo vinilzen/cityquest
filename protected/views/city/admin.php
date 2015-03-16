@@ -41,7 +41,8 @@ $('.search-form form').submit(function(){
 				'id'=>'city-grid',
 				'dataProvider'=>$model->search(),
 				'cssFile'=>'',
-				'itemsCssClass' => 'table table-striped',
+				'htmlOptions'=>array('class'=>'table-responsive'),
+				'itemsCssClass' => 'table table-striped table-responsive',
 				'columns'=>array(
 					'id',
 					'name',
@@ -50,7 +51,7 @@ $('.search-form form').submit(function(){
 					'languages',
 					array(
 						'class'=>'CButtonColumn',
-						'template' => '{update} {delete} {view}',
+						'template' => '{update} {delete}',
 						'htmlOptions' => array('style'=> 'white-space:nowrap;text-align:right;'),
 						'buttons'=>array(
 							'update' => array(
@@ -59,13 +60,8 @@ $('.search-form form').submit(function(){
 								'imageUrl' => false,
 							),
 							'delete' => array(
-								'options' => array('class'=>'delete btn btn-default btn-xs', 'title'=>'Удалить'),
+								'options' => array('class'=>'delete btn btn-default btn-danger btn-xs', 'title'=>'Удалить'),
 								'label' => '<i class="hi hi-trash"></i>',
-								'imageUrl' => false,
-							),
-							'view' => array(
-								'options' => array('class'=>'view btn btn-default btn-xs', 'title'=>'Смотреть'),
-								'label' => '<i class="hi hi-eye-open"></i>',
 								'imageUrl' => false,
 							),
 						)

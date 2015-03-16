@@ -24,20 +24,7 @@
 								<strong>CityQuest</strong>
 							</span>
 						</a>
-						<div class="sidebar-section sidebar-user clearfix sidebar-nav-mini-hide hide">
-							<div class="sidebar-user-avatar">
-								<a href="page_ready_user_profile.php">
-									<img src="/img/avatar2.jpg" alt="avatar">
-								</a>
-							</div>
-							<div class="sidebar-user-name">Илья</div>
-							<div class="sidebar-user-links">
-								<a href="page_ready_user_profile.php" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Profile"><i class="gi gi-user"></i></a>
-								<a href="page_ready_inbox.php" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Messages"><i class="gi gi-envelope"></i></a>
-								<a href="javascript:void(0)" class="enable-tooltip" data-placement="bottom" title="" onclick="$('#modal-user-settings').modal('show');" data-original-title="Settings"><i class="gi gi-cogwheel"></i></a>
-								<a href="login.php" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Logout"><i class="gi gi-exit"></i></a>
-							</div>
-						</div>
+						<? if (Yii::app()->getModule('user')->user()->superuser == 1) { ?>
 						<ul class="sidebar-nav">
 							<li class="">
 								<a href="/quest/adminschedule/ymd">
@@ -81,6 +68,7 @@
 								</a>
 							</li>
 						</ul>
+						<? } ?>
 					</div>
 				</div>
 			</div>
@@ -119,26 +107,6 @@
 							</a>
 							<ul class="dropdown-menu dropdown-custom dropdown-menu-right">
 								<li class="dropdown-header text-center"><?=Yii::app()->user->name?></li>
-								<li class="hide">
-									<a href="page_ready_timeline.php">
-										<i class="fa fa-clock-o fa-fw pull-right"></i>
-										<span class="badge pull-right">10</span>
-										Updates
-									</a>
-									<a href="page_ready_inbox.php">
-										<i class="fa fa-envelope-o fa-fw pull-right"></i>
-										<span class="badge pull-right">5</span>
-										Messages
-									</a>
-									<a href="page_ready_pricing_tables.php"><i class="fa fa-magnet fa-fw pull-right"></i>
-										<span class="badge pull-right">3</span>
-										Subscriptions
-									</a>
-									<a href="page_ready_faq.php"><i class="fa fa-question fa-fw pull-right"></i>
-										<span class="badge pull-right">11</span>
-										FAQ
-									</a>
-								</li>
 								<li>
 									<a href="/user/profile">
 										<i class="fa fa-user fa-fw pull-right"></i>
@@ -173,8 +141,7 @@
 								$user_city_id = Yii::app()->getModule('user')->user()->city_id;
 								
 								foreach ($this->cities AS $city)
-									if ($city->id == $user_city_id)
-										echo $city->name;
+									if ($city->id == $user_city_id) echo $city->name;
 							?><span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu" role="menu">
@@ -200,26 +167,7 @@
 			</div>
 		</div>
 	</div>
-
-	<div class="container-fluid">
-		<div class="row">
-		<? if (Yii::app()->getModule('user')->user()->superuser == 1) { ?>
-			<div class="navbar-default">
-				<button type="button" class="navbar-toggle collapsed pull-left" data-toggle="collapse" data-target="#left-sidebar">
-					<span class="sr-only">Toggle sidebar</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-			</div>
-			<div class="col-xs-12 col-sm-12 col-md-9 col-lg-10 main">
-		<? 	} else { ?>
-			<div class="col-xs-12 main">
-		<? 	} ?>
-			</div>
-		</div>
-	</div>
-
+	
 <script src="/js/jquery.min.js"></script>
 <script src="/js/jquery.ba-bbq.js"></script>
 <script src="/js/jquery-ui.js"></script>

@@ -70,71 +70,73 @@
 									$next = $prev + 2*$offset;
 								}
 							?>
-							<div class="btn-group btn-group-justified">
-								<a href="/quest/adminschedule/ymd/?d=<? echo $prev; ?>" class="btn btn-default" title="<? echo $offset; ?> дней назад">
-									<i class="hi hi-chevron-left"></i>
-								</a>
-							<?
-								for ($i=$start-1; $i<$start+$offset; $i++) {
-									$currDate = strtotime( '+'.$i.' day' );
+							<div class="table-responsive">
+								<div class="btn-group btn-group-justified" style="min-width:1024px;">
+									<a href="/quest/adminschedule/ymd/?d=<? echo $prev; ?>" class="btn btn-default" title="<? echo $offset; ?> дней назад">
+										<i class="hi hi-chevron-left"></i>
+									</a>
+									<?
+									for ($i=$start-1; $i<$start+$offset; $i++) {
+										$currDate = strtotime( '+'.$i.' day' );
 
-									// выбранная дата
-									$disabled = '';
-									$disabled_class = '';
+										// выбранная дата
+										$disabled = '';
+										$disabled_class = '';
 
-									// weekend
-									$weekend = '';
-									$holiday = 0;
-									if ($ymd == date('Ymd', $currDate)) {
-										$disabled = ' disabled="disabled"';
-										$selectedDate = $currDate;
-										$disabled_class = ' btn-success ';
-									} else {
-										if (date('w', $currDate) == 0 || date('w', $currDate) == 6 || in_array(date('Ymd', $currDate), $holidays)){
-											$holiday = 1;
-											$weekend = ' btn-warning';
-										}			
+										// weekend
+										$weekend = '';
+										$holiday = 0;
+										if ($ymd == date('Ymd', $currDate)) {
+											$disabled = ' disabled="disabled"';
+											$selectedDate = $currDate;
+											$disabled_class = ' btn-success ';
+										} else {
+											if (date('w', $currDate) == 0 || date('w', $currDate) == 6 || in_array(date('Ymd', $currDate), $holidays)){
+												$holiday = 1;
+												$weekend = ' btn-warning';
+											}			
+										}
+
+										// сегодня 
+										$active = '';
+										if (date('Ymd', $currDate) === date('Ymd', strtotime('now')))
+											$active = ' active';
+
+
+										$style="";
+										$title="";
+										$badge = '<span class="badge" style=" margin-top:3px; font-size: 13px;font-family: \'Open Sans\';font-weight: normal;">0</span>';
+										if (isset($twoweek_bookings_arr[date('Ymd', $currDate)])) {	
+											// $style = 'style="box-shadow: inset 0px -10px 0px -7px #000; padding-bottom: 3px;';
+											$title = '(Всего броней - '.count($twoweek_bookings_arr[date('Ymd', $currDate)]).')';
+											$badge = '<span class="badge" style=" margin-top:3px; font-size: 13px;font-family: \'Open Sans\';font-weight: normal;">'.count($twoweek_bookings_arr[date('Ymd', $currDate)]).'</span>';
+										}
+
+										if (date('w', $currDate) == 0 || date('w', $currDate) == 6){
+											echo '<a data-container="body" data-toggle="tooltip" title="'.date('d M Y', $currDate).' '.$title.'" '.
+													'href="/quest/adminschedule/ymd/'.date('Ymd', $currDate).'?d='.$start.'" type="button" 
+														class="text-center btn btn-default'.$active.$weekend.$disabled_class.'" '.$disabled.'>'.
+														'<span style="display:block;line-height:1;">'.date('d', $currDate).'</span>'.
+														'<small style="display:block;line-height:1;">'.$days_short[date('N', $currDate)-1].'</small>'.
+														'<small style="display:block;line-height:1;">'.mb_substr($month[date('n', $currDate)-1],0,6).'</small>'.
+														$badge.
+												 '</a>';
+										} else {
+											echo '<a '.$style.' data-container="body" data-toggle="tooltip" title="'.date('d M Y', $currDate).' '.$title.'" '.
+													'href="/quest/adminschedule/ymd/'.date('Ymd', $currDate).'?d='.$start.'" type="button" 
+														class="text-center btn btn-default'.$active.$weekend.$disabled_class.'" '.$disabled.'>'.
+														'<span style="display:block;line-height:1;">'.date('d', $currDate).'</span>'.
+														'<small style="display:block;line-height:1;">'.$days_short[date('N', $currDate)-1].'</small>'.
+														'<small style="display:block;line-height:1;">'.mb_substr($month[date('n', $currDate)-1],0,6).'</small>'.
+														$badge.
+												 '</a>';
+										}
 									}
-
-									// сегодня 
-									$active = '';
-									if (date('Ymd', $currDate) === date('Ymd', strtotime('now')))
-										$active = ' active';
-
-
-									$style="";
-									$title="";
-									$badge = '<span class="badge" style=" margin-top:3px; font-size: 13px;font-family: \'Open Sans\';font-weight: normal;">0</span>';
-									if (isset($twoweek_bookings_arr[date('Ymd', $currDate)])) {	
-										// $style = 'style="box-shadow: inset 0px -10px 0px -7px #000; padding-bottom: 3px;';
-										$title = '(Всего броней - '.count($twoweek_bookings_arr[date('Ymd', $currDate)]).')';
-										$badge = '<span class="badge" style=" margin-top:3px; font-size: 13px;font-family: \'Open Sans\';font-weight: normal;">'.count($twoweek_bookings_arr[date('Ymd', $currDate)]).'</span>';
-									}
-
-									if (date('w', $currDate) == 0 || date('w', $currDate) == 6){
-										echo '<a data-container="body" data-toggle="tooltip" title="'.date('d M Y', $currDate).' '.$title.'" '.
-												'href="/quest/adminschedule/ymd/'.date('Ymd', $currDate).'?d='.$start.'" type="button" 
-													class="text-center btn btn-default'.$active.$weekend.$disabled_class.'" '.$disabled.'>'.
-													'<span style="display:block;line-height:1;">'.date('d', $currDate).'</span>'.
-													'<small style="display:block;line-height:1;">'.$days_short[date('N', $currDate)-1].'</small>'.
-													'<small style="display:block;line-height:1;">'.mb_substr($month[date('n', $currDate)-1],0,6).'</small>'.
-													$badge.
-											 '</a>';
-									} else {
-										echo '<a '.$style.' data-container="body" data-toggle="tooltip" title="'.date('d M Y', $currDate).' '.$title.'" '.
-												'href="/quest/adminschedule/ymd/'.date('Ymd', $currDate).'?d='.$start.'" type="button" 
-													class="text-center btn btn-default'.$active.$weekend.$disabled_class.'" '.$disabled.'>'.
-													'<span style="display:block;line-height:1;">'.date('d', $currDate).'</span>'.
-													'<small style="display:block;line-height:1;">'.$days_short[date('N', $currDate)-1].'</small>'.
-													'<small style="display:block;line-height:1;">'.mb_substr($month[date('n', $currDate)-1],0,6).'</small>'.
-													$badge.
-											 '</a>';
-									}
-								}
-							?>
-								<a href="/quest/adminschedule/ymd/?d=<? echo $next; ?>" class="btn btn-default" title="<? echo $offset; ?> дней вперед">
-									<i class="hi hi-chevron-right"></i>
-								</a>
+								?>
+									<a href="/quest/adminschedule/ymd/?d=<? echo $next; ?>" class="btn btn-default" title="<? echo $offset; ?> дней вперед">
+										<i class="hi hi-chevron-right"></i>
+									</a>
+								</div>
 							</div>
 							<hr>
 							<style> .table>tbody>tr>td { padding:8px 1px; } </style>

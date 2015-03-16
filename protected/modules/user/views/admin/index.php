@@ -25,13 +25,29 @@ $('.search-form form').submit(function(){
 ?>
 
 <div class="search-form" style="display:none">
-<?php $this->renderPartial('_search',array('model'=>$model)); ?>
+	<?php $this->renderPartial('_search',array('model'=>$model)); ?>
 </div>
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'dataProvider'=>$model->search(),
-	'filter'=>$model,
-	// 'pagerCssClass' => 'pagination',
+    // 'rowCssClassExpression'=>'(($data->superuser==2) ? "info":"").(($data->superuser==1) ? "danger":"")',
+    'pagerCssClass'=>'dataTables_paginate paging_bootstrap',
+    'pager'=>array(
+    	'htmlOptions'=>array(
+    		'class'=>'pagination pagination-sm remove-margin',
+    	),
+    	'lastPageLabel'=>'>>',
+    	'firstPageLabel'=>'<<',
+    	'nextPageLabel'=>'>',
+    	'prevPageLabel'=>'<',
+    	'header'=>'',
+    	'selectedPageCssClass'=>'active'
+    ),
+	'htmlOptions'=>array(
+		'class'=>'table-responsive',
+    	'style'=>'margin-bottom:20px;'
+    ),
+    'filter'=>$model,
 	'cssFile'=>'',
 	'itemsCssClass' => 'table table-striped',
 	'columns'=>array(
@@ -66,20 +82,21 @@ $('.search-form form').submit(function(){
 			'value' => '(($data->lastvisit)?date("d.m.Y H:i:s",$data->lastvisit):UserModule::t("Not visited"))',
 			'filter'=>'',
 		),
-		/*array(
-			'name'=>'status',
-			'value'=>'User::itemAlias("UserStatus",$data->status)',
-			'filter'=>'',
-		),*/
 		array(
 			'name'=>'superuser',
-			'value'=>'User::itemAlias("AdminStatus",$data->superuser)',
+			'value'=>'CHtml::link(
+					CHtml::encode( User::itemAlias("AdminStatus",$data->superuser) ),
+					"#",
+					array("class"=>"label label-".(($data->superuser==1)?"danger":(($data->superuser==2)?"info":"success")))
+				)',
+			// 'value'=>'User::itemAlias("AdminStatus",$data->superuser)',
 			'filter'=>'',
+			'type'=>'raw',
 		),
 		array(
 			'class'=>'CButtonColumn',
-			'template' => '{update} {delete} {view} {viewfb} {viewvk}',
-			'htmlOptions' => array('style'=> 'max-width:85px;'),
+			'template' => '{update} {delete} {viewfb} {viewvk}',
+			'htmlOptions' => array('style'=> 'white-space:nowrap;'),
 			'buttons'=>array(
 				'update' => array(
 					'options' => array('class'=>'update btn btn-default btn-xs', 'title'=>'Редактировать'),
@@ -87,13 +104,8 @@ $('.search-form form').submit(function(){
 					'imageUrl' => false,
 				),
 				'delete' => array(
-					'options' => array('class'=>'delete btn btn-default btn-xs', 'title'=>'Удалить'),
+					'options' => array('class'=>'delete btn btn-danger btn-default btn-xs', 'title'=>'Удалить'),
 					'label' => '<i class="hi hi-trash"></i>',
-					'imageUrl' => false,
-				),
-				'view' => array(
-					'options' => array('class'=>'view btn btn-default btn-xs', 'title'=>'Смотреть'),
-					'label' => '<i class="hi hi-eye-open"></i>',
 					'imageUrl' => false,
 				),
 				'viewfb' => array(
