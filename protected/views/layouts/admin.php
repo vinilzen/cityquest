@@ -5,35 +5,166 @@
 	<meta content="IE=edge" http-equiv="X-UA-Compatible">
 	<meta content="width=device-width, initial-scale=1" name="viewport">
 	<meta name="language" content="ru" />
-	<!--[if lt IE 8]>
-	 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie.css" media="screen, projection" />
-	<![endif]-->
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/_bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/proui/bootstrap.min-3.1.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/proui/main-3.1.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/proui/plugins-3.1.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/proui/themes-3.1.css" />
 	<link rel="stylesheet" type="text/css" href="/css/jquery.formstyler.css" />
-	<!--[if lt IE 9]
-		<script src="/js/ie8-responsive-file-warning.js"></script>-->
-	<script src="/js/ie-emulation-modes-warning.js"></script>
-	<script src="/js/ie10-viewport-bug-workaround.js"></script>
-	<!--[if lt IE 9]
-		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>-->
-	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
+	<title><?=CHtml::encode($this->pageTitle)?></title>
 	<link href="/favico.png" rel="icon">
 </head>
 <body>
-	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">
-					<span>CityQuest</span>
-				</a>
+	<div id="page-wrapper">
+		<div id="page-container" class="sidebar-partial sidebar-visible-lg sidebar-no-animations sidebar-visible-xs">
+			<div id="sidebar">
+				<div id="sidebar-scroll">
+					<div class="sidebar-content">
+						<a href="/" class="sidebar-brand">
+							<span class="sidebar-nav-mini-hide">
+								<strong>CityQuest</strong>
+							</span>
+						</a>
+						<div class="sidebar-section sidebar-user clearfix sidebar-nav-mini-hide hide">
+							<div class="sidebar-user-avatar">
+								<a href="page_ready_user_profile.php">
+									<img src="/img/avatar2.jpg" alt="avatar">
+								</a>
+							</div>
+							<div class="sidebar-user-name">Илья</div>
+							<div class="sidebar-user-links">
+								<a href="page_ready_user_profile.php" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Profile"><i class="gi gi-user"></i></a>
+								<a href="page_ready_inbox.php" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Messages"><i class="gi gi-envelope"></i></a>
+								<a href="javascript:void(0)" class="enable-tooltip" data-placement="bottom" title="" onclick="$('#modal-user-settings').modal('show');" data-original-title="Settings"><i class="gi gi-cogwheel"></i></a>
+								<a href="login.php" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Logout"><i class="gi gi-exit"></i></a>
+							</div>
+						</div>
+						<ul class="sidebar-nav">
+							<li class="">
+								<a href="/quest/adminschedule/ymd">
+									<i class="hi hi-tasks sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Брони</span>
+								</a>
+							</li>
+							<li class="">
+								<a href="/quest/admin">
+									<i class="hi hi-book sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Квесты</span>
+								</a>
+							</li>
+							<li class="hide">
+								<a href="/user/user/export">
+									<span class="sidebar-nav-mini-hide">Экспорт пользователей</span>
+								</a>
+							</li>
+							<li class=" hide">
+								<a href="/user/user/exportlab" title="Экспорт кто не прошел Лабораторию">
+									<span class="sidebar-nav-mini-hide">Экспорт пользователей которые не прошли Лабораторию</span>
+								</a>
+							</li>
+							<li class="">
+								<a href="/user/admin">
+									<i class="hi hi-user sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Пользователи</span>
+								</a>
+							</li>
+
+							<li class="">
+								<a href="/city/admin">
+									<i class="hi hi-globe sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Города</span>
+								</a>
+							</li>
+							<li class="hide">
+								<a href="/site/editmailtpl/success/1">
+									<span class="sidebar-nav-mini-hide">Шаблон письма "Прошел""</span>
+								</a>
+							</li>
+							<li class="hide">
+								<a href="/site/editmailtpl/success/0">
+									<span class="sidebar-nav-mini-hide">Шаблон письма "Не прошел"</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
 			</div>
+			<div id="main-container">
+				<header class="navbar navbar-default">
+					<ul class="nav navbar-nav-custom">
+						<li>
+							<a href="javascript:void(0)" onclick="App.sidebar('toggle-sidebar');this.blur();">
+							<i class="fa fa-bars fa-fw"></i>
+							</a>
+						</li>
+						<li class="dropdown">
+							<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+								<? 	
+								$user_city_id = Yii::app()->getModule('user')->user()->city_id;
+								
+								foreach ($this->cities AS $city)
+									if ($city->id == $user_city_id)
+										echo $city->name;
+								?>
+								<i class="fa fa-angle-down"></i>
+							</a>
+							<ul class="dropdown-menu dropdown-custom dropdown-options">
+								<li class="dropdown-header text-center">Выберите город</li>
+								<? foreach ($this->cities AS $city) {
+									echo '<li><a href="/city/set/?id='.$city->id.'">'.$city->name.'</a></li>';
+								} ?>
+							</ul>
+						</li>
+					</ul>
+					<ul class="nav navbar-nav-custom pull-right">
+						<li class="dropdown">
+							<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+								Профиль
+								<i class="fa fa-angle-down"></i>
+							</a>
+							<ul class="dropdown-menu dropdown-custom dropdown-menu-right">
+								<li class="dropdown-header text-center"><?=Yii::app()->user->name?></li>
+								<li class="hide">
+									<a href="page_ready_timeline.php">
+										<i class="fa fa-clock-o fa-fw pull-right"></i>
+										<span class="badge pull-right">10</span>
+										Updates
+									</a>
+									<a href="page_ready_inbox.php">
+										<i class="fa fa-envelope-o fa-fw pull-right"></i>
+										<span class="badge pull-right">5</span>
+										Messages
+									</a>
+									<a href="page_ready_pricing_tables.php"><i class="fa fa-magnet fa-fw pull-right"></i>
+										<span class="badge pull-right">3</span>
+										Subscriptions
+									</a>
+									<a href="page_ready_faq.php"><i class="fa fa-question fa-fw pull-right"></i>
+										<span class="badge pull-right">11</span>
+										FAQ
+									</a>
+								</li>
+								<li>
+									<a href="/user/profile">
+										<i class="fa fa-user fa-fw pull-right"></i>
+										Profile
+									</a>
+									<a href="/user/logout" class="hide">
+										<i class="fa fa-cog fa-fw pull-right"></i>
+										Settings
+									</a>
+								</li>
+								<li class="divider"></li>
+								<li>
+									<!-- <a href="page_ready_lock_screen.php"><i class="fa fa-lock fa-fw pull-right"></i> Lock Account</a> -->
+									<a href="/user/logout"><i class="fa fa-ban fa-fw pull-right"></i> Logout</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+
+				</header>
+				<div id="page-content"><?=$content?></div>
+			</div>
+		</div>
+	</div>
+	<div class="navbar navbar-inverse navbar-fixed-top hide">
+		<div class="container-fluid">
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown">
@@ -81,103 +212,10 @@
 					<span class="icon-bar"></span>
 				</button>
 			</div>
-			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-2">
-
-				<div class="navbar-collapse collapse" id="left-sidebar">
-					<ul class="nav nav-sidebar menu-items" style="margin-bottom:0;">
-						<li>
-							<div class="menu-items-title menu-favorites">
-								<span class="menu-items-title-text">Квесты</span>
-							</div>
-						</li>
-					</ul>
-					<ul class="nav nav-sidebar">
-						<li class="menu-item-block menu-item-live-feed">
-							<a href="/quest/adminschedule/ymd" class="menu-item-link">
-								<span class="menu-item-link-text">Сводная таблица</span>
-							</a>
-						</li>
-						<li class="menu-item-block menu-item-live-feed">
-							<a href="/quest/admin" class="menu-item-link">
-								<span class="menu-item-link-text">Управление квестами</span>
-							</a>
-						</li>
-					</ul>
-					<ul class="nav nav-sidebar menu-items" style="margin-bottom:0;">
-						<li>
-							<div class="menu-items-title menu-favorites">
-								<span class="menu-items-title-text">Пользователи</span>
-							</div>
-						</li>
-					</ul>
-					<ul class="nav nav-sidebar">
-						<li class="menu-item-block menu-item-live-feed">
-							<a href="/user/user/export" class="menu-item-link">
-								<span class="menu-item-link-text">Экспорт</span>
-							</a>
-						</li>
-						<li class="menu-item-block menu-item-live-feed">
-							<a href="/user/user/exportlab" class="menu-item-link" title="Экспорт кто не прошел Лабораторию">
-								<span class="menu-item-link-text">Экспорт кто не прошел Лабораторию</span>
-							</a>
-						</li>
-						<li class="menu-item-block menu-item-live-feed">
-							<a href="/user/admin" class="menu-item-link">
-								<span class="menu-item-link-text">Управление пользователями</span>
-							</a>
-						</li>
-					</ul>
-
-					<ul class="nav nav-sidebar menu-items" style="margin-bottom:0;">
-						<li>
-							<div class="menu-items-title menu-favorites">
-								<span class="menu-items-title-text">Города</span>
-							</div>
-						</li>
-					</ul>
-					<ul class="nav nav-sidebar menu-items">
-
-						<li class="menu-item-block menu-item-live-feed">
-							<a href="/city/admin" class="menu-item-link">
-								<span class="menu-item-link-text">Управление городами</span>
-							</a>
-						</li>
-					</ul>
-					
-					<ul class="nav nav-sidebar menu-items" style="margin-bottom:0;">
-						<li>
-							<div class="menu-items-title menu-favorites">
-								<span class="menu-items-title-text">Шаблон письма</span>
-							</div>
-						</li>
-						<li class="menu-item-block menu-item-live-feed">
-							<div class="menu-items-title menu-favorites">
-								<span class="menu-items-subtitle-text">Рус</span>
-							</div>
-						</li>
-					</ul>
-					<ul class="nav nav-sidebar menu-items">
-
-						<li class="menu-item-block menu-item-live-feed">
-							<a href="/site/editmailtpl/success/1" class="menu-item-link">
-								<span class="menu-item-link-text">Прошел</span>
-							</a>
-						</li>
-						<li class="menu-item-block menu-item-live-feed">
-							<a href="/site/editmailtpl/success/0" class="menu-item-link">
-								<span class="menu-item-link-text">Не прошел</span>
-							</a>
-						</li>
-					</ul>
-				</div>	
-			</div>
 			<div class="col-xs-12 col-sm-12 col-md-9 col-lg-10 main">
 		<? 	} else { ?>
 			<div class="col-xs-12 main">
 		<? 	} ?>
-				<div style="min-height:300px;">
-					<?php echo $content; ?>
-				</div>
 			</div>
 		</div>
 	</div>
@@ -191,6 +229,7 @@
 <script src="/js/admin_main.js"></script>
 <script src="/js/jquery.mask.min.js"></script>
 <script src="/js/jquery.formstyler.min.js"></script>  
+<script src="/js/app-3.1.js"></script>  
 <!-- Yandex.Metrika informer --><!-- /Yandex.Metrika informer --><!-- Yandex.Metrika counter -->
 <script type="text/javascript">
   (function (d, w, c) {

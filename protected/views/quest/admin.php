@@ -9,8 +9,6 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 	array('label'=>'Сводная таблица', 'url'=>array('quest/adminschedule/ymd')),
-	// array('label'=>'Управление квестами', 'url'=>array('admin')),
-	// array('label'=>'Создать новый квест', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -23,30 +21,44 @@ $('.search-form form').submit(function(){
 		data: $(this).serialize()
 	});
 	return false;
-});
-");
+});");
 ?>
 <div class="pagetitle-wrap">
 	<h1 class="page-header pagetitle">
 		Управление квестами
 		<small>
 			<a href="/quest/create">
-				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+				<i class="hi hi-plus" aria-hidden="true"></i>
 			</a>
 		</small>
 	</h1>
 </div>
 
-<div class="row workarea" id="sortable">
+<div class="row" id="sortable">
 	<? if (count($models)>0) {
 		foreach ($models AS $q) {
-			echo '<div class="col-sm-6 col-md-4 col-lg-3 sortable_quest" data-id="'.$q->id.'" id="quest_'.$q->id.'">'.
-					'<div class="thumbnail">'.
-						'<img src="/images/q/'.$q->id.'.jpg" class="img-responsive" style="max-height:180px;">'.
-						'<div class="caption">'.
-							'<h4 style="max-height: 37px; height: 37px; overflow: hidden;">'.$q->title.'</h4>'.
-							'<p style="overflow: hidden;height: 40px;">'.$q->content.'</p>'.
-							'<p><a href="/quest/update?id='.$q->id.'" class="btn btn-primary btn-sm" role="button">Редактировать</a></p>'.
+
+			if ($q->status==1)
+				$status = Yii::t('app','Draft');
+			else if ($q->status==2)
+				$status = Yii::t('app','Active');
+			else if ($q->status==3)
+				$status = Yii::t('app','In development');
+
+			echo '<div class="col-xs-12 col-sm-6 col-lg-4 sortable_quest" data-id="'.$q->id.'" id="quest_'.$q->id.'">'.
+					'<div class="widget ">'.
+						'<div class="widget-extra themed-background">'.
+							'<h4 class="widget-content-light"><strong>'.$q->title.'</strong>&nbsp;'.
+								'<span style="font-size:.6em;">('.$status.')</span>'.
+							'</h4>'.
+						'</div>'.
+						'<div class="widget-extra-full">'.
+								'<img src="/images/q/'.$q->id.'.jpg" class="img-responsive" style="max-height:180px;">'.
+								'<div class="caption">'.
+									'<p></p>'.
+									'<p style="overflow: hidden;height: 40px;">'.$q->content.'</p>'.
+									'<p><a href="/quest/update?id='.$q->id.'" class="btn btn-primary btn-sm" role="button">Редактировать</a></p>'.
+								'</div>'.
 						'</div>'.
 					'</div>'.
 				'</div>';

@@ -7,6 +7,7 @@
             <div class="navbar-header" itemscope itemtype="http://schema.org/Brand">
               <h2 style="display:none;" itemprop="name">CityQuest - квесты в Москве</h2>
               <a class="navbar-brand" itemprop="url" href="http://cityquest.ru/">
+                <img itemprop="logo" alt="CityQuest Реальные игровые квесты выход из комнаты в Москве" src="/img/cityquest_logo.svg">
                 <img itemprop="logo" alt="CityQuest Реальные игровые квесты выход из комнаты в Москве" src="/img/logo1.png">
               </a>
             </div>
@@ -24,21 +25,27 @@
               <div id="for-city">
                 <div class="btn-group city-select">
                   <?
-                    $domen2 = explode('.', $_SERVER['HTTP_HOST'])[1];
+                    $domen2 = explode('.', $_SERVER['HTTP_HOST']);
+                    $domen2 = $domen2[1];
+
                     if (strpos($_SERVER['HTTP_HOST'], '.kz') > 0){
                       $default_city = 'Астана';
                     } else {
                       $default_city = 'Москва';
                     }
                   ?>
-                  <? $domen_loc = explode('.', $_SERVER['HTTP_HOST'])[1]; ?>
+                  <? 
+                    $domen_loc = explode('.', $_SERVER['HTTP_HOST']);//[1];
+                    $domen_loc = $domen_loc[1];
+                  ?>
                   <button class="btn btn-link ico-msq" data-toggle="dropdown" type="button">
                     <span><?=$default_city?></span>
                   </button>
                   <ul class="dropdown-menu" role="menu">
                   <? 
                     foreach($this->cities AS $city){
-                      $domen1 = explode('.', $_SERVER['HTTP_HOST'])[0];
+                      $domen1 = explode('.', $_SERVER['HTTP_HOST']);//[0];
+                      $domen1 = $domen1[0];
                       $domen2 = $city->country;
 
                       // only for local

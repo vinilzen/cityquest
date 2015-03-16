@@ -1,5 +1,5 @@
-<div class="">
-	<div class="form row">
+<div class="col-sm-6">
+	<div class="form">
 
 	<?php echo CHtml::beginForm('','post',array('enctype'=>'multipart/form-data', 'class'=>'form-horizontal')); ?>
 
@@ -115,7 +115,7 @@
 		<div class="form-group buttons">
 			<div class="my_form_label col-sm-5"></div>
 			<div class="my_form_control col-sm-7 ">
-				<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Сохранить', array('class'=>'btn')); ?>
+				<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Сохранить', array('class'=>'btn btn-default')); ?>
 			</div>
 		</div>
 

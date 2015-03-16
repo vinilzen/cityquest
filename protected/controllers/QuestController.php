@@ -221,11 +221,15 @@ class QuestController extends Controller
 
 			$bookings_by_date[$booking->date][$booking->time] = $booking->attributes;
 			$bookings_by_date[$booking->date][$booking->time]['name'] = $booking->name != '' ? $booking->name : $booking->competitor->username;
-			$bookings_by_date[$booking->date][$booking->time]['user_id'] = $booking->competitor_id != 1 ? $booking->competitor->id : '';
+			
+			if (isset($booking->competitor->id)){
+				$competitor_id = $booking->competitor->id;
+			} else {
+				$competitor_id = 0;
+			}
+			$bookings_by_date[$booking->date][$booking->time]['user_id'] = $booking->competitor_id != 1 ? $competitor_id : '';
 
 		}
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['Quest']))	
 		{

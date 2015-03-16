@@ -14,6 +14,12 @@ $this->menu=array(
 );
 ?>
 
-<h1 class="page-header">Создать квест</h1>
-
-<?php $this->renderPartial('_form', array('model'=>$model, 'cities' => $cities)); ?>
+<div class="block">
+	<div class="block-title">
+		<h2>Создать квест</h2>
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+			<?php $this->renderPartial('_form', array('model'=>$model, 'cities' => $cities)); ?>
+		</div>
+	</div>

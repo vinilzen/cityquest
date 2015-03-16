@@ -23,7 +23,7 @@
         </div>
         <div class="col-xs-2">
           <button id="saveBooking" class="btn btn-default btn-sm" data-toggle="tooltip" title="Сохранить">
-            <span class="glyphicon glyphicon-ok"></span>
+            <i class="hi hi-ok"></i>
           </button>
         </div>
       </div>
@@ -34,7 +34,7 @@
         </div>
         <div class="col-xs-2">
           <button id="cancelEditBooking" class="btn btn-default btn-sm" data-toggle="tooltip" title="Отменить">
-            <span class="glyphicon glyphicon-remove"></span>
+            <i class="hi hi-remove"></i>
           </button>
         </div>
       </div>
@@ -64,7 +64,7 @@
         </div>
         <div class="col-xs-2">
           <button id="saveBooking" class="btn btn-default btn-sm" data-toggle="tooltip" title="Сохранить">
-            <span class="glyphicon glyphicon-ok"></span>
+            <i class="hi hi-ok"></i>
           </button>
         </div>
       </div>
@@ -75,7 +75,7 @@
         </div>
         <div class="col-xs-2">
           <button id="cancelAddBooking" class="btn btn-default btn-sm" data-toggle="tooltip" title="Отменить">
-            <span class="glyphicon glyphicon-remove"></span>
+            <i class="hi hi-remove"></i>
           </button>
         </div>
       </div>
@@ -86,7 +86,7 @@
         </div>
         <div class="col-xs-2">
           <button id="reservation" class="btn btn-default btn-sm" data-toggle="tooltip" title="Зарезервировать">
-            <span class="glyphicon glyphicon-ban-circle"></span>
+            <i class="hi hi-ban-circle"></i>
           </button>
         </div>
       </div>
@@ -114,10 +114,10 @@
     <p class="text-center">
       <strong>Вы уверены?</strong>
       <button class="btn btn-default btn-sm" data-toggle="tooltip" title="Да, Удалить!" id="confirmedDelete">
-        <span class="glyphicon glyphicon-ok"></span>
+        <i class="hi hi-ok"></i>
       </button>
       <button class="btn btn-default btn-sm" data-toggle="tooltip" title="Отменить удаление" id="cancelDelete">
-        <span class="glyphicon glyphicon-remove"></span>
+        <i class="hi hi-remove"></i>
       </button>
     </p>
     </div>
@@ -125,18 +125,18 @@
     <p class="text-center">
       <% if (status == 0) { %>
         <button class="btn btn-default btn-sm" id="confirmBooking" data-toggle="tooltip" title="Подтвердить бронирование">
-          <span class="glyphicon glyphicon-ok-circle"></span>
+          <i class="hi hi-ok-circle"></i>
         </button>
       <% } else { %>
         <button class="btn btn-default btn-sm" id="undoBooking" data-toggle="tooltip" title="Удалить подтверждение">
-          <span class="glyphicon glyphicon-remove-circle"></span>
+          <i class="hi hi-remove-circle"></i>
         </button>
       <% } %>
       <button class="btn btn-default btn-sm" id="showRemoveBooking" data-toggle="tooltip" title="Удалить бронирование">
-        <span class="glyphicon glyphicon-remove"></span>
+        <i class="hi hi-remove"></i>
       </button>
       <button class="btn btn-default btn-sm" id="editBooking" data-toggle="tooltip" title="Редактировать бронирование">
-        <span class="glyphicon glyphicon-pencil"></span>
+        <i class="hi hi-pencil"></i>
       </button>
     </p>
     </div>
@@ -144,7 +144,7 @@
       <p class="text-center">
         <strong>Записать вручную</strong>
         <button class="btn btn-default btn-sm" id="addBooking" data-toggle="tooltip" title="Добавить бронирование">
-          <span class="glyphicon glyphicon-plus"></span>
+          <i class="hi hi-plus"></i>
         </button>
       </p>
     </div>
