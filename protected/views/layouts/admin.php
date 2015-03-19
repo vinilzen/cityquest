@@ -15,7 +15,7 @@
 </head>
 <body>
 	<div id="page-wrapper">
-		<div id="page-container" class="sidebar-partial sidebar-visible-lg sidebar-no-animations sidebar-visible-xs">
+		<div id="page-container" class="sidebar-partial sidebar-visible-lg sidebar-no-animations">
 			<div id="sidebar">
 				<div id="sidebar-scroll">
 					<div class="sidebar-content">
