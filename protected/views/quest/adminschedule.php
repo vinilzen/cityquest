@@ -3,10 +3,10 @@
 /* @var $dataProvider CActiveDataProvider */  ?>
 
 <script type="text/javascript">
-	var user_name = '<? echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->username : ''; ?>',
-		hash = '<? echo $arr_hash ?>',
-		city_id = '<? echo Yii::app()->getModule('user')->user()->city_id; ?>',
-		user_phone = '<? echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->phone : ''; ?>';
+	var user_name = '<?=!Yii::app()->user->isGuest ? Yii::app()->getModule("user")->user()->username : ''?>',
+		hash = '<?=$arr_hash?>',
+		city_id = '<?=Yii::app()->getModule("user")->user()->city_id?>',
+		user_phone = '<?=!Yii::app()->user->isGuest ? Yii::app()->getModule("user")->user()->phone : ''?>';
 </script>
 
 <?	
@@ -49,7 +49,6 @@
 					style="cursor:pointer;" data-toggle="tooltip" 
 					data-date="<? echo date('Ymd', $selectedDate) ?>"
 					title="<? echo $today_holiday ? 'Сделать рабочим' : 'Сделать выходным'; ?>"></span>
-
 		</h2>
 	</div>
 	<h3 class="sub-header hide"><?=$month_f[date('n', $selectedDate)-1]?></h3>
@@ -58,7 +57,7 @@
 			<div class="widget">
 				<div class="widget-extra">
 					<div class="row">
-						<div class="col-sm-12" style="padding-top:15px;">
+						<div class="col-sm-12" style="padding-top:15px; position:relative; ">
 							<?
 								$start = 0;
 								$prev = -1*$offset;
@@ -70,11 +69,13 @@
 									$next = $prev + 2*$offset;
 								}
 							?>
-							<div class="table-responsive">
-								<div class="btn-group btn-group-justified" style="min-width:1024px;">
-									<a href="/quest/adminschedule/ymd/?d=<? echo $prev; ?>" class="btn btn-default" title="<? echo $offset; ?> дней назад">
-										<i class="hi hi-chevron-left"></i>
-									</a>
+							<a href="/quest/adminschedule/ymd/?d=<?=$prev?>"
+								class="btn btn-link btn-arrow btn-arrow-left" 
+								title="<?=$offset?> дней назад">
+								<i class="hi hi-chevron-left"></i>
+							</a>
+							<div class="table-responsive table-responsive-date">
+								<div class="btn-group btn-group-justified date_line">
 									<?
 									for ($i=$start-1; $i<$start+$offset; $i++) {
 										$currDate = strtotime( '+'.$i.' day' );
@@ -133,11 +134,13 @@
 										}
 									}
 								?>
-									<a href="/quest/adminschedule/ymd/?d=<? echo $next; ?>" class="btn btn-default" title="<? echo $offset; ?> дней вперед">
-										<i class="hi hi-chevron-right"></i>
-									</a>
 								</div>
 							</div>
+							<a href="/quest/adminschedule/ymd/?d=<?=$next?>"
+								class="btn btn-link btn-arrow btn-arrow-right"
+								title="<?=$offset?> дней вперед">
+								<i class="hi hi-chevron-right"></i>
+							</a>
 							<hr>
 							<style> .table>tbody>tr>td { padding:8px 1px; } </style>
 							<div id="times-table" class="table-responsive">
