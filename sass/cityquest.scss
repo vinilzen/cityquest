@@ -2656,3 +2656,11 @@ h1 {
 	text-decoration: none;
   	line-height: 1.5;
 }
+.login-page {
+	@media (max-width: 767px) {
+		margin-top: -60px;
+	}
+	.modal-dialog {
+		margin: 0 auto;
+	}
+}

@@ -515,13 +515,18 @@ $(function() {
 									'UserLogin[password]' : $('#auth-pass').val()
 								},
 								function( data ) {
-									console.log(data);
 								
 									if (data.error && data.error == 1) {
 										
 										if (data.msg && data.msg == 'Вы уже авторизованы!') {
 											$('#myModalAuth').modal('hide');
-											location.reload();
+											if (window.location.pathname == '/user/login') {
+												console.log('lh',window.location.pathname);
+												window.location.href = '/';
+											} else {
+												console.log('lr', window.location.pathname);
+												location.reload();
+											}
 										} else {
 											$('#auth-form button')
 												.attr({ 'title': 'Неверный логин или пароль' })
