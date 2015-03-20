@@ -65,7 +65,13 @@ class LoginController extends Controller
 
 	       	Yii::app()->end();
 		} else {
-			$this->redirect('/');
+			$this->pageTitle = Yii::app()->name . ' - Авторизация';
+			$model=new UserLogin;
+			// echo 123;
+			// $this->redirect('/');
+		    $this->render('/user/login',array(
+		    		'model'=>$model
+		    	));
 		}
 	}
 

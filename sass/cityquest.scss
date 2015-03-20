@@ -91,15 +91,10 @@ input {
 	}
 	@media (max-width: $screen-xs-max) {
 		margin-top: -2px;
-		img {	
-			display: block;
-			max-width: 100%;
-			height: auto;
-		}
 	}
 	img {
+		display: block;
 		width: 176px;
-		max-width: inherit;
 		@media (min-width: 1600px) {
 			width: 201px;
 			margin-top: -8px;
@@ -1493,9 +1488,64 @@ h2.twotab, a.h2.twotab {
 }
 
 /* Страница квеста */
-
-
-#myModalAuth {
+.social_auth {
+	a {
+		width: 58px;
+		height: 58px;
+		display: inline-block;
+		background-position: right top;
+		background-repeat: no-repeat;
+		background-image: url(../img/soc_big_btn.png);
+		margin: 0 13px;
+		&.fb {
+			background-position: left top;
+		}
+	}
+}
+.orTbl {
+	display: table;
+	width: 100%;
+	margin-top: 25px;
+	margin-bottom: 25px;
+}
+.orRow {
+	display: table-row;
+}
+.orCell {
+	display: table-cell;
+	&.orC {
+		width: 48px;
+		text-align: center;
+		font-size: 14px;
+		position: relative;
+		span {
+			position: absolute;
+			width: 100%;
+			left: 0;
+			top: -10px;
+			color: rgba(255,255,255,.6);
+		}
+	}
+	&.orL {
+		opacity: .2;
+		background: -moz-linear-gradient(left,  rgba(225,225,225,0) 0%, rgba(225,225,225,1) 50%, rgba(225,225,225,1) 100%); /* FF3.6+ */
+		background: -webkit-linear-gradient(left,  rgba(225,225,225,0) 0%,rgba(225,225,225,1) 50%,rgba(225,225,225,1) 100%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(left,  rgba(225,225,225,0) 0%,rgba(225,225,225,1) 50%,rgba(225,225,225,1) 100%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(left,  rgba(225,225,225,0) 0%,rgba(225,225,225,1) 50%,rgba(225,225,225,1) 100%); /* IE10+ */
+		background: linear-gradient(to right,  rgba(225,225,225,0) 0%,rgba(225,225,225,1) 50%,rgba(225,225,225,1) 100%); /* W3C */
+		height: 1px;
+	}
+	&.orR {
+		opacity: .2;
+		background: -moz-linear-gradient(left,  rgba(225,225,225,1) 100%, rgba(225,225,225,1) 50%, rgba(225,225,225,0) 0%); /* FF3.6+ */
+		background: -webkit-linear-gradient(left,  rgba(225,225,225,1) 100%,rgba(225,225,225,1) 50%,rgba(225,225,225,0) 0%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(left,  rgba(225,225,225,1) 100%,rgba(225,225,225,1) 50%,rgba(225,225,225,0) 0%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(left,  rgba(225,225,225,1) 100%,rgba(225,225,225,1) 50%,rgba(225,225,225,0) 0%); /* IE10+ */
+		background: linear-gradient(to left,  rgba(225,225,225,0) 0%,rgba(225,225,225,1) 50%,rgba(225,225,225,1) 100%); /* W3C */
+		height: 1px;
+	}
+}
+#myModalAuth, #myAuth {
 	.modal-dialog {
 		@media (min-width: $screen-md) {
 			margin-top: 150px;
@@ -1532,66 +1582,8 @@ h2.twotab, a.h2.twotab {
 		border-bottom: 0;
 		padding-bottom: 0;
 	}
-	.social_auth {
-		a {
-			width: 58px;
-			height: 58px;
-			display: inline-block;
-			background-position: right top;
-			background-repeat: no-repeat;
-			background-image: url(../img/soc_big_btn.png);
-			margin: 0 13px;
-			&.fb {
-				background-position: left top;
-			}
-		}
-
-	}
 	.fadeOut {
 		margin-bottom: 5px;
-	}
-	.orTbl {
-		display: table;
-		width: 100%;
-		margin-top: 25px;
-		margin-bottom: 25px;
-	}
-	.orRow {
-		display: table-row;
-	}
-	.orCell {
-		display: table-cell;
-		&.orC {
-			width: 48px;
-			text-align: center;
-			font-size: 14px;
-			position: relative;
-			span {
-				position: absolute;
-				width: 100%;
-				left: 0;
-				top: -10px;
-				color: rgba(255,255,255,.6);
-			}
-		}
-		&.orL {
-			opacity: .2;
-			background: -moz-linear-gradient(left,  rgba(225,225,225,0) 0%, rgba(225,225,225,1) 50%, rgba(225,225,225,1) 100%); /* FF3.6+ */
-			background: -webkit-linear-gradient(left,  rgba(225,225,225,0) 0%,rgba(225,225,225,1) 50%,rgba(225,225,225,1) 100%); /* Chrome10+,Safari5.1+ */
-			background: -o-linear-gradient(left,  rgba(225,225,225,0) 0%,rgba(225,225,225,1) 50%,rgba(225,225,225,1) 100%); /* Opera 11.10+ */
-			background: -ms-linear-gradient(left,  rgba(225,225,225,0) 0%,rgba(225,225,225,1) 50%,rgba(225,225,225,1) 100%); /* IE10+ */
-			background: linear-gradient(to right,  rgba(225,225,225,0) 0%,rgba(225,225,225,1) 50%,rgba(225,225,225,1) 100%); /* W3C */
-			height: 1px;
-		}
-		&.orR {
-			opacity: .2;
-			background: -moz-linear-gradient(left,  rgba(225,225,225,1) 100%, rgba(225,225,225,1) 50%, rgba(225,225,225,0) 0%); /* FF3.6+ */
-			background: -webkit-linear-gradient(left,  rgba(225,225,225,1) 100%,rgba(225,225,225,1) 50%,rgba(225,225,225,0) 0%); /* Chrome10+,Safari5.1+ */
-			background: -o-linear-gradient(left,  rgba(225,225,225,1) 100%,rgba(225,225,225,1) 50%,rgba(225,225,225,0) 0%); /* Opera 11.10+ */
-			background: -ms-linear-gradient(left,  rgba(225,225,225,1) 100%,rgba(225,225,225,1) 50%,rgba(225,225,225,0) 0%); /* IE10+ */
-			background: linear-gradient(to left,  rgba(225,225,225,0) 0%,rgba(225,225,225,1) 50%,rgba(225,225,225,1) 100%); /* W3C */
-			height: 1px;
-		}
 	}
 	.form-control {
 		height: 43px;
@@ -1643,7 +1635,7 @@ h2.twotab, a.h2.twotab {
 	.tab-content {
 		padding: 0 30px;
 	}
-	button {
+	button, input.btn[type="submit"] {
 		text-transform: uppercase;
 		font-weight: bold;
 		color:#fff;
@@ -2645,4 +2637,22 @@ h1 {
 .contacts .parking {
 	margin-top: -30px;
 	font-size: 16px;
+}
+.contacts p a.addres-sm {
+	@media (max-width: 767px){	
+	    font-size: 16px;
+	    margin-bottom: 16px;
+	    display: inline-block;
+	}
+}
+.login-title {
+	font-size: 18px;
+	color: rgba(255,255,255,0.8);
+  	border-bottom: 5px solid rgba(255,255,255,0.2);
+	cursor: pointer;
+	padding: 0 0 15px 0;
+	margin: -20px 12px 20px;
+	text-transform: uppercase;
+	text-decoration: none;
+  	line-height: 1.5;
 }

@@ -33,7 +33,7 @@
 
     <p><i class="ico3"></i>Павелецкая</p>
 
-    <p><i class="ico4"></i><a itemprop="address" href="https://goo.gl/maps/1Vuuv" target="_blank">ул. Летниковская, дом 4, строение 2</a></p>
+    <p><i class="ico4"></i><a class="addres-sm" itemprop="address" href="https://goo.gl/maps/1Vuuv" target="_blank">ул. Летниковская, дом 4, строение 2</a></p>
 
     <p class="parking"><?=Yii::t('app','Free on site parking is 1.5 hours')?>.</p>
 

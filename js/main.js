@@ -877,9 +877,8 @@ $(function() {
 	});
 
 
-	/*  ВОССТАНОВИТЬ ПАРОЛЬ  */
+	/* ВОССТАНОВИТЬ ПАРОЛЬ */
 	$('#forgot').click(function(){
-
 		$(this).hide();
 		$('#auth_toogl').show();
 
@@ -887,7 +886,6 @@ $(function() {
 		$('#form-group-forgot-auth').show();
 
 		$('#myModalAuth button.btn').html('ВОССТАНОВИТЬ');
-
 	});
 
 	$('#auth_toogl').click(function(event) {
@@ -968,4 +966,11 @@ $(function() {
 		setSize();
 		window.addEventListener(orientationEvent, setSize);
 	}
+
+	$('#myModalAuth').on('show.bs.modal', function () {
+		if ($(window).width() < 768){
+			window.location.href = '/user/login';
+			return false;
+		}
+	});
 });
