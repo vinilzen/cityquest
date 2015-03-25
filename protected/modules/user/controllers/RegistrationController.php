@@ -5,18 +5,6 @@ class RegistrationController extends Controller
     public $layout = "//layouts/main";
 	public $defaultAction = 'reg';
 
-	/*
-		//Declares class-based actions.
-		public function actions()
-		{
-			return (isset($_POST['ajax']) && $_POST['ajax']==='registration-form')?array():array(
-				'captcha'=>array(
-					'class'=>'CCaptchaAction',
-					'backColor'=>0xFFFFFF,
-				),
-			);
-		}
-	*/	
 
 	/**
 	 * Registration user
@@ -29,11 +17,13 @@ class RegistrationController extends Controller
 		// ajax validator
 		if(isset($_POST['ajax']) && $_POST['ajax']==='registration-form')
 		{
+			Yii::log('This is not the Ajax request', 'info', 'registration');
 			echo UActiveForm::validate(array($model,$profile));
 			Yii::app()->end();
 		}
 		
 	    if (Yii::app()->user->id) {
+	    	Yii::log('The user ('.Yii::app()->user->id.') is already registered', 'info', 'registration');
 	    	$this->redirect(Yii::app()->controller->module->profileUrl);
 	    } else {
 	    	if(isset($_POST['RegistrationForm'])) {
@@ -119,6 +109,8 @@ class RegistrationController extends Controller
 				$model->status = 1;
 
 				if ($model->save()) {
+
+					Yii::log('User save to db. '.Yii::app()->request->requestUri, 'info', 'registration');
 	
 					$identity=new UserIdentity($model->username,$soucePassword);
 					$identity->authenticate();
@@ -132,6 +124,7 @@ class RegistrationController extends Controller
 
 				} else {
 
+					Yii::log('Error save user. '.json_encode($model->getAttributes()).' - '.Yii::app()->request->requestUri, 'info', 'registration');
 		        	echo CJSON::encode(array(
 		        			'success' => 0,
 		        			'error' => 1,
@@ -142,7 +135,8 @@ class RegistrationController extends Controller
 
 
 			} else {
-				
+				Yii::log('You entered is not all data. '.Yii::app()->request->requestUri, 'info', 'registration');
+        	
 	        	echo CJSON::encode(array(
 	        			'success' => 0,
 	        			'error' => 1,
@@ -151,6 +145,7 @@ class RegistrationController extends Controller
 			}
         } else {
     
+    		Yii::log('The user ('.Yii::app()->user->id.') is already registered. '.Yii::app()->request->requestUri, 'info', 'registration');
         	echo CJSON::encode(array(
         			'success' => 0,
         			'error' => 1,

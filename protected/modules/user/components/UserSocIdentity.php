@@ -34,6 +34,9 @@ class UserSocIdentity extends CUserIdentity
 			$this->username=$user->username;
 			$this->errorCode=self::ERROR_NONE;
 		}
+
+		Yii::log('Authenticate. errorCode->'.$this->errorCode.' '.Yii::app()->request->requestUri, 'info', 'registration.authenticate.usersocidentity');
+
 		return !$this->errorCode;
 	}
     
