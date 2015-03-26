@@ -327,23 +327,6 @@
     ga('create', 'UA-56033342-1', 'auto');
     ga('send', 'pageview');
   </script>
-
-  <? if ($_SERVER['HTTP_HOST'] != 'cq.il' && $_SERVER['HTTP_HOST'] != 'cq.kzil') { ?>
-    <script type="text/javascript">
-      <!--//--><![CDATA[//><!--
-      var advaction_params = advaction_params || {};
-      advaction_params.asite = 'cityquest.ru';
-      (function(){
-        var aa = document.createElement("script");
-        aa.type = "text/javascript";
-        aa.async = true;
-        aa.src = document.location.protocol+"//advaction.ru/js/advertiser.js";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(aa, s); 
-      })();
-      //-->!]>]
-    </script>
-  <? } ?>
 <? } ?>
 
 <script src="/js/jquery.min.js"></script>

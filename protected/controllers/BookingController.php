@@ -117,19 +117,15 @@ class BookingController extends Controller
 
 							$model->competitor_id = (isset($_POST['user']) && $_POST['user'] == -1) ? -1 : (int)Yii::app()->user->id;
 
-							if ( isset($_POST['user']) && $_POST['user'] != -1){
-								if ($_POST['user'] != '' && $_POST['user'] != 0 ){
-									$user_model = Yii::app()->getModule('user')->user($_POST['user']);
-									
-									if($user_model){
-										$model->competitor_id = $user_model->id;
-									} else {									
-										$user_model = Yii::app()->getModule('user')->user();
-										$user_model->phone = $_POST['phone'];	
-									}
-								} else {
+							if ( isset($_POST['user']) && $_POST['user'] != -1 && $_POST['user'] != '' && $_POST['user'] != 0 ) {
+								
+								$user_model = Yii::app()->getModule('user')->user($_POST['user']);
+
+								if($user_model){
+									$model->competitor_id = $user_model->id;
+								} else {									
 									$user_model = Yii::app()->getModule('user')->user();
-									$user_model->phone = $_POST['phone'];
+									$user_model->phone = $_POST['phone'];	
 								}
 							} else {
 								$user_model = Yii::app()->getModule('user')->user();
@@ -141,12 +137,21 @@ class BookingController extends Controller
 							}
 
 							if ( $user_model->save() && $model->save() ){
-								if (!Yii::app()->getModule('user')->user()->superuser > 0) {
+								if (
+										!Yii::app()->getModule('user')->user()->superuser > 0
+										||
+										(isset($user_model) && $model->competitor_id == $user_model->id)
 
-									Yii::beginProfile('sendMail');
+									) {
+
+									$email = Yii::app()->getModule('user')->user()->email;
+									if (isset($user_model) && $model->competitor_id == $user_model->id){
+										$email = $user_model->email;
+									}
+
+									Yii::beginProfile('sendMail-'.Yii::app()->getModule('user')->user()->email);
 									$this->sendMail(
-										Yii::app()->getModule('user')->user()->email,
-										//Cityquest. Бронирование квеста «НАЗВАНИЕ КВЕСТА» ДАТА ВРЕМЯ
+										$email, //Cityquest. Бронирование квеста «НАЗВАНИЕ КВЕСТА» ДАТА ВРЕМЯ
 										"CityQuest. Бронирование квеста «".$quest->title."» ".substr($model->date, -2, 2)."/".substr($model->date, -4, 2)."/".substr($model->date, 0, 4)." ".$model->time,
 										"Здравствуйте, ".Yii::app()->getModule('user')->user()->username."! <br><br>
 										
@@ -160,7 +165,7 @@ class BookingController extends Controller
 										Команда CityQuest<br>
 										<a href='http://cityquest.ru' target='_blank'>www.cityquest.ru</a><br>
 										8 (495) 749-96-09");
-									Yii::endProfile('sendMail');
+									Yii::endProfile('sendMail-'.Yii::app()->getModule('user')->user()->email);
 								}
 
 								if (!isset($_POST['user']) || (isset($_POST['user']) && $_POST['user'] != -1)){

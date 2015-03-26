@@ -336,11 +336,20 @@ $(function() {
 
 	if (document.body.clientWidth < 769) {
 
-		$('#times-table button[data-toggle="popover"]').click(function () {
+		window.button_popovers = $('#times-table button[data-toggle="popover"]');
+
+		window.button_popovers.popover('destroy');
+
+		setTimeout("window.button_popovers.popover('destroy')", 1000);
+
+
+		window.button_popovers.click(function () {
+			
 			$(this)[0].popover_view = new PopoverView({parent:this});
 			$('#addBookModal .modal-title').html( $(this).attr('data-title') );
 			$('#addBookModal .modal-body').html($(this)[0].popover_view.render().el);
 			$('#addBookModal').modal('show');
+			
 		});
 
 	} else {

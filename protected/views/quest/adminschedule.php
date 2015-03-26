@@ -234,7 +234,8 @@
 
 									        $invisible = '';
 									        if ($workday && $k > 2 && $k < 7)
-									        	$invisible = ' invisible';
+									        	// $invisible = ' invisible';
+									        	$invisible = ' hidden';
 
 									        ?>
 

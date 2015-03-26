@@ -302,15 +302,6 @@ $(function() {
 								order_id = result.id;
 								price = book_data.price;
 
-								(function(){
-									var aa = document.createElement("script");
-									aa.type = "text/javascript";
-									aa.async = true;
-									aa.src = document.location.protocol+"//advaction.ru/js/ec_action.js";
-									var s = document.getElementsByTagName("script")[0];
-									s.parentNode.insertBefore(aa, s); 
-								})();
-
 								ModalBook.modal('hide');
 								
 								btn_time.attr({

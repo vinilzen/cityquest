@@ -19,7 +19,7 @@
 			<div id="sidebar">
 				<div id="sidebar-scroll">
 					<div class="sidebar-content">
-						<a href="/" class="sidebar-brand">
+						<a href="/quest/adminschedule/ymd" class="sidebar-brand">
 							<span class="sidebar-nav-mini-hide">
 								<strong>CityQuest</strong>
 							</span>

@@ -1431,14 +1431,14 @@ h2.twotab, a.h2.twotab {
 		}
 	}
 	.col-xs-1 {
-		width: 115px;
+		width: 110px;
 		@media (max-width: $screen-xs-max) {
 			padding-left: 15px;
 			width: 105px;
 		}
 	}
 	.col-xs-12.times {
-		margin-left: -115px;
+		margin-left: -110px;
 		@media (max-width: $screen-xs-max) {
 			margin-left: -105px;
 			padding-right: 10px;
@@ -1452,13 +1452,13 @@ h2.twotab, a.h2.twotab {
 		margin-left: -5px;
 	}
 	@media (min-width: $screen-sm-min) and (max-width: $screen-md-max) {
-		width: 770px;
+		width: 780px;
 	}
 	@media (max-width: $screen-xs-max) {
 		// width: 900px;
 	}
 	@media (min-width: 1100px)  {
-		width: 770px;
+		width: 780px;
 	}
 	@media (min-width: 1025px) and  (max-width: 1099px)  {
 		width: 650px;
