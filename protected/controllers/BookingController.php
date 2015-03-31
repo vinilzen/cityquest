@@ -137,19 +137,11 @@ class BookingController extends Controller
 							}
 
 							if ( $user_model->save() && $model->save() ){
-								if (
-										!Yii::app()->getModule('user')->user()->superuser > 0
-										||
-										(isset($user_model) && $model->competitor_id == $user_model->id)
-
-									) {
+								if ( !Yii::app()->getModule('user')->user()->superuser > 0) {
 
 									$email = Yii::app()->getModule('user')->user()->email;
-									if (isset($user_model) && $model->competitor_id == $user_model->id){
-										$email = $user_model->email;
-									}
 
-									Yii::beginProfile('sendMail-'.Yii::app()->getModule('user')->user()->email);
+									Yii::beginProfile('sendMail-'.$email);
 									$this->sendMail(
 										$email, //Cityquest. Бронирование квеста «НАЗВАНИЕ КВЕСТА» ДАТА ВРЕМЯ
 										"CityQuest. Бронирование квеста «".$quest->title."» ".substr($model->date, -2, 2)."/".substr($model->date, -4, 2)."/".substr($model->date, 0, 4)." ".$model->time,
@@ -165,7 +157,30 @@ class BookingController extends Controller
 										Команда CityQuest<br>
 										<a href='http://cityquest.ru' target='_blank'>www.cityquest.ru</a><br>
 										8 (495) 749-96-09");
-									Yii::endProfile('sendMail-'.Yii::app()->getModule('user')->user()->email);
+									Yii::endProfile('sendMail-'.$email);
+								}
+
+								if (isset($user_model) && $model->competitor_id == $user_model->id && isset($_POST['user']) && $_POST['user'] != -1) {
+									$email = $user_model->email;
+
+									Yii::beginProfile('sendMail-'.$email);
+									$this->sendMail(
+										$email, //Cityquest. Бронирование квеста «НАЗВАНИЕ КВЕСТА» ДАТА ВРЕМЯ
+										"CityQuest. Бронирование квеста «".$quest->title."» ".substr($model->date, -2, 2)."/".substr($model->date, -4, 2)."/".substr($model->date, 0, 4)." ".$model->time,
+										"Здравствуйте, ".Yii::app()->getModule('user')->user()->username."! <br><br>
+										
+										Вы записались на квест <a href='http://cityquest.ru/quest/view?id=".$quest->id."' target='_blank' >«".$quest->title."»</a> ".substr($model->date, -2, 2)."/".substr($model->date, -4, 2)."/".substr($model->date, 0, 4)." в ".$model->time." <br>
+										Не забудьте, для участия вам понадобится команда от 2 до 4 человек.<br><br>
+
+										Мы ждем вас по адресу <a href='https://www.google.com/maps/preview?q=москва,+".urlencode($quest->addres)."' target='_blank'>".$quest->addres.".</a> <br><br>
+										Игра начнется, когда вся команда соберется. Мы просим не опаздывать, иначе у вас останется меньше времени на прохождение.<br><br>
+
+										До встречи,<br>
+										Команда CityQuest<br>
+										<a href='http://cityquest.ru' target='_blank'>www.cityquest.ru</a><br>
+										8 (495) 749-96-09");
+									Yii::endProfile('sendMail-'.$email);
+
 								}
 
 								if (!isset($_POST['user']) || (isset($_POST['user']) && $_POST['user'] != -1)){

@@ -50,7 +50,6 @@ class AdminController extends Controller
             $model->attributes=$_GET['User'];
 
 		$this->render('index',array(
-			//'dataProvider'=>$dataProvider,
 			'model'=>$model
 		));
 	}
