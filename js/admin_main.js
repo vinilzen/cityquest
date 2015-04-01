@@ -78,6 +78,7 @@ var PopoverView = Backbone.View.extend({
 								'class': 'progress-bar progress-bar-striped active',
 							}).html(' ');
 
+		/*
 		$.get('/user/user/list', function(r){
 			if (r && r.success && r.data && r.data.length>0) {
 				var select_container = $('#selectUser')
@@ -106,6 +107,7 @@ var PopoverView = Backbone.View.extend({
 
 			}
 		});
+		*/
 	},
 
 	addSeven:function(e){
@@ -218,7 +220,8 @@ var PopoverView = Backbone.View.extend({
 			phone : reservation ? '0000000' : $('#addBookingRow .inputPhone').val(),
 			comment : $('#addBookingRow .inputComment').val(),
 			name : $('#addBookingRow .inputName').val()!=''?$('#addBookingRow .inputName').val() : 'CQ',
-			user : reservation ? -1 : $('#selectUser select').val(),
+			// user : reservation ? -1 : $('#selectUser select').val(),
+			user : reservation ? -1 : $('#selectUser_id').val(),
 		}, function(result){
 			if (result && result.success) {
 				console.log('confirmed');
@@ -280,11 +283,87 @@ var PopoverView = Backbone.View.extend({
 		var self = this;
 
 		$('#addRow', this.$el).hide();
-		$('#addBookingRow', this.$el).show();
+		$('#addBookingRow', this.$el).show('fast',function(){
+
+			$('#addUser').on('hide.bs.dropdown', function () {
+				console.log(1234);
+				$('#addUser input').popover('hide');
+			}).on('shown.bs.dropdown', function () {
+				console.log(4);
+				$('#addUser input').focus();
+			});
+
+			$('#addUser li').click(function(e){
+				$('#dropdown_users').addClass('open');
+
+				var run = false,
+					progress = $( '<li><div class="progress">'+
+							'<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>'+
+						'</div></li>' );
+
+				var user_input = $('#addUser input')
+					.popover('show')
+					.on('keyup', function(){
+						var self_input = $(this);
+
+						self_input.popover('hide');
+						var val = self_input.val();
+						if (val.length > 2 && run == false) {
+							
+							$('#addUser li.result').remove();
+							progress.insertAfter( "#addUser li:first" );
+							self_input.prop('disabled', true);
+							run = true;
+							$.get('/user/user/list?val='+val, function(r){
+								$('#addUser li.result').remove();
+								if ( r && r.success && r.data && r.data.length>0 ) {
+									//$('#addUser li.last').hide();
+									$('#addUser li.result').remove();
+									_.each(r.data, function(user){
+										var li = $('<li class="result">').appendTo('#addUser');
+										$(	'<a title="'+user.phone+'" data-value="'+user.id+'" data-name="'+user.username+'">'+
+												user.username+' ('+user.email+')</a>')
+											.on('click', function(){
+												$(this).addClass('selected');
+												var val = $(this).attr('data-value'),
+													phone = $(this).attr('title'),
+													name = $(this).attr('data-name');
+
+												$('#selectUser_id').val( val );
+												$('.inputPhone', self.$el).val( phone );
+												$('.inputName', self.$el).val( name );
+											}).appendTo(li);
+									});
+
+								} else {
+									$('#addUser').append('<li class="result"><a>Ничего не найдено</a></li>');
+								}
+
+							}).error(function(e){
+
+								$('#addUser').append('<li class="result"><a>Ошибка!</a></li>');
+
+							}).done(function(e){
+								progress.remove();
+								self_input.prop('disabled', false).focus();
+
+								run = false;
+							});
+							
+							
+						} else {
+							$('#addUser li.result').remove();
+						}
+					});
+				return false;
+			});
+		});
 
 		$('.inputPhone', self.$el).blur(function(){
 			$(this).mask('+7(000)-000-00-00');				
 		});
+
+
 
 		$(this.parent).popover('setPosition');
 		return false;

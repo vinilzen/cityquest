@@ -116,8 +116,14 @@ class UserController extends Controller
 
 			$this->layout=false;
 			header('Content-type: application/json');
-			
-			$users = User::model()->findALL(array("condition"=>"superuser = 0"));
+
+			$val = addcslashes($_GET['val'], '%_'); // escape LIKE's special characters
+			$q = new CDbCriteria( array(
+			    'condition' => "(username LIKE :val OR email LIKE :val OR phone LIKE :val) AND superuser = 0",         // no quotes around :match
+			    'params'    => array(':val' => "%$val%")  // Aha! Wildcards go here
+			) );
+
+			$users = User::model()->findALL($q);
 
 			echo CJavaScript::jsonEncode(
 				array(

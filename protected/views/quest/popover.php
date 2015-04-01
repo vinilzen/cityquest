@@ -97,9 +97,25 @@
         </div>
       </div>
       <div class="form-group">
-        <div class="col-xs-12" id="users_progress">
-          <div class="progress" style="height:33px; margin-bottom:10px;">
-            <span class="btn btn-default btn-block" role="progressbar" aria-valuenow="100" style="width: 100%" id="showUserList">Выбрать из зарегестрированных</span>
+        <div class="col-xs-12">
+          <div class="dropdown" id="dropdown_users">
+            <button type="button" id="dLabel_users" class="btn btn-sm btn-block btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+              Выбрать из зарегестрированных <span class="caret"></span>
+            </button>
+            <input type="hidden" id="selectUser_id" value="-1" />
+            
+            <ul class="dropdown-menu" id="addUser" role="menu" aria-labelledby="dLabel_users">
+              <li class="search_line" role="presentation">
+                <div class="input-group">
+                  <input type="text" class="input-block-level input-sm form-control" placeholder="Имя или Email" autocomplete="off"
+                    data-toggle="popover" data-placement="top" data-container="body" data-content="Введите как минимум три символа для начала поиска" >
+                  <i class="gi gi-search form-control-feedback" aria-hidden="true"></i>
+                </div>
+              </li>
+              <li class="last hide" role="presentation">
+                <a href="#" class="btn"><strong>Показать всех</strong></a>
+              </li>
+            </ul>
           </div>
         </div>
         <div class="col-xs-9" id="selectUser"></div>
