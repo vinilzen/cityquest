@@ -174,14 +174,20 @@ class QuestController extends Controller
 		$model=new Quest;
 		$cities = City::model()->findAllByAttributes( array('active'=>1) );
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
 		if(isset($_POST['Quest']))
 		{
 
 			$_POST['Quest']['author_id'] = Yii::app()->user->id;
+
+			// drafts at the end of the list
+			if ($_POST['Quest']['status'] == 1){
+				$_POST['Quest']['sort'] = 100;
+			}
+			
 			$model->attributes=$_POST['Quest'];
+
+			//var_dump($model->attributes); die;
+
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -367,6 +373,10 @@ class QuestController extends Controller
 			}
 		}
 
+		// echo '<!--';
+			// var_dump($twoweek_bookings_arr[20150409]);
+		// echo '-->';
+
 		if(Yii::app()->request->isAjaxRequest){
 			echo md5(serialize($twoweek_bookings_arr));
 			Yii::app()->end();
@@ -498,9 +508,11 @@ class QuestController extends Controller
 		$this->render('admin',array(
 			'models'=>Quest::model()->findAll(
 						array(
-						    "condition" => "status>1 AND city_id=".(int)$user_city_id,
-						    "order" => "status ASC, sort ASC",
-						    "limit" => 12,
+						    // "condition" => "status>1 AND city_id=".(int)$user_city_id,
+						    "condition" => "city_id=".(int)$user_city_id,
+						    // "order" => "status ASC, sort ASC",
+						    "order" => "sort ASC",
+						    "limit" => 20,
 						)
 					),
 			'model'=>$model

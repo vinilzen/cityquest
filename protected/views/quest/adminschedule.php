@@ -107,8 +107,7 @@
 										$style="";
 										$title="";
 										$badge = '<span class="badge" style=" margin-top:3px; font-size: 13px;font-family: \'Open Sans\';font-weight: normal;">0</span>';
-										if (isset($twoweek_bookings_arr[date('Ymd', $currDate)])) {	
-											// $style = 'style="box-shadow: inset 0px -10px 0px -7px #000; padding-bottom: 3px;';
+										if (isset($twoweek_bookings_arr[date('Ymd', $currDate)])) {
 											$title = '(Всего броней - '.count($twoweek_bookings_arr[date('Ymd', $currDate)]).')';
 											$badge = '<span class="badge" style=" margin-top:3px; font-size: 13px;font-family: \'Open Sans\';font-weight: normal;">'.count($twoweek_bookings_arr[date('Ymd', $currDate)]).'</span>';
 										}

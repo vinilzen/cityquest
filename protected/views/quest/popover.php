@@ -102,7 +102,7 @@
             <button type="button" id="dLabel_users" class="btn btn-sm btn-block btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
               Выбрать из зарегестрированных <span class="caret"></span>
             </button>
-            <input type="hidden" id="selectUser_id" value="-1" />
+            <input type="hidden" id="selectUser_id" value="0" />
             
             <ul class="dropdown-menu" id="addUser" role="menu" aria-labelledby="dLabel_users">
               <li class="search_line" role="presentation">

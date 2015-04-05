@@ -123,13 +123,17 @@ class BookingController extends Controller
 
 								if($user_model){
 									$model->competitor_id = $user_model->id;
-								} else {									
+								} else {							
 									$user_model = Yii::app()->getModule('user')->user();
 									$user_model->phone = $_POST['phone'];	
 								}
 							} else {
 								$user_model = Yii::app()->getModule('user')->user();
 								$user_model->phone = $_POST['phone'];
+
+								if ( isset($_POST['user']) && $_POST['user'] == 0 ) {
+									$model->competitor_id = 0;
+								} 
 							}
 
 							if (isset(Yii::app()->request->cookies['from'])){
@@ -137,6 +141,7 @@ class BookingController extends Controller
 							}
 
 							if ( $user_model->save() && $model->save() ){
+								
 								if ( !Yii::app()->getModule('user')->user()->superuser > 0) {
 
 									$email = Yii::app()->getModule('user')->user()->email;

@@ -220,7 +220,6 @@ var PopoverView = Backbone.View.extend({
 			phone : reservation ? '0000000' : $('#addBookingRow .inputPhone').val(),
 			comment : $('#addBookingRow .inputComment').val(),
 			name : $('#addBookingRow .inputName').val()!=''?$('#addBookingRow .inputName').val() : 'CQ',
-			// user : reservation ? -1 : $('#selectUser select').val(),
 			user : reservation ? -1 : $('#selectUser_id').val(),
 		}, function(result){
 			if (result && result.success) {
