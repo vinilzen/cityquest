@@ -26,6 +26,7 @@ EOD;
 
   public function run($args) {
     $args = array_flip($args);
+    $folder = '../runtime/';
 
     if (isset($args['tbl_users']) || isset($args['tbl_booking'])) {
 
@@ -43,7 +44,7 @@ EOD;
           foreach ($table as $row) {
             $json_str .= json_encode($row, JSON_UNESCAPED_UNICODE)."\r\n";
           }
-          $path = './runtime/'.$dbt.'.json';
+          $path = $folder.$dbt.'.json';
           file_put_contents($path, $json_str);
 
           echo 'save table '.$dbt.' to '.$path."\r\n";
@@ -68,7 +69,7 @@ EOD;
         foreach ($users as $row) {
           $json_str .= json_encode($row, JSON_UNESCAPED_UNICODE)."\r\n";
         }
-        $path1 = './runtime/tbl_users.json';
+        $path1 = $folder.'tbl_users.json';
         file_put_contents($path1, $json_str);
       }
 
@@ -79,7 +80,7 @@ EOD;
         foreach ($bookings as $row) {
           $json_str .= json_encode($row, JSON_UNESCAPED_UNICODE)."\r\n";
         }
-        $path2 = './runtime/tbl_booking.json';
+        $path2 = $folder.'tbl_booking.json';
         file_put_contents($path2, $json_str);
       }
 
