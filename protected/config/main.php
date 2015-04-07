@@ -26,6 +26,10 @@ return array(
 
     'modules'=>array(
         'user',
+        'gii'=>array(
+            'class'=>'system.gii.GiiModule',
+            'password'=>'zaq1',
+        ),
     ),
 
 	'defaultController'=>'quest',

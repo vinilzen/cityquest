@@ -16,7 +16,7 @@
 	'htmlOptions'=>array('enctype'=>'multipart/form-data', 'role'=>'form', 'class' => 'form-horizontal'),
 )); ?>
 	<div class="form-group">
-		<p class="note help-block">Fields with <span class="required">*</span> are required.</p>
+		<p class="note help-block"><?=Yii::t('app','Fields with')?> <span class="required">*</span> <?=Yii::t('app','are required')?>.</p>
 
 		<?=$form->errorSummary($model)?>
 	</div>

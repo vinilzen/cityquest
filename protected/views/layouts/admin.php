@@ -28,12 +28,12 @@
 						<ul class="sidebar-nav">
 							<li class="">
 								<a href="/quest/adminschedule/ymd">
-									<i class="hi hi-tasks sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Брони</span>
+									<i class="hi hi-tasks sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide"><?=Yii::t('app','Bookings')?></span>
 								</a>
 							</li>
 							<li class="">
 								<a href="/quest/admin">
-									<i class="hi hi-book sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Квесты</span>
+									<i class="hi hi-book sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide"><?=Yii::t('app','Quests')?></span>
 								</a>
 							</li>
 							<li class="hide">
@@ -48,14 +48,38 @@
 							</li>
 							<li class="">
 								<a href="/user/admin">
-									<i class="hi hi-user sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Пользователи</span>
+									<i class="hi hi-user sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide"><?=Yii::t('app','Users')?></span>
 								</a>
 							</li>
 
 							<li class="">
 								<a href="/city/admin">
-									<i class="hi hi-globe sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Города</span>
+									<i class="hi hi-globe sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide"><?=Yii::t('app','Cities')?></span>
 								</a>
+							</li>
+							<li class="">
+								<a href="#" class="sidebar-nav-menu">
+									<i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i>
+									<i class="fa fa-wrench sidebar-nav-icon"></i>
+									<span class="sidebar-nav-mini-hide"><?=Yii::t('app','Settings')?></span>
+								</a>
+								<ul>
+									<li>
+										<a href="/discounts/admin">
+											<i class="hi sidebar-nav-icon" style="margin-top:-3px;">%</i><span class="sidebar-nav-mini-hide"><?=Yii::t('app','Discounts')?></span>
+										</a>
+									</li>
+									<li>
+										<a href="/payments/admin">
+											<i class="sidebar-nav-icon fa fa-money"></i><span class="sidebar-nav-mini-hide"><?=Yii::t('app','Payment method')?></span>
+										</a>
+									</li>
+									<li>
+										<a href="/sources/admin">
+											<i class="fa fa-user sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide"><?=Yii::t('app','Source of traffic')?></span>
+										</a>
+									</li>
+								</ul>
 							</li>
 							<li class="hide">
 								<a href="/site/editmailtpl/success/1">
@@ -102,7 +126,7 @@
 					<ul class="nav navbar-nav-custom pull-right">
 						<li class="dropdown">
 							<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-								Профиль
+								<?=Yii::t('app','Profile')?>
 								<i class="fa fa-angle-down"></i>
 							</a>
 							<ul class="dropdown-menu dropdown-custom dropdown-menu-right">
@@ -110,17 +134,17 @@
 								<li>
 									<a href="/user/profile">
 										<i class="fa fa-user fa-fw pull-right"></i>
-										Profile
+										<?=Yii::t('app','Profile')?>
 									</a>
 									<a href="/user/logout" class="hide">
 										<i class="fa fa-cog fa-fw pull-right"></i>
-										Settings
+										<?=Yii::t('app','Settings')?>						
 									</a>
 								</li>
 								<li class="divider"></li>
 								<li>
 									<!-- <a href="page_ready_lock_screen.php"><i class="fa fa-lock fa-fw pull-right"></i> Lock Account</a> -->
-									<a href="/user/logout"><i class="fa fa-ban fa-fw pull-right"></i> Logout</a>
+									<a href="/user/logout"><i class="fa fa-ban fa-fw pull-right"></i><?=Yii::t('app','Logout')?></a>
 								</li>
 							</ul>
 						</li>

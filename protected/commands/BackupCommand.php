@@ -26,7 +26,7 @@ EOD;
 
   public function run($args) {
     $args = array_flip($args);
-    $folder = '../runtime/';
+    $folder = '/home/u419487/cityquest.ru/www/protected/runtime/';
 
     if (isset($args['tbl_users']) || isset($args['tbl_booking'])) {
 
