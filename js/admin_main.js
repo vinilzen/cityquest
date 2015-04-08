@@ -57,7 +57,7 @@ var PopoverView = Backbone.View.extend({
 		$('.pop-row', this.$el).hide();
 
 		if (($(this.parent).hasClass('btn-info') || $(this.parent).hasClass('btn-success')) && this.attr.name !== '') {
-			$('#BookInf h3, #btnRow, #phoneRow', this.$el).show();
+			$('#BookInf h3, #btnRow, #phoneRow, #priceRow, #sourceMethodRow, #paymentsMethodRow', this.$el).show();
 		} else {
 			this.showAdd();
 		}

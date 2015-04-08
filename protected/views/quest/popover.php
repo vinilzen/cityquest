@@ -17,42 +17,86 @@
     </p>
     <form class="form-horizontal pop-row" id="editBookingRow" role="form">
       <div class="form-group">
-        <label for="inputName" class="col-xs-2 control-label">Name</label>
-        <div class="col-xs-7">
+        <label for="inputName" class="col-xs-4 text-left control-label"><?=Yii::t('app','Name')?></label>
+        <div class="col-xs-8">
           <input type="text" class="form-control input-sm inputName" placeholder="Ivan">
         </div>
-        <div class="col-xs-2">
-          <button id="saveBooking" class="btn btn-default btn-sm" data-toggle="tooltip" title="Сохранить">
-            <i class="hi hi-ok"></i>
-          </button>
-        </div>
       </div>
       <div class="form-group">
-        <label for="inputPhone" class="col-xs-2 control-label">Phone</label>
-        <div class="col-xs-7">
+        <label for="inputPhone" class="col-xs-4 text-left control-label"><?=Yii::t('app','Phone')?></label>
+        <div class="col-xs-8">
           <input type="text" class="form-control input-sm inputPhone" placeholder="+7(123)-456-78-90">
         </div>
-        <div class="col-xs-2">
-          <button id="cancelEditBooking" class="btn btn-default btn-sm" data-toggle="tooltip" title="Отменить">
-            <i class="hi hi-remove"></i>
-          </button>
-        </div>
       </div>
       <div class="form-group">
-        <label for="inputPrice" class="col-xs-2 control-label">Price</label>
-        <div class="col-xs-7">
-          <input type="text" class="form-control input-sm inputPrice" placeholder="3000">
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="inputResult" class="col-xs-2 control-label">Result</label>
-        <div class="col-xs-7">
+        <label for="inputResult" class="col-xs-4 text-left control-label"><?=Yii::t('app','Result')?></label>
+        <div class="col-xs-8">
           <input type="text" class="form-control input-sm inputResult" placeholder="00:00">
         </div>
       </div>
       <div class="form-group">
+        <label for="inputPrice" class="col-xs-4 text-left control-label"><?=Yii::t('app','Price')?></label>
+        <div class="col-xs-8">
+          <input type="text" class="form-control input-sm inputPrice" placeholder="3000">
+        </div>
+      </div>
+
+
+      <div id="priceRow">
+        <p class="text-center">
+          <select class="form-control">
+            <option>Причина скидки</option>
+            <option>2</option>
+            <option>3</option>
+          </select>
+        </p>
+      </div>
+      <div id="paymentsMethodRow">
+        <p class="text-center">
+          <select class="form-control">
+            <option>Метод оплаты</option>
+            <option>2</option>
+            <option>3</option>
+          </select>
+        </p>
+      </div>
+      <div id="sourceMethodRow">
+        <p class="text-center">
+          <select class="form-control">
+            <option>Откуда пришел пользователь</option>
+            <option>2</option>
+            <option>3</option>
+          </select>
+        </p>
+      </div>
+
+      <div class="form-group">
         <div class="col-xs-12">
           <textarea type="text" class="form-control input-sm inputComment" placeholder="Дополнительный комментарий"></textarea>
+        </div>
+      </div>
+      <div class="form-group form-group-btn ">
+        <div class="col-xs-12">
+          <!-- example -->
+          <button class="btn btn-success btn-block btn-sm" id="confirmBooking" data-toggle="tooltip" title="Подтвердить бронирование">
+            <i class="hi hi-ok-circle"></i> Подтвердить бронирование
+          </button>
+        </div>
+        <div class="col-xs-12">
+          <!-- example -->
+          <button class="btn btn-danger btn-block btn-sm" id="showRemoveBooking" data-toggle="tooltip" title="Удалить бронирование">
+            <i class="hi hi-remove"></i> Удалить бронирование
+          </button>
+        </div>
+        <div class="col-xs-6">
+          <button id="saveBooking" class="btn btn-primary btn-block btn-sm" data-toggle="tooltip" title="Сохранить">
+            <i class="hi hi-ok"></i> <?=Yii::t('app','Save')?>
+          </button>
+        </div>
+        <div class="col-xs-6">
+          <button id="cancelEditBooking" class="btn btn-warning btn-block btn-sm" data-toggle="tooltip" title="Отменить">
+            <i class="hi hi-remove"></i> <?=Yii::t('app','Cancel')?>
+          </button>
         </div>
       </div>
     </form>
@@ -80,6 +124,12 @@
         </div>
       </div>
       <div class="form-group">
+        <label for="inputResult" class="col-xs-2 control-label">Result</label>
+        <div class="col-xs-7">
+          <input type="text" class="form-control input-sm inputResult" value="<%= result %>" placeholder="00:00">
+        </div>
+      </div>
+      <div class="form-group">
         <label for="inputPrice" class="col-xs-2 control-label">Price</label>
         <div class="col-xs-7">
           <input type="text" class="form-control input-sm inputPrice" value="<%= price %>" placeholder="3000">
@@ -90,12 +140,38 @@
           </button>
         </div>
       </div>
-      <div class="form-group">
-        <label for="inputResult" class="col-xs-2 control-label">Result</label>
-        <div class="col-xs-7">
-          <input type="text" class="form-control input-sm inputResult" value="<%= result %>" placeholder="00:00">
-        </div>
+
+      <div id="priceRow">
+        <p class="text-center">
+          <div class="form-group">
+            <select class="form-control">
+              <option>Причина скидки</option>
+              <option>2</option>
+              <option>3</option>
+            </select>
+          </div>
+        </p>
       </div>
+      <div id="paymentsMethodRow">
+        <p class="text-center">
+          <select class="form-control">
+            <option>Метод оплаты</option>
+            <option>2</option>
+            <option>3</option>
+          </select>
+        </p>
+      </div>
+      <div id="sourceMethodRow">
+        <p class="text-center">
+          <select class="form-control">
+            <option>Откуда пришел пользователь</option>
+            <option>2</option>
+            <option>3</option>
+          </select>
+        </p>
+      </div>
+
+
       <div class="form-group">
         <div class="col-xs-12">
           <div class="dropdown" id="dropdown_users">
@@ -138,23 +214,23 @@
     </p>
     </div>
     <div class="pop-row" id="btnRow">
-    <p class="text-center">
-      <% if (status == 0) { %>
-        <button class="btn btn-default btn-sm" id="confirmBooking" data-toggle="tooltip" title="Подтвердить бронирование">
-          <i class="hi hi-ok-circle"></i>
+      <p class="text-center">
+        <% if (status == 0) { %>
+          <button class="btn btn-default btn-sm" id="confirmBooking" data-toggle="tooltip" title="Подтвердить бронирование">
+            <i class="hi hi-ok-circle"></i>
+          </button>
+        <% } else { %>
+          <button class="btn btn-default btn-sm" id="undoBooking" data-toggle="tooltip" title="Удалить подтверждение">
+            <i class="hi hi-remove-circle"></i>
+          </button>
+        <% } %>
+        <button class="btn btn-default btn-sm" id="showRemoveBooking" data-toggle="tooltip" title="Удалить бронирование">
+          <i class="hi hi-remove"></i>
         </button>
-      <% } else { %>
-        <button class="btn btn-default btn-sm" id="undoBooking" data-toggle="tooltip" title="Удалить подтверждение">
-          <i class="hi hi-remove-circle"></i>
+        <button class="btn btn-default btn-sm" id="editBooking" data-toggle="tooltip" title="Редактировать бронирование">
+          <i class="hi hi-pencil"></i>
         </button>
-      <% } %>
-      <button class="btn btn-default btn-sm" id="showRemoveBooking" data-toggle="tooltip" title="Удалить бронирование">
-        <i class="hi hi-remove"></i>
-      </button>
-      <button class="btn btn-default btn-sm" id="editBooking" data-toggle="tooltip" title="Редактировать бронирование">
-        <i class="hi hi-pencil"></i>
-      </button>
-    </p>
+      </p>
     </div>
     <div class="pop-row" id="addRow">
       <p class="text-center">

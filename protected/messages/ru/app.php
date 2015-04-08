@@ -7,6 +7,10 @@ return array(
 	'slogan'=>'«ВЫБЕРИСЬ ИЗ КОМНАТЫ» КВЕСТЫ В РЕАЛЬНОСТИ',
 	'Escape Room, quests in real life'=>'ВЫБЕРИСЬ ИЗ КОМНАТЫ КВЕСТЫ В РЕАЛЬНОЙ ЖИЗНИ',
 	'SAVE'=>'СОХРАНИТЬ',
+	'Save'=>'Сохранить',
+	'Cancel'=>'Отменить',
+	'Price'=>'Цена',
+	'Phone'=>'Телефон',
 	'Edit profile'=>'Редактировать профиль',
 	'Password'=>'Пароль',
 	'Forgot your password?'=>'Забыли пароль?',
@@ -86,4 +90,5 @@ return array(
 	'Create Payments' => 'Добавить способ оплаты',
 	'Manage Payments' => 'Управление способами оплаты',
 	'Edit Payments' => 'Редактирование способа оплаты',
+	'Result' => 'Результат',
 );
