@@ -16,6 +16,32 @@
       <strong>Comment</strong>: <span><%= comment %></span>
     </p>
     <form class="form-horizontal pop-row" id="editBookingRow" role="form">
+      <% if (action == 'add') { %>
+        <div class="form-group form-group-select-user">
+          <div class="col-xs-12">
+            <div class="dropdown" id="dropdown_users">
+              <button type="button" id="dLabel_users" class="btn btn-sm btn-block btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                Выбрать из зарегестрированных <span class="caret"></span>
+              </button>
+              <input type="hidden" id="selectUser_id" value="0" />
+              
+              <ul class="dropdown-menu" id="addUser" role="menu" aria-labelledby="dLabel_users">
+                <li class="search_line" role="presentation">
+                  <div class="input-group">
+                    <input type="text" class="input-block-level input-sm form-control" placeholder="Имя или Email" autocomplete="off"
+                      data-toggle="popover" data-placement="top" data-container="body" data-content="Введите как минимум три символа для начала поиска" >
+                    <i class="gi gi-search form-control-feedback" aria-hidden="true"></i>
+                  </div>
+                </li>
+                <li class="last hide" role="presentation">
+                  <a href="#" class="btn"><strong>Показать всех</strong></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-xs-9" id="selectUser"></div>
+        </div>
+      <% } %>
       <div class="form-group">
         <label for="inputName" class="col-xs-4 text-left control-label"><?=Yii::t('app','Name')?></label>
         <div class="col-xs-8">
@@ -28,12 +54,14 @@
           <input type="text" class="form-control input-sm inputPhone" placeholder="+7(123)-456-78-90">
         </div>
       </div>
+      <% if (action == 'edit') { %>
       <div class="form-group">
         <label for="inputResult" class="col-xs-4 text-left control-label"><?=Yii::t('app','Result')?></label>
         <div class="col-xs-8">
           <input type="text" class="form-control input-sm inputResult" placeholder="00:00">
         </div>
       </div>
+      <% } %>
       <div class="form-group">
         <label for="inputPrice" class="col-xs-4 text-left control-label"><?=Yii::t('app','Price')?></label>
         <div class="col-xs-8">
@@ -44,161 +72,66 @@
 
       <div id="priceRow">
         <p class="text-center">
-          <select class="form-control">
-            <option>Причина скидки</option>
-            <option>2</option>
-            <option>3</option>
+          <select name="discount" id="discount" class="form-control">
+            <option value="0"><?=Yii::t('app','Reason discounts')?></option>
+            <? if (isset($discounts)) foreach ($discounts AS $discount) { ?>
+              <option value="<?=$discount->id?>"><?=$discount->name?></option>
+            <? } ?>
           </select>
         </p>
       </div>
       <div id="paymentsMethodRow">
         <p class="text-center">
-          <select class="form-control">
-            <option>Метод оплаты</option>
-            <option>2</option>
-            <option>3</option>
+          <select name="payment" id="payment" class="form-control">
+            <option value="0"><?=Yii::t('app','Payment method')?></option>
+            <? if (isset($payments)) foreach ($payments AS $payment) { ?>
+              <option value="<?=$payment->id?>"><?=$payment->name?></option>
+            <? } ?>
           </select>
         </p>
       </div>
       <div id="sourceMethodRow">
         <p class="text-center">
-          <select class="form-control">
-            <option>Откуда пришел пользователь</option>
-            <option>2</option>
-            <option>3</option>
+          <select name="source" id="source" class="form-control">
+            <option value="0">Откуда пришел пользователь</option>
+            <? if (isset($sources)) foreach ($sources AS $source) { ?>
+              <option value="<?=$source->id?>"><?=$source->name?></option>
+            <? } ?>
           </select>
         </p>
       </div>
 
       <div class="form-group">
         <div class="col-xs-12">
-          <textarea type="text" class="form-control input-sm inputComment" placeholder="Дополнительный комментарий"></textarea>
+          <textarea type="text" class="form-control input-sm inputComment" placeholder="<?=Yii::t('app','Additional comment')?>"></textarea>
         </div>
       </div>
       <div class="form-group form-group-btn ">
         <div class="col-xs-12">
-          <!-- example -->
-          <button class="btn btn-success btn-block btn-sm" id="confirmBooking" data-toggle="tooltip" title="Подтвердить бронирование">
-            <i class="hi hi-ok-circle"></i> Подтвердить бронирование
-          </button>
+          <% if (status == 0) { %>
+            <button class="btn btn-success btn-block btn-sm" id="confirmBooking" data-toggle="tooltip" title="<?=Yii::t('app','Confirm reservation')?>">
+              <i class="hi hi-ok-circle"></i> <?=Yii::t('app','Confirm reservation')?>
+            </button>
+          <% } else { %>
+            <button class="btn btn-default btn-block btn-sm" id="undoBooking" data-toggle="tooltip" title="<?=Yii::t('app','Unconfirmed reservation')?>">
+              <i class="hi hi-remove-circle"></i> <?=Yii::t('app','Unconfirmed reservation')?>
+            </button>
+          <% } %>
         </div>
         <div class="col-xs-12">
-          <!-- example -->
-          <button class="btn btn-danger btn-block btn-sm" id="showRemoveBooking" data-toggle="tooltip" title="Удалить бронирование">
-            <i class="hi hi-remove"></i> Удалить бронирование
+          <button class="btn btn-danger btn-block btn-sm" id="showRemoveBooking" data-toggle="tooltip" title="<?=Yii::t('app','Remove reservation')?>">
+            <i class="hi hi-trash"></i> <?=Yii::t('app','Remove reservation')?>
           </button>
         </div>
         <div class="col-xs-6">
-          <button id="saveBooking" class="btn btn-primary btn-block btn-sm" data-toggle="tooltip" title="Сохранить">
+          <button id="saveBooking" class="btn btn-primary btn-block btn-sm" data-toggle="tooltip" title="<?=Yii::t('app','Save')?>">
             <i class="hi hi-ok"></i> <?=Yii::t('app','Save')?>
           </button>
         </div>
         <div class="col-xs-6">
-          <button id="cancelEditBooking" class="btn btn-warning btn-block btn-sm" data-toggle="tooltip" title="Отменить">
+          <button id="cancelEditBooking" class="btn btn-warning btn-block btn-sm" data-toggle="tooltip" title="<?=Yii::t('app','Cancel')?>">
             <i class="hi hi-remove"></i> <?=Yii::t('app','Cancel')?>
           </button>
-        </div>
-      </div>
-    </form>
-    <form class="form-horizontal pop-row" id="addBookingRow" role="form">
-      <div class="form-group">
-        <label for="inputName" class="col-xs-2 control-label">Name</label>
-        <div class="col-xs-7">
-          <input type="text" class="form-control input-sm inputName" placeholder="Ivan">
-        </div>
-        <div class="col-xs-2">
-          <button id="saveBooking" class="btn btn-default btn-sm" data-toggle="tooltip" title="Сохранить">
-            <i class="hi hi-ok"></i>
-          </button>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="inputPhone" class="col-xs-2 control-label">Phone</label>
-        <div class="col-xs-7">
-          <input type="text" class="form-control input-sm inputPhone" placeholder="+7(123)-456-78-90">
-        </div>
-        <div class="col-xs-2">
-          <button id="cancelAddBooking" class="btn btn-default btn-sm" data-toggle="tooltip" title="Отменить">
-            <i class="hi hi-remove"></i>
-          </button>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="inputResult" class="col-xs-2 control-label">Result</label>
-        <div class="col-xs-7">
-          <input type="text" class="form-control input-sm inputResult" value="<%= result %>" placeholder="00:00">
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="inputPrice" class="col-xs-2 control-label">Price</label>
-        <div class="col-xs-7">
-          <input type="text" class="form-control input-sm inputPrice" value="<%= price %>" placeholder="3000">
-        </div>
-        <div class="col-xs-2">
-          <button id="reservation" class="btn btn-default btn-sm" data-toggle="tooltip" title="Зарезервировать">
-            <i class="hi hi-ban-circle"></i>
-          </button>
-        </div>
-      </div>
-
-      <div id="priceRow">
-        <p class="text-center">
-          <div class="form-group">
-            <select class="form-control">
-              <option>Причина скидки</option>
-              <option>2</option>
-              <option>3</option>
-            </select>
-          </div>
-        </p>
-      </div>
-      <div id="paymentsMethodRow">
-        <p class="text-center">
-          <select class="form-control">
-            <option>Метод оплаты</option>
-            <option>2</option>
-            <option>3</option>
-          </select>
-        </p>
-      </div>
-      <div id="sourceMethodRow">
-        <p class="text-center">
-          <select class="form-control">
-            <option>Откуда пришел пользователь</option>
-            <option>2</option>
-            <option>3</option>
-          </select>
-        </p>
-      </div>
-
-
-      <div class="form-group">
-        <div class="col-xs-12">
-          <div class="dropdown" id="dropdown_users">
-            <button type="button" id="dLabel_users" class="btn btn-sm btn-block btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-              Выбрать из зарегестрированных <span class="caret"></span>
-            </button>
-            <input type="hidden" id="selectUser_id" value="0" />
-            
-            <ul class="dropdown-menu" id="addUser" role="menu" aria-labelledby="dLabel_users">
-              <li class="search_line" role="presentation">
-                <div class="input-group">
-                  <input type="text" class="input-block-level input-sm form-control" placeholder="Имя или Email" autocomplete="off"
-                    data-toggle="popover" data-placement="top" data-container="body" data-content="Введите как минимум три символа для начала поиска" >
-                  <i class="gi gi-search form-control-feedback" aria-hidden="true"></i>
-                </div>
-              </li>
-              <li class="last hide" role="presentation">
-                <a href="#" class="btn"><strong>Показать всех</strong></a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-xs-9" id="selectUser"></div>
-      </div>
-      <div class="form-group">
-        <div class="col-xs-12">
-          <textarea type="text" class="form-control input-sm inputComment" placeholder="Дополнительный комментарий"></textarea>
         </div>
       </div>
     </form>

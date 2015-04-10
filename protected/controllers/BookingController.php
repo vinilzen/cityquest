@@ -295,11 +295,13 @@ class BookingController extends Controller
 					$model->phone = $_POST['phone'];
 					$model->result = $_POST['result'];
 					$model->name = $_POST['name'];
-					// $model->competitor_id = (int)Yii::app()->user->id;
+
+					$model->payment = isset($_POST['payment']) ? $_POST['payment'] : 0;
+					$model->source = isset($_POST['source']) ? $_POST['source'] : 0;
+					$model->discount = isset($_POST['discount']) ? $_POST['discount'] : 0;
+					// var_dump($model->getAttributes());
 
 					if($model->save()){
-						//Yii::log(CJSON::encode($model->getAttributes()), 'info', 'bookingController.update');
-
 						echo CJavaScript::jsonEncode(array('success'=>1));
 					} else {
 						echo CJavaScript::jsonEncode(

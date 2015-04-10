@@ -77,17 +77,20 @@ class Booking extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'comment' => 'Comment',
-			'status' => 'Status',
-			'time' => 'Time',
-			'create_time' => 'Create Time',
-			'email' => 'Email',
-			'name' => 'Name',
-			'phone' => 'Phone',
-			'result' => 'Result',
-			'quest_id' => 'Quest',
-			'competitor_id' => 'Competitor',
-			'affiliate' => 'Affiliate',
+			'comment' => Yii::t('app','Comment'),
+			'status' => Yii::t('app','Status'),
+			'time' => Yii::t('app','Time'),
+			'create_time' => Yii::t('app','Create Time'),
+			'email' => Yii::t('app','Email'),
+			'name' => Yii::t('app','Name'),
+			'phone' => Yii::t('app','Phone'),
+			'result' => Yii::t('app','Result'),
+			'quest_id' => Yii::t('app','Quest'),
+			'competitor_id' => Yii::t('app','Competitor'),
+			'affiliate' => Yii::t('app','Affiliate'),
+			'source' => Yii::t('app','Sources'),
+			'discount' => Yii::t('app','Discounts'),
+			'payment' => Yii::t('app','Payments'),
 		);
 	}
 

@@ -52,15 +52,16 @@ var PopoverView = Backbone.View.extend({
 								? '/user/admin/view/id/'+$(this.parent).attr('data-user-id') 
 								: '#';
 
+		this.attr.action = 'add';
+		if (($(this.parent).hasClass('btn-info') || $(this.parent).hasClass('btn-success')) && this.attr.name !== '') {
+			this.attr.action = 'edit';
+		}
+
 		this.$el.html( _.template($('#BookInfWrap').html(), this.attr) );
 
 		$('.pop-row', this.$el).hide();
 
-		if (($(this.parent).hasClass('btn-info') || $(this.parent).hasClass('btn-success')) && this.attr.name !== '') {
-			$('#BookInf h3, #btnRow, #phoneRow, #priceRow, #sourceMethodRow, #paymentsMethodRow', this.$el).show();
-		} else {
-			this.showAdd();
-		}
+		this.showEdit(this.attr.action); // Add || Edit
 
 		if (this.attr.affiliate != '' ){
 			$('#phoneRow', this.$el)
@@ -77,37 +78,6 @@ var PopoverView = Backbone.View.extend({
 			showUserList = $('#showUserList').attr({
 								'class': 'progress-bar progress-bar-striped active',
 							}).html(' ');
-
-		/*
-		$.get('/user/user/list', function(r){
-			if (r && r.success && r.data && r.data.length>0) {
-				var select_container = $('#selectUser')
-						.html('<select name="user"><option value="0">Пользователь</option></select>'),
-					select_div = select_container.find('select');
-
-				_.each(r.data, function(user){
-					select_div.append(
-						'<option value="'+user.id+'" title="'+user.email+'" data-name="'+user.username+'" data-phone="'+user.phone+'">'
-							+user.username+' ('+user.email+')</option>'
-					);
-				});
-
-				select_div.styler({selectSearch:true});
-				$('.jq-selectbox').css('display','block');
-				$('#users_progress').remove();
-
-				select_div.on('change', function(){
-					var val = $(this).val(),
-						phone = $('option[value="'+val+'"]', this).attr('data-phone'),
-						name = $('option[value="'+val+'"]', this).attr('data-name');
-
-					$('.inputPhone', self.$el).val( phone );
-					$('.inputName', self.$el).val( name );
-				});
-
-			}
-		});
-		*/
 	},
 
 	addSeven:function(e){
@@ -182,6 +152,11 @@ var PopoverView = Backbone.View.extend({
 			phone : $('#editBookingRow .inputPhone').val(),
 			comment : $('#editBookingRow .inputComment').val(),
 			name : $('#editBookingRow .inputName').val(),
+			
+			payment : $('#payment').val(),
+			source : $('#source').val(),
+			discount : $('#discount').val(),
+
 		}, function(result){
 			
 			console.log(result);
@@ -215,11 +190,16 @@ var PopoverView = Backbone.View.extend({
 			ymd : self.attr.ymd,
 			date : self.attr.date,
 			time : self.attr.time,
-			price : $('#addBookingRow .inputPrice').val(),
-			result : $('#addBookingRow .inputResult').val(),
-			phone : reservation ? '0000000' : $('#addBookingRow .inputPhone').val(),
-			comment : $('#addBookingRow .inputComment').val(),
-			name : $('#addBookingRow .inputName').val()!=''?$('#addBookingRow .inputName').val() : 'CQ',
+			
+			payment : $('#payment').val(),
+			source : $('#source').val(),
+			discount : $('#discount').val(),
+
+			price : $('.inputPrice').val(),
+			result : $('.inputResult').val(),
+			phone : reservation ? '0000000' : $('.inputPhone').val(),
+			comment : $('.inputComment').val(),
+			name : $('.inputName').val()!=''?$('.inputName').val() : 'CQ',
 			user : reservation ? -1 : $('#selectUser_id').val(),
 		}, function(result){
 			if (result && result.success) {
@@ -253,7 +233,7 @@ var PopoverView = Backbone.View.extend({
 		return false;
 	},
 
-	showEdit:function(){
+	showEdit:function(options){
 		var self = this;
 
 		$('#addRow, #btnRow, #BookInf h3, #phoneRow', self.$el).hide();
@@ -273,107 +253,106 @@ var PopoverView = Backbone.View.extend({
 		$('#editBookingRow .inputComment', this.$el).val(self.attr.comment);
 		$('#editBookingRow .inputPrice', this.$el).val(self.attr.price);
 
-		$('#editBookingRow', this.$el).show();
-		$(this.parent).popover('setPosition');
-		return false;
-	},
+		$('#editBookingRow', this.$el).show('fast',function(a,b,c){
 
-	showAdd:function(){
-		var self = this;
+			if (options == 'add'){
 
-		$('#addRow', this.$el).hide();
-		$('#addBookingRow', this.$el).show('fast',function(){
-
-			$('#dropdown_users').on('hide.bs.dropdown', function () {
-				$('#addUser input').popover('hide');
-			}).on('show.bs.dropdown', function () {
-				// $('#addUser input').focus();
-				setTimeout( "$( '#addUser input' ).focus()", 500 );
-			});
-
-			$('#addUser li').click(function(e){
-				$('#dropdown_users').addClass('open');
-				return false;
-			});
-
-			var run = false,
-				progress = $( '<li><div class="progress">'+
-						'<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>'+
-					'</div></li>' );
-
-			var user_input = $('#addUser input')
-				.popover('show')
-				.on('keyup', function(){
-					var self_input = $(this);
-
-					self_input.popover('hide');
-					var val = self_input.val();
-					if (val.length > 2 && run == false) {
-						
-						$('#addUser li.result').remove();
-						progress.insertAfter( "#addUser li:first" );
-						self_input.prop('disabled', true);
-						run = true;
-						$.get('/user/user/list?val='+val, function(r){
-							$('#addUser li.result').remove();
-							if ( r && r.success && r.data && r.data.length>0 ) {
-								//$('#addUser li.last').hide();
-								$('#addUser li.result').remove();
-								_.each(r.data, function(user){
-									var li = $('<li class="result">').appendTo('#addUser');
-									$(	'<a title="'+user.phone+'" data-value="'+user.id+'" data-name="'+user.username+'">'+
-											user.username+' ('+user.email+')</a>')
-										.on('click', function(){
-											$(this).addClass('selected');
-											var val = $(this).attr('data-value'),
-												phone = $(this).attr('title'),
-												name = $(this).attr('data-name');
-
-											$('#selectUser_id').val( val );
-											$('.inputPhone', self.$el).val( phone );
-											$('.inputName', self.$el).val( name );
-										}).appendTo(li);
-								});
-
-							} else {
-								$('#addUser').append('<li class="result"><a>Ничего не найдено</a></li>');
-							}
-
-						}).error(function(e){
-
-							$('#addUser').append('<li class="result"><a>Ошибка!</a></li>');
-
-						}).done(function(e){
-							progress.remove();
-							self_input.prop('disabled', false).focus();
-
-							run = false;
-						});
-						
-						
-					} else {
-						$('#addUser li.result').remove();
-					}
+				$('#dropdown_users').on('hide.bs.dropdown', function () {
+					$('#addUser input').popover('hide');
+				}).on('show.bs.dropdown', function () {
+					setTimeout( "$( '#addUser input' ).focus()", 500 );
 				});
 
+				$('#addUser li').click(function(e){
+					$('#dropdown_users').addClass('open');
+					return false;
+				});
+
+				var run = false,
+					progress = $( '<li><div class="progress">'+
+							'<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>'+
+						'</div></li>' );
+
+				// search exist user
+				var user_input = $('#addUser input')
+					.popover('show')
+					.on('keyup', function(){
+						var self_input = $(this);
+
+						self_input.popover('hide');
+						var val = self_input.val();
+						if (val.length > 2 && run == false) {
+							
+							$('#addUser li.result').remove();
+							progress.insertAfter( "#addUser li:first" );
+							self_input.prop('disabled', true);
+							run = true;
+							$.get('/user/user/list?val='+val, function(r){
+								$('#addUser li.result').remove();
+								if ( r && r.success && r.data && r.data.length>0 ) {
+									//$('#addUser li.last').hide();
+									$('#addUser li.result').remove();
+									_.each(r.data, function(user){
+										var li = $('<li class="result">').appendTo('#addUser');
+										$(	'<a title="'+user.phone+'" data-value="'+user.id+'" data-name="'+user.username+'">'+
+												user.username+' ('+user.email+')</a>')
+											.on('click', function(){
+												$(this).addClass('selected');
+												var val = $(this).attr('data-value'),
+													phone = $(this).attr('title'),
+													name = $(this).attr('data-name');
+
+												$('#selectUser_id').val( val );
+												$('.inputPhone', self.$el).val( phone );
+												$('.inputName', self.$el).val( name );
+											}).appendTo(li);
+									});
+
+								} else {
+									$('#addUser').append('<li class="result"><a>Ничего не найдено</a></li>');
+								}
+
+							}).error(function(e){
+
+								$('#addUser').append('<li class="result"><a>Ошибка!</a></li>');
+
+							}).done(function(e){
+								progress.remove();
+								self_input.prop('disabled', false).focus();
+
+								run = false;
+							});
+							
+							
+						} else {
+							$('#addUser li.result').remove();
+						}
+					});
+			}
+			
+			$(self.parent).popover('setPosition');
+
 		});
 
-		$('.inputPhone', self.$el).blur(function(){
-			$(this).mask('+7(000)-000-00-00');				
-		});
 
-
-
-		$(this.parent).popover('setPosition');
 		return false;
 	},
 
-	cancelAddBooking: function(){
-		$('.pop-row', this.$el).hide();
-		$('#addRow', this.$el).show();
-		$(this.parent).popover('setPosition');
-		return false;
-	},
+	// showAdd:function(){
+	// 	this.showEdit('add');
+
+	// 	// $('#addRow', this.$el).hide();
+	// 	// $('#addBookingRow', this.$el).show('fast',function(){});
+
+	// 	return false;
+	// },
+
+	// cancelAddBooking: function(){
+	// 	$('.pop-row', this.$el).hide();
+	// 	$('#addRow', this.$el).show();
+	// 	$(this.parent).popover('setPosition');
+	// 	return false;
+	// },
 
 	cancelEditBooking: function(){
 		$('.pop-row', this.$el).hide();
