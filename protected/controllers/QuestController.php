@@ -110,8 +110,8 @@ class QuestController extends Controller
 
 		$quests = Quest::model()->findAll(array(
 		    "condition" => "status = 2 AND city_id = ".$this->city,
-		    "order" => "status ASC, sort ASC",
-		    "limit" => 12,
+		    "order" => "sort ASC",
+		    "limit" => 20,
 		));
 
 		$cities = City::model()->findAll();
@@ -122,12 +122,33 @@ class QuestController extends Controller
 
 		$other_quests = array();
 		
+		$now = false;
+		$next = false;
+		$prev = false;
 		foreach ($quests AS $quest){
-			if ($quest->id == $id){
-				$model = $quest;
-			} else {
+			if ($quest->id != $id){
 				$other_quests[$quest->id] = $quest;
 			}
+		}
+		foreach ($quests AS $quest){
+			if ($now){
+				$next = $quest;
+				break;
+			}
+			if ($quest->id == $id){
+				$model = $quest;
+				$now = true;
+			} else {
+				$prev = $quest;
+			}
+		}
+
+		if (!$next) {
+			reset($quests);
+			$next = current($quests);
+		}
+		if (!$prev) {
+			$prev = end($quests);
 		}
 
 		$bookings = array();
@@ -160,7 +181,9 @@ class QuestController extends Controller
 			'booking' => $bookings_by_date,
 			'times' => $times,
 			'holidays' => $holiday_list,
-			'other_quests' => $other_quests
+			'other_quests' => $other_quests,
+			'prev' => $prev,
+			'next' => $next,
 		));
 	}
 

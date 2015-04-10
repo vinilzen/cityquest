@@ -30,44 +30,42 @@
 
         <h1 itemprop="name" id='quest_title'>
           <?=$model->title?>
-          <? if (isset($other_quests) && count($other_quests) > 0) {
-              $counter = 1;
-              foreach ($other_quests as $quest) {
-                if ($counter==1 || $counter == 2){
-
-                  if ($model->id == 4 || $model->id == 3){
-                    $arrow = ($counter==2)?'left':'right';
-                  } else {
-                    $arrow = ($counter==1)?'left':'right';
-                  }
-
-                  echo '<a class="arrow-quest arrow-'.$arrow.'" title="'.$quest->title.'" href="/quest/view?id='.$quest->id.'">'.
-                        '<span class="glyphicon glyphicon-menu-'.$arrow.'"></span></a>';
-                }
-                $counter++;
+          <? if (isset($prev)) {
+                echo '<a class="arrow-quest arrow-left" title="'.$prev->title.'" href="/quest/view?id='.$prev->id.'">'.
+                      '<span class="glyphicon glyphicon-menu-left"></span></a>';
               }
-             } ?>
+              if (isset($next)) {
+                echo '<a class="arrow-quest arrow-right" title="'.$next->title.'" href="/quest/view?id='.$next->id.'">'.
+                      '<span class="glyphicon glyphicon-menu-right"></span></a>';
+              }
+          ?>
         </h1>
         <h2 itemprop="description"><?=$model->content?></h2>
 
         <div class="descr_quest">
-          <p><i class="duration iconm-Time"></i><span class="time-mt"><em>60</em>минут</span></p>
+          <i class="duration iconm-Time"></i>
+          <p class="time-text">
+            <span class="time-mt"><em>60</em>минут</span>
+          </p>
           <p class="pull-right"><i class="ico-ppl iconm-Man"></i><i class="ico-ppl iconm-Man"></i><i class="ico-ppl iconm-Man noactive"></i><i class="ico-ppl iconm-Man noactive"></i>
             <span class="people"><em>2-4</em><?=Yii::t('app','players')?></span>
           </p>
         </div>
       </div>
       <div class="col-sm-12 col-br descr_quest">
-          <div class="text-left tr">
-            <p><i class="metro"></i><span class="metro-title"><?=$model->metro?></span></p>
+          <div class="text-left tr text-metro">
+            <i class="metro"></i>
+            <p>
+              <span class="metro-title"><?=$model->metro?></span>
+            </p>
           </div>
           <div class="text-left text-pin">
+            <i class="ico-loc iconm-Pin"></i>
             <p>
-              <i class="ico-loc iconm-Pin"></i>
               <span class="addr-quest">
                 <span><?=$model->addres?></span><br>
-                <?=Yii::t('app','Free on site parking is 1.5 hours')?>.<br>
-                <a href="https://www.google.com/maps/preview?q=<?=$cities[$model->city_id]->name?>,+<?=urlencode($model->addres)?>"><?=Yii::t('app','How to get there')?>?</a>
+                <?=($model->id!=15)?Yii::t('app','Free on site parking is 1.5 hours').'.':'Проход и проезд со стороны <br>ул. Нижняя Красносельская д.15/17 в арку'?><br>
+                <a href="https://www.google.com/maps/preview?q=<?=$cities[$model->city_id]->name?>,+<?=urlencode($model->addres)?>" target="_blank"><?=Yii::t('app','How to get there')?>?</a>
               </span>
             </p>
           </div>
@@ -248,7 +246,7 @@
   <div class="row">
   <? $counter = 1;
     foreach ($other_quests as $quest) { ?>
-    <div class="col-xs-12 col-md-6 col-sm-12 col-lg-6 col-xlg-4 <?=($counter)?'col-xlg-offset-2':''; ?> item">
+    <div class="col-xs-12 col-md-6 col-sm-12 col-lg-4 col-xlg-4 item">
     <? $counter = 0; ?>
       <img class="featurette-image img-responsive"
         alt="<?=CHtml::encode($quest->title)?>" 

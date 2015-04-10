@@ -95,9 +95,11 @@ input {
 	img {
 		display: block;
 		width: 176px;
+		height: 42px;
 		@media (min-width: 1600px) {
 			width: 201px;
-			margin-top: -8px;
+			height: 48px;
+			// margin-top: -8px;
 		}
 	}
 }
@@ -1148,7 +1150,16 @@ body.inner .jumbotron.quest {
 		}
 	}
 }
-
+.text-metro {
+	position: relative;
+	display: block;
+	padding-left: 40px;
+	.metro {
+		position: absolute;
+		left:0;
+		top:-2px;
+	}
+}
 .descr_quest {
 	text-align: left;
 	margin-left: -4px;
@@ -1160,17 +1171,9 @@ body.inner .jumbotron.quest {
 	}
 	p {
 		font-size: 16px;
-		height: 32px;
-		line-height: 32px;
+		line-height: 20px;
 		display: inline-block;
 		white-space: nowrap;
-		@media (max-width: 1024px) and (min-width: 992px) {
-			-webkit-transform: scale(0.9);
-			   -moz-transform: scale(0.9);
-			    -ms-transform: scale(0.9);
-			     -o-transform: scale(0.9);
-			        transform: scale(0.9);
-		}
 		@media (max-width: $screen-xs-max) {
 			width: 275px;
 			text-align: left;
@@ -1191,7 +1194,7 @@ body.inner .jumbotron.quest {
 			top: -4px;
 			position: relative;
 			font-size: 14px;
-			margin-left: 12px;
+			margin-left: 0px;
 			font-weight: normal;
 			line-height: 20px;
 			@media (max-width: $screen-xs-max) {
@@ -1223,7 +1226,9 @@ body.inner .jumbotron.quest {
 		font-size: 28px;
 		margin-right: 0;
 		margin-left: 0px;
-		top: -40px;
+		position: absolute;
+		left:0;
+		top: -2px;
 	}
 	.metro {
 		margin-top: 3px;
@@ -1248,10 +1253,14 @@ body.inner .jumbotron.quest {
 	}
 	@media (max-width: 1023px) {
 		margin-left: 30px;
+		margin-top: 5px;
 	}
 	@media (max-width: $screen-xs-max) {
 		.col-md-3:last-child {
 			margin-top: 5px;
+		}
+		.time-text {
+			width: 170px;
 		}
 		margin-left: 0;
 	}
@@ -1262,12 +1271,14 @@ body.inner .jumbotron.quest {
 	}
 	.col-br.descr_quest {
 		margin-left: 20px;
+		margin-top: -105px;
 		.tr {
 			width: 170px;
 			float: left;
 		}
 		.text-pin {
 			padding-top: 12px;
+			float: left;
 		}
 	}
 }
@@ -1327,21 +1338,16 @@ body.inner .jumbotron.quest {
 }
 .col-br {
 	margin-top: -100px;
+	bottom: 0;
 	@media (min-width: 1024px){
 		margin-top: 0;
 		position: absolute;
 		right:0;
-		bottom: 79px;
 		width: 366px;
 	}
 	@media (min-width: 1440px) {
 		bottom: 10px;
-	}
-
-	@media (width: 1024px){
-		.tr {
-			padding-left: 10px;
-		}
+		right: 60px;
 	}
 }
 body.inner .jumbotron.quest1 {
@@ -1350,6 +1356,8 @@ body.inner .jumbotron.quest1 {
 
 .text-pin {
 	padding-top: 5px;
+	position: relative;
+	padding-left: 40px;
 }
 .descr_quest p .addr-quest {
 	a {
@@ -1357,7 +1365,7 @@ body.inner .jumbotron.quest1 {
 		color:#6bcceb;
 		padding-left: 0;
 		margin-left: 0;
-		margin-top: 3px;
+		margin-top: 12px;
 		&:hover {
 			color:#fff;
 			text-decoration: none;
@@ -1370,6 +1378,7 @@ body.inner .jumbotron.quest1 {
 	display: inline-block;
 	font-size: 26px;
 	color:#6bcceb;
+	margin-right: 12px;
 }
 .metro {
 	width: 28px;
@@ -2108,7 +2117,7 @@ h2.twotab, a.h2.twotab {
 				width: 22px;
 				height: 33px;
 				margin-left: 9px;
-
+  				margin-top: -4px;
 				@media (max-width: $screen-xs-max) {
 					width: 12px;
 					height: 17px;

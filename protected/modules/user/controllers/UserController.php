@@ -32,7 +32,7 @@ class UserController extends Controller
 			),
 			array('allow',
 				'actions'=>array('list', 'export', 'exportlab'),
-				'expression'=>"Yii::app()->getModule('user')->user()->superuser == 1",
+				'expression'=>"Yii::app()->getModule('user')->user()->superuser > 0",
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
