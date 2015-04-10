@@ -34,6 +34,11 @@ var PopoverView = Backbone.View.extend({
 			id : $(this.parent).attr('data-id') || 0,
 			quest_id : $(this.parent).attr('data-quest') || 0,
 			status : $(this.parent).attr('data-status') || 0,
+
+			payment : $(this.parent).attr('data-payment') || 0,
+			source : $(this.parent).attr('data-source') || 0,
+			discount : $(this.parent).attr('data-discount') || 0,
+			
 			name :  name,
 			phone :  $(this.parent).attr('data-phone') || '',
 			result :  $(this.parent).attr('data-result') || '',
@@ -152,7 +157,7 @@ var PopoverView = Backbone.View.extend({
 			phone : $('#editBookingRow .inputPhone').val(),
 			comment : $('#editBookingRow .inputComment').val(),
 			name : $('#editBookingRow .inputName').val(),
-			
+
 			payment : $('#payment').val(),
 			source : $('#source').val(),
 			discount : $('#discount').val(),

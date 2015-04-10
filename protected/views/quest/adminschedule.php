@@ -199,6 +199,11 @@
 														'data-price="'.$quest['bookings'][$time]->price.'" '.
 														'data-phone="'.$quest['bookings'][$time]->phone.'" '.
 														'data-result="'.$quest['bookings'][$time]->result.'" '.
+
+														'data-payment="'.$quest['bookings'][$time]->payment.'" '.
+														'data-source="'.$quest['bookings'][$time]->source.'" '.
+														'data-discount="'.$quest['bookings'][$time]->discount.'" '.
+
 														'data-comment="'.$quest['bookings'][$time]->comment.'" '.
 														'data-affiliate="'.$quest['bookings'][$time]->affiliate.'" '.
 														'data-user-id="'. $competitor_id .'" '.

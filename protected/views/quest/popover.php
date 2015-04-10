@@ -75,7 +75,9 @@
           <select name="discount" id="discount" class="form-control">
             <option value="0"><?=Yii::t('app','Reason discounts')?></option>
             <? if (isset($discounts)) foreach ($discounts AS $discount) { ?>
-              <option value="<?=$discount->id?>"><?=$discount->name?></option>
+              <option value="<?=$discount->id?>" <% if (discount == '<?=$discount->id?>') { %> selected="selected" <% } %> >
+                <?=$discount->name?>
+              </option>
             <? } ?>
           </select>
         </p>
@@ -85,7 +87,9 @@
           <select name="payment" id="payment" class="form-control">
             <option value="0"><?=Yii::t('app','Payment method')?></option>
             <? if (isset($payments)) foreach ($payments AS $payment) { ?>
-              <option value="<?=$payment->id?>"><?=$payment->name?></option>
+              <option value="<?=$payment->id?>" <% if (payment == '<?=$payment->id?>') { %> selected="selected" <% } %>>
+                <?=$payment->name?>
+              </option>
             <? } ?>
           </select>
         </p>
@@ -95,7 +99,9 @@
           <select name="source" id="source" class="form-control">
             <option value="0">Откуда пришел пользователь</option>
             <? if (isset($sources)) foreach ($sources AS $source) { ?>
-              <option value="<?=$source->id?>"><?=$source->name?></option>
+              <option value="<?=$source->id?>" <% if (source == '<?=$source->id?>') { %> selected="selected" <% } %>>
+                <?=$source->name?>
+              </option>
             <? } ?>
           </select>
         </p>
