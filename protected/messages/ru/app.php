@@ -90,7 +90,7 @@ return array(
 	'Update Discounts' => 'Редактирование скидки',
 	'Users' => 'Пользователи',
 	'Uploader'=>'Загрузить',
-	'Unconfirmed reservation'=>'Не подтвержденная бронь',
+	'Unconfirmed reservation'=>'Отменить подтвержденние брони',
 	'we are in social networks'=>'мы в социальных сетях',
 	'Quests'=>'Квесты',
 	'Your phone number'=>'Ваш номер телефона',

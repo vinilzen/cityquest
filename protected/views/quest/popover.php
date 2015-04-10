@@ -115,7 +115,7 @@
       <div class="form-group form-group-btn ">
         <div class="col-xs-12">
           <% if (status == 0) { %>
-            <button class="btn btn-success btn-block btn-sm" id="confirmBooking" data-toggle="tooltip" title="<?=Yii::t('app','Confirm reservation')?>">
+            <button class="btn btn-primary btn-block btn-sm" id="confirmBooking" data-toggle="tooltip" title="<?=Yii::t('app','Confirm reservation')?>">
               <i class="hi hi-ok-circle"></i> <?=Yii::t('app','Confirm reservation')?>
             </button>
           <% } else { %>
@@ -124,18 +124,16 @@
             </button>
           <% } %>
         </div>
-        <div class="col-xs-12">
-          <button class="btn btn-danger btn-block btn-sm" id="showRemoveBooking" data-toggle="tooltip" title="<?=Yii::t('app','Remove reservation')?>">
-            <i class="hi hi-trash"></i> <?=Yii::t('app','Remove reservation')?>
-          </button>
-        </div>
         <div class="col-xs-6">
-          <button id="saveBooking" class="btn btn-primary btn-block btn-sm" data-toggle="tooltip" title="<?=Yii::t('app','Save')?>">
+          <button id="saveBooking" class="btn btn-success btn-block btn-sm" data-toggle="tooltip" title="<?=Yii::t('app','Save')?>">
             <i class="hi hi-ok"></i> <?=Yii::t('app','Save')?>
           </button>
         </div>
         <div class="col-xs-6">
-          <button id="cancelEditBooking" class="btn btn-warning btn-block btn-sm" data-toggle="tooltip" title="<?=Yii::t('app','Cancel')?>">
+          <button class="btn btn-danger btn-block btn-sm" id="showRemoveBooking" data-toggle="tooltip" title="<?=Yii::t('app','Remove reservation')?>">
+            <i class="hi hi-trash"></i> <?=Yii::t('app','Remove reservation')?>
+          </button>
+          <button id="cancelEditBooking" class="btn hide btn-warning btn-block btn-sm" data-toggle="tooltip" title="<?=Yii::t('app','Cancel')?>">
             <i class="hi hi-remove"></i> <?=Yii::t('app','Cancel')?>
           </button>
         </div>

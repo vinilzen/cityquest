@@ -10,8 +10,7 @@ var PopoverView = Backbone.View.extend({
 		'click #editBooking':'showEdit',
 		'click #addBooking':'showAdd',
 		'click #confirmedDelete':'removeBooking',
-		'click #addBookingRow #saveBooking':'saveBooking',
-		'click #editBookingRow #saveBooking':'saveEditedBooking',
+		'click #saveBooking':'saveBooking',
 		'click #cancelAddBooking':'cancelAddBooking',
 		'click #cancelEditBooking':'cancelEditBooking',
 		'click #reservation':'reservation',
@@ -187,34 +186,40 @@ var PopoverView = Backbone.View.extend({
 
 	saveBooking:function(options){
 
-		var self = this,
-			reservation = options.reservation || false;
+		if (this.attr.action == 'edit') {
+			this.saveEditedBooking();
+		} else {
 
-		$.post('/booking/create', {
-			quest_id : self.attr.quest_id,
-			ymd : self.attr.ymd,
-			date : self.attr.date,
-			time : self.attr.time,
-			
-			payment : $('#payment').val(),
-			source : $('#source').val(),
-			discount : $('#discount').val(),
+			var self = this,
+				reservation = options.reservation || false;
 
-			price : $('.inputPrice').val(),
-			result : $('.inputResult').val(),
-			phone : reservation ? '0000000' : $('.inputPhone').val(),
-			comment : $('.inputComment').val(),
-			name : $('.inputName').val()!=''?$('.inputName').val() : 'CQ',
-			user : reservation ? -1 : $('#selectUser_id').val(),
-		}, function(result){
-			if (result && result.success) {
-				console.log('confirmed');
-				location.reload();
-			} else {
-				console.log(result);
-				alert('Ошибка!');
-			}
-		});
+			$.post('/booking/create', {
+				quest_id : self.attr.quest_id,
+				ymd : self.attr.ymd,
+				date : self.attr.date,
+				time : self.attr.time,
+				
+				payment : $('#payment').val(),
+				source : $('#source').val(),
+				discount : $('#discount').val(),
+
+				price : $('.inputPrice').val(),
+				result : $('.inputResult').val(),
+				phone : reservation ? '0000000' : $('.inputPhone').val(),
+				comment : $('.inputComment').val(),
+				name : $('.inputName').val()!=''?$('.inputName').val() : 'CQ',
+				user : reservation ? -1 : $('#selectUser_id').val(),
+			}, function(result){
+				if (result && result.success) {
+					console.log('confirmed');
+					location.reload();
+				} else {
+					console.log(result);
+					alert('Ошибка!');
+				}
+			});
+
+		}
 
 		return false;
 	},
@@ -343,26 +348,10 @@ var PopoverView = Backbone.View.extend({
 		return false;
 	},
 
-	// showAdd:function(){
-	// 	this.showEdit('add');
-
-	// 	// $('#addRow', this.$el).hide();
-	// 	// $('#addBookingRow', this.$el).show('fast',function(){});
-
-	// 	return false;
-	// },
-
-	// cancelAddBooking: function(){
-	// 	$('.pop-row', this.$el).hide();
-	// 	$('#addRow', this.$el).show();
-	// 	$(this.parent).popover('setPosition');
-	// 	return false;
-	// },
-
 	cancelEditBooking: function(){
-		$('.pop-row', this.$el).hide();
-		$('#BookInf h3, #btnRow, #phoneRow', this.$el).show();
-		$(this.parent).popover('setPosition');
+		// $('.pop-row', this.$el).hide();
+		// $('#BookInf h3, #btnRow, #phoneRow', this.$el).show();
+		$(this.parent).popover('hide');
 		return false;
 	},
 });

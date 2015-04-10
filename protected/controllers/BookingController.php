@@ -115,6 +115,10 @@ class BookingController extends Controller
 							$model->name = $_POST['name'];
 							$model->quest_id = (int)$_POST['quest_id'];
 
+							$model->payment = isset($_POST['payment']) ? $_POST['payment'] : 0;
+							$model->source = isset($_POST['source']) ? $_POST['source'] : 0;
+							$model->discount = isset($_POST['discount']) ? $_POST['discount'] : 0;
+
 							$model->competitor_id = (isset($_POST['user']) && $_POST['user'] == -1) ? -1 : (int)Yii::app()->user->id;
 
 							if ( isset($_POST['user']) && $_POST['user'] != -1 && $_POST['user'] != '' && $_POST['user'] != 0 ) {
