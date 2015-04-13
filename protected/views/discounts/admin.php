@@ -1,6 +1,6 @@
 <?php
-/* @var $this CityController */
-/* @var $model City */
+/* @var $this DiscountsController */
+/* @var $model Discounts */
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
@@ -8,7 +8,7 @@ $('.search-button').click(function(){
 	return false;
 });
 $('.search-form form').submit(function(){
-	$('#city-grid').yiiGridView('update', {
+	$('#discounts-grid').yiiGridView('update', {
 		data: $(this).serialize()
 	});
 	return false;
@@ -19,9 +19,9 @@ $('.search-form form').submit(function(){
 <div class="block">
 	<div class="block-title">
 		<h2>
-			<?=Yii::t('app','Management of cities')?> 
+			<?=Yii::t('app','Manage Discounts')?> 
 			<small>
-				<a href="/city/create"><i class="hi hi-plus" aria-hidden="true"></i></a>
+				<a href="/discounts/create"><i class="hi hi-plus" aria-hidden="true"></i></a>
 			</small>
 		</h2>
 	</div>
@@ -36,9 +36,7 @@ $('.search-form form').submit(function(){
 				'columns'=>array(
 					'id',
 					'name',
-					'active',
-					'country',
-					'languages',
+					'key',
 					array(
 						'class'=>'CButtonColumn',
 						'template' => '{update} {delete}',

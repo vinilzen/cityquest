@@ -27,7 +27,7 @@
   </div>
 </div>
 
-<div aria-hidden="true" aria-labelledby="myModalMenuLabel" class="modal fade" id="myModalMenu" role="dialog" tabindex="-1">
+<div aria-hidden="true" class="modal fade" id="myModalMenu" role="dialog" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header text-center">
@@ -47,10 +47,10 @@
 </div>
 
 <? if (Yii::app()->user->isGuest) { ?>
-  <div aria-hidden="true" aria-labelledby="myModalLabelAuth" class="modal fade" id="myModalAuth" role="dialog" tabindex="-1">
+  <div aria-hidden="true" class="modal fade" id="myModalAuth" role="dialog" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header" role="tablist">
           <button class="visible-xs close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
           <a class="h4 modal-title active" data-toggle="tab" href="#auth" id="auth-tab" role="tab"><?=Yii::t('app','Sign in')?></a>
           <a class="h4 modal-title" data-toggle="tab" href="#reg" role="tab"><?=Yii::t('app','Check In')?></a>
@@ -59,7 +59,7 @@
         <div class="modal-body">
           <div class="row social_auth">
             <div class="col-xs-6 text-right">
-              <a class="vk" href="https://oauth.vk.com/authorize?client_id=4659293&scope=uid,first_name,last_name,sex,bdate,email&redirect_uri=http://<?=$_SERVER['SERVER_NAME']; ?>/user/login/vkauth&response_type=code"></a>
+              <a class="vk" href="https://oauth.vk.com/authorize?client_id=4659293&amp;scope=uid,first_name,last_name,sex,bdate,email&amp;redirect_uri=http://<?=$_SERVER['SERVER_NAME']; ?>/user/login/vkauth&amp;response_type=code"></a>
             </div>
             <div class="col-xs-6 text-left">
               <? if ($_SERVER['HTTP_HOST'] != 'cq.il' && $_SERVER['HTTP_HOST'] != 'cq.kzil') { ?>
@@ -138,13 +138,13 @@
           </div>
           <div class="tab-content">
             <div class="tab-pane active" id="auth">
-              <form role="form" id="auth-form" action="">
+              <form role="form" id="auth-form" action="#">
                 <div class="form-group" id="form-group-username-auth">
                   <input class="form-control" placeholder="Email" id="auth-email" name="email" type="email">
                   <span class="error-msg">?</span>
                 </div>
                 <div class="form-group" style="display:none;" id="form-group-forgot-auth">
-                  <input class="form-control" placeholder="Email" id="auth-forgot" type="forgot_email" name="email">
+                  <input class="form-control" placeholder="Email" id="auth-forgot" type="email" name="email">
                   <p class="help-block"><small><?=Yii::t('app','To recover a password, enter Email'); ?></small></p>
                   <span class="error-msg">?</span>
                 </div>
@@ -157,7 +157,7 @@
               </form>
             </div>
             <div class="tab-pane" id="reg">
-              <form role="form" id="reg-form" action="">
+              <form role="form" id="reg-form" action="#">
                 <div class="form-group" id="form-group-reg-email">
                   <input required class="form-control" placeholder="Email" id="reg-email" name="email" type="email">
                   <span class="error-msg">?</span>
@@ -187,15 +187,15 @@
   </div>
 <? } ?>
 
-<div aria-hidden="true" aria-labelledby="myModalLabelBook" class="ModalBook modal fade" id="myModalBook" role="dialog" tabindex="-1">
+<div aria-hidden="true" class="ModalBook modal fade" id="myModalBook" role="dialog" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">
         <div class="row">
           <div class="col-sm-6 col-xs-12">
-            <img alt="" class="featurette-image img-responsive" src="">
+            <img alt="" class="featurette-image img-responsive" src="/images/q/3.jpg">
             <a class="descr" href="#lab">
-              <h2></h2>
+              <h2>Театр</h2>
               <p>
                 <span>
                   <i class="ico-ppl iconm-Man"></i>
@@ -230,7 +230,7 @@
 </div>
 
 <? if (!Yii::app()->user->isGuest) { ?>
-  <div aria-hidden="true" aria-labelledby="myModalLabelAuth" class="modal fade" id="myModalEditProfile" role="dialog" tabindex="-1">
+  <div aria-hidden="true" class="modal fade" id="myModalEditProfile" role="dialog" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -292,6 +292,8 @@
 <? } ?>
 
 <? if ($_SERVER['HTTP_HOST'] != 'cq.il' && $_SERVER['HTTP_HOST'] != 'cq.kzil') { ?>
+
+<!-- Yandex.Metrika counter -->
   <script type="text/javascript">
     (function (d, w, c) {
     (w[c] = w[c] || []).push(function() {
@@ -317,7 +319,7 @@
     })(document, window, "yandex_metrika_callbacks");
   </script>
   <noscript><div><img alt="" src="//mc.yandex.ru/watch/25221941" style="position:absolute; left:-9999px;"></div></noscript>
-
+<!-- /Yandex.Metrika counter -->
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

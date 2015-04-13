@@ -16,113 +16,131 @@
       <strong>Comment</strong>: <span><%= comment %></span>
     </p>
     <form class="form-horizontal pop-row" id="editBookingRow" role="form">
+      <% if (action == 'add') { %>
+        <div class="form-group form-group-select-user">
+          <div class="col-xs-12">
+            <div class="dropdown" id="dropdown_users">
+              <button type="button" id="dLabel_users" class="btn btn-sm btn-block btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                Выбрать из зарегестрированных <span class="caret"></span>
+              </button>
+              <input type="hidden" id="selectUser_id" value="0" />
+              
+              <ul class="dropdown-menu" id="addUser" role="menu" aria-labelledby="dLabel_users">
+                <li class="search_line" role="presentation">
+                  <div class="input-group">
+                    <input type="text" class="input-block-level input-sm form-control" placeholder="Имя или Email" autocomplete="off"
+                      data-toggle="popover" data-placement="top" data-container="body" data-content="Введите как минимум три символа для начала поиска" >
+                    <i class="gi gi-search form-control-feedback" aria-hidden="true"></i>
+                  </div>
+                </li>
+                <li class="last hide" role="presentation">
+                  <a href="#" class="btn"><strong>Показать всех</strong></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-xs-9" id="selectUser"></div>
+        </div>
+      <% } %>
       <div class="form-group">
-        <label for="inputName" class="col-xs-2 control-label">Name</label>
-        <div class="col-xs-7">
+        <label for="inputName" class="col-xs-4 text-left control-label"><?=Yii::t('app','Name')?></label>
+        <div class="col-xs-8">
           <input type="text" class="form-control input-sm inputName" placeholder="Ivan">
         </div>
-        <div class="col-xs-2">
-          <button id="saveBooking" class="btn btn-default btn-sm" data-toggle="tooltip" title="Сохранить">
-            <i class="hi hi-ok"></i>
-          </button>
-        </div>
       </div>
       <div class="form-group">
-        <label for="inputPhone" class="col-xs-2 control-label">Phone</label>
-        <div class="col-xs-7">
+        <label for="inputPhone" class="col-xs-4 text-left control-label"><?=Yii::t('app','Phone')?></label>
+        <div class="col-xs-8">
           <input type="text" class="form-control input-sm inputPhone" placeholder="+7(123)-456-78-90">
         </div>
-        <div class="col-xs-2">
-          <button id="cancelEditBooking" class="btn btn-default btn-sm" data-toggle="tooltip" title="Отменить">
-            <i class="hi hi-remove"></i>
-          </button>
-        </div>
       </div>
+      <% if (action == 'edit') { %>
       <div class="form-group">
-        <label for="inputPrice" class="col-xs-2 control-label">Price</label>
-        <div class="col-xs-7">
-          <input type="text" class="form-control input-sm inputPrice" placeholder="3000">
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="inputResult" class="col-xs-2 control-label">Result</label>
-        <div class="col-xs-7">
+        <label for="inputResult" class="col-xs-4 text-left control-label"><?=Yii::t('app','Result')?></label>
+        <div class="col-xs-8">
           <input type="text" class="form-control input-sm inputResult" placeholder="00:00">
         </div>
       </div>
+      <% } %>
+      <div class="form-group">
+        <label for="inputPrice" class="col-xs-4 text-left control-label"><?=Yii::t('app','Price')?></label>
+        <div class="col-xs-8">
+          <input type="text" class="form-control input-sm inputPrice" placeholder="3000">
+        </div>
+      </div>
+
+
+      <div class="form-group" id="priceRow">
+        <label class="col-xs-4 text-left control-label"><?=Yii::t('app','Reason discounts')?></label>
+        <div class="col-xs-8">
+          <select name="discount" id="discount" class="form-control">
+            <option value="0">(Пусто)</option>
+            <? if (isset($discounts)) foreach ($discounts AS $discount) { ?>
+              <option value="<?=$discount->id?>" <% if (discount == '<?=$discount->id?>') { %> selected="selected" <% } %> >
+                <?=$discount->name?>
+              </option>
+            <? } ?>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group" id="paymentsMethodRow">
+        <label class="col-xs-4 text-left control-label"><?=Yii::t('app','Payment method')?></label>
+        <div class="col-xs-8">
+          <select name="payment" id="payment" class="form-control">
+            <option value="0">(Пусто)</option>
+            <? if (isset($payments)) foreach ($payments AS $payment) { ?>
+              <option value="<?=$payment->id?>" <% if (payment == '<?=$payment->id?>') { %> selected="selected" <% } %>>
+                <?=$payment->name?>
+              </option>
+            <? } ?>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group" id="sourceMethodRow">
+        <label class="col-xs-4 text-left control-label">Откуда узнали</label>
+        <div class="col-xs-8">
+          <select name="source" id="source" class="form-control">
+            <option value="0">(Пусто)</option>
+            <? if (isset($sources)) foreach ($sources AS $source) { ?>
+              <option value="<?=$source->id?>" <% if (source == '<?=$source->id?>') { %> selected="selected" <% } %>>
+                <?=$source->name?>
+              </option>
+            <? } ?>
+          </select>
+        </div>
+      </div>
+
       <div class="form-group">
         <div class="col-xs-12">
-          <textarea type="text" class="form-control input-sm inputComment" placeholder="Дополнительный комментарий"></textarea>
+          <textarea type="text" class="form-control input-sm inputComment" placeholder="<?=Yii::t('app','Additional comment')?>"></textarea>
         </div>
       </div>
-    </form>
-    <form class="form-horizontal pop-row" id="addBookingRow" role="form">
-      <div class="form-group">
-        <label for="inputName" class="col-xs-2 control-label">Name</label>
-        <div class="col-xs-7">
-          <input type="text" class="form-control input-sm inputName" placeholder="Ivan">
-        </div>
-        <div class="col-xs-2">
-          <button id="saveBooking" class="btn btn-default btn-sm" data-toggle="tooltip" title="Сохранить">
-            <i class="hi hi-ok"></i>
-          </button>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="inputPhone" class="col-xs-2 control-label">Phone</label>
-        <div class="col-xs-7">
-          <input type="text" class="form-control input-sm inputPhone" placeholder="+7(123)-456-78-90">
-        </div>
-        <div class="col-xs-2">
-          <button id="cancelAddBooking" class="btn btn-default btn-sm" data-toggle="tooltip" title="Отменить">
-            <i class="hi hi-remove"></i>
-          </button>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="inputPrice" class="col-xs-2 control-label">Price</label>
-        <div class="col-xs-7">
-          <input type="text" class="form-control input-sm inputPrice" value="<%= price %>" placeholder="3000">
-        </div>
-        <div class="col-xs-2">
-          <button id="reservation" class="btn btn-default btn-sm" data-toggle="tooltip" title="Зарезервировать">
-            <i class="hi hi-ban-circle"></i>
-          </button>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="inputResult" class="col-xs-2 control-label">Result</label>
-        <div class="col-xs-7">
-          <input type="text" class="form-control input-sm inputResult" value="<%= result %>" placeholder="00:00">
-        </div>
-      </div>
-      <div class="form-group">
+      <div class="form-group form-group-btn ">
         <div class="col-xs-12">
-          <div class="dropdown" id="dropdown_users">
-            <button type="button" id="dLabel_users" class="btn btn-sm btn-block btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-              Выбрать из зарегестрированных <span class="caret"></span>
+          <% if (status == 0) { %>
+            <button class="btn btn-primary btn-block btn-sm" id="confirmBooking" data-toggle="tooltip" title="<?=Yii::t('app','Confirm reservation')?>">
+              <i class="hi hi-ok-circle"></i> <?=Yii::t('app','Confirm reservation')?>
             </button>
-            <input type="hidden" id="selectUser_id" value="0" />
-            
-            <ul class="dropdown-menu" id="addUser" role="menu" aria-labelledby="dLabel_users">
-              <li class="search_line" role="presentation">
-                <div class="input-group">
-                  <input type="text" class="input-block-level input-sm form-control" placeholder="Имя или Email" autocomplete="off"
-                    data-toggle="popover" data-placement="top" data-container="body" data-content="Введите как минимум три символа для начала поиска" >
-                  <i class="gi gi-search form-control-feedback" aria-hidden="true"></i>
-                </div>
-              </li>
-              <li class="last hide" role="presentation">
-                <a href="#" class="btn"><strong>Показать всех</strong></a>
-              </li>
-            </ul>
-          </div>
+          <% } else { %>
+            <button class="btn btn-default btn-block btn-sm" id="undoBooking" data-toggle="tooltip" title="<?=Yii::t('app','Unconfirmed reservation')?>">
+              <i class="hi hi-remove-circle"></i> <?=Yii::t('app','Unconfirmed reservation')?>
+            </button>
+          <% } %>
         </div>
-        <div class="col-xs-9" id="selectUser"></div>
-      </div>
-      <div class="form-group">
-        <div class="col-xs-12">
-          <textarea type="text" class="form-control input-sm inputComment" placeholder="Дополнительный комментарий"></textarea>
+        <div class="col-xs-6">
+          <button id="saveBooking" class="btn btn-success btn-block btn-sm" data-toggle="tooltip" title="<?=Yii::t('app','Save')?>">
+            <i class="hi hi-ok"></i> <?=Yii::t('app','Save')?>
+          </button>
+        </div>
+        <div class="col-xs-6">
+          <button class="btn btn-danger btn-block btn-sm" id="showRemoveBooking" data-toggle="tooltip" title="<?=Yii::t('app','Remove reservation')?>">
+            <i class="hi hi-trash"></i> <?=Yii::t('app','Remove reservation')?>
+          </button>
+          <button id="cancelEditBooking" class="btn hide btn-warning btn-block btn-sm" data-toggle="tooltip" title="<?=Yii::t('app','Cancel')?>">
+            <i class="hi hi-remove"></i> <?=Yii::t('app','Cancel')?>
+          </button>
         </div>
       </div>
     </form>
@@ -138,23 +156,23 @@
     </p>
     </div>
     <div class="pop-row" id="btnRow">
-    <p class="text-center">
-      <% if (status == 0) { %>
-        <button class="btn btn-default btn-sm" id="confirmBooking" data-toggle="tooltip" title="Подтвердить бронирование">
-          <i class="hi hi-ok-circle"></i>
+      <p class="text-center">
+        <% if (status == 0) { %>
+          <button class="btn btn-default btn-sm" id="confirmBooking" data-toggle="tooltip" title="Подтвердить бронирование">
+            <i class="hi hi-ok-circle"></i>
+          </button>
+        <% } else { %>
+          <button class="btn btn-default btn-sm" id="undoBooking" data-toggle="tooltip" title="Удалить подтверждение">
+            <i class="hi hi-remove-circle"></i>
+          </button>
+        <% } %>
+        <button class="btn btn-default btn-sm" id="showRemoveBooking" data-toggle="tooltip" title="Удалить бронирование">
+          <i class="hi hi-remove"></i>
         </button>
-      <% } else { %>
-        <button class="btn btn-default btn-sm" id="undoBooking" data-toggle="tooltip" title="Удалить подтверждение">
-          <i class="hi hi-remove-circle"></i>
+        <button class="btn btn-default btn-sm" id="editBooking" data-toggle="tooltip" title="Редактировать бронирование">
+          <i class="hi hi-pencil"></i>
         </button>
-      <% } %>
-      <button class="btn btn-default btn-sm" id="showRemoveBooking" data-toggle="tooltip" title="Удалить бронирование">
-        <i class="hi hi-remove"></i>
-      </button>
-      <button class="btn btn-default btn-sm" id="editBooking" data-toggle="tooltip" title="Редактировать бронирование">
-        <i class="hi hi-pencil"></i>
-      </button>
-    </p>
+      </p>
     </div>
     <div class="pop-row" id="addRow">
       <p class="text-center">

@@ -3,11 +3,20 @@
   
   <? include('head.php'); ?>
 
-<body itemscope itemtype="http://schema.org/WebPage" class="<? if (!(Yii::app()->controller->id == 'quest' && Yii::app()->controller->action->id == 'index'))
-echo ' inner ';  if (Yii::app()->request->url == '/contact') echo ' contact ';?>">
+<body itemscope itemtype="http://schema.org/WebPage" class="<?
+    // if (!(Yii::app()->controller->id == 'quest' && Yii::app()->controller->action->id == 'index'))
+    
+    if (Yii::app()->request->url == '/contact') 
+      echo ' contact ';
 
-    <? if (Yii::app()->controller->id == 'quest' && Yii::app()->controller->action->id == 'index')
-        echo '<video autoplay="1" id="bgr_video" loop="1" src=""></video>'; ?>
+    if (Yii::app()->controller->id == 'quest' && Yii::app()->controller->action->id == 'index')
+      echo ' video ';
+    else 
+      echo ' inner ';
+
+    ?>">
+
+    <? //echo '<video autoplay="autoplay" id="bgr_video" loop="loop"></video>'; ?>
     
     <? include('nav.php'); ?>
 

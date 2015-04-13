@@ -1,31 +1,25 @@
 <?php
-/* @var $this CityController */
-/* @var $model City */
+/* @var $this SourcesController */
+/* @var $model Sources */
 
-Yii::app()->clientScript->registerScript('search', "
-$('.search-button').click(function(){
-	$('.search-form').toggle();
-	return false;
-});
-$('.search-form form').submit(function(){
-	$('#city-grid').yiiGridView('update', {
-		data: $(this).serialize()
-	});
-	return false;
-});
-");
+?>
+
+<?php
+/* @var $this DiscountsController */
+/* @var $model Discounts */
 ?>
 
 <div class="block">
 	<div class="block-title">
 		<h2>
-			<?=Yii::t('app','Management of cities')?> 
+			<?=Yii::t('app','Manage Sources')?> 
 			<small>
-				<a href="/city/create"><i class="hi hi-plus" aria-hidden="true"></i></a>
+				<a href="/sources/create"><i class="hi hi-plus" aria-hidden="true"></i></a>
 			</small>
 		</h2>
 	</div>
 	<div class="row">
+		<div class="col-sm-12">
 		<div class="col-sm-12">
 			<?php $this->widget('zii.widgets.grid.CGridView', array(
 				'id'=>'city-grid',
@@ -36,9 +30,6 @@ $('.search-form form').submit(function(){
 				'columns'=>array(
 					'id',
 					'name',
-					'active',
-					'country',
-					'languages',
 					array(
 						'class'=>'CButtonColumn',
 						'template' => '{update} {delete}',

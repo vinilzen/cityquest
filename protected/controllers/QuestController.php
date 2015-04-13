@@ -421,6 +421,7 @@ class QuestController extends Controller
 			}
 
 			$users = User::model()->findALL(array("condition"=>"superuser = 0"));
+			
 
 			$quests = Quest::model()->findAll($criteria);
 			$quests_array = array();
@@ -449,24 +450,19 @@ class QuestController extends Controller
 					}
 				}
 
-				$this->render('adminschedule',array(
-					'twoweek_bookings_arr' => $twoweek_bookings_arr,
-					'quests' => $quests_array,
-					'ymd' => $YMDate,
-					'users' => $users,
-					'holidays' => $holiday_list,
-					'arr_hash' => md5(serialize($twoweek_bookings_arr)),
-				));
-			} else {
-				$this->render('adminschedule',array(
-					'twoweek_bookings_arr' => $twoweek_bookings_arr,
-					'quests' => array(),
-					'ymd' => $YMDate,
-					'users' => $users,
-					'holidays' => $holiday_list,
-					'arr_hash' => md5(serialize($twoweek_bookings_arr)),
-				));
 			}
+
+			$this->render('adminschedule',array(
+				'twoweek_bookings_arr' => $twoweek_bookings_arr,
+				'quests' => $quests_array,
+				'ymd' => $YMDate,
+				'users' => $users,
+				'holidays' => $holiday_list,
+				'arr_hash' => md5(serialize($twoweek_bookings_arr)),
+				'discounts' => Discounts::model()->findALL(),
+				'sources' => Sources::model()->findALL(),
+				'payments' => Payments::model()->findALL(),
+			));
 		}
 	}
 

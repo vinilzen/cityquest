@@ -60,6 +60,28 @@ class Controller extends CController
 
 	public function init()
 	{
+		if ($_SERVER['REQUEST_URI'] == '/index.php' || $_SERVER['REQUEST_URI'] == '/index.html') {
+			header("HTTP/1.1 301 Moved Permanently");
+ 			header('Location: /');
+ 			die;
+		} elseif ($_SERVER['REQUEST_URI'] == '/contact/') {
+			header("HTTP/1.1 301 Moved Permanently");
+ 			header('Location: /contact');
+ 			die;
+		} elseif ($_SERVER['REQUEST_URI'] == '/giftcard/') {
+			header("HTTP/1.1 301 Moved Permanently");
+ 			header('Location: /giftcard');
+ 			die;
+		} elseif ($_SERVER['REQUEST_URI'] == '/franchise/') {
+			header("HTTP/1.1 301 Moved Permanently");
+ 			header('Location: /franchise');
+ 			die;
+		} elseif ($_SERVER['REQUEST_URI'] == '/rules/') {
+			header("HTTP/1.1 301 Moved Permanently");
+ 			header('Location: /rules');
+ 			die;
+		}
+
 		$this->cities = City::model()->findAll();
 		$this->language = 'ru';
 

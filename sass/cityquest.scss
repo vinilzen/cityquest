@@ -1349,6 +1349,12 @@ body.inner .jumbotron.quest {
 		bottom: 10px;
 		right: 60px;
 	}
+
+	@media (width: 1024px){
+		.tr {
+			padding-left: 10px;
+		}
+	}
 }
 body.inner .jumbotron.quest1 {
 	background-image: url(../img/Photos/Bank.jpg); 

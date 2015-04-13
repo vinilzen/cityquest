@@ -1,5 +1,7 @@
-User-agent: *
-Disallow: 
-Disallow: /forum
-Sitemap: http://cityquest.ru/sitemap.xml
+User-agent: Yandex
+Disallow: /user/
 Host: cityquest.ru
+
+User-agent: *
+Disallow: /user/
+Sitemap: http://cityquest.ru/sitemap.xml

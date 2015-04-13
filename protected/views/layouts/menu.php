@@ -1,5 +1,5 @@
 <li class="hidden hidden-lg">
-	<a id="close_top_menu" type="button">
+	<a id="close_top_menu">
 		<span aria-hidden="true">×</span><span class="sr-only">Close</span>
 	</a>
 </li>
