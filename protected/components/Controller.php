@@ -76,6 +76,10 @@ class Controller extends CController
 			header("HTTP/1.1 301 Moved Permanently");
  			header('Location: /franchise');
  			die;
+		} elseif ($_SERVER['REQUEST_URI'] == '/rules/') {
+			header("HTTP/1.1 301 Moved Permanently");
+ 			header('Location: /rules');
+ 			die;
 		}
 
 		$this->cities = City::model()->findAll();

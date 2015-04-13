@@ -292,6 +292,8 @@
 <? } ?>
 
 <? if ($_SERVER['HTTP_HOST'] != 'cq.il' && $_SERVER['HTTP_HOST'] != 'cq.kzil') { ?>
+
+<!-- Yandex.Metrika counter -->
   <script type="text/javascript">
     (function (d, w, c) {
     (w[c] = w[c] || []).push(function() {
@@ -317,7 +319,7 @@
     })(document, window, "yandex_metrika_callbacks");
   </script>
   <noscript><div><img alt="" src="//mc.yandex.ru/watch/25221941" style="position:absolute; left:-9999px;"></div></noscript>
-
+<!-- /Yandex.Metrika counter -->
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
