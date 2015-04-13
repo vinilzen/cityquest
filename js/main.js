@@ -82,25 +82,25 @@ return check; };
 
 $(function() {
 	$('.ico-pay').tooltip();
-	if ($('#bgr_video').length) {
+
+	if ($('body').hasClass('video')) {
 
 		function set_video_bgr() {
-			if (document.body.clientWidth < 1025) {
-				$('#bgr_video').hide();
-			} else {
-				var w = $('.jumbotron').outerWidth(),
-					video = document.getElementById('bgr_video');
-
+			if (document.body.clientWidth > 1023) {
+				var w = $('.jumbotron').outerWidth();
+				var $video = $('<video autoplay="autoplay" id="bgr_video" loop="loop"></video>')
+						.prependTo('body.video');
+						
+				video = document.getElementById('bgr_video');
 				video.addEventListener('loadeddata', function() {
 					$('.jumbotron').css('backgroud', 'none');
-					$('#bgr_video')
-						.css({
-							width: '100%',
-							height: 'auto',
-							display: 'block',
-						});
+					$video.css({
+						width: '100%',
+						height: 'auto',
+						display: 'block',
+					});
 				}, false);
-
+				
 				video.src = '/img/Comp_1_3_1.mp4';
 				video.load();
 			}

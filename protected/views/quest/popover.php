@@ -70,41 +70,46 @@
       </div>
 
 
-      <div id="priceRow">
-        <p class="text-center">
+      <div class="form-group" id="priceRow">
+        <label class="col-xs-4 text-left control-label"><?=Yii::t('app','Reason discounts')?></label>
+        <div class="col-xs-8">
           <select name="discount" id="discount" class="form-control">
-            <option value="0"><?=Yii::t('app','Reason discounts')?></option>
+            <option value="0">(Пусто)</option>
             <? if (isset($discounts)) foreach ($discounts AS $discount) { ?>
               <option value="<?=$discount->id?>" <% if (discount == '<?=$discount->id?>') { %> selected="selected" <% } %> >
                 <?=$discount->name?>
               </option>
             <? } ?>
           </select>
-        </p>
+        </div>
       </div>
-      <div id="paymentsMethodRow">
-        <p class="text-center">
+
+      <div class="form-group" id="paymentsMethodRow">
+        <label class="col-xs-4 text-left control-label"><?=Yii::t('app','Payment method')?></label>
+        <div class="col-xs-8">
           <select name="payment" id="payment" class="form-control">
-            <option value="0"><?=Yii::t('app','Payment method')?></option>
+            <option value="0">(Пусто)</option>
             <? if (isset($payments)) foreach ($payments AS $payment) { ?>
               <option value="<?=$payment->id?>" <% if (payment == '<?=$payment->id?>') { %> selected="selected" <% } %>>
                 <?=$payment->name?>
               </option>
             <? } ?>
           </select>
-        </p>
+        </div>
       </div>
-      <div id="sourceMethodRow">
-        <p class="text-center">
+
+      <div class="form-group" id="sourceMethodRow">
+        <label class="col-xs-4 text-left control-label">Откуда узнали</label>
+        <div class="col-xs-8">
           <select name="source" id="source" class="form-control">
-            <option value="0">Откуда пришел пользователь</option>
+            <option value="0">(Пусто)</option>
             <? if (isset($sources)) foreach ($sources AS $source) { ?>
               <option value="<?=$source->id?>" <% if (source == '<?=$source->id?>') { %> selected="selected" <% } %>>
                 <?=$source->name?>
               </option>
             <? } ?>
           </select>
-        </p>
+        </div>
       </div>
 
       <div class="form-group">

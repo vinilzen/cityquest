@@ -151,7 +151,7 @@
 										else 
 											$times = Yii::app()->params['times'][1];
 
-										echo '<table class="table"><tr><td style="width:100px;">'.$quest['q']->title.'</td>';
+										echo '<table class="table"><tr><td style="width:100px;" id="q_id_'.$quest['q']->id.'" >'.$quest['q']->title.'</td>';
 
 										if (date('w', $selectedDate) == 0 || date('w', $selectedDate) == 6 || in_array(date('Ymd', $selectedDate), $holidays))
 											$workday = 0;

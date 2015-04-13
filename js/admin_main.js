@@ -77,6 +77,22 @@ var PopoverView = Backbone.View.extend({
 		return this;
 	},
 
+	afterShow:function(btn){
+		var self = this;
+
+		$('.popover').addClass('popover-booking');
+
+		$('<button type="button" class="close close-booking"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>')
+			.appendTo('.popover-title')
+			.click(function(){
+				$(btn).popover('hide');
+			});
+
+		$('.popover-title .close').before('&nbsp;-&nbsp;'+$('#q_id_'+self.attr.quest_id).text());
+
+
+	},
+
 	showUserList:function(){
 		var self = this,
 			showUserList = $('#showUserList').attr({
@@ -411,7 +427,7 @@ $(function() {
 			trigger: 'click',
 			html: true,
 			content:function(){
-				
+
 				if (!$(this)[0].popover_view)
 					$(this)[0].popover_view = new PopoverView({parent:this});
 
@@ -426,14 +442,8 @@ $(function() {
 
 		}).on('shown.bs.popover', function (e) {
 
-			var self = this;
+			$(this)[0].popover_view.afterShow(this);
 
-			$('<button type="button" class="close"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>')
-				.css('margin-top', -4)
-				.appendTo('.popover-title')
-				.click(function(){
-					$(self).popover('hide');
-				});
 		});
 	}
 

@@ -4,25 +4,34 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<url>
-  <loc>http://cityquest.ru/</loc>
-</url>
-<url>
-  <loc>http://cityquest.ru/rules</loc>
-</url>
-<url>
-  <loc>http://cityquest.ru/giftcard</loc>
-</url>
-<url>
-  <loc>http://cityquest.ru/franchise</loc>
-</url>
-<url>
-  <loc>http://cityquest.ru/contact</loc>
-</url>
-<url>
-  <loc>http://cityquest.ru/quest/view?id=3</loc>
-</url>
-<url>
-  <loc>http://cityquest.ru/quest/view?id=2</loc>
-</url>
+  <url>
+    <loc>http://cityquest.ru/</loc>
+  </url>
+  <url>
+    <loc>http://cityquest.ru/rules</loc>
+  </url>
+  <url>
+    <loc>http://cityquest.ru/giftcard</loc>
+  </url>
+  <url>
+    <loc>http://cityquest.ru/franchise</loc>
+  </url>
+  <url>
+    <loc>http://cityquest.ru/contact</loc>
+  </url>
+  <url>
+    <loc>http://cityquest.ru/quest/view?id=3</loc>
+  </url>
+  <url>
+    <loc>http://cityquest.ru/quest/view?id=2</loc>
+  </url>
+  <url>
+    <loc>http://cityquest.ru/quest/view?id=4</loc>
+  </url>
+  <url>
+    <loc>http://cityquest.ru/quest/view?id=15</loc>
+  </url>
+  <url>
+    <loc>http://cityquest.ru/press_about_us</loc>
+  </url>
 </urlset>
