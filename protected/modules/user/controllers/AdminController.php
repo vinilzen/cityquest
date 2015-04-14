@@ -139,7 +139,7 @@ class AdminController extends Controller
 		if(isset($_POST['User'])) {
 			$model->attributes=$_POST['User'];
 			
-			if ($_POST['User']['quests']){
+			if (isset($_POST['User']['quests'])){
 				$model->quests = implode(',', $_POST['User']['quests']);
 			} else {
 				$model->quests = '';

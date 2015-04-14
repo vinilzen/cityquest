@@ -1,5 +1,4 @@
 <?
-
 	$this->pageTitle= Yii::app()->name.' - живые квесты в Москве. Найди выход из реальной комнаты';
 	$this->description= 'Живые квесты поиска выходы из комнаты в Москве. Лучшие игровые квесты. Выберись из реальной квест-комнаты в Москве';
 	$this->keywords= 'квест комната, квесты выход из комнаты, квесты выйти из комнаты, живой квест, квесты в москве, квесты в реальности в Москве';
@@ -12,7 +11,7 @@ foreach ($quests as $quest) {
 					class="featurette-image img-responsive"
 					src="/images/q/<?=$quest->id?>.jpg"	/>
 		<? if ($quest->status == 2) { ?>
-			<a class="descr" href="/quest/view?id=<? echo $quest->id; ?>">
+			<a class="descr" href="/quest/<?=$quest->link?>">
 				<h2><?=CHtml::encode($quest->title)?></h2>
 				<p>
 					<span>

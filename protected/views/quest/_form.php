@@ -38,6 +38,14 @@
 	</div>
 
 	<div class="form-group">
+		<?=$form->labelEx($model,'link', array('class' => 'control-label col-sm-3'))?>
+		<div class="col-sm-9">
+			<?=$form->textField($model,'link',array('size'=>60,'maxlength'=>45,'class'=>'form-control'))?>
+		</div>
+		<?=$form->error($model,'link')?>
+	</div>
+
+	<div class="form-group">
 		<?=$form->labelEx($model,'addres', array('class' => 'control-label col-sm-3'))?>
 		<div class="col-sm-9">
 			<?=$form->textField($model,'addres',array('size'=>60,'maxlength'=>128,'class'=>'form-control'))?>

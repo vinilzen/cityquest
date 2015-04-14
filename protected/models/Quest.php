@@ -17,6 +17,7 @@
  * @property integer $update_time
  * @property integer $author_id
  * @property integer $city_id
+ * @property integer $link
  * 
  * @property integer $page_title
  * @property integer $description
@@ -54,7 +55,7 @@ class Quest extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('title, content, addres, metro, times, status, author_id', 'required'),
+			array('title, content, addres, metro, times, status, author_id, link', 'required'),
 			array('times, status, sort, create_time, update_time, author_id', 'numerical', 'integerOnly'=>true),
 			array('title, addres, start_text, metro, page_title', 'length', 'max'=>128),
 			array('description, keywords', 'length', 'max'=>256),
@@ -109,6 +110,7 @@ class Quest extends CActiveRecord
 			'page_title'=>'Page Title',
 			'description'=>'Description',
 			'keywords'=>'Keywords',
+			'link'=>Yii::t('app','Link'),
 		);
 	}
 
@@ -141,6 +143,7 @@ class Quest extends CActiveRecord
 		$criteria->compare('create_time',$this->create_time);
 		$criteria->compare('update_time',$this->update_time);
 		$criteria->compare('author_id',$this->author_id);
+		$criteria->compare('link',$this->link);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

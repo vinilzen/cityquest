@@ -30,7 +30,7 @@ class QuestController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view', 'schedule'),
+				'actions'=>array('redirect','index','view', 'schedule'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -98,7 +98,21 @@ class QuestController extends Controller
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
 	 */
-	public function actionView($id)
+	public function actionRedirect($id)
+	{
+		$quest = Quest::model()->findByPk((int)$id);
+		if ($quest && $quest->link != '') {
+			$this->redirect(array('view','link'=>$quest->link), true, 301);
+		} else {
+			$this->actionView((int)$id);
+		}
+	}
+
+	/**
+	 * Displays a particular model.
+	 * @param integer $id the ID of the model to be displayed
+	 */
+	public function actionView($link)
 	{
 		$this->layout='//layouts/quest';
 
@@ -126,7 +140,12 @@ class QuestController extends Controller
 		$next = false;
 		$prev = false;
 		foreach ($quests AS $quest){
-			if ($quest->id != $id){
+
+			if ( 
+				(is_numeric($link) && ($quest->id != $link))
+				|| 
+				(!is_numeric($link) && ($quest->link != $link))
+			){
 				$other_quests[$quest->id] = $quest;
 			}
 		}
@@ -135,12 +154,21 @@ class QuestController extends Controller
 				$next = $quest;
 				break;
 			}
-			if ($quest->id == $id){
+			if (
+				(is_numeric($link) && ($quest->id == $link))
+				|| 
+				(!is_numeric($link) && ($quest->link == $link))
+			){
 				$model = $quest;
+				$id = $quest->id;
 				$now = true;
 			} else {
 				$prev = $quest;
 			}
+		}
+
+		if (!isset($model)) {
+			throw new CHttpException(404, 'Квест не найден!');
 		}
 
 		if (!$next) {
@@ -417,6 +445,16 @@ class QuestController extends Controller
 
 				if ($moderator_quests && $moderator_quests != ''){
 					$criteria->addInCondition("id", explode(',', $moderator_quests));
+				} else {
+					$this->render('adminschedule',array(
+						'twoweek_bookings_arr' => $twoweek_bookings_arr,
+						'quests' => array(),
+						'ymd' => $YMDate,
+						'users' => array(),
+						'holidays' => $holiday_list,
+						'arr_hash' => md5(serialize($twoweek_bookings_arr)),
+					));
+					die;
 				}
 			}
 

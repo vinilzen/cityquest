@@ -31,11 +31,11 @@
         <h1 itemprop="name" id='quest_title'>
           <?=$model->title?>
           <? if (isset($prev)) {
-                echo '<a class="arrow-quest arrow-left" title="'.$prev->title.'" href="/quest/view?id='.$prev->id.'">'.
+                echo '<a class="arrow-quest arrow-left" title="'.$prev->title.'" href="/quest/'.$prev->link.'">'.
                       '<span class="glyphicon glyphicon-menu-left"></span></a>';
               }
               if (isset($next)) {
-                echo '<a class="arrow-quest arrow-right" title="'.$next->title.'" href="/quest/view?id='.$next->id.'">'.
+                echo '<a class="arrow-quest arrow-right" title="'.$next->title.'" href="/quest/'.$next->link.'">'.
                       '<span class="glyphicon glyphicon-menu-right"></span></a>';
               }
           ?>
@@ -251,7 +251,7 @@
       <img class="featurette-image img-responsive"
         alt="<?=CHtml::encode($quest->title)?>" 
         src="/images/q/<?=$quest->id?>.jpg">
-      <a class="descr" href="/quest/view?id=<?=$quest->id?>">
+      <a class="descr" href="/quest/<?=$quest->link?>">
         <h2><?=CHtml::encode($quest->title)?></h2>
         <p>
             <span>

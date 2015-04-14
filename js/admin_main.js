@@ -273,7 +273,9 @@ var PopoverView = Backbone.View.extend({
 				$(this).unmask().blur(function(){
 					$(this).mask('+7(000)-000-00-00');			
 				}).val(val);
-			})
+			}).on('keyup', function(){
+				$(this).mask('+7(000)-000-00-00');			
+			});
 
 		$('#editBookingRow .inputResult', this.$el).val(self.attr.result);
 		$('#editBookingRow .inputComment', this.$el).val(self.attr.comment);
