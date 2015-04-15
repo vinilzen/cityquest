@@ -202,6 +202,7 @@
 <script src="/js/jquery.mask.min.js"></script>
 <script src="/js/jquery.formstyler.min.js"></script>  
 <script src="/js/app-3.1.js"></script>
+<script src="/js/proui/plugins-3.1.js"></script>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
   (function (d, w, c) {

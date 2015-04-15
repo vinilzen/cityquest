@@ -39,6 +39,10 @@ class BookingController extends Controller
 				'actions'=>array('admin','delete','update', 'confirm'),
 				'expression'=>"Yii::app()->getModule('user')->user()->superuser",
 			),
+			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				'actions'=>array('reports'),
+				'expression'=>"Yii::app()->getModule('user')->user()->superuser > 0",
+			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
@@ -67,10 +71,178 @@ class BookingController extends Controller
 		return mail($email,"=?UTF-8?B?".base64_encode($subject)."?=",$message,$headers);
 	}
 
+	public function actionReports() {
+		$this->layout='//layouts/admin_column';
+	
+		$user_city_id = Yii::app()->getModule('user')->user()->city_id;
+
+		$criteria=new CDbCriteria(array(
+			'condition'=>"status = 2 && city_id = ".$user_city_id,
+			'limit'=>50,
+			'order'=>"sort ASC",
+		));
+
+		if (UserModule::isModerator()){
+
+			$moderator_quests = Yii::app()->getModule('user')->user()->quests;
+
+			if ($moderator_quests && $moderator_quests != ''){
+				$criteria->addInCondition("id", explode(',', $moderator_quests));
+			} else {
+				$this->render('reports',array(
+					'quests' => array(),
+				));
+				die;
+			}
+		}
+
+		$quests = Quest::model()->findAll($criteria);
+
+		$from = isset($_POST['from'])? $_POST['from'] : '';
+		$to = isset($_POST['to'])? $_POST['to'] : '';
+		$message = '';
+
+		if ( isset($_POST['quest']) ) {
+
+			$discounts = Discounts::model()->findALL();
+			$discounts_array = array();
+			foreach ($discounts as $d) $discounts_array[$d->id] = $d->name;
+
+			$sources = Sources::model()->findALL();
+			$sources_array = array();
+			foreach ($sources as $s) $sources_array[$s->id] = $s->name;
+
+			$payments = Payments::model()->findALL();
+			$payments_array = array();
+			foreach ($payments as $p) $payments_array[$p->id] = $p->name;
+
+
+			/* INIT PHPEXCEL */
+				$phpExcelPath = Yii::getPathOfAlias('ext.phpexcel.vendor');
+			    Yii::import('ext.phpexcel.vendor');
+			    require_once $phpExcelPath . DIRECTORY_SEPARATOR . 'PHPExcel.php';
+			    require_once $phpExcelPath . DIRECTORY_SEPARATOR . 'PHPExcel' . DIRECTORY_SEPARATOR . 'Shared' . DIRECTORY_SEPARATOR . 'String.php';
+			    require_once $phpExcelPath . DIRECTORY_SEPARATOR . 'PHPExcel' . DIRECTORY_SEPARATOR . 'Autoloader.php';
+			    Yii::registerAutoloader(array('PHPExcel_Autoloader','Load'), true);    
+				$phpExcel = new PHPExcel();
+			/* INIT PHPEXCEL */
+
+
+			/* Set properties */
+				$phpExcel->getProperties()->setCreator("Auto reports generator")
+					->setLastModifiedBy("Auto reports generator")
+					->setTitle("Xlsx Reports Document ". $from . "-" . $to)
+					->setDescription("Reports, generated using PHP classes.")
+					->setCategory("Reports");
+			/* Set properties */
+
+			$from_array = explode('/', $from);
+			$to_array = explode('/', $to);
+
+			$ActiveSheetIndex = 0;
+			foreach ($quests as $quest) {
+
+				$phpExcel->createSheet(NULL, $ActiveSheetIndex);
+				$phpExcel->setActiveSheetIndex($ActiveSheetIndex)
+							->setTitle($quest->title);
+
+				// Add column head
+				$phpExcel->getActiveSheet()
+					->setCellValue('A1', 'Дата')
+					->setCellValue('B1', 'Время')
+					->setCellValue('C1', 'Цена')
+					->setCellValue('D1', 'Тип платежа')
+					->setCellValue('E1', 'Причина скидки')
+					->setCellValue('F1', 'Откуда узнали')
+					->setCellValue('G1', 'Комментарий')
+					->setCellValue('H1', 'Не пришли')
+					->setCellValue('I1', 'Суммарное кол-во броней за день')
+					->setCellValue('J1', 'Cуммарное кол-во сеансов')
+					->setCellValue('K1', 'Cумма выручки');
+
+				$bookings = array();
+				$bookings = Booking::model()->findAllByAttributes(
+					array('quest_id'=>$quest->id),
+					'date >= :start_date AND date <= :end_date',
+					array(
+						'start_date'=> $from_array[2].$from_array[0].$from_array[1],
+						'end_date'=> $to_array[2].$to_array[0].$to_array[1],
+					));
+
+				$bookings_by_date = array();
+
+				foreach ($bookings as $booking) {
+					if (!isset($bookings_by_date[$booking->date]))
+						$bookings_by_date[$booking->date] = array();
+
+					$bookings_by_date[$booking->date][$booking->time] = $booking->attributes;
+				}
+
+				foreach ($bookings_by_date as $date_key => $times) {
+					ksort($times);
+					$bookings_by_date[$date_key] = $times;
+				}
+
+				$line_number = 2;
+				foreach ($bookings_by_date as $date_key =>$times_array) {
+					$start_line = $line_number;
+					$count_seans = 0;
+					$sum_price = 0;
+					foreach ($times_array as $time_key => $booking) {
+						if ($booking['result']!='') {
+							$count_seans++;
+							$sum_price += (int)$booking['price'];
+						}
+						$phpExcel->getActiveSheet()
+							->setCellValue('A'.$line_number, $date_key)
+							->setCellValue('B'.$line_number, $time_key)
+							->setCellValue('C'.$line_number, $booking['price'])
+							->setCellValue('D'.$line_number, $booking['payment'] ? $payments_array[$booking['payment']] : '-')
+							->setCellValue('E'.$line_number, $booking['discount'] ? $discounts_array[$booking['discount']] : '-')
+							->setCellValue('F'.$line_number, $booking['source'] ? $sources_array[$booking['source']] : '-')
+							->setCellValue('G'.$line_number, $booking['comment'])
+							->setCellValue('H'.$line_number, ($booking['result']!='') ? 'Пришли' : 'Не пришли' )
+							->setCellValue('I'.$line_number, count($times_array));
+						$line_number++;
+					}
+					$end_line = $line_number - 1;
+					$phpExcel->getActiveSheet()
+						 ->setCellValue('J'.$start_line, $count_seans)
+						 ->setCellValue('K'.$start_line, $sum_price)
+						->mergeCells('A'.$start_line.':A'.$end_line)
+						->mergeCells('J'.$start_line.':J'.$end_line)
+						->mergeCells('K'.$start_line.':K'.$end_line)
+						->mergeCells('I'.$start_line.':I'.$end_line);
+ 				}
+ 				$ActiveSheetIndex ++;
+			}
+
+			// Miscellaneous glyphs, UTF-8
+			/*$phpExcel->setActiveSheetIndex(0)
+			    ->setCellValue('A4', 'Miscellaneous glyphs');*/
+
+			$file_name = 'reports'.date('Y_m_d_H_i_s').'.xlsx';
+
+
+			// Save Excel 2007 file
+			$message = date('H:i:s') . "  Записть в файл формата Excel2007 <br>";
+			$objWriter = new PHPExcel_Writer_Excel2007($phpExcel);
+			$objWriter->save('./'.$file_name);
+
+			$message .= date('H:i:s') . ' Отчет сохранен. Скачать можно <a href="/'.$file_name.'">тут</a>';
+		}
+
+		$this->render('reports',array(
+			'quests' => $quests,
+			'from' => $from,
+			'to' => $to,
+			'message' => $message,
+		));
+	}
+
 
 	/**
 	 * Creates a new model.
-	 * 
 	 */
 	public function actionCreate()
 	{

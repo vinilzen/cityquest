@@ -352,6 +352,10 @@ class QuestController extends Controller
 	 */
 	public function actionIndex()
 	{
+		if ($_SERVER['REQUEST_URI'] == '/quest/') {
+			$this->redirect('/', true, 301);
+			die;
+		}
 
 		Yii::beginProfile('quest_index');
 		
