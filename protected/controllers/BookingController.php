@@ -85,9 +85,10 @@ class BookingController extends Controller
 		if (UserModule::isModerator()){
 
 			$moderator_quests = Yii::app()->getModule('user')->user()->quests;
+			$moderator_quests_array = explode(',', $moderator_quests);
 
 			if ($moderator_quests && $moderator_quests != ''){
-				$criteria->addInCondition("id", explode(',', $moderator_quests));
+				$criteria->addInCondition("id", $moderator_quests_array);
 			} else {
 				$this->render('reports',array(
 					'quests' => array(),
@@ -96,13 +97,18 @@ class BookingController extends Controller
 			}
 		}
 
-		$quests = Quest::model()->findAll($criteria);
+		$available_quests = $quests = Quest::model()->findAll($criteria);
 
 		$from = isset($_POST['from'])? $_POST['from'] : '';
 		$to = isset($_POST['to'])? $_POST['to'] : '';
 		$message = '';
 
-		if ( isset($_POST['quest']) ) {
+		if ( isset($_POST['quest']) && isset($_POST['from']) && $_POST['from']!='' && isset($_POST['to']) && $_POST['to']!='' ) {
+
+
+			$quest_ids = array_keys($_POST['quest']);
+			$criteria->addInCondition("id", $quest_ids);
+			$quests = Quest::model()->findAll($criteria);
 
 			$discounts = Discounts::model()->findALL();
 			$discounts_array = array();
@@ -158,7 +164,12 @@ class BookingController extends Controller
 					->setCellValue('H1', 'Не пришли')
 					->setCellValue('I1', 'Суммарное кол-во броней за день')
 					->setCellValue('J1', 'Cуммарное кол-во сеансов')
-					->setCellValue('K1', 'Cумма выручки');
+
+					->setCellValue('K1', 'Кэш (другое)')
+					->setCellValue('L1', 'Касса')
+					->setCellValue('M1', 'Счет')
+
+					->setCellValue('N1', 'Cумма выручки');
 
 				$bookings = array();
 				$bookings = Booking::model()->findAllByAttributes(
@@ -188,38 +199,56 @@ class BookingController extends Controller
 					$start_line = $line_number;
 					$count_seans = 0;
 					$sum_price = 0;
+
+					$sum_other = 0;
+					$sum_account = 0;
+					$sum_kassa = 0;
+
 					foreach ($times_array as $time_key => $booking) {
 						if ($booking['result']!='') {
 							$count_seans++;
 							$sum_price += (int)$booking['price'];
+
+							if ($booking['payment'] == 1) {
+								$sum_kassa += (int)$booking['price'];
+							} elseif ($booking['payment'] == 2) {
+								$sum_account += (int)$booking['price'];
+							} else {
+								$sum_other += (int)$booking['price'];
+							}
 						}
+
 						$phpExcel->getActiveSheet()
 							->setCellValue('A'.$line_number, $date_key)
 							->setCellValue('B'.$line_number, $time_key)
 							->setCellValue('C'.$line_number, $booking['price'])
 							->setCellValue('D'.$line_number, $booking['payment'] ? $payments_array[$booking['payment']] : '-')
 							->setCellValue('E'.$line_number, $booking['discount'] ? $discounts_array[$booking['discount']] : '-')
-							->setCellValue('F'.$line_number, $booking['source'] ? $sources_array[$booking['source']] : '-')
+							->setCellValue('F'.$line_number, ($booking['source'] && isset($sources_array[$booking['source']])) ? $sources_array[$booking['source']] : '-')
 							->setCellValue('G'.$line_number, $booking['comment'])
 							->setCellValue('H'.$line_number, ($booking['result']!='') ? 'Пришли' : 'Не пришли' )
 							->setCellValue('I'.$line_number, count($times_array));
+
 						$line_number++;
 					}
+
 					$end_line = $line_number - 1;
 					$phpExcel->getActiveSheet()
 						 ->setCellValue('J'.$start_line, $count_seans)
-						 ->setCellValue('K'.$start_line, $sum_price)
+						 ->setCellValue('K'.$start_line, $sum_other)
+						 ->setCellValue('L'.$start_line, $sum_kassa)
+						 ->setCellValue('M'.$start_line, $sum_account)
+						 ->setCellValue('N'.$start_line, $sum_price)
 						->mergeCells('A'.$start_line.':A'.$end_line)
+						->mergeCells('I'.$start_line.':I'.$end_line)
 						->mergeCells('J'.$start_line.':J'.$end_line)
 						->mergeCells('K'.$start_line.':K'.$end_line)
-						->mergeCells('I'.$start_line.':I'.$end_line);
+						->mergeCells('L'.$start_line.':L'.$end_line)
+						->mergeCells('M'.$start_line.':M'.$end_line)
+						->mergeCells('N'.$start_line.':N'.$end_line);
  				}
  				$ActiveSheetIndex ++;
 			}
-
-			// Miscellaneous glyphs, UTF-8
-			/*$phpExcel->setActiveSheetIndex(0)
-			    ->setCellValue('A4', 'Miscellaneous glyphs');*/
 
 			$file_name = 'reports'.date('Y_m_d_H_i_s').'.xlsx';
 
@@ -229,11 +258,11 @@ class BookingController extends Controller
 			$objWriter = new PHPExcel_Writer_Excel2007($phpExcel);
 			$objWriter->save('./'.$file_name);
 
-			$message .= date('H:i:s') . ' Отчет сохранен. Скачать можно <a href="/'.$file_name.'">тут</a>';
+			$message .= date('H:i:s') . ' Отчет сохранен. Скачать можно <a target="_blank" href="/'.$file_name.'">тут</a>';
 		}
 
 		$this->render('reports',array(
-			'quests' => $quests,
+			'quests' => $available_quests,
 			'from' => $from,
 			'to' => $to,
 			'message' => $message,

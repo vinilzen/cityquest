@@ -51,10 +51,14 @@
 									<i class="hi hi-user sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide"><?=Yii::t('app','Users')?></span>
 								</a>
 							</li>
-
 							<li class="">
 								<a href="/city/admin">
 									<i class="hi hi-globe sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide"><?=Yii::t('app','Cities')?></span>
+								</a>
+							</li>
+							<li class="">
+								<a href="/booking/reports">
+									<i class="gi gi-charts sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide"><?=Yii::t('app','Reports')?></span>
 								</a>
 							</li>
 							<li class="">
@@ -92,7 +96,16 @@
 								</a>
 							</li>
 						</ul>
+						<? } elseif (Yii::app()->getModule('user')->user()->superuser == 2) { ?>
+							<ul class="sidebar-nav">
+								<li class="">
+									<a href="/booking/reports">
+										<i class="gi gi-charts sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide"><?=Yii::t('app','Reports')?></span>
+									</a>
+								</li>
+							</ul>
 						<? } ?>
+
 					</div>
 				</div>
 			</div>

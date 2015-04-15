@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="/css/proui/plugins-3.1.css">
 <div class="block">
 	<div class="block-title">
-		<h2>Отчеты</h2>
+		<h2><?=Yii::t('app','Reports')?></h2>
 	</div>
 	<h3 class="sub-header hide">123</h3>
 	<div class="row">
@@ -13,7 +13,7 @@
 						<form action="" method="post" class="form-horisontal">
 							<div class="col-xs-12 col-sm-6">
 								<div class="form-group">
-									<label class="col-md-3 control-label">Quests</label>
+									<label class="col-md-3 control-label"><?=Yii::t('app','Quests')?></label>
 									<div class="col-md-9">
 										<? foreach ($quests AS $q) { ?>
 										<div class="checkbox">

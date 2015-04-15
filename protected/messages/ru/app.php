@@ -71,6 +71,7 @@ return array(
 	'Reason discounts' => 'Причина скидки',
 	'Remove reservation'=>'Удалить бронь',
 	'Repeat new password'=>'Повторите новый пароль',
+	'Reports'=>'Отчеты',
 	'Reservation' => 'Зарезервировать',
 	'Result' => 'Результат',
 	'rub'=>'руб',
