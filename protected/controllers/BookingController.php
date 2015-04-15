@@ -165,7 +165,7 @@ class BookingController extends Controller
 					->setCellValue('I1', 'Суммарное кол-во броней за день')
 					->setCellValue('J1', 'Cуммарное кол-во сеансов')
 
-					->setCellValue('K1', 'Кэш (другое)')
+					->setCellValue('K1', 'Другое')
 					->setCellValue('L1', 'Касса')
 					->setCellValue('M1', 'Счет')
 
