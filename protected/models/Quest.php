@@ -55,7 +55,7 @@ class Quest extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('title, content, addres, metro, times, status, author_id, link', 'required'),
+			array('title, content, addres, metro, times, status, author_id, city_id, link', 'required'),
 			array('times, status, sort, create_time, update_time, author_id', 'numerical', 'integerOnly'=>true),
 			array('title, addres, start_text, metro, page_title', 'length', 'max'=>128),
 			array('description, keywords', 'length', 'max'=>256),

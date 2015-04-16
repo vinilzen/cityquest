@@ -158,13 +158,16 @@
 										else
 											$workday = 1;
 
-								        if (!$workday)
-								        {
+								        if (!$workday) {
+								        
 								          $priceAm = Yii::app()->params['price_weekend_AM'];
 								          $pricePm = Yii::app()->params['price_weekend_PM'];
-								        } else {         
+								        
+								        } else {
+
 								          $priceAm = Yii::app()->params['price_workday_AM'];
 								          $pricePm = Yii::app()->params['price_workday_PM'];
+
 								        }
 
 										foreach ($times as $k=>$time) {
@@ -172,9 +175,15 @@
 								            if ($workday){
 								              if ($k>6 && $k<14) $price = $priceAm;
 								              else $price = $pricePm;
+								              if ($quest['q']->id == 15 ){
+							                    if ($k<6) $price = $priceAm;
+							                    else $price = $pricePm;
+							                  }
 								            } else {
+
 								              if ($k<10) $price = $priceAm;
 								              else $price = $pricePm;
+
 								            }
 
 											$dis = '';
@@ -237,9 +246,7 @@
 											}
 
 									        $invisible = '';
-									        if ($workday && $k > 2 && $k < 7)
-									        	// $invisible = ' invisible';
-									        	$invisible = ' hidden';
+									        if ($workday && $k > 2 && $k < 7 && $quest['q']->id!=15) $invisible = ' hidden';
 
 									        ?>
 

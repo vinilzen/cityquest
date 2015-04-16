@@ -297,7 +297,7 @@ class QuestController extends Controller
 				City::model()->findByPk($_POST['Quest']['city_id'])
 			) {
 
-				$model->city_id = $_POST['Quest']['city_id'];
+				$model->city_id = (int)$_POST['Quest']['city_id'];
 
 				$model->image = CUploadedFile::getInstance($model,'image');
 

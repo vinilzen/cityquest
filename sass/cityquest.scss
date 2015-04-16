@@ -2418,18 +2418,28 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 	}
 	.weekendPrice2 {
 		width: 490px;
+		&.weekendPrice23 {
+			width: 450px;
+		}
+		
 	}
 }
 @media (min-width: 1100px)  {
 	.workPrice2 {
 		margin-left: 0px;
 		width: 320px;
+		&.workPrice23 {
+			width: 330px;
+		}
 	}
 	.workPrice3 {
 		width: 275px;
 	}
 	.weekendPrice2 {
 		width: 660px;
+		&.weekendPrice23 {
+			width: 605px;
+		}
 	}
 }
 @media (min-width: 768px) and (max-width: 1099px) {
@@ -2439,9 +2449,16 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 	.workPrice2 {
 		margin-left: 0;
 		width: 320px;
+		&.workPrice23 {
+			width: 330px;
+
+		}
 	}
 	.weekendPrice2 {
 		width: 660px;
+		&.weekendPrice23 {
+			width: 605px;
+		}
 	}
 }
 .footer_logo {

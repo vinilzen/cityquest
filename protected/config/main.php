@@ -65,6 +65,7 @@ return array(
 				'quest/update'=>'quest/update',
 				'quest/admin'=>'quest/admin',
 				'quest/view'=>'quest/redirect',
+				'quest/sort'=>'quest/sort',
 				'quest/<link:\w+>'=>'quest/view',
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 			),

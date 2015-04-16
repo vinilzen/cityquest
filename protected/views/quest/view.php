@@ -148,6 +148,12 @@
                 if ($workday){
                   if ($k>6 && $k<14) $price = $priceAm;
                   else $price = $pricePm;
+
+                  if ($model->id == 15 ){
+                    if ($k<6) $price = $priceAm;
+                    else $price = $pricePm;
+                  }
+
                 } else {
                   if ($k<10) $price = $priceAm;
                   else $price = $pricePm;
@@ -159,8 +165,6 @@
                 $timastamp_quest_start = strtotime( $value['year'].'-'.$value['month'].'-'.$value['day'].' '.$time);
                 if ( $timastamp_quest_start < (strtotime( 'now' )+(40*60)) ) $near = 1;
 
-               // echo '<!--('.$time_str.') '.$timastamp_quest_start.' = '.(strtotime( 'now' )+(40*60)).' -->';
-
                 $disabled = '';
                 $my_quest = '';
                 if ( isset($booking[$value['date']]) && isset($booking[$value['date']][$time]) ) {
@@ -171,7 +175,7 @@
                 }
 
                 $empty = '';
-                if ($k != 0 && $k<8) {
+                if ($k != 0 && $k<8 && $model->id != 15) {
                   $empty = ' empty_btn ';
                   $disabled = ' disabled="disabled"';
                 }
@@ -179,53 +183,55 @@
 
               ?>
                 <div  type="button" 
-                  data-name="<? echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->username : ''; ?>" 
-                  data-phone="<? echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->phone : ''; ?>" 
-                  data-time="<? echo $time; ?>" 
-                  data-quest="<? echo $model->id; ?>" 
-                  data-ymd="<? echo $value['date']; ?>" 
-                  data-date="<? echo $value['day']; ?> <? echo $value['month_name']; ?>" 
-                  data-day="<? echo $value['day_name']; ?>" 
-                  data-d="<? echo $value['day']; ?>" 
-                  data-m="<? echo $value['month']; ?>" 
-                  data-price="<? echo $price; ?>" 
-                  class="btn btn-q <? echo $my_quest.$empty; ?>
+                  data-name="<?=!Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->username : ''?>" 
+                  data-phone="<?=!Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->phone : ''?>" 
+                  data-time="<?=$time?>" 
+                  data-quest="<?=$model->id?>" 
+                  data-ymd="<?=$value['date']?>" 
+                  data-date="<?=$value['day']?> <?=$value['month_name']?>" 
+                  data-day="<?=$value['day_name']?>" 
+                  data-d="<?=$value['day']?>" 
+                  data-m="<?=$value['month']?>" 
+                  data-price="<?=$price?>" 
+                  class="btn btn-q <?=$my_quest.$empty?>
                       <? echo ($near || $dis) ? 'disabled' : '';
-                      if ($workday && $k > 2 && $k < 7 ) echo ' invisible';?>" 
-                      <? if (($workday && $k > 2 && $k < 7) || ($empty != '')) echo ' style="display:none;" '; ?>
-                      <? echo $disabled; ?>><? echo $time; ?>
+                      if ($workday && $k > 2 && $k < 7 && $model->id != 15) echo ' invisible';?>" 
+                      <? if (($workday && $k > 2 && $k < 7 && $model->id != 15) || ($empty != '')) echo ' style="display:none;" '; ?>
+                      <?=$disabled?>><?=$time?>
                 </div>
               <? } ?>
 
             </div>
             <?if ($workday) { ?>
               <div class="price-line">
+                <? if ($model->id!=15) { ?>
                 <div class="priceTbl workPrice1" title="Цена за команду" data-toggle="tooltip">
                   <div class="priceRow">
-                    <span class="price" itemprop="price" content="<? echo $pricePm?>" style="padding:0;"><? echo $pricePm; ?> <em itemprop="priceCurrency" content="RUB" class="rur"><em>руб.</em></em></span>
+                    <span class="price" itemprop="price" content="<?=$pricePm?>" style="padding:0;"><? echo $pricePm; ?> <em itemprop="priceCurrency" content="RUB" class="rur"><em>руб.</em></em></span>
                   </div>
                 </div>
-                <div class="priceTbl workPrice2" title="Цена за команду" data-toggle="tooltip">
+                <? } ?>
+                <div class="priceTbl workPrice2 <? if ($model->id==15) echo 'workPrice23'; ?>" title="Цена за команду" data-toggle="tooltip">
                   <div class="priceRow">
                     <span class="dashed">&nbsp;</span>
-                    <span class="price" itemprop="price" content="<? echo $priceAm?>"><? echo $priceAm; ?> <em itemprop="priceCurrency" content="RUB" class="rur"><em>руб.</em></em></span>
+                    <span class="price" itemprop="price" content="<?=$priceAm?>"><?=$priceAm?> <em itemprop="priceCurrency" content="RUB" class="rur"><em>руб.</em></em></span>
                     <span class="dashed">&nbsp;</span>
                   </div>
                 </div>
                 <div class="priceTbl workPrice3" title="Цена за команду" data-toggle="tooltip">
                   <div class="priceRow">
                     <span class="dashed">&nbsp;</span>
-                    <span class="price" itemprop="price" content="<? echo $pricePm?>"><? echo $pricePm; ?> <em itemprop="priceCurrency" content="RUB" class="rur"><em>руб.</em></em></span>
+                    <span class="price" itemprop="price" content="<?=$pricePm?>"><?=$pricePm?> <em itemprop="priceCurrency" content="RUB" class="rur"><em>руб.</em></em></span>
                     <span class="dashed">&nbsp;</span>
                   </div>
                 </div>
               </div>
             <? } else { ?>
               <div class="price-line weekend">
-                <div class="priceTbl weekendPrice2" title="Цена за команду" data-toggle="tooltip">
+                <div class="priceTbl weekendPrice2 <? if ($model->id==15) echo 'weekendPrice23'; ?>" title="Цена за команду" data-toggle="tooltip">
                   <div class="priceRow">
                     <span class="dashed">&nbsp;</span>
-                    <span class="price" itemprop="price" content="<? echo $pricePm?>"><? echo $pricePm; ?> <em itemprop="priceCurrency" content="RUB" class="rur"><em>руб.</em></em></span>
+                    <span class="price" itemprop="price" content="<?=$pricePm?>"><?=$pricePm?> <em itemprop="priceCurrency" content="RUB" class="rur"><em>руб.</em></em></span>
                     <span class="dashed">&nbsp;</span>
                   </div>
                 </div>

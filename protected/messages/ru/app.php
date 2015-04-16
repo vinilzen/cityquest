@@ -16,6 +16,7 @@ return array(
 	'Choose a city'=>'Выбрать город',
 	'Cities' => 'Города',
 	'Confirm reservation'=>'Подтвердить бронь',
+	'Confirm the reservation'=>'Подтвердить бронь',
 	'Contacts'=>'Контакты',
 	'Confirmation'=>'Подтверждение',
 	'Create'=>'Создать',
