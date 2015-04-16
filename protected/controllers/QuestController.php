@@ -258,6 +258,8 @@ class QuestController extends Controller
 	{
 		$this->layout='//layouts/admin_column';
 		$model= Quest::model()->findByPk($id);
+		
+		$message_success = '';
 
 		$bookings = array();
 		$bookings = Booking::model()->with('competitor')->findAllByAttributes(
@@ -300,23 +302,33 @@ class QuestController extends Controller
 				$model->city_id = (int)$_POST['Quest']['city_id'];
 
 				$model->image = CUploadedFile::getInstance($model,'image');
+				
+				$isValid = true;
 
-				if($model->save()){
-					//Если отмечен чекбокс «удалить файл» 
-					if($model->del_img)
-						if(file_exists('./images/q/'.$id.'.jpg'))
-							unlink('./images/q/'.$id.'.jpg');
+				if ($model->validate()) {
+					if($model->save()){
+						$message_success = 'Изменения успешно сохранены';
+						//Если отмечен чекбокс «удалить файл» 
+						if($model->del_img)
+							if(file_exists('./images/q/'.$id.'.jpg'))
+								unlink('./images/q/'.$id.'.jpg');
 
-					//сохранить файл на сервере в каталог /images/q/ под именем {id}.jpg
-					if ($model->image) $model->image->saveAs('./images/q/'.$model->id.'.jpg');
+						//сохранить файл на сервере в каталог /images/q/ под именем {id}.jpg
+						if ($model->image)
+							$model->image->saveAs('./images/q/'.$model->id.'.jpg');
+
+					} else {
+						throw new CHttpException(500, 'Ошибка сохранения');
+					}
 				} else {
-					throw new CHttpException(500, 'Ошибка сохранения');
+					$isValid = false;
 				}
 			} else {
 				throw new CHttpException(500, 'Не найден город квеста!');
 			}
-
-			$model= Quest::model()->findByPk($id);
+			if ($isValid){
+				$model= Quest::model()->findByPk($id);
+			}
 		}
 
 
@@ -329,7 +341,8 @@ class QuestController extends Controller
 			'model'=>$model,
 			'booking' => $bookings_by_date,
 			'times' => $times,
-			'cities' => $cities
+			'cities' => $cities,
+			'message_success' => $message_success,
 		));
 	}
 
