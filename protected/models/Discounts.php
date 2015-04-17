@@ -7,6 +7,8 @@
  * @property integer $id
  * @property string $key
  * @property string $name
+ * @property string $till_what_time
+ * @property string $amount
  */
 class Discounts extends CActiveRecord
 {
@@ -27,7 +29,7 @@ class Discounts extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('name, key', 'required'),
-			array('key, name', 'length', 'max'=>45),
+			array('key, name, till_what_time, amount', 'length', 'max'=>45),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, key, name', 'safe', 'on'=>'search'),
@@ -54,6 +56,8 @@ class Discounts extends CActiveRecord
 			'id' => 'ID',
 			'key' => Yii::t('app','Key'),
 			'name' => Yii::t('app','Name'),
+			'till_what_time' => Yii::t('app','Till what time'),
+			'amount' => Yii::t('app','Amount of discount'),
 		);
 	}
 

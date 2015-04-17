@@ -103,6 +103,12 @@
 										<i class="gi gi-charts sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide"><?=Yii::t('app','Reports')?></span>
 									</a>
 								</li>
+								<li class="">
+									<a href="/discounts/admin">
+										<i class="hi sidebar-nav-icon" style="margin-top:-3px;">%</i>
+										<span class="sidebar-nav-mini-hide"><?=Yii::t('app','Discounts')?></span>
+									</a>
+								</li>
 							</ul>
 						<? } ?>
 

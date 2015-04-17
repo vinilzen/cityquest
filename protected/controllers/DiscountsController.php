@@ -35,6 +35,10 @@ class DiscountsController extends Controller
 				'actions'=>array('admin','delete','create','update'),
 				'expression'=>"Yii::app()->getModule('user')->user()->superuser == 1",
 			),
+			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				'actions'=>array('admin'),
+				'expression'=>"Yii::app()->getModule('user')->user()->superuser == 2",
+			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),

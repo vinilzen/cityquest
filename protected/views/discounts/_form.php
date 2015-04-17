@@ -19,20 +19,43 @@
 
 	<?=$form->errorSummary($model); ?>
 
-	<div class="form-group">
-		<?=$form->labelEx($model,'key', array('class' => 'control-label col-sm-3'))?>
-		<div class="col-sm-9">
-			<?=$form->textField($model,'key',array('size'=>45,'maxlength'=>45)); ?>
-		</div>
-		<?=$form->error($model,'key')?>
-	</div>
 
-	<div class="form-group">
+	<div class="form-group<?=(isset($model->getErrors()['name']))?' has-error':''?>">
 		<?=$form->labelEx($model,'name', array('class' => 'control-label col-sm-3'))?>
 		<div class="col-sm-9">
-			<?=$form->textField($model,'name',array('size'=>45,'maxlength'=>45)); ?>
+			<?=$form->textField($model,'name',array('size'=>45,'maxlength'=>45,'class'=>'form-control')); ?>
+			<?=$form->error($model,'name', array('class'=>'help-block'))?>
 		</div>
-		<?=$form->error($model,'name')?>
+	</div>
+
+	<div class="form-group<?=(isset($model->getErrors()['key']))?' has-error':''?>">
+		<?=$form->labelEx($model,'key', array('class' => 'control-label col-sm-3'))?>
+		<div class="col-sm-9">
+			<?=$form->textField($model,'key',array('size'=>45,'maxlength'=>45,'class'=>'form-control')); ?>
+			<?=$form->error($model,'key', array('class'=>'help-block'))?>
+		</div>
+	</div>
+
+	<div class="form-group<?=(isset($model->getErrors()['till_what_time']))?' has-error':''?>">
+		<?=$form->labelEx($model,'till_what_time', array('class' => 'control-label col-sm-3'))?>
+		<div class="col-sm-9">
+			<?=$form->textField($model,'till_what_time',array(
+					'size'=>45,
+					'maxlength'=>45,
+					'class'=>'form-control input-datepicker-close',
+					'data-date-format'=>"mm/dd/yy",
+					'placeholder'=>"mm/dd/yy",
+				)); ?>
+			<?=$form->error($model,'till_what_time', array('class'=>'help-block'))?>
+		</div>
+	</div>
+
+	<div class="form-group<?=(isset($model->getErrors()['amount']))?' has-error':''?>">
+		<?=$form->labelEx($model,'amount', array('class' => 'control-label col-sm-3'))?>
+		<div class="col-sm-9">
+			<?=$form->textField($model,'amount',array('size'=>45,'maxlength'=>45,'class'=>'form-control')); ?>
+			<?=$form->error($model,'amount', array('class'=>'help-block'))?>
+		</div>
 	</div>
 
 	<div class="form-group buttons">

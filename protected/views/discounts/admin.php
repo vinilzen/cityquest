@@ -19,15 +19,27 @@ $('.search-form form').submit(function(){
 <div class="block">
 	<div class="block-title">
 		<h2>
-			<?=Yii::t('app','Manage Discounts')?> 
+			<? if (Yii::app()->getModule("user")->user()->superuser == 1) { ?>
+			<?=Yii::t('app','Manage Discounts')?>
 			<small>
 				<a href="/discounts/create"><i class="hi hi-plus" aria-hidden="true"></i></a>
 			</small>
+			<? } else { ?>
+				<?=Yii::t('app','Discounts')?>
+			<? }  ?>
 		</h2>
 	</div>
 	<div class="row">
 		<div class="col-sm-12">
-			<?php $this->widget('zii.widgets.grid.CGridView', array(
+			<? 
+
+			if (Yii::app()->getModule("user")->user()->superuser == 1) {
+				$style = 'white-space:nowrap;text-align:right;';
+			} else {
+				$style = 'display:none;';
+			}
+
+			$this->widget('zii.widgets.grid.CGridView', array(
 				'id'=>'city-grid',
 				'dataProvider'=>$model->search(),
 				'cssFile'=>'',
@@ -37,10 +49,12 @@ $('.search-form form').submit(function(){
 					'id',
 					'name',
 					'key',
+					'amount',
+					'till_what_time',
 					array(
 						'class'=>'CButtonColumn',
 						'template' => '{update} {delete}',
-						'htmlOptions' => array('style'=> 'white-space:nowrap;text-align:right;'),
+						'htmlOptions' => array('style'=> $style),
 						'buttons'=>array(
 							'update' => array(
 								'options' => array('class'=>'update btn btn-default btn-xs', 'title'=>'Редактировать'),
