@@ -38,7 +38,9 @@
                     $domen_loc = $domen_loc[1];
                   ?>
                   <button class="btn btn-link ico-msq" data-toggle="dropdown" type="button">
+                    <i class="glyphicon glyphicon-map-marker"></i>
                     <span><?=$default_city?></span>
+                    <i class="glyphicon glyphicon-menu-down"></i>
                   </button>
                   <ul class="dropdown-menu" role="menu">
                   <? 

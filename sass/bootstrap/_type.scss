@@ -249,7 +249,6 @@ address {
   line-height: $line-height-base;
 }
 
-/*
   
   @font-face {
     font-family: 'Proxima Nova';
@@ -302,8 +301,6 @@ address {
            url('fonts/proximanovasemibold.svg#ProximaNovaSemibold') format('svg');
   }
 
-*/
-
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
@@ -351,6 +348,23 @@ address {
        url('fonts/bebasneueregular.woff') format('woff'), 
        url('fonts/bebasneueregular.ttf') format('truetype'), 
        url('fonts/bebasneueregular.svg#bebasneueregular') format('svg');
+}
+
+@font-face {
+  font-family: 'Circe';
+  font-weight: 300;
+  src: url('fonts/Circe-Light.eot') format('eot'), 
+       url('fonts/Circe-Light.woff') format('woff'), 
+       url('fonts/Circe-Light.ttf') format('truetype'), 
+       url('fonts/Circe-Light.svg#Circe-Light') format('svg');
+}
+@font-face {
+  font-family: 'Circe';
+  font-weight: normal;
+  src: url('fonts/Circe-Regular.eot') format('eot'), 
+       url('fonts/Circe-Regular.woff') format('woff'), 
+       url('fonts/Circe-Regular.ttf') format('truetype'), 
+       url('fonts/Circe-Regular.svg#Circe-Regular') format('svg');
 }
 
 

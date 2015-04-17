@@ -106,7 +106,7 @@ $(function() {
 			}
 		}
 
-		set_video_bgr();
+		//set_video_bgr();
 	}
 
 	$('#bookgift-comment').elastic();
@@ -943,7 +943,7 @@ $(function() {
 
 		if (dropdown_menu > abtn_link) {
 			var imw = $('.ico-msq').width();
-			$('.ico-msq').width(dropdown_menu - 56);
+			$('.ico-msq').width(dropdown_menu - 26);
 			var mr = $('.ico-msq').width() - imw;
 			$('.city-select').css('margin-right','-'+mr+'px');
 		}

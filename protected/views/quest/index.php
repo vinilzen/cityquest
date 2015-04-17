@@ -12,13 +12,25 @@ foreach ($quests as $quest) {
 					src="/images/q/<?=$quest->id?>.jpg"	/>
 		<? if ($quest->status == 2) { ?>
 			<a class="descr" href="/quest/<?=$quest->link?>">
+				<span class="difficult">
+					<? if ($quest->difficult == 2) { ?>
+						<i class="glyphicon glyphicon-record"></i>
+						<?=Yii::t('app','High')?>
+					<? } elseif ($quest->difficult == 1) { ?>
+						<i class="glyphicon glyphicon-certificate"></i>
+						<?=Yii::t('app','Medium')?>
+					<? } else { ?>
+						<i class="glyphicon glyphicon-dashboard"></i>
+						<?=Yii::t('app','Base')?>
+					<? } ?>
+				</span>
 				<h2><?=CHtml::encode($quest->title)?></h2>
-				<p>
+				<p class="quest_info">
 					<span>
 						<i class="ico-ppl iconm-Man"></i>
 						<i class="ico-ppl iconm-Man"></i>
 						<i class="ico-ppl iconm-Man noactive"></i>
-						<i class="ico-ppl iconm-Man noactive"></i>2 - 4 <?=Yii::t('app','players')?>
+						<i class="ico-ppl iconm-Man noactive"></i><strong>2 - 4</strong> <?=Yii::t('app','players')?>
 					</span>
 					<span><i class="ico-loc iconm-Pin"></i><?=CHtml::encode($quest->addres)?></span>
 				</p>

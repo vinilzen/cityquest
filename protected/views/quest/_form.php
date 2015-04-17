@@ -93,6 +93,40 @@
 		</div>
 	</div>
 
+	<div class="form-group<?=(isset($model->getErrors()['type']))?' has-error':''?>">
+		<label class="control-label col-sm-3 required" for="type">Вид <span class="required">*</span></label>
+		<div class="col-sm-9">
+			<?=$form->dropDownList($model,'type', array(
+				0=>Yii::t('app','Regular'),
+				1=>Yii::t('app','Sport'),
+				2=>Yii::t('app','Perfomance'),
+			),array('class'=>'form-control'))?>
+		</div>
+	</div>
+
+	<div class="form-group<?=(isset($model->getErrors()['difficult']))?' has-error':''?>">
+		<label class="control-label col-sm-3 required" for="difficult">Сложность <span class="required">*</span></label>
+		<div class="col-sm-9">
+			<?=$form->dropDownList($model,'difficult', array(
+				0=>Yii::t('app','Base'),
+				1=>Yii::t('app','Medium'),
+				2=>Yii::t('app','High'),
+			),array('class'=>'form-control'))?>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<div class="col-sm-offset-3 col-sm-9">
+			<div class="checkbox">
+				<label>
+					<?=$form->checkBox($model,'actor' )?>
+					<?=$form->labelEx($model,'actor')?>
+				</label>
+			</div>
+		</div>
+	</div>
+	
+
 	<div class="form-group<?=(isset($model->getErrors()['city_id']))?' has-error':''?>">
 		<label class="control-label col-sm-3 required" for="city_id">Город <span class="required">*</span></label>
 		<div class="col-sm-9">

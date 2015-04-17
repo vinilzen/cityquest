@@ -22,6 +22,9 @@
         <span class="weinsoc hidden-sm"><?=Yii::t('app','we are in social networks')?><em>&mdash;</em></span>
         <a class="btn-soc" target="_blank" href="https://www.facebook.com/cityquestru"><i class="ico-soc ico-fb"></i></a>
         <a class="btn-soc" href="http://vk.com/cityquestru" target="_blank"><i class="ico-soc ico-vk"></i></a>
+        <a class="btn-soc" href="http://instagram.com/cityquestru" target="_blank">
+          <img src="/img/instagram.svg" class="instagram" width="18" ></i>
+        </a>
       </p>
     </div>
   </div>
