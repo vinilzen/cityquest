@@ -1,25 +1,28 @@
 <div class="footer <? if (Yii::app()->request->url == '/contact') echo 'dark-footer'; ?>">
   <div class="row">
-    <div class="col-sm-5 hidden-xs">
+    <div class="col-sm-4 col-md-4 hidden-xs">
       <p class="pull-left condition">
-        <i class="ico-pay ico-visa" data-toggle="tooltip" title="<?=Yii::t('app','Accept Visa card')?>"></i><i class="ico-pay ico-mc" data-toggle="tooltip" title="<?=Yii::t('app','Accept MasterCard Cards')?>"></i><i class="ico-pay ico-cash" data-toggle="tooltip" title="<?=Yii::t('app','Accept cash')?>"></i><span class="weinsoc hidden-sm"><em>&mdash;</em><?=Yii::t('app','PAYMENT METHODS')?></span>
+        <i class="ico-pay ico-visa" data-toggle="tooltip" title="<?=Yii::t('app','Accept Visa card')?>"></i>
+        <i class="ico-pay ico-mc" data-toggle="tooltip" title="<?=Yii::t('app','Accept MasterCard Cards')?>"></i>
+        <i class="ico-pay ico-cash" data-toggle="tooltip" title="<?=Yii::t('app','Accept cash')?>"></i>
+        <span class="weinsoc hidden-md hidden-sm"><em>&mdash;</em><?=Yii::t('app','PAYMENT METHODS')?></span>
       </p>
     </div>
-    <div class="col-xs-12 visible-xs">
+    <div class="col-xs-12 col-md-4 visible-xs">
       <p class="text-center">
         <a class="btn-soc" target="_blank" href="https://www.facebook.com/cityquestru"><i class="ico-soc ico-fb"></i></a>
         <a class="btn-soc" target="_blank" href="http://vk.com/cityquestru"><i class="ico-soc ico-vk"></i></a>
       </p>
     </div>
-    <div class="col-sm-2 col-xs-12">
+    <div class="col-sm-4 col-md-4 col-xs-12">
       <p class="text-center">
         <span class="copy">&copy; 2014-2015 <strong>CITYQUEST</strong></span>
         <a href="/press_about_us" class="about_us"><?=Yii::t('app','PRESS ABOUT US')?></a>
       </p>
     </div>
-    <div class="col-sm-5 col-xs-12 hidden-xs">
+    <div class="col-sm-4 col-md-4 col-xs-12 hidden-xs">
       <p class="pull-right right-soc">
-        <span class="weinsoc hidden-sm"><?=Yii::t('app','we are in social networks')?><em>&mdash;</em></span>
+        <span class="weinsoc hidden-sm hidden-md "><?=Yii::t('app','we are in social networks')?><em>&mdash;</em></span>
         <a class="btn-soc" target="_blank" href="https://www.facebook.com/cityquestru"><i class="ico-soc ico-fb"></i></a>
         <a class="btn-soc" href="http://vk.com/cityquestru" target="_blank"><i class="ico-soc ico-vk"></i></a>
         <a class="btn-soc" href="http://instagram.com/cityquestru" target="_blank">

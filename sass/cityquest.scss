@@ -141,6 +141,7 @@ ul.nav.navbar-nav {
 			@media (max-width: $screen-md-max) {
 				text-align: center;
 			}
+			font-family: 'Circe';
 			font-size: 13px;
 			font-weight: normal;
 			text-transform: uppercase;
@@ -150,7 +151,7 @@ ul.nav.navbar-nav {
 		       -o-transition: all .5s;
 		          transition: all .5s;
 			opacity:0.4;
-			padding-top: 24px;
+			padding-top: 25px;
 			padding-left: 0;
 			padding-right: 0;
 			&:hover {
@@ -219,6 +220,7 @@ ul.nav.navbar-nav {
 	margin-top: 22px;
 	white-space: nowrap;
 	.btn {
+		margin-top: 3px;
 		transition: all .5s;
 		&.ico-msq {
 			padding: 1px 18px 6px 6px;
@@ -371,9 +373,6 @@ ul.nav.navbar-nav {
 	padding-bottom: 5px;
 	background-image: url(../img/new_bg_.jpg);
 	background-size: cover;
-    // -webkit-box-shadow: inset 0px 0px 500px rgba(0,0,0,.8);
-    //     -moz-box-shadow: inset 0px 0px 500px rgba(0,0,0,.8);
-    //         box-shadow: inset 0px 0px 500px rgba(0,0,0,.8);
 	h1 {
 		font-family: "Bebas Neue", "Helvetica Neue", Helvetica, sans-serif;
 		font-weight: normal;
@@ -406,7 +405,7 @@ ul.nav.navbar-nav {
 		color: #b4cce9;
 		font-size: 26px;
 		font-weight: 300;
-		line-height: 38px;
+  		line-height: 1.4em;
 		font-family: 'Proxima Nova';
 		@media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
 			font-size: 24px;
@@ -449,14 +448,17 @@ ul.nav.navbar-nav {
 	border-radius: 40px;
 	line-height: 40px;
 	height: 40px;
-	padding: 0 20px 0 38px;
+	padding: 0 20px;
 	position: relative;
+	span {
+		padding-left: 18px;
+	}
 	&.active {
 		background-color: #26222d;
 	}
 	.glyphicon {
 		position: absolute;
-		left:11px;
+		left:10px;
 		top:9px;
 		color:#55c4e8;
 		font-size: 22px;
@@ -809,6 +811,9 @@ a.descr {
 	margin-left: 27px;
 	background-image: url(../img/cash.png);
 	background-repeat: no-repeat;
+	@media (max-width: $screen-sm-max) {
+		margin-left: 16px;
+	}
 	&.ico-visa {
 		background-position: top left;
 	}
