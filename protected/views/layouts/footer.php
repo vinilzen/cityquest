@@ -12,6 +12,9 @@
       <p class="text-center">
         <a class="btn-soc" target="_blank" href="https://www.facebook.com/cityquestru"><i class="ico-soc ico-fb"></i></a>
         <a class="btn-soc" target="_blank" href="http://vk.com/cityquestru"><i class="ico-soc ico-vk"></i></a>
+        <a class="btn-soc" href="http://instagram.com/cityquestru" target="_blank">
+          <img src="/img/instagram.svg" class="instagram" width="18" ></i>
+        </a>
       </p>
     </div>
     <div class="col-sm-4 col-md-4 col-xs-12">

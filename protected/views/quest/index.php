@@ -6,7 +6,7 @@ $i=0;
 
 foreach ($quests as $quest) {
 	$i++;
-	?> <div class="col-xs-12 col-md-6 col-sm-12 col-lg-4 col-xlg-4 item">
+	?> <div class="col-xs-12 col-md-6 col-sm-6 col-lg-4 col-xlg-4 item">
 		<img	alt="<?=CHtml::encode($quest->title)?>"
 					class="featurette-image img-responsive"
 					src="/images/q/<?=$quest->id?>.jpg"	/>
@@ -45,6 +45,6 @@ foreach ($quests as $quest) {
 		<? } ?>
 	</div>
 	<? if ($i%3==0) { ?>
-		<div class="clearfix visible-lg-block hidden-md"></div>
+		<div class="clearfix visible-lg-block hidden-md hidden-sm"></div>
 	<? } ?>
 <? } ?>

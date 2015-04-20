@@ -52,7 +52,9 @@ body {
 		background-image: url(../img/title_bg_bottom.jpg);
 		background-position: bottom left;
 		background-repeat: no-repeat;
-  		background-size: 100%;
+		@media (min-width: 1200px) {
+  			background-size: 100%;
+		}
 	}
 }
 
@@ -184,7 +186,7 @@ ul.nav.navbar-nav {
 	color: rgba(255,255,255, 0.7);
 	border: 1px solid rgba(255,255,255, 0.5);
 	font-weight: 300;
-	font-size: 13px;
+	font-size: 12px;
 	padding: 8px 12px;
 	.caret {
 		margin-left: 0;
@@ -195,15 +197,14 @@ ul.nav.navbar-nav {
 		background-color: transparent;
 		box-shadow: 0 0 10px rgba(255,255,255,0.5);
 	}
+	@media (max-width: $screen-sm) {
+  		margin-top: 7px;
+	}
 }
 .btn.navbar-toggle {
 	float: none;
 	margin-right: 25px;
 	padding-left: 10px;
-	@media (max-width: $screen-xs-max) {
-		margin-right: 0;
-		margin-top: -3px;
-	}
 	.icos {
 		display: inline-block;
 		margin-right: 5px;
@@ -212,7 +213,7 @@ ul.nav.navbar-nav {
 	}
 	.icon-bar {
 		width: 16px;
-		background-color: #879199;
+		background-color: rgba(255,255,255,.4);
 	}
 }
 
@@ -353,6 +354,17 @@ ul.nav.navbar-nav {
 	.local-select .dropdown-menu {
 		min-width: 65px;
 	}
+
+	#show-menu {
+		@media (min-width: 768px) and (max-width: $screen-sm) {
+			margin-top: 6px;
+			margin-bottom: 4px;
+  		}
+		@media (max-width: $screen-xs-max) {
+			margin-right: 0;
+			margin-top: -3px;
+		}
+	}
 }
 
 #bgr_video {
@@ -362,11 +374,6 @@ ul.nav.navbar-nav {
 	top:0;
 	background-image: url(../img/Frame_1_Blur.jpg);
 	background-size: cover;
-}
-
-
-#quests {
-	//box-shadow: 0 -15px 50px 10px rgba(0, 0, 0, 0.3);
 }
 
 .jumbotron {
@@ -638,9 +645,13 @@ a.descr {
 		text-transform: uppercase;
 		text-decoration: none;
 		font-family: "Bebas Neue", "Helvetica Neue", Helvetica, sans-serif;
+		@media (min-width:769px) and (max-width: 1024px) {
+		  font-size: 42px;
+		  margin-top: 110px;
+		}
 		@media (max-width: $screen-xs-max) {
-			font-size: 21px;
-			margin-top: 7%;
+		  font-size: 26px;
+		  margin-top: 15%;
 		}
 		@media (min-width: $screen-xlg) {
 		  margin-top: 140px;
@@ -653,9 +664,6 @@ a.descr {
 		margin-bottom: 0;
 		position: absolute;
 		bottom:21px;
-		@media (max-width: $screen-xs-max) {
-			padding-left: 10%;	
-		}
 		span {
 			display: block;
 			text-decoration: none;
