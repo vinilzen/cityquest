@@ -176,8 +176,10 @@
 								              if ($k>6 && $k<14) $price = $priceAm;
 								              else $price = $pricePm;
 								              if ($quest['q']->id == 15 ){
-							                    if ($k<6) $price = $priceAm;
+							                    if ($k<7) $price = $priceAm;
 							                    else $price = $pricePm;
+							                    
+							                    if ($k<1) $price = $pricePm;
 							                  }
 								            } else {
 

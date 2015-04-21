@@ -150,8 +150,10 @@
                   else $price = $pricePm;
 
                   if ($model->id == 15 ){
-                    if ($k<6) $price = $priceAm;
+                    if ($k<7) $price = $priceAm;
                     else $price = $pricePm;
+
+                    if ($k<1) $price = $pricePm;
                   }
 
                 } else {
@@ -204,13 +206,13 @@
             </div>
             <?if ($workday) { ?>
               <div class="price-line">
-                <? if ($model->id!=15) { ?>
+                <? // if ($model->id!=15) { ?>
                 <div class="priceTbl workPrice1" title="Цена за команду" data-toggle="tooltip">
                   <div class="priceRow">
                     <span class="price" itemprop="price" content="<?=$pricePm?>" style="padding:0;"><? echo $pricePm; ?> <em itemprop="priceCurrency" content="RUB" class="rur"><em>руб.</em></em></span>
                   </div>
                 </div>
-                <? } ?>
+                <? // } ?>
                 <div class="priceTbl workPrice2 <? if ($model->id==15) echo 'workPrice23'; ?>" title="Цена за команду" data-toggle="tooltip">
                   <div class="priceRow">
                     <span class="dashed">&nbsp;</span>
@@ -228,7 +230,7 @@
               </div>
             <? } else { ?>
               <div class="price-line weekend">
-                <div class="priceTbl weekendPrice2 <? if ($model->id==15) echo 'weekendPrice23'; ?>" title="Цена за команду" data-toggle="tooltip">
+                <div class="priceTbl weekendPrice2 <?// if ($model->id==15) echo 'weekendPrice23'; ?>" title="Цена за команду" data-toggle="tooltip">
                   <div class="priceRow">
                     <span class="dashed">&nbsp;</span>
                     <span class="price" itemprop="price" content="<?=$pricePm?>"><?=$pricePm?> <em itemprop="priceCurrency" content="RUB" class="rur"><em>руб.</em></em></span>
