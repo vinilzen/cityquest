@@ -2,18 +2,22 @@
   <div class="row">
     <div class="col-sm-4 col-md-4 hidden-xs">
       <p class="pull-left condition">
-        <i class="ico-pay ico-visa" data-toggle="tooltip" title="<?=Yii::t('app','Accept Visa card')?>"></i>
-        <i class="ico-pay ico-mc" data-toggle="tooltip" title="<?=Yii::t('app','Accept MasterCard Cards')?>"></i>
-        <i class="ico-pay ico-cash" data-toggle="tooltip" title="<?=Yii::t('app','Accept cash')?>"></i>
+        <i class="icon icon-visa" data-toggle="tooltip" title="<?=Yii::t('app','Accept Visa card')?>"></i>
+        <i class="icon icon-mastercard" data-toggle="tooltip" title="<?=Yii::t('app','Accept MasterCard Cards')?>"></i>
+        <i class="icon icon-ruble" data-toggle="tooltip" title="<?=Yii::t('app','Accept cash')?>"></i>
         <span class="weinsoc hidden-md hidden-sm"><em>&mdash;</em><?=Yii::t('app','PAYMENT METHODS')?></span>
       </p>
     </div>
     <div class="col-xs-12 col-md-4 visible-xs">
       <p class="text-center">
-        <a class="btn-soc" target="_blank" href="https://www.facebook.com/cityquestru"><i class="ico-soc ico-fb"></i></a>
-        <a class="btn-soc" target="_blank" href="http://vk.com/cityquestru"><i class="ico-soc ico-vk"></i></a>
+        <a class="btn-soc" target="_blank" href="https://www.facebook.com/cityquestru">
+          <i class="icon icon-facebook"></i>
+        </a>
+        <a class="btn-soc" target="_blank" href="http://vk.com/cityquestru">
+          <i class="icon icon-vk"></i>
+        </a>
         <a class="btn-soc" href="http://instagram.com/cityquestru" target="_blank">
-          <img src="/img/instagram.svg" class="instagram" width="18" ></i>
+          <i class="icon-instagram icon"></i>
         </a>
       </p>
     </div>
@@ -26,11 +30,17 @@
     <div class="col-sm-4 col-md-4 col-xs-12 hidden-xs">
       <p class="pull-right right-soc">
         <span class="weinsoc hidden-sm hidden-md "><?=Yii::t('app','we are in social networks')?><em>&mdash;</em></span>
-        <a class="btn-soc" target="_blank" href="https://www.facebook.com/cityquestru"><i class="ico-soc ico-fb"></i></a>
-        <a class="btn-soc" href="http://vk.com/cityquestru" target="_blank"><i class="ico-soc ico-vk"></i></a>
-        <a class="btn-soc" href="http://instagram.com/cityquestru" target="_blank">
-          <img src="/img/instagram.svg" class="instagram" width="18" ></i>
-        </a>
+        <a class="btn-soc" target="_blank" href="https://www.facebook.com/cityquestru">
+          <i class="icon icon-facebook"></i></a>
+        <a class="btn-soc" href="http://vk.com/cityquestru" target="_blank">
+          <i class="icon icon-vk"></i></a>
+        <a class="btn-soc" href="http://instagram.com/cityquestru" target="_blank" >
+          <i class="icon-instagram icon"></i></a>
+      </p>
+    </div>
+    <div class="col-xs-12">
+      <p class="text-center">
+        г. Москва, ул. Летниковская, д. 4, стр. 2<br>+7 (495) 749-96-09
       </p>
     </div>
   </div>

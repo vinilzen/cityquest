@@ -29,16 +29,16 @@
             <small><?=Yii::t('app', 'To participate you need a team')?></small>
             <p class="btns-filter">
               <span class="btn btn-filter">
-                <i class="glyphicon glyphicon-time"></i> <span class="hidden-xs">Все квесты</span>
+                <i class="icon icon-logo_cityquest"></i> <span class="hidden-xs">Все квесты</span>
               </span>
               <span class="btn btn-filter active">
-                <i class="glyphicon glyphicon-time"></i> <span class="hidden-xs">Обычные</span>
+                <i class="icon icon-spiral"></i> <span class="hidden-xs">Обычные</span>
               </span>
               <span class="btn btn-filter">
-                <i class="glyphicon glyphicon-time"></i> <span class="hidden-xs">Спортивные</span>
+                <i class="icon icon-alarm"></i> <span class="hidden-xs">Спортивные</span>
               </span>
               <span class="btn btn-filter">
-                <i class="glyphicon glyphicon-time"></i> <span class="hidden-xs">Перфоманс</span>
+                <i class="icon icon-star"></i> <span class="hidden-xs">Перфоманс</span>
               </span>
             </p>
           </div>

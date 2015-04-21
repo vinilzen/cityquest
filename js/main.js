@@ -127,7 +127,7 @@ $(function() {
 			if (document.body.clientWidth > 767) {
 
 				if ($('#for-login-pl').text() == '') {
-					$('.ico-lock').appendTo('#for-login-pl').show();
+					$('#for-login-pl .btn').appendTo('#for-login-pl').show();
 					$('#for-login').html('');
 				}
 				if ($('#for-city').text() == '') {
@@ -135,7 +135,7 @@ $(function() {
 					$('#for-select-city').html('');
 				}
 			} else {
-				$('.city-select, .ico-lock').hide();
+				$('.city-select, #for-login-pl .btn').hide();
 			}
 		}
 
@@ -152,12 +152,12 @@ $(function() {
 			}
 
 			if ($('#for-login').text() == '') {
-				$('.ico-lock').show().css('display', 'inline-block').appendTo('#for-login');
+				$('#for-login-pl .btn').show().css('display', 'inline-block').appendTo('#for-login');
 				$('#for-login-pl').html('');
 			}
 		} else {
 			if ($('#for-login-pl').text() == '') {
-				$('.ico-lock').hide().appendTo('#for-login-pl');
+				$('#for-login-pl .btn').hide().appendTo('#for-login-pl');
 				$('#for-login').html('')
 			}
 			if ($('#for-city').text() == '') {

@@ -342,6 +342,7 @@ class QuestController extends Controller
 			'booking' => $bookings_by_date,
 			'times' => $times,
 			'cities' => $cities,
+			'errors'=>$model->getErrors(),
 			'message_success' => $message_success,
 		));
 	}

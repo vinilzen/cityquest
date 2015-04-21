@@ -14,31 +14,40 @@ foreach ($quests as $quest) {
 			<a class="descr" href="/quest/<?=$quest->link?>">
 				<span class="difficult">
 					<? if ($quest->difficult == 2) { ?>
-						<i class="glyphicon glyphicon-record"></i>
+						<i class="icon icon-hexahedron"></i>
 						<?=Yii::t('app','High')?>
 					<? } elseif ($quest->difficult == 1) { ?>
-						<i class="glyphicon glyphicon-certificate"></i>
+						<i class="icon icon-square"></i>
 						<?=Yii::t('app','Medium')?>
 					<? } else { ?>
-						<i class="glyphicon glyphicon-dashboard"></i>
+						<i class="icon icon-triangle"></i>
 						<?=Yii::t('app','Base')?>
+					<? } 
+					if ($quest->actor) { ?>
+						<i class="icon icon-mask"></i>
+						<?=Yii::t('app','With actor')?>
 					<? } ?>
 				</span>
 				<h2><?=CHtml::encode($quest->title)?></h2>
 				<p class="quest_info">
 					<span>
-						<i class="ico-ppl iconm-Man"></i>
-						<i class="ico-ppl iconm-Man"></i>
-						<i class="ico-ppl iconm-Man noactive"></i>
-						<i class="ico-ppl iconm-Man noactive"></i><strong>2 - 4</strong> <?=Yii::t('app','players')?>
+						<i class="icon icon-user"></i>
+						<i class="icon icon-user"></i>
+						<i class="icon icon-user noactive"></i>
+						<i class="icon icon-user noactive"></i><strong>2 - 4</strong> <?=Yii::t('app','players')?>
 					</span>
-					<span><i class="ico-loc iconm-Pin"></i><?=CHtml::encode($quest->addres)?></span>
+					<span><i class="icon icon-Pin"></i><?=CHtml::encode($quest->addres)?></span>
 				</p>
 			</a>
 		<? } else { ?>
-			<a class="descr inactive">
-				<h2><?=CHtml::encode($quest->title)?></h2>
-				<p><i class="iconm iconm-Time"></i></p>
+			<a class="descr inactive<?=($quest->actor)?' withactor':''?>">
+				<p class="text-center">
+					<?=($quest->actor)?'<i class="icon icon-mask"></i>'.Yii::t('app','With actor').'<br>' : '' ?>
+				</p>
+				<h2>
+					<?=CHtml::encode($quest->title)?>
+				</h2>
+				<p><i class="icon icon-Time"></i></p>
 				<p><?=Yii::t('app','The quest to develop')?></p>
 				<p class="add_descr"><?=CHtml::encode($quest->start_text)?></p>
 			</a>

@@ -27,7 +27,7 @@
 	</div>	
 	<? } ?>
 
-	<div class="form-group<?=(isset($model->getErrors()['title']))?' has-error':''?>">
+	<div class="form-group<?=(isset($errors['title']))?' has-error':''?>">
 		<?=$form->labelEx($model,'title', array('class' => 'control-label col-sm-3'))?>
 		<div class="col-sm-9">
 			<?=$form->textField($model,'title',array('size'=>60,'maxlength'=>128,'class'=>'form-control'))?>
@@ -35,7 +35,7 @@
 		</div>
 	</div>
 
-	<div class="form-group<?=(isset($model->getErrors()['content']))?' has-error':''?>">
+	<div class="form-group<?=(isset($errors['content']))?' has-error':''?>">
 		<?=$form->labelEx($model,'content', array('class' => 'control-label col-sm-3'))?>
 		<div class="col-sm-9">
 			<?=$form->textArea($model,'content',array('rows'=>8, 'cols'=>50,'class'=>'form-control'))?>
@@ -43,7 +43,7 @@
 		</div>
 	</div>
 
-	<div class="form-group<?=(isset($model->getErrors()['link']))?' has-error':''?>">
+	<div class="form-group<?=(isset($errors['link']))?' has-error':''?>">
 		<?=$form->labelEx($model,'link', array('class' => 'control-label col-sm-3'))?>
 		<div class="col-sm-9">
 			<?=$form->textField($model,'link',array('size'=>60,'maxlength'=>45,'class'=>'form-control'))?>
@@ -51,7 +51,7 @@
 		</div>
 	</div>
 
-	<div class="form-group<?=(isset($model->getErrors()['addres']))?' has-error':''?>">
+	<div class="form-group<?=(isset($errors['addres']))?' has-error':''?>">
 		<?=$form->labelEx($model,'addres', array('class' => 'control-label col-sm-3'))?>
 		<div class="col-sm-9">
 			<?=$form->textField($model,'addres',array('size'=>60,'maxlength'=>128,'class'=>'form-control'))?>
@@ -59,7 +59,7 @@
 		</div>
 	</div>
 
-	<div class="form-group<?=(isset($model->getErrors()['metro']))?' has-error':''?>">
+	<div class="form-group<?=(isset($errors['metro']))?' has-error':''?>">
 		<?=$form->labelEx($model,'metro', array('class' => 'control-label col-sm-3'))?>
 		<div class="col-sm-9">
 			<?=$form->textField($model,'metro',array('size'=>60,'maxlength'=>128,'class'=>'form-control'))?>
@@ -67,7 +67,7 @@
 		</div>
 	</div>
 
-	<div class="form-group<?=(isset($model->getErrors()['times']))?' has-error':''?>">
+	<div class="form-group<?=(isset($errors['times']))?' has-error':''?>">
 		<label class="control-label col-sm-3 required" for="status">Начало часа<span class="required">*</span></label>
 		<div class="col-sm-9">
 			<?=$form->dropDownList($model,'times', array(
@@ -82,7 +82,7 @@
 		</div>
 	</div>
 
-	<div class="form-group<?=(isset($model->getErrors()['status']))?' has-error':''?>">
+	<div class="form-group<?=(isset($errors['status']))?' has-error':''?>">
 		<label class="control-label col-sm-3 required" for="status">Статус <span class="required">*</span></label>
 		<div class="col-sm-9">
 			<?=$form->dropDownList($model,'status', array(
@@ -93,7 +93,7 @@
 		</div>
 	</div>
 
-	<div class="form-group<?=(isset($model->getErrors()['type']))?' has-error':''?>">
+	<div class="form-group<?=(isset($errors['type']))?' has-error':''?>">
 		<label class="control-label col-sm-3 required" for="type">Вид <span class="required">*</span></label>
 		<div class="col-sm-9">
 			<?=$form->dropDownList($model,'type', array(
@@ -104,7 +104,7 @@
 		</div>
 	</div>
 
-	<div class="form-group<?=(isset($model->getErrors()['difficult']))?' has-error':''?>">
+	<div class="form-group<?=(isset($errors['difficult']))?' has-error':''?>">
 		<label class="control-label col-sm-3 required" for="difficult">Сложность <span class="required">*</span></label>
 		<div class="col-sm-9">
 			<?=$form->dropDownList($model,'difficult', array(
@@ -127,7 +127,7 @@
 	</div>
 	
 
-	<div class="form-group<?=(isset($model->getErrors()['city_id']))?' has-error':''?>">
+	<div class="form-group<?=(isset($errors['city_id']))?' has-error':''?>">
 		<label class="control-label col-sm-3 required" for="city_id">Город <span class="required">*</span></label>
 		<div class="col-sm-9">
 			<?=$form->dropDownList($model,'city_id', CHtml::listData($cities, 'id', 'name'), array('class'=>'form-control'))?>
@@ -135,7 +135,7 @@
 	</div>
 
 
-	<div class="form-group<?=(isset($model->getErrors()['start_text']))?' has-error':''?>">
+	<div class="form-group<?=(isset($errors['start_text']))?' has-error':''?>">
 		<?=$form->labelEx($model,'start_text', array('class' => 'control-label col-sm-3'))?>
 		<div class="col-sm-9">
 			<?=$form->textArea($model,'start_text',array('rows'=>2, 'cols'=>50,'class'=>'form-control'))?>
@@ -144,21 +144,21 @@
 	</div>
 
 	
-	<div class="form-group<?=(isset($model->getErrors()['page_title']))?' has-error':''?>">
+	<div class="form-group<?=(isset($errors['page_title']))?' has-error':''?>">
 		<?=$form->labelEx($model,'page_title', array('class' => 'control-label col-sm-3'))?>
 		<div class="col-sm-9">
 			<?=$form->textArea($model,'page_title',array('rows'=>2, 'cols'=>50,'class'=>'form-control'))?>
 			<?=$form->error($model,'page_title', array('class'=>'help-block'))?>
 		</div>
 	</div>
-	<div class="form-group<?=(isset($model->getErrors()['description']))?' has-error':''?>">
+	<div class="form-group<?=(isset($errors['description']))?' has-error':''?>">
 		<?=$form->labelEx($model,'description', array('class' => 'control-label col-sm-3'))?>
 		<div class="col-sm-9">
 			<?=$form->textArea($model,'description',array('rows'=>2, 'cols'=>50,'class'=>'form-control'))?>
 			<?=$form->error($model,'description', array('class'=>'help-block'))?>
 		</div>
 	</div>
-	<div class="form-group<?=(isset($model->getErrors()['keywords']))?' has-error':''?>">
+	<div class="form-group<?=(isset($errors['keywords']))?' has-error':''?>">
 		<?=$form->labelEx($model,'keywords', array('class' => 'control-label col-sm-3'))?>
 		<div class="col-sm-9">
 			<?=$form->textArea($model,'keywords',array('rows'=>2, 'cols'=>50,'class'=>'form-control'))?>

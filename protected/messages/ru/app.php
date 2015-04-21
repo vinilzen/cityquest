@@ -113,4 +113,5 @@ return array(
 	'we are in social networks'=>'мы в социальных сетях',
 	'Quests'=>'Квесты',
 	'Your phone number'=>'Ваш номер телефона',
+	'With actor'=>'С актером',
 );

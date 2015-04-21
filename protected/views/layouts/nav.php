@@ -66,7 +66,7 @@
                   </ul>
                 </div>
               </div><div id="for-local" <? if ($domen_loc=='ru' || $domen_loc=='il') echo 'style="display:none;"'; ?>>
-                <div class="btn-group local-select">
+                <div class="btn-group local-select hidden-xs">
                   <button class="btn btn-link ico-earth" data-toggle="dropdown" type="button">
                     <span><?=($this->language == 'kz')?'Kz':'Ru'?></span></button>
                   <ul class="dropdown-menu" role="menu">
@@ -74,10 +74,13 @@
                   </ul>
                 </div>
               </div><div id="for-login-pl">
-                <?=(Yii::app()->user->isGuest)?
-                  '<a class="btn btn-topline btn-default ico-lock" data-target="#myModalAuth" data-toggle="modal" href="#login">'.Yii::t('app','LOGIN').'</a>'
-                  :
-                  '<a class="btn btn-topline btn-default ico-lock" data-toggle="modal" href="/user/profile">'.Yii::t('app','CABINET').'</a>'?>
+                <? if (Yii::app()->user->isGuest) { ?>
+                  <a class="btn btn-topline btn-default" data-target="#myModalAuth" data-toggle="modal" href="#login">
+                    <i class="icon icon-lock"></i><?=Yii::t('app','LOGIN')?></a>
+                <? } else { ?>
+                  <a class="btn btn-topline btn-default" data-toggle="modal" href="/user/profile">
+                    <i class="icon icon-lock"></i><?=Yii::t('app','CABINET')?></a>
+                <? } ?>
               </div>
             </div>
           </div>
