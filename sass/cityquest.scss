@@ -1027,10 +1027,8 @@ a.descr {
 	tr {
 	}
 }
-// inset 0px -65px 130px 0px rgba(0, 0, 0, 0.7)
 .curent_date {
 	display: inline-block;
-	// padding: 0 20px 15px;
 	padding: 0 14px 10px;
 	cursor: pointer;
 	border-bottom: 5px solid rgba(0,0,0,0);
@@ -1074,14 +1072,12 @@ a.descr {
 	&.weekend {
 		span em {
 			color: rgba(168,234,255,.7);
-			// text-shadow: 0 0 1px rgba(168,234,255, 0.6);
 		}
 		span:hover em {
 			color: rgba(168,234,255,1);
 		}
 		small {
 			color:#7ae1ff;
-			// text-shadow: 0 0 1px rgba(168,234,255, 0.6);
 		}
 	}
 
@@ -1375,7 +1371,7 @@ body.inner .jumbotron.quest {
 	body.inner .jumbotron.quest h2 {
 		font-size: 14px;
 	}
-	.col-br.descr_quest {
+	/* .col-br.descr_quest {
 		margin-left: 20px;
 		margin-top: -105px;
 		.tr {
@@ -1386,7 +1382,7 @@ body.inner .jumbotron.quest {
 			padding-top: 12px;
 			float: left;
 		}
-	}
+	} */
 }
 
 @media (max-width: $screen-xs-max) {
@@ -1394,9 +1390,9 @@ body.inner .jumbotron.quest {
 		padding-left: 0;
 		padding-right: 0;
 	}
-	.col-br.descr_quest {
+	/* .col-br.descr_quest {
 		margin-left: 0;
-	}
+	} */
 }
 .img-container {
 	position: absolute;
