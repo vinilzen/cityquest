@@ -270,7 +270,7 @@ $(function() {
 
 		$('img', ModalBook).attr('src', '/images/q/'+book_data.quest_id+'.jpg');
 		$('.addr-to', ModalBook).html('<i class="ico-loc iconm-Pin"></i>'+book_data.addres);
-		$('h2', ModalBook).html(book_data.title);
+		$('.h2', ModalBook).html(book_data.title);
 		$('.book_time', ModalBook).html(
 			'<small>'+book_data.day+'</small>'+
 			'<span>'+book_data.d+'.'+book_data.m+'</span><em>в</em><span>'+book_data.time+'</span>');

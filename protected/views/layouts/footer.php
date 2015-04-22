@@ -213,14 +213,14 @@
         <div class="row">
           <div class="col-sm-6 col-xs-12">
             <img alt="" class="featurette-image img-responsive" src="/images/q/3.jpg">
-            <a class="descr" href="#lab">
-              <h2>Театр</h2>
-              <p>
+            <a class="descr " href="#lab">
+              <h3 class="h2"></h3>
+              <p class='hide'>
                 <span>
-                  <i class="ico-ppl iconm-Man"></i>
-                  <i class="ico-ppl iconm-Man"></i>
-                  <i class="ico-ppl iconm-Man noactive"></i>
-                  <i class="ico-ppl iconm-Man noactive"></i>2 - 4 <?=Yii::t('app','players')?>
+                  <i class="icon icon-Man"></i>
+                  <i class="icon icon-Man"></i>
+                  <i class="icon icon-Man noactive"></i>
+                  <i class="icon icon-Man noactive"></i>2 - 4 <?=Yii::t('app','players')?>
                 </span>
                 <span class="addr-to"><i class="ico-loc"></i></span>
               </p>
@@ -259,7 +259,7 @@
         </div>
         <div class="modal-body">
           <form role="form" id="edit-form" class="tab-content">
-            <h2 class="form-signin-heading"><?=Yii::t('app','Edit Profile'); ?></h2>
+            <h3 class=" h2 form-signin-heading"><?=Yii::t('app','Edit Profile'); ?></h3>
             <hr class="fadeOut">
 
             <div class="form-group">

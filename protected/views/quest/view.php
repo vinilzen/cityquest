@@ -32,7 +32,7 @@
               }
           ?>
         </h1>
-        <h2 itemprop="description"><?=$model->content?></h2>
+        <p class="description h2" itemprop="description"><?=$model->content?></p>
       </div>
     </div>
     <div class="clearfix"></div>
@@ -283,7 +283,7 @@
         alt="<?=CHtml::encode($quest->title)?>" 
         src="/images/q/<?=$quest->id?>.jpg">
       <a class="descr" href="/quest/<?=$quest->link?>">
-        <h2><?=CHtml::encode($quest->title)?></h2>
+        <h3 class="h2"><?=CHtml::encode($quest->title)?></h3>
         <p class="quest_info">
             <span>
                 <i class="icon icon-user"></i>
