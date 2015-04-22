@@ -20,6 +20,10 @@ body {
 			background-repeat: no-repeat;
 			background-position-y: 550px;
 			background-repeat-y: initial;
+
+  			@media (max-width: 769px) {
+  				background-size: cover;
+  			}
 		}
 		&.contact {
 			background-image: url(../img/mapstack_big1.png);
@@ -465,25 +469,6 @@ ul.nav.navbar-nav {
 			top:6px;
 		}
 	}
-	&.quest_view {
-		position: static;
-		margin-top: -5px;
-		font-size: 16px;
-  		white-space: nowrap;
-		display: block;
-		.icon {
-			font-size: 22px;
-		}
-		.icon-mask {
-			font-size: 28px;
-		}
-
-		@media (min-width: 601px) and (max-width: 980px) {
-			position: relative;
-  			left: 412px;
-  			top: -41px;
-		}
-	}
 }
 .footer {
 	position: absolute;
@@ -599,30 +584,6 @@ body.inner {
 		color:#1a2734;
 		text-align: center;
 	}
-
-	/* .ico-soc {
-		background-image: url(../img/soc_btn.png);
-		background-repeat:  no-repeat;
-		background-position: left top;
-		width: 10px;
-		height: 20px;
-		margin-top: 8px;
-		margin-left: auto;
-		margin-right: auto;
-		display: block;
-		&.ico-tw {
-			width: 20px;
-			height: 16px;
-			margin-top: 11px;
-			background-position: -22px -2px;
-		}
-		&.ico-vk {
-			width: 14px;
-			height: 16px;
-			margin-top: 10px;
-			background-position: -55px -1px;
-		}
-	} */
 }
 .item {
 	position: relative;
@@ -643,7 +604,6 @@ body.inner {
 	}
 }
 a.descr {
-	// background-color: rgba(0,0,0,0.4);
 	text-decoration: none;
 	width: 100%;
 	height: 100%;
@@ -1288,7 +1248,7 @@ body.inner .jumbotron.quest {
 		top:-2px;
 	}
 }
-.descr_quest {
+/* .descr_quest {
 	text-align: left;
 	margin-left: -4px;
 	margin-top: 25px;
@@ -1399,7 +1359,7 @@ body.inner .jumbotron.quest {
 		}
 		margin-left: 0;
 	}
-}
+} */
 @media (max-width: 1023px) {
 	body.inner .jumbotron.quest h2 {
 		font-size: 14px;
@@ -1500,33 +1460,7 @@ body.inner .jumbotron.quest1 {
 	position: relative;
 	padding-left: 40px;
 }
-.descr_quest p .addr-quest {
-	a {
-		font-size: 14px;
-		color:#6bcceb;
-		padding-left: 0;
-		margin-left: 0;
-		margin-top: 12px;
-		&:hover {
-			color:#fff;
-			text-decoration: none;
-		}
-	}
-}
-.duration {
-	width: 24px;
-	height: 24px;
-	display: inline-block;
-	font-size: 26px;
-	color:#6bcceb;
-	margin-right: 12px;
-}
-.metro {
-	width: 28px;
-	height: 22px;
-	background: url(../img/metro.png) left top no-repeat;
-	display: inline-block;
-}
+
 
 .fadeOut {
 	margin-top: 0;
@@ -2864,4 +2798,85 @@ h1 {
 		display: inline-block;
 		top: -3px;
 	}
+}
+.quest_description {
+	margin-top: -130px;
+
+	@media (max-width: 991px) {
+		margin-top: -170px;
+		margin-bottom: 30px;
+	}
+	@media (min-width: 1200px) {
+		margin-top: -120px;
+  		margin-bottom: 20px;
+	}
+	.icon {
+		color:#8cc6eb;
+		font-size: 26px;
+		// margin-right: 12px;
+		float: left;
+		@media (max-width: 991px) {
+			font-size: 24px;
+		}
+		&.icon-Man {
+			margin-right: 3px;
+			color:#fff;
+			&.last-man {
+				margin-right: 12px;
+			}
+			&.noactive {
+				color:#8cc6eb;
+			}
+		}
+		&.icon-Pin {
+			font-size: 30px;
+			@media (max-width: 991px) {
+				font-size: 26px;
+			}
+		}
+	}
+	p {
+		color:#fff;
+		font-size:16px;
+  		line-height: 28px;
+		font-family: Circe;
+  		padding-left: 42px;
+  		@media (max-width: 480px) {
+  			padding-left: 38px;
+  			font-size: 13px;
+  			line-height: 2em;
+
+  		}
+	}
+}
+.quest_description_left {
+	@media (min-width: 992px) {
+		padding-left: 50px;
+	}
+}
+.quest_description_right {
+
+	@media (min-width: 992px) {
+		margin-top: -30px;
+		margin-bottom: 20px;
+	}
+	@media (min-width: 1024px) {
+		margin-top: -30px;
+		margin-bottom: 20px;
+	}
+	@media (min-width: 1200px) {
+		margin-top: -50px;
+		margin-bottom: 10px;
+	}
+	@media (min-width: 1400px) {
+		margin-top: -40px;
+		margin-bottom: 20px;
+	}
+}
+em.gotham {
+	font-style: normal;
+	font-size: 23px;
+	font-family: 'Gotham A';
+	margin-right: 6px;
+	font-weight: bold;
 }

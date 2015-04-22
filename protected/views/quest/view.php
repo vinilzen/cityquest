@@ -16,11 +16,6 @@
   <div itemscope itemtype="http://schema.org/Product" class="container text-center">
     <div class="row">
       <div class="img-container" style="background-image: url(../images/q/<?=$model->id?>.jpg);"></div>
-      <div style="display: none;" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
-        <meta itemprop="bestRating" content="5" />
-        <meta itemprop="ratingValue" content="5" />
-        <meta itemprop="ratingCount" content="171" />
-      </div>
       <div class="col-sm-12 col-black">
         <p class="text-center quest-type hidden">
           <i class="icon icon-spiral"></i><span class="hidden-xs">Обычные</span>
@@ -38,52 +33,67 @@
           ?>
         </h1>
         <h2 itemprop="description"><?=$model->content?></h2>
-
-        <div class="descr_quest">
-          <i class="duration icon icon-Time"></i>
-          <p class="time-text">
-            <span class="time-mt"><em>60</em>минут</span>
-          </p>
-          <div class="clearfix visible-xs"></div>
-          <p class="pull-right"><i class="icon icon-Man"></i><i class="icon icon-Man"></i><i class="icon icon-Man noactive"></i><i class="icon icon-Man noactive"></i>
-            <span class="people"><em>2-4</em><?=Yii::t('app','players')?></span>
-          </p>
-          <div class="clearfix"></div>
-          <span class="difficult quest_view">
-            <? if ($model->difficult == 2) { ?>
-              <i class="icon icon-hexahedron"></i>
-              <?=Yii::t('app','High')?>
-            <? } elseif ($model->difficult == 1) { ?>
-              <i class="icon icon-square"></i>
-              <?=Yii::t('app','Medium')?>
-            <? } else { ?>
-              <i class="icon icon-triangle"></i>
-              <?=Yii::t('app','Base')?>
-            <? } 
-            if ($model->actor) { ?>
-              <i class="icon icon-mask"></i>
-              <?=Yii::t('app','With actor')?>
-            <? } ?>
-          </span>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row quest_description">
+      <div class="col-md-6 col-lg-5 col-xlg-4 col-xs-12">
+        <div class="container-fluid quest_description_left">
+          <div class="row">
+            <div class="col-md-4 col-sm-3 col-xs-12 text-left">
+              <i class="icon icon-Time"></i>
+              <p>
+                <em class="gotham">60</em>минут
+              </p>
+            </div>  
+            <div class="col-md-8 col-sm-3 col-xs-12 text-left">
+              <i class="icon icon-Man hidden-sm"></i><i class="icon icon-Man hidden-sm"></i><i class="icon icon-Man noactive hidden-sm"></i><i class="icon icon-Man noactive last-man"></i>
+              <p>
+                <em class="gotham">2-4</em><?=Yii::t('app','players')?>
+              </p> 
+            </div>
+            <div class="clearfix hidden-sm"></div>
+            <div class="col-md-4 col-sm-3 col-xs-5 text-left">
+              <? if ($model->difficult == 2) { ?>
+                <i class="icon icon-hexahedron"></i>
+                <p><?=Yii::t('app','High')?></p>
+              <? } elseif ($model->difficult == 1) { ?>
+                <i class="icon icon-square"></i>
+                <p><?=Yii::t('app','Medium')?></p>
+              <? } else { ?>
+                <i class="icon icon-triangle"></i>
+                <p><?=Yii::t('app','Base')?></p>
+              <? } ?>
+            </div>  
+            <div class="col-md-8 col-sm-3 col-xs-6 text-left">
+              <? if ($model->actor) { ?>
+                <i class="icon icon-mask"></i>
+                <p><?=Yii::t('app','With actor')?></p>
+              <? } ?>
+            </div>  
+          </div>
         </div>
       </div>
-      <div class="col-sm-12 col-br descr_quest">
-          <div class="text-left tr text-metro">
-            <i class="icon icon-metro"></i>
-            <p>
-              <span class="metro-title"><?=$model->metro?></span>
-            </p>
-          </div>
-          <div class="text-left text-pin">
-            <i class="icon icon-Pin"></i>
-            <p>
-              <span class="addr-quest">
-                <span><?=$model->addres?></span><br>
-                <?=($model->id!=15)?Yii::t('app','Free on site parking is 1.5 hours').'.':'Проход и проезд со стороны <br>ул. Нижняя Красносельская д.15/17 в арку'?><br>
+      <div class="col-md-5 col-md-offset-1 col-lg-4 col-lg-offset-3 col-xlg-3 col-xlg-offset-5 col-xs-12">
+        <div class="container-fluid quest_description_right">
+          <div class="row">
+            <div class="col-xs-12 col-md-12 col-sm-3 text-left">
+              <i class="icon icon-metro"></i>
+              <p>
+                <span class="metro-title"><?=$model->metro?></span>
+              </p>
+            </div>
+            <div class="col-xs-12 col-md-12 col-sm-9 text-left">
+              <i class="icon icon-Pin"></i>
+              <p><?=$model->addres?>
+                <br>
+                <?=($model->id!=15)?Yii::t('app','Free on site parking is 1.5 hours').'.':'Проход и проезд со стороны <br>ул. Нижняя Красносельская д.15/17 в арку'?>
+                <br>
                 <a href="https://www.google.com/maps/preview?q=<?=$cities[$model->city_id]->name?>,+<?=urlencode($model->addres)?>" target="_blank"><?=Yii::t('app','How to get there')?>?</a>
-              </span>
-            </p>
+              </p>
+            </div>
           </div>
+        </div>
       </div>
     </div>
   </div>
