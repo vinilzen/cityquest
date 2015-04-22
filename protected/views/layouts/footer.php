@@ -39,7 +39,7 @@
       </p>
     </div>
     <div class="col-xs-12">
-      <p class="text-center">
+      <p class="text-center footer-addr">
         г. Москва, ул. Летниковская, д. 4, стр. 2<br>+7 (495) 749-96-09
       </p>
     </div>

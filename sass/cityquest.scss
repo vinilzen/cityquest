@@ -15,7 +15,12 @@ body {
 	&.inner {
 		background-image: url(../img/content_bg.jpg);
 		background-size: cover;
-		background-repeat: no-repeat;
+		&.body-quest {
+			background-size: 100%;
+			background-repeat: no-repeat;
+			background-position-y: 550px;
+			background-repeat-y: initial;
+		}
 		&.contact {
 			background-image: url(../img/mapstack_big1.png);
 			box-shadow: inset 0 160px 160px -80px rgba(0, 0, 0, 0.6);
@@ -37,7 +42,7 @@ input {
 }
 
 .navbar-wrapper {
-	box-shadow: inset 0 80px 80px -40px rgba(0, 0, 0, 0.3);
+	// box-shadow: inset 0 80px 80px -40px rgba(0, 0, 0, 0.3);
 	.container-fluid {
 		@media (min-width: 1670px) {
 			width: 1650px;
@@ -88,6 +93,10 @@ input {
 
 .navbar-inner {
   text-align:center;
+}
+
+.navbar {
+	margin-bottom: 0;
 }
 
 ul.nav.navbar-nav {
@@ -456,6 +465,25 @@ ul.nav.navbar-nav {
 			top:6px;
 		}
 	}
+	&.quest_view {
+		position: static;
+		margin-top: -5px;
+		font-size: 16px;
+  		white-space: nowrap;
+		display: block;
+		.icon {
+			font-size: 22px;
+		}
+		.icon-mask {
+			font-size: 28px;
+		}
+
+		@media (min-width: 601px) and (max-width: 980px) {
+			position: relative;
+  			left: 412px;
+  			top: -41px;
+		}
+	}
 }
 .footer {
 	position: absolute;
@@ -469,7 +497,7 @@ ul.nav.navbar-nav {
 	}
 	p {
 		white-space: nowrap;
-		&.text-center {
+		&.footer-addr {
 			font-family: Circe;
 			font-size: 12px;
 			font-weight: 300;
@@ -1263,7 +1291,7 @@ body.inner .jumbotron.quest {
 .descr_quest {
 	text-align: left;
 	margin-left: -4px;
-	margin-top: 35px;
+	margin-top: 25px;
 	.tr p {
 		@media (max-width: $screen-xs-max) {
 			margin-bottom: 25px;
@@ -1318,10 +1346,17 @@ body.inner .jumbotron.quest {
 			display: none;
 		}
 	}
-	.ico-ppl {
-		top: 1px;
+	.icon-user, .icon-Man {
+		top: 4px;
+		font-size: 24px;
+		position: relative;
+		margin-right: 3px;
+		color:#fff;
+		&.noactive {
+			color:#6bcceb;
+		}
 	}
-	.ico-loc {
+	.icon-Pin, .icon-metro {
 		color: #6bcceb;
 		font-size: 28px;
 		margin-right: 0;
@@ -1330,8 +1365,8 @@ body.inner .jumbotron.quest {
 		left:0;
 		top: -2px;
 	}
-	.metro {
-		margin-top: 3px;
+	.icon-metro {
+		font-size: 24px;
 	}
 
 	@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
@@ -1397,7 +1432,7 @@ body.inner .jumbotron.quest {
 	top:0;
 	right: 0;
 	width: 871px;// for screen width 1400px
-	height: 532px;// for screen width 1400px
+	height: 550px;// for screen width 1400px
 	background-position: center top;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -1417,7 +1452,7 @@ body.inner .jumbotron.quest {
 	margin-top: -90px;
 	padding:100px 85px;
 	width: 514px;
-	height: 532px;
+	height: 550px;
 	@media (min-width: 1670px) {
 		margin-top: -180px;
 		// width: 600px;
@@ -1452,7 +1487,7 @@ body.inner .jumbotron.quest {
 
 	@media (width: 1024px){
 		.tr {
-			padding-left: 10px;
+			padding-left: 40px;
 		}
 	}
 }
@@ -2808,4 +2843,25 @@ h1 {
 	color:#fff;
 	margin-bottom: 0;
 	margin-top: 30px;
+}
+.jumbotron p.quest-type {
+	margin: -40px 0 7px 0;
+	@media (min-width: 1600px) {
+  		margin: -10px 0 16px 0;
+	}
+	.icon {
+		color:#5e9fc0;
+		font-size: 21px;
+		margin-right: 7px;
+		display: inline-block;
+	}
+	span {
+		font-size: 16px;
+		font-family: Circe;
+		font-weight: 300;
+		color:#fff;
+		position: relative;
+		display: inline-block;
+		top: -3px;
+	}
 }

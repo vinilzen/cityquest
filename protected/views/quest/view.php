@@ -8,26 +8,23 @@
 ?>
 
 <script type="text/javascript">
-    var user_name = '<? echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->username : ''; ?>',
-        user_phone = '<? echo !Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->phone : ''; ?>';
+    var user_name = '<?=(!Yii::app()->user->isGuest) ? Yii::app()->getModule('user')->user()->username : ''?>',
+        user_phone = '<?=(!Yii::app()->user->isGuest) ? Yii::app()->getModule('user')->user()->phone : ''?>';
 </script>
 
 <div class="jumbotron quest">
   <div itemscope itemtype="http://schema.org/Product" class="container text-center">
     <div class="row">
       <div class="img-container" style="background-image: url(../images/q/<?=$model->id?>.jpg);"></div>
-      <div style="display:none;" itemscope itemtype="http://schema.org/ImageObject">
-        <h2 itemprop="name"> Квест в <?=$cities[$model->city_id]->name?> "<?=$model->title?>"</h2>
-          <img src="/images/q/<?=$model->id?>.jpg" itemprop="contentUrl" />
-          <span itemprop="description"><?=$this->description?></span>
-      </div>
       <div style="display: none;" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
         <meta itemprop="bestRating" content="5" />
         <meta itemprop="ratingValue" content="5" />
         <meta itemprop="ratingCount" content="171" />
       </div>
       <div class="col-sm-12 col-black">
-
+        <p class="text-center quest-type hidden">
+          <i class="icon icon-spiral"></i><span class="hidden-xs">Обычные</span>
+        </p>
         <h1 itemprop="name" id='quest_title'>
           <?=$model->title?>
           <? if (isset($prev)) {
@@ -43,24 +40,42 @@
         <h2 itemprop="description"><?=$model->content?></h2>
 
         <div class="descr_quest">
-          <i class="duration iconm-Time"></i>
+          <i class="duration icon icon-Time"></i>
           <p class="time-text">
             <span class="time-mt"><em>60</em>минут</span>
           </p>
-          <p class="pull-right"><i class="ico-ppl iconm-Man"></i><i class="ico-ppl iconm-Man"></i><i class="ico-ppl iconm-Man noactive"></i><i class="ico-ppl iconm-Man noactive"></i>
+          <div class="clearfix visible-xs"></div>
+          <p class="pull-right"><i class="icon icon-Man"></i><i class="icon icon-Man"></i><i class="icon icon-Man noactive"></i><i class="icon icon-Man noactive"></i>
             <span class="people"><em>2-4</em><?=Yii::t('app','players')?></span>
           </p>
+          <div class="clearfix"></div>
+          <span class="difficult quest_view">
+            <? if ($model->difficult == 2) { ?>
+              <i class="icon icon-hexahedron"></i>
+              <?=Yii::t('app','High')?>
+            <? } elseif ($model->difficult == 1) { ?>
+              <i class="icon icon-square"></i>
+              <?=Yii::t('app','Medium')?>
+            <? } else { ?>
+              <i class="icon icon-triangle"></i>
+              <?=Yii::t('app','Base')?>
+            <? } 
+            if ($model->actor) { ?>
+              <i class="icon icon-mask"></i>
+              <?=Yii::t('app','With actor')?>
+            <? } ?>
+          </span>
         </div>
       </div>
       <div class="col-sm-12 col-br descr_quest">
           <div class="text-left tr text-metro">
-            <i class="metro"></i>
+            <i class="icon icon-metro"></i>
             <p>
               <span class="metro-title"><?=$model->metro?></span>
             </p>
           </div>
           <div class="text-left text-pin">
-            <i class="ico-loc iconm-Pin"></i>
+            <i class="icon icon-Pin"></i>
             <p>
               <span class="addr-quest">
                 <span><?=$model->addres?></span><br>
@@ -259,14 +274,14 @@
         src="/images/q/<?=$quest->id?>.jpg">
       <a class="descr" href="/quest/<?=$quest->link?>">
         <h2><?=CHtml::encode($quest->title)?></h2>
-        <p>
+        <p class="quest_info">
             <span>
-                <i class="ico-ppl iconm-Man"></i>
-                <i class="ico-ppl iconm-Man"></i>
-                <i class="ico-ppl iconm-Man noactive"></i>
-                <i class="ico-ppl iconm-Man noactive"></i>2 - 4 <?=Yii::t('app','players')?>
+                <i class="icon icon-user"></i>
+                <i class="icon icon-user"></i>
+                <i class="icon icon-user noactive"></i>
+                <i class="icon icon-user noactive"></i><strong>2 - 4</strong> <?=Yii::t('app','players')?>
             </span>
-            <span><i class="ico-loc iconm-Pin"></i><?=CHtml::encode($quest->addres)?></span>
+            <span><i class="icon icon-Pin"></i><?=CHtml::encode($quest->addres)?></span>
         </p>
       </a>
     </div>

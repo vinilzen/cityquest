@@ -3,9 +3,7 @@
   
   <? include('head.php'); ?>
 
-<body itemscope itemtype="http://schema.org/WebPage" class="<?
-    // if (!(Yii::app()->controller->id == 'quest' && Yii::app()->controller->action->id == 'index'))
-    
+<body itemscope itemtype="http://schema.org/WebPage" class="<?    
     if (Yii::app()->request->url == '/contact') 
       echo ' contact ';
 
@@ -47,21 +45,15 @@
       <? } ?>
     </div>
 
-    <div style="display: none;" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
-      <meta itemprop="bestRating" content="5" />
-      <meta itemprop="ratingValue" content="5" />
-      <meta itemprop="ratingCount" content="436" />
-    </div>
-
 		<?php echo $content; ?>
-
-    <div class="row">
-      <div class="col-sm-10 col-sm-offset-1 col-xs-12">
-        <p class="text-center bottom-lead">CityQuest - это уникальные приключения для команды от 2 до 4 человек. Игроки заходят в помещение и за ними запирается дверь. 
-Мы детально продумали каждую мелочь и обстановку внутри, что позволит вам полностью погрузиться в атмосферу игры. Для того чтобы пройти квест, нужно найти выход, проявляя смекалку и решая загадки. Записаться на игру вы можете на нашем сайте или позвонив по телефону. Правила просты, но если вы хотите узнать подробные инструкции - они описаны ниже.
-</p>
+    
+    <? if (Yii::app()->controller->id == 'quest' && Yii::app()->controller->action->id == 'index') { ?> 
+      <div class="row">
+        <div class="col-sm-10 col-sm-offset-1 col-xs-12">
+          <p class="text-center bottom-lead">CityQuest — это квесты "выберись из комнаты" в реальной жизни. Здесь все как в компьютерной игре, только по-настоящему: можно брать в руки предметы обстановки, открывать шкафы и двери, включать различные приборы. Цель игры – выбраться из запертогого тематического помещения  за 60 минут, решая загадки, взламывая замки, находя ключи и открывая двери.</p>
+        </div>
       </div>
-    </div>
+    <? } ?>
 
     <? include('footer.php'); ?>
 </body>
