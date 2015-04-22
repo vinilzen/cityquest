@@ -11,6 +11,9 @@ body {
 		@media (min-width: 1200px) {
   			background-size: 100%;
 		}
+		@media (min-width: 1921px) {
+			background-size: cover;	
+		}
 	}
 	&.inner {
 		// background-image: url(../img/content_bg.jpg);
@@ -883,6 +886,7 @@ a.descr {
 		text-transform: none;
 		@media (max-width: $screen-xs-max) {
 			font-size: 21px;
+			margin-top: 30px;
 		}
 		&:after {
 			content: ' ';
@@ -1234,7 +1238,11 @@ body.inner .jumbotron.quest {
 		}
 		@media (max-width: $screen-xs-max) {
 			font-size: 15px;
-			margin-bottom: 20px;
+			margin:18px -10px 20px;
+			padding-left: 0;
+			padding-right: 0;
+			max-height: 200px;
+			overflow: hidden;
 			&:after {
 				display: none;
 			}
@@ -2846,8 +2854,7 @@ h1 {
   		@media (max-width: 480px) {
   			padding-left: 38px;
   			font-size: 13px;
-  			line-height: 2em;
-
+  			line-height: 1.8em;
   		}
 	}
 }
@@ -2881,4 +2888,12 @@ em.gotham {
 	font-family: 'Gotham A';
 	margin-right: 6px;
 	font-weight: bold;
+}
+@media (min-width: 1921px) {
+	.container-fluid, .jumbotron {
+		max-width: 1920px;
+	}
+	.jumbotron {
+  		margin: 0 auto;
+	}
 }
