@@ -1,27 +1,46 @@
 <div class="footer <? if (Yii::app()->request->url == '/contact') echo 'dark-footer'; ?>">
   <div class="row">
-    <div class="col-sm-5 hidden-xs">
+    <div class="col-sm-4 col-md-4 hidden-xs">
       <p class="pull-left condition">
-        <i class="ico-pay ico-visa" data-toggle="tooltip" title="<?=Yii::t('app','Accept Visa card')?>"></i><i class="ico-pay ico-mc" data-toggle="tooltip" title="<?=Yii::t('app','Accept MasterCard Cards')?>"></i><i class="ico-pay ico-cash" data-toggle="tooltip" title="<?=Yii::t('app','Accept cash')?>"></i><span class="weinsoc hidden-sm"><em>&mdash;</em><?=Yii::t('app','PAYMENT METHODS')?></span>
+        <i class="icon icon-visa" data-toggle="tooltip" title="<?=Yii::t('app','Accept Visa card')?>"></i>
+        <i class="icon icon-mastercard" data-toggle="tooltip" title="<?=Yii::t('app','Accept MasterCard Cards')?>"></i>
+        <i class="icon icon-ruble" data-toggle="tooltip" title="<?=Yii::t('app','Accept cash')?>"></i>
+        <span class="weinsoc hidden-md hidden-sm"><em>&mdash;</em><?=Yii::t('app','PAYMENT METHODS')?></span>
       </p>
     </div>
-    <div class="col-xs-12 visible-xs">
+    <div class="col-xs-12 col-md-4 visible-xs">
       <p class="text-center">
-        <a class="btn-soc" target="_blank" href="https://www.facebook.com/cityquestru"><i class="ico-soc ico-fb"></i></a>
-        <a class="btn-soc" target="_blank" href="http://vk.com/cityquestru"><i class="ico-soc ico-vk"></i></a>
+        <a class="btn-soc" target="_blank" href="https://www.facebook.com/cityquestru">
+          <i class="icon icon-facebook"></i>
+        </a>
+        <a class="btn-soc" target="_blank" href="http://vk.com/cityquestru">
+          <i class="icon icon-vk"></i>
+        </a>
+        <a class="btn-soc" href="http://instagram.com/cityquestru" target="_blank">
+          <i class="icon-instagram icon"></i>
+        </a>
       </p>
     </div>
-    <div class="col-sm-2 col-xs-12">
+    <div class="col-sm-4 col-md-4 col-xs-12">
       <p class="text-center">
         <span class="copy">&copy; 2014-2015 <strong>CITYQUEST</strong></span>
         <a href="/press_about_us" class="about_us"><?=Yii::t('app','PRESS ABOUT US')?></a>
       </p>
     </div>
-    <div class="col-sm-5 col-xs-12 hidden-xs">
+    <div class="col-sm-4 col-md-4 col-xs-12 hidden-xs">
       <p class="pull-right right-soc">
-        <span class="weinsoc hidden-sm"><?=Yii::t('app','we are in social networks')?><em>&mdash;</em></span>
-        <a class="btn-soc" target="_blank" href="https://www.facebook.com/cityquestru"><i class="ico-soc ico-fb"></i></a>
-        <a class="btn-soc" href="http://vk.com/cityquestru" target="_blank"><i class="ico-soc ico-vk"></i></a>
+        <span class="weinsoc hidden-sm hidden-md "><?=Yii::t('app','we are in social networks')?><em>&mdash;</em></span>
+        <a class="btn-soc" target="_blank" href="https://www.facebook.com/cityquestru">
+          <i class="icon icon-facebook"></i></a>
+        <a class="btn-soc" href="http://vk.com/cityquestru" target="_blank">
+          <i class="icon icon-vk"></i></a>
+        <a class="btn-soc" href="http://instagram.com/cityquestru" target="_blank" >
+          <i class="icon-instagram icon"></i></a>
+      </p>
+    </div>
+    <div class="col-xs-12">
+      <p class="text-center footer-addr">
+        г. Москва, ул. Летниковская, д. 4, стр. 2<br>+7 (495) 749-96-09
       </p>
     </div>
   </div>
@@ -194,14 +213,14 @@
         <div class="row">
           <div class="col-sm-6 col-xs-12">
             <img alt="" class="featurette-image img-responsive" src="/images/q/3.jpg">
-            <a class="descr" href="#lab">
-              <h2>Театр</h2>
-              <p>
+            <a class="descr " href="#lab">
+              <h3 class="h2"></h3>
+              <p class='hide'>
                 <span>
-                  <i class="ico-ppl iconm-Man"></i>
-                  <i class="ico-ppl iconm-Man"></i>
-                  <i class="ico-ppl iconm-Man noactive"></i>
-                  <i class="ico-ppl iconm-Man noactive"></i>2 - 4 <?=Yii::t('app','players')?>
+                  <i class="icon icon-Man"></i>
+                  <i class="icon icon-Man"></i>
+                  <i class="icon icon-Man noactive"></i>
+                  <i class="icon icon-Man noactive"></i>2 - 4 <?=Yii::t('app','players')?>
                 </span>
                 <span class="addr-to"><i class="ico-loc"></i></span>
               </p>
@@ -240,7 +259,7 @@
         </div>
         <div class="modal-body">
           <form role="form" id="edit-form" class="tab-content">
-            <h2 class="form-signin-heading"><?=Yii::t('app','Edit Profile'); ?></h2>
+            <h3 class=" h2 form-signin-heading"><?=Yii::t('app','Edit Profile'); ?></h3>
             <hr class="fadeOut">
 
             <div class="form-group">

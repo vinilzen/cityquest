@@ -106,7 +106,7 @@ $(function() {
 			}
 		}
 
-		set_video_bgr();
+		//set_video_bgr();
 	}
 
 	$('#bookgift-comment').elastic();
@@ -127,7 +127,7 @@ $(function() {
 			if (document.body.clientWidth > 767) {
 
 				if ($('#for-login-pl').text() == '') {
-					$('.ico-lock').appendTo('#for-login-pl').show();
+					$('#for-login-pl .btn').appendTo('#for-login-pl').show();
 					$('#for-login').html('');
 				}
 				if ($('#for-city').text() == '') {
@@ -135,7 +135,7 @@ $(function() {
 					$('#for-select-city').html('');
 				}
 			} else {
-				$('.city-select, .ico-lock').hide();
+				$('.city-select, #for-login-pl .btn').hide();
 			}
 		}
 
@@ -152,12 +152,12 @@ $(function() {
 			}
 
 			if ($('#for-login').text() == '') {
-				$('.ico-lock').show().css('display', 'inline-block').appendTo('#for-login');
+				$('#for-login-pl .btn').show().css('display', 'inline-block').appendTo('#for-login');
 				$('#for-login-pl').html('');
 			}
 		} else {
 			if ($('#for-login-pl').text() == '') {
-				$('.ico-lock').hide().appendTo('#for-login-pl');
+				$('#for-login-pl .btn').hide().appendTo('#for-login-pl');
 				$('#for-login').html('')
 			}
 			if ($('#for-city').text() == '') {
@@ -270,7 +270,7 @@ $(function() {
 
 		$('img', ModalBook).attr('src', '/images/q/'+book_data.quest_id+'.jpg');
 		$('.addr-to', ModalBook).html('<i class="ico-loc iconm-Pin"></i>'+book_data.addres);
-		$('h2', ModalBook).html(book_data.title);
+		$('.h2', ModalBook).html(book_data.title);
 		$('.book_time', ModalBook).html(
 			'<small>'+book_data.day+'</small>'+
 			'<span>'+book_data.d+'.'+book_data.m+'</span><em>в</em><span>'+book_data.time+'</span>');
@@ -943,7 +943,7 @@ $(function() {
 
 		if (dropdown_menu > abtn_link) {
 			var imw = $('.ico-msq').width();
-			$('.ico-msq').width(dropdown_menu - 56);
+			$('.ico-msq').width(dropdown_menu - 26);
 			var mr = $('.ico-msq').width() - imw;
 			$('.city-select').css('margin-right','-'+mr+'px');
 		}

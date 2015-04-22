@@ -1,6 +1,6 @@
 <div class="row rules">
 	<div class="col-xs-10 col-xs-offset-1">
-		<h3 class="text-center">Пресса о нас</h3>
+		<h1 class="text-center h3">Пресса о нас</h1>
 		<dl class="dl-horizontal first">
 			<dt>
 				<a target="_blank" href="http://bg.ru/entertainment/kak_delajutsja_kvesty_po_russki-22101/">

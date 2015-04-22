@@ -3,7 +3,7 @@
 <div class="jumbotron">
   <div class="row">
     <div class="col-xs-12 text-center cabinet">
-      <span class="name"><? echo Yii::app()->getModule('user')->user()->username; ?></span>
+      <span class="name"><?=Yii::app()->getModule('user')->user()->username?></span>
       <span class="phone"><?
         if (Yii::app()->getModule('user')->user()->phone == '00000') // after vk auth
           echo '';
@@ -23,10 +23,10 @@
     </div>
   </div>
 </div>
-
 <div class="container-fluid myQuests">
   <div class="row">
     <div class="col-xs-12 text-center">
+      <div class="clearfix"></div>
       <a href="#next_books" role="tab" data-toggle="tab" class="h2 twotab active">Активные квесты</a>
       <a href="#prev_books" role="tab" data-toggle="tab" class="h2 twotab">прошедшие квесты</a>
       <hr class="fadeOut">
@@ -41,7 +41,7 @@
         <div class="col-sm-6 col-xs-12">
           <img alt="Generic placeholder image" class="featurette-image img-responsive" src="/images/q/<? echo $book->quest->id; ?>.jpg"><a class="descr" href="#lab">
               <h2><? echo $book->quest->title; ?></h2>
-              <p>
+              <p class="hide">
                 <span><i class="ico-ppl iconm-Man"></i><i class="ico-ppl iconm-Man"></i><i class="ico-ppl iconm-Man noactive"></i><i class="ico-ppl iconm-Man noactive"></i>2 - 4 <?=Yii::t('app','players')?></span>
                 <span><i class="ico-loc"></i><? echo $book->quest->addres; ?></span>
               </p>
@@ -56,8 +56,8 @@
                 $st = substr($book->date, -4, 2).'/'.substr($book->date, -2, 2).'/'.substr($book->date, 0, 4);
                 $time = strtotime($st);
               ?>
-              <small><? echo $week[date('w',$time)]; ?></small>
-              <span><? echo substr($book->date, -2, 2); ?>.<? echo substr($book->date, -4, 2); ?></span><em>в</em><span><? echo $book->time; ?></span>
+              <small><?=$week[date('w',$time)]?></small>
+              <span><?=substr($book->date, -2, 2)?>.<?=substr($book->date, -4, 2)?></span><em>в</em><span><?=$book->time?></span>
             </p>
             <div class="priceTbl">
               <div class="priceRow">
@@ -86,9 +86,15 @@
         <div class="col-sm-6 col-xs-12">
           <img alt="Profile" class="featurette-image img-responsive" src="/images/q/<? echo $book->quest->id; ?>.jpg"><a class="descr" href="#lab">
               <h2><? echo $book->quest->title; ?></h2>
-              <p>
-                <span><i class="ico-ppl iconm-Man"></i><i class="ico-ppl iconm-Man"></i><i class="ico-ppl iconm-Man noactive"></i><i class="ico-ppl iconm-Man noactive"></i>2 - 4 <?=Yii::t('app','players')?></span>
-                <span><i class="ico-loc"></i><? echo $book->quest->addres; ?></span>
+              <p class="hide">
+                <i class="icon icon-Man"></i><i class="icon icon-Man"></i><i class="icon icon-Man noactive"></i><i class="icon icon-Man noactive"></i>
+                <span>  
+                  2 - 4 <?=Yii::t('app','players')?></span>
+                </span>
+                <i class="icon icon-Pin"></i>
+                <span>
+                  <?=$book->quest->addres?>
+                </span>
               </p>
             </a>
         </div>
@@ -101,21 +107,21 @@
                 $st = substr($book->date, -4, 2).'/'.substr($book->date, -2, 2).'/'.substr($book->date, 0, 4);
                 $time = strtotime($st);
               ?>
-              <small><? echo $week[date('w',$time)]; ?></small>
-              <span><? echo substr($book->date, -2, 2); ?>.<? echo substr($book->date, -4, 2); ?></span><em>в</em><span><? echo $book->time; ?></span>
+              <small><?=$week[date('w',$time)]?></small>
+              <span><?=substr($book->date, -2, 2)?>.<?=substr($book->date, -4, 2)?></span><em>в</em><span><?=$book->time?></span>
             </p>
             <div class="priceTbl">
               <div class="priceRow">
-                <span class="dashed"></span><span class="price"><? echo $book->price; ?><em class="rur"><em>руб.</em></em></span><span class="dashed"></span>
+                <span class="dashed"></span><span class="price"><?=$book->price?><em class="rur"><em>руб.</em></em></span><span class="dashed"></span>
               </div>
             </div>
-            <p class="you_phone">Ваш номер телефона: <input type="text" disabled value="<? echo Yii::app()->getModule('user')->user()->phone; ?>" ></p>
+            <p class="you_phone">Ваш номер телефона: <input type="text" disabled value="<?=Yii::app()->getModule('user')->user()->phone?>" ></p>
             <div class="btn btn-default btn-success">ПОдтвержден<i class="glyphicon glyphicon-ok"></i></div>
-            <div class="btn btn-default btn-blank decline-book" data-book-id="<? echo $book->id; ?>">снять бронь</div>
+            <div class="btn btn-default btn-blank decline-book" data-book-id="<?=$book->id?>">снять бронь</div>
           </div>
         </div>
       </div>
-      <div class="row" id="row_fade_<? echo $book->id; ?>"><div class="col-xs-12"><hr class="fadeOut p10"></div></div>
+      <div class="row" id="row_fade_<?=$book->id?>"><div class="col-xs-12"><hr class="fadeOut p10"></div></div>
 
       <? } ?>
 

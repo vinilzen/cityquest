@@ -19,6 +19,10 @@
  * @property integer $city_id
  * @property integer $link
  * 
+ * @property integer $type
+ * @property integer $difficult
+ * @property integer $actor
+ * 
  * @property integer $page_title
  * @property integer $description
  * @property integer $keywords
@@ -32,6 +36,14 @@ class Quest extends CActiveRecord
 	const STATUS_DRAFT=1;
 	const STATUS_PUBLISHED=2;
 	const STATUS_SOON=3;
+
+	const TYPE_DEFAULT = 0;
+	const TYPE_SPORT = 1;
+	const TYPE_PERFOMANCE = 2;
+
+	const DIFFICULT_BASE = 0;
+	const DIFFICULT_MEDIUM = 1;
+	const DIFFICULT_HIGH = 2;
 
 
 	// assortiment_img value
@@ -56,7 +68,7 @@ class Quest extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('title, content, addres, metro, times, status, author_id, city_id, link', 'required'),
-			array('times, status, sort, create_time, update_time, author_id', 'numerical', 'integerOnly'=>true),
+			array('times, status, sort, create_time, update_time, author_id, type, difficult, actor', 'numerical', 'integerOnly'=>true),
 			array('title, addres, start_text, metro, page_title', 'length', 'max'=>128),
 			array('description, keywords', 'length', 'max'=>256),
 			array('del_img', 'boolean'),
@@ -111,6 +123,9 @@ class Quest extends CActiveRecord
 			'description'=>'Description',
 			'keywords'=>'Keywords',
 			'link'=>Yii::t('app','Link'),
+			'type'=>Yii::t('app','Type'),
+ 			'difficult'=>Yii::t('app','Difficult'),
+ 			'actor'=>Yii::t('app','Actor'),
 		);
 	}
 

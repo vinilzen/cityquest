@@ -3,7 +3,10 @@
   
   <? include('head.php'); ?>
 
-<body class="inner">
+<body class="inner<?    
+    if (Yii::app()->controller->id == 'quest' && Yii::app()->controller->action->id == 'view')
+      echo ' body-quest ';
+?>">
     
   <? include('nav.php'); ?>
   

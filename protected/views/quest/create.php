@@ -9,6 +9,10 @@
 	</div>
 	<div class="row">
 		<div class="col-sm-12">
-			<?php $this->renderPartial('_form', array('model'=>$model, 'cities' => $cities)); ?>
+			<?php $this->renderPartial('_form', array(
+				'model'=>$model,
+            	'errors'=>$errors,
+				'cities' => $cities
+				)); ?>
 		</div>
 	</div>

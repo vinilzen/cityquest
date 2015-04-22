@@ -203,6 +203,8 @@ class QuestController extends Controller
 		else 
 			$times = Yii::app()->params['times'][1];
 
+
+		header("Last-Modified: " . gmdate("D, d M Y H:i:s", $model->update_time) . " GMT");
 		$this->render('view',array(
 			'model'=>$model,
 			'cities'=>$city_array,
@@ -342,6 +344,7 @@ class QuestController extends Controller
 			'booking' => $bookings_by_date,
 			'times' => $times,
 			'cities' => $cities,
+			'errors'=>$model->getErrors(),
 			'message_success' => $message_success,
 		));
 	}
