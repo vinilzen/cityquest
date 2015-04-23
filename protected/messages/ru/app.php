@@ -6,6 +6,8 @@ return array(
 	'Accept Visa card'=>'Принимаем к оплате карты Visa',
 	'Active'=>'Активен',
 	'Actor'=>'Актер',
+	'Addres'=> 'Адрес',
+	'Addres additional'=>'Дополнительный адрес',
 	'Additional comment' => 'Дополнительный комментарий',
 	'Admin panel'=>'Панель администратора',
 	'Amount of discount'=>'Размер скидки',

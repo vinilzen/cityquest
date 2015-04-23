@@ -87,7 +87,7 @@
               <i class="icon icon-Pin"></i>
               <p><?=$model->addres?>
                 <br>
-                <?=($model->id!=15)?Yii::t('app','Free on site parking is 1.5 hours').'.':'Проход и проезд со стороны <br>ул. Нижняя Красносельская д.15/17 в арку'?>
+                <?=$model->addres_additional?>
                 <br>
                 <a href="https://www.google.com/maps/preview?q=<?=$cities[$model->city_id]->name?>,+<?=urlencode($model->addres)?>" target="_blank"><?=Yii::t('app','How to get there')?>?</a>
               </p>

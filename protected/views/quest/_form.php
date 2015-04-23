@@ -59,6 +59,14 @@
 		</div>
 	</div>
 
+	<div class="form-group<?=(isset($errors['addres_additional']))?' has-error':''?>">
+		<?=$form->labelEx($model,'addres_additional', array('class' => 'control-label col-sm-3'))?>
+		<div class="col-sm-9">
+			<?=$form->textField($model,'addres_additional',array('size'=>60,'maxlength'=>128,'class'=>'form-control'))?>
+			<?=$form->error($model,'addres_additional', array('class'=>'help-block'))?>
+		</div>
+	</div>
+
 	<div class="form-group<?=(isset($errors['metro']))?' has-error':''?>">
 		<?=$form->labelEx($model,'metro', array('class' => 'control-label col-sm-3'))?>
 		<div class="col-sm-9">

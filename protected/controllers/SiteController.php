@@ -71,6 +71,24 @@ class SiteController extends Controller
 		}
 	}
 
+	public function actionRobot()
+	{
+		if (strpos($_SERVER['HTTP_HOST'], '.kz') > 0){
+			echo "User-agent: *
+Disallow: /";
+		} else {
+			echo "User-agent: Yandex
+Disallow: /user/
+Host: cityquest.ru
+
+User-agent: *
+Disallow: /user/
+Sitemap: http://cityquest.ru/sitemap.xml"; 
+		}
+		die;
+	}
+
+
 	public function actionGiftcard()
 	{
 		$msg = '';

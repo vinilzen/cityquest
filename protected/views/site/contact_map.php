@@ -19,7 +19,7 @@
     <h1 class="h3"><?=Yii::t('app','Contacts')?></h1>
     <h5><?=Yii::t('app','For all the questions and reservations quests write!')?></h5>
 
-    <p><i class="ico1"></i><a itemprop="telephone" class="ya-phone" href="tel:8 495 749-96-09">8 (495) 749-96-09</a></p>
+    <p><i class="ico1"></i><a itemprop="telephone" class="ya-phone" href="tel:8 495 749-96-09">+7 (495) 749-96-09</a></p>
 
     <p><i class="ico2"></i>
     	<span><?=Yii::t('app','General questions')?>:&nbsp;<a itemprop="email" href="mailto:hello@cityquest.ru" target="_blank">hello@cityquest.ru</a><br></span>

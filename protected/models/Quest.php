@@ -9,6 +9,9 @@
  * @property string $content
  * @property string $start_text
  * @property string $addres
+ * 
+ * @property string $addres_additional
+ * 
  * @property string $metro
  * @property integer $times
  * @property integer $status
@@ -69,7 +72,7 @@ class Quest extends CActiveRecord
 		return array(
 			array('title, content, addres, metro, times, status, author_id, city_id, link', 'required'),
 			array('times, status, sort, create_time, update_time, author_id, type, difficult, actor', 'numerical', 'integerOnly'=>true),
-			array('title, addres, start_text, metro, page_title', 'length', 'max'=>128),
+			array('title, addres, addres_additional, start_text, metro, page_title', 'length', 'max'=>128),
 			array('description, keywords', 'length', 'max'=>256),
 			array('del_img', 'boolean'),
 			array('image', 'file',
@@ -108,7 +111,8 @@ class Quest extends CActiveRecord
 			'title' => 'Title',
 			'content' => 'Content',
 			'start_text' => 'Текст перед запуском',
-			'addres' => 'Addres',
+			'addres' => Yii::t('app','Addres'),
+			'addres_additional' => Yii::t('app','Addres additional'),
 			'metro' => 'Metro',
 			'sort' => 'Sort',
 			'times' => 'Times',
