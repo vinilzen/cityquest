@@ -279,7 +279,7 @@
   <div class="row">
   <? $counter = 1;
     foreach ($other_quests as $quest) { ?>
-    <div class="col-xs-12 col-md-6 col-sm-12 col-lg-4 col-xlg-4 item">
+    <div class="col-xs-12 col-md-4 col-sm-6 col-lg-4 col-xlg-4 item">
     <? $counter = 0; ?>
       <img class="featurette-image img-responsive"
         alt="<?=CHtml::encode($quest->title)?>" 

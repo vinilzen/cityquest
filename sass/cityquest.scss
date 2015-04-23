@@ -626,8 +626,8 @@ a.descr {
 		text-decoration: none;
 		font-family: "Bebas Neue", "Helvetica Neue", Helvetica, sans-serif;
 		@media (min-width:769px) and (max-width: 1024px) {
-		  font-size: 42px;
-		  margin-top: 110px;
+			font-size: 32px;
+			margin-top: 50px;
 		}
 		@media (max-width: $screen-xs-max) {
 		  font-size: 26px;
@@ -1191,6 +1191,7 @@ body.inner .jumbotron.quest {
 	padding-bottom: 0;
 	position: relative;
 	overflow: hidden;
+  	background-color: #000;
 	.container {
 		width: 100%;
 	}
@@ -1231,6 +1232,14 @@ body.inner .jumbotron.quest {
 		color: rgba(255,255,255,.8);
 		@media (max-width: $screen-sm-max) {
 			font-size: 21px;
+  			// line-height: 1.2em;
+		}
+		@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+			padding-left: 10px;
+			line-height: 1.5em;
+			padding-right: 0;
+			font-size: 16px;
+			margin-top: 18px;
 		}
 		@media (max-width: $screen-xs-max) {
 			font-size: 15px;
@@ -2810,7 +2819,14 @@ h1 {
 
 	@media (max-width: 991px) {
 		margin-top: -170px;
-		margin-bottom: 30px;
+		margin-bottom: 0px;
+	}
+	@media (min-width: 768px) and (max-width: 991px) {
+		margin-top: -130px;
+		margin-bottom: 10px;
+	}
+	@media (min-width: 992px) and (max-width: 1024px) {
+		margin-top: -110px;
 	}
 	@media (min-width: 1200px) {
 		margin-top: -120px;
