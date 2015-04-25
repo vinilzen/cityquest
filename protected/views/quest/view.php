@@ -1,10 +1,10 @@
 <?php
   /* @var $this QuestController */
   /* @var $model Quest */
-  $this->pageTitle= Yii::app()->name.' - '.$model->page_title;
-  $this->description= $model->description?$model->description:'';
-  $this->keywords= $model->keywords?$model->keywords:'';
-  $this->pageImg= '/images/q/'.$model->id.'.jpg';
+  $this->pageTitle = $model->page_title;
+  $this->description = $model->description?$model->description:'';
+  $this->keywords = $model->keywords?$model->keywords:'';
+  $this->pageImg = '/images/q/'.$model->id.'.jpg';
 ?>
 
 <script type="text/javascript">

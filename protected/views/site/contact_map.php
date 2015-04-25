@@ -19,7 +19,13 @@
     <h1 class="h3"><?=Yii::t('app','Contacts')?></h1>
     <h5><?=Yii::t('app','For all the questions and reservations quests write!')?></h5>
 
-    <p><i class="ico1"></i><a itemprop="telephone" class="ya-phone" href="tel:8 495 749-96-09">+7 (495) 749-96-09</a></p>
+  <? if (strpos($_SERVER['HTTP_HOST'], '.kz') > 0){ ?>
+    <p><i class="ico1"></i><a itemprop="telephone" class="ya-phone" href="tel:+7 776 1004447">
+      <span class="ya-phone">+7 (776) 100-4447</span></a></p>
+  <? } else { ?>
+    <p><i class="ico1"></i><a itemprop="telephone" class="ya-phone" href="tel:8 495 749-96-09">
+      <span class="ya-phone">+7 (495) 749-96-09</span></a></p>
+  <? } ?>
 
     <p><i class="ico2"></i>
     	<span><?=Yii::t('app','General questions')?>:&nbsp;<a itemprop="email" href="mailto:hello@cityquest.ru" target="_blank">hello@cityquest.ru</a><br></span>
@@ -32,7 +38,10 @@
       <meta itemprop="faxnumber" content="+7 (495) 749-96-09" />
       <meta itemprop="email" content="hello@cityquest.ru" />
     </div>
+    <? if (strpos($_SERVER['HTTP_HOST'], '.kz') > 0){ ?>
     
-    <p>ООО «Сити Квест»   ОГРН  5147746030900</p>
+    <? } else { ?>
+      <p>ООО «Сити Квест»   ОГРН  5147746030900</p>
+    <? } ?>
   </div>
 </div>

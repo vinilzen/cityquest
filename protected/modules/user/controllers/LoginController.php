@@ -83,6 +83,10 @@ class LoginController extends Controller
 	public function actionFbauth()
 	{
 		if (Yii::app()->user->isGuest) {
+			$parameters = array(
+	            'return_url'  => Yii::app()->request->urlReferrer
+			);
+
 			if ($_POST['email']){
 				$user = $this->getUserByEmail($_POST['email']);
 				if ($user){
@@ -91,7 +95,7 @@ class LoginController extends Controller
 					$user->fb_link=$_POST['link'];
 					if ($user->save()){
 						Yii::log('User exist, and connected by Email. '.Yii::app()->request->requestUri, 'info', 'registration.actionfbauth');
-						$this->fb_authenticate($user->email);
+						$this->fb_authenticate($user->email,$parameters);
 					}
 				} else {
 					Yii::log('user does not exist, we will create a new. '.Yii::app()->request->requestUri, 'info', 'registration.actionfbauth');
@@ -109,7 +113,7 @@ class LoginController extends Controller
 
 					if ($user->validate() && $user->save() ){
 						Yii::log('User model is Valid. '.Yii::app()->request->requestUri, 'info', 'registration.actionfbauth');
-						$this->fb_authenticate($user->email);
+						$this->fb_authenticate($user->email,$parameters);
 					} else {
 						Yii::log('User model is not valid. '.json_encode($user->getAttributes()).' '.Yii::app()->request->requestUri, 'info', 'registration.actionfbauth');
 						// var_dump($user->attributes);
@@ -144,10 +148,9 @@ class LoginController extends Controller
 	            'client_id'     => Yii::app()->params['vk']['appId'],
 	            'client_secret' => Yii::app()->params['vk']['secret'],
 	            'code'          => $_GET['code'],
-	            'redirect_uri'  => 'http://'.$_SERVER['SERVER_NAME'].'/user/login/vkauth'
+	            'redirect_uri'  => 'http://'.$_SERVER['SERVER_NAME'].'/user/login/vkauth',
+	            'return_url'  => Yii::app()->request->urlReferrer
 	        ); 
-
-			//var_dump($parameters); var_dump($url); die;
     		
     		$this->ch = curl_init();
 	        $url = $this->getUrl(self::ACCESS_TOKEN_URL, $parameters);
@@ -164,7 +167,7 @@ class LoginController extends Controller
 	            	if ($user){
 	            		$user->vk_id=$rs['user_id'];
 	            		$user->save();
-	            		$this->vk_authenticate($user->email);
+	            		$this->vk_authenticate($user->email, $parameters);
 	            	} else {
 	            		$api_url = 'https://api.vk.com/method/users.get?user_id='.
 	            			$rs['user_id'].'&v=5.27&access_token='.
@@ -185,7 +188,7 @@ class LoginController extends Controller
 											$user_info['response'][0]['last_name'];
 
 						if ($user->validate() && $user->save() ){
-							$this->vk_authenticate($user->email);
+							$this->vk_authenticate($user->email, $parameters);
 						} else {
 							var_dump($user->attributes);
 							var_dump($user->getErrors());
@@ -271,7 +274,7 @@ class LoginController extends Controller
 	 * Authenticates the vk.
 	 * This is the 'authenticate' validator as declared in rules().
 	 */
-	public function vk_authenticate($email)
+	public function vk_authenticate($email, $parameters)
 	{
 		$identity=new UserSocIdentity($email,'vk');
 		$identity->authenticate();
@@ -288,8 +291,12 @@ class LoginController extends Controller
 					));
 					Yii::app()->end();
 				} else {
-					Yii::log('This is not the Ajax request. '.Yii::app()->request->requestUri, 'info', 'registration.vk_authenticate');
-					$this->redirect('/');
+					if ($parameters['return_url']!='' && $parameters['return_url']!='/'){
+						$this->redirect($parameters['return_url']);
+					} else {
+						Yii::log('This is not the Ajax request. '.Yii::app()->request->requestUri, 'info', 'registration.vk_authenticate');
+						$this->redirect('/');
+					}
 				} 
 				break;
 			default:
@@ -301,7 +308,7 @@ class LoginController extends Controller
 	 * Authenticates the FB
 	 * This is the 'authenticate' validator as declared in rules().
 	 */
-	public function fb_authenticate($email)
+	public function fb_authenticate($email,$parameters)
 	{
 		$identity=new UserSocIdentity($email,'fb');
 		$identity->authenticate();
@@ -319,8 +326,12 @@ class LoginController extends Controller
 					));
 					Yii::app()->end();
 				} else {
-					Yii::log('This is not the Ajax request. '.Yii::app()->request->requestUri, 'info', 'registration.fb_authenticate');
-					$this->redirect('/');
+					if ($parameters['return_url']!='' && $parameters['return_url']!='/'){
+						$this->redirect($parameters['return_url']);
+					} else {
+						Yii::log('This is not the Ajax request. '.Yii::app()->request->requestUri, 'info', 'registration.fb_authenticate');
+						$this->redirect('/');
+					}
 				}
 				break;
 			default:

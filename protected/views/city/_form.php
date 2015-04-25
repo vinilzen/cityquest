@@ -53,6 +53,14 @@
 		</div>
 	</div>
 
+	<div class="form-group">
+		<?=$form->labelEx($model,'subdomain', array('class' => 'control-label col-sm-3'))?>
+		<div class="col-sm-9">
+			<?=$form->textField($model,'subdomain', array('class'=>'form-control'))?>
+			<?=$form->error($model,'subdomain')?>
+		</div>
+	</div>
+
 	<div class="row buttons">
 		<div class="col-sm-3"></div>
 		<div class="col-sm-9">

@@ -26,5 +26,6 @@ $this->menu=array(
 		'active',
 		'country',
 		'languages',
+		'subdomain',
 	),
 )); ?>

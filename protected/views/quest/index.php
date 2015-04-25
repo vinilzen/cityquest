@@ -1,12 +1,23 @@
 <?
-	$this->pageTitle= Yii::app()->name.' - живые квесты в Москве. Найди выход из реальной комнаты';
+	$this->pageTitle= 'Лучшие квесты в реальности в Москве, живой квест-игра выход из комнаты для подростков - CityQuest';
 	$this->description= 'Живые квесты поиска выходы из комнаты в Москве. Лучшие игровые квесты. Выберись из реальной квест-комнаты в Москве';
 	$this->keywords= 'квест комната, квесты выход из комнаты, квесты выйти из комнаты, живой квест, квесты в москве, квесты в реальности в Москве';
 $i=0;
+$count_quests = count($quests);
 
 foreach ($quests as $quest) {
 	$i++;
-	?> <div class="col-xs-12 col-md-6 col-sm-6 col-lg-4 col-xlg-4 item">
+	?> 
+	<? if ($count_quests == 2) {?>
+		<? if ($i==1) { ?>
+			<!-- <div class="col-xs-12 col-md-6 col-sm-6 col-lg-4 col-xlg-4 col-lg-offset-2 col-xlg-offset-2 item"> -->
+		<? } else { ?>
+			<!-- <div class="col-xs-12 col-md-6 col-sm-6 col-lg-4 col-xlg-4 item"> -->
+		<? } ?>
+		<div class="col-xs-12 col-md-6 col-sm-6 col-lg-6 col-xlg-6 item">
+	<? } else { ?>
+		<div class="col-xs-12 col-md-6 col-sm-6 col-lg-4 col-xlg-4 item">
+	<? } ?>
 		<img	alt="<?=CHtml::encode($quest->title)?>"
 					class="featurette-image img-responsive"
 					src="/images/q/<?=$quest->id?>.jpg"	/>

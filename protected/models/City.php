@@ -8,6 +8,7 @@
  * @property string $name
  * @property string $languages
  * @property string $country
+ * @property string $subdomain
  * @property integer $active
  *
  * The followings are the available model relations:
@@ -35,6 +36,7 @@ class City extends CActiveRecord
 			array('active', 'numerical', 'integerOnly'=>true),
 			array('name, country', 'length', 'max'=>128),
 			array('languages', 'length', 'max'=>128),
+			array('subdomain', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, name, active, languages', 'safe', 'on'=>'search'),
@@ -60,10 +62,11 @@ class City extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'name' => 'Название',
+			'name' => Yii::t('app','Title'),
 			'active' => 'Активность',
 			'country' => 'Страна',
 			'languages' => 'Язык',
+			'subdomain' => Yii::t('app','Subdomain'),
 		);
 	}
 
@@ -88,6 +91,7 @@ class City extends CActiveRecord
 		$criteria->compare('id',$this->id);
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('active',$this->active);
+		$criteria->compare('subdomain',$this->subdomain);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

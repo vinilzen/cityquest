@@ -18,7 +18,7 @@
   <? } ?>
   Следите за открытием новых квестов на нашем сайте и в наших соц. сетях:<br>
   <a target="_blank" href="https://www.facebook.com/cityquestru">https://www.facebook.com/cityquestru</a><br>
-  <a target="_blank" href="http://vk.com/cityquestru">http://vk.com/cityquestru</a>
+  <a target="_blank" href="http://vk.com/cityquestru">http://vk.com/cityquestru</a><br>
   <a target="_blank" href="https://instagram.com/cityquestru/">https://instagram.com/cityquestru/</a>
   </p>
    

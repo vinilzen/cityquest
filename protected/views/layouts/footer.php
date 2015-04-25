@@ -40,8 +40,13 @@
     </div>
     <div class="col-xs-12">
       <p class="text-center footer-addr">
+      <? if (strpos($_SERVER['HTTP_HOST'], '.kz') > 0){ ?>
+        г. Астана, Айша биби 9<br>
+        <span class="ya-phone">+7 (776) 100-4447</span>
+      <? } else { ?>
         г. Москва, ул. Летниковская, д. 4, стр. 2<br>
         <span class="ya-phone">+7 (495) 749-96-09</span>
+      <? } ?>
       </p>
     </div>
   </div>

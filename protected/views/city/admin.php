@@ -39,6 +39,7 @@ $('.search-form form').submit(function(){
 					'active',
 					'country',
 					'languages',
+					'subdomain',
 					array(
 						'class'=>'CButtonColumn',
 						'template' => '{update} {delete}',

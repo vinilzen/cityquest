@@ -48,6 +48,8 @@
                       $domen1 = $domen1[0];
                       $domen2 = $city->country;
 
+                      $subdomain = '';
+
                       // only for local
                       if ($domen1 == 'cq'){
                         if ($city->country == 'ru') {
@@ -57,8 +59,12 @@
                         }
                       }
 
-                      if (strtolower($city->name) != strtolower($default_city)){
-                        echo '<li><a href="http://'.$domen1.'.'.$domen2.'/">'.$city->name.'</a></li>';
+                      if ($city->subdomain != '' && $city->subdomain != '/'){
+                        $subdomain = $city->subdomain.'.';
+                      }
+
+                      if (strtolower($city->name) != strtolower($default_city) && $city->active == 1){
+                        echo '<li><a href="http://'.$subdomain.''.$domen1.'.'.$domen2.'/">'.$city->name.'</a></li>';
                       }
                     }
                    ?>
