@@ -20,7 +20,6 @@ class QuestController extends Controller
 		);
 	}
 
-
 	/**
 	 * Specifies the access control rules.
 	 * This method is used by the 'accessControl' filter.
@@ -46,8 +45,6 @@ class QuestController extends Controller
 			),
 		);
 	}
-
-
 
 	/**
 	 * Sort
@@ -92,7 +89,6 @@ class QuestController extends Controller
 
 		} else throw new CHttpException(404, 'Страница не найдена');
 	}
-
 
 	/**
 	 * Displays a particular model.
@@ -370,7 +366,6 @@ class QuestController extends Controller
 	{
 		if ($_SERVER['REQUEST_URI'] == '/quest/') {
 			$this->redirect('/', true, 301);
-			die;
 		}
 
 		Yii::beginProfile('quest_index');
@@ -390,7 +385,6 @@ class QuestController extends Controller
 			'quests'=>$quests,
 		));
 	}
-
 
 	/**
 	 *  all schedule for models.

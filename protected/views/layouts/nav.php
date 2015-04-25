@@ -24,28 +24,20 @@
                 <div class="btn-group city-select">
                   <?
                     $domen2 = explode('.', $_SERVER['HTTP_HOST']);
-                    $domen2 = $domen2[1];
-
-                    if (strpos($_SERVER['HTTP_HOST'], '.kz') > 0){
-                      $default_city = 'Астана';
-                    } else {
-                      $default_city = 'Москва';
-                    }
-                  ?>
-                  <? 
+                    $domen2 = $domen2[count($domen2)-1];
                     $domen_loc = explode('.', $_SERVER['HTTP_HOST']);//[1];
-                    $domen_loc = $domen_loc[1];
+                    $domen_loc = $domen_loc[count($domen_loc)-1];
                   ?>
                   <button class="btn btn-link ico-msq" data-toggle="dropdown" type="button">
                     <i class="glyphicon glyphicon-map-marker"></i>
-                    <span><?=$default_city?></span>
+                    <span><?=$this->city_name?></span>
                     <i class="glyphicon glyphicon-menu-down"></i>
                   </button>
                   <ul class="dropdown-menu" role="menu">
                   <? 
                     foreach($this->cities AS $city){
                       $domen1 = explode('.', $_SERVER['HTTP_HOST']);//[0];
-                      $domen1 = $domen1[0];
+                      $domen1 = $domen1[count($domen1)-2];
                       $domen2 = $city->country;
 
                       $subdomain = '';
@@ -63,7 +55,7 @@
                         $subdomain = $city->subdomain.'.';
                       }
 
-                      if (strtolower($city->name) != strtolower($default_city) && $city->active == 1){
+                      if (strtolower($city->name) != strtolower($this->city_name) && $city->active == 1){
                         echo '<li><a href="http://'.$subdomain.''.$domen1.'.'.$domen2.'/">'.$city->name.'</a></li>';
                       }
                     }

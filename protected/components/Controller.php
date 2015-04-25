@@ -54,42 +54,57 @@ class Controller extends CController
 
 	public $cities;
 	public $city = 1;
+	public $city_name = 'Москва';
 	
 	public $language;
 
 
 	public function init()
 	{
-		if ($_SERVER['REQUEST_URI'] == '/index.php' || $_SERVER['REQUEST_URI'] == '/index.html') {
-			header("HTTP/1.1 301 Moved Permanently");
- 			header('Location: /');
- 			die;
+		if ($_SERVER['REQUEST_URI'] == '/index.php' || $_SERVER['REQUEST_URI'] == '/index.html' || $_SERVER['REQUEST_URI'] == '/quest/') {
+ 			
+ 			$this->redirect('/', true, 301);
+
 		} elseif ($_SERVER['REQUEST_URI'] == '/contact/') {
-			header("HTTP/1.1 301 Moved Permanently");
- 			header('Location: /contact');
- 			die;
+ 			
+ 			$this->redirect('/contact', true, 301);
+
 		} elseif ($_SERVER['REQUEST_URI'] == '/giftcard/') {
-			header("HTTP/1.1 301 Moved Permanently");
- 			header('Location: /giftcard');
- 			die;
+ 			
+ 			$this->redirect('/giftcard', true, 301);
+
 		} elseif ($_SERVER['REQUEST_URI'] == '/franchise/') {
-			header("HTTP/1.1 301 Moved Permanently");
- 			header('Location: /franchise');
- 			die;
+ 			
+ 			$this->redirect('/franchise', true, 301);
+
 		} elseif ($_SERVER['REQUEST_URI'] == '/rules/') {
-			header("HTTP/1.1 301 Moved Permanently");
- 			header('Location: /rules');
- 			die;
-		}
+
+ 			$this->redirect('/rules', true, 301);
+
+		}	
 
 		$this->cities = City::model()->findAll();
 		$this->language = 'ru';
 
 		if (strpos($_SERVER['HTTP_HOST'], '.kz') > 0){
-			// $this->language = 'kz';
 			$this->city = 2;
+			$this->city_name = 'Астана';
 		} else {
-			$this->city = 1;
+			
+			$url_segments = explode('.',$_SERVER['HTTP_HOST']);
+
+			if ( count($url_segments)==3 ) {
+				foreach ($this->cities as $city) {
+					if($city->subdomain == $url_segments[0]) {
+						$this->city = $city->id;
+						$this->city_name = $city->name;
+						break;
+					}
+				}
+			} else {
+				$this->city = 1;
+				$this->city_name = 'Москва';
+			}
 		}
 
 		if (isset( Yii::app()->request->cookies['lang'] )){
