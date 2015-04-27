@@ -16,8 +16,8 @@ body {
 		}
 	}
 	&.inner {
-		// background-image: url(../img/content_bg.jpg);
-		background-image: url(../img/Fon_2_Blur.jpg);
+		background-image: url(../img/content_bg.jpg);
+		// background-image: url(../img/Fon_2_Blur.jpg);
 		background-size: cover;
 		/* &.body-quest {
 			background-size: 100%;
@@ -165,6 +165,7 @@ ul.nav.navbar-nav {
 	font-weight: 300;
 	font-size: 12px;
 	padding: 6px 13px 7px 13px;
+	margin-top: 1px;
 	.caret {
 		margin-left: 0;
 		margin-top: -2px;
@@ -214,7 +215,7 @@ ul.nav.navbar-nav {
 	.btn {
 		transition: all .5s;
 		&.ico-msq {
-			padding: 1px 18px 6px 6px;
+			padding: 5px 18px 6px 6px;
 			font-weight: 300;
 			transition:none;
 			text-align: left;
@@ -1049,7 +1050,7 @@ a.descr {
 		font-size: 12px;
 	}
 	span {
-		color: rgba(255,255,255, .1);
+		color: rgba(255,255,255,.3);
 		font-family: "Gotham A", Helvetica, sans-serif;
 		font-size: 28px;
 		font-style: normal;
@@ -1071,13 +1072,13 @@ a.descr {
 	}
 	&.weekend {
 		span em {
-			color: rgba(168,234,255,.7);
+			color: #85d2ed;
 		}
 		span:hover em {
 			color: rgba(168,234,255,1);
 		}
 		small {
-			color:#7ae1ff;
+			color:#85d2ed;
 		}
 	}
 
@@ -1164,6 +1165,7 @@ hr.gradient {
 			}
 			&.dashed {
 				background: url(../img/dot.png) repeat-x left 9px;
+				font-size: 13px;
 			}
 		}
 	}
@@ -1582,7 +1584,7 @@ h2.twotab, a.h2.twotab {
 			background-image: url(../img/dot_bl.png);
 		}
 		&.price {
-			color: #57a3bb;
+			color: #85d2ed;
 		}
 	}
 }
@@ -1740,8 +1742,8 @@ h2.twotab, a.h2.twotab {
 		font-weight: bold;
 		color:#fff;
 		font-size: 16px;
-		background-color: #0c1c29;
-		border-color: #000;
+		background-color: #3a4c6d;
+		border-color: #3a4c6d;
 		margin-bottom: 30px;
 	}
 	.btn-lg {
@@ -2620,9 +2622,12 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 
 .form-control {
 	border-radius: 0;
-	background-color: rgba(10, 27, 40, 0.24);
-	border-color: #23323E;
+	background-color: rgba(10, 27, 40, .1);
+	border-color: rgba(10, 27, 40, .4);
 	color:#fff;
+	&::-webkit-input-placeholder {
+		color: rgba(255, 255, 255, 0.4);
+	}
 }
 h1 {
 	color: rgba(255, 255, 255, 0.8);
@@ -2908,4 +2913,8 @@ em.gotham {
 	.jumbotron {
   		margin: 0 auto;
 	}
+}
+.btn-q.disabled, .btn-q[disabled]:not(.myDate) {
+	color: rgba(0,0,0,.2);
+	border: 1px solid rgba(0,0,0,.2);
 }
