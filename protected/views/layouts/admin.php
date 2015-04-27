@@ -62,6 +62,11 @@
 								</a>
 							</li>
 							<li class="">
+								<a href="/photo/admin">
+									<i class="gi gi-charts sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide"><?=Yii::t('app','Photos')?></span>
+								</a>
+							</li>
+							<li class="">
 								<a href="#" class="sidebar-nav-menu">
 									<i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i>
 									<i class="fa fa-wrench sidebar-nav-icon"></i>
@@ -217,11 +222,41 @@
 <script src="/js/underscore-min.js"></script>
 <script src="/js/backbone-min.js"></script>
 <script src="/js/bootstrap.js"></script>
+
+
+
+
+<!-- Jquery File Upload -->
+	<script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
+	<script src="/js/jq_file_upload/jquery.ui.widget.js"></script>
+	<!-- The Templates plugin is included to render the upload/download listings -->
+	<script src="//blueimp.github.io/JavaScript-Templates/js/tmpl.min.js"></script>
+	<!-- The Load Image plugin is included for the preview images and image resizing functionality -->
+	<script src="//blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>
+	<!-- The Canvas to Blob plugin is included for image resizing functionality -->
+	<script src="//blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
+
+	<script src="/js/jq_file_upload/jquery.iframe-transport.js"></script>
+	<!-- The basic File Upload plugin -->
+	<script src="/js/jq_file_upload/jquery.fileupload.js"></script>
+	<!-- The File Upload processing plugin -->
+	<script src="/js/jq_file_upload/jquery.fileupload-process.js"></script>
+	<!-- The File Upload image preview & resize plugin -->
+	<script src="/js/jq_file_upload/jquery.fileupload-image.js"></script>
+	<script src="/js/jq_file_upload/jquery.fileupload-validate.js"></script>
+	<!-- The File Upload user interface plugin -->
+	<script src="/js/jq_file_upload/jquery.fileupload-ui.js"></script>
+<!-- Jquery File Upload -->
+
+
+
 <script src="/js/admin_main.js"></script>
 <script src="/js/jquery.mask.min.js"></script>
 <script src="/js/jquery.formstyler.min.js"></script>  
 <script src="/js/app-3.1.js"></script>
 <script src="/js/proui/plugins-3.1.js"></script>
+
+
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
   (function (d, w, c) {

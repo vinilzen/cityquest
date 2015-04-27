@@ -609,4 +609,51 @@ $(function() {
 		$('.city-list-'+city_id).css('height',(showed=='0px' || showed=='0' || showed==0)?'auto':'0');
 	});
 
+	// Initialize the jQuery File Upload widget:
+    $('#fileupload').fileupload({
+        url: 'management'
+    }).on('fileuploadsubmit', function (e, data) {
+	    data.formData = data.context.find(':input').serializeArray();
+	});
+
+
+	if ($('#fileupload').length > 0) {
+		$.get('/photo/get',function(response,b,c){
+
+			if (response){
+				
+				response.formatFileSize = function(bytes){
+					if (typeof bytes !== 'number') {
+						return '';
+					}
+					if (bytes >= 1000000000) {
+						return (bytes / 1000000000).toFixed(2) + ' GB';
+					}
+					if (bytes >= 1000000) {
+						return (bytes / 1000000).toFixed(2) + ' MB';
+					}
+					return (bytes / 1000).toFixed(2) + ' KB';
+				}
+
+				var result = tmpl($('#template-oldfiles').html(), response);
+				console.log(result);
+				$('.files').html(result)
+					.find('.template-oldfiles').addClass('in')
+					.find('.delete').on('click', function(){
+						var photo_id = $(this).data('image-id');
+						$.post('/photo/remove',{ photo_id: photo_id }, function(a,b,c){
+							
+							console.log(a,b,c);
+
+							if (a && a.success && a.id){
+								$('#photo_'+a.id).remove();
+							}
+						});
+					});
+
+
+			}
+		});
+	}
+
 });
