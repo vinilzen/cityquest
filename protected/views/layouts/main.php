@@ -12,7 +12,6 @@
     else 
       echo ' inner ';
     ?>">
-
     <? //echo '<video autoplay="autoplay" id="bgr_video" loop="loop"></video>'; ?>
     
     <? include('nav.php'); ?>

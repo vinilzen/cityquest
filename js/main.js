@@ -101,12 +101,12 @@ $(function() {
 					});
 				}, false);
 				
-				video.src = '/img/Comp_1_3_1.mp4';
+				video.src = '/img/fog_bg.mp4';
 				video.load();
 			}
 		}
 
-		//set_video_bgr();
+		set_video_bgr();
 	}
 
 	$('#bookgift-comment').elastic();

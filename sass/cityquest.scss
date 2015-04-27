@@ -334,6 +334,10 @@ ul.nav.navbar-nav {
 
 	#show-menu {
 		padding-top: 7px;
+		
+		margin-top: 1px;
+		margin-bottom: 0;
+
 		@media (min-width: 768px) and (max-width: $screen-sm) {
 			margin-top: 0;
 			margin-bottom: 4px;
@@ -346,14 +350,14 @@ ul.nav.navbar-nav {
 	}
 }
 
-/* #bgr_video {
+#bgr_video {
 	position: absolute;
 	display: none;
 	left: 0;
 	top:0;
 	background-image: url(../img/Frame_1_Blur.jpg);
 	background-size: cover;
-} */
+}
 
 .jumbotron {
 	padding-bottom: 5px;
