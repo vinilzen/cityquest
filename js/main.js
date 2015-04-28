@@ -88,20 +88,36 @@ $(function() {
 		function set_video_bgr() {
 			if (document.body.clientWidth > 1023) {
 				var w = $('.jumbotron').outerWidth();
-				var $video = $('<video autoplay="autoplay" id="bgr_video" loop="loop"></video>')
+				var $video = $('<div id="video_container" style="display:none"><video autoplay="autoplay" id="bgr_video" loop="loop"></video></div>')
 						.prependTo('body.video');
 						
+
+
+
 				video = document.getElementById('bgr_video');
 				video.addEventListener('loadeddata', function() {
 					$('.jumbotron').css('backgroud', 'none');
-					$video.css({
-						width: '100%',
-						height: 'auto',
-						display: 'block',
-					});
+
+					var jh = $('.jumbotron').outerHeight();
+					
+					console.log(jh);
+					$video
+						.css({
+							width:'100%',
+							height:jh,
+							overflow:'hidden',
+							position:'absolute',
+						})
+						.fadeIn(2000)
+						.find('video')
+						.css({
+							width: '100%',
+							height: 'auto',
+							display: 'block',
+						});
 				}, false);
 				
-				video.src = '/img/fog_bg.mp4';
+				video.src = '/img/fog_bg3.mp4';
 				video.load();
 			}
 		}
@@ -116,9 +132,9 @@ $(function() {
 
 	window.addEventListener(orientationEvent, function() {
 
-		if ($('#bgr_video').length) {
-			set_video_bgr();
-		}
+		// if ($('#bgr_video').length) {
+		// 	set_video_bgr();
+		// }
 
 		if (document.body.clientWidth < 1024) {
 			$('#top_menu').appendTo('#top_menu_container');

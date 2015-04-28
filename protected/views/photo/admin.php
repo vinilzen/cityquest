@@ -119,7 +119,7 @@
 <!-- The template to display files available for download -->
 <script id="template-download" type="text/x-tmpl">
 {% for (var i=0, file; file=o.files[i]; i++) { %}
-    <tr class="template-download fade">
+    <tr class="template-download fade" id="photo_{%=file.id%}">
         <td>
             <span class="preview">
                 {% if (file.thumbnailUrl) { %}
@@ -146,7 +146,7 @@
         </td>
         <td>
             {% if (file.deleteUrl) { %}
-                <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
+                <button class="btn btn-danger delete"  data-image-id="{%=file.id%}">
                     <i class="hi hi-trash"></i>
                     <span>Delete</span>
                 </button>
@@ -188,7 +188,7 @@
             {% } %}
         </td>
         <td>
-            <span class="size">{%=o.formatFileSize(file.size)%}</span>
+            <span class="size">{%=formatFileSize(parseInt(file.size))%}</span>
         </td>
         <td>
             <button class="btn btn-danger delete" data-image-id="{%=file.id%}">

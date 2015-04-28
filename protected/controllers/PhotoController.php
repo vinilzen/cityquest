@@ -1,83 +1,14 @@
 <?php
 
 class PhotoController extends Controller
-{	
-	/**
-	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
-	 * using two-column layout. See 'protected/views/layouts/column2.php'.
-	 */
-	public $layout='//layouts/admin_column';
+{
 
+    public $layout='//layouts/admin_column';
 	protected $options;
-	protected $file_upload_response;
 
-    // PHP File Upload error message codes:
-    // http://php.net/manual/en/features.file-upload.errors.php
-    protected $error_messages = array(
-        1 => 'The uploaded file exceeds the upload_max_filesize directive in php.ini',
-        2 => 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form',
-        3 => 'The uploaded file was only partially uploaded',
-        4 => 'No file was uploaded',
-        6 => 'Missing a temporary folder',
-        7 => 'Failed to write file to disk',
-        8 => 'A PHP extension stopped the file upload',
-        'post_max_size' => 'The uploaded file exceeds the post_max_size directive in php.ini',
-        'max_file_size' => 'File is too big',
-        'min_file_size' => 'File is too small',
-        'accept_file_types' => 'Filetype not allowed',
-        'max_number_of_files' => 'Maximum number of files exceeded',
-        'max_width' => 'Image exceeds maximum width',
-        'min_width' => 'Image requires a minimum width',
-        'max_height' => 'Image exceeds maximum height',
-        'min_height' => 'Image requires a minimum height',
-        'abort' => 'File upload aborted',
-        'image_resize' => 'Failed to resize image'
-    );
-    protected $image_objects = array();
+    protected function setOptions(){
 
-
-	public function actionIndex()
-	{
-		$this->render('index');
-	}
-
-	/**
-	 * @return array action filters
-	 */
-	public function filters()
-	{
-		return array(
-			'accessControl', // perform access control for CRUD operations
-			'postOnly + delete', // we only allow deletion via POST request
-		);
-	}
-
-	/**
-	 * Specifies the access control rules.
-	 * This method is used by the 'accessControl' filter.
-	 * @return array access control rules
-	 */
-	public function accessRules()
-	{
-		return array(
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','remove', 'create','update','management', 'view', 'set', 'get'),
-				'expression'=>"Yii::app()->getModule('user')->user()->superuser == 1",
-			),
-			array('deny',  // deny all users
-				'users'=>array('*'),
-			),
-		);
-	}
-
-	/**
-	 * Upload photo.
-	 */
-	public function actionManagement()
-	{
-		$this->file_upload_response = array();
-
-        $this->options = array(
+        return $this->options = array(
             'script_url' => $this->get_full_url().'/'.basename($this->get_server_var('SCRIPT_NAME')),
             // 'upload_dir' => dirname($this->get_server_var('SCRIPT_FILENAME')).'/images/',
             'upload_dir' => './images/',
@@ -187,6 +118,77 @@ class PhotoController extends Controller
             ),
             'print_response' => true
         );
+
+    }
+
+	protected $file_upload_response;
+
+    // PHP File Upload error message codes:
+    // http://php.net/manual/en/features.file-upload.errors.php
+    protected $error_messages = array(
+        1 => 'The uploaded file exceeds the upload_max_filesize directive in php.ini',
+        2 => 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form',
+        3 => 'The uploaded file was only partially uploaded',
+        4 => 'No file was uploaded',
+        6 => 'Missing a temporary folder',
+        7 => 'Failed to write file to disk',
+        8 => 'A PHP extension stopped the file upload',
+        'post_max_size' => 'The uploaded file exceeds the post_max_size directive in php.ini',
+        'max_file_size' => 'File is too big',
+        'min_file_size' => 'File is too small',
+        'accept_file_types' => 'Filetype not allowed',
+        'max_number_of_files' => 'Maximum number of files exceeded',
+        'max_width' => 'Image exceeds maximum width',
+        'min_width' => 'Image requires a minimum width',
+        'max_height' => 'Image exceeds maximum height',
+        'min_height' => 'Image requires a minimum height',
+        'abort' => 'File upload aborted',
+        'image_resize' => 'Failed to resize image'
+    );
+    protected $image_objects = array();
+
+
+	public function actionIndex()
+	{
+		$this->render('index');
+	}
+
+	/**
+	 * @return array action filters
+	 */
+	public function filters()
+	{
+		return array(
+			'accessControl', // perform access control for CRUD operations
+			'postOnly + delete', // we only allow deletion via POST request
+		);
+	}
+
+	/**
+	 * Specifies the access control rules.
+	 * This method is used by the 'accessControl' filter.
+	 * @return array access control rules
+	 */
+	public function accessRules()
+	{
+		return array(
+			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				'actions'=>array('admin','remove', 'create','update','management', 'view', 'set', 'get'),
+				'expression'=>"Yii::app()->getModule('user')->user()->superuser == 1",
+			),
+			array('deny',  // deny all users
+				'users'=>array('*'),
+			),
+		);
+	}
+
+	/**
+	 * Upload photo.
+	 */
+	public function actionManagement()
+	{
+		$this->file_upload_response = array();
+        $this->options = $this->setOptions();
 
         switch ($this->get_server_var('REQUEST_METHOD')) {
             case 'OPTIONS':
@@ -617,7 +619,7 @@ class PhotoController extends Controller
         $failed_versions = array();
 
         $photoModel = $this->createPhotoModel($file_path, $file);
-
+        $file->id = $photoModel->id;
         foreach($this->options['image_versions'] as $version => $options) {
             if ($this->create_scaled_image($file->name, $version, $options)) {
                 if (!empty($version)) {
@@ -628,8 +630,6 @@ class PhotoController extends Controller
                 } else {
                     $file->size = $this->get_file_size($file_path, true);
                 }
-                // TODO
-                // $photoModel->updatePhotoVersion();
 
             } else {
                 $failed_versions[] = $version ? $version : 'original';
@@ -1232,17 +1232,38 @@ class PhotoController extends Controller
 
 	public function actionRemove()
     {
-        header('Content-type: application/json');
         
         if (isset($_POST['photo_id']) && $_POST['photo_id']!= '' && $_POST['photo_id']!= 0) {
 
+            $this->options = $this->setOptions();
             $id = (int)$_POST['photo_id'];
-            if ( $this->loadModel( $id )->delete() ) {
+            $model = $this->loadModel( $id );
+
+            $file_name = $model->name;
+
+            foreach($this->options['image_versions'] as $version => $options) {
+                if (!empty($version)) {
+                    $file = $this->get_upload_path($file_name, $version);
+                    if (is_file($file)) {
+                        unlink($file);
+                    }
+                }
+            }
+
+
+            if (is_file($model->path)) {
+                unlink($model->path);
+            }
+
+            header('Content-type: application/json');
+            if ( $model->delete() ) {
                 echo CJSON::encode( array('success'=>1, 'id'=>$_POST['photo_id']) );
             } else {
-                echo 'load model failed';
+                echo 'delete model failed';
             }
+
         } else {
+            header('Content-type: application/json');
             echo 'Incorrect request';
         }
         Yii::app()->end();

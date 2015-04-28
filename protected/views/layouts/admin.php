@@ -256,7 +256,7 @@
 <script src="/js/app-3.1.js"></script>
 <script src="/js/proui/plugins-3.1.js"></script>
 
-
+<? if ($_SERVER['HTTP_HOST'] != 'cq.il' && $_SERVER['HTTP_HOST'] != 'cq.kzil') { ?>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
   (function (d, w, c) {
@@ -286,5 +286,6 @@
   <div><img alt="" src="//mc.yandex.ru/watch/25221941" style="position:absolute; left:-9999px;"></div>
 </noscript>
 <!-- /Yandex.Metrika counter -->
+<? } ?>
 </body>
 </html>
