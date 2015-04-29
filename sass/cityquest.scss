@@ -2721,7 +2721,7 @@ h1 {
 }
 .login-page {
 	@media (max-width: 767px) {
-		margin-top: -60px;
+		margin-top: -20px;
 	}
 	.modal-dialog {
 		margin: 0 auto;
@@ -2819,6 +2819,9 @@ h1 {
   			padding-left: 38px;
   			font-size: 13px;
   			line-height: 1.8em;
+  		}
+  		@media (min-width: 768px) and (max-width: 1024px) {
+  			line-height: 1.4em;
   		}
   		@media (min-width: 768px) and (max-width: 991px) {
   			line-height: 24px;
