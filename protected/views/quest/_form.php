@@ -208,12 +208,16 @@
 	<div class="form-group<?=(isset($errors['cover']))?' has-error':''?>">
 		<label class="control-label col-sm-3">Изображения квеста</label>
 		<div class="col-sm-9">
-			<input type="hidden" name="photo" >
 			<div class="photos">
-			<? foreach ($model->photo as $image) {
-				echo '<img data-id="'.$image->id.'" class="quest_photo" src="/images/thumbnail/'.$image->name.'" > ';
-			}?>
+			<? 
+				$ids = array();
+				foreach ($model->photo as $image) {
+					$ids[] = $image->id;
+					echo '<img data-id="'.$image->id.'" class="quest_photo" src="/images/thumbnail/'.$image->name.'" > ';
+				}
+			?>
 			</div>
+			<input type="hidden" name="photo" value="<?=implode($ids,',')?>">
 			<div class="btn btn-default form-control" id="selectImage" data-toggle="modal" data-target="#ModalSelectImage">
 				Выбрать изображения квеста</div>
 		</div>

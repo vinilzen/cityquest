@@ -15,7 +15,14 @@
 <div class="jumbotron quest">
   <div itemscope itemtype="http://schema.org/Product" class="container text-center">
     <div class="row">
-      <div class="img-container" style="background-image: url(../images/q/<?=$model->id?>.jpg);"></div>
+    <?
+      $photos = '';
+      $zindex = 10;
+      foreach ($model->photo AS $photo) {
+        $photos .= '<div class="img-container" style="z-index:'.$zindex--.';background-image: url(../images/'.$photo->name.');"></div>';
+      }
+      ?>
+      <div class="img-container" style="z-index:11; background-image: url(../images/<?=$model->cover?>);"></div><?=$photos?>
       <div class="col-sm-12 col-black">
         <p class="text-center quest-type hidden">
           <i class="icon icon-spiral"></i><span class="hidden-xs">Обычные</span>
