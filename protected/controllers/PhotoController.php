@@ -1203,6 +1203,63 @@ class PhotoController extends Controller
         return @$_GET[$id];
     }
     
+    protected function imagick_orient_image($image) {
+        $orientation = $image->getImageOrientation();
+        $background = new \ImagickPixel('none');
+        switch ($orientation) {
+            case \imagick::ORIENTATION_TOPRIGHT: // 2
+                $image->flopImage(); // horizontal flop around y-axis
+                break;
+            case \imagick::ORIENTATION_BOTTOMRIGHT: // 3
+                $image->rotateImage($background, 180);
+                break;
+            case \imagick::ORIENTATION_BOTTOMLEFT: // 4
+                $image->flipImage(); // vertical flip around x-axis
+                break;
+            case \imagick::ORIENTATION_LEFTTOP: // 5
+                $image->flopImage(); // horizontal flop around y-axis
+                $image->rotateImage($background, 270);
+                break;
+            case \imagick::ORIENTATION_RIGHTTOP: // 6
+                $image->rotateImage($background, 90);
+                break;
+            case \imagick::ORIENTATION_RIGHTBOTTOM: // 7
+                $image->flipImage(); // vertical flip around x-axis
+                $image->rotateImage($background, 270);
+                break;
+            case \imagick::ORIENTATION_LEFTBOTTOM: // 8
+                $image->rotateImage($background, 270);
+                break;
+            default:
+                return false;
+        }
+        $image->setImageOrientation(\imagick::ORIENTATION_TOPLEFT); // 1
+        return true;
+    }
+
+    protected function imagick_get_image_object($file_path, $no_cache = false) {
+        if (empty($this->image_objects[$file_path]) || $no_cache) {
+            $this->imagick_destroy_image_object($file_path);
+            $image = new \Imagick();
+            if (!empty($this->options['imagick_resource_limits'])) {
+                foreach ($this->options['imagick_resource_limits'] as $type => $limit) {
+                    $image->setResourceLimit($type, $limit);
+                }
+            }
+            $image->readImage($file_path);
+            $this->image_objects[$file_path] = $image;
+        }
+        return $this->image_objects[$file_path];
+    }
+    protected function imagick_set_image_object($file_path, $image) {
+        $this->imagick_destroy_image_object($file_path);
+        $this->image_objects[$file_path] = $image;
+    }
+    protected function imagick_destroy_image_object($file_path) {
+        $image = (isset($this->image_objects[$file_path])) ? $this->image_objects[$file_path] : null ;
+        return $image && $image->destroy();
+    }
+
 	/**
 	 * Manages all models.
 	 */

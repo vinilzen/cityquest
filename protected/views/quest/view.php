@@ -64,13 +64,13 @@
         <div class="container-fluid quest_description_left">
           <div class="row">
             <div class="col-md-4 col-sm-3 col-xs-12 text-left">
-              <i class="icon icon-Time"></i>
+              <i class="icon icon-alarm"></i>
               <p>
                 <em class="gotham">60</em>минут
               </p>
             </div>  
             <div class="col-md-8 col-sm-3 col-xs-12 text-left">
-              <i class="icon icon-Man hidden-sm"></i><i class="icon icon-Man hidden-sm"></i><i class="icon icon-Man noactive hidden-sm"></i><i class="icon icon-Man noactive last-man"></i>
+              <i class="icon icon-user hidden-sm"></i><i class="icon icon-user hidden-sm"></i><i class="icon icon-user noactive hidden-sm"></i><i class="icon icon-user noactive last-man"></i>
               <p>
                 <em class="gotham">2-4</em><?=Yii::t('app','players')?>
               </p> 
@@ -107,7 +107,7 @@
               </p>
             </div>
             <div class="col-xs-12 col-md-12 col-sm-9 text-left">
-              <i class="icon icon-Pin"></i>
+              <i class="icon icon-point"></i>
               <p><?=$model->addres?>
                 <br>
                 <?=$model->addres_additional?>
@@ -306,7 +306,7 @@
     <? $counter = 0; ?>
       <img class="featurette-image img-responsive"
         alt="<?=CHtml::encode($quest->title)?>" 
-        src="/images/q/<?=$quest->id?>.jpg">
+        src="/images/q/<?=$quest->cover?>">
       <a class="descr" href="/quest/<?=$quest->link?>">
         <h3 class="h2"><?=CHtml::encode($quest->title)?></h3>
         <p class="quest_info">
@@ -316,7 +316,7 @@
                 <i class="icon icon-user noactive"></i>
                 <i class="icon icon-user noactive"></i><strong>2 - 4</strong> <?=Yii::t('app','players')?>
             </span>
-            <span><i class="icon icon-Pin"></i><?=CHtml::encode($quest->addres)?></span>
+            <span><i class="icon icon-point"></i><?=CHtml::encode($quest->addres)?></span>
         </p>
       </a>
     </div>

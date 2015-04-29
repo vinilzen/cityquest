@@ -77,6 +77,8 @@ return array(
 	'PAYMENT METHODS'=>'ПРИНИМАЕМ К ОПЛАТЕ',
 	'Perfomance'=>'Перфоманс',
 	'Phone'=>'Телефон',
+	'Photo'=>'Фотография',
+	'Photos'=>'Фотографии',
 	'players'=>'игрока',
 	'Profile'=>'Профиль',
 	'Price'=>'Цена',

@@ -9,18 +9,13 @@ foreach ($quests as $quest) {
 	$i++;
 	?> 
 	<? if ($count_quests == 2) {?>
-		<? if ($i==1) { ?>
-			<!-- <div class="col-xs-12 col-md-6 col-sm-6 col-lg-4 col-xlg-4 col-lg-offset-2 col-xlg-offset-2 item"> -->
-		<? } else { ?>
-			<!-- <div class="col-xs-12 col-md-6 col-sm-6 col-lg-4 col-xlg-4 item"> -->
-		<? } ?>
 		<div class="col-xs-12 col-md-6 col-sm-6 col-lg-6 col-xlg-6 item">
 	<? } else { ?>
 		<div class="col-xs-12 col-md-6 col-sm-6 col-lg-4 col-xlg-4 item">
 	<? } ?>
 		<img	alt="<?=CHtml::encode($quest->title)?>"
 					class="featurette-image img-responsive"
-					src="/images/q/<?=$quest->id?>.jpg"	/>
+					src="/images/<?=$quest->cover?>"	/>
 		<? if ($quest->status == 2) { ?>
 			<a class="descr" href="/quest/<?=$quest->link?>">
 				<span class="difficult">

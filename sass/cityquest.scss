@@ -671,8 +671,8 @@ a.descr {
 			.icon {
 				font-size: 18px;
   				margin-right: 2px;
-  				&.icon-Pin {
-  					font-size: 25px;
+  				&.icon-Pin, &.icon-point {
+  					font-size: 22px;
   					position: relative;
   					top:5px;
   					left: -3px;
@@ -1196,7 +1196,7 @@ body.inner .jumbotron.quest {
 		color: rgba(255,255,255,.8);
 		@media (max-width: $screen-sm-max) {
 			font-size: 21px;
-  			// line-height: 1.2em;
+			color: #fff;
 		}
 		@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
 			padding-left: 10px;
@@ -1262,6 +1262,11 @@ body.inner .jumbotron.quest {
 	@media (max-width: $screen-xs-max) {
 		height: 660px;
 	}
+	&:hover img {
+		-webkit-transform:none;
+		-ms-transform:none;
+		transform:none;
+	}
 	img {
 		min-width: 100%;
 		min-height: 100%;
@@ -1290,7 +1295,7 @@ body.inner .jumbotron.quest {
 	text-align: right;
 	width:auto;
 	max-width: 200px;
-	@media (max-width: 480px) {
+	@media (max-width: 600px) {
 		right: 0;
 		top: 68px;
 		left: 0;
@@ -1308,6 +1313,11 @@ body.inner .jumbotron.quest {
 		width: 21px;
 		height: 21px;
 		left:0;
+		@media (max-width: 600px) {
+			width: 30px;
+			height: 30px;
+			border-radius: 15px;
+		}
 		&:after {
 			content:' ';
 			width: 5px;
@@ -1318,13 +1328,23 @@ body.inner .jumbotron.quest {
 			position: absolute;
 			top:5px;
 			left:5px;
+			@media (max-width: 600px) {
+				width: 6px;
+				height: 6px;
+				border-radius: 6px;
+				top:9px;
+				left:9px;
+			}
 		}
 		&.active, &:hover {
 			width: 21px;
 			height: 21px;
 			border-color:rgba(255,255,255, 0.7);
 			background-color: rgba(0,0,0,0);
-
+			@media (max-width: 600px) {
+				width: 30px;
+				height: 30px;
+			}
 			&:after {
 				background-color:rgba(255,255,255,.7);
 			}
@@ -1429,10 +1449,23 @@ h2.twotab, a.h2.twotab {
 		small, span {
 			text-align: left;
 		}
+		@media (max-width: $screen-xs-max) {
+			min-width: 80px;
+			text-align: right;
+			padding-right: 10px;
+			margin-left: -10px;
+			span {
+				text-align: right;
+  				margin-top: 5px;
+			}
+			small {
+				text-align: right;
+			}
+		}
 		span {
 			font-size: 40px;
 			@media (max-width: $screen-xs-max) {
-				font-size: 30px;
+				font-size: 28px;
 			}
 		}
 		small {
@@ -2737,7 +2770,7 @@ h1 {
 		margin-bottom: 0px;
 	}
 	@media (min-width: 768px) and (max-width: 991px) {
-		margin-top: -130px;
+		margin-top: -140px;
 		margin-bottom: 10px;
 	}
 	@media (min-width: 992px) and (max-width: 1024px) {
@@ -2747,6 +2780,9 @@ h1 {
 		margin-top: -120px;
   		margin-bottom: 20px;
 	}
+	@media (max-width: 700px) and (min-width: 600px) {
+		margin-top: -190px;
+	}
 	.icon {
 		color:#8cc6eb;
 		font-size: 26px;
@@ -2755,7 +2791,7 @@ h1 {
 		@media (max-width: 991px) {
 			font-size: 24px;
 		}
-		&.icon-Man {
+		&.icon-user, &.icon-Man {
 			margin-right: 3px;
 			color:#fff;
 			&.last-man {
@@ -2765,8 +2801,9 @@ h1 {
 				color:#8cc6eb;
 			}
 		}
-		&.icon-Pin {
+		&.icon-Pin, &.icon-point {
 			font-size: 30px;
+  			padding-left: 5px;
 			@media (max-width: 991px) {
 				font-size: 26px;
 			}
@@ -2782,6 +2819,9 @@ h1 {
   			padding-left: 38px;
   			font-size: 13px;
   			line-height: 1.8em;
+  		}
+  		@media (min-width: 768px) and (max-width: 991px) {
+  			line-height: 24px;
   		}
 	}
 }
