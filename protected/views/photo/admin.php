@@ -165,6 +165,7 @@
 <script id="template-oldfiles" type="text/x-tmpl">
 {% for (var i=0, file; file=o.files[i]; i++) { %}
     <tr class="template-oldfiles fade" id="photo_{%=file.id%}">
+        <td>#{%=file.id%}</td>
         <td>
             <span class="preview">
                 {% if (file.name) { %}

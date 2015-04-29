@@ -39,11 +39,12 @@
 
       <div class="row ModalBook" id="row_book_<? echo $book->id; ?>">
         <div class="col-sm-6 col-xs-12">
-          <img alt="Generic placeholder image" class="featurette-image img-responsive" src="/images/q/<? echo $book->quest->id; ?>.jpg"><a class="descr" href="#lab">
+          <img alt="Generic placeholder image" class="featurette-image img-responsive" src="/images/q/<? echo $book->quest->id; ?>.jpg">
+            <a class="descr" href="#lab">
               <h2><? echo $book->quest->title; ?></h2>
               <p class="hide">
                 <span><i class="ico-ppl iconm-Man"></i><i class="ico-ppl iconm-Man"></i><i class="ico-ppl iconm-Man noactive"></i><i class="ico-ppl iconm-Man noactive"></i>2 - 4 <?=Yii::t('app','players')?></span>
-                <span><i class="ico-loc"></i><? echo $book->quest->addres; ?></span>
+                <span><i class="ico-loc"></i><?=$book->quest->addres?></span>
               </p>
             </a>
         </div>
@@ -84,7 +85,8 @@
 
       <div class="row ModalBook" id="row_book_<? echo $book->id; ?>">
         <div class="col-sm-6 col-xs-12">
-          <img alt="Profile" class="featurette-image img-responsive" src="/images/q/<? echo $book->quest->id; ?>.jpg"><a class="descr" href="#lab">
+          <img alt="Profile" class="featurette-image img-responsive" src="/images/q/<?=$book->quest->id?>.jpg">
+            <a class="descr" href="#lab">
               <h2><? echo $book->quest->title; ?></h2>
               <p class="hide">
                 <i class="icon icon-Man"></i><i class="icon icon-Man"></i><i class="icon icon-Man noactive"></i><i class="icon icon-Man noactive"></i>

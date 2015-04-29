@@ -247,6 +247,24 @@ class QuestController extends Controller
 		));
 	}
 
+	function updatePhoto($model, $photo_ids) {
+ 		
+ 		QuestPhoto::model()->deleteAll("quest_id=:qid", array(":qid" => $model->id));
+		
+		if ($photo_ids!=''){
+			$ids = explode(',', $photo_ids);
+			foreach ($ids as $id) {
+				$photo_model  = Photo::model()->findByPk($id);
+				if ($photo_model) {
+					$quest_photo = new QuestPhoto;
+					$quest_photo->quest_id = $model->id;
+					$quest_photo->photo_id = $id;
+					$quest_photo->save(false);
+				}
+			}
+		}
+	}
+
 	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
@@ -288,7 +306,12 @@ class QuestController extends Controller
 
 		}
 
-		if(isset($_POST['Quest']))	
+		if(isset($_POST['photo']))
+		{
+			$this->updatePhoto($model, $_POST['photo']);
+		}
+
+		if(isset($_POST['Quest']))
 		{
 			$model->attributes=$_POST['Quest'];
 

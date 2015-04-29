@@ -1,24 +1,20 @@
 <?php
 
 /**
- * This is the model class for table "{{photo}}".
+ * This is the model class for table "{{quest_photo}}".
  *
- * The followings are the available columns in table '{{photo}}':
- * @property integer $id
- * @property string $title
- * @property integer $name
- * @property string $description
- * @property string $path
- * @property string $size
+ * The followings are the available columns in table '{{quest_photo}}':
+ * @property integer $quest_id
+ * @property integer $photo_id
  */
-class Photo extends CActiveRecord
+class QuestPhoto extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return '{{photo}}';
+		return '{{quest_photo}}';
 	}
 
 	/**
@@ -29,13 +25,11 @@ class Photo extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name', 'required'),
-			array('id, size', 'numerical', 'integerOnly'=>true),
-			array('title', 'length', 'max'=>45),
-			array('description, path', 'length', 'max'=>128),
+			array('quest_id, photo_id', 'required'),
+			array('quest_id, photo_id', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, title, size, description, path', 'safe', 'on'=>'search'),
+			array('quest_id, photo_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -47,7 +41,6 @@ class Photo extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'quest' => array(self::MANY_MANY, 'Quest', '{{quest_photo}}(photo_id, quest_id)'),
 		);
 	}
 
@@ -57,12 +50,8 @@ class Photo extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'title' => Yii::t('app','Title'),
-			'name' => Yii::t('app','File name'),
-			'size' => Yii::t('app','Size'),
-			'description' => Yii::t('app','Description'),
-			'path' => Yii::t('app','Path'),
+			'quest_id' => Yii::t('app','Quest'),
+			'photo_id' => Yii::t('app','Photo'),
 		);
 	}
 
@@ -84,11 +73,8 @@ class Photo extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
-		$criteria->compare('title',$this->title,true);
-		$criteria->compare('size',$this->size);
-		$criteria->compare('description',$this->description,true);
-		$criteria->compare('path',$this->path,true);
+		$criteria->compare('quest_id',$this->quest_id);
+		$criteria->compare('photo_id',$this->photo_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -99,7 +85,7 @@ class Photo extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Photo the static model class
+	 * @return QuestPhoto the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

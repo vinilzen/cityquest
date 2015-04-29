@@ -669,4 +669,103 @@ $(function() {
 		});
 	}
 
+	$('#ModalSetCover').on('show.bs.modal', function (e) {
+		
+		$('.select_cover').click(function(){
+			var SelectedImage = $('#ModalSetCover input[name="cover_image"]:checked');
+
+			if (SelectedImage.length == 1 ) {
+
+				var image_name = SelectedImage.attr('data-name');
+
+				$('#Quest_cover').val(image_name);
+				$('#ModalSetCover').modal('hide');
+			}
+		});
+
+		$.get('/photo/get',function(response,b,c){
+
+			if (response && response.files){
+				
+				$('#ModalSetCover .modal-body .row').html('');
+
+				_.each(response.files, function(file){
+					$('#ModalSetCover .modal-body .row').append(
+						tmpl(
+						'<div class="col-sm-4 col-md-3">'+
+							'<div class="thumbnail">'+
+								'<img width="80" src="/images/thumbnail/{%=o.name%}" >'+
+								'<div class="caption text-center">'+
+									'{%=o.name%}<br>'+
+									'<input type="radio" name="cover_image" data-name="{%=o.name%}" value="{%=o.id%}">'+
+								'</div>'+
+							'</div>'+
+						'</div>',file)
+					);
+				});
+
+
+				$('#ModalSetCover input[name="cover_image"]').change(function(){
+					$('#quest_cover_image').attr('src','/images/thumbnail/'+$(this).attr('data-name'));
+				});
+
+			}
+		});
+	});
+
+	$('#ModalSelectImage').on('show.bs.modal', function (e) {
+		
+		$('.select_photo').click(function(){
+			var photos = [];
+			$( ".quest_photo" ).each(function( index ) {
+				photos.push( $(this).attr('data-id') );
+			});
+
+			$('input[name="photo"]').val(photos.join(','));
+			$('#ModalSelectImage').modal('hide');
+		});
+
+		$.get('/photo/get',function(response,b,c){
+
+			if (response && response.files){
+				
+				$('#ModalSelectImage .modal-body .row').html('');
+
+				_.each(response.files, function(file){
+					$('#ModalSelectImage .modal-body .row').append(
+						tmpl(
+						'<div class="col-sm-4 col-md-3">'+
+							'<div class="thumbnail">'+
+								'<img width="80" src="/images/thumbnail/{%=o.name%}" >'+
+								'<div class="caption text-center">'+
+									'{%=o.name%}<br>'+
+									'<input type="checkbox" name="photo" data-name="{%=o.name%}" value="{%=o.id%}">'+
+								'</div>'+
+							'</div>'+
+						'</div>',file)
+					);
+				});
+
+				$( ".quest_photo" ).each(function( index ) {
+					var id = $(this).attr('data-id');
+					$('#ModalSelectImage input[value="'+id+'"]').attr("checked",true);
+				});
+
+				$('#ModalSelectImage input[name="photo"]').change(function(e){
+					var self = $(this);
+
+					if (self.prop('checked')){
+						$('.photos').append(
+							'<img data-id="'+self.val()+'" class="quest_photo" src="/images/thumbnail/'+self.attr('data-name')+'" > '
+						);
+					} else {
+						$('.photos img[data-id="'+self.val()+'"]').remove();
+					}
+				});
+
+
+			}
+		});
+	});
+
 });

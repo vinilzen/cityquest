@@ -4,7 +4,7 @@
 	/* @var $form CActiveForm */
 ?>
 
-<div class="form col-sm-6">
+<div class="form col-md-8 col-lg-6 col-sm-12">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'quest-form',
@@ -174,25 +174,51 @@
 		</div>
 	</div>
 
-	<? $img_path = '/images/q/'.$model->id.'.jpg'; ?>
+	<? //$img_path = '/images/q/'.$model->id.'.jpg'; ?>
 
-	<div class="form-group">
+	<div class="form-group hide">
 		<div class="col-sm-offset-3 col-sm-9">
-				<?=(file_exists('.'.$img_path))?'<img src="'.$img_path.'" width="100" />':''?>
+				<? //echo (file_exists('.'.$img_path))?'<img src="'.$img_path.'" width="100" />':''; ?>
 			<div class="checkbox">
 				<label>
-					<?=$form->checkBox($model,'del_img' )?><?=$form->labelEx($model,'del_img')?>
+					<? // $form->checkBox($model,'del_img' )?>
+					<? // $form->labelEx($model,'del_img') ?>
 				</label>
 			</div>
 		</div>
 	</div>
-	
-
-	<div class="form-group">
+	<div class="form-group hide">
 		<div class="col-sm-offset-3 col-sm-9">
 			<?=CHtml::activeFileField($model, 'image')?>
 		</div>
 	</div>
+
+
+	<div class="form-group<?=(isset($errors['cover']))?' has-error':''?>">
+		<?=$form->labelEx($model,'cover', array('class' => 'control-label col-sm-3'))?>
+		<div class="col-sm-9">
+			<img src="/images/thumbnail/<?=$model->cover?>" width="80" id="quest_cover_image" alt="">
+			<div class="btn btn-default form-control" id="selectCover" data-toggle="modal" data-target="#ModalSetCover">
+				Выбрать обложку квеста</div>
+			<?=$form->error($model,'cover', array('class'=>'help-block'))?>
+			<?=$form->hiddenField($model,'cover',array('type'=>"hidden"))?>
+		</div>
+	</div>
+
+	<div class="form-group<?=(isset($errors['cover']))?' has-error':''?>">
+		<label class="control-label col-sm-3">Изображения квеста</label>
+		<div class="col-sm-9">
+			<input type="hidden" name="photo" >
+			<div class="photos">
+			<? foreach ($model->photo as $image) {
+				echo '<img data-id="'.$image->id.'" class="quest_photo" src="/images/thumbnail/'.$image->name.'" > ';
+			}?>
+			</div>
+			<div class="btn btn-default form-control" id="selectImage" data-toggle="modal" data-target="#ModalSelectImage">
+				Выбрать изображения квеста</div>
+		</div>
+	</div>
+	
 
 	<div class="form-group buttons">
 		<div class="col-sm-offset-3 col-sm-9">
@@ -203,3 +229,35 @@
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+
+<div class="modal fade" id="ModalSetCover" tabindex="-1" role="dialog" aria-labelledby="ModalSetCoverLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title"><?=Yii::t('app','Select cover')?></h4>
+      </div>
+      <div class="modal-body"><div class="row"></div></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal"><?=Yii::t('app','Close')?></button>
+        <button type="button" class="btn btn-primary select_cover"><?=Yii::t('app','Select')?></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="ModalSelectImage" tabindex="-1" role="dialog" aria-labelledby="ModalSelectImageLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title"><?=Yii::t('app','Select images')?></h4>
+      </div>
+      <div class="modal-body"><div class="row"></div></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal"><?=Yii::t('app','Close')?></button>
+        <button type="button" class="btn btn-primary select_photo"><?=Yii::t('app','Select')?></button>
+      </div>
+    </div>
+  </div>
+</div>
