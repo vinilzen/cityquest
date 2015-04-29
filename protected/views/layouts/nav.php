@@ -5,7 +5,7 @@
         <div class="row">
           <div class="col-md-3 col-sm-4 col-xs-7">
             <div class="navbar-header" itemscope itemtype="http://schema.org/Brand">
-              <a class="navbar-brand" itemprop="url" href="http://cityquest.ru/">
+              <a class="navbar-brand" itemprop="url" href="http://<?=$_SERVER['HTTP_HOST']?>">
                 <img itemprop="logo" alt="CityQuest Реальные игровые квесты выход из комнаты в Москве" src="/img/logo3.svg">
               </a>
             </div>

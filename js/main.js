@@ -977,6 +977,15 @@ $(function() {
 
 		setSize();
 		window.addEventListener(orientationEvent, setSize);
+
+		if($('.img-container').length>1){
+			var offset = 0;
+			$('.img-container').each(function(index){
+				$(this).css('right',offset);
+				offset = offset - $(this).width();
+			});
+			// $( ".img-container" ).animate({    right: "-=1151" }, 2000);
+		}
 	}
 
 	$('#myModalAuth').on('show.bs.modal', function () {

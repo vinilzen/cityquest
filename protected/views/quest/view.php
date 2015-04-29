@@ -15,14 +15,30 @@
 <div class="jumbotron quest">
   <div itemscope itemtype="http://schema.org/Product" class="container text-center">
     <div class="row">
-    <?
-      $photos = '';
-      $zindex = 10;
-      foreach ($model->photo AS $photo) {
-        $photos .= '<div class="img-container" style="z-index:'.$zindex--.';background-image: url(../images/'.$photo->name.');"></div>';
-      }
-      ?>
-      <div class="img-container" style="z-index:11; background-image: url(../images/<?=$model->cover?>);"></div><?=$photos?>
+    <? $photos = '';
+       $zindex = 10;
+       $num = 1;
+    ?>
+      <div id="carouselPhoto" class="carousel slide img-container" data-ride="carousel">
+        <? if (count($model->photo)>0) { ?>
+        <ol class="carousel-indicators">
+          <li data-target="#carouselPhoto" data-slide-to="0" class="active"></li>
+          <? foreach ($model->photo AS $photo) {
+            $photos .= '<div class="item"><img src="/images/'.$photo->name.'"></div>';
+            echo '<li data-target="#carouselPhoto" data-slide-to="'.$num++.'"></li>';
+          } ?>
+        </ol>
+        <? } ?>
+        <div class="carousel-inner" role="listbox">
+          <div class="item active"><img src="/images/<?=$model->cover?>"></div>
+          <?=$photos?>
+        </div>
+      </div>
+  
+      
+      <!-- <div class="img-container hide" style="z-index:11; background-image: url(../images/<?=$model->cover?>);"></div> -->
+
+
       <div class="col-sm-12 col-black">
         <p class="text-center quest-type hidden">
           <i class="icon icon-spiral"></i><span class="hidden-xs">Обычные</span>

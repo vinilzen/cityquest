@@ -13,6 +13,5 @@
 	<?php echo $content; ?>
 
   <? include('footer.php'); ?>
-  
 </body>
 </html>

@@ -1228,134 +1228,10 @@ body.inner .jumbotron.quest {
 		top:-2px;
 	}
 }
-/* .descr_quest {
-	text-align: left;
-	margin-left: -4px;
-	margin-top: 25px;
-	.tr p {
-		@media (max-width: $screen-xs-max) {
-			margin-bottom: 25px;
-		}
-	}
-	p {
-		font-size: 16px;
-		line-height: 20px;
-		display: inline-block;
-		white-space: nowrap;
-		@media (max-width: $screen-xs-max) {
-			width: 275px;
-			text-align: left;
-			&.pull-right {
-			    float: left !important;
-			}
-		}
-		em {
-			font-style: normal;
-			font-size: 23px;
-			font-family: 'Gotham A';
-			margin-right: 6px;
-			font-weight: bold;
-		}
-		span, a {
-			color:#fff;
-			display: inline-block;
-			top: -4px;
-			position: relative;
-			font-size: 14px;
-			margin-left: 0px;
-			font-weight: normal;
-			line-height: 20px;
-			@media (max-width: $screen-xs-max) {
-				font-size: 13px;
-			}
-			&.people {
-				top: 1px;
-			}
-			&.time-mt {
-				top: -1px;
-			}
-			&.metro-title {
-				top: -2px;
-			}
-			span {
-				margin-left: 0;
-			}
-		}
-		&:after {
-			content: ' ';
-			display: none;
-		}
-	}
-	.icon-user, .icon-Man {
-		top: 4px;
-		font-size: 24px;
-		position: relative;
-		margin-right: 3px;
-		color:#fff;
-		&.noactive {
-			color:#6bcceb;
-		}
-	}
-	.icon-Pin, .icon-metro {
-		color: #6bcceb;
-		font-size: 28px;
-		margin-right: 0;
-		margin-left: 0px;
-		position: absolute;
-		left:0;
-		top: -2px;
-	}
-	.icon-metro {
-		font-size: 24px;
-	}
-
-	@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
-		.col-sm-12 {
-			margin-top: 30px;
-		}
-		.col-sm-4.tl {
-			text-align: left;
-		}
-		.col-sm-4.tr {
-			text-align: right;
-		}
-	}
-
-	@media (max-width: 1024px) and (min-width: 992px) {
-		.col-md-3:last-child {
-			margin-left: -20px;
-		}
-	}
-	@media (max-width: 1023px) {
-		margin-left: 30px;
-		margin-top: 5px;
-	}
-	@media (max-width: $screen-xs-max) {
-		.col-md-3:last-child {
-			margin-top: 5px;
-		}
-		.time-text {
-			width: 170px;
-		}
-		margin-left: 0;
-	}
-} */
 @media (max-width: 1023px) {
 	body.inner .jumbotron.quest h2 {
 		font-size: 14px;
 	}
-	/* .col-br.descr_quest {
-		margin-left: 20px;
-		margin-top: -105px;
-		.tr {
-			width: 170px;
-			float: left;
-		}
-		.text-pin {
-			padding-top: 12px;
-			float: left;
-		}
-	} */
 }
 
 @media (max-width: $screen-xs-max) {
@@ -1373,17 +1249,86 @@ body.inner .jumbotron.quest {
 	right: 0;
 	width: 871px;// for screen width 1400px
 	height: 550px;// for screen width 1400px
-	background-position: center top;
-	background-repeat: no-repeat;
-	background-size: cover;
-	// -webkit-box-shadow: inset 0px -90px 90px -30px rgba(0,0,0,1);
-	// -moz-box-shadow: inset 0px -90px 90px -30px rgba(0,0,0,1);
-	// box-shadow: inset 0px -90px 90px -30px rgba(0,0,0,1);
 	@media (max-width: 1023px) {
 		width: 100%;
 	}
 	@media (max-width: $screen-xs-max) {
 		height: 660px;
+	}
+}
+.carousel .item {
+	height: 550px;
+	background-color:rgba(0,0,0,0);
+	@media (max-width: $screen-xs-max) {
+		height: 660px;
+	}
+	img {
+		min-width: 100%;
+		min-height: 100%;
+		max-width: 5000px;
+
+		@media (min-width: $screen-xlg) {
+			width: 100%;
+			height: auto;
+			min-height: 500px;
+		}
+	}
+}
+.carousel-inner>.item>img {
+	@media (max-width: 1024px) and (min-width: 980px) {
+		left:-50%;
+	}
+	@media (max-width: 480px) {
+		left:-170%;
+	}
+}
+.carousel-indicators {
+	right: 25px;
+	top: 105px;
+	left: inherit;
+	bottom: inherit;
+	text-align: right;
+	width:auto;
+	max-width: 200px;
+	@media (max-width: 480px) {
+		right: 0;
+		top: 68px;
+		left: 0;
+		bottom: inherit;
+		text-align: right;
+		width: 100%;
+		text-align: center;
+		margin: 0 auto;
+	}
+	li {
+		margin:0;
+		border-width: 3px;
+		border-color:rgba(0,0,0,0);
+		position: relative;
+		width: 21px;
+		height: 21px;
+		left:0;
+		&:after {
+			content:' ';
+			width: 5px;
+			height: 5px;
+			display: block;
+			border-radius: 5px;
+			background-color:rgba(255,255,255,.5);
+			position: absolute;
+			top:5px;
+			left:5px;
+		}
+		&.active, &:hover {
+			width: 21px;
+			height: 21px;
+			border-color:rgba(255,255,255, 0.7);
+			background-color: rgba(0,0,0,0);
+
+			&:after {
+				background-color:rgba(255,255,255,.7);
+			}
+		}
 	}
 }
 .col-black {
@@ -1393,6 +1338,8 @@ body.inner .jumbotron.quest {
 	padding:100px 85px;
 	width: 515px;
 	height: 550px;
+	position: relative;
+	z-index: 12;
 	@media (min-width: 1670px) {
 		margin-top: -180px;
 		// width: 600px;
@@ -2783,7 +2730,8 @@ h1 {
 }
 .quest_description {
 	margin-top: -130px;
-
+	position: relative;
+	z-index: 13;
 	@media (max-width: 991px) {
 		margin-top: -170px;
 		margin-bottom: 0px;
@@ -2885,4 +2833,7 @@ em.gotham {
 }
 a:hover, a:focus {
   color: #428bca;
+}
+.carousel {
+	margin-bottom: 0;
 }
