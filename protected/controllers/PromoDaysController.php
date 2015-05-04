@@ -1,12 +1,7 @@
 <?php
 
-class CityController extends Controller
+class PromoDaysController extends Controller
 {
-	/**
-	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
-	 * using two-column layout. See 'protected/views/layouts/column2.php'.
-	 */
-	public $layout='//layouts/admin_column';
 
 	/**
 	 * @return array action filters
@@ -19,12 +14,6 @@ class CityController extends Controller
 		);
 	}
 
-
-	public function init() {
-		parent::init();
-	}
-
-
 	/**
 	 * Specifies the access control rules.
 	 * This method is used by the 'accessControl' filter.
@@ -33,13 +22,17 @@ class CityController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete', 'create','update', 'view'),
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('index','view'),
+				'users'=>array('*'),
+			),
+			array('allow', // allow authenticated user to perform 'create' and 'update' actions
+				'actions'=>array('create','update'),
 				'expression'=>"Yii::app()->getModule('user')->user()->superuser == 1",
 			),
-			array('allow',
-				'actions'=>array('set'),
-				'expression'=>"Yii::app()->getModule('user')->user()->superuser > 0",
+			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				'actions'=>array('admin','delete'),
+				'expression'=>"Yii::app()->getModule('user')->user()->superuser == 1",
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -58,40 +51,43 @@ class CityController extends Controller
 		));
 	}
 
-	public function actionSet($id)
-	{
-		$model=$this->loadModel($id);
-
-		if ($model){
-			Yii::app()->getModule('user')->user()->city_id = $id;
-			Yii::app()->getModule('user')->user()->save();
-			$this->redirect(Yii::app()->user->returnUrl);
-		} else {
-			echo 'Нет такого города!';
-		}
-	}
-
 	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
 	public function actionCreate()
 	{
-		$model = new City;
+		$model=new PromoDays;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['City']))
+		if(isset($_POST['PromoDays']))
 		{
-			$model->attributes=$_POST['City'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			$this->layout=false;
+			header('Content-type: application/json');
+			$model->attributes=$_POST['PromoDays'];
+
+			if($model->save()) {
+				echo CJSON::encode( array('success'=>1) );
+				//$this->redirect(array('view','id'=>$model->id));
+			} else {
+				echo CJSON::encode(
+					array(
+						'success'=>0,
+						'errors'=>$model->getErrors()
+					)
+				);
+			}
+
+			Yii::app()->end();
 		}
 
-		$this->render('create',array(
-			'model'=>$model,
-		));
+		/*
+			$this->render('create',array(
+				'model'=>$model,
+			));
+		*/
 	}
 
 	/**
@@ -106,9 +102,9 @@ class CityController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['City']))
+		if(isset($_POST['PromoDays']))
 		{
-			$model->attributes=$_POST['City'];
+			$model->attributes=$_POST['PromoDays'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -123,13 +119,13 @@ class CityController extends Controller
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.
 	 * @param integer $id the ID of the model to be deleted
 	 */
-	public function actionDelete($id)
+	public function actionDelete()
 	{
-		$this->loadModel($id)->delete();
-
-		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+		$model = $this->loadModel((int)$_POST['id'])->delete();
+		$this->layout=false;
+		header('Content-type: application/json');
+		echo CJSON::encode( array('success'=>1) );
+		Yii::app()->end();
 	}
 
 	/**
@@ -137,10 +133,17 @@ class CityController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('City');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
+		$qid = $_POST['qid'];
+		$models = PromoDays::model()->findAllByAttributes(
+			array('quest_id'=>(int)$qid),
+			'day >= :today',
+			array('today'=>date('Ymd'))
+		);
+
+        $this->layout=false;
+        header('Content-type: application/json');
+        echo CJSON::encode( array('days'=>$models) );
+        Yii::app()->end();
 	}
 
 	/**
@@ -148,10 +151,10 @@ class CityController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new City('search');
+		$model=new PromoDays('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['City']))
-			$model->attributes=$_GET['City'];
+		if(isset($_GET['PromoDays']))
+			$model->attributes=$_GET['PromoDays'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -162,12 +165,13 @@ class CityController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return City the loaded model
+	 * @return PromoDays the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=City::model()->findByPk($id);
+
+		$model=PromoDays::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -175,21 +179,14 @@ class CityController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param City $model the model to be validated
+	 * @param PromoDays $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='city-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='promo-days-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
 	}
-
-	public function beforeAction($action)
-	{
-	    Yii::app()->user->returnUrl = Yii::app()->request->urlReferrer;
-	    return parent::beforeAction($action);
-	}
-
 }

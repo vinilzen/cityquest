@@ -16,25 +16,26 @@ $this->quest_menu=array(
 ?>
 <div class="block">
   <div class="block-title">
-    <h2>#<?php echo $model->id; ?> <?php echo $model->title; ?></h2>
+    <h2>#<?=$model->id?> <?=$model->title?></h2>
   </div>
   
-  <input type="hidden" value="<?php echo $model->id; ?>" id="quest_id">
+  <input type="hidden" value="<?=$model->id?>" id="quest_id">
 
   <div class="row">
     <div class="col-sm-12">
 
     <!-- Nav tabs -->
     <ul class="nav nav-tabs">
-      <li><a href="#times" data-toggle="tab"><?=Yii::t('app','Time table')?></a></li>
+      <!-- <li><a href="#times" data-toggle="tab"><?=Yii::t('app','Time table')?></a></li> -->
       <li class="active"><a href="#edit" data-toggle="tab"><?=Yii::t('app','Editing quest')?></a></li>
+      <li class=""><a href="#promo" data-toggle="tab"><?=Yii::t('app','Promo days')?></a></li>
     </ul>
 
     <!-- Tab panes -->
     <div class="tab-content">
       <div class="tab-pane" id="times">
         <div id="times-table" class="table-responsive" style="padding-top:10px;">
-        <?
+        <? /*
           $days = Yii::app()->params['days'];
           $month = Yii::app()->params['month'];
           $endDate = strtotime( '+'.Yii::app()->params['offset'].' day' );
@@ -150,6 +151,7 @@ $this->quest_menu=array(
             </tr>
             <?php } ?>
           </table>
+        <? */ ?>
         </div>
       </div>
       <div class="tab-pane active" id="edit">
@@ -159,6 +161,41 @@ $this->quest_menu=array(
             'cities'=>$cities,
             'message_success'=>$message_success
           )); ?>
+      </div>
+      <div class="tab-pane " id="promo">
+          <br>
+        <div class="col-md-12 promo_days" data-quest="<?=$model->id?>"></div>
+        <form action="#" method="post" class="form-horizontal col-md-8 col-lg-6 col-sm-12" onsubmit="return false;">
+          <div class="form-group">
+            <div class="col-md-12">
+              <h3>Добавить промо день</h3>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-4 control-label"><?=Yii::t('app','Enter date')?></label>
+            <div class="col-md-8">
+              <input type="text" class="form-control input-datepicker" name="date" data-date-format="yyyy/mm/dd" placeholder="yyyy/mm/dd" >
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-4 control-label"><?=Yii::t('app','Price Am')?></label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" name="price_am">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-4 control-label"><?=Yii::t('app','Price Pm')?></label>
+            <div class="col-md-8">
+              <input type="text" class="form-control"  name="price_pm">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-4 control-label"></label>
+            <div class="col-md-8">
+              <div class="btn btn-md btn-success" id="add_promoday">Добавить</div>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
 

@@ -82,6 +82,7 @@ return array(
 	'Photos'=>'Фотографии',
 	'players'=>'игрока',
 	'Profile'=>'Профиль',
+	'Promo days'=>'Промо дни',
 	'Price'=>'Цена',
 	'PRESS ABOUT US'=>'ПРЕССА О НАС',
 	'Reason discounts' => 'Причина скидки',

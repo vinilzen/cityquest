@@ -73,17 +73,21 @@ class SiteController extends Controller
 
 	public function actionRobot()
 	{
+		header("Content-Type:text/plain");
 		if (strpos($_SERVER['HTTP_HOST'], '.kz') > 0){
 			echo "User-agent: *
 Disallow: /";
 		} else {
 			echo "User-agent: Yandex
 Disallow: /user/
+Disallow: /*?
 Host: cityquest.ru
 
 User-agent: *
 Disallow: /user/
-Sitemap: http://cityquest.ru/sitemap.xml"; 
+Disallow: /*?
+Sitemap: http://cityquest.ru/sitemap.xml
+"; 
 		}
 		die;
 	}

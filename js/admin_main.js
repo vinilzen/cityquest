@@ -797,4 +797,74 @@ $(function() {
 		});
 	}
 
+	if ( $('.promo_days').length == 1 ) {
+		var quest_id = $('.promo_days').attr('data-quest');
+		function getPromoDays(quest_id) {
+			$.post('/promoDays/index', {qid:quest_id}, function(response,b,c){
+				if (response && response.days) {
+
+					var promo_days = $('.promo_days').html('');
+
+					_.each(response.days, function(day) {
+
+						var date_year = day.day.substring(0, 4),
+							date_month = day.day.substring(4, 6),
+							date_day = day.day.substring(6,8);
+
+						$('<div class="btn btn-md btn-primary" id="promoday_'+day.id+'">'+date_year+'/'+date_month+'/'+date_day+
+							' ('+day.price_am+'р; '+day.price_pm+'р) <i title="удалить" class="fa fa-times" data-id="'+day.id+'"></i></div>')
+							.appendTo(promo_days)
+							.find('.fa-times')
+							.click(function(){
+								var promoday_id = $(this).attr('data-id');
+								var answer = confirm("Вы действительно хотите удалить этот промо день?");
+							    if (answer == true) {
+							        $.post('/promoDays/delete/', {'id':promoday_id}, function(r){
+							        	if (r && r.success && r.success == 1) {
+							        		$('#promoday_'+promoday_id).fadeOut('400', function() {
+							        			$(this).remove();
+							        		});
+							        	} else alert('Error!')
+							        })
+							    }
+							});
+						promo_days.append('&nbsp;')
+					});
+
+				}
+			});
+		}
+
+		getPromoDays(quest_id);
+		
+		$('#add_promoday').click(function(){
+			if ( 	$('input[name="date"]').val() != '' 
+					&& $('input[name="price_am"]').val() != '' 
+					&& $('input[name="price_pm"]').val() != '' )
+			{
+				var yyyy = $('input[name="date"]').val().substring(0,4),
+					mm = $('input[name="date"]').val().substring(5,7),
+					dd = $('input[name="date"]').val().substring(8,11);
+
+				$.post('/promoDays/create', {
+						'PromoDays[quest_id]':quest_id,
+						'PromoDays[day]': yyyy+mm+dd,
+						'PromoDays[price_am]':$('input[name="price_am"]').val(),
+						'PromoDays[price_pm]':$('input[name="price_pm"]').val(),
+					},
+					function(r,b,c){
+						if (r && r.success && r.success == 1) {
+							getPromoDays(quest_id);
+							$('input[name="date"]').val('');
+							$('input[name="price_am"]').val('');
+							$('input[name="price_pm"]').val('');
+						}
+					}
+				);
+
+			} else {
+				alert('Заполните все поля!');
+			}
+		});
+	}
 });
