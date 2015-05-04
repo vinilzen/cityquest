@@ -90,9 +90,6 @@ $(function() {
 				var w = $('.jumbotron').outerWidth();
 				var $video = $('<div id="video_container" style="display:none"><video autoplay="autoplay" id="bgr_video" loop="loop"></video></div>')
 						.prependTo('body.video');
-						
-
-
 
 				video = document.getElementById('bgr_video');
 				video.addEventListener('loadeddata', function() {
@@ -100,7 +97,6 @@ $(function() {
 
 					var jh = $('.jumbotron').outerHeight();
 					
-					console.log(jh);
 					$video
 						.css({
 							width:'100%',
@@ -249,8 +245,8 @@ $(function() {
 			$('.shad').height(h);
 		}
 
-		yaCounter25221941.reachGoal('openBookWindow');
-		ga('send', 'event', 'book', 'openWindow');
+		if ( typeof yaCounter25221941 != 'undefined') yaCounter25221941.reachGoal('openBookWindow');
+		if ( typeof ga != 'undefined') ga('send', 'event', 'book', 'openWindow');
 	});
 
 
@@ -271,6 +267,7 @@ $(function() {
 
 		book_data = {
 			quest_id : btn_time.attr('data-quest'),
+			quest_cover : btn_time.attr('data-quest-cover'),
 			addres : $('.addr-quest span').text() || $('#quest_addr_'+btn_time.attr('data-quest')).val(),
 			title : $('#quest_title').text() || $('#quest_title_'+btn_time.attr('data-quest')).text(),
 			day : btn_time.attr('data-day'),
@@ -284,7 +281,7 @@ $(function() {
 			comment : ' ',
 		};
 
-		$('img', ModalBook).attr('src', '/images/q/'+book_data.quest_id+'.jpg');
+		$('img', ModalBook).attr('src', '/images/'+book_data.quest_cover);
 		$('.addr-to', ModalBook).html('<i class="ico-loc iconm-Pin"></i>'+book_data.addres);
 		$('.h2', ModalBook).html(book_data.title);
 		$('.book_time', ModalBook).html(
@@ -312,11 +309,15 @@ $(function() {
 						book_data,
 						function(result){
 							if (result && result.success) {
-								yaCounter25221941.reachGoal('confirmBook');
-								ga('send', 'event', 'book', 'confirmBook');
+								if ( typeof yaCounter25221941 != 'undefined') yaCounter25221941.reachGoal('confirmBook');
+								if ( typeof ga != 'undefined') ga('send', 'event', 'book', 'confirmBook');
 								
+								// TODO admitad
+
 								order_id = result.id;
+								uid = result.uid;
 								price = book_data.price;
+
 
 								ModalBook.modal('hide');
 								

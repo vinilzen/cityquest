@@ -113,6 +113,7 @@ return array(
 	'summary'=>'всего',
 	'Terms of Use'=>'Условия использования',
 	'Time table'=>'Времена для записи',
+	'Time close registration before Quest'=>'Время, за которое закрвыается регистрация',
 	'Till what time'=>'До которого времени',
 	'The quest to develop'=>'Квест в разработке',
 	'Type' => 'Вид',

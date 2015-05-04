@@ -75,6 +75,22 @@
 		</div>
 	</div>
 
+	<div class="form-group<?=(isset($errors['time_preregistration']))?' has-error':''?>">
+		<?=$form->labelEx($model,'time_preregistration', array('class' => 'control-label col-sm-3'))?>
+
+		<div class="col-sm-9">
+			<div class="input-group bootstrap-timepicker">
+				<input type="text" class="form-control input-timepicker24" value="00:00">
+				<span class="input-group-btn">
+					<a href="javascript:void(0)" class="btn btn-primary"><i class="fa fa-clock-o"></i></a>
+				</span>
+			</div>
+			<p class="help-block">(чч:мм)</p>
+			<?=$form->hiddenField($model,'time_preregistration')?>
+			<?=$form->error($model,'time_preregistration', array('class'=>'help-block'))?>
+		</div>
+	</div>
+
 	<div class="form-group<?=(isset($errors['times']))?' has-error':''?>">
 		<label class="control-label col-sm-3 required" for="status">Начало часа<span class="required">*</span></label>
 		<div class="col-sm-9">
@@ -132,8 +148,7 @@
 				</label>
 			</div>
 		</div>
-	</div>
-	
+	</div>	
 
 	<div class="form-group<?=(isset($errors['city_id']))?' has-error':''?>">
 		<label class="control-label col-sm-3 required" for="city_id">Город <span class="required">*</span></label>
@@ -142,7 +157,6 @@
 		</div>
 	</div>
 
-
 	<div class="form-group<?=(isset($errors['start_text']))?' has-error':''?>">
 		<?=$form->labelEx($model,'start_text', array('class' => 'control-label col-sm-3'))?>
 		<div class="col-sm-9">
@@ -150,7 +164,6 @@
 			<?=$form->error($model,'start_text', array('class'=>'help-block'))?>
 		</div>
 	</div>
-
 	
 	<div class="form-group<?=(isset($errors['page_title']))?' has-error':''?>">
 		<?=$form->labelEx($model,'page_title', array('class' => 'control-label col-sm-3'))?>
@@ -173,9 +186,6 @@
 			<?=$form->error($model,'keywords', array('class'=>'help-block'))?>
 		</div>
 	</div>
-
-	<? //$img_path = '/images/q/'.$model->id.'.jpg'; ?>
-
 	<div class="form-group hide">
 		<div class="col-sm-offset-3 col-sm-9">
 				<? //echo (file_exists('.'.$img_path))?'<img src="'.$img_path.'" width="100" />':''; ?>
@@ -201,7 +211,7 @@
 			<div class="btn btn-default form-control" id="selectCover" data-toggle="modal" data-target="#ModalSetCover">
 				Выбрать обложку квеста</div>
 			<?=$form->error($model,'cover', array('class'=>'help-block'))?>
-			<?=$form->hiddenField($model,'cover',array('type'=>"hidden"))?>
+			<?=$form->hiddenField($model,'cover')?>
 		</div>
 	</div>
 
@@ -209,7 +219,7 @@
 		<label class="control-label col-sm-3">Изображения квеста</label>
 		<div class="col-sm-9">
 			<div class="photos">
-			<? 
+			<?
 				$ids = array();
 				foreach ($model->photo as $image) {
 					$ids[] = $image->id;

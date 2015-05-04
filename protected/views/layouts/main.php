@@ -4,15 +4,42 @@
   <? include('head.php'); ?>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="<?    
-    if (Yii::app()->request->url == '/contact') 
-      echo ' contact ';
+    if (Yii::app()->request->url == '/contact')  echo ' contact ';
 
-    if (Yii::app()->controller->id == 'quest' && Yii::app()->controller->action->id == 'index')
-      echo ' video ';
-    else 
-      echo ' inner ';
+    if (Yii::app()->controller->id == 'quest' && Yii::app()->controller->action->id == 'index') echo ' video ';
+    else echo ' inner ';
     ?>">
-    <? //echo '<video autoplay="autoplay" id="bgr_video" loop="loop"></video>'; ?>
+<? if ( 0 && $_SERVER['HTTP_HOST'] != 'cq.il' && $_SERVER['HTTP_HOST'] != 'cq.kzil') { ?>
+  <script type="text/javascript">
+  (function (d, w) {
+    w._admitadPixel = { response_type: 'img' };
+    w._admitadPositions = w._admitadPositions || [];
+    w._admitadPositions.push({
+      uid: '',
+      client_id: '',
+      tariff_code: '1',
+    });
+    
+    var id = '_admitad-pixel';
+
+    if (d.getElementById(id)) { return; }
+
+    var s = d.createElement('script');
+    s.id = id;
+    var r = (new Date).getTime();
+    var protocol = (d.location.protocol === 'https:' ? 'https:' : 'http:');
+    s.src = protocol + '//cdn.asbmit.com/static/js/pixel.min.js?r=' + r;
+    d.head.appendChild(s);
+   })(document, window)</script>
+
+  <noscript>
+    action_code: '1',
+    campaign_code: 'e8be9dc3d4'
+    order_id: '',
+    payment_type: 'lead'
+    <img src="//ad.admitad.com/r?uid=&campaign_code=e8be9dc3d4&action_code=1&response_type=img&order_id=&tariff_code=1&payment_type=lead" width="1" height="1" alt="">
+  </noscript>
+<? } ?>
     
     <? include('nav.php'); ?>
 

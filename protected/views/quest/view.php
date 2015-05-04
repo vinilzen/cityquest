@@ -218,7 +218,7 @@
                 $near = 0;
                 $time_str = $value['year'].'-'.$value['month'].'-'.$value['day'].' '.$time;
                 $timastamp_quest_start = strtotime( $value['year'].'-'.$value['month'].'-'.$value['day'].' '.$time);
-                if ( $timastamp_quest_start < (strtotime( 'now' )+(40*60)) ) $near = 1;
+                if ( $timastamp_quest_start < (strtotime( 'now' )+ $model->time_preregistration ) ) $near = 1;
 
                 $disabled = '';
                 $my_quest = '';
@@ -242,6 +242,7 @@
                   data-phone="<?=!Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->phone : ''?>" 
                   data-time="<?=$time?>" 
                   data-quest="<?=$model->id?>" 
+                  data-quest-cover="<?=$model->cover?>" 
                   data-ymd="<?=$value['date']?>" 
                   data-date="<?=$value['day']?> <?=$value['month_name']?>" 
                   data-day="<?=$value['day_name']?>" 
@@ -311,7 +312,7 @@
     <? $counter = 0; ?>
       <img class="featurette-image img-responsive"
         alt="<?=CHtml::encode($quest->title)?>" 
-        src="/images/q/<?=$quest->cover?>">
+        src="/images/<?=$quest->cover?>">
       <a class="descr" href="/quest/<?=$quest->link?>">
         <h3 class="h2"><?=CHtml::encode($quest->title)?></h3>
         <p class="quest_info">

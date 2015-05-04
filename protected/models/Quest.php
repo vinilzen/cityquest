@@ -28,6 +28,8 @@
  * 
  * @property integer $cover
  * 
+ * @property integer $time_preregistration
+ * 
  * @property integer $page_title
  * @property integer $description
  * @property integer $keywords
@@ -73,7 +75,7 @@ class Quest extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('title, content, addres, metro, times, status, author_id, city_id, link', 'required'),
-			array('times, status, sort, create_time, update_time, author_id, type, difficult, actor', 'numerical', 'integerOnly'=>true),
+			array('times, status, sort, create_time, update_time, author_id, type, difficult, actor, time_preregistration', 'numerical', 'integerOnly'=>true),
 			array('title, addres, addres_additional, cover, start_text, metro, page_title', 'length', 'max'=>128),
 			array('description, keywords', 'length', 'max'=>256),
 			array('del_img', 'boolean'),
@@ -134,6 +136,7 @@ class Quest extends CActiveRecord
  			'difficult'=>Yii::t('app','Difficult'),
  			'actor'=>Yii::t('app','Actor'),
  			'cover'=>Yii::t('app','Cover'),
+ 			'time_preregistration'=>Yii::t('app','Time close registration before Quest'),
 		);
 	}
 

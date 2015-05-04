@@ -113,8 +113,14 @@ class Controller extends CController
 
 		if (isset($_GET['from']) && $_GET['from'] == 'advaction'){
 			$cookie = new CHttpCookie('from', 'advaction');
-			$cookie->expire = time()+60*60*24*7;
+			$cookie->expire = time()+60*60*24*90;
 			Yii::app()->request->cookies['from'] = $cookie;
+		}
+
+		if (isset($_GET['admitad_uid']) && $_GET['admitad_uid'] != ''){
+			$cookie = new CHttpCookie('admitad_uid', $_GET['admitad_uid']);
+			$cookie->expire = time()+60*60*24*90;
+			Yii::app()->request->cookies['admitad_uid'] = $cookie;
 		}
 
 		Yii::app()->setLanguage($this->language);

@@ -768,4 +768,33 @@ $(function() {
 		});
 	});
 
+	if ( $(".input-timepicker24").length > 0 ) {
+
+		var val = $('#Quest_time_preregistration').val(),
+			time;
+		if (val == 0 || val == '0'){
+			time = '00:00';
+		} else {
+			var hours   = Math.floor(val / 3600);
+			var minutes = Math.floor((val - (hours * 3600)) / 60);
+
+			if (hours   < 10) {hours   = "0"+hours;}
+			if (minutes < 10) {minutes = "0"+minutes;}
+			var time = hours+':'+minutes;
+		}
+
+	    $(".input-timepicker24")
+	        .timepicker({minuteStep: 10,showSeconds: 0,showMeridian: !1})
+	        .val(time);
+
+		$('.input-timepicker24').change(function(event) {
+			
+			var result_time = $(this).val().split(':');
+			$('#Quest_time_preregistration').val(
+				parseInt(result_time[0])*3600 + parseInt(result_time[1])*60
+			);
+
+		});
+	}
+
 });
