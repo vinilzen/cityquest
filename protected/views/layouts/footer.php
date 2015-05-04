@@ -1,3 +1,11 @@
+<?
+$currency = '<em class="rur currency"><em>'.Yii::t('app','rub').'.</em></em>';
+if (strpos($_SERVER['HTTP_HOST'], '.kz') > 0){
+  $currency = '<em itemprop="priceCurrency" class="currency" content="〒"><em style="font-style:normal;">〒</em></em>';
+}
+?>
+
+
 <div class="footer <? if (Yii::app()->request->url == '/contact') echo 'dark-footer'; ?>">
   <div class="row">
     <div class="col-sm-4 col-md-4 hidden-xs">
@@ -178,7 +186,7 @@
                   <span class="error-msg">?</span>
                 </div>
                 <div class="checkbox forgot"><label id="forgot"><?=Yii::t('app','Forgot your password?')?></label><label style="display:none;" id="auth_toogl"><?=Yii::t('app','Log In')?></label></div>
-                <button class="btn btn-default btn-block btn-lg" type="submit"><?=Yii::t('app','LOGIN')?></button>
+                <button class="btn btn-default btn-block btn-lg" type="submit" data-value="go"><?=Yii::t('app','LOGIN')?></button>
               </form>
             </div>
             <div class="tab-pane" id="reg">
@@ -240,7 +248,7 @@
               <div class="priceTbl">
                 <div class="priceRow">
                   <span class="dashed">&nbsp;</span>
-                  <span class="price">3000<em class="rur"><em><?=Yii::t('app','rub')?>.</em></em> <b class="team"><?=Yii::t('app','for the team')?></b></span>
+                  <span class="price">3000<?=$currency?> <b class="team"><?=Yii::t('app','for the team')?></b></span>
                   <span class="dashed">&nbsp;</span>
                 </div>
               </div>

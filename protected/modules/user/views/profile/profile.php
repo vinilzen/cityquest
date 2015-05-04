@@ -1,5 +1,11 @@
-<? $this->pageTitle=Yii::app()->name . ' - '.UserModule::t("Profile"); ?>
+<? $this->pageTitle=Yii::app()->name . ' - '.UserModule::t("Profile");
 
+
+  $currency = '<em class="rur"><em>руб.</em></em>';
+  if (strpos($_SERVER['HTTP_HOST'], '.kz') > 0){
+    $currency = '<em content="〒" class=""><em style="font-style:normal;">〒</em></em>';
+  }
+?>
 <div class="jumbotron">
   <div class="row">
     <div class="col-xs-12 text-center cabinet">
@@ -69,7 +75,7 @@
             </p>
             <div class="priceTbl">
               <div class="priceRow">
-                <span class="dashed"></span><span class="price"><? echo $book->price; ?><em class="rur"><em>руб.</em></em></span><span class="dashed"></span>
+                <span class="dashed"></span><span class="price"><?=$book->price?><?=$currency?></span><span class="dashed"></span>
               </div>
             </div>
             <p class="you_phone">Ваш номер телефона: <input type="text" disabled value="<? echo Yii::app()->getModule('user')->user()->phone; ?>" ></p>
@@ -122,7 +128,7 @@
             </p>
             <div class="priceTbl">
               <div class="priceRow">
-                <span class="dashed"></span><span class="price"><?=$book->price?><em class="rur"><em>руб.</em></em></span><span class="dashed"></span>
+                <span class="dashed"></span><span class="price"><?=$book->price?><?=$currency?></span><span class="dashed"></span>
               </div>
             </div>
             <p class="you_phone">Ваш номер телефона: <input type="text" disabled value="<?=Yii::app()->getModule('user')->user()->phone?>" ></p>

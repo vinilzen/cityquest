@@ -288,7 +288,9 @@ $(function() {
 			'<small>'+book_data.day+'</small>'+
 			'<span>'+book_data.d+'.'+book_data.m+'</span><em>в</em><span>'+book_data.time+'</span>');
 
-		$('.price', ModalBook).html( book_data.price +'<em class="rur"><em>руб.</em></em> <b class="team">за команду</b>');
+		var currency = $("<div />").append($(".currency").clone()).html();
+
+		$('.price', ModalBook).html( book_data.price + currency + ' <b class="team">за команду</b>');
 
 		ModalBook.modal('show');
 	});
@@ -506,8 +508,7 @@ $(function() {
 		$('#form-group-pass-auth span').tooltip('destroy');
 		$('#auth-form button').tooltip('destroy');
 
-		if ($('#auth-form button').html().toLowerCase() == 'войти') {
-
+		if ($('#auth-form button').attr('data-value') == 'go') {
 
 			if ( $('#auth-email').val() !== '') {
 				if ( re.test( $('#auth-email').val() ) ) {

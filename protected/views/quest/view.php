@@ -5,6 +5,10 @@
   $this->description = $model->description?$model->description:'';
   $this->keywords = $model->keywords?$model->keywords:'';
   $this->pageImg = '/images/q/'.$model->id.'.jpg';
+  $currency = '<em itemprop="priceCurrency" content="RUB" class="rur"><em>руб.</em></em>';
+  if (strpos($_SERVER['HTTP_HOST'], '.kz') > 0){
+    $currency = '<em itemprop="priceCurrency" content="〒" class=""><em style="font-style:normal;">〒</em></em>';
+  }
 ?>
 
 <script type="text/javascript">
@@ -254,21 +258,21 @@
                 <? // if ($model->id!=15) { ?>
                 <div class="priceTbl workPrice1" title="Цена за команду" data-toggle="tooltip">
                   <div class="priceRow">
-                    <span class="price" itemprop="price" content="<?=$pricePm?>" style="padding:0;"><? echo $pricePm; ?> <em itemprop="priceCurrency" content="RUB" class="rur"><em>руб.</em></em></span>
+                    <span class="price" itemprop="price" content="<?=$pricePm?>" style="padding:0;"><?=$pricePm?> <?=$currency?></span>
                   </div>
                 </div>
                 <? // } ?>
                 <div class="priceTbl workPrice2 <? if ($model->id==15) echo 'workPrice23'; ?>" title="Цена за команду" data-toggle="tooltip">
                   <div class="priceRow">
                     <span class="dashed">&nbsp;</span>
-                    <span class="price" itemprop="price" content="<?=$priceAm?>"><?=$priceAm?> <em itemprop="priceCurrency" content="RUB" class="rur"><em>руб.</em></em></span>
+                    <span class="price" itemprop="price" content="<?=$priceAm?>"><?=$priceAm?> <?=$currency?></span>
                     <span class="dashed">&nbsp;</span>
                   </div>
                 </div>
                 <div class="priceTbl workPrice3" title="Цена за команду" data-toggle="tooltip">
                   <div class="priceRow">
                     <span class="dashed">&nbsp;</span>
-                    <span class="price" itemprop="price" content="<?=$pricePm?>"><?=$pricePm?> <em itemprop="priceCurrency" content="RUB" class="rur"><em>руб.</em></em></span>
+                    <span class="price" itemprop="price" content="<?=$pricePm?>"><?=$pricePm?> <?=$currency?></span>
                     <span class="dashed">&nbsp;</span>
                   </div>
                 </div>
@@ -278,7 +282,7 @@
                 <div class="priceTbl weekendPrice2 <?// if ($model->id==15) echo 'weekendPrice23'; ?>" title="Цена за команду" data-toggle="tooltip">
                   <div class="priceRow">
                     <span class="dashed">&nbsp;</span>
-                    <span class="price" itemprop="price" content="<?=$pricePm?>"><?=$pricePm?> <em itemprop="priceCurrency" content="RUB" class="rur"><em>руб.</em></em></span>
+                    <span class="price" itemprop="price" content="<?=$pricePm?>"><?=$pricePm?> <?=$currency?></span>
                     <span class="dashed">&nbsp;</span>
                   </div>
                 </div>
