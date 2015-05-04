@@ -47,8 +47,8 @@ $('.search-form form').submit(function(){
 				'itemsCssClass' => 'table table-striped table-responsive',
 				'columns'=>array(
 					'id',
-					'name',
 					'key',
+					'name',
 					'amount',
 					'till_what_time',
 					array(

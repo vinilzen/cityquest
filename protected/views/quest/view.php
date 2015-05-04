@@ -179,12 +179,17 @@
               $pricePm = Yii::app()->params['price_workday_PM'];
             }
 
+            if ($model->id == 14){
+              $priceAm += 500;
+              $pricePm += 500;
+            }
+
           ?>
               
           <div class="col-xs-1 col-sm-1">
             <div class="curent_date <? echo !$workday ? 'weekend' : ''; ?>">
-              <span><em><? echo $value['day']; ?>.</em><? echo $value['month']; ?></span>
-              <small><? echo $value['day_name']; ?></small>
+              <span><em><?=$value['day']?>.</em><?=$value['month']?></span>
+              <small><?=$value['day_name']?></small>
             </div>
           </div>
           <div class="col-xs-12 times">

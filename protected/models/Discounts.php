@@ -28,8 +28,9 @@ class Discounts extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, key', 'required'),
-			array('key, name, till_what_time, amount', 'length', 'max'=>45),
+			array('key', 'required'),
+			array('key, till_what_time, amount', 'length', 'max'=>45),
+			array('name', 'length', 'max'=>500),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, key, name', 'safe', 'on'=>'search'),
@@ -55,7 +56,7 @@ class Discounts extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'key' => Yii::t('app','Key'),
-			'name' => Yii::t('app','Name'),
+			'name' => Yii::t('app','Comment'),
 			'till_what_time' => Yii::t('app','Till what time'),
 			'amount' => Yii::t('app','Amount of discount'),
 		);

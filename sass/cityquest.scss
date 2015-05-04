@@ -600,10 +600,10 @@ body.inner {
 	overflow: hidden;
 	@media (min-width: $screen-sm) {
 		img {
-			-webkit-transition: -webkit-transform 3s ease-out; 
-		     -moz-transition: -moz-transform 3s ease-out;
-		       -o-transition: -o-transform 3s ease-out;
-		          transition: transform 3s ease-out;
+			-webkit-transition: -webkit-transform 1.5s ease-out; 
+		     -moz-transition: -moz-transform 1.5s ease-out;
+		       -o-transition: -o-transform 1.5s ease-out;
+		          transition: transform 1.5s ease-out;
 		}
 		&:hover img {
 			-webkit-transform: scale(1.05);
@@ -757,6 +757,20 @@ a.descr {
 		}
 	}
 }
+ .ModalBook a.descr p.quest_info {
+	padding-right: 0;
+	width: 100%;
+	left:0;
+	@media (min-width: $screen-md) {
+		bottom: 130px;
+	}
+	span {
+		font-size: 16px;
+	}
+ }
+ .ModalBook a.descr h3.h2 {
+
+ }
 
 .right-soc {
 	margin-bottom: 0;
@@ -1155,12 +1169,11 @@ body.inner .jumbotron.quest {
 	padding-bottom: 0;
 	position: relative;
 	overflow: hidden;
-  	// background-color: #000;
-	.container {
-		width: 100%;
-	}
 	@media (max-width: $screen-xs-max) {
 		padding-bottom: 25px;
+	}
+	.container {
+		width: 100%;
 	}
 	h1 {
 		font-size: 36px;
@@ -1277,6 +1290,20 @@ body.inner .jumbotron.quest {
 			height: auto;
 			min-height: 500px;
 		}
+	}
+	&:after {
+		position: absolute;
+		top:0;
+		left:0;
+		bottom: 0;
+		right:0;
+		content:' ';
+		-webkit-box-shadow: inset 0px -90px 90px -30px rgba(0,0,0,1);
+		-moz-box-shadow: inset 0px -90px 90px -30px rgba(0,0,0,1);
+		box-shadow: inset 0px -90px 90px -30px rgba(0,0,0,1);
+		@media (max-width: $screen-xs-max) {
+  			background-color: rgba(0,0,0,.45);
+  		}
 	}
 }
 .carousel-inner>.item>img {
@@ -2786,10 +2813,12 @@ h1 {
 	.icon {
 		color:#8cc6eb;
 		font-size: 26px;
-		// margin-right: 12px;
 		float: left;
 		@media (max-width: 991px) {
 			font-size: 24px;
+		}
+		&.icon-alarm {
+			font-size: 28px;
 		}
 		&.icon-user, &.icon-Man {
 			margin-right: 3px;

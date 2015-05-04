@@ -7,7 +7,7 @@
 <div class="block">
 	<div class="block-title">
 		<h2>
-			<?=Yii::t('app','Update Discounts')?> "<?=$model->name?>"
+			<?=Yii::t('app','Update Discounts')?> "<?=$model->key?>"
 		</h2>
 	</div>
 	<div class="row">

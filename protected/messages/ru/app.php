@@ -21,6 +21,7 @@ return array(
 	'Choose a city'=>'Выбрать город',
 	'Cities' => 'Города',
 	'Close' => 'Закрыть',
+	'Comment' => 'Коментарий',
 	'Confirm reservation'=>'Подтвердить бронь',
 	'Confirm the reservation'=>'Подтвердить бронь',
 	'Contacts'=>'Контакты',

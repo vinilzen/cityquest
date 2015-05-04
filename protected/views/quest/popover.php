@@ -79,7 +79,7 @@
             <option value="0">(Пусто)</option>
             <? if (isset($discounts)) foreach ($discounts AS $discount) { ?>
               <option value="<?=$discount->id?>" <% if (discount == '<?=$discount->id?>') { %> selected="selected" <% } %> >
-                <?=$discount->name?>
+                <?=$discount->key?>
               </option>
             <? } ?>
           </select>

@@ -3,6 +3,9 @@ assets/*
 protected/runtime/*
 !protected/runtime/.gitignore
 protected/data/*.db
+images/*.jpg
+images/medium/
+images/thumbnail/
 themes/classic/views/
 protected/config/local.php
 protected/config/vk.php
@@ -10,3 +13,4 @@ protected/config/fb.php
 *.sublime-project
 *.sublime-workspace
 prepros.cfg
+.phpintel

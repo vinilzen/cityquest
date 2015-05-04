@@ -42,9 +42,16 @@
           <img alt="Generic placeholder image" class="featurette-image img-responsive" src="/images/q/<? echo $book->quest->id; ?>.jpg">
             <a class="descr" href="#lab">
               <h2><? echo $book->quest->title; ?></h2>
-              <p class="hide">
-                <span><i class="ico-ppl iconm-Man"></i><i class="ico-ppl iconm-Man"></i><i class="ico-ppl iconm-Man noactive"></i><i class="ico-ppl iconm-Man noactive"></i>2 - 4 <?=Yii::t('app','players')?></span>
-                <span><i class="ico-loc"></i><?=$book->quest->addres?></span>
+              <p class="quest_info">
+                <span>
+                  <i class="icon icon-user"></i>
+                  <i class="icon icon-user"></i>
+                  <i class="icon icon-user noactive"></i>
+                  <i class="icon icon-user noactive"></i><strong>2 - 4</strong> <?=Yii::t('app','players')?>
+                </span>
+                <span>
+                  <i class="icon icon-point"></i><?=$book->quest->addres?>
+                </span>
               </p>
             </a>
         </div>
@@ -88,14 +95,15 @@
           <img alt="Profile" class="featurette-image img-responsive" src="/images/q/<?=$book->quest->id?>.jpg">
             <a class="descr" href="#lab">
               <h2><? echo $book->quest->title; ?></h2>
-              <p class="hide">
-                <i class="icon icon-Man"></i><i class="icon icon-Man"></i><i class="icon icon-Man noactive"></i><i class="icon icon-Man noactive"></i>
-                <span>  
-                  2 - 4 <?=Yii::t('app','players')?></span>
-                </span>
-                <i class="icon icon-Pin"></i>
+              <p class="quest_info">
                 <span>
-                  <?=$book->quest->addres?>
+                  <i class="icon icon-user"></i>
+                  <i class="icon icon-user"></i>
+                  <i class="icon icon-user noactive"></i>
+                  <i class="icon icon-user noactive"></i><strong>2 - 4</strong> <?=Yii::t('app','players')?>
+                </span>
+                <span>
+                  <i class="icon icon-point"></i><?=$book->quest->addres?>
                 </span>
               </p>
             </a>
