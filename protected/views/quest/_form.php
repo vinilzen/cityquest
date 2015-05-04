@@ -51,6 +51,34 @@
 		</div>
 	</div>
 
+
+
+	<div class="form-group<?=( isset($errors['price_am']) || isset($errors['price_pm']) )?' has-error':''?>">
+		<?=$form->labelEx($model,'price_am', array('class' => 'control-label col-sm-3'))?>
+		<div class="col-sm-3">
+			<?=$form->textField($model,'price_am',array('size'=>10,'maxlength'=>10,'class'=>'form-control'))?>
+			<?=$form->error($model,'price_am', array('class'=>'help-block'))?>
+		</div>
+		<?=$form->labelEx($model,'price_pm', array('class' => 'control-label col-sm-3'))?>
+		<div class="col-sm-3">
+			<?=$form->textField($model,'price_pm',array('size'=>10,'maxlength'=>10,'class'=>'form-control'))?>
+			<?=$form->error($model,'price_pm', array('class'=>'help-block'))?>
+		</div>
+	</div>
+
+	<div class="form-group<?=( isset($errors['price_weekend_am']) || isset($errors['price_weekend_pm']) )?' has-error':''?>">
+		<?=$form->labelEx($model,'price_weekend_am', array('class' => 'control-label col-sm-3'))?>
+		<div class="col-sm-3">
+			<?=$form->textField($model,'price_weekend_am',array('size'=>10,'maxlength'=>10,'class'=>'form-control'))?>
+			<?=$form->error($model,'price_weekend_am', array('class'=>'help-block'))?>
+		</div>
+		<?=$form->labelEx($model,'price_weekend_pm', array('class' => 'control-label col-sm-3'))?>
+		<div class="col-sm-3">
+			<?=$form->textField($model,'price_weekend_pm',array('size'=>10,'maxlength'=>10,'class'=>'form-control'))?>
+			<?=$form->error($model,'price_weekend_pm', array('class'=>'help-block'))?>
+		</div>
+	</div>
+
 	<div class="form-group<?=(isset($errors['addres']))?' has-error':''?>">
 		<?=$form->labelEx($model,'addres', array('class' => 'control-label col-sm-3'))?>
 		<div class="col-sm-9">

@@ -159,17 +159,12 @@
 											$workday = 1;
 
 								        if (!$workday) {
-								          $priceAm = Yii::app()->params['price_weekend_AM'];
-								          $pricePm = Yii::app()->params['price_weekend_PM'];
+											$priceAm = $quest['q']->price_weekend_am;
+											$pricePm = $quest['q']->price_weekend_pm;
 								        } else {
-								          $priceAm = Yii::app()->params['price_workday_AM'];
-								          $pricePm = Yii::app()->params['price_workday_PM'];
+											$priceAm = $quest['q']->price_am;
+											$pricePm = $quest['q']->price_pm;
 								        }
-
-										if ($quest['q']->id == 14){
-											$priceAm += 500;
-											$pricePm += 500;
-										}
 
 										foreach ($times as $k=>$time) {
 

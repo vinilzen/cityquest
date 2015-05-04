@@ -27,6 +27,10 @@
  * @property integer $actor
  * 
  * @property integer $cover
+ * @property integer $price_am
+ * @property integer $price_pm
+ * @property integer $price_weekend_am
+ * @property integer $price_weekend_pm
  * 
  * @property integer $time_preregistration
  * 
@@ -74,8 +78,8 @@ class Quest extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('title, content, addres, metro, times, status, author_id, city_id, link', 'required'),
-			array('times, status, sort, create_time, update_time, author_id, type, difficult, actor, time_preregistration', 'numerical', 'integerOnly'=>true),
+			array('price_am, price_pm, price_weekend_am, price_weekend_pm, title, content, addres, metro, times, status, author_id, city_id, link', 'required'),
+			array('price_am, price_pm, price_weekend_am, price_weekend_pm, times, status, sort, create_time, update_time, author_id, type, difficult, actor, time_preregistration', 'numerical', 'integerOnly'=>true),
 			array('title, addres, addres_additional, cover, start_text, metro, page_title', 'length', 'max'=>128),
 			array('description, keywords', 'length', 'max'=>256),
 			array('del_img', 'boolean'),
@@ -123,19 +127,23 @@ class Quest extends CActiveRecord
 			'times' => 'Times',
 			'status' => 'Status',
 			'create_time' => 'Create Time',
-			'update_time' => 'Update Time',
-			'author_id' => 'Author',
-			'city_id' => 'City',
-			'image' => 'Image',
-			'del_img'=>'Delete image?',
-			'page_title'=>'Page Title',
-			'description'=>'Description',
-			'keywords'=>'Keywords',
+			'update_time' => Yii::t('app','Update Time'),
+			'author_id' => Yii::t('app','Author'),
+			'city_id' => Yii::t('app','City'),
+			'image' => Yii::t('app','Image'),
+			'del_img'=>Yii::t('app','Delete image?'),
+			'page_title'=>Yii::t('app','Page Title'),
+			'description'=>Yii::t('app','Description'),
+			'keywords'=>Yii::t('app','Keywords'),
 			'link'=>Yii::t('app','Link'),
 			'type'=>Yii::t('app','Type'),
  			'difficult'=>Yii::t('app','Difficult'),
  			'actor'=>Yii::t('app','Actor'),
  			'cover'=>Yii::t('app','Cover'),
+ 			'price_am'=>Yii::t('app','Price Am workday'),
+ 			'price_pm'=>Yii::t('app','Price Pm workday'),
+ 			'price_weekend_am'=>Yii::t('app','Price Am weekend'),
+ 			'price_weekend_pm'=>Yii::t('app','Price Pm weekend'),
  			'time_preregistration'=>Yii::t('app','Time close registration before Quest'),
 		);
 	}

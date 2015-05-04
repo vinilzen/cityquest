@@ -168,7 +168,7 @@ $this->quest_menu=array(
         <form action="#" method="post" class="form-horizontal col-md-8 col-lg-6 col-sm-12" onsubmit="return false;">
           <div class="form-group">
             <div class="col-md-12">
-              <h3>Добавить промо день</h3>
+              <h3><?=Yii::t('app','Add')?></h3>
             </div>
           </div>
           <div class="form-group">
@@ -192,7 +192,7 @@ $this->quest_menu=array(
           <div class="form-group">
             <label class="col-md-4 control-label"></label>
             <div class="col-md-8">
-              <div class="btn btn-md btn-success" id="add_promoday">Добавить</div>
+              <div class="btn btn-md btn-success" id="add_promoday"><?=Yii::t('app','Add')?></div>
             </div>
           </div>
         </form>

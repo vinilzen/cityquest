@@ -34,10 +34,6 @@
           <?=$photos?>
         </div>
       </div>
-  
-      
-      <!-- <div class="img-container hide" style="z-index:11; background-image: url(../images/<?=$model->cover?>);"></div> -->
-
 
       <div class="col-sm-12 col-black">
         <p class="text-center quest-type hidden">
@@ -171,17 +167,12 @@
 
             if ( $value['day_name'] == 'суббота' ||  $value['day_name'] == 'воскресенье' || in_array($value['date'], $holidays)) {
               $workday = 0;
-              $priceAm = Yii::app()->params['price_weekend_AM'];
-              $pricePm = Yii::app()->params['price_weekend_PM'];
+              $priceAm = $model->price_weekend_am;
+              $pricePm = $model->price_weekend_pm;
             } else {
               $workday = 1;
-              $priceAm = Yii::app()->params['price_workday_AM'];
-              $pricePm = Yii::app()->params['price_workday_PM'];
-            }
-
-            if ($model->id == 14){
-              $priceAm += 500;
-              $pricePm += 500;
+              $priceAm = $model->price_am;
+              $pricePm = $model->price_pm;
             }
 
           ?>

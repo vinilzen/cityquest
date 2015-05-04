@@ -7,6 +7,8 @@ return array(
 	'Active'=>'Активен',
 	'Actor'=>'Актер',
 	'Addres'=> 'Адрес',
+	'Add'=> 'Добавить',
+	'Add promo day'=> 'Добавить промо день',
 	'Addres additional'=>'Дополнительный адрес',
 	'Additional comment' => 'Дополнительный комментарий',
 	'Admin panel'=>'Панель администратора',
@@ -84,6 +86,12 @@ return array(
 	'Profile'=>'Профиль',
 	'Promo days'=>'Промо дни',
 	'Price'=>'Цена',
+	'Price Am workday'=>'Цена в будни до обеда',
+	'Price Pm workday'=>'Цена в будни после обеда',
+
+	'Price Am weekend'=>'Цена в выходные после обеда',
+	'Price Pm weekend'=>'Цена в выходные после обеда',
+
 	'PRESS ABOUT US'=>'ПРЕССА О НАС',
 	'Reason discounts' => 'Причина скидки',
 	'Regular'=>'Обычные',
