@@ -313,13 +313,50 @@ $(function() {
 							if (result && result.success) {
 								if ( typeof yaCounter25221941 != 'undefined') yaCounter25221941.reachGoal('confirmBook');
 								if ( typeof ga != 'undefined') ga('send', 'event', 'book', 'confirmBook');
-								
-								// TODO admitad
 
-								order_id = result.id;
-								uid = result.uid;
-								price = book_data.price;
+								var order_id = result.id,
+									uid = result.uid,
+									client_id = result.client_id,
+									price = book_data.price,
+									currency_code = 'RUB',
+									country_code = 'RU',
+									hostname = window.location.hostname.split('.');
 
+								if (hostname[hostname.length - 1] == 'kz') {
+									var currency_code = 'KZT',
+										country_code = 'KZ';
+								}
+
+								if (uid && uid != '') {
+
+									var wh = $(window).height(),
+										ww = $(window).width();
+
+									var url = 'http:' + '//ad.admitad.com/r?postback=1&'+
+										'postback_key=033BA5Ca6f9952713930e4e1336425E3&'+
+										'uid='+uid+'&'+
+										'campaign_code=e8be9dc3d4&'+
+										'action_code=1&'+
+										'order_id='+order_id+'&'+
+										'tariff_code=1&'+
+										'client_id='+client_id+'&'+
+										'screen='+ww+'x'+wh+'&'+
+										'price='+price+'&'+
+										'currency_code='+currency_code+'&'+
+										'country_code='+country_code+'&'+
+										'payment_type=lead';
+
+									console.log(url);
+
+									$.ajax({
+										type: 'GET',
+										url: url,
+										// dataType: 'jsonp',
+										success: function (data) {
+											console.log(data);
+										}
+									});
+								}
 
 								ModalBook.modal('hide');
 								

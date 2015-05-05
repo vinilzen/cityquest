@@ -45,7 +45,7 @@
 
       <div class="row ModalBook" id="row_book_<? echo $book->id; ?>">
         <div class="col-sm-6 col-xs-12">
-          <img alt="Generic placeholder image" class="featurette-image img-responsive" src="/images/q/<? echo $book->quest->id; ?>.jpg">
+          <img alt="Generic placeholder image" class="featurette-image img-responsive" src="/images/<?=$book->quest->cover?>">
             <a class="descr" href="#lab">
               <h2><? echo $book->quest->title; ?></h2>
               <p class="quest_info">
@@ -98,7 +98,7 @@
 
       <div class="row ModalBook" id="row_book_<? echo $book->id; ?>">
         <div class="col-sm-6 col-xs-12">
-          <img alt="Profile" class="featurette-image img-responsive" src="/images/q/<?=$book->quest->id?>.jpg">
+          <img alt="Profile" class="featurette-image img-responsive" src="/images/<?=$book->quest->cover?>">
             <a class="descr" href="#lab">
               <h2><? echo $book->quest->title; ?></h2>
               <p class="quest_info">

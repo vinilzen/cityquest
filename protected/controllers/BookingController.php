@@ -418,7 +418,9 @@ class BookingController extends Controller
 								echo CJavaScript::jsonEncode(array(
 									'success'=>1,
 									'id'=>$model->id,
-									'uid'=>$model->competitor_id,
+									'price'=>$model->price,
+									'client_id'=>$model->competitor_id,
+									'uid'=> (string)Yii::app()->request->cookies['admitad_uid'],
 									'a' => urlencode($quest->addres)
 								));
 
