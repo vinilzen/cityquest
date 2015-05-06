@@ -50,6 +50,7 @@ var PopoverView = Backbone.View.extend({
 			payment : $(this.parent).attr('data-payment') || 0,
 			source : $(this.parent).attr('data-source') || 0,
 			discount : $(this.parent).attr('data-discount') || 0,
+			winner_photo : $(this.parent).attr('data-winner-photo') || 0,
 			
 			name :  name,
 			phone :  $(this.parent).attr('data-phone') || '',
@@ -394,6 +395,12 @@ var PopoverView = Backbone.View.extend({
 
 		$('#uploadWinnerPhoto', this.$el).show();
 
+		if (self.attr.winner_photo != '') {
+			$('#picbox').fadeIn();
+		} else {
+			$('#picbox').hide();
+		}
+
 		var uploader = new ss.SimpleUpload({
 			button: 'upload-btn', // file upload button
 			url: '/booking/upload/'+self.attr.id, // server side handler
@@ -435,6 +442,8 @@ var PopoverView = Backbone.View.extend({
 						.attr({'href':'/images/winner_photo/'+response.file})
 						.html('<img width="200" src="/images/winner_photo/'+self.attr.id+'.jpg?'+Date.now()+'"></a>');
 					$('#picbox').removeClass('hide').fadeIn();
+					$('button[data-id="'+self.attr.id+'"]')
+						.append('<i style="position:absolute;font-size:7px;bottom:0;right:0;" class="fa fa-camera"></i>');
 				}
 			}
 		});

@@ -216,6 +216,7 @@
 														'data-user-id="'. $competitor_id .'" '.
 														'data-fb-id="'. $competitor_fb_id .'" '.
 														'data-vk-id="'. $competitor_vk_id .'" '.
+														'data-winner-photo="'. $quest['bookings'][$time]->winner_photo .'" '.
 														'data-name="'.$quest['bookings'][$time]->name.'" ';
 
 												if ($quest['bookings'][$time]->result != 0 && 
@@ -249,15 +250,17 @@
 									        ?>
 
 											<td>
-												<button data-toggle="popover"  
-								            		data-title="<? echo date('d',$selectedDate); ?> <? echo $month[date('n', $selectedDate)-1]; ?> <?php echo $time; ?>"
-												    data-time="<? echo $time; ?>" 
-										            data-ymd="<? echo $ymd; ?>" 
-										            data-quest="<? echo $quest['q']->id; ?>" 
-										            data-date="<? echo date('d',$selectedDate); ?> <? echo date('M', $selectedDate); ?>" 
-										            data-day="<? echo $days[date('w',$selectedDate)]; ?>" 
-													class="btn btn-default btn-xs <? echo $invisible.$additionalClass;?>" <? echo $dis.$data;?>>
-													<? echo $time; ?><br><small><? echo $price; ?>р.</small>
+												<button style="position:relative;" data-toggle="popover"  
+								            		data-title="<?=date('d',$selectedDate)?> <?=$month[date('n', $selectedDate)-1]?> <?php echo $time; ?>"
+												    data-time="<?=$time?>" 
+										            data-ymd="<?=$ymd?>" 
+										            data-quest="<?=$quest['q']->id?>" 
+										            data-date="<?=date('d',$selectedDate)?> <?=date('M', $selectedDate)?>" 
+										            data-day="<?=$days[date('w',$selectedDate)]?>" 
+													class="btn btn-default btn-xs <?=($invisible.$additionalClass)?>" <?=($dis.$data)?>>
+													<?=$time?><br><small><?=$price?>р.</small>
+													<? if (isset($quest['bookings'][$time]) && $quest['bookings'][$time]->winner_photo != '')
+														echo '<i style="position:absolute; font-size:7px; bottom:0; right:0;" class="fa fa-camera"></i>'; ?>
 												</button>
 											</td>
 

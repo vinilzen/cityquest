@@ -732,13 +732,19 @@ class BookingController extends Controller
 	        $newFileName = $id .'.jpg';
 	        $savedFile = $uploadDir . $newFileName;
 
+
 	        if (!$this->save($savedFile)) {
 	            throw new CHttpException(404, 'File could not be saved');
 	            Yii::app()->end();
 	        }
 
+	        $model->winner_photo = $newFileName;
+	        $model->save();
+
+	        $watemark = new \Imagick(realpath('./images/logo_text0.5.png'));
 	        $imagick = new \Imagick(realpath($savedFile));
 	        $imagick->resizeImage(1200, 1200, null, 1, TRUE);
+	        $imagick->compositeImage($watemark,imagick::COMPOSITE_OVER, 20, 20);
 	        $imagick->writeImage($savedFile);
 
 	        echo CJavaScript::jsonEncode(
