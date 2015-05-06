@@ -22,7 +22,6 @@ var PopoverView = Backbone.View.extend({
 		'click #showRemoveBooking':'showRemoveBooking',
 		'click #cancelDelete':'cancelDelete',
 		'click #editBooking':'showEdit',
-		'click #addBooking':'showAdd',
 		'click #confirmedDelete':'removeBooking',
 		'click #saveBooking':'saveBooking',
 		'click #cancelAddBooking':'cancelAddBooking',
@@ -370,12 +369,13 @@ var PopoverView = Backbone.View.extend({
 							$('#addUser li.result').remove();
 						}
 					});
+			} else {
+				self.addUpload();
 			}
 			
 			$(self.parent).popover('setPosition');
 
-		});
-
+		});     
 
 		return false;
 	},
@@ -386,6 +386,59 @@ var PopoverView = Backbone.View.extend({
 		$(this.parent).popover('hide');
 		return false;
 	},
+
+	addUpload: function(){
+		var self = this,
+			sizeBox = $('#editBookingRow #sizeBox', self.$el),
+			progress = $('#progress', self.$el).hide();
+
+		$('#uploadWinnerPhoto', this.$el).show();
+
+		var uploader = new ss.SimpleUpload({
+			button: 'upload-btn', // file upload button
+			url: '/booking/upload/'+self.attr.id, // server side handler
+			name: 'uploadfile', // upload parameter name        
+			//progressUrl: 'uploadProgress.php', // enables cross-browser progress support (more info below)
+			responseType: 'json',
+			allowedExtensions: ['jpg', 'jpeg'],
+			maxSize: 5120, // kilobytes
+			/*hoverClass: 'ui-state-hover',
+			focusClass: 'ui-state-focus',
+			disabledClass: 'ui-state-disabled',*/
+			onSubmit: function(filename, extension) {
+				// console.log('onSubmit', filename, extension);
+				progress.removeClass('hide').fadeIn('fast');
+				this.setFileSizeBox(sizeBox); // designate this element as file size container
+				this.setProgressBar(progress); // designate as progress bar
+			},
+			onError: function( filename, errorType, status, statusText, response, uploadBtn ){
+				console.log('onSubmit', filename, errorType, status, statusText, response, uploadBtn);
+			},
+			onSizeError: function( filename, fileSize ) {
+				// console.log('onSubmit', filename, fileSize);
+				$('#errormsg')
+					.removeClass('hide')
+					.html('Размер файла: '+filename+' - '+fileSize+'Kb больше разрешенного (5Mb)')
+					.css('color','red')
+					.fadeIn('fast');
+			},
+			onComplete: function(filename, response) {
+				progress.fadeOut();
+				$('#errormsg').fadeOut();
+				if (!response) {
+					alert(filename + 'upload failed');
+					return false;            
+				} else {
+
+					$('#picbox a img').remove();
+					$('#picbox a')
+						.attr({'href':'/images/winner_photo/'+response.file})
+						.html('<img width="200" src="/images/winner_photo/'+self.attr.id+'.jpg?'+Date.now()+'"></a>');
+					$('#picbox').removeClass('hide').fadeIn();
+				}
+			}
+		});
+	}
 });
 
 $(function() {

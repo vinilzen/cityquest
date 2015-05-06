@@ -119,6 +119,22 @@
           <textarea type="text" class="form-control input-sm inputComment" placeholder="<?=Yii::t('app','Additional comment')?>"></textarea>
         </div>
       </div>
+      <% if (action == 'edit') { %>
+      <div class="form-group" id="uploadWinnerPhoto">
+        <div class="col-xs-12">
+          <input type="button" id="upload-btn" class="btn btn-default btn-block btn-large clearfix" value="Загрузить фото победителя">
+          <span id="sizeBox"></span>
+          <div id="errormsg" class="clearfix hide"></div>
+          <div class="progress progress-striped active hide">
+            <div class="progress-bar progress-bar-success" id="progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">0%</div>
+          </div>
+          <div id="picbox" class="clear text-center">
+            <a href="/images/winner_photo/<%= id %>.jpg" target="_blank">
+              <img width="200" src="/images/winner_photo/<%= id %>.jpg" alt="Нет фото"></a>
+          </div>
+        </div>
+      </div>
+      <% } %>
       <div class="form-group form-group-btn ">
         <div class="col-xs-12">
           <% if (action == 'edit') { %>

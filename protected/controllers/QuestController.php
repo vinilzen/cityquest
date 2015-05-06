@@ -461,10 +461,6 @@ class QuestController extends Controller
 			}
 		}
 
-		// echo '<!--';
-			// var_dump($twoweek_bookings_arr[20150409]);
-		// echo '-->';
-
 		if(Yii::app()->request->isAjaxRequest){
 			echo md5(serialize($twoweek_bookings_arr));
 			Yii::app()->end();

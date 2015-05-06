@@ -74,7 +74,18 @@ class SiteController extends Controller
 	public function actionRobot()
 	{
 		header("Content-Type:text/plain");
-		if (strpos($_SERVER['HTTP_HOST'], '.kz') > 0){
+
+		$host = $_SERVER['HTTP_HOST'];
+
+		$host_part = explode('.', $host);
+
+		if (count($host_part) == 3 ){
+			echo "User-agent: *
+Disallow: /";
+			die;
+		}
+
+		if (strpos($host, '.kz') > 0){
 			echo "User-agent: *
 Disallow: /";
 		} else {

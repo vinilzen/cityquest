@@ -222,9 +222,7 @@
 <script src="/js/underscore-min.js"></script>
 <script src="/js/backbone-min.js"></script>
 <script src="/js/bootstrap.js"></script>
-
-
-
+<script src="/js/SimpleAjaxUploader.min.js"></script>
 
 <!-- Jquery File Upload -->
 	<script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
@@ -247,8 +245,6 @@
 	<!-- The File Upload user interface plugin -->
 	<script src="/js/jq_file_upload/jquery.fileupload-ui.js"></script>
 <!-- Jquery File Upload -->
-
-
 
 <script src="/js/admin_main.js"></script>
 <script src="/js/jquery.mask.min.js"></script>

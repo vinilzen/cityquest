@@ -40,7 +40,7 @@ class BookingController extends Controller
 				'expression'=>"Yii::app()->getModule('user')->user()->superuser",
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('reports'),
+				'actions'=>array('reports', 'upload'),
 				'expression'=>"Yii::app()->getModule('user')->user()->superuser > 0",
 			),
 			array('deny',  // deny all users
@@ -667,4 +667,145 @@ class BookingController extends Controller
 			Yii::app()->end();
 		}
 	}
+
+	public function actionUpload($id)
+	{
+
+		$model=$this->loadModel($id);
+		$sizeLimit = 5120000;
+		$uploadDir = './images/winner_photo/';
+		$allowedExtensions = array('jpg','jpeg');
+ 
+        if($model)
+        {
+
+			if (isset($_SERVER['HTTP_X_FILE_NAME']) || isset($_GET[$this->uploadName])) {
+
+				$isXhr = true;
+				$fileName = isset($_SERVER['HTTP_X_FILE_NAME']) ? $_SERVER['HTTP_X_FILE_NAME'] : $_GET[$this->uploadName];
+				
+				if (isset($_SERVER['CONTENT_LENGTH']))
+					$fileSize = (int)$_SERVER['CONTENT_LENGTH'];
+				else throw new Exception('Content length is empty.');
+
+			}
+
+
+			if (isset($fileName)) {
+				$pathinfo = pathinfo($fileName);
+				if (array_key_exists('extension', $pathinfo) && array_key_exists('filename', $pathinfo))
+				{
+					$fileExtension = strtolower($pathinfo['extension']);
+					$fileNameWithoutExt = $pathinfo['filename'];
+				}
+
+				$fileName = str_replace(array('/','\\'),'_',$fileName);
+			} else {
+				throw new CHttpException(404, 'Incorrect upload name or no file uploaded');
+				Yii::app()->end();
+        	}
+
+			if ($fileSize == 0) {
+				throw new CHttpException(404, 'File is empty');
+				Yii::app()->end();
+			}
+
+			if ($fileSize > $sizeLimit) {
+				throw new CHttpException(404, 'File size exceeds limit');
+				Yii::app()->end();
+			}
+
+
+	        $uploadDir = $this->fixDir($uploadDir);
+	        if (!is_writable($uploadDir)) {
+	        	echo $uploadDir."\r\n"; die;
+	            throw new CHttpException(404, 'Upload directory is not writable');
+	            Yii::app()->end();
+	        }
+
+	        if (!empty($allowedExtensions)) {
+	            if (!$this->checkExtension($fileExtension, $allowedExtensions)) {
+	                throw new CHttpException(404, 'Invalid file type');
+	                Yii::app()->end();
+	            }
+	        }
+	        $newFileName = $id .'.jpg';
+	        $savedFile = $uploadDir . $newFileName;
+
+	        if (!$this->save($savedFile)) {
+	            throw new CHttpException(404, 'File could not be saved');
+	            Yii::app()->end();
+	        }
+
+	        $imagick = new \Imagick(realpath($savedFile));
+	        $imagick->resizeImage(1200, 1200, null, 1, TRUE);
+	        $imagick->writeImage($savedFile);
+
+	        echo CJavaScript::jsonEncode(
+	        	array(
+	        		'success'=>1,
+	        		'file'=> $newFileName,
+	        	)
+	        );
+
+
+        } else throw new CHttpException(404, 'Страница не найдена');
+
+        Yii::app()->end();
+	}
+
+	private function checkExtension($ext, $allowedExtensions) {
+        if (!is_array($allowedExtensions))
+            return false;
+        if (!in_array(strtolower($ext), array_map('strtolower', $allowedExtensions)))
+            return false;
+        return true;
+    }
+    
+    private function fixDir($dir) {
+        if (empty($dir))
+            return $dir;
+        $slash = DIRECTORY_SEPARATOR;
+        $dir = str_replace('/', $slash, $dir);
+        $dir = str_replace('\\', $slash, $dir);
+        return substr($dir, -1) == $slash ? $dir : $dir . $slash;
+    }
+
+    private function errorCodeToMsg($code) {
+        switch($code) {
+            case UPLOAD_ERR_INI_SIZE:
+                $message = 'File size exceeds limit.';
+                break;
+            case UPLOAD_ERR_PARTIAL:
+                $message = 'The uploaded file was only partially uploaded.';
+                break;
+            case UPLOAD_ERR_NO_FILE:
+                $message = 'No file was uploaded.';
+                break;
+            case UPLOAD_ERR_NO_TMP_DIR:
+                $message = 'Missing a temporary folder.';
+                break;
+            case UPLOAD_ERR_CANT_WRITE:
+                $message = 'Failed to write file to disk.';
+                break;
+            case UPLOAD_ERR_EXTENSION:
+                $message = 'File upload stopped by extension.';
+                break;
+            default:
+                $message = 'Unknown upload error.';
+                break;
+        }
+        return $message;
+    }
+
+    private function save($path) {
+        if (false !== file_put_contents($path, fopen('php://input', 'r')))
+            return true;
+        return false;
+    }
+
+/*    private function setErrorMsg($msg)
+    {
+        if (empty($errorMsg))
+    }*/
 }

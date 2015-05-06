@@ -15,6 +15,8 @@
  * @property integer $quest_id
  * @property integer $competitor_id
  * @property string  $affiliate
+ * 
+ * @property string  $winer_photo
  *
  * The followings are the available model relations:
  * @property TblQuest $quest
@@ -45,6 +47,8 @@ class Booking extends CActiveRecord
 		return array(
 			array('status, time, quest_id, competitor_id', 'required'),
 			array('status, create_time, quest_id', 'numerical', 'integerOnly'=>true),
+			array('winer_photo', 'file','types'=>'jpg', 'allowEmpty'=>true, 'on'=>'update'),
+			array('winer_photo, comment','length', 'max'=>255, 'on'=>'insert, update'),
 			array('competitor_id', 'numerical', 'integerOnly'=>false),
 			array('email, phone, name,affiliate', 'length', 'max'=>128),
 			array('result', 'length', 'max'=>5),
@@ -91,6 +95,7 @@ class Booking extends CActiveRecord
 			'source' => Yii::t('app','Sources'),
 			'discount' => Yii::t('app','Discounts'),
 			'payment' => Yii::t('app','Payments'),
+			'winer_photo' => Yii::t('app','Winer photo'),
 		);
 	}
 

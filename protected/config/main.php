@@ -56,6 +56,7 @@ return array(
 			'rules'=>array(
 				'robots.txt'=>'site/robot',
 				'post/<id:\d+>/<title:.*?>'=>'post/view',
+				'booking/upload/<id:\d+>'=>'booking/upload',
 				'posts/<tag:.*?>'=>'post/index',
 				'rules'=>'site/about',
 				'<lang:kz|ru>'=>'site/lang',
@@ -84,7 +85,7 @@ return array(
 					'levels'=>'profile',
 					'logFile'=>'profile.log',
 				),
-		        /*array(
+		       /* array(
 			    	'class'=>'CWebLogRoute',
 			        'levels'=>'error, warning, trace, log, vardump',
 		        ),*/
