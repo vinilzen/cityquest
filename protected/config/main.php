@@ -59,6 +59,7 @@ return array(
 				'booking/upload/<id:\d+>'=>'booking/upload',
 				'posts/<tag:.*?>'=>'post/index',
 				'rules'=>'site/about',
+				'result/<id:\d+>'=>'booking/view',
 				'<lang:kz|ru>'=>'site/lang',
 				'giftcard'=>'site/giftcard',
 				'franchise'=>'site/franchise',

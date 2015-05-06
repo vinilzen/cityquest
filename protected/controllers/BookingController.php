@@ -55,8 +55,11 @@ class BookingController extends Controller
 	 */
 	public function actionView($id)
 	{
+		$model = $this->loadModel($id);
+		$quest = Quest::model()->findByPk($model->quest_id);
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+			'model'=>$model,
+			'quest'=>$quest,
 		));
 	}
 
@@ -741,10 +744,11 @@ class BookingController extends Controller
 	        $model->winner_photo = $newFileName;
 	        $model->save();
 
-	        $watemark = new \Imagick(realpath('./images/logo_text0.5.png'));
+	        $watemark = new \Imagick(realpath('./images/logo_text0.75.png'));
 	        $imagick = new \Imagick(realpath($savedFile));
 	        $imagick->resizeImage(1200, 1200, null, 1, TRUE);
 	        $imagick->compositeImage($watemark,imagick::COMPOSITE_OVER, 20, 20);
+	        $imagick->setImageCompressionQuality(70); 
 	        $imagick->writeImage($savedFile);
 
 	        echo CJavaScript::jsonEncode(

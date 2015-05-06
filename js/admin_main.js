@@ -409,11 +409,7 @@ var PopoverView = Backbone.View.extend({
 			responseType: 'json',
 			allowedExtensions: ['jpg', 'jpeg'],
 			maxSize: 5120, // kilobytes
-			/*hoverClass: 'ui-state-hover',
-			focusClass: 'ui-state-focus',
-			disabledClass: 'ui-state-disabled',*/
 			onSubmit: function(filename, extension) {
-				// console.log('onSubmit', filename, extension);
 				progress.removeClass('hide').fadeIn('fast');
 				this.setFileSizeBox(sizeBox); // designate this element as file size container
 				this.setProgressBar(progress); // designate as progress bar
@@ -422,7 +418,6 @@ var PopoverView = Backbone.View.extend({
 				console.log('onSubmit', filename, errorType, status, statusText, response, uploadBtn);
 			},
 			onSizeError: function( filename, fileSize ) {
-				// console.log('onSubmit', filename, fileSize);
 				$('#errormsg')
 					.removeClass('hide')
 					.html('Размер файла: '+filename+' - '+fileSize+'Kb больше разрешенного (5Mb)')
@@ -443,6 +438,7 @@ var PopoverView = Backbone.View.extend({
 						.html('<img width="200" src="/images/winner_photo/'+self.attr.id+'.jpg?'+Date.now()+'"></a>');
 					$('#picbox').removeClass('hide').fadeIn();
 					$('button[data-id="'+self.attr.id+'"]')
+						.attr('data-winner-photo',self.attr.id+'.jpg')
 						.append('<i style="position:absolute;font-size:7px;bottom:0;right:0;" class="fa fa-camera"></i>');
 				}
 			}
