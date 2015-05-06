@@ -57,6 +57,7 @@ class BookingController extends Controller
 	{
 		$model = $this->loadModel($id);
 		$quest = Quest::model()->findByPk($model->quest_id);
+
 		$this->render('view',array(
 			'model'=>$model,
 			'quest'=>$quest,

@@ -23,8 +23,24 @@
     <p><i class="ico1"></i><a itemprop="telephone" class="ya-phone" href="tel:+7 776 1004447">
       <span class="ya-phone">+7 (776) 100-4447</span></a></p>
   <? } else { ?>
-    <p><i class="ico1"></i><a itemprop="telephone" class="ya-phone" href="tel:8 495 749-96-09">
-      <span class="ya-phone">+7 (495) 749-96-09</span></a></p>
+    
+    <?  if (strpos($_SERVER['HTTP_HOST'], 'irk') === 0) { ?>
+
+      <p><i class="ico1"></i><a itemprop="telephone" class="ya-phone" href="tel:60-05-21">
+        <span class="ya-phone">60-05-21</span></a></p>
+
+    <? } elseif (strpos($_SERVER['HTTP_HOST'], 'vlg') === 0) { ?>
+
+      <p><i class="ico1"></i><a itemprop="telephone" class="ya-phone" href="tel:8 961 686 99 96">
+        <span class="ya-phone">8 961 686 99 96</span></a></p>
+
+    <? } else { ?>
+
+      <p><i class="ico1"></i><a itemprop="telephone" class="ya-phone" href="tel:8 495 749-96-09">
+        <span class="ya-phone">+7 (495) 749-96-09</span></a></p>
+
+    <? } ?>
+
   <? } ?>
 
     <p><i class="ico2"></i>
@@ -39,9 +55,17 @@
       <meta itemprop="email" content="hello@cityquest.ru" />
     </div>
     <? if (strpos($_SERVER['HTTP_HOST'], '.kz') > 0){ ?>
-    
     <? } else { ?>
-      <p><span>Адрес офиса:</span><br>  г. Москва, ул. Летниковская, д. 4, стр. 2</p>
+      <p><span>Адрес офиса:</span><br>
+      <?  if (strpos($_SERVER['HTTP_HOST'], 'irk') === 0) { ?>
+        г. Иркутск, переулок Мопра д. 5
+      <? } elseif (strpos($_SERVER['HTTP_HOST'], 'vlg') === 0) { ?>
+        г. Волгоград, ул. им.Хользунова, 18 А
+      <? } else { ?>
+        г. Москва, ул. Летниковская, д. 4, стр. 2
+      <? } ?>
+  
+      </p>
       <p>ООО «Сити Квест»   ОГРН  5147746030900</p>
     <? } ?>
   </div>

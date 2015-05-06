@@ -125,23 +125,22 @@
 <div class="container container-xlg">
   <div class="row">
     <div class="col-xs-12 text-center">
-      <h2 class="twotab active">
+      <a href="#schedule" class="h2 twotab active" role="tab" data-toggle="tab">
         <?=($model->status == 2)?Yii::t('app','Schedule'):Yii::t('app','Inactive quest')?>
-      </h2>
+      </a>
+      <a href="#winner" class="h2 twotab" role="tab" data-toggle="tab">Победители</a>
       <hr class="fadeOut">
     </div>
     <? if ($model->status == 2) { ?>
     <div class="clearfix"></div>
-    <div class="col-xs-12 ovs">
-      <div class="row quests_schedules quest_schedule">
-
-    <?
-
-    $days = Yii::app()->params['days'];
-    $month = Yii::app()->params['month'];
-    $endDate = strtotime( '+'.Yii::app()->params['offset'].' day' );
-    $currDate = strtotime( 'now' );
-    $dayArray = array();
+    <div class="col-xs-12 ovs tab-content">
+      <div class="row quests_schedules fade in quest_schedule tab-pane active" role="tabpanel" id="schedule">
+      <?
+      $days = Yii::app()->params['days'];
+      $month = Yii::app()->params['month'];
+      $endDate = strtotime( '+'.Yii::app()->params['offset'].' day' );
+      $currDate = strtotime( 'now' );
+      $dayArray = array();
 
       function makeDayArray( ){
         $days = array('понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота', 'воскресенье');
@@ -231,7 +230,7 @@
                 }
 
 
-              ?>
+                ?>
                 <div  type="button" 
                   data-name="<?=!Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->username : ''?>" 
                   data-phone="<?=!Yii::app()->user->isGuest ? Yii::app()->getModule('user')->user()->phone : ''?>" 
@@ -291,7 +290,70 @@
             </div>
           </div>
           <div class="clearfix"></div>
-      <?  } ?>
+      <? } ?>
+      </div>
+      <div class="row tab-pane fade" role="tabpanel" id="winner">
+        <div class="col-sm-12">
+          
+        <? $month_array = array(
+            '1'=>'январь',
+            '2'=>'февраль',
+            '3'=>'март',
+            '04'=>'апрель',
+            '05'=>'май',
+            '06'=>'июнь',
+            '07'=>'июль',
+            '08'=>'август',
+            '09'=>'сентябрь',
+            '10'=>'октябрь',
+            '11'=>'ноябрь',
+            '12'=>'декабрь',
+          ); ?>
+          <div class="btn-group btn-group-justified" role="group">
+          <? foreach ($month_array as $key => $value){
+              if ($key == date('m')) {
+                echo '<div class="btn btn-xs btn-transp active">'.$value.'</div>';
+              } else {
+                echo '<div class="btn btn-xs btn-transp">'.$value.'</div>';
+              }
+          } ?>
+          </div>
+          <div class="clearfix"></div>
+          <? foreach ($bookings_winner_array AS $date) { ?>
+            <? foreach ($date AS $b) { ?>
+              <div class="col-sm-3">
+                <div class="thumbnail thumbnail-transp">
+                  <img class="img-responsive" src="/images/winner_photo/<?=$b->winner_photo?>" alt="">
+                  <div class="caption">
+                    <h4>Результат: <?=$b->result?></h4>
+                    <?  
+                      $year = substr($b->date, 0, 4);
+                      $month = substr($b->date, 4,2);
+                      $day = (int)(substr($b->date, -2));
+
+                      $month_array = array(
+                        '01'=>'января',
+                        '02'=>'февраля',
+                        '03'=>'марта',
+                        '04'=>'апреля',
+                        '05'=>'мая',
+                        '06'=>'июня',
+                        '07'=>'июля',
+                        '08'=>'августа',
+                        '09'=>'сентября',
+                        '10'=>'октября',
+                        '11'=>'ноября',
+                        '12'=>'декабря',
+                      );
+                      
+                    ?>
+                    <p><?=$day; ?> <?=$month_array[$month]?> <?=$b->time?></p>
+                  </div>
+                </div>
+              </div>
+            <? } ?>
+          <? } ?>
+        </div>
       </div>
     </div>
     <? } ?>
@@ -302,9 +364,11 @@
 <div class="container-fluid bottom_quest" id="quests">
   <div class="row">
   <? $counter = 1;
-    foreach ($other_quests as $quest) { ?>
+    foreach ($other_quests as $quest) {
+      $counter++;
+      if ($counter<5) {
+  ?>
     <div class="col-xs-12 col-md-4 col-sm-6 col-lg-4 col-xlg-4 item">
-    <? $counter = 0; ?>
       <img class="featurette-image img-responsive"
         alt="<?=CHtml::encode($quest->title)?>" 
         src="/images/<?=$quest->cover?>">
@@ -320,8 +384,9 @@
             <span><i class="icon icon-point"></i><?=CHtml::encode($quest->addres)?></span>
         </p>
       </a>
-    </div>
-  <? } ?>
+    </div>  
+    <? }
+  } ?>
   </div>
 </div>
 <? } ?>

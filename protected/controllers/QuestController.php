@@ -194,6 +194,24 @@ class QuestController extends Controller
 			$bookings_by_date[$booking->date][$booking->time]['name'] = isset($booking->competitor)?$booking->competitor->username:'';
 		}
 
+
+		$bookings_winner = Booking::model()->findAllByAttributes(
+			array('quest_id'=>$model->id),
+			'date LIKE :month AND winner_photo != "" AND result != "" AND result != "0"',
+			array('month'=>'%'.(int)date("Ym").'%')
+		);
+		$bookings_winner_array = array();
+
+		foreach ($bookings_winner AS $b){
+			
+			if (!isset($bookings_winner_array[$b->date])) {
+				$bookings_winner_array[$b->date] = array();
+			}
+
+			$bookings_winner_array[$b->date][] = $b;
+
+		}
+
 		if (isset($model->times) && is_numeric($model->times) && isset(Yii::app()->params['times'][(int)$model->times]))
 			$times = Yii::app()->params['times'][(int)$model->times];
 		else 
@@ -205,6 +223,7 @@ class QuestController extends Controller
 			'model'=>$model,
 			'cities'=>$city_array,
 			'booking' => $bookings_by_date,
+			'bookings_winner_array' => $bookings_winner_array,
 			'times' => $times,
 			'holidays' => $holiday_list,
 			'other_quests' => $other_quests,
