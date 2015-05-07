@@ -1017,7 +1017,7 @@ a.descr {
 	&:hover {
 		text-decoration: none;
 	}
-	small, span {
+	small, .quest_date {
 		text-align: center;
 		display: block;
 		clear: both;
@@ -1028,7 +1028,7 @@ a.descr {
 	small {
 		font-size: 12px;
 	}
-	span {
+	.quest_date {
 		color: rgba(255,255,255,.3);
 		font-family: "Gotham A", Helvetica, sans-serif;
 		font-size: 28px;
@@ -1050,10 +1050,10 @@ a.descr {
 		border-bottom: 5px solid #fff;
 	}
 	&.weekend {
-		span em {
+		.quest_date em {
 			color: #85d2ed;
 		}
-		span:hover em {
+		.quest_date:hover em {
 			color: rgba(168,234,255,1);
 		}
 		small {
@@ -1064,7 +1064,7 @@ a.descr {
 
 	@media (max-width: 1439px) and (min-width: 1300px) {
 		padding: 0 5px 10px;
-		span {
+		.quest_date {
 			font-size: 26px;
 		}
 		small {
@@ -1073,7 +1073,7 @@ a.descr {
 	}
 	@media (max-width: 1299px) and (min-width: 1200px) {
 		padding: 0 5px 10px;
-		span {
+		.quest_date {
 			font-size: 24px;
 		}
 		small {
@@ -1125,16 +1125,22 @@ hr.gradient {
 
 	.priceRow {
 		display: table-row;
+		em {
+			font-style: normal;
+		}
 		span {
 			display: table-cell;
 			text-align: center;
 			&.price {
 				width: 30px;
 				white-space: nowrap;
-				color: rgba(255, 255, 255, 0.8);
+				color: rgba(255, 255, 255, .8);
 				font-size: 13px;
 				padding: 0 10px;
 				font-family: "Gotham A";
+				.promo-day-price {
+					color: rgba(255, 255, 255, .5);
+				}
 				@media (max-width: $screen-xs-max) {
 					font-size: 10px;
 					padding-right: 5px;
@@ -1145,6 +1151,25 @@ hr.gradient {
 			&.dashed {
 				background: url(../img/dot.png) repeat-x left 9px;
 				font-size: 13px;
+			}
+			.through {
+				text-decoration: line-through;
+				opacity:.6;
+			}
+		}
+	}
+}
+.promo-day {
+	/* &.price-line {
+  		margin-top: 10px;
+	} */
+	.priceTbl .priceRow {
+		span {
+			&.dashed {
+				background: none;
+			}
+			&.price {
+				color:#78c4e8;
 			}
 		}
 	}
@@ -1476,7 +1501,7 @@ h2.twotab, a.h2.twotab {
 		padding-top: 6px;
 		padding-left: 0;
 		padding-right: 0;
-		small, span {
+		small, .quest_date {
 			text-align: left;
 		}
 		@media (max-width: $screen-xs-max) {
@@ -1484,7 +1509,7 @@ h2.twotab, a.h2.twotab {
 			text-align: right;
 			padding-right: 10px;
 			margin-left: -10px;
-			span {
+			.quest_date {
 				text-align: right;
   				margin-top: 5px;
 			}
@@ -1492,7 +1517,7 @@ h2.twotab, a.h2.twotab {
 				text-align: right;
 			}
 		}
-		span {
+		.quest_date {
 			font-size: 40px;
 			@media (max-width: $screen-xs-max) {
 				font-size: 28px;
@@ -1558,6 +1583,9 @@ h2.twotab, a.h2.twotab {
 		&.price {
 			color: #85d2ed;
 		}
+	}
+	&.promo-day .priceTbl .priceRow span.dashed {
+		background:none;
 	}
 }
 
@@ -2924,4 +2952,27 @@ a:hover, a:focus {
 .thumbnail.thumbnail-transp {
 	background-color:rgba(0,0,0,0);
 	border-color:rgba(0,0,0,0);
+}
+.promo-flag {
+	font-size: 13px;
+	font-family: Circe;
+	color:#22243c;
+	display: inline-block;
+	background-color:#78c4e8;
+	line-height: 28px;
+	height: 28px;
+	padding-left: 14px;
+	padding-right: 14px;
+	position: relative;
+	top:-10px;
+	&:before {
+	  content: ' ';
+	  position: absolute;
+	  height: 0;
+	  width: 12px;
+	  right: -12px;
+	  border-width: 14px 6px;
+	  border-style: solid;
+	  border-color: #78c4e8 transparent #78c4e8 #78c4e8;
+	}
 }

@@ -111,6 +111,8 @@ class QuestController extends Controller
 	public function actionView($link)
 	{
 		$this->layout='//layouts/quest';
+		$start_date = date('Ymd', strtotime('now'));
+		$end_date = date('Ymd', strtotime('+2 week'));
 
 		$holidays = Holiday::model()->findAll();
 		$holiday_list = array();
@@ -171,17 +173,16 @@ class QuestController extends Controller
 			reset($quests);
 			$next = current($quests);
 		}
-		if (!$prev) {
-			$prev = end($quests);
-		}
+
+		if (!$prev) $prev = end($quests);
 
 		$bookings = array();
 		$bookings = Booking::model()->with('competitor')->findAllByAttributes(
 			array('quest_id'=>$id),
 			'date >= :start_date AND date <= :end_date',
 			array(
-				'start_date'=> date('Ymd', strtotime('now')),
-				'end_date'=> date('Ymd', strtotime('+2 week')),
+				'start_date'=> $start_date,
+				'end_date'=> $end_date,
 			));
 
 		$bookings_by_date = array();
@@ -217,9 +218,11 @@ class QuestController extends Controller
 		else 
 			$times = Yii::app()->params['times'][1];
 
+		$promo_days_array = $this->getPromoDays($model->id, $start_date, $end_date);
 
 		header("Last-Modified: " . gmdate("D, d M Y H:i:s", $model->update_time) . " GMT");
 		$this->render('view',array(
+			'promo_days'=>$promo_days_array,
 			'model'=>$model,
 			'cities'=>$city_array,
 			'booking' => $bookings_by_date,
@@ -230,6 +233,26 @@ class QuestController extends Controller
 			'prev' => $prev,
 			'next' => $next,
 		));
+	}
+
+	private function getPromoDays($quest_id, $start_date, $end_date)
+	{
+		$promo_days = PromoDays::model()->findAllByAttributes(
+			array('quest_id'=>$quest_id),
+			'day >= :start_date AND day <= :end_date',
+			array(
+				'start_date'=> $start_date,
+				'end_date'=> $end_date,
+			)
+		);
+		$promo_days_array = array();
+		foreach ($promo_days as $pd) {
+			if (!isset($promo_days_array[$pd->day])){
+				$promo_days_array[$pd->day] = array();
+			}
+			$promo_days_array[$pd->day] = $pd;
+		}
+		return $promo_days_array;
 	}
 
 	/**
@@ -443,7 +466,6 @@ class QuestController extends Controller
 			array_push($holiday_list, $holiday->holiday_date);
 		}
 		
-
 		if ($ymd === '' || !is_numeric($ymd) || strlen($ymd) !== 8){
 			$YMDate = date('Ymd', strtotime( "now" ));
 		} else {
@@ -460,12 +482,15 @@ class QuestController extends Controller
 			$next = $prev + 2*$offset;
 		}
 
+		$start_date = date('Ymd', strtotime( '+'.$prev.' day' ));
+		$end_date = date('Ymd', strtotime( '+'.$next.' day' ));
+
 		$twoweek_bookings = Booking::model()->findAllByAttributes(
 			array(),
 			'date >=:today && date < :twoweek && competitor_id > -1 ',
 			array(
-				'today'=>date('Ymd', strtotime( '+'.$prev.' day' )),
-				'twoweek'=> date('Ymd', strtotime( '+'.$next.' day' ))
+				'today'=>$start_date,
+				'twoweek'=> $end_date
 			)
 		);
 
@@ -524,6 +549,7 @@ class QuestController extends Controller
 					$quest_ids[] = $quest->id;
 					$quests_array[$quest->id] = array();
 					$quests_array[$quest->id]['q'] = $quest;
+					$quests_array[$quest->id]['promo_days'] = $this->getPromoDays($quest->id, $start_date, $end_date);
 					$quests_array[$quest->id]['booking'] = array();
 				}
 

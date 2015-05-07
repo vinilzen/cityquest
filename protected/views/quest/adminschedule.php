@@ -166,6 +166,13 @@
 											$pricePm = $quest['q']->price_pm;
 								        }
 
+								        $promo_day = 0;
+								        if ( isset(  $quest['promo_days'][date('Ymd', $selectedDate)] ) ) {
+								        	$priceAm = $quest['promo_days'][date('Ymd', $selectedDate)]->price_am;
+								        	$pricePm = $quest['promo_days'][date('Ymd', $selectedDate)]->price_pm;
+								        	$promo_day = 1;
+								        }
+
 										foreach ($times as $k=>$time) {
 
 								            if ($workday){
@@ -258,7 +265,7 @@
 										            data-date="<?=date('d',$selectedDate)?> <?=date('M', $selectedDate)?>" 
 										            data-day="<?=$days[date('w',$selectedDate)]?>" 
 													class="btn btn-default btn-xs <?=($invisible.$additionalClass)?>" <?=($dis.$data)?>>
-													<?=$time?><br><small><?=$price?>р.</small>
+													<?=$time?><br><small><?=($promo_day)?'<i class="fa fa-exclamation"></i> ':''?><?=$price?>р.</small>
 													<? if (isset($quest['bookings'][$time]) && $quest['bookings'][$time]->winner_photo != '')
 														echo '<i style="position:absolute; font-size:7px; bottom:0; right:0;" class="fa fa-camera"></i>'; ?>
 												</button>

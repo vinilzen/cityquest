@@ -178,13 +178,23 @@
               $pricePm = $model->price_pm;
             }
 
+            if (isset($promo_days[$value['date']])) {
+              $priceAm = $promo_days[$value['date']]->price_am;
+              $pricePm = $promo_days[$value['date']]->price_pm;
+            }
+
           ?>
               
           <div class="col-xs-1 col-sm-1">
             <div class="curent_date <? echo !$workday ? 'weekend' : ''; ?>">
-              <span><em><?=$value['day']?>.</em><?=$value['month']?></span>
+              <span class="quest_date"><em><?=$value['day']?>.</em><?=$value['month']?></span>
               <small><?=$value['day_name']?></small>
             </div>
+            <? if (isset($promo_days[$value['date']])) { ?>
+              <div class="curent_date">
+                <span class="promo-flag">Акция</span>
+              </div>
+            <? } ?>
           </div>
           <div class="col-xs-12 times">
             <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
@@ -252,40 +262,93 @@
               <? } ?>
 
             </div>
-            <?if ($workday) { ?>
+            <?
+              $line_through = '';
+              $promo_day = '';
+              if (isset($promo_days[$value['date']]))
+                $line_through = 'through';
+
+              if ($workday) { ?>
+
               <div class="price-line">
-                <? // if ($model->id!=15) { ?>
                 <div class="priceTbl workPrice1" title="Цена за команду" data-toggle="tooltip">
                   <div class="priceRow">
-                    <span class="price" itemprop="price" content="<?=$pricePm?>" style="padding:0;"><?=$pricePm?> <?=$currency?></span>
+                    <span class="price" itemprop="price" content="<?=$pricePm?>" style="padding:0;"><em class="<?=$line_through?>"><?=$pricePm?></em> <?=$currency?></span>
                   </div>
                 </div>
-                <? // } ?>
                 <div class="priceTbl workPrice2 <? if ($model->id==15) echo 'workPrice23'; ?>" title="Цена за команду" data-toggle="tooltip">
                   <div class="priceRow">
                     <span class="dashed">&nbsp;</span>
-                    <span class="price" itemprop="price" content="<?=$priceAm?>"><?=$priceAm?> <?=$currency?></span>
+                    <span class="price" itemprop="price" content="<?=$priceAm?>"><em class="<?=$line_through?>"><?=$priceAm?></em> <?=$currency?></span>
                     <span class="dashed">&nbsp;</span>
                   </div>
                 </div>
                 <div class="priceTbl workPrice3" title="Цена за команду" data-toggle="tooltip">
                   <div class="priceRow">
                     <span class="dashed">&nbsp;</span>
-                    <span class="price" itemprop="price" content="<?=$pricePm?>"><?=$pricePm?> <?=$currency?></span>
+                    <span class="price" itemprop="price" content="<?=$pricePm?>"><em class="<?=$line_through?>"><?=$pricePm?></em> <?=$currency?></span>
                     <span class="dashed">&nbsp;</span>
                   </div>
                 </div>
               </div>
+
+
+              <? if (isset($promo_days[$value['date']])) { ?>
+              <div class="price-line promo-day">
+                <div class="priceTbl workPrice1" title="Цена за команду" data-toggle="tooltip">
+                  <div class="priceRow">
+                    <span class="price" itemprop="price" content="<?=$promo_days[$value['date']]->price_pm?>" style="padding:0;">
+                      <strong><?=$promo_days[$value['date']]->price_pm?></strong> <?=$currency?>
+                    </span>
+                  </div>
+                </div>
+                <div class="priceTbl workPrice2 <? if ($model->id==15) echo 'workPrice23'; ?>" title="Цена за команду" data-toggle="tooltip">
+                  <div class="priceRow">
+                    <span class="dashed"></span>
+                    <span class="price" itemprop="price" content="<?=$promo_days[$value['date']]->price_am?>">
+                      <strong><?=$promo_days[$value['date']]->price_am?></strong> <?=$currency?>
+                    </span>
+                    <span class="dashed"></span>
+                  </div>
+                </div>
+                <div class="priceTbl workPrice3" title="Цена за команду" data-toggle="tooltip">
+                  <div class="priceRow">
+                    <span class="dashed"></span>
+                    <span class="price" itemprop="price" content="<?=$promo_days[$value['date']]->price_pm?>">
+                      <strong><?=$promo_days[$value['date']]->price_pm?></strong> <?=$currency?>
+                    </span>
+                    <span class="dashed"></span>
+                  </div>
+                </div>
+              </div>
+              <? } ?>
+
             <? } else { ?>
               <div class="price-line weekend">
-                <div class="priceTbl weekendPrice2 <?// if ($model->id==15) echo 'weekendPrice23'; ?>" title="Цена за команду" data-toggle="tooltip">
+                <div class="priceTbl weekendPrice2 " title="Цена за команду" data-toggle="tooltip">
                   <div class="priceRow">
                     <span class="dashed">&nbsp;</span>
-                    <span class="price" itemprop="price" content="<?=$pricePm?>"><?=$pricePm?> <?=$currency?></span>
+                    <span class="price" itemprop="price" content="<?=$pricePm?>">
+                      <em class="<?=$line_through?>"><?=$pricePm?></em> <?=$currency?></span>
                     <span class="dashed">&nbsp;</span>
                   </div>
                 </div>
               </div>
+              <? if (isset($promo_days[$value['date']])) { ?>
+
+                <div class="price-line weekend promo-day">
+                  <div class="priceTbl weekendPrice2 " title="Цена за команду" data-toggle="tooltip">
+                    <div class="priceRow">
+                      <span class="dashed"></span>
+                      <span class="price" itemprop="price" content="<?=$promo_days[$value['date']]->price_pm?>">
+                        <?=$promo_days[$value['date']]->price_pm?> <?=$currency?>
+                      </span>
+                      <span class="dashed"></span>
+                    </div>
+                  </div>
+                </div>
+
+              <? } ?>
             <? } ?>
             </div>
           </div>
