@@ -140,27 +140,30 @@ Sitemap: http://cityquest.ru/sitemap.xml
 			if (isset($_POST['name']) && $_POST['name'] != '' && isset($_POST['phone']) 
 				&& $_POST['phone'] != '' && isset($_POST['addres']) && $_POST['addres'] != ''
 			){
-				if ($show_captcha == 0 || (isset($_POST['captcha']) && $_POST['captcha'] == $code)){
-					$this->sendMail(
-						'ilya@cityquest.ru, e.roslovets@cityquest.ru, roslovets.elena@gmail.com',
-						//'marchukilya@gmail.com',
-						"CityQuest. Заказ подарочной карты",
-						"Имя - ".$_POST['name']."<br>".
-						"Телефон -  ".$_POST['phone']."<br>".
-						"Адрес - ".$_POST['addres']."<br>".
-						"Комментарий - ".$_POST['comment']);
+				if ($this->city_model->giftcard_mail == '') {
+					if ($show_captcha == 0 || (isset($_POST['captcha']) && $_POST['captcha'] == $code)){
+						$this->sendMail(
+							$this->city_model->giftcard_mail,
+							"CityQuest. Заказ подарочной карты",
+							"Имя - ".$_POST['name']."<br>".
+							"Телефон -  ".$_POST['phone']."<br>".
+							"Адрес - ".$_POST['addres']."<br>".
+							"Комментарий - ".$_POST['comment']);
 
-					$msg = 'Мы получили ваш заказ, в ближайшее время с вами свяжутся по указаному номеру!';
-					Yii::app()->user->setFlash('success', $msg);
-					$_POST['name'] = '';
-					$_POST['phone'] = '';
-					$_POST['addres'] = '';
-					$_POST['comment'] = '';
-					$show_captcha = 0;
-				} else {
-					if (isset($_POST['captcha']) && $_POST['captcha'] != $code){
-						Yii::app()->user->setFlash('error', 'Не верный код с картинки');
+						$msg = 'Мы получили ваш заказ, в ближайшее время с вами свяжутся по указаному номеру!';
+						Yii::app()->user->setFlash('success', $msg);
+						$_POST['name'] = '';
+						$_POST['phone'] = '';
+						$_POST['addres'] = '';
+						$_POST['comment'] = '';
+						$show_captcha = 0;
+					} else {
+						if (isset($_POST['captcha']) && $_POST['captcha'] != $code){
+							Yii::app()->user->setFlash('error', 'Не верный код с картинки');
+						}
 					}
+				} else {
+					Yii::app()->user->setFlash('error', 'Ошибка на сервере');
 				}
 			}
 		}

@@ -40,6 +40,9 @@ $('.search-form form').submit(function(){
 					'country',
 					'languages',
 					'subdomain',
+					'tel',
+					'addres',
+					'giftcard_mail',
 					array(
 						'class'=>'CButtonColumn',
 						'template' => '{update} {delete}',

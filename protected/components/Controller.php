@@ -10,6 +10,7 @@ class Controller extends CController
 	 * meaning using a single column layout. See 'protected/views/layouts/column1.php'.
 	 */
 	public $layout='column1';
+	public $city_model;
 
 	/**
 	 * @var array context menu items. This property will be assigned to {@link CMenu::items}.
@@ -87,6 +88,7 @@ class Controller extends CController
 		$this->language = 'ru';
 
 		if (strpos($_SERVER['HTTP_HOST'], '.kz') > 0){
+			$this->city_model = City::model()->findByPk(2);
 			$this->city = 2;
 			$this->city_name = 'Астана';
 		} else {
@@ -96,12 +98,14 @@ class Controller extends CController
 			if ( count($url_segments)==3 ) {
 				foreach ($this->cities as $city) {
 					if($city->subdomain == $url_segments[0]) {
+						$this->city_model = $city;
 						$this->city = $city->id;
 						$this->city_name = $city->name;
 						break;
 					}
 				}
 			} else {
+				$this->city_model = City::model()->findByPk(1);
 				$this->city = 1;
 				$this->city_name = 'Москва';
 			}

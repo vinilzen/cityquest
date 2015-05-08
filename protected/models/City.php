@@ -10,6 +10,12 @@
  * @property string $country
  * @property string $subdomain
  * @property integer $active
+ * 
+ * @property string $tel
+ * @property string $addres
+ * @property string $giftcard_text
+ * @property string $franchise_text
+ * @property string $giftcard_mail
  *
  * The followings are the available model relations:
  * @property Quest[] $quests
@@ -34,8 +40,9 @@ class City extends CActiveRecord
 		return array(
 			array('name, country', 'required'),
 			array('active', 'numerical', 'integerOnly'=>true),
-			array('name, country', 'length', 'max'=>128),
-			array('languages', 'length', 'max'=>128),
+			array('giftcard_text, franchise_text', 'length', 'max'=>1024),
+			array('name, country, tel, addres, giftcard_mail', 'length', 'max'=>128),
+			array('languages', 'length', 'max'=>10),
 			array('subdomain', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -63,10 +70,16 @@ class City extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'name' => Yii::t('app','Title'),
-			'active' => 'Активность',
-			'country' => 'Страна',
-			'languages' => 'Язык',
+			'active' => Yii::t('app','Active'),
+			'country' => Yii::t('app','Country'),
+			'languages' => Yii::t('app','Languages'),
 			'subdomain' => Yii::t('app','Subdomain'),
+
+			'addres' => Yii::t('app','Addres'),
+			'tel' => Yii::t('app','Phone'),
+			'giftcard_text' => Yii::t('app','Giftcard text'),
+			'franchise_text' => Yii::t('app','Franchise text'),
+			'giftcard_mail' => Yii::t('app','Giftcard mail'),
 		);
 	}
 

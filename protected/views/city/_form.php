@@ -5,7 +5,7 @@
 ?>
 
 
-<div class="form col-sm-6">
+<div class="form col-sm-12">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'city-form',
@@ -58,6 +58,43 @@
 		<div class="col-sm-9">
 			<?=$form->textField($model,'subdomain', array('class'=>'form-control'))?>
 			<?=$form->error($model,'subdomain')?>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<?=$form->labelEx($model,'tel', array('class' => 'control-label col-sm-3'))?>
+		<div class="col-sm-9">
+			<?=$form->textField($model,'tel', array('class'=>'form-control'))?>
+			<?=$form->error($model,'tel')?>
+		</div>
+	</div>
+	<div class="form-group">
+		<?=$form->labelEx($model,'addres', array('class' => 'control-label col-sm-3'))?>
+		<div class="col-sm-9">
+			<?=$form->textField($model,'addres', array('class'=>'form-control'))?>
+			<?=$form->error($model,'addres')?>
+		</div>
+	</div>
+	<div class="form-group">
+		<?=$form->labelEx($model,'giftcard_text', array('class' => 'control-label col-sm-3'))?>
+		<div class="col-sm-9">
+			<?=$form->textArea($model,'giftcard_text', array('rows'=>8, 'class'=>'form-control'))?>
+			<?=$form->error($model,'giftcard_text')?>
+		</div>
+	</div>
+	<div class="form-group">
+		<?=$form->labelEx($model,'franchise_text', array('class' => 'control-label col-sm-3'))?>
+		<div class="col-sm-9">
+			<?=$form->textArea($model,'franchise_text', array('rows'=>9, 'class'=>'form-control'))?>
+			<?=$form->error($model,'franchise_text')?>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<?=$form->labelEx($model,'giftcard_mail', array('class' => 'control-label col-sm-3'))?>
+		<div class="col-sm-9">
+			<?=$form->textField($model,'giftcard_mail', array( 'class'=>'form-control'))?>
+			<?=$form->error($model,'giftcard_mail')?>
 		</div>
 	</div>
 

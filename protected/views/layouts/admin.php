@@ -63,7 +63,7 @@
 							</li>
 							<li class="">
 								<a href="/photo/admin">
-									<i class="gi gi-charts sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide"><?=Yii::t('app','Photos')?></span>
+									<i class="fa fa-camera-retro sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide"><?=Yii::t('app','Photos')?></span>
 								</a>
 							</li>
 							<li class="">
