@@ -140,8 +140,9 @@ Sitemap: http://cityquest.ru/sitemap.xml
 			if (isset($_POST['name']) && $_POST['name'] != '' && isset($_POST['phone']) 
 				&& $_POST['phone'] != '' && isset($_POST['addres']) && $_POST['addres'] != ''
 			){
-				if ($this->city_model->giftcard_mail == '') {
+				if ($this->city_model->giftcard_mail != '') {
 					if ($show_captcha == 0 || (isset($_POST['captcha']) && $_POST['captcha'] == $code)){
+
 						$this->sendMail(
 							$this->city_model->giftcard_mail,
 							"CityQuest. Заказ подарочной карты",
@@ -164,6 +165,7 @@ Sitemap: http://cityquest.ru/sitemap.xml
 					}
 				} else {
 					Yii::app()->user->setFlash('error', 'Ошибка на сервере');
+					$msg = 'Ошибка на сервере, свяжитесь с нами пожалуйста по поводу этой проблемы';
 				}
 			}
 		}

@@ -20,5 +20,6 @@
 		'giftcard_text',
 		'franchise_text',
 		'giftcard_mail',
+		'booking_alert_mail',
 	),
 )); ?>

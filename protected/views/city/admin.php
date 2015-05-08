@@ -43,6 +43,7 @@ $('.search-form form').submit(function(){
 					'tel',
 					'addres',
 					'giftcard_mail',
+					'booking_alert_mail',
 					array(
 						'class'=>'CButtonColumn',
 						'template' => '{update} {delete}',

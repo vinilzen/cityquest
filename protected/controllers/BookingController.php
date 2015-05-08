@@ -403,7 +403,7 @@ class BookingController extends Controller
 									
 									Yii::beginProfile('sendMail_2');
 									$this->sendMail(
-										'ilya@cityquest.ru, e.roslovets@cityquest.ru',
+										$this->city_model->booking_alert_mail,
 										"CityQuest. Бронирование квеста «".$quest->title."» ".substr($model->date, -2, 2)."/".substr($model->date, -4, 2)."/".substr($model->date, 0, 4)." ".$model->time,
 										"Здравствуйте, ".Yii::app()->getModule('user')->user()->username."! <br><br>
 										

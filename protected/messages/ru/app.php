@@ -12,6 +12,7 @@ return array(
 	'Addres additional'=>'Дополнительный адрес',
 	'Additional comment' => 'Дополнительный комментарий',
 	'Admin panel'=>'Панель администратора',
+	'Alert booking mail'=>'Оповещение о бронировании',
 	'Amount of discount'=>'Размер скидки',
 	'are required' => 'обязательны',
 	'Base'=>'Простой',

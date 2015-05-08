@@ -46,6 +46,7 @@ if (strpos($_SERVER['HTTP_HOST'], '.kz') > 0){
           <i class="icon-instagram icon"></i></a>
       </p>
     </div>
+    <? if ($this->city_model->id < 3) { ?>
     <div class="col-xs-12">
       <p class="text-center footer-addr">
       <? if (strpos($_SERVER['HTTP_HOST'], '.kz') > 0){ ?>
@@ -57,6 +58,7 @@ if (strpos($_SERVER['HTTP_HOST'], '.kz') > 0){
       <? } ?>
       </p>
     </div>
+    <? } ?>
   </div>
 </div>
 
