@@ -356,12 +356,12 @@
       <? } ?>
       </div>
       <div class="row tab-pane fade" role="tabpanel" id="winner">
-        <div class="col-sm-12">
+        <div class="col-sm-10 col-sm-offset-1">
           
         <? $month_array = array(
-            '1'=>'январь',
-            '2'=>'февраль',
-            '3'=>'март',
+            '01'=>'январь',
+            '02'=>'февраль',
+            '03'=>'март',
             '04'=>'апрель',
             '05'=>'май',
             '06'=>'июнь',
@@ -372,47 +372,57 @@
             '11'=>'ноябрь',
             '12'=>'декабрь',
           ); ?>
-          <div class="btn-group btn-group-justified" role="group">
+          <div class="text-center btn-group-month" role="group">
           <? foreach ($month_array as $key => $value){
               if ($key == date('m')) {
-                echo '<div class="btn btn-xs btn-transp active">'.$value.'</div>';
+                echo '<div class="btn btn-xs btn-link active">'.$value.'</div>';
               } else {
-                echo '<div class="btn btn-xs btn-transp">'.$value.'</div>';
+                $disabled = '';
+                if ($key > date('m')) $disabled = ' disabled';
+                echo '<div class="btn btn-xs btn-link'.$disabled.'">'.$value.'</div>';
               }
           } ?>
           </div>
           <div class="clearfix"></div>
           <? foreach ($bookings_winner_array AS $date) { ?>
             <? foreach ($date AS $b) { ?>
-              <div class="col-sm-3">
-                <div class="thumbnail thumbnail-transp">
+              <div class="col-sm-6 col-md-4 col-lg-3">
+                <a href="/result/<?=$b->id?>" class="thumbnail thumbnail-transp">
                   <img class="img-responsive" src="/images/winner_photo/<?=$b->winner_photo?>" alt="">
                   <div class="caption">
-                    <h4>Результат: <?=$b->result?></h4>
-                    <?  
-                      $year = substr($b->date, 0, 4);
-                      $month = substr($b->date, 4,2);
-                      $day = (int)(substr($b->date, -2));
+                    <p>
+                      <span class="pull-left">
+                        <i class="icon icon-alarm"></i>
+                        <?=$b->result?>
+                      </span>
+                      <?  
+                        $year = substr($b->date, 0, 4);
+                        $month = substr($b->date, 4,2);
+                        $day = (int)(substr($b->date, -2));
 
-                      $month_array = array(
-                        '01'=>'января',
-                        '02'=>'февраля',
-                        '03'=>'марта',
-                        '04'=>'апреля',
-                        '05'=>'мая',
-                        '06'=>'июня',
-                        '07'=>'июля',
-                        '08'=>'августа',
-                        '09'=>'сентября',
-                        '10'=>'октября',
-                        '11'=>'ноября',
-                        '12'=>'декабря',
-                      );
-                      
-                    ?>
-                    <p><?=$day; ?> <?=$month_array[$month]?> <?=$b->time?></p>
+                        $month_array = array(
+                          '01'=>'января',
+                          '02'=>'февраля',
+                          '03'=>'марта',
+                          '04'=>'апреля',
+                          '05'=>'мая',
+                          '06'=>'июня',
+                          '07'=>'июля',
+                          '08'=>'августа',
+                          '09'=>'сентября',
+                          '10'=>'октября',
+                          '11'=>'ноября',
+                          '12'=>'декабря',
+                        );
+                        
+                      ?>
+                      <span class="pull-right">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                        <?=$day; ?> <?=$month_array[$month]?> <?=$year?>
+                      </span>
+                    </p>
                   </div>
-                </div>
+                </a>
               </div>
             <? } ?>
           <? } ?>
