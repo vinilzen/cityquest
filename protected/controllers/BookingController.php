@@ -755,9 +755,9 @@ class BookingController extends Controller
 
 	        $watemark = new \Imagick(realpath('./images/logo_text75_sm.png'));
 	        $imagick = new \Imagick(realpath($savedFile));
-	        $imagick->resizeImage(1200, 1200, null, 1, TRUE);
+	        $imagick->resizeImage(1000, 1000, null, 1, TRUE);
 	        $imagick->compositeImage($watemark,imagick::COMPOSITE_OVER, 20, 20);
-	        $imagick->setImageCompressionQuality(70); 
+	        $imagick->setImageCompressionQuality(80); 
 	        $imagick->writeImage($savedFile);
 
 	        echo CJavaScript::jsonEncode(

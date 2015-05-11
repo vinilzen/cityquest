@@ -1033,4 +1033,8 @@ $(function() {
 			return false;
 		}
 	});
+
+	if($('#winner').length > 0 && window.location.hash != "") {
+      $('a[href="' + window.location.hash + '"]').click()
+  	}
 });

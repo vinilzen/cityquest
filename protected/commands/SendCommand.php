@@ -29,7 +29,7 @@ EOD;
     	$args = array_flip($args);
 
     	$date = date('Ymd', mktime(0, 0, 0, date("m")  , date("d")-1, date("Y")));
-    	$sql = "SELECT DISTINCT q.title, u.email, u.username, u.id AS user_id, b.result, b.quest_id ".
+    	$sql = "SELECT DISTINCT b.id AS id, b.winner_photo AS winner_photo, q.title, u.email, u.username, u.id AS user_id, b.result, b.quest_id ".
     			"FROM tbl_users AS u ".
 					"JOIN tbl_booking AS b ON b.competitor_id = u.id ".
 					"JOIN tbl_quest AS q ON b.quest_id = q.id ".
@@ -116,8 +116,8 @@ EOD;
           $mail = new YiiMailer($tamplate_name, $options);
           $mail->setFrom(Yii::app()->params['helloEmail'], 'CityQuest');
           $mail->setTo($options['email']);
-          //$mail->setTo('marchukilya@gmail.com');
-          $mail->setBcc('marchukilya@gmail.com');
+          // $mail->setTo('marchukilya@gmail.com');
+          //$mail->setBcc('marchukilya@gmail.com');
           $mail->setBcc('ilya@cityquest.ru');
           $mail->setSubject($subj);
 

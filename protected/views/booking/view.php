@@ -53,7 +53,7 @@
 			<span class="share_panel">
 				<script type="text/javascript">
 					var share_data = {
-						url: 'http://<?=$host?>/result/<?=$model->id?>',
+						url: 'http://<?=$host?>/result/<?=$model->id?>?<?=time()?>',
 						title: 'CityQuest - квесты в реальности',
 						description: 'Квест <?=$quest->title?> пройден за <?=$model->result?>',
 						image: 'http://<?=$host?>/images/winner_photo/<?=$model->winner_photo?>',
@@ -63,17 +63,17 @@
 				<script type="text/javascript" src="//yastatic.net/share/share.js" charset="utf-8"></script>
 				<span class="yashare-auto-init" 
 					data-yashareL10n="ru" 
+					data-yashareImage="http://<?=$host?>/images/winner_photo/<?=$model->winner_photo?>" 
 					data-yashareType="button" 
 					data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir"
 					data-yashareTitle="CityQuest - квесты в реальности"
 					data-yashareDescription="Квест <?=$quest->title?> пройден за <?=$model->result?>"
-					data-yashareLink="http://<?=$host?>/result/<?=$model->id?>" 
-					data-yashareImage="http://<?=$host?>/images/winner_photo/<?=$model->winner_photo?>" 
+					data-yashareLink="http://<?=$host?>/result/<?=$model->id?>?<?=time()?>" 
 					data-yashareTheme="counter"></span>
 			</span>
 		</p>
 		<p class="text-center">
-			<a href="/quest/<?=$quest->link?>" class="return_link">
+			<a href="/quest/<?=$quest->link?>#winner" class="return_link">
 			<img src="/img/orden.png" alt=""><br>
 			Все победители <br>этого квеста</a>
 		</p>
