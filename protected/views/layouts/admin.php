@@ -104,6 +104,11 @@
 						<? } elseif (Yii::app()->getModule('user')->user()->superuser == 2) { ?>
 							<ul class="sidebar-nav">
 								<li class="">
+									<a href="/quest/adminschedule/ymd">
+										<i class="hi hi-tasks sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide"><?=Yii::t('app','Bookings')?></span>
+									</a>
+								</li>
+								<li class="">
 									<a href="/booking/reports">
 										<i class="gi gi-charts sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide"><?=Yii::t('app','Reports')?></span>
 									</a>

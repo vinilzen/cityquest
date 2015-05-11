@@ -1,6 +1,9 @@
 <?php
 /* @var $this BookingController */
 /* @var $model Booking */
+  $this->pageTitle = 'CityQuest - квесты в реальности';
+  $this->description = 'Квест '.$quest->title.' пройден за '.$model->result;
+  $this->pageImg = '/images/winner_photo/'.$model->winner_photo;
 ?>
 
 <div class="row rules">
@@ -36,64 +39,75 @@
 				<i class="icon icon-alarm"></i> <strong><?=$model->result?></strong>
 			</span>
 			<span class="pull-right text-right">
-				Дата проведения мероприятия<br>
+				Дата игры<br>
 				<i class="glyphicon glyphicon-calendar"></i> <strong><?=$day; ?> <?=$month_array[$month]?> <?=$year?> <!-- <?=$model->time?> --></strong>
 			</span>
 			<img class="img-responsive" src="/images/winner_photo/<?=$model->winner_photo?>" alt="">
 		</p>
 		<? $host = $_SERVER['HTTP_HOST']; ?>
 		<p class="text-center">
-			<small>Поделись с друзьями</small>
+			<small class="white">Поделись с друзьями</small>
 		</p>
-		<p class="text-center">
+		<div id="fb-root"></div>
+		<p class="text-center" style="margin-top:15px;">
 			<span class="share_panel">
-				<a href="http://vkontakte.ru/share.php?url=http%3A%2F%2F<?=$host?>%2Fresult%2F<?=$model->id?>&t=" title="Поделиться на Vk" target="_blank" onclick="window.open('http://vkontakte.ru/share.php?url=' + encodeURIComponent(document.URL) + '&t=' + encodeURIComponent(document.URL)); return false;">
-					<img src="/img/color/Vk.png">
-				</a> &nbsp;
-				<a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F<?=$host?>%2Fresult%2F<?=$model->id?>&t=" title="Поделиться на Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&t=' + encodeURIComponent(document.URL)); return false;">
-					<img src="/img/color/Facebook.png">
-				</a> &nbsp;
-				<a href="https://twitter.com/intent/tweet?source=http%3A%2F%2F<?=$host?>%2Fresult%2F<?=$model->id?>&text=:%20http%3A%2F%2F<?=$host?>%2Fresult%2F<?=$model->id?>" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(document.URL)); return false;">
-					<img src="/img/color/Twitter.png">
-				</a>
-				<!-- OK
-					<a id="ok_shareWidget"></a>
-					<script>
-					!function (d, id, did, st) {
-					  var js = d.createElement("script");
-					  js.src = "http://connect.ok.ru/connect.js";
-					  js.onload = js.onreadystatechange = function () {
-					  if (!this.readyState || this.readyState == "loaded" || this.readyState == "complete") {
-					    if (!this.executed) {
-					      this.executed = true;
-					      setTimeout(function () {
-					        OK.CONNECT.insertShareWidget(id,did,st);
-					      }, 0);
-					    }
-					  }};
-					  d.documentElement.appendChild(js);
-					}(document,"ok_shareWidget",document.URL,"{width:30,height:35,st:'oval',sz:30,nt:1,nc:1}");
-					</script>
-				-->
-				<!--  MAIL
-					<a target="_blank" class="mrc__plugin_uber_like_button" href="http://connect.mail.ru/share" data-mrc-config="{'nc' : '1', 'nt' : '1', 'cm' : '1', 'sz' : '30', 'st' : '1', 'tp' : 'mm'}">Нравится</a>
-					<script src="http://cdn.connect.mail.ru/js/loader.js" type="text/javascript" charset="UTF-8"></script>
- 				-->
+				<script type="text/javascript">
+					var share_data = {
+						url: 'http://<?=$host?>/result/<?=$model->id?>',
+						title: 'CityQuest - квесты в реальности',
+						description: 'Квест <?=$quest->title?> пройден за <?=$model->result?>',
+						image: 'http://<?=$host?>/images/winner_photo/<?=$model->winner_photo?>',
+						noparse: true						
+					};
+				</script>
+				<script type="text/javascript" src="//yastatic.net/share/share.js" charset="utf-8"></script>
+				<span class="yashare-auto-init" 
+					data-yashareL10n="ru" 
+					data-yashareType="button" 
+					data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir"
+					data-yashareTitle="CityQuest - квесты в реальности"
+					data-yashareDescription="Квест <?=$quest->title?> пройден за <?=$model->result?>"
+					data-yashareLink="http://<?=$host?>/result/<?=$model->id?>" 
+					data-yashareImage="http://<?=$host?>/images/winner_photo/<?=$model->winner_photo?>" 
+					data-yashareTheme="counter"></span>
 			</span>
-			<!-- &nbsp;
-				<a href="https://plus.google.com/share?url=http%3A%2F%2F<?=$host?>%2Fresult%2F<?=$model->id?>" target="_blank" title="Поделиться на Google+" onclick="window.open('https://plus.google.com/share?url=' + encodeURIComponent(document.URL)); return false;">
-					<img src="/img/color/Google+.png">
-				</a> &nbsp;
-				<a href="http://pinterest.com/pin/create/button/?url=http%3A%2F%2F<?=$host?>%2Fresult%2F<?=$model->id?>&description=" target="_blank" title="Pin it" onclick="window.open('http://pinterest.com/pin/create/button/?url=' + encodeURIComponent(document.URL) + '&description=' +  encodeURIComponent(document.title)); return false;">
-					<img src="/img/color/Pinterest.png">
-				</a> &nbsp;
-				<a href="mailto:?subject=&body=:%20http%3A%2F%2F<?=$host?>%2Fresult%2F<?=$model->id?>" target="_blank" title="Email" onclick="window.open('mailto:?subject=' + encodeURIComponent(document.title) + '&body=' +  encodeURIComponent(document.URL)); return false;">
-					<img src="/img/color/Email.png">
-				</a>
-			-->
 		</p>
 		<p class="text-center">
-			<a href="/quest/<?=$quest->link?>" class="return_link">Все победители <br>этого квеста</a>
+			<a href="/quest/<?=$quest->link?>" class="return_link">
+			<img src="/img/orden.png" alt=""><br>
+			Все победители <br>этого квеста</a>
 		</p>
 	</div>
 </div>
+
+
+<? if (isset($quests) && count($quests) > 0) { ?>
+<div class="container-fluid bottom_quest" id="quests">
+  <div class="row">
+  <? $counter = 1;
+    foreach ($quests as $quest) {
+      $counter++;
+      if ($counter<5) {
+  ?>
+    <div class="col-xs-12 col-md-4 col-sm-6 col-lg-4 col-xlg-4 item">
+      <img class="featurette-image img-responsive"
+        alt="<?=CHtml::encode($quest->title)?>" 
+        src="/images/<?=$quest->cover?>">
+      <a class="descr" href="/quest/<?=$quest->link?>">
+        <h3 class="h2"><?=CHtml::encode($quest->title)?></h3>
+        <p class="quest_info">
+            <span>
+                <i class="icon icon-user"></i>
+                <i class="icon icon-user"></i>
+                <i class="icon icon-user noactive"></i>
+                <i class="icon icon-user noactive"></i><strong>2 - 4</strong> <?=Yii::t('app','players')?>
+            </span>
+            <span><i class="icon icon-point"></i><?=CHtml::encode($quest->addres)?></span>
+        </p>
+      </a>
+    </div>  
+    <? }
+  } ?>
+  </div>
+</div>
+<? } ?>

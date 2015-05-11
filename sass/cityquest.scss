@@ -877,8 +877,17 @@ a.descr {
 		}
 		&.h3-winner {
 			margin-bottom: 20px;
+			font-size: 30px;
+			color:#fff;	
 			&:after {
 				display:none;
+			}
+			a {
+				color:#78c4e8;
+				font-family: Proxima Nova;
+				&:hover {
+					text-decoration: none;
+				}
 			}
 		}
 	}
@@ -2969,8 +2978,11 @@ a:hover, a:focus {
 	// @media (min-width: 980px) and (max-width: 1024px) {
 	// 	max-height: 130px
 	// }
-	@media (min-width: 980px) and (max-width: 1350px) {
+	@media (min-width: 1281px) and (max-width: 1350px) {
 		max-height: 170px;
+	}
+	@media (min-width: 980px) and (max-width: 1280px) {
+		max-height: 160px;
 	}
 	&:after {
 		content: ' ';
@@ -3078,7 +3090,7 @@ a:hover, a:focus {
 .share_panel {
 	display:inline-block;
 	background-color:rgba(193, 235, 255, 0.3);
-	padding:14px 18px;
+	padding:12px 18px 14px 18px;
 	a {
 		display:inline-block;
 	}
@@ -3109,10 +3121,18 @@ a:hover, a:focus {
 	line-height: 1;
 	text-decoration: none;
 	transition: all 0.5s ease;
-
+	max-width: 150px;
+	display: inline-block;
+	line-height: 1.2;
+	img {
+		margin-bottom: 10px;
+	}
 	&:hover, &:focus {
 		color:#fff;
 		text-decoration: none;
 	}
 
+}
+.white {
+	color:#fff;
 }

@@ -19,7 +19,8 @@
 
 	<meta property="og:title" content="<?php echo CHtml::encode($this->pageTitle); ?>" />
 	<meta property="og:url" content="http://cityquest.ru<?php echo $_SERVER['REQUEST_URI'] ?>" />
-	<meta property="og:description" content="<?php echo CHtml::encode($this->pageTitle); ?>" />
+	<meta property="og:description" content="<?php echo CHtml::encode($this->description); ?>" />
 	<link rel="alternate" hreflang="ru" href="http://cityquest.ru/" />
 	<link rel="alternate" hreflang="x-default" href="http://cityquest.kz/" />
+	<script src="/js/jquery.min.js"></script>
 </head>

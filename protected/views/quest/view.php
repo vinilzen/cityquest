@@ -378,7 +378,7 @@
                 echo '<div class="btn btn-xs btn-link active">'.$value.'</div>';
               } else {
                 $disabled = '';
-                if ($key > date('m')) $disabled = ' disabled';
+                if (1 || $key > date('m')) $disabled = ' disabled';
                 echo '<div class="btn btn-xs btn-link'.$disabled.'">'.$value.'</div>';
               }
           } ?>

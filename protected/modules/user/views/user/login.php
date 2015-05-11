@@ -110,7 +110,7 @@
                           <span class="error-msg">?</span>
                         </div>
                         <div class="checkbox forgot"><label id="forgot"><?=Yii::t('app','Forgot your password?')?></label><label style="display:none;" id="auth_toogl"><?=Yii::t('app','Log In')?></label></div>
-                        <button class="btn btn-default btn-block btn-lg" type="submit"><?=Yii::t('app','LOGIN')?></button>
+                        <button class="btn btn-default btn-block btn-lg" type="submit" data-value="go"><?=Yii::t('app','LOGIN')?></button>
                       </form>
                     </div>
                     <div class="tab-pane" id="reg">

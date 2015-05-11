@@ -7,6 +7,7 @@ class BookingController extends Controller
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
 	public $layout='//layouts/column2';
+	public $pageImg;
 
 	/**
 	 * @return array action filters
@@ -58,9 +59,16 @@ class BookingController extends Controller
 		$model = $this->loadModel($id);
 		$quest = Quest::model()->findByPk($model->quest_id);
 
+		$quests = Quest::model()->findAll(array(
+		    "condition" => "status = 2 AND city_id = ".$this->city." AND id !=".$model->quest_id,
+		    "order" => "sort ASC",
+		    "limit" => 3,
+		));
+
 		$this->render('view',array(
 			'model'=>$model,
 			'quest'=>$quest,
+			'quests'=>$quests,
 		));
 	}
 
@@ -745,7 +753,7 @@ class BookingController extends Controller
 	        $model->winner_photo = $newFileName;
 	        $model->save();
 
-	        $watemark = new \Imagick(realpath('./images/logo_text0.75.png'));
+	        $watemark = new \Imagick(realpath('./images/logo_text75_sm.png'));
 	        $imagick = new \Imagick(realpath($savedFile));
 	        $imagick->resizeImage(1200, 1200, null, 1, TRUE);
 	        $imagick->compositeImage($watemark,imagick::COMPOSITE_OVER, 20, 20);

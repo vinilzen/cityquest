@@ -195,12 +195,15 @@ class QuestController extends Controller
 			$bookings_by_date[$booking->date][$booking->time]['name'] = isset($booking->competitor)?$booking->competitor->username:'';
 		}
 
-
 		$bookings_winner = Booking::model()->findAllByAttributes(
 			array('quest_id'=>$model->id),
-			'date LIKE :month AND winner_photo != "" AND result != "" AND result != "0"',
-			array('month'=>'%'.(int)date("Ym").'%')
+			array(
+				'condition'=>'date LIKE :month AND winner_photo != "" AND result != "" AND result != "0"',
+				'order'=>'date DESC',
+				'params'=>array('month'=>'%'.(int)date("Ym").'%')
+			)
 		);
+		
 		$bookings_winner_array = array();
 
 		foreach ($bookings_winner AS $b){
