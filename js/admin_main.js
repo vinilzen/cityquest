@@ -102,7 +102,9 @@ var PopoverView = Backbone.View.extend({
 				$(btn).popover('hide');
 			});
 
-		$('.popover-title .close').before('&nbsp;-&nbsp;'+$('#q_id_'+self.attr.quest_id).text());
+		$('.popover-title .close').before(
+			'&nbsp;-&nbsp;'+$('#q_id_'+self.attr.quest_id).text()//+' ('+self.attr.price+'р)'
+		);
 
 
 	},
@@ -431,11 +433,10 @@ var PopoverView = Backbone.View.extend({
 					alert(filename + 'upload failed');
 					return false;            
 				} else {
-
 					$('#picbox a img').remove();
 					$('#picbox a')
 						.attr({'href':'/images/winner_photo/'+response.file})
-						.html('<img width="200" src="/images/winner_photo/'+self.attr.id+'.jpg?'+Date.now()+'"></a>');
+						.html('<img class="img-responsive" style="max-height: 100px; height: 200px;" src="/images/winner_photo/'+self.attr.id+'.jpg?'+Date.now()+'"></a>');
 					$('#picbox').removeClass('hide').fadeIn();
 					$('button[data-id="'+self.attr.id+'"]')
 						.attr('data-winner-photo',self.attr.id+'.jpg')

@@ -936,7 +936,7 @@ $(function() {
 		$('#form-group-username-auth, #form-group-pass-auth').hide();
 		$('#form-group-forgot-auth').show();
 
-		$('#myModalAuth button.btn').html('ВОССТАНОВИТЬ');
+		$('#myModalAuth button.btn').html('ВОССТАНОВИТЬ').attr('data-value','forgot');
 	});
 
 	$('#auth_toogl').click(function(event) {
@@ -947,7 +947,7 @@ $(function() {
 		$('#form-group-forgot-auth').hide();
 
 
-		$('#myModalAuth button.btn').html('войти');
+		$('#myModalAuth button.btn').html('войти').attr('data-value','go');
 	});
 
 

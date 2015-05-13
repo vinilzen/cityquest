@@ -58,19 +58,29 @@
       </div>
       <% if (action == 'edit') { %>
       <div class="form-group">
-        <label for="inputResult" class="col-xs-4 text-left control-label"><?=Yii::t('app','Result')?></label>
-        <div class="col-xs-8">
-          <input type="text" class="form-control input-sm inputResult" placeholder="00:00">
+        <div class="row">
+          <div class="col-xs-7">
+            <label for="inputResult" class="col-xs-7 text-left control-label"><?=Yii::t('app','Result')?></label>
+            <div class="col-xs-5">
+              <input type="text" class="form-control input-sm inputResult" placeholder="00:00">
+            </div>
+          </div>
+          <div class="col-xs-5">
+            <label for="inputPrice" class="col-xs-4 text-left control-label"><?=Yii::t('app','Price')?></label>
+            <div class="col-xs-8">
+              <input type="text" class="form-control input-sm inputPrice" placeholder="3000">
+            </div>
+          </div>
         </div>
       </div>
-      <% } %>
+      <% } else { %>
       <div class="form-group">
         <label for="inputPrice" class="col-xs-4 text-left control-label"><?=Yii::t('app','Price')?></label>
         <div class="col-xs-8">
           <input type="text" class="form-control input-sm inputPrice" placeholder="3000">
         </div>
       </div>
-
+      <% } %>
 
       <div class="form-group" id="priceRow">
         <label class="col-xs-4 text-left control-label"><?=Yii::t('app','Reason discounts')?></label>
@@ -121,16 +131,18 @@
       </div>
       <% if (action == 'edit') { %>
       <div class="form-group" id="uploadWinnerPhoto">
-        <div class="col-xs-12">
-          <input type="button" id="upload-btn" class="btn btn-default btn-block btn-large clearfix" value="Загрузить фото победителя">
+        <div class="col-xs-6">
+          <input type="button" id="upload-btn" class="btn btn-default btn-block btn-large clearfix" value="Загрузить фото">
           <span id="sizeBox"></span>
           <div id="errormsg" class="clearfix hide"></div>
           <div class="progress progress-striped active hide">
             <div class="progress-bar progress-bar-success" id="progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">0%</div>
           </div>
+        </div>
+        <div class="col-xs-6">
           <div id="picbox" class="clear text-center">
             <a href="/images/winner_photo/<%= id %>.jpg" target="_blank">
-              <img width="200" src="/images/winner_photo/<%= id %>.jpg" alt="Нет фото"></a>
+              <img class="img-responsive" style="max-height: 100px; height: 200px;" src="/images/winner_photo/<%= id %>.jpg" alt="Нет фото"></a>
           </div>
         </div>
       </div>

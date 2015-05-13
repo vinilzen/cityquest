@@ -1,8 +1,19 @@
 <?
 $currency = '<em class="rur currency"><em>'.Yii::t('app','rub').'.</em></em>';
+$fb_link = 'https://www.facebook.com/cityquestru';
+$instagram_link = 'http://instagram.com/cityquestru';
+$vk_link = 'http://vk.com/cityquestru';
+
 if (strpos($_SERVER['HTTP_HOST'], '.kz') > 0){
+
   $currency = '<em itemprop="priceCurrency" class="currency" content="〒"><em style="font-style:normal;">〒</em></em>';
+
+  $fb_link = 'https://www.facebook.com/CityQuestAst';
+  $instagram_link = 'https://instagram.com/cityquestast';
+  $vk_link = 'https://vk.com/club93430433';
+
 }
+
 ?>
 
 
@@ -18,13 +29,13 @@ if (strpos($_SERVER['HTTP_HOST'], '.kz') > 0){
     </div>
     <div class="col-xs-12 col-md-4 visible-xs">
       <p class="text-center">
-        <a class="btn-soc" target="_blank" href="https://www.facebook.com/cityquestru">
+        <a class="btn-soc" target="_blank" href="<?=$fb_link?>">
           <i class="icon icon-facebook"></i>
         </a>
-        <a class="btn-soc" target="_blank" href="http://vk.com/cityquestru">
+        <a class="btn-soc" target="_blank" href="<?=$vk_link?>">
           <i class="icon icon-vk"></i>
         </a>
-        <a class="btn-soc" href="http://instagram.com/cityquestru" target="_blank">
+        <a class="btn-soc" href="<?=$instagram_link?>" target="_blank">
           <i class="icon-instagram icon"></i>
         </a>
       </p>
@@ -38,24 +49,19 @@ if (strpos($_SERVER['HTTP_HOST'], '.kz') > 0){
     <div class="col-sm-4 col-md-4 col-xs-12 hidden-xs">
       <p class="pull-right right-soc">
         <span class="weinsoc hidden-sm hidden-md "><?=Yii::t('app','we are in social networks')?><em>&mdash;</em></span>
-        <a class="btn-soc" target="_blank" href="https://www.facebook.com/cityquestru">
+        <a class="btn-soc" target="_blank" href="<?=$fb_link?>">
           <i class="icon icon-facebook"></i></a>
-        <a class="btn-soc" href="http://vk.com/cityquestru" target="_blank">
+        <a class="btn-soc" href="<?=$vk_link?>" target="_blank">
           <i class="icon icon-vk"></i></a>
-        <a class="btn-soc" href="http://instagram.com/cityquestru" target="_blank" >
+        <a class="btn-soc" href="<?=$instagram_link?>" target="_blank" >
           <i class="icon-instagram icon"></i></a>
       </p>
     </div>
     <? if ($this->city_model->id < 3) { ?>
     <div class="col-xs-12">
       <p class="text-center footer-addr">
-      <? if (strpos($_SERVER['HTTP_HOST'], '.kz') > 0){ ?>
-        г. Астана, Айша биби 9<br>
-        <span class="ya-phone">+7 (776) 100-4447</span>
-      <? } else { ?>
-        г. Москва, ул. Летниковская, д. 4, стр. 2<br>
-        <span class="ya-phone">+7 (495) 749-96-09</span>
-      <? } ?>
+        <?=$this->city_model->addres?><br>
+        <span class="ya-phone"><?=$this->city_model->tel?></span>
       </p>
     </div>
     <? } ?>
@@ -180,7 +186,7 @@ if (strpos($_SERVER['HTTP_HOST'], '.kz') > 0){
                 </div>
                 <div class="form-group" style="display:none;" id="form-group-forgot-auth">
                   <input class="form-control" placeholder="Email" id="auth-forgot" type="email" name="email">
-                  <p class="help-block"><small><?=Yii::t('app','To recover a password, enter Email'); ?></small></p>
+                  <p class="help-block" style="clear:both; padding-top: 45px;"><small><?=Yii::t('app','To recover a password, enter Email'); ?></small></p>
                   <span class="error-msg">?</span>
                 </div>
                 <div class="form-group" id="form-group-pass-auth">
