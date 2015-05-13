@@ -59,16 +59,16 @@
       <% if (action == 'edit') { %>
       <div class="form-group">
         <div class="row">
-          <div class="col-xs-7">
-            <label for="inputResult" class="col-xs-7 text-left control-label"><?=Yii::t('app','Result')?></label>
-            <div class="col-xs-5">
-              <input type="text" class="form-control input-sm inputResult" placeholder="00:00">
+          <div class="col-xs-6">
+            <label for="inputPrice" class="col-xs-6 text-left control-label"><?=Yii::t('app','Price')?></label>
+            <div class="col-xs-6">
+              <input type="text" class="form-control input-sm inputPrice" placeholder="3000">
             </div>
           </div>
-          <div class="col-xs-5">
-            <label for="inputPrice" class="col-xs-4 text-left control-label"><?=Yii::t('app','Price')?></label>
-            <div class="col-xs-8">
-              <input type="text" class="form-control input-sm inputPrice" placeholder="3000">
+          <div class="col-xs-6">
+            <label for="inputResult" class="col-xs-6 text-left control-label"><?=Yii::t('app','Result')?></label>
+            <div class="col-xs-6">
+              <input type="text" class="form-control input-sm inputResult" placeholder="00:00">
             </div>
           </div>
         </div>
@@ -138,6 +138,7 @@
           <div class="progress progress-striped active hide">
             <div class="progress-bar progress-bar-success" id="progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">0%</div>
           </div>
+          <div id="affilate_container"></div>
         </div>
         <div class="col-xs-6">
           <div id="picbox" class="clear text-center">
@@ -147,7 +148,7 @@
         </div>
       </div>
       <% } %>
-      <div class="form-group form-group-btn ">
+      <div class="form-group" style="margin-bottom:0;">
         <div class="col-xs-12">
           <% if (action == 'edit') { %>
             <% if (status == 0) { %>

@@ -82,8 +82,9 @@ var PopoverView = Backbone.View.extend({
 		this.showEdit(this.attr.action); // Add || Edit
 
 		if (this.attr.affiliate != '' ){
-			$('#phoneRow', this.$el)
-				.append('<br><strong>Affiliate</strong>: <span>#'+self.attr.id+' '+self.attr.affiliate+'</span>');
+			$('#affilate_container', this.$el)
+				// .append('<br><strong>Affiliate</strong>: <span>#'+self.attr.id+' '+self.attr.affiliate+'</span>');
+				.append('<br><strong>Affiliate</strong>: <span>'+self.attr.affiliate+'</span>');
 		}
 
 		$('[data-toggle="tooltip"]', this.$el).tooltip();
@@ -101,6 +102,8 @@ var PopoverView = Backbone.View.extend({
 			.click(function(){
 				$(btn).popover('hide');
 			});
+
+		$('.popover-title').prepend('<small>#'+self.attr.id+'</small>&nbsp;&nbsp;');
 
 		$('.popover-title .close').before(
 			'&nbsp;-&nbsp;'+$('#q_id_'+self.attr.quest_id).text()//+' ('+self.attr.price+'р)'

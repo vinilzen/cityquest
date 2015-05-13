@@ -3057,6 +3057,18 @@ a:hover, a:focus {
 	  border-style: solid;
 	  border-color: #78c4e8 transparent #78c4e8 #78c4e8;
 	}
+	&.promo-flag-right {
+		left:initial;
+		right:0;
+		position: absolute;
+		top:12px;
+		width:60px;
+		&:before {
+			right:initial;
+			left:-6px;
+			border-color: #78c4e8 #78c4e8 #78c4e8 transparent;
+		}
+	}
 }
 .btn-group-month {
 	margin-bottom: 25px;

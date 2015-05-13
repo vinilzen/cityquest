@@ -446,11 +446,20 @@ class QuestController extends Controller
 
 		Yii::endProfile('quest_index');
 
+		$start_date = date('Ymd', strtotime('0 day'));
+		$end_date = date('Ymd', strtotime( '+10 day' ));
+
+		$quests_with_promo = array();
+		foreach ($quests as $q) {
+			$promo_days = $this->getPromoDays($q->id, $start_date, $end_date);
+			if (count($promo_days) > 0) $quests_with_promo[] = $q->id;
+		}
 		// foreach ($quests as $key => $value) { echo $value->id.'#'.$value->title.', '.$value->sort.' - '.$value->status.'<br>';	}
         
         $this->layout = '//layouts/index';
 		$this->render('index',array(
 			'quests'=>$quests,
+			'quests_with_promo'=>$quests_with_promo,
 		));
 	}
 

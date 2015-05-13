@@ -44,6 +44,9 @@ foreach ($quests as $quest) {
 					</span>
 					<span><i class="icon icon-Pin"></i><?=CHtml::encode($quest->addres)?></span>
 				</p>
+				<? if (in_array($quest->id, $quests_with_promo)) {
+					echo '<span class="promo-flag promo-flag-right">Акция</span>';
+				} ?>
 			</a>
 		<? } else { ?>
 			<a class="descr inactive<?=($quest->actor)?' withactor':''?>">
