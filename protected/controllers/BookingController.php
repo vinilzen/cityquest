@@ -408,8 +408,16 @@ class BookingController extends Controller
 								if (!isset($_POST['user']) || (isset($_POST['user']) && $_POST['user'] != -1)){
 									
 									// Yii::beginProfile('sendMail_2');
+									$notification_mails = explode(',', $this->city_model->booking_alert_mail);
+
+									if ($quest->mail_for_notifications!='') {
+										$notification_mails = array_merge($notification_mails, explode(',',$quest->mail_for_notifications));
+									}
+									
+									$emails = array_unique($notification_mails, SORT_STRING);
+
 									$this->sendMail(
-										($quest->mail_for_notifications!='') ? $quest->mail_for_notifications : $this->city_model->booking_alert_mail, 
+										implode(', ',$emails), 
 										"CityQuest. Бронирование квеста «".$quest->title."» ".substr($model->date, -2, 2)."/".substr($model->date, -4, 2)."/".substr($model->date, 0, 4)." ".$model->time,
 										"Здравствуйте, ".Yii::app()->getModule('user')->user()->username."! <br><br>
 										

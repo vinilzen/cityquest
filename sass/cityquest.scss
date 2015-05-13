@@ -3053,9 +3053,14 @@ a:hover, a:focus {
 	  height: 0;
 	  width: 12px;
 	  right: -12px;
+	  height:28px;
+	  background: url(../img/flag_tr.png) no-repeat left top;
+	  background-size: 8px 28px;
+	  /* 
 	  border-width: 14px 6px;
 	  border-style: solid;
-	  border-color: #78c4e8 transparent #78c4e8 #78c4e8;
+	  border-right-style: double;
+	  border-color: #78c4e8 transparent #78c4e8 #78c4e8; */
 	}
 	&.promo-flag-right {
 		left:initial;
@@ -3066,7 +3071,11 @@ a:hover, a:focus {
 		&:before {
 			right:initial;
 			left:-6px;
-			border-color: #78c4e8 #78c4e8 #78c4e8 transparent;
+	  		background: url(../img/flag_tr_r.png) no-repeat left top;
+	  		background-size: 8px 28px;
+	  		/* border-style: solid;
+	  		border-left-style: double;
+			border-color: #78c4e8 #78c4e8 #78c4e8 transparent; */
 		}
 	}
 }
