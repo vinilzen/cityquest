@@ -25,10 +25,10 @@ $('.search-form form').submit(function(){
 ?>
 
 <div class="search-form" style="display:none">
-	<?php $this->renderPartial('_search',array('model'=>$model)); ?>
+	<? $this->renderPartial('_search',array('model'=>$model)); ?>
 </div>
 
-<?php $this->widget('zii.widgets.grid.CGridView', array(
+<? $this->widget('zii.widgets.grid.CGridView', array(
 	'dataProvider'=>$model->search(),
     // 'rowCssClassExpression'=>'(($data->superuser==2) ? "info":"").(($data->superuser==1) ? "danger":"")',
     'pagerCssClass'=>'dataTables_paginate paging_bootstrap',
@@ -89,10 +89,15 @@ $('.search-form form').submit(function(){
 					"#",
 					array("class"=>"label label-".(($data->superuser==1)?"danger":(($data->superuser==2)?"info":"success")))
 				)',
-			// 'value'=>'User::itemAlias("AdminStatus",$data->superuser)',
 			'filter'=>'',
 			'type'=>'raw',
 		),
+		/*array(
+			'name' => 'city_id',
+			'type'=>'raw',
+			'value' => '$this->cities_array[$data->city_id]->name',
+			'filter'=>'',
+		),*/
 		array(
 			'class'=>'CButtonColumn',
 			'template' => '{update} {delete} {viewfb} {viewvk}',

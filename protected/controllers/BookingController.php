@@ -361,9 +361,8 @@ class BookingController extends Controller
 								if ( !Yii::app()->getModule('user')->user()->superuser > 0) {
 									$email = Yii::app()->getModule('user')->user()->email;
 
-									// Yii::beginProfile('sendMail-'.$email);
 									$this->sendMail(
-										$email, //Cityquest. Бронирование квеста «НАЗВАНИЕ КВЕСТА» ДАТА ВРЕМЯ
+										$email,
 										"CityQuest. Бронирование квеста «".$quest->title."» ".substr($model->date, -2, 2)."/".substr($model->date, -4, 2)."/".substr($model->date, 0, 4)." ".$model->time,
 										"Здравствуйте, ".Yii::app()->getModule('user')->user()->username."! <br><br>
 										
@@ -378,15 +377,13 @@ class BookingController extends Controller
 										Команда CityQuest<br>
 										<a href='http://cityquest.ru' target='_blank'>www.cityquest.ru</a><br>
 										8 (495) 749-96-09");
-									// Yii::endProfile('sendMail-'.$email);
 								}
 
 								if (isset($user_model) && $model->competitor_id == $user_model->id && isset($_POST['user']) && $_POST['user'] != -1) {
 									$email = $user_model->email;
 
-									// Yii::beginProfile('sendMail-'.$email);
 									$this->sendMail(
-										$email, //Cityquest. Бронирование квеста «НАЗВАНИЕ КВЕСТА» ДАТА ВРЕМЯ
+										$email,
 										"CityQuest. Бронирование квеста «".$quest->title."» ".substr($model->date, -2, 2)."/".substr($model->date, -4, 2)."/".substr($model->date, 0, 4)." ".$model->time,
 										"Здравствуйте, ".Yii::app()->getModule('user')->user()->username."! <br><br>
 										
@@ -401,13 +398,10 @@ class BookingController extends Controller
 										Команда CityQuest<br>
 										<a href='http://cityquest.ru' target='_blank'>www.cityquest.ru</a><br>
 										8 (495) 749-96-09");
-									// Yii::endProfile('sendMail-'.$email);
-
 								}
 
 								if (!isset($_POST['user']) || (isset($_POST['user']) && $_POST['user'] != -1)){
 									
-									// Yii::beginProfile('sendMail_2');
 									$notification_mails = explode(',', $this->city_model->booking_alert_mail);
 
 									if ($quest->mail_for_notifications!='') {
@@ -428,7 +422,6 @@ class BookingController extends Controller
 										.$quest->addres_additional
 
 									);
-									// Yii::endProfile('sendMail_2');
 								}
 							
 

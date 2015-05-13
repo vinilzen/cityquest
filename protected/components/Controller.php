@@ -54,6 +54,7 @@ class Controller extends CController
 
 
 	public $cities;
+	public $cities_array;
 	public $city = 1;
 	public $city_name = 'Москва';
 	
@@ -85,12 +86,14 @@ class Controller extends CController
 		}	
 
 		$this->cities = City::model()->findAll();
+		$this->cities_array = array();
 		$this->language = 'ru';
 
 		if (strpos($_SERVER['HTTP_HOST'], '.kz') > 0){
 			$this->city_model = City::model()->findByPk(2);
 			$this->city = 2;
 			$this->city_name = 'Астана';
+			$this->cities_array[$this->city] = $this->city_model;
 		} else {
 			
 			$url_segments = explode('.',$_SERVER['HTTP_HOST']);
@@ -98,6 +101,7 @@ class Controller extends CController
 			if ( count($url_segments)==3 ) {
 				foreach ($this->cities as $city) {
 					if($city->subdomain == $url_segments[0]) {
+						$this->cities_array[$city->id] = $city;
 						$this->city_model = $city;
 						$this->city = $city->id;
 						$this->city_name = $city->name;
@@ -108,6 +112,7 @@ class Controller extends CController
 				$this->city_model = City::model()->findByPk(1);
 				$this->city = 1;
 				$this->city_name = 'Москва';
+				$this->cities_array[$this->city] = $this->city_model;
 			}
 		}
 

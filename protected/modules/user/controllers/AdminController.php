@@ -189,10 +189,9 @@ class AdminController extends Controller
 	 */
 	public function actionDelete()
 	{
-			// we only allow deletion via POST request
-			$model = $this->loadModel();
-			$model->delete();
-			$this->redirect(array('/user/admin'));
+		$model = $this->loadModel();
+		$model->delete();
+		$this->redirect(array('/user/admin'));
 	}
 	
 	
