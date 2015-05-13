@@ -67,7 +67,7 @@ $('.search-form form').submit(function(){
 							'</div>';*/
 
 						echo '<div class="col-xs-12 col-sm-6 col-lg-4 portfolio-item animation-fadeInQuick sortable_quest" data-id="'.$q->id.'" id="quest_'.$q->id.'">'.
-								'<a href="/quest/update?id='.$q->id.'" class="widget " title="Редактировать">'.
+								'<a href="/quest/update?id='.$q->id.'?123" class="widget " title="Редактировать">'.
 									'<img src="/images/'.$q->cover.'" class="img-responsive">'.
 									'<span class="portfolio-item-info"><strong>'.$q->title.'</strong>'.
 										'<em class="pull-right">'.$status.'</em>'.

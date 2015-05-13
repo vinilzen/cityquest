@@ -214,6 +214,15 @@
 			<?=$form->error($model,'keywords', array('class'=>'help-block'))?>
 		</div>
 	</div>
+
+	<div class="form-group<?=(isset($errors['mail_for_notifications']))?' has-error':''?>">
+		<?=$form->labelEx($model,'mail_for_notifications', array('class' => 'control-label col-sm-3'))?>
+		<div class="col-sm-9">
+			<?=$form->textArea($model,'mail_for_notifications',array('rows'=>2, 'cols'=>50,'class'=>'form-control'))?>
+			<?=$form->error($model,'mail_for_notifications', array('class'=>'help-block'))?>
+		</div>
+	</div>
+	
 	<div class="form-group hide">
 		<div class="col-sm-offset-3 col-sm-9">
 				<? //echo (file_exists('.'.$img_path))?'<img src="'.$img_path.'" width="100" />':''; ?>

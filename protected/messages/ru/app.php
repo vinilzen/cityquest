@@ -43,6 +43,7 @@ return array(
 	'Editing quest'=>'Редактирование квеста',
 	'Edit Sources' => 'Редактирование "откуда пришел пользователь"',
 	'end'=>'до',
+	'Email for notifications'=>'E-mail для уведомлений',
 	'Escape Room, quests in real life'=>'ВЫБЕРИСЬ ИЗ КОМНАТЫ КВЕСТЫ В РЕАЛЬНОЙ ЖИЗНИ',
 	// 'Edit Profile'=>'Редактирование профиля',
 	'Fields with' => 'Поля с',

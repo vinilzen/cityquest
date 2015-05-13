@@ -178,6 +178,9 @@
               $pricePm = $model->price_pm;
             }
 
+            $price_original_Am = $priceAm;
+            $price_original_Pm = $pricePm;
+
             if (isset($promo_days[$value['date']])) {
               $priceAm = $promo_days[$value['date']]->price_am;
               $pricePm = $promo_days[$value['date']]->price_pm;
@@ -273,20 +276,20 @@
               <div class="price-line">
                 <div class="priceTbl workPrice1" title="Цена за команду" data-toggle="tooltip">
                   <div class="priceRow">
-                    <span class="price" itemprop="price" content="<?=$pricePm?>" style="padding:0;"><em class="<?=$line_through?>"><?=$pricePm?></em> <?=$currency?></span>
+                    <span class="price" itemprop="price" content="<?=$price_original_Pm?>" style="padding:0;"><em class="<?=$line_through?>"><?=$price_original_Pm?></em> <?=$currency?></span>
                   </div>
                 </div>
                 <div class="priceTbl workPrice2 <? if ($model->id==15) echo 'workPrice23'; ?>" title="Цена за команду" data-toggle="tooltip">
                   <div class="priceRow">
                     <span class="dashed">&nbsp;</span>
-                    <span class="price" itemprop="price" content="<?=$priceAm?>"><em class="<?=$line_through?>"><?=$priceAm?></em> <?=$currency?></span>
+                    <span class="price" itemprop="price" content="<?=$price_original_Am?>"><em class="<?=$line_through?>"><?=$price_original_Am?></em> <?=$currency?></span>
                     <span class="dashed">&nbsp;</span>
                   </div>
                 </div>
                 <div class="priceTbl workPrice3" title="Цена за команду" data-toggle="tooltip">
                   <div class="priceRow">
                     <span class="dashed">&nbsp;</span>
-                    <span class="price" itemprop="price" content="<?=$pricePm?>"><em class="<?=$line_through?>"><?=$pricePm?></em> <?=$currency?></span>
+                    <span class="price" itemprop="price" content="<?=$price_original_Pm?>"><em class="<?=$line_through?>"><?=$price_original_Pm?></em> <?=$currency?></span>
                     <span class="dashed">&nbsp;</span>
                   </div>
                 </div>
@@ -328,8 +331,8 @@
                 <div class="priceTbl weekendPrice2 " title="Цена за команду" data-toggle="tooltip">
                   <div class="priceRow">
                     <span class="dashed">&nbsp;</span>
-                    <span class="price" itemprop="price" content="<?=$pricePm?>">
-                      <em class="<?=$line_through?>"><?=$pricePm?></em> <?=$currency?></span>
+                    <span class="price" itemprop="price" content="<?=$price_original_Pm?>">
+                      <em class="<?=$line_through?>"><?=$price_original_Pm?></em> <?=$currency?></span>
                     <span class="dashed">&nbsp;</span>
                   </div>
                 </div>

@@ -358,21 +358,19 @@ class BookingController extends Controller
 							}
 
 							if ( $user_model->save() && $model->save() ){
-								
 								if ( !Yii::app()->getModule('user')->user()->superuser > 0) {
-
 									$email = Yii::app()->getModule('user')->user()->email;
 
-									Yii::beginProfile('sendMail-'.$email);
+									// Yii::beginProfile('sendMail-'.$email);
 									$this->sendMail(
 										$email, //Cityquest. Бронирование квеста «НАЗВАНИЕ КВЕСТА» ДАТА ВРЕМЯ
 										"CityQuest. Бронирование квеста «".$quest->title."» ".substr($model->date, -2, 2)."/".substr($model->date, -4, 2)."/".substr($model->date, 0, 4)." ".$model->time,
 										"Здравствуйте, ".Yii::app()->getModule('user')->user()->username."! <br><br>
 										
-										Вы записались на квест <a href='http://cityquest.ru/quest/view?id=".$quest->id."' target='_blank' >«".$quest->title."»</a> ".substr($model->date, -2, 2)."/".substr($model->date, -4, 2)."/".substr($model->date, 0, 4)." в ".$model->time." <br>
+										Вы записались на квест <a href='http://cityquest.ru/quest/".$quest->link."' target='_blank' >«".$quest->title."»</a> ".substr($model->date, -2, 2)."/".substr($model->date, -4, 2)."/".substr($model->date, 0, 4)." в ".$model->time." <br>
 										Не забудьте, для участия вам понадобится команда от 2 до 4 человек.<br><br>
 
-										Мы ждем вас по адресу <a href='https://www.google.com/maps/preview?q=москва,+".urlencode($quest->addres)."' target='_blank'>".$quest->addres.".</a><br>"
+										Мы ждем вас по адресу <a href='https://www.google.com/maps/preview?q=".$this->city_model->name.",+".urlencode($quest->addres)."' target='_blank'>".$quest->addres.".</a><br>"
 										.$quest->addres_additional."<br><br>".
 										"Игра начнется, когда вся команда соберется. Мы просим не опаздывать, иначе у вас останется меньше времени на прохождение.<br><br>
 
@@ -380,22 +378,22 @@ class BookingController extends Controller
 										Команда CityQuest<br>
 										<a href='http://cityquest.ru' target='_blank'>www.cityquest.ru</a><br>
 										8 (495) 749-96-09");
-									Yii::endProfile('sendMail-'.$email);
+									// Yii::endProfile('sendMail-'.$email);
 								}
 
 								if (isset($user_model) && $model->competitor_id == $user_model->id && isset($_POST['user']) && $_POST['user'] != -1) {
 									$email = $user_model->email;
 
-									Yii::beginProfile('sendMail-'.$email);
+									// Yii::beginProfile('sendMail-'.$email);
 									$this->sendMail(
 										$email, //Cityquest. Бронирование квеста «НАЗВАНИЕ КВЕСТА» ДАТА ВРЕМЯ
 										"CityQuest. Бронирование квеста «".$quest->title."» ".substr($model->date, -2, 2)."/".substr($model->date, -4, 2)."/".substr($model->date, 0, 4)." ".$model->time,
 										"Здравствуйте, ".Yii::app()->getModule('user')->user()->username."! <br><br>
 										
-										Вы записались на квест <a href='http://cityquest.ru/quest/view?id=".$quest->id."' target='_blank' >«".$quest->title."»</a> ".substr($model->date, -2, 2)."/".substr($model->date, -4, 2)."/".substr($model->date, 0, 4)." в ".$model->time." <br>
+										Вы записались на квест <a href='http://cityquest.ru/quest/".$quest->link."' target='_blank' >«".$quest->title."»</a> ".substr($model->date, -2, 2)."/".substr($model->date, -4, 2)."/".substr($model->date, 0, 4)." в ".$model->time." <br>
 										Не забудьте, для участия вам понадобится команда от 2 до 4 человек.<br><br>
 
-										Мы ждем вас по адресу <a href='https://www.google.com/maps/preview?q=москва,+".urlencode($quest->addres)."' target='_blank'>".$quest->addres.".</a><br>
+										Мы ждем вас по адресу <a href='https://www.google.com/maps/preview?q=".$this->city_model->name.",+".urlencode($quest->addres)."' target='_blank'>".$quest->addres.".</a><br>
 										".$quest->addres_additional."<br><br>
 										Игра начнется, когда вся команда соберется. Мы просим не опаздывать, иначе у вас останется меньше времени на прохождение.<br><br>
 
@@ -403,27 +401,26 @@ class BookingController extends Controller
 										Команда CityQuest<br>
 										<a href='http://cityquest.ru' target='_blank'>www.cityquest.ru</a><br>
 										8 (495) 749-96-09");
-									Yii::endProfile('sendMail-'.$email);
+									// Yii::endProfile('sendMail-'.$email);
 
 								}
 
 								if (!isset($_POST['user']) || (isset($_POST['user']) && $_POST['user'] != -1)){
 									
-									Yii::beginProfile('sendMail_2');
+									// Yii::beginProfile('sendMail_2');
 									$this->sendMail(
-										$this->city_model->booking_alert_mail,
+										($quest->mail_for_notifications!='') ? $quest->mail_for_notifications : $this->city_model->booking_alert_mail, 
 										"CityQuest. Бронирование квеста «".$quest->title."» ".substr($model->date, -2, 2)."/".substr($model->date, -4, 2)."/".substr($model->date, 0, 4)." ".$model->time,
 										"Здравствуйте, ".Yii::app()->getModule('user')->user()->username."! <br><br>
 										
-										Вы записались на квест <a href='http://cityquest.ru/quest/view?id=".$quest->id."' target='_blank' >«".$quest->title."»</a> ".substr($model->date, -2, 2)."/".substr($model->date, -4, 2)."/".substr($model->date, 0, 4)." в ".$model->time." <br>
+										Вы записались на квест <a href='http://cityquest.ru/quest/".$quest->link."' target='_blank' >«".$quest->title."»</a> ".substr($model->date, -2, 2)."/".substr($model->date, -4, 2)."/".substr($model->date, 0, 4)." в ".$model->time." <br>
 										Не забудьте, для участия вам понадобится команда от 2 до 4 человек.<br><br>
 
-										Мы ждем вас по адресу <a href='https://www.google.com/maps/preview?q=москва,+".urlencode($quest->addres)."' target='_blank'>".$quest->addres.".</a><br>"
+										Мы ждем вас по адресу <a href='https://www.google.com/maps/preview?q=".$this->city_model->name.",+".urlencode($quest->addres)."' target='_blank'>".$quest->addres.".</a><br>"
 										.$quest->addres_additional
 
 									);
-
-									Yii::endProfile('sendMail_2');
+									// Yii::endProfile('sendMail_2');
 								}
 							
 
