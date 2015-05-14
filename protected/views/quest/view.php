@@ -60,7 +60,7 @@
     </div>
     <div class="clearfix"></div>
     <div class="row quest_description">
-      <div class="col-md-6 col-lg-5 col-xlg-4 col-xs-12">
+      <div id="quest_description_left" class="col-md-6 col-lg-5 col-xlg-4 col-xs-12">
         <div class="container-fluid quest_description_left">
           <div class="row">
             <div class="col-md-4 col-sm-3 col-xs-12 text-left">
@@ -97,7 +97,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-5 col-md-offset-1 col-lg-4 col-lg-offset-3 col-xlg-3 col-xlg-offset-5 col-xs-12">
+      <div id="quest_description_right" class="col-md-5 col-lg-4 col-lg-offset-3 col-xlg-3 col-xlg-offset-5 col-xs-12">
         <div class="container-fluid quest_description_right">
           <div class="row">
             <div class="col-xs-12 col-md-12 col-sm-3 text-left">
@@ -440,6 +440,7 @@
 <div class="container-fluid bottom_quest" id="quests">
   <div class="row">
   <? $counter = 1;
+    shuffle($other_quests);
     foreach ($other_quests as $quest) {
       $counter++;
       if ($counter<5) {

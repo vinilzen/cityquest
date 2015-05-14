@@ -38,6 +38,7 @@ class RegistrationController extends Controller
 					$model->createtime=time();
 					$model->lastvisit=((Yii::app()->controller->module->loginNotActiv||(Yii::app()->controller->module->activeAfterRegister&&Yii::app()->controller->module->sendActivationMail==false))&&Yii::app()->controller->module->autoLogin)?time():0;
 					$model->superuser=0;
+					$model->city_id = $this->city_model->id;
 					$model->status=((Yii::app()->controller->module->activeAfterRegister)?User::STATUS_ACTIVE:User::STATUS_NOACTIVE);
 					
 					if ($model->save()) {
@@ -107,6 +108,7 @@ class RegistrationController extends Controller
 
 				$model->superuser = 0;
 				$model->status = 1;
+				$model->city_id = $this->city_model->id;
 
 				if ($model->save()) {
 

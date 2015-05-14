@@ -62,7 +62,7 @@ class BookingController extends Controller
 		$quests = Quest::model()->findAll(array(
 		    "condition" => "status = 2 AND city_id = ".$this->city." AND id !=".$model->quest_id,
 		    "order" => "sort ASC",
-		    "limit" => 3,
+		    "limit" => 10,
 		));
 
 		$this->render('view',array(
@@ -217,7 +217,7 @@ class BookingController extends Controller
 					$sum_kassa = 0;
 
 					foreach ($times_array as $time_key => $booking) {
-						if ($booking['result']!='') {
+						if ($booking['result']!='' && $booking['result']!='0') {
 							$count_seans++;
 							$sum_price += (int)$booking['price'];
 
@@ -238,7 +238,7 @@ class BookingController extends Controller
 							->setCellValue('E'.$line_number, $booking['discount'] ? $discounts_array[$booking['discount']] : '-')
 							->setCellValue('F'.$line_number, ($booking['source'] && isset($sources_array[$booking['source']])) ? $sources_array[$booking['source']] : '-')
 							->setCellValue('G'.$line_number, $booking['comment'])
-							->setCellValue('H'.$line_number, ($booking['result']!='') ? 'Пришли' : 'Не пришли' )
+							->setCellValue('H'.$line_number, ($booking['result']!='' && $booking['result']!='0') ? 'Пришли' : 'Не пришли' )
 							->setCellValue('I'.$line_number, count($times_array));
 
 						$line_number++;
@@ -420,7 +420,6 @@ class BookingController extends Controller
 
 										Мы ждем вас по адресу <a href='https://www.google.com/maps/preview?q=".$this->city_model->name.",+".urlencode($quest->addres)."' target='_blank'>".$quest->addres.".</a><br>"
 										.$quest->addres_additional
-
 									);
 								}
 							

@@ -46,6 +46,10 @@
 			array(
 				'name' => 'quests',
 				'value' => User::listQuests($quests),
+			),
+			array(
+				'name' => 'city_id',
+				'value' => $this->cities_array[$model->city_id]->name,
 			)
 		);
 	} else {
@@ -70,6 +74,10 @@
 			array(
 				'name' => 'status',
 				'value' => User::itemAlias("UserStatus",$model->status),
+			),
+			array(
+				'name' => 'city_id',
+				'value' => $this->cities_array[$model->city_id]->name,
 			)
 		);
 	

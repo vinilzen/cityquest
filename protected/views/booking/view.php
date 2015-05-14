@@ -2,7 +2,7 @@
 /* @var $this BookingController */
 /* @var $model Booking */
   $this->pageTitle = 'CityQuest - квесты в реальности';
-  $this->description = 'Квест '.$quest->title.' пройден за '.$model->result;
+  $this->description = 'Квест &quot;'.$quest->title.'&quot; пройден за '.$model->result;
   $this->pageImg = '/images/winner_photo/'.$model->winner_photo;
 ?>
 
@@ -55,7 +55,7 @@
 					var share_data = {
 						url: 'http://<?=$host?>/result/<?=$model->id?>?<?=time()?>',
 						title: 'CityQuest - квесты в реальности',
-						description: 'Квест <?=$quest->title?> пройден за <?=$model->result?>',
+						description: 'Квест &quot;<?=$quest->title?>&quot; пройден за <?=$model->result?>',
 						image: 'http://<?=$host?>/images/winner_photo/<?=$model->winner_photo?>',
 						noparse: true						
 					};
@@ -67,7 +67,7 @@
 					data-yashareType="button" 
 					data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir"
 					data-yashareTitle="CityQuest - квесты в реальности"
-					data-yashareDescription="Квест <?=$quest->title?> пройден за <?=$model->result?>"
+					data-yashareDescription="Квест &quot;<?=$quest->title?>&quot; пройден за <?=$model->result?>"
 					data-yashareLink="http://<?=$host?>/result/<?=$model->id?>?<?=time()?>" 
 					data-yashareTheme="counter"></span>
 			</span>
@@ -85,6 +85,7 @@
 <div class="container-fluid bottom_quest" id="quests">
   <div class="row">
   <? $counter = 1;
+  	shuffle($quests);
     foreach ($quests as $quest) {
       $counter++;
       if ($counter<5) {

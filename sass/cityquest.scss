@@ -2838,6 +2838,10 @@ h1 {
 	margin-top: -130px;
 	position: relative;
 	z-index: 13;
+
+	@media (min-width: 768px) {
+		min-height: 132px;
+	}
 	@media (max-width: 991px) {
 		margin-top: -170px;
 		margin-bottom: 0px;
@@ -2906,6 +2910,25 @@ h1 {
 .quest_description_left {
 	@media (min-width: 992px) {
 		padding-left: 50px;
+	}
+}
+#quest_description_left {
+	@media (min-width: 768px)  {
+		position: absolute;
+		left: 0;
+		top: 10px;
+	}
+}
+#quest_description_right {
+	@media (min-width: 768px) {
+		right: 0;
+		position: absolute;
+	}
+	@media (min-width: 1024px) {
+		top:0px;
+	}
+	@media (min-width: 481px) and (max-width: 1023px) {
+		top:50px;
 	}
 }
 .quest_description_right {
