@@ -106,6 +106,30 @@
 		</div>
 	</div>
 
+	<div class="form-group">
+		<?=$form->labelEx($model,'vk_link', array('class' => 'control-label col-sm-3'))?>
+		<div class="col-sm-9">
+			<?=$form->textField($model,'vk_link', array( 'class'=>'form-control'))?>
+			<?=$form->error($model,'vk_link')?>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<?=$form->labelEx($model,'fb_link', array('class' => 'control-label col-sm-3'))?>
+		<div class="col-sm-9">
+			<?=$form->textField($model,'fb_link', array( 'class'=>'form-control'))?>
+			<?=$form->error($model,'fb_link')?>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<?=$form->labelEx($model,'instagram_link', array('class' => 'control-label col-sm-3'))?>
+		<div class="col-sm-9">
+			<?=$form->textField($model,'instagram_link', array( 'class'=>'form-control'))?>
+			<?=$form->error($model,'instagram_link')?>
+		</div>
+	</div>
+
 	<div class="row buttons">
 		<div class="col-sm-3"></div>
 		<div class="col-sm-9">

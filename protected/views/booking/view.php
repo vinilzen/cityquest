@@ -50,6 +50,14 @@
 		</p>
 		<div id="fb-root"></div>
 		<p class="text-center" style="margin-top:15px;">
+		<?
+			/*if (isset($_GET['t']) && $_GET['t']!='' ) {
+				$hash = $_GET['t'];
+			} else {
+				$hash = time();
+			}*/
+			//?t=$hash" 
+		?>
 			<span class="share_panel">
 				<script type="text/javascript">
 					var share_data = {
@@ -64,11 +72,11 @@
 				<span class="yashare-auto-init" 
 					data-yashareL10n="ru" 
 					data-yashareImage="http://<?=$host?>/images/winner_photo/<?=$model->winner_photo?>" 
-					data-yashareType="button" 
+					data-yashareType="button"
 					data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir"
 					data-yashareTitle="CityQuest - квесты в реальности"
 					data-yashareDescription="Квест &quot;<?=$quest->title?>&quot; пройден за <?=$model->result?>"
-					data-yashareLink="http://<?=$host?>/result/<?=$model->id?>?<?=time()?>" 
+					data-yashareLink="http://<?=$host?>/result/<?=$model->id?>"
 					data-yashareTheme="counter"></span>
 			</span>
 		</p>

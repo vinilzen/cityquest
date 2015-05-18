@@ -1,16 +1,12 @@
 <?
 $currency = '<em class="rur currency"><em>'.Yii::t('app','rub').'.</em></em>';
-$fb_link = 'https://www.facebook.com/cityquestru';
-$instagram_link = 'http://instagram.com/cityquestru';
-$vk_link = 'http://vk.com/cityquestru';
+$fb_link = $this->city_model->fb_link;
+$instagram_link = $this->city_model->instagram_link;
+$vk_link = $this->city_model->vk_link;
 
 if (strpos($_SERVER['HTTP_HOST'], '.kz') > 0){
 
   $currency = '<em itemprop="priceCurrency" class="currency" content="〒"><em style="font-style:normal;">〒</em></em>';
-
-  $fb_link = 'https://www.facebook.com/CityQuestAst';
-  $instagram_link = 'https://instagram.com/cityquestast';
-  $vk_link = 'https://vk.com/club93430433';
 
 }
 
@@ -29,15 +25,16 @@ if (strpos($_SERVER['HTTP_HOST'], '.kz') > 0){
     </div>
     <div class="col-xs-12 col-md-4 visible-xs">
       <p class="text-center">
+      <? if ($fb_link!='') { ?>
         <a class="btn-soc" target="_blank" href="<?=$fb_link?>">
           <i class="icon icon-facebook"></i>
-        </a>
+        </a><? } ?><? if ($vk_link!='') { ?>
         <a class="btn-soc" target="_blank" href="<?=$vk_link?>">
           <i class="icon icon-vk"></i>
-        </a>
+        </a><? } ?><? if ($instagram_link!='') { ?>
         <a class="btn-soc" href="<?=$instagram_link?>" target="_blank">
           <i class="icon-instagram icon"></i>
-        </a>
+        </a><? } ?>
       </p>
     </div>
     <div class="col-sm-4 col-md-4 col-xs-12">
@@ -49,12 +46,12 @@ if (strpos($_SERVER['HTTP_HOST'], '.kz') > 0){
     <div class="col-sm-4 col-md-4 col-xs-12 hidden-xs">
       <p class="pull-right right-soc">
         <span class="weinsoc hidden-sm hidden-md "><?=Yii::t('app','we are in social networks')?><em>&mdash;</em></span>
-        <a class="btn-soc" target="_blank" href="<?=$fb_link?>">
-          <i class="icon icon-facebook"></i></a>
-        <a class="btn-soc" href="<?=$vk_link?>" target="_blank">
-          <i class="icon icon-vk"></i></a>
-        <a class="btn-soc" href="<?=$instagram_link?>" target="_blank" >
-          <i class="icon-instagram icon"></i></a>
+        <? if ($fb_link!='') { ?><a class="btn-soc" target="_blank" href="<?=$fb_link?>">
+          <i class="icon icon-facebook"></i></a><? } ?>
+        <? if ($vk_link!='') { ?><a class="btn-soc" href="<?=$vk_link?>" target="_blank">
+          <i class="icon icon-vk"></i></a><? } ?>
+        <? if ($instagram_link!='') { ?><a class="btn-soc" href="<?=$instagram_link?>" target="_blank" >
+          <i class="icon-instagram icon"></i></a><? } ?>
       </p>
     </div>
     <? if ($this->city_model->id < 3) { ?>
@@ -339,11 +336,14 @@ if (strpos($_SERVER['HTTP_HOST'], '.kz') > 0){
     (function (d, w, c) {
     (w[c] = w[c] || []).push(function() {
         try {
-            w.yaCounter25221941 = new Ya.Metrika({id:25221941,
-                    webvisor:true,
-                    clickmap:true,
-                    trackLinks:true,
-                    accurateTrackBounce:true});
+            w.yaCounter25221941 = new Ya.Metrika({
+                id:25221941,
+                webvisor:true,
+                clickmap:true,
+                trackLinks:true,
+                accurateTrackBounce:true
+            });
+            w.yaCounter25221941.enableAll();
         } catch(e) { }
     });
     

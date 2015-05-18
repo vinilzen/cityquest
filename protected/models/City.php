@@ -17,6 +17,10 @@
  * @property string $franchise_text
  * @property string $giftcard_mail
  * @property string $booking_alert_mail
+ * 
+ * @property string $vk_link
+ * @property string $fb_link
+ * @property string $instagram_link
  *
  * The followings are the available model relations:
  * @property Quest[] $quests
@@ -43,6 +47,7 @@ class City extends CActiveRecord
 			array('active', 'numerical', 'integerOnly'=>true),
 			array('giftcard_text, franchise_text', 'length', 'max'=>1024),
 			array('name, country, tel, addres, giftcard_mail, booking_alert_mail', 'length', 'max'=>128),
+			array('vk_link, fb_link, instagram_link', 'length', 'max'=>128),
 			array('languages', 'length', 'max'=>10),
 			array('subdomain', 'length', 'max'=>10),
 			// The following rule is used by search().
@@ -82,6 +87,10 @@ class City extends CActiveRecord
 			'franchise_text' => Yii::t('app','Franchise text'),
 			'giftcard_mail' => Yii::t('app','Giftcard mail'),
 			'booking_alert_mail' => Yii::t('app','Alert booking mail'),
+
+			'vk_link' => Yii::t('app','Link to vk group'),
+			'fb_link' => Yii::t('app','Link to fb group'),
+			'instagram_link' => Yii::t('app','Link to instagram'),
 		);
 	}
 

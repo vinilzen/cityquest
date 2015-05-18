@@ -21,5 +21,8 @@
 		'franchise_text',
 		'giftcard_mail',
 		'booking_alert_mail',
+		'vk_link',
+		'fb_link',
+		'instagram_link',
 	),
 )); ?>
