@@ -185,8 +185,10 @@ class BookingController extends Controller
 
 				$bookings = array();
 				$bookings = Booking::model()->findAllByAttributes(
-					array('quest_id'=>$quest->id),
-					'date >= :start_date AND date <= :end_date',
+					array(
+						'quest_id'=>$quest->id
+					),
+					'date >= :start_date AND date <= :end_date && name!="CQ"',
 					array(
 						'start_date'=> $from_array[2].$from_array[0].$from_array[1],
 						'end_date'=> $to_array[2].$to_array[0].$to_array[1],
@@ -217,7 +219,7 @@ class BookingController extends Controller
 					$sum_kassa = 0;
 
 					foreach ($times_array as $time_key => $booking) {
-						if ($booking['result']!='' && $booking['result']!='0') {
+						if ($booking['result']!='' && $booking['result']!='0' && $booking['result']!=0) {
 							$count_seans++;
 							$sum_price += (int)$booking['price'];
 
@@ -230,8 +232,12 @@ class BookingController extends Controller
 							}
 						}
 
+						$month = substr($date_key, 4,2);
+						$day = substr($date_key, 6,2);
+						$year = substr($date_key, 0,4);
+
 						$phpExcel->getActiveSheet()
-							->setCellValue('A'.$line_number, $date_key)
+							->setCellValue('A'.$line_number, $year.'-'.$month.'-'.$day)
 							->setCellValue('B'.$line_number, $time_key)
 							->setCellValue('C'.$line_number, $booking['price'])
 							->setCellValue('D'.$line_number, $booking['payment'] ? $payments_array[$booking['payment']] : '-')

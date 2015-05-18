@@ -100,12 +100,10 @@
       <div id="quest_description_right" class="col-md-5 col-lg-4 col-lg-offset-3 col-xlg-3 col-xlg-offset-5 col-xs-12">
         <div class="container-fluid quest_description_right">
           <div class="row">
-            <div class="col-xs-12 col-md-12 col-sm-3 text-left">
+            <? if ($model->metro!= '') { ?><div class="col-xs-12 col-md-12 col-sm-3 text-left">
               <i class="icon icon-metro"></i>
-              <p>
-                <span class="metro-title"><?=$model->metro?></span>
-              </p>
-            </div>
+              <p><span class="metro-title"><?=$model->metro?></span></p>
+            </div><? } ?>
             <div class="col-xs-12 col-md-12 col-sm-9 text-left">
               <i class="icon icon-point"></i>
               <p><?=$model->addres?>
