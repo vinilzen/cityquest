@@ -1,14 +1,14 @@
 <?
-	$this->pageTitle= 'Лучшие квесты в реальности в Москве, живой квест-игра выход из комнаты для подростков - CityQuest';
-	$this->description= 'Живые квесты поиска выходы из комнаты в Москве. Лучшие игровые квесты. Выберись из реальной квест-комнаты в Москве';
-	$this->keywords= 'квест комната, квесты выход из комнаты, квесты выйти из комнаты, живой квест, квесты в москве, квесты в реальности в Москве';
+	$this->pageTitle= 'Лучшие квесты в реальности в '.Yii::t('app', $this->city_model->name, 2).', живой квест-игра выход из комнаты для подростков - CityQuest';
+	$this->description= 'Живые квесты поиска выходы из комнаты в '.Yii::t('app', $this->city_model->name, 2).'. Лучшие игровые квесты. Выберись из реальной квест-комнаты в '.Yii::t('app', $this->city_model->name, 2);
+	$this->keywords= 'квест комната, квесты выход из комнаты, квесты выйти из комнаты, живой квест, квесты в москве, квесты в реальности в '.Yii::t('app', $this->city_model->name, 2);
 $i=0;
 $count_quests = count($quests);
 
 foreach ($quests as $quest) {
 	$i++;
 	?> 
-	<? if ($count_quests == 2) {?>
+	<? if ($count_quests == 2) { ?>
 		<div class="col-xs-12 col-md-6 col-sm-6 col-lg-6 col-xlg-6 item">
 	<? } else { ?>
 		<div class="col-xs-12 col-md-6 col-sm-6 col-lg-4 col-xlg-4 item">

@@ -1,6 +1,8 @@
 <?php
 
 return array(
+	'Москва'=>'Москва|Москве',
+	'Астана'=>'Астана|Астане',
 	'Accept cash'=>'Принимаем к оплате наличные',
 	'Accept MasterCard Cards'=>'Принимаем к оплате карты MasterCard',
 	'Accept Visa card'=>'Принимаем к оплате карты Visa',

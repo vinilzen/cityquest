@@ -287,14 +287,19 @@ var PopoverView = Backbone.View.extend({
 		$('#editBookingRow .inputPhone', this.$el)
 			.val(self.attr.phone)
 			.mask('+7(000)-000-00-00')
-			.focus(function(){
+			.focus(function(e){
 				var val = $(this).val();
-				$(this).unmask().blur(function(){
-					$(this).mask('+7(000)-000-00-00');			
-				}).val(val);
-			}).on('keyup', function(){
-				$(this).mask('+7(000)-000-00-00');			
-			});
+				
+				if (val == '') $(this).val('+7(');
+
+				/*$(this).unmask().blur(function(){
+					$(this).mask('+7(000)-000-00-00');		
+				}).val(val);*/
+
+			});/*.on('keyup', function(){
+				// if ($(e.target).val() == '') $(e.target).val('+7(');
+				//$(this).mask('+7(000)-000-00-00');
+			});*/
 
 		$('#editBookingRow .inputResult', this.$el).val(self.attr.result);
 		$('#editBookingRow .inputComment', this.$el).val(self.attr.comment);
