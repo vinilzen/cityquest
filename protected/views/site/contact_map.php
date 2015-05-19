@@ -1,7 +1,7 @@
 <?
-  $this->pageTitle= Yii::app()->name.' - Квесты <?=$this->city_model->name?>. Контакты';
-  $this->description= 'Лучшие квесты <?=$this->city_model->name?>. <?=$this->city_model->addres?> hello@cityquest.ru <?=$this->city_model->tel?>';
-  $this->keywords= 'лучшие квесты <?=$this->city_model->name?>, <?=$this->city_model->addres?> hello@cityquest.ru <?=$this->city_model->tel?>, контакты, CityQuest';
+  $this->pageTitle= Yii::app()->name.' - Квесты '.$this->city_model->name.' Контакты';
+  $this->description= 'Лучшие квесты '.$this->city_model->name. '.$this->city_model->addres hello@cityquest.ru '.$this->city_model->tel;
+  $this->keywords= 'лучшие квесты '.$this->city_model->name.', '.$this->city_model->addres.' hello@cityquest.ru '.$this->city_model->tel.', контакты, CityQuest';
 ?>
 <div class="row" itemscope itemtype="http://schema.org/LocalBusiness">
   <meta itemprop="name" content="CityQuest" />
