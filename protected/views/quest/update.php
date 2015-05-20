@@ -159,6 +159,7 @@ $this->quest_menu=array(
             'model'=>$model, 
             'errors'=>$errors,
             'cities'=>$cities,
+            'locations'=>$locations,
             'message_success'=>$message_success
           )); ?>
       </div>

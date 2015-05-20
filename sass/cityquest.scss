@@ -3185,3 +3185,121 @@ a:hover, a:focus {
 .white {
 	color:#fff;
 }
+.map_container {
+	position: relative;
+}
+.map_info {
+	background-color: #23243e;
+	width: 360px;
+	height: 470px;
+	position: absolute;
+	left:0;
+	top: 65px;
+}
+.map_container, .g_map {
+	height:570px;
+	width:100%;
+	overflow:hidden;
+}
+#gmap_canvas {
+	height:585px;
+	width:100%;
+}
+.contactV2 {
+	p {
+		font-family: Circe;
+		font-weight: normal;
+		font-size: 16px;
+		color:#fff;
+		padding-left: 39px;
+		position: relative;
+		span {
+			font-weight: 300;
+		}
+		.icon, .glyphicon {
+			position: absolute;
+			left:0;
+			top:-10px;
+			color:#78c5ea;
+			font-size: 32px;
+		}
+	}
+}
+.rules h1.h3.contactH1:after {
+	display: none;
+}
+.contactH2 {
+	font-family: Circe;
+	font-weight: 300;
+	font-size: 28px;
+	color:#fff;
+}
+.contact-rules.rules {
+	padding-bottom: 15px;
+}
+.map_info_head {
+	height: 60px;
+	padding: 19px;
+	a {
+		opacity:.3;
+		display:inline-block;
+		margin-right: 26px;
+		&:hover {
+			opacity:.8;
+		}
+	}
+	.controls {
+		width: 100px;
+		float: left;
+	}
+	.close {
+		float: right;
+	}
+}
+.map_info_body {
+	padding: 20px 55px;
+	display: none;
+	&.active {
+		display: block;
+	}
+	p.info_ico {
+		font-size: 14px;
+		color:#fff;
+		font-weight: normal;
+		position: relative;
+		padding-left: 37px;
+		margin-bottom: 16px;
+		a {
+			color:#7fc9ec;
+		}
+		i {
+			position: absolute;
+			left:0px;
+			top:-5px;
+			font-size: 24px;
+			color:#7fc9ec;
+		}
+
+	}
+	.local_quests {
+		a {
+			font-family: 'Bebas Neue';
+			font-weight: bold;
+			font-size: 20px;
+			text-transform: uppercase;
+			display: block;
+			width: 100%;
+			text-align: center;
+			color:#7fc9ec;
+		}
+	}
+	h3 {
+		text-align: center;
+		margin-top: 45px;
+		margin-bottom: 25px;
+		font-size: 14px;
+		color:#fff;
+		font-family: Circe;
+		font-weight: normal;
+	}
+}

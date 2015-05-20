@@ -4,13 +4,12 @@
   <? include('head.php'); ?>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="<?    
-    if (Yii::app()->request->url == '/contact')  {
+    /*if (Yii::app()->request->url == '/contact')  {
       echo ' contact ';
       if (strpos($_SERVER['HTTP_HOST'], '.kz') > 0) {
         echo ' contact_kz ';
       }
-    }
-
+    }*/
     if (Yii::app()->controller->id == 'quest' && Yii::app()->controller->action->id == 'index') echo ' video ';
     else echo ' inner ';
     ?>">

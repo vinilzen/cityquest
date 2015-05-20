@@ -57,6 +57,11 @@
 								</a>
 							</li>
 							<li class="">
+								<a href="/location/admin">
+									<i class="hi hi-globe sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide"><?=Yii::t('app','Locations')?></span>
+								</a>
+							</li>
+							<li class="">
 								<a href="/booking/reports">
 									<i class="gi gi-charts sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide"><?=Yii::t('app','Reports')?></span>
 								</a>

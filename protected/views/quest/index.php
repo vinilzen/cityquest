@@ -1,6 +1,7 @@
 <?
 	$this->pageTitle= 'Лучшие квесты в реальности в '.Yii::t('app', $this->city_model->name, 2).', живой квест-игра выход из комнаты для подростков - CityQuest';
-	$this->description= 'Живые квесты поиска выходы из комнаты в '.Yii::t('app', $this->city_model->name, 2).'. Лучшие игровые квесты. Выберись из реальной квест-комнаты в '.Yii::t('app', $this->city_model->name, 2);
+	// $this->description= 'Живые квесты поиска выходы из комнаты в '.Yii::t('app', $this->city_model->name, 2).'. Лучшие игровые квесты. Выберись из реальной квест-комнаты в '.Yii::t('app', $this->city_model->name, 2);
+	$this->description= 'Живые квесты «выйти из комнаты» для подростков и взрослых. Расписание игр и онлайн бронирование, низкие цены. Escape Room в '.Yii::t('app', $this->city_model->name, 2).' от CityQuest.';
 	$this->keywords= 'квест комната, квесты выход из комнаты, квесты выйти из комнаты, живой квест, квесты в москве, квесты в реальности в '.Yii::t('app', $this->city_model->name, 2);
 $i=0;
 $count_quests = count($quests);

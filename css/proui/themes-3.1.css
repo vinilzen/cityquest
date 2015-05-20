@@ -143,3 +143,7 @@
   top: 0px;
   font-size: 28px;
 }
+
+#times-table .btn-default.btn-gray {
+  background-color:rgb(233, 233, 233);
+}

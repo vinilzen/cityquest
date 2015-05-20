@@ -247,6 +247,10 @@
 													}
 												}
 
+												if ($quest['bookings'][$time]->name == 'CQ') {
+													$additionalClass = '  btn-gray ';
+												}
+
 											} else {
 												$data = ' data-price="'.$price.'" ';
 											}

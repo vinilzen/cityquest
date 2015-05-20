@@ -215,27 +215,24 @@ Sitemap: http://cityquest.ru/sitemap.xml
 	{
 		$this->pageTitle = Yii::app()->name . ' - Контакты';
 
-		if ( 0 ) {
+		$quests = array();
+		$cities = array();
+		$locations = Location::model()->findAllByAttributes(
+			array('city_id'=>$this->city_model->id)
+		);
 
-			$model=new ContactForm;
-			if(isset($_POST['ContactForm']))
-			{
-				$model->attributes=$_POST['ContactForm'];
-				if($model->validate())
-				{
-					$headers="From: {$model->email}\r\nReply-To: {$model->email}";
-					mail(Yii::app()->params['adminEmail'],$model->subject,$model->body,$headers);
-					Yii::app()->user->setFlash('contact','Thank you for contacting us. We will respond to you as soon as possible.');
-					$this->refresh();
-				}
-			}
-			
-			$this->render('contact',array('model'=>$model));
-		
-		} else {
-
-			$this->render('contact_map');
+		foreach ($locations as $location) {
+			$city = City::model()->findByPk($location->city_id);
+			$cities[$city->id] = $city->name;
+			$quests[$location->id] = Quest::model()->findAllByAttributes(array('location_id'=>$location->id));
 		}
+
+		$this->render('contact_map', array(
+				'locations' => $locations,
+				'cities' => $cities,
+				'quests' => $quests,
+			)
+		);
 	}
 
 	/**

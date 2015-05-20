@@ -12,7 +12,8 @@
 			<?php $this->renderPartial('_form', array(
 				'model'=>$model,
             	'errors'=>$errors,
-				'cities' => $cities
+				'cities' => $cities,
+            	'locations'=>$locations,
 				)); ?>
 		</div>
 	</div>

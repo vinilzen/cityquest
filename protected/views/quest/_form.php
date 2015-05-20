@@ -51,8 +51,6 @@
 		</div>
 	</div>
 
-
-
 	<div class="form-group<?=( isset($errors['price_am']) || isset($errors['price_pm']) )?' has-error':''?>">
 		<?=$form->labelEx($model,'price_am', array('class' => 'control-label col-sm-3'))?>
 		<div class="col-sm-3">
@@ -100,6 +98,14 @@
 		<div class="col-sm-9">
 			<?=$form->textField($model,'metro',array('size'=>60,'maxlength'=>128,'class'=>'form-control'))?>
 			<?=$form->error($model,'metro', array('class'=>'help-block'))?>
+		</div>
+	</div>
+
+
+	<div class="form-group<?=(isset($errors['location_id']))?' has-error':''?>">
+		<label class="control-label col-sm-3 required" for="location_id"><?=Yii::t('app','Location')?> <span class="required">*</span></label>
+		<div class="col-sm-9">
+			<?=$form->dropDownList($model,'location_id', CHtml::listData($locations, 'id', 'name'), array('class'=>'form-control'))?>
 		</div>
 	</div>
 
@@ -175,13 +181,6 @@
 					<?=$form->labelEx($model,'actor')?>
 				</label>
 			</div>
-		</div>
-	</div>	
-
-	<div class="form-group<?=(isset($errors['city_id']))?' has-error':''?>">
-		<label class="control-label col-sm-3 required" for="city_id">Город <span class="required">*</span></label>
-		<div class="col-sm-9">
-			<?=$form->dropDownList($model,'city_id', CHtml::listData($cities, 'id', 'name'), array('class'=>'form-control'))?>
 		</div>
 	</div>
 

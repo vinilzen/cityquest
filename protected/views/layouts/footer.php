@@ -332,34 +332,30 @@ if (strpos($_SERVER['HTTP_HOST'], '.kz') > 0){
 <? if ($_SERVER['HTTP_HOST'] != 'cq.il' && $_SERVER['HTTP_HOST'] != 'cq.kzil') { ?>
 
 <!-- Yandex.Metrika counter -->
-  <script type="text/javascript">
-    (function (d, w, c) {
+<script type="text/javascript">
+(function (d, w, c) {
     (w[c] = w[c] || []).push(function() {
         try {
-            w.yaCounter25221941 = new Ya.Metrika({
-                id:25221941,
-                webvisor:true,
-                clickmap:true,
-                trackLinks:true,
-                accurateTrackBounce:true
-            });
-            w.yaCounter25221941.enableAll();
+            w.yaCounter25221941 = new Ya.Metrika({id:25221941,
+                    webvisor:true,
+                    clickmap:true,
+                    trackLinks:true});
         } catch(e) { }
     });
-    
+
     var n = d.getElementsByTagName("script")[0],
         s = d.createElement("script"),
         f = function () { n.parentNode.insertBefore(s, n); };
     s.type = "text/javascript";
     s.async = true;
     s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
-    
+
     if (w.opera == "[object Opera]") {
         d.addEventListener("DOMContentLoaded", f, false);
     } else { f(); }
-    })(document, window, "yandex_metrika_callbacks");
-  </script>
-  <noscript><div><img alt="" src="//mc.yandex.ru/watch/25221941" style="position:absolute; left:-9999px;"></div></noscript>
+})(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="//mc.yandex.ru/watch/25221941" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
   <? if ($this->city_model->id != 2 ) { ?>
   <script>

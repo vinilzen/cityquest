@@ -38,6 +38,8 @@
  * @property integer $page_title
  * @property integer $description
  * @property integer $keywords
+ * 
+ * @property integer $location_id
  *
  * The followings are the available model relations:
  * @property TblUser $author
@@ -79,7 +81,7 @@ class Quest extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('price_am, price_pm, price_weekend_am, price_weekend_pm, title, content, addres, times, status, author_id, city_id, link', 'required'),
+			array('price_am, price_pm, price_weekend_am, price_weekend_pm, title, content, addres, times, status, author_id, city_id, location_id, link', 'required'),
 			array('price_am, price_pm, price_weekend_am, price_weekend_pm, times, status, sort, create_time, update_time, author_id, type, difficult, actor, time_preregistration', 'numerical', 'integerOnly'=>true),
 			array('title, addres, addres_additional, cover, start_text, metro, page_title, mail_for_notifications', 'length', 'max'=>128),
 			array('description, keywords', 'length', 'max'=>256),
@@ -107,6 +109,7 @@ class Quest extends CActiveRecord
 			'author' => array(self::BELONGS_TO, 'User', 'author_id'),
 			'booking' => array(self::HAS_MANY, 'Booking', 'quest_id'),
 			'city' => array(self::BELONGS_TO, 'City', 'city_id'),
+			'location' => array(self::BELONGS_TO, 'Location', 'location_id'),
 			'photo' => array(self::MANY_MANY, 'Photo', '{{quest_photo}}(quest_id, photo_id)'),
 		);
 	}
@@ -131,6 +134,7 @@ class Quest extends CActiveRecord
 			'update_time' => Yii::t('app','Update Time'),
 			'author_id' => Yii::t('app','Author'),
 			'city_id' => Yii::t('app','City'),
+			'location_id' => Yii::t('app','Location'),
 			'image' => Yii::t('app','Image'),
 			'del_img'=>Yii::t('app','Delete image?'),
 			'page_title'=>Yii::t('app','Page Title'),

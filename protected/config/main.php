@@ -26,7 +26,7 @@ return array(
 
     'modules'=>array(
         'user',
-       /* 'gii'=>array(
+        /*'gii'=>array(
             'class'=>'system.gii.GiiModule',
             'password'=>'zaq1',
         ),*/

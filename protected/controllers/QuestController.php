@@ -318,7 +318,7 @@ class QuestController extends Controller
 	public function actionUpdate($id)
 	{
 		$this->layout='//layouts/admin_column';
-		$model= Quest::model()->findByPk($id);
+		$model = Quest::model()->findByPk($id);
 		
 		$message_success = '';
 
@@ -332,6 +332,9 @@ class QuestController extends Controller
 			));
 
 		$cities = City::model()->findAllByAttributes( array('active'=>1) );
+		// Yii::app()->getModule('user')->user()->city_id
+		// $locations = Location::model()->findAllByAttributes( array('city_id' =>$this->city_model->id) );
+		$locations = Location::model()->findAll();
 
 		$bookings_by_date = array();
 
@@ -351,21 +354,19 @@ class QuestController extends Controller
 
 		}
 
-		if(isset($_POST['photo']))
-		{
+		if(isset($_POST['photo'])) {
 			$this->updatePhoto($model, $_POST['photo']);
 		}
 
-		if(isset($_POST['Quest']))
-		{
+		if(isset($_POST['Quest'])) {
 			$model->attributes=$_POST['Quest'];
 
 			if (
-				isset($_POST['Quest']['city_id']) && 
-				City::model()->findByPk($_POST['Quest']['city_id'])
+				isset($_POST['Quest']['location_id']) && 
+				Location::model()->findByPk($_POST['Quest']['location_id'])
 			) {
 
-				$model->city_id = (int)$_POST['Quest']['city_id'];
+				$model->location_id = (int)$_POST['Quest']['location_id'];
 
 				$model->image = CUploadedFile::getInstance($model,'image');
 				
@@ -383,18 +384,10 @@ class QuestController extends Controller
 						if ($model->image)
 							$model->image->saveAs('./images/q/'.$model->id.'.jpg');
 
-					} else {
-						throw new CHttpException(500, 'Ошибка сохранения');
-					}
-				} else {
-					$isValid = false;
-				}
-			} else {
-				throw new CHttpException(500, 'Не найден город квеста!');
-			}
-			if ($isValid){
-				$model= Quest::model()->findByPk($id);
-			}
+					} else throw new CHttpException(500, 'Ошибка сохранения');
+				} else $isValid = false;
+			} else throw new CHttpException(500, 'Не найдена локация квеста!');
+			if ($isValid) $model= Quest::model()->findByPk($id);
 		}
 
 
@@ -408,6 +401,7 @@ class QuestController extends Controller
 			'booking' => $bookings_by_date,
 			'times' => $times,
 			'cities' => $cities,
+			'locations' => $locations,
 			'errors'=>$model->getErrors(),
 			'message_success' => $message_success,
 		));
