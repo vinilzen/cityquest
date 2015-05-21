@@ -3195,6 +3195,21 @@ a:hover, a:focus {
 	position: absolute;
 	left:0;
 	top: 65px;
+	@media (min-width: 480px) and (max-width: 768px) {
+		bottom:0;
+		left:0;
+		right:0;
+		width:100%;
+		top:inherit;
+		height: 280px;
+	}
+	@media (max-width: 480px) {
+		bottom:0;
+		left:0;
+		right:0;
+		width:100%;
+		top:inherit;
+	}
 }
 .map_container, .g_map {
 	height:570px;
@@ -3215,6 +3230,10 @@ a:hover, a:focus {
 		position: relative;
 		span {
 			font-weight: 300;
+  			display: inline-block;
+			span {
+				white-space: nowrap;
+			}
 		}
 		.icon, .glyphicon {
 			position: absolute;
@@ -3263,6 +3282,9 @@ a:hover, a:focus {
 	}
 	.close {
 		float: right;
+		@media (max-width: 768px) {
+			display: none;
+		}
 	}
 }
 .map_info_body {
@@ -3310,6 +3332,12 @@ a:hover, a:focus {
 		color:#fff;
 		font-family: Circe;
 		font-weight: normal;
+		@media (min-width: 480px) and (max-width: 768px) {
+			margin-top: 0;
+		}
+		@media (max-width: 480px) {
+			margin-top: 20px;
+		}
 	}
 	.item:after {
 	}
@@ -3321,18 +3349,42 @@ a:hover, a:focus {
 	display: none;
 }
 .map_info_show {
-  background-color: #23243e;
-  width: 33px;
-  height: 46px;
-  position: absolute;
-  left: 0;
-  top: 45%;
-  a {
-  	padding: 10px;
+	background-color: #23243e;
+	width: 33px;
+	height: 46px;
+	position: absolute;
+	left: 0;
+	top: 45%;
+	a {
+		padding: 10px;
 	opacity:.3;
-  	display:inline-block;
+		display:inline-block;
 	&:hover {
 		opacity:.8;
 	}
-  }
+	}
+	@media (max-width: 768px) {
+		bottom:0;
+		left:0;
+		top:inherit;
+	}
+}
+.g_map, #gmap_canvas {
+	@media (min-width: 480px) and (max-width: 768px) {
+		height: 290px;
+	}
+	@media (max-width: 480px) {
+		height: 320px;
+	}
+}
+.map_container {
+	@media (max-width: 480px) {
+		height: 790px;
+  		margin-bottom: 20px;
+	}
+}
+.rules h1.h3.contactH1 {
+	@media (max-width: 480px) {
+		margin-bottom: 10px;
+	}
 }

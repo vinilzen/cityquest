@@ -21,19 +21,19 @@
     <meta itemprop="logo" content="http://cityquest.ru/img/logo1.png" />
     <meta itemprop="name" content="CityQuest. <?=$this->city_model->name?>" />
   </div>
-  <div class="col-md-5 col-lg-4 col-md-offset-1 col-lg-offset-2 contactV2">
+  <div class="col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-2 col-md-5 col-lg-4 col-md-offset-1 col-lg-offset-2 contactV2">
     <p>
       <i class="icon icon-Call"></i><a itemprop="telephone" class="ya-phone" href="tel:<?=$this->city_model->tel?>">
       <span class="ya-phone"><?=$this->city_model->tel?></span></a>
     </p>
     <p>
       <i class="icon icon-Man"></i>
-      <span><?=Yii::t('app','General questions')?>:&nbsp;<a itemprop="email" href="mailto:hello@cityquest.ru" target="_blank">hello@cityquest.ru</a><br></span>
-      <span><?=Yii::t('app','Franchise')?>:&nbsp;<a itemprop="email" href="mailto:franchise@cityquest.ru" target="_blank">franchise@cityquest.ru</a><br></span>
-      <span><?=Yii::t('app','For journalists')?>:&nbsp;<a itemprop="email" href="mailto:pr@cityquest.ru" target="_blank">pr@cityquest.ru</a></span>
+      <span><span><?=Yii::t('app','General questions')?>:&nbsp;</span><a itemprop="email" href="mailto:hello@cityquest.ru" target="_blank">hello@cityquest.ru</a><br></span>
+      <span><span><?=Yii::t('app','Franchise')?>:&nbsp;</span><a itemprop="email" href="mailto:franchise@cityquest.ru" target="_blank">franchise@cityquest.ru</a><br></span>
+      <span><span><?=Yii::t('app','For journalists')?>:&nbsp;</span><a itemprop="email" href="mailto:pr@cityquest.ru" target="_blank">pr@cityquest.ru</a></span>
     </p>
   </div>
-  <div class="col-md-5 col-lg-4 contactV2">
+  <div class="col-xs-10 col-xs-offset-1 col-sm-4 col-md-5 col-lg-4 contactV2">
     <p>
       <i class="icon icon-Pin"></i>
       <span>Адрес офиса:</span><br><?=$this->city_model->addres?>
@@ -80,31 +80,37 @@
               $i = 0;
               foreach ($locations as $location) { ?>
                 <div class="map_info_body item <?=$active?'active':''?>" id="location_<?=$location->id?>">
-                  <? $active = 0;?>
-                  <p class="info_ico info_addr" data-id="<?=$location->id?>" data-num="<?=$i++?>">
-                    <i class="icon icon-Pin"></i>
-                    г. <?=$cities[$location->city_id]?>, <?=$location->address?>
-                  </p>
-                  <? if ($location->metro != '') { ?>
-                  <p class="info_ico">
-                    <i class="icon icon icon-metro"></i>
-                    <?=$location->metro?>
-                  </p>
-                  <? } ?>
-                  <p class="info_ico">
-                    <i class="icon icon icon-Call"></i>
-                    <?=$location->tel?>
-                  </p>
-                  <p class="info_ico">
-                    <i class="icon icon icon-Man"></i>
-                    <?=$location->contact_email?>
-                  </p>
-                  <h3>Квесты на этой локации</h3>
-                  <p class="text-center local_quests">
-                  <? foreach ($quests[$location->id] as $q)
-                    echo '<a href="/quest/'.$q->link.'" target="_blank">'.$q->title.'</a>';
-                  ?>
-                  </p>
+                  <div class="row">
+                    <div class="col-md-12 col-sm-6 col-xs-12">
+                      <? $active = 0;?>
+                      <p class="info_ico info_addr" data-id="<?=$location->id?>" data-num="<?=$i++?>">
+                        <i class="icon icon-Pin"></i>
+                        г. <?=$cities[$location->city_id]?>, <?=$location->address?>
+                      </p>
+                      <? if ($location->metro != '') { ?>
+                      <p class="info_ico">
+                        <i class="icon icon icon-metro"></i>
+                        <?=$location->metro?>
+                      </p>
+                      <? } ?>
+                      <p class="info_ico">
+                        <i class="icon icon icon-Call"></i>
+                        <?=$location->tel?>
+                      </p>
+                      <p class="info_ico">
+                        <i class="icon icon icon-Man"></i>
+                        <?=$location->contact_email?>
+                      </p>
+                    </div>
+                    <div class="col-md-12 col-sm-6 col-xs-12">
+                      <h3>Квесты на этой локации</h3>
+                      <p class="text-center local_quests">
+                      <? foreach ($quests[$location->id] as $q)
+                        echo '<a href="/quest/'.$q->link.'" target="_blank">'.$q->title.'</a>';
+                      ?>
+                      </p>
+                    </div>
+                  </div>
                 </div>
             <? }?>
           </div>
@@ -283,10 +289,14 @@
                   getGeocode(i);
                 } else {
                   var myMapOptions = {
-                      zoom: 12,
+                      zoom: 11,
                       scrollwheel: true,
                       disableDefaultUI: true,
-                      zoomControl: false,
+                      zoomControl: true,
+                      zoomControlOptions: {
+                        style: google.maps.ZoomControlStyle.SMALL,
+                        position: google.maps.ControlPosition.RIGHT_TOP
+                      },
                       center: latlngbounds.getCenter(), // get center of group items
                       mapTypeId: google.maps.MapTypeId.ROADMAP,
                       styles:styles
