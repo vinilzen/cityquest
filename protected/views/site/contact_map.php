@@ -16,7 +16,7 @@
   <meta itemprop="openinghours" content="Mo-Su" />
 
   <div class="col-xs-10 col-xs-offset-1 col-md-12 col-lg-10 col-lg-offset-1" itemscope itemtype="http://schema.org/Organization">
-    <h1 class="h3 text-center contactH1"><?=Yii::t('app','Contact details of office in')?> <?=Yii::t('app', $this->city_model->name, 2)?></h1>
+    <h1 class="h3 text-center contactH1"><?=Yii::t('app','Contacts')?></h1>
     <meta itemprop="url" content="http://cityquest.ru/" />
     <meta itemprop="logo" content="http://cityquest.ru/img/logo1.png" />
     <meta itemprop="name" content="CityQuest. <?=$this->city_model->name?>" />
@@ -28,15 +28,15 @@
     </p>
     <p>
       <i class="icon icon-Man"></i>
-      <span><span><?=Yii::t('app','General questions')?>:&nbsp;</span><a itemprop="email" href="mailto:hello@cityquest.ru" target="_blank">hello@cityquest.ru</a><br></span>
-      <span><span><?=Yii::t('app','Franchise')?>:&nbsp;</span><a itemprop="email" href="mailto:franchise@cityquest.ru" target="_blank">franchise@cityquest.ru</a><br></span>
+      <span><span><?=Yii::t('app','General questions')?>:&nbsp;</span><a itemprop="email" href="mailto:hello@cityquest.ru" target="_blank">hello@cityquest.ru</a></span>
+      <span><span><?=Yii::t('app','Franchise')?>:&nbsp;</span><a itemprop="email" href="mailto:franchise@cityquest.ru" target="_blank">franchise@cityquest.ru</a></span>
       <span><span><?=Yii::t('app','For journalists')?>:&nbsp;</span><a itemprop="email" href="mailto:pr@cityquest.ru" target="_blank">pr@cityquest.ru</a></span>
     </p>
   </div>
   <div class="col-xs-10 col-xs-offset-1 col-sm-4 col-md-5 col-lg-4 contactV2">
     <p>
       <i class="icon icon-Pin"></i>
-      <span>Адрес офиса:</span><br><?=$this->city_model->addres?>
+      <span>Адрес офиса:</span><?=$this->city_model->addres?>
     </p>
     <?=(!strpos($_SERVER['HTTP_HOST'], '.kz') > 0)?'<p>ООО «Сити Квест»   ОГРН  5147746030900</p>':''?>
   </div>
@@ -83,9 +83,9 @@
                   <div class="row">
                     <div class="col-md-12 col-sm-6 col-xs-12">
                       <? $active = 0;?>
-                      <p class="info_ico info_addr" data-id="<?=$location->id?>" data-num="<?=$i++?>">
+                      <p class="info_ico info_addr" data-id="<?=$location->id?>" data-num="<?=$i++?>" data-addr="г. <?=$cities[$location->city_id]?>, <?=$location->address?>">
                         <i class="icon icon-Pin"></i>
-                        г. <?=$cities[$location->city_id]?>, <?=$location->address?>
+                        <?=$location->address?>
                       </p>
                       <? if ($location->metro != '') { ?>
                       <p class="info_ico">
@@ -96,11 +96,11 @@
                       <p class="info_ico">
                         <i class="icon icon icon-Call"></i>
                         <?=$location->tel?>
-                      </p>
+                      </p><!-- 
                       <p class="info_ico">
                         <i class="icon icon icon-Man"></i>
                         <?=$location->contact_email?>
-                      </p>
+                      </p> -->
                     </div>
                     <div class="col-md-12 col-sm-6 col-xs-12">
                       <h3>Квесты на этой локации</h3>
@@ -268,19 +268,21 @@
 
           if (element) {
 
-            var addr = element.text().trim(),
+            var addr = element.attr('data-addr'),
                 location_id = element.attr('data-id');
             // Get coordinats for marker
             geocoder.geocode( { 'address': addr}, function(results, status, c) {
 
               if (status == google.maps.GeocoderStatus.OK) {
 
-                var marker = {
-                    id:location_id,
-                    num:i,
-                    icon: icon_marker,
-                    position: results[0].geometry.location
-                }
+                var ww = $(window).width(),
+                    marker = {
+                      id:location_id,
+                      num:i,
+                      icon: (i==0 && ww<769)?icon_marker_hover:icon_marker,
+                      position: results[0].geometry.location
+                    };
+
                 markersOptions[i] = marker;
                 latlngbounds.extend(results[0].geometry.location);
 
@@ -347,6 +349,7 @@
                     map = markers[i].getMap();
                     map.setCenter(markers[i].getPosition()); // set map center to marker position
                     smoothZoom(map, 17, map.getZoom());
+                    $('.map_info').animate({ left: '0' }, 500);
                   });
 
                   // the smooth zoom function

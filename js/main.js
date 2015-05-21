@@ -1044,8 +1044,8 @@ $(function() {
 		return false;
   	});
 
-  	$('.map_info_show a').click(function(){
+	$('.map_info_show a').click(function(){
 		$('.map_info').animate({ left: '0' }, 500);
 		return false;
-  	});
+	});
 });

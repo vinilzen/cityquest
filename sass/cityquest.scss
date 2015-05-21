@@ -3195,6 +3195,9 @@ a:hover, a:focus {
 	position: absolute;
 	left:0;
 	top: 65px;
+	@media (min-width: 769px) {
+		left:-360px;
+	}
 	@media (min-width: 480px) and (max-width: 768px) {
 		bottom:0;
 		left:0;
@@ -3230,8 +3233,9 @@ a:hover, a:focus {
 		position: relative;
 		span {
 			font-weight: 300;
-  			display: inline-block;
+  			display: block;
 			span {
+  				display: inline-block;
 				white-space: nowrap;
 			}
 		}
@@ -3253,8 +3257,11 @@ a:hover, a:focus {
 		color:#7fc9ec;
 	}
 }
-.rules h1.h3.contactH1:after {
-	display: none;
+.rules h1.h3.contactH1 {
+	color:#fff;
+	&:after {
+		display: none;
+	}
 }
 .contactH2 {
 	font-family: Circe;
@@ -3371,10 +3378,10 @@ a:hover, a:focus {
 }
 .g_map, #gmap_canvas {
 	@media (min-width: 480px) and (max-width: 768px) {
-		height: 290px;
+		height: 315px;
 	}
 	@media (max-width: 480px) {
-		height: 320px;
+		height: 345px;
 	}
 }
 .map_container {
