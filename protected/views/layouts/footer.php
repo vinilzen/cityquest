@@ -13,7 +13,7 @@ if (strpos($_SERVER['HTTP_HOST'], '.kz') > 0){
 ?>
 
 
-<div class="footer <? if (Yii::app()->request->url == '/contact') echo 'dark-footer'; ?>">
+<div class="footer">
   <div class="row">
     <div class="col-sm-4 col-md-4 hidden-xs">
       <p class="pull-left condition">

@@ -3225,7 +3225,13 @@ a:hover, a:focus {
 		}
 		.ya-phone {
 			color:#fff;
+			font-weight: bold;
 		}
+	}
+	a {
+		font-weight: bold;
+		font-size: 16px;
+		color:#7fc9ec;
 	}
 }
 .rules h1.h3.contactH1:after {
@@ -3260,7 +3266,7 @@ a:hover, a:focus {
 	}
 }
 .map_info_body {
-	padding: 20px 55px;
+	padding: 20px 55px 20px 45px;
 	display: none;
 	&.active {
 		display: block;
@@ -3312,5 +3318,21 @@ a:hover, a:focus {
 	max-height: 410px;
 }
 .carousel .map_info_body.item:after {
-	box-shadow: none;
+	display: none;
+}
+.map_info_show {
+  background-color: #23243e;
+  width: 33px;
+  height: 46px;
+  position: absolute;
+  left: 0;
+  top: 45%;
+  a {
+  	padding: 10px;
+	opacity:.3;
+  	display:inline-block;
+	&:hover {
+		opacity:.8;
+	}
+  }
 }

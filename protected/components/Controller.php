@@ -101,6 +101,10 @@ class Controller extends CController
 			
 			$url_segments = explode('.',$_SERVER['HTTP_HOST']);
 
+			$this->city_model = City::model()->findByPk(1);
+			$this->city = 1;
+			$this->city_name = 'Москва';
+
 			if ( count($url_segments)==3 ) {
 				foreach ($this->cities as $city) {
 					if($city->subdomain == $url_segments[0]) {
@@ -110,10 +114,6 @@ class Controller extends CController
 						break;
 					}
 				}
-			} else {
-				$this->city_model = City::model()->findByPk(1);
-				$this->city = 1;
-				$this->city_name = 'Москва';
 			}
 		}
 

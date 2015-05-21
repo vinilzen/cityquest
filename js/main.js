@@ -1037,4 +1037,15 @@ $(function() {
 	if($('#winner').length > 0 && window.location.hash != "") {
       $('a[href="' + window.location.hash + '"]').click()
   	}
+
+  	$('.map_info_head .close').click(function(){
+  		var w = $('.map_info').width();
+		$('.map_info').animate({ left: '-'+w+'px' }, 500);
+		return false;
+  	});
+
+  	$('.map_info_show a').click(function(){
+		$('.map_info').animate({ left: '0' }, 500);
+		return false;
+  	});
 });

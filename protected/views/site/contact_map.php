@@ -2,7 +2,11 @@
   $this->pageTitle= Yii::app()->name.' - Квесты '.$this->city_model->name.' Контакты';
   $this->description= 'Лучшие квесты '.$this->city_model->name. '.$this->city_model->addres hello@cityquest.ru '.$this->city_model->tel;
   $this->keywords= 'лучшие квесты '.$this->city_model->name.', '.$this->city_model->addres.' hello@cityquest.ru '.$this->city_model->tel.', контакты, CityQuest';
+  
+  // var_dump($this->city_model); die;
+
 ?>
+
 <div class="row rules contact-rules" itemscope itemtype="http://schema.org/LocalBusiness">
   <meta itemprop="name" content="CityQuest" />
   <meta itemprop="telephone" content="<?=$this->city_model->tel?>" />
@@ -49,17 +53,24 @@
         <div class="g_map">
             <div id="gmap_canvas"></div>
         </div>
-        <div class="map_info carousel slide" id="carousel-location">
+        <div class="map_info_show">
+          <a href="#" class="right" role="button">
+            <img src="/img/arrow_right.png" alt="">
+          </a>
+        </div>
+        <div class="map_info carousel slide" id="carousel-location" data-interval="false">
           <div class="map_info_head">
             <div class="controls">
+            <? if (count($locations)>1) { ?>
               <a href="#carousel-location" class="left" role="button" data-slide="prev">
                 <img src="/img/arrow_left.png" alt="">
               </a>
               <a href="#carousel-location" class="right" role="button" data-slide="next">
                 <img src="/img/arrow_right.png" alt="">
               </a>
+            <? } ?>
             </div>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <button type="button" class="close" aria-label="Close">
               <img src="/img/close_btn.png" alt="">
             </button>
           </div>
@@ -74,10 +85,12 @@
                     <i class="icon icon-Pin"></i>
                     г. <?=$cities[$location->city_id]?>, <?=$location->address?>
                   </p>
+                  <? if ($location->metro != '') { ?>
                   <p class="info_ico">
                     <i class="icon icon icon-metro"></i>
                     <?=$location->metro?>
                   </p>
+                  <? } ?>
                   <p class="info_ico">
                     <i class="icon icon icon-Call"></i>
                     <?=$location->tel?>
@@ -103,7 +116,6 @@
 
     <!-- <h5><?=Yii::t('app','For all the questions and reservations quests write!')?></h5> -->
 
-
     <div itemscope itemprop="itemType" content="http://schema.org/PostalAddress" />
       <meta itemprop="addresslocality" content="<?=$this->city_model->name?>" />
       <meta itemprop="streetaddress" content="<?=$this->city_model->addres?>" />
@@ -113,233 +125,244 @@
     </div>
   </div>
 </div>
-        <script type="text/javascript">
-            function init_map() {
-                var address = $('#meta_address').attr('content'),
-                    styles = [
-                      {
-                        "featureType": "water",
-                        "elementType": "geometry.fill",
-                        "stylers": [
-                          { "visibility": "on" },
-                          { "color": "#475a8b" }
-                        ]
-                      },{
-                        "featureType": "water",
-                        "elementType": "labels.text.fill",
-                        "stylers": [
-                          { "color": "#6782ba" }
-                        ]
-                      },{
-                        "featureType": "water",
-                        "elementType": "labels.text.stroke",
-                        "stylers": [
-                          { "visibility": "off" }
-                        ]
-                      },{
-                        "featureType": "landscape",
-                        "elementType": "geometry.fill",
-                        "stylers": [
-                          { "color": "#3b4360" }
-                        ]
-                      },{
-                        "featureType": "administrative",
-                        "elementType": "geometry.stroke",
-                        "stylers": [
-                          { "visibility": "off" }
-                        ]
-                      },{
-                        "featureType": "landscape.man_made",
-                        "elementType": "geometry.fill",
-                        "stylers": [
-                          { "visibility": "on" },
-                          { "color": "#3b4360" }
-                        ]
-                      },{
-                        "featureType": "landscape.man_made",
-                        "elementType": "geometry.stroke",
-                        "stylers": [
-                          { "color": "#475a8b" }
-                        ]
-                      },{
-                        "featureType": "road",
-                        "elementType": "geometry.stroke",
-                        "stylers": [
-                          { "visibility": "off" }
-                        ]
-                      },{
-                        "featureType": "road",
-                        "elementType": "geometry.fill",
-                        "stylers": [
-                          { "color": "#6e89c0" }
-                        ]
-                      },{
-                        "featureType": "road",
-                        "elementType": "labels.text.stroke",
-                        "stylers": [
-                          { "visibility": "on" },
-                          { "color": "#3b4360" }
-                        ]
-                      },{
-                        "featureType": "poi",
-                        "elementType": "labels.text.stroke",
-                        "stylers": [
-                          { "color": "#3b4360" }
-                        ]
-                      },{
-                        "featureType": "poi",
-                        "elementType": "labels.text.fill",
-                        "stylers": [
-                          { "color": "#ccddfb" }
-                        ]
-                      },{
-                        "featureType": "road",
-                        "elementType": "labels.text.fill",
-                        "stylers": [
-                          { "color": "#ccddfb" }
-                        ]
-                      },{
-                        "elementType": "labels.text.stroke",
-                        "stylers": [
-                          { "color": "#3b4360" }
-                        ]
-                      },{
-                        "elementType": "labels.text.fill",
-                        "stylers": [
-                          { "color": "#b0c5eb" }
-                        ]
-                      },{
-                        "featureType": "poi",
-                        "elementType": "geometry",
-                        "stylers": [
-                          { "color": "#2f3756" }
-                        ]
-                      },{
-                        "featureType": "transit",
-                        "elementType": "geometry.fill",
-                        "stylers": [
-                          { "color": "#2f3756" }
-                        ]
-                      },{
-                        "featureType": "road",
-                        "elementType": "geometry.stroke",
-                        "stylers": [
-                          { "visibility": "off" }
-                        ]
-                      },{
-                      }
-                    ],
-                    markers = {},
-                    icon_marker = '../img/marker.png',
-                    icon_marker_hover = '../img/marker_hover.png',
-                    geocoder = new google.maps.Geocoder(),
-                    latlngbounds = new google.maps.LatLngBounds(),
-                    length = $('.info_addr').length,
-                    map, i = 0, last = false,
-                    getGeocode = function(i) {
-                      console.log('getGeocode-',i);
-                      var element = $('.info_addr[data-num="'+i+'"]');
+<script type="text/javascript">
+  Object.size = function(obj) {
+      var size = 0, key;
+      for (key in obj) {
+          if (obj.hasOwnProperty(key)) size++;
+      }
+      return size;
+  };
 
-                      if (element) {
+  function init_map() {
+    var address = $('#meta_address').attr('content'),
+        styles = [
+          {
+            "featureType": "water",
+            "elementType": "geometry.fill",
+            "stylers": [
+              { "visibility": "on" },
+              { "color": "#475a8b" }
+            ]
+          },{
+            "featureType": "water",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              { "color": "#6782ba" }
+            ]
+          },{
+            "featureType": "water",
+            "elementType": "labels.text.stroke",
+            "stylers": [
+              { "visibility": "off" }
+            ]
+          },{
+            "featureType": "landscape",
+            "elementType": "geometry.fill",
+            "stylers": [
+              { "color": "#3b4360" }
+            ]
+          },{
+            "featureType": "administrative",
+            "elementType": "geometry.stroke",
+            "stylers": [
+              { "visibility": "off" }
+            ]
+          },{
+            "featureType": "landscape.man_made",
+            "elementType": "geometry.fill",
+            "stylers": [
+              { "visibility": "on" },
+              { "color": "#3b4360" }
+            ]
+          },{
+            "featureType": "landscape.man_made",
+            "elementType": "geometry.stroke",
+            "stylers": [
+              { "color": "#475a8b" }
+            ]
+          },{
+            "featureType": "road",
+            "elementType": "geometry.stroke",
+            "stylers": [
+              { "visibility": "off" }
+            ]
+          },{
+            "featureType": "road",
+            "elementType": "geometry.fill",
+            "stylers": [
+              { "color": "#6e89c0" }
+            ]
+          },{
+            "featureType": "road",
+            "elementType": "labels.text.stroke",
+            "stylers": [
+              { "visibility": "on" },
+              { "color": "#3b4360" }
+            ]
+          },{
+            "featureType": "poi",
+            "elementType": "labels.text.stroke",
+            "stylers": [
+              { "color": "#3b4360" }
+            ]
+          },{
+            "featureType": "poi",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              { "color": "#ccddfb" }
+            ]
+          },{
+            "featureType": "road",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              { "color": "#ccddfb" }
+            ]
+          },{
+            "elementType": "labels.text.stroke",
+            "stylers": [
+              { "color": "#3b4360" }
+            ]
+          },{
+            "elementType": "labels.text.fill",
+            "stylers": [
+              { "color": "#b0c5eb" }
+            ]
+          },{
+            "featureType": "poi",
+            "elementType": "geometry",
+            "stylers": [
+              { "color": "#2f3756" }
+            ]
+          },{
+            "featureType": "transit",
+            "elementType": "geometry.fill",
+            "stylers": [
+              { "color": "#2f3756" }
+            ]
+          },{
+            "featureType": "road",
+            "elementType": "geometry.stroke",
+            "stylers": [
+              { "visibility": "off" }
+            ]
+          },{
+          }
+        ],
+        markersOptions = {},
+        markers = {},
+        icon_marker = '../img/marker.png',
+        icon_marker_hover = '../img/marker_hover.png',
+        geocoder = new google.maps.Geocoder(),
+        latlngbounds = new google.maps.LatLngBounds(),
+        length = $('.info_addr').length,
+        map, i = 0, last = false,
+        getGeocode = function(i) {
+          var element = $('.info_addr[data-num="'+i+'"]');
 
-                        var addr = element.text().trim(),
-                            location_id = element.attr('data-id');
+          if (element) {
 
-                        geocoder.geocode( { 'address': addr}, function(results, status, c) {
+            var addr = element.text().trim(),
+                location_id = element.attr('data-id');
+            // Get coordinats for marker
+            geocoder.geocode( { 'address': addr}, function(results, status, c) {
 
-                          if (status == google.maps.GeocoderStatus.OK) {
+              if (status == google.maps.GeocoderStatus.OK) {
 
-                            // console.log(results, status, c);
+                var marker = {
+                    id:location_id,
+                    num:i,
+                    icon: icon_marker,
+                    position: results[0].geometry.location
+                }
+                markersOptions[i] = marker;
+                latlngbounds.extend(results[0].geometry.location);
 
-                            var marker = new google.maps.Marker({
-                                id:location_id,
-                                num:i,
-                                map: map,
-                                icon: icon_marker,
-                                position: results[0].geometry.location
-                            });
-                            markers[i] = marker;
-                            google.maps.event.addListener(marker, 'mouseover', function() {
-                                marker.setIcon(icon_marker_hover);
-                            });
-                            google.maps.event.addListener(marker, 'mouseout', function() {
-                                marker.setIcon(icon_marker);
-                            });
+                if (i<length-1){
+                  i++
+                  getGeocode(i);
+                } else {
+                  var myMapOptions = {
+                      zoom: 12,
+                      scrollwheel: true,
+                      disableDefaultUI: true,
+                      zoomControl: false,
+                      center: latlngbounds.getCenter(), // get center of group items
+                      mapTypeId: google.maps.MapTypeId.ROADMAP,
+                      styles:styles
+                  };
+                  map = new google.maps.Map(document.getElementById("gmap_canvas"), myMapOptions);
+                  
+                  if (markersOptions.length>1)
+                    map.fitBounds(latlngbounds);//auto zoom
 
-                            google.maps.event.addListener(marker, 'click', function() {
-                              $('#carousel-location').carousel(marker.num).carousel('pause');
+                  /*google.maps.event.addListenerOnce(map, 'idle', function(){
+                    console.log('map loaded');
+                  });*/
 
-                            });
+                  // Create markers
+                  $.each(markersOptions,function(k,v){
+                    v.map = map;
+                    var m = new google.maps.Marker(v);
+                    markers[k] = m;
+                    google.maps.event.addListener(m,'mouseover',function(){ m.setIcon(icon_marker_hover); });
+                    google.maps.event.addListener(m,'mouseout',function(){ m.setIcon(icon_marker); });
 
-                            latlngbounds.extend(results[0].geometry.location);
-                            if (i<length-1){
-                              i++
-                              getGeocode(i);
-                            } else {
-
-                              var myMapOptions = {
-                                  zoom: 12,
-                                  scrollwheel: true,
-                                  disableDefaultUI: true,
-                                  zoomControl: false,
-                                  center: latlngbounds.getCenter(),
-                                  mapTypeId: google.maps.MapTypeId.ROADMAP,
-                                  styles:styles
-                              };
-                              map = new google.maps.Map(document.getElementById("gmap_canvas"), myMapOptions);
-                              // map.setCenter();
-                              map.fitBounds(latlngbounds);
-                              
-                              google.maps.event.addListenerOnce(map, 'idle', function(){
-                                console.log('map loaded');
-                                
-                              });
-
-                              console.log(markers);
-
-
-                            }
-
-                          } else {
-                            console.log('Geocode was not successful for the following reason: ' + status);
-                          }
-                        });
-                      }
+                    if (Object.size(markersOptions)>1){
+                      google.maps.event.addListener(m, 'click', function() {
+                        if (m.num == 0) {
+                          $('#carousel-location').trigger('slid.bs.carousel');
+                        }
+                        $('#carousel-location').carousel(m.num);
+                      });
+                    } else {
+                      google.maps.event.addListener(m,'click',function(event){
+                        map = m.getMap();
+                        map.setCenter(m.getPosition()); // set map center to marker position
+                        smoothZoom(map, 17, map.getZoom()); // call smoothZoom, parameters map, final zoomLevel, and starting zoom level
+                      });
                     }
+                  });
 
-                /*geocoder.geocode( { 'address': 'Москва'}, function(results, status) {
-                  if (status == google.maps.GeocoderStatus.OK) {
+                  $('#carousel-location').on('slid.bs.carousel', function (e) {
+                    var i = $(".active", e.target).index();
+                    $.each(markers,function(k,v){
+                      v.setIcon(icon_marker);
+                      google.maps.event.addListener(v,'mouseover',function(){ v.setIcon(icon_marker_hover); });
+                      google.maps.event.addListener(v,'mouseout',function(){ v.setIcon(icon_marker); });
+                    });
+                    markers[i].setIcon(icon_marker_hover);
+                    google.maps.event.clearListeners(markers[i], 'mouseout');
+                    google.maps.event.clearListeners(markers[i], 'mouseover');
+                    map = markers[i].getMap();
+                    map.setCenter(markers[i].getPosition()); // set map center to marker position
+                    smoothZoom(map, 17, map.getZoom());
+                  });
 
-                  } else {
-                    console.log('Geocode was not successful for the following reason: ' + status);
+                  // the smooth zoom function
+                  function smoothZoom (map, max, cnt) {
+                    if (cnt >= max) {
+                            return;
+                    } else {
+                        z = google.maps.event.addListener(map, 'zoom_changed', function(event){
+                            google.maps.event.removeListener(z);
+                            smoothZoom(map, max, cnt + 1);
+                        });
+                        setTimeout(function(){map.setZoom(cnt)}, 80); // 80ms is what I found to work well on my system -- it might not work well on all systems
+                    }
                   }
-                });*/
 
-                getGeocode(i);
+                }
 
-               
-                
-                // map.setOptions({styles: styles});
-                // ico = new google.maps.Icon({
-                //   url:'/img/marker.png'
-                // });
-                /*image = '../static/img/marker.png';
-                marker = new google.maps.Marker({
-                    map: map,
-                    icon: image,
-                    position: new google.maps.LatLng(55.7857383, 37.57939429999999)
-                });
-                infowindow = new google.maps.InfoWindow({
-                    content: "<span style='height:auto !important; display:block; white-space:nowrap; overflow:hidden !important;'><strong style='font-weight:400;'></strong><br>&#1091;&#1083; &#1055;&#1088;&#1072;&#1074;&#1076;&#1099; &#1076;. 8<br> &#1052;&#1086;&#1089;&#1082;&#1074;&#1072;</span>"
-                });
-                google.maps.event.addListener(marker, "click", function() {
-                    infowindow.open(map, marker);
-                });*/
-            }
-
-            $('#carousel-location').on('slide.bs.carousel', function (a,b,c) {
-              console.log(a,b,c);
+              } else {
+                console.log('Geocode was not successful for the following reason: ' + status);
+              }
             });
+          }
+        }
 
-            google.maps.event.addDomListener(window, "load", init_map);
-        </script>
+        getGeocode(i);
+  }
+
+  google.maps.event.addDomListener(window, "load", init_map);
+</script>
