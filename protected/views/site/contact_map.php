@@ -17,7 +17,7 @@
     <meta itemprop="logo" content="http://cityquest.ru/img/logo1.png" />
     <meta itemprop="name" content="CityQuest. <?=$this->city_model->name?>" />
   </div>
-  <div class="col-md-4 col-md-offset-2 contactV2">
+  <div class="col-md-5 col-lg-4 col-md-offset-1 col-lg-offset-2 contactV2">
     <p>
       <i class="icon icon-Call"></i><a itemprop="telephone" class="ya-phone" href="tel:<?=$this->city_model->tel?>">
       <span class="ya-phone"><?=$this->city_model->tel?></span></a>
@@ -29,7 +29,7 @@
       <span><?=Yii::t('app','For journalists')?>:&nbsp;<a itemprop="email" href="mailto:pr@cityquest.ru" target="_blank">pr@cityquest.ru</a></span>
     </p>
   </div>
-  <div class="col-md-4 contactV2">
+  <div class="col-md-5 col-lg-4 contactV2">
     <p>
       <i class="icon icon-Pin"></i>
       <span>Адрес офиса:</span><br><?=$this->city_model->addres?>
@@ -49,13 +49,13 @@
         <div class="g_map">
             <div id="gmap_canvas"></div>
         </div>
-        <div class="map_info">
+        <div class="map_info carousel slide" id="carousel-location">
           <div class="map_info_head">
             <div class="controls">
-              <a href="">
+              <a href="#carousel-location" class="left" role="button" data-slide="prev">
                 <img src="/img/arrow_left.png" alt="">
               </a>
-              <a href="">
+              <a href="#carousel-location" class="right" role="button" data-slide="next">
                 <img src="/img/arrow_right.png" alt="">
               </a>
             </div>
@@ -63,33 +63,36 @@
               <img src="/img/close_btn.png" alt="">
             </button>
           </div>
-          <div class="map_info_container">
-            <? $active = 1; foreach ($locations as $location) { ?>
-              <div class="map_info_body <?=$active?'active':''?>" id="location_<?=$location->id?>">
-                <? $active = 0;?>
-                <p class="info_ico info_addr" data-id="<?=$location->id?>">
-                  <i class="icon icon-Pin"></i>
-                  г. <?=$cities[$location->city_id]?>, <?=$location->address?>
-                </p>
-                <p class="info_ico">
-                  <i class="icon icon icon-metro"></i>
-                  <?=$location->metro?>
-                </p>
-                <p class="info_ico">
-                  <i class="icon icon icon-Call"></i>
-                  <?=$location->tel?>
-                </p>
-                <p class="info_ico">
-                  <i class="icon icon icon-Man"></i>
-                  <?=$location->contact_email?>
-                </p>
-                <h3>Квесты на этой локации</h3>
-                <p class="text-center local_quests">
-                <? foreach ($quests[$location->id] as $q)
-                  echo '<a href="/quest/'.$q->link.'" target="_blank">'.$q->title.'</a>';
-                ?>
-                </p>
-              </div>
+          <div class="map_info_container carousel-inner" role="listbox">
+            <?
+              $active = 1;
+              $i = 0;
+              foreach ($locations as $location) { ?>
+                <div class="map_info_body item <?=$active?'active':''?>" id="location_<?=$location->id?>">
+                  <? $active = 0;?>
+                  <p class="info_ico info_addr" data-id="<?=$location->id?>" data-num="<?=$i++?>">
+                    <i class="icon icon-Pin"></i>
+                    г. <?=$cities[$location->city_id]?>, <?=$location->address?>
+                  </p>
+                  <p class="info_ico">
+                    <i class="icon icon icon-metro"></i>
+                    <?=$location->metro?>
+                  </p>
+                  <p class="info_ico">
+                    <i class="icon icon icon-Call"></i>
+                    <?=$location->tel?>
+                  </p>
+                  <p class="info_ico">
+                    <i class="icon icon icon-Man"></i>
+                    <?=$location->contact_email?>
+                  </p>
+                  <h3>Квесты на этой локации</h3>
+                  <p class="text-center local_quests">
+                  <? foreach ($quests[$location->id] as $q)
+                    echo '<a href="/quest/'.$q->link.'" target="_blank">'.$q->title.'</a>';
+                  ?>
+                  </p>
+                </div>
             <? }?>
           </div>
         </div>
@@ -112,187 +115,209 @@
 </div>
         <script type="text/javascript">
             function init_map() {
-                var address = $('#meta_address').attr('content');
-                var styles = [
-                  {
-                    "featureType": "water",
-                    "elementType": "geometry.fill",
-                    "stylers": [
-                      { "visibility": "on" },
-                      { "color": "#475a8b" }
-                    ]
-                  },{
-                    "featureType": "water",
-                    "elementType": "labels.text.fill",
-                    "stylers": [
-                      { "color": "#6782ba" }
-                    ]
-                  },{
-                    "featureType": "water",
-                    "elementType": "labels.text.stroke",
-                    "stylers": [
-                      { "visibility": "off" }
-                    ]
-                  },{
-                    "featureType": "landscape",
-                    "elementType": "geometry.fill",
-                    "stylers": [
-                      { "color": "#3b4360" }
-                    ]
-                  },{
-                    "featureType": "administrative",
-                    "elementType": "geometry.stroke",
-                    "stylers": [
-                      { "visibility": "off" }
-                    ]
-                  },{
-                    "featureType": "landscape.man_made",
-                    "elementType": "geometry.fill",
-                    "stylers": [
-                      { "visibility": "on" },
-                      { "color": "#3b4360" }
-                    ]
-                  },{
-                    "featureType": "landscape.man_made",
-                    "elementType": "geometry.stroke",
-                    "stylers": [
-                      { "color": "#475a8b" }
-                    ]
-                  },{
-                    "featureType": "road",
-                    "elementType": "geometry.stroke",
-                    "stylers": [
-                      { "visibility": "off" }
-                    ]
-                  },{
-                    "featureType": "road",
-                    "elementType": "geometry.fill",
-                    "stylers": [
-                      { "color": "#6e89c0" }
-                    ]
-                  },{
-                    "featureType": "road",
-                    "elementType": "labels.text.stroke",
-                    "stylers": [
-                      { "visibility": "on" },
-                      { "color": "#3b4360" }
-                    ]
-                  },{
-                    "featureType": "poi",
-                    "elementType": "labels.text.stroke",
-                    "stylers": [
-                      { "color": "#3b4360" }
-                    ]
-                  },{
-                    "featureType": "poi",
-                    "elementType": "labels.text.fill",
-                    "stylers": [
-                      { "color": "#ccddfb" }
-                    ]
-                  },{
-                    "featureType": "road",
-                    "elementType": "labels.text.fill",
-                    "stylers": [
-                      { "color": "#ccddfb" }
-                    ]
-                  },{
-                    "elementType": "labels.text.stroke",
-                    "stylers": [
-                      { "color": "#3b4360" }
-                    ]
-                  },{
-                    "elementType": "labels.text.fill",
-                    "stylers": [
-                      { "color": "#b0c5eb" }
-                    ]
-                  },{
-                    "featureType": "poi",
-                    "elementType": "geometry",
-                    "stylers": [
-                      { "color": "#2f3756" }
-                    ]
-                  },{
-                    "featureType": "transit",
-                    "elementType": "geometry.fill",
-                    "stylers": [
-                      { "color": "#2f3756" }
-                    ]
-                  },{
-                    "featureType": "road",
-                    "elementType": "geometry.stroke",
-                    "stylers": [
-                      { "visibility": "off" }
-                    ]
-                  },{
-                  }
-                ];
-                var icon_marker = '../img/marker.png';
-                var icon_marker_hover = '../img/marker_hover.png';
-                var geocoder = new google.maps.Geocoder();
-                var latlngbounds = new google.maps.LatLngBounds();
-                var map;
+                var address = $('#meta_address').attr('content'),
+                    styles = [
+                      {
+                        "featureType": "water",
+                        "elementType": "geometry.fill",
+                        "stylers": [
+                          { "visibility": "on" },
+                          { "color": "#475a8b" }
+                        ]
+                      },{
+                        "featureType": "water",
+                        "elementType": "labels.text.fill",
+                        "stylers": [
+                          { "color": "#6782ba" }
+                        ]
+                      },{
+                        "featureType": "water",
+                        "elementType": "labels.text.stroke",
+                        "stylers": [
+                          { "visibility": "off" }
+                        ]
+                      },{
+                        "featureType": "landscape",
+                        "elementType": "geometry.fill",
+                        "stylers": [
+                          { "color": "#3b4360" }
+                        ]
+                      },{
+                        "featureType": "administrative",
+                        "elementType": "geometry.stroke",
+                        "stylers": [
+                          { "visibility": "off" }
+                        ]
+                      },{
+                        "featureType": "landscape.man_made",
+                        "elementType": "geometry.fill",
+                        "stylers": [
+                          { "visibility": "on" },
+                          { "color": "#3b4360" }
+                        ]
+                      },{
+                        "featureType": "landscape.man_made",
+                        "elementType": "geometry.stroke",
+                        "stylers": [
+                          { "color": "#475a8b" }
+                        ]
+                      },{
+                        "featureType": "road",
+                        "elementType": "geometry.stroke",
+                        "stylers": [
+                          { "visibility": "off" }
+                        ]
+                      },{
+                        "featureType": "road",
+                        "elementType": "geometry.fill",
+                        "stylers": [
+                          { "color": "#6e89c0" }
+                        ]
+                      },{
+                        "featureType": "road",
+                        "elementType": "labels.text.stroke",
+                        "stylers": [
+                          { "visibility": "on" },
+                          { "color": "#3b4360" }
+                        ]
+                      },{
+                        "featureType": "poi",
+                        "elementType": "labels.text.stroke",
+                        "stylers": [
+                          { "color": "#3b4360" }
+                        ]
+                      },{
+                        "featureType": "poi",
+                        "elementType": "labels.text.fill",
+                        "stylers": [
+                          { "color": "#ccddfb" }
+                        ]
+                      },{
+                        "featureType": "road",
+                        "elementType": "labels.text.fill",
+                        "stylers": [
+                          { "color": "#ccddfb" }
+                        ]
+                      },{
+                        "elementType": "labels.text.stroke",
+                        "stylers": [
+                          { "color": "#3b4360" }
+                        ]
+                      },{
+                        "elementType": "labels.text.fill",
+                        "stylers": [
+                          { "color": "#b0c5eb" }
+                        ]
+                      },{
+                        "featureType": "poi",
+                        "elementType": "geometry",
+                        "stylers": [
+                          { "color": "#2f3756" }
+                        ]
+                      },{
+                        "featureType": "transit",
+                        "elementType": "geometry.fill",
+                        "stylers": [
+                          { "color": "#2f3756" }
+                        ]
+                      },{
+                        "featureType": "road",
+                        "elementType": "geometry.stroke",
+                        "stylers": [
+                          { "visibility": "off" }
+                        ]
+                      },{
+                      }
+                    ],
+                    markers = {},
+                    icon_marker = '../img/marker.png',
+                    icon_marker_hover = '../img/marker_hover.png',
+                    geocoder = new google.maps.Geocoder(),
+                    latlngbounds = new google.maps.LatLngBounds(),
+                    length = $('.info_addr').length,
+                    map, i = 0, last = false,
+                    getGeocode = function(i) {
+                      console.log('getGeocode-',i);
+                      var element = $('.info_addr[data-num="'+i+'"]');
 
-                geocoder.geocode( { 'address': 'Москва'}, function(results, status) {
+                      if (element) {
+
+                        var addr = element.text().trim(),
+                            location_id = element.attr('data-id');
+
+                        geocoder.geocode( { 'address': addr}, function(results, status, c) {
+
+                          if (status == google.maps.GeocoderStatus.OK) {
+
+                            // console.log(results, status, c);
+
+                            var marker = new google.maps.Marker({
+                                id:location_id,
+                                num:i,
+                                map: map,
+                                icon: icon_marker,
+                                position: results[0].geometry.location
+                            });
+                            markers[i] = marker;
+                            google.maps.event.addListener(marker, 'mouseover', function() {
+                                marker.setIcon(icon_marker_hover);
+                            });
+                            google.maps.event.addListener(marker, 'mouseout', function() {
+                                marker.setIcon(icon_marker);
+                            });
+
+                            google.maps.event.addListener(marker, 'click', function() {
+                              $('#carousel-location').carousel(marker.num).carousel('pause');
+
+                            });
+
+                            latlngbounds.extend(results[0].geometry.location);
+                            if (i<length-1){
+                              i++
+                              getGeocode(i);
+                            } else {
+
+                              var myMapOptions = {
+                                  zoom: 12,
+                                  scrollwheel: true,
+                                  disableDefaultUI: true,
+                                  zoomControl: false,
+                                  center: latlngbounds.getCenter(),
+                                  mapTypeId: google.maps.MapTypeId.ROADMAP,
+                                  styles:styles
+                              };
+                              map = new google.maps.Map(document.getElementById("gmap_canvas"), myMapOptions);
+                              // map.setCenter();
+                              map.fitBounds(latlngbounds);
+                              
+                              google.maps.event.addListenerOnce(map, 'idle', function(){
+                                console.log('map loaded');
+                                
+                              });
+
+                              console.log(markers);
+
+
+                            }
+
+                          } else {
+                            console.log('Geocode was not successful for the following reason: ' + status);
+                          }
+                        });
+                      }
+                    }
+
+                /*geocoder.geocode( { 'address': 'Москва'}, function(results, status) {
                   if (status == google.maps.GeocoderStatus.OK) {
-                    var myOptions = {
-                        zoom: 12,
-                        scrollwheel: true,
-                        disableDefaultUI: true,
-                        zoomControl: false,
-                        center: results[0].geometry.location,
-                        mapTypeId: google.maps.MapTypeId.ROADMAP,
-                        styles:styles
-                    };
-                    map = new google.maps.Map(document.getElementById("gmap_canvas"), myOptions);
+
                   } else {
                     console.log('Geocode was not successful for the following reason: ' + status);
                   }
-                });
+                });*/
 
-                var i = 1,
-                    last = false;
-                $('.info_addr').each(function() {
-                  var addr = $( this ).text().trim(),
-                      location_id = $( this ).attr('data-id');
+                getGeocode(i);
 
-                  i++;
-
-                  if ( $('.info_addr').length < i ) {
-                    last = true;
-                    console.log('last', location_id);
-                  }
-
-                  geocoder.geocode( { 'address': addr}, function(results, status) {
-
-                    if (status == google.maps.GeocoderStatus.OK) {
-                      var marker = new google.maps.Marker({
-                          id:location_id,
-                          map: map,
-                          icon: icon_marker,
-                          position: results[0].geometry.location
-                      });
-                      google.maps.event.addListener(marker, 'mouseover', function() {
-                          marker.setIcon(icon_marker_hover);
-                      });
-                      google.maps.event.addListener(marker, 'mouseout', function() {
-                          marker.setIcon(icon_marker);
-                      });
-                      google.maps.event.addListener(marker, 'click', function() {
-                        $('.map_info_body').removeClass('active');
-                        $('#location_'+marker.id).addClass('active');
-                      });
-
-                      latlngbounds.extend(results[0].geometry.location);
-                      if (last) {
-                        map.setCenter(latlngbounds.getCenter());
-                        map.fitBounds(latlngbounds);
-                      }
-
-                    } else {
-                      console.log('Geocode was not successful for the following reason: ' + status);
-                    }
-                  });
-                });
+               
                 
                 // map.setOptions({styles: styles});
                 // ico = new google.maps.Icon({
@@ -311,5 +336,10 @@
                     infowindow.open(map, marker);
                 });*/
             }
+
+            $('#carousel-location').on('slide.bs.carousel', function (a,b,c) {
+              console.log(a,b,c);
+            });
+
             google.maps.event.addDomListener(window, "load", init_map);
         </script>

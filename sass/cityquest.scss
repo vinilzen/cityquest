@@ -3223,6 +3223,9 @@ a:hover, a:focus {
 			color:#78c5ea;
 			font-size: 32px;
 		}
+		.ya-phone {
+			color:#fff;
+		}
 	}
 }
 .rules h1.h3.contactH1:after {
@@ -3302,4 +3305,12 @@ a:hover, a:focus {
 		font-family: Circe;
 		font-weight: normal;
 	}
+	.item:after {
+	}
+}
+.map_info_container {
+	max-height: 410px;
+}
+.carousel .map_info_body.item:after {
+	box-shadow: none;
 }
