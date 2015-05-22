@@ -78,15 +78,12 @@
 	</div>
 
 	<div class="form-group">
-		<div class="col-sm-offset-3 col-sm-9">
-			<div class="checkbox">
-				<label>
-					<?=$form->checkBox($model,'free_parking' )?>
-					<?=$form->labelEx($model,'free_parking')?>
-				</label>
-			</div>
+		<?=$form->labelEx($model,'parking', array('class' => 'control-label col-sm-3'))?>
+		<div class="col-sm-9">
+			<?=$form->textField($model,'parking', array('class'=>'form-control'))?>
+			<?=$form->error($model,'parking')?>
 		</div>
-	</div>	
+	</div>
 
 	<div class="form-group<?=(isset($errors['city_id']))?' has-error':''?>">
 		<label class="control-label col-sm-3 required" for="city_id">Город <span class="required">*</span></label>

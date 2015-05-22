@@ -52,7 +52,7 @@ $('.search-form form').submit(function(){
 					'contact_email',
 					'metro',
 					'address_additional',
-					'free_parking',
+					'parking',
 					'city_id',
 					array(
 						'class'=>'CButtonColumn',

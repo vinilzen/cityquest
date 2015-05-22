@@ -87,7 +87,7 @@ $('.search-form form').submit(function(){
 			'value'=>'CHtml::link(
 					CHtml::encode( User::itemAlias("AdminStatus",$data->superuser) ),
 					"#",
-					array("class"=>"label label-".(($data->superuser==1)?"danger":(($data->superuser==2)?"info":"success")))
+					array("class"=>"label label-".(($data->superuser==1)?"danger":( ($data->superuser==2)?"info":(($data->superuser==3)?"warning":"success") )))
 				)',
 			'filter'=>'',
 			'type'=>'raw',

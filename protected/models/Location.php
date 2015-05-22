@@ -14,7 +14,7 @@
  * @property integer $city_id
  * 
  * @property integer $address_additional
- * @property integer $free_parking
+ * @property integer $parking
  */
 class Location extends CActiveRecord
 {
@@ -34,8 +34,8 @@ class Location extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('city_id, free_parking', 'numerical', 'integerOnly'=>true),
-			array('name, address, contact_email, notification_email', 'length', 'max'=>128),
+			array('city_id', 'numerical', 'integerOnly'=>true),
+			array('name, address, contact_email, notification_email, parking', 'length', 'max'=>128),
 			array('address_additional', 'length', 'max'=>256),
 			array('tel, metro', 'length', 'max'=>45),
 			// The following rule is used by search().
@@ -70,7 +70,7 @@ class Location extends CActiveRecord
 			'metro' => Yii::t('app','Metro'),
 			'city_id' => Yii::t('app','City'),
 			'address_additional' => Yii::t('app','Additional address info'),
-			'free_parking' => Yii::t('app','Free parking'),
+			'parking' => Yii::t('app','Parking'),
 		);
 	}
 

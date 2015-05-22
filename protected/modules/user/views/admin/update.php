@@ -8,6 +8,8 @@
 					'model'=>$model,
 					'quests'=>$quests,
 					'quests_obj'=>$quests_obj,
+					'locations'=>$locations,
+					'locations_obj'=>$locations_obj,
 					'cities'=>$cities,
 				))?>
 		</div>

@@ -19,6 +19,7 @@ class User extends CActiveRecord
 	 * @var integer $superuser
 	 * @var integer $status
 	 * @var string $quests
+	 * @var string $locations
 	 * @var string $city_id
 	 */
 
@@ -54,7 +55,7 @@ class User extends CActiveRecord
 				array('email', 'email'),
 				array('email', 'unique', 'message' => UserModule::t("This user's email address already exists.")),
 				array('status', 'in', 'range'=>array(self::STATUS_NOACTIVE,self::STATUS_ACTIVE,self::STATUS_BANED)),
-				array('superuser', 'in', 'range'=>array(0,1,2)),
+				array('superuser', 'in', 'range'=>array(0,1,2,3)),
 				array('username, email, createtime, lastvisit, superuser, status', 'required'),
 				array('createtime, lastvisit, superuser, status', 'numerical', 'integerOnly'=>true),
 				array('username, email, phone', 'safe', 'on'=>'search'),
@@ -102,10 +103,11 @@ class User extends CActiveRecord
 			'createtime' => UserModule::t("Registration date"),
 			'lastvisit' => UserModule::t("Last visit"),
 			'phone' => UserModule::t("Phone"),
-			'quests' => 'Квесты',
+			'quests' => Yii::t('app','Quest'),
+			'locations' => Yii::t('app','Locations'),
 			'superuser' => 'Роль',
 			'moderator' => 'Модератор',
-			'city_id' => 'Город',
+			'city_id' => Yii::t('app','City'),
 			'status' => UserModule::t("Status"),
 		);
 	}
@@ -117,7 +119,7 @@ class User extends CActiveRecord
             'notactvie'=>array('condition'=>'status='.self::STATUS_NOACTIVE),
             'banned'=>array('condition'=>'status='.self::STATUS_BANED),
             'superuser'=>array('condition'=>'superuser=1'),
-            'admin'=>array('condition'=>'superuser=1'),
+            'admin'=>array('condition'=>'superuser=3'),
             'moderator'=>array('condition'=>'superuser=2'),
             'notsafe'=>array(
             	'select' => 'id, username, password, email, activkey, createtime, lastvisit, superuser, status',
@@ -127,7 +129,7 @@ class User extends CActiveRecord
 	
 	public function defaultScope() {
         return array(
-            'select' => 'id, username, email, phone, createtime, lastvisit, superuser, status, quests, fb_link, fb_id, vk_id, city_id',
+            'select' => 'id, username, email, phone, createtime, lastvisit, superuser, status, quests, locations, fb_link, fb_id, vk_id, city_id',
         );
     }
 
@@ -137,6 +139,14 @@ class User extends CActiveRecord
 			array_push($titles, $q->title);
 		}
 		return implode(', ', $titles);
+	}
+
+    public static function listLocations($locations) {
+		$names = array();
+    	foreach ($locations as $l) {
+			array_push($names, $l->name);
+		}
+		return implode(', ', $names);
 	}
 	
 	public static function itemAlias($type,$code=NULL) {
@@ -148,8 +158,9 @@ class User extends CActiveRecord
 			),
 			'AdminStatus' => array(
 				'0' => UserModule::t('Пользователь'),
-				'1' => UserModule::t('Админ'),
+				'1' => UserModule::t('Суперадмин'),
 				'2' => UserModule::t('Модератор'),
+				'3' => UserModule::t('Админ'),
 			),
 		);
 		if (isset($code))

@@ -95,6 +95,7 @@ return array(
 	'Name'=>'Имя',
 	'or'=>'или',
 	'Old password'=>'Старый пароль',
+	'Parking'=>'Парковка',
 	'Password'=>'Пароль',
 	'Payment method'=>'Методы оплаты',
 	'PAYMENT METHODS'=>'ПРИНИМАЕМ К ОПЛАТЕ',

@@ -62,10 +62,10 @@
 			</div>
 		</div>
 
-		<?php if ($model->superuser == 2) { ?>
+		<? if ($model->superuser == 2) { ?>
 
 			<div class="form-group set_moderator_quests">
-				<?php echo CHtml::activeLabelEx($model,'quests',array('class'=>'control-label my_form_label col-sm-5')); ?>
+				<?=CHtml::activeLabelEx($model,'quests',array('class'=>'control-label my_form_label col-sm-5'))?>
 				<!-- <div class="my_form_control col-sm-7 ">
 					<?php echo CHtml::checkBoxList('User[quests][]', explode(',', $model->quests), $quests); ?>
 					<?php echo CHtml::error($model,'quests'); ?>
@@ -104,13 +104,36 @@
 							echo '<ul class="list-unstyled city-list-'.$city->id.'" style="padding-left:10px; overflow:hidden; height:0;">'.$quests_str.'</ul>';
 						}
 
-
 						echo '</li>';
 					} ?>
 					</ul>
 				</div>
 			</div>
 		<?php } ?>
+
+
+		<? if ($model->superuser == 3) { ?>
+			<div class="form-group set_moderator_quests">
+				<?=CHtml::activeLabelEx($model,'locations',array('class'=>'control-label my_form_label col-sm-5'))?>
+				<? $user_locations_array = explode(',', $model->locations); ?>
+				<div class="my_form_control col-sm-7 ">
+					<ul class="list-unstyled">
+					<? foreach ($locations_obj as $location) {
+
+						$checked = (in_array($location->id, $user_locations_array)) ? 'checked' : '';
+
+						echo
+						'<li>'.
+							'<input value="'.$location->id.'" id="User_locations_'.$location->id.'" type="checkbox" '.
+								'name="User[locations][]" '.$checked.'> '.
+							'<label for="User_locations_'.$location->id.'">'.$location->name.'</label>'.
+						'</li>';
+
+					} ?>
+					</ul>
+				</div>
+			</div>				
+		<? } ?>
 
 		<div class="form-group buttons">
 			<div class="my_form_label col-sm-5"></div>

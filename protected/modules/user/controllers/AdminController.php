@@ -139,10 +139,16 @@ class AdminController extends Controller
 		if(isset($_POST['User'])) {
 			$model->attributes=$_POST['User'];
 			
-			if (isset($_POST['User']['quests'])){
-				$model->quests = implode(',', $_POST['User']['quests']);
+			if ($model->superuser == 2){
+				$model->quests = (isset($_POST['User']['quests'])) ? implode(',', $_POST['User']['quests']) : '';
 			} else {
 				$model->quests = '';
+			}
+			
+			if ($model->superuser == 3){
+				$model->locations = (isset($_POST['User']['locations'])) ? implode(',', $_POST['User']['locations']) : '';
+			} else {
+				$model->locations = '';
 			}
 
 			if($model->validate()) {
@@ -154,7 +160,7 @@ class AdminController extends Controller
 					$model->activkey=Yii::app()->controller->module->encrypting(microtime().$model->password);
 				}
 				$model->save();
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('update','id'=>$model->id));
 			}
 		}
 
@@ -174,9 +180,17 @@ class AdminController extends Controller
 			}
 		}
 
+		$location_titels = array();
+		$locations = Location::model()->findAll();
+		if ($locations && count($locations)>0){
+			foreach ($locations as $l) $location_titels[$l->id] = $l->name;
+		}
+
 		$this->render('update',array(
 			'model'=>$model,
 			'quests'=>$quest_titels,
+			'locations'=>$location_titels,
+			'locations_obj'=>$locations,
 			'quests_obj'=>$quests,
 			'cities'=>$cities,
 		));

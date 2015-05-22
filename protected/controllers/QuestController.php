@@ -38,7 +38,7 @@ class QuestController extends Controller
 			),
 			array('allow',
 				'actions'=>array('adminschedule'),
-				'expression'=>"Yii::app()->getModule('user')->user()->superuser == 2",
+				'expression'=>"Yii::app()->getModule('user')->user()->superuser > 1",
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -517,27 +517,49 @@ class QuestController extends Controller
 		} else {
 
 			$criteria=new CDbCriteria(array(
-				'condition'=>"status = 2 && city_id = ".$user_city_id,
-				'limit'=>12,
+				'condition'=>"status = 2 && city_id = ".$this->city_model->id,
+				'limit'=>20,
 				'order'=>"status ASC, sort ASC"
 			));
 			
-			if (UserModule::isModerator()){
+			if (Yii::app()->getModule('user')->user()->superuser > 1){
 
-				$moderator_quests = Yii::app()->getModule('user')->user()->quests;
+				if ( Yii::app()->getModule('user')->user()->superuser == 2 ){
 
-				if ($moderator_quests && $moderator_quests != ''){
-					$criteria->addInCondition("id", explode(',', $moderator_quests));
-				} else {
-					$this->render('adminschedule',array(
-						'twoweek_bookings_arr' => $twoweek_bookings_arr,
-						'quests' => array(),
-						'ymd' => $YMDate,
-						'users' => array(),
-						'holidays' => $holiday_list,
-						'arr_hash' => md5(serialize($twoweek_bookings_arr)),
-					));
-					die;
+					$moderator_quests = Yii::app()->getModule('user')->user()->quests;
+
+					if ($moderator_quests && $moderator_quests != ''){
+						$criteria->addInCondition("id", explode(',', $moderator_quests));
+					} else {
+						$this->render('adminschedule',array(
+							'twoweek_bookings_arr' => $twoweek_bookings_arr,
+							'quests' => array(),
+							'ymd' => $YMDate,
+							'users' => array(),
+							'holidays' => $holiday_list,
+							'arr_hash' => md5(serialize($twoweek_bookings_arr)),
+						));
+						die;
+					}
+				} else if (Yii::app()->getModule('user')->user()->superuser == 3) {
+					if (Yii::app()->getModule('user')->user()->locations != '') {
+
+						$criteria->addInCondition(
+							'location_id',explode(',', Yii::app()->getModule('user')->user()->locations)
+						);
+
+					} else {
+
+						$this->render('adminschedule',array(
+							'twoweek_bookings_arr' => $twoweek_bookings_arr,
+							'quests' => array(),
+							'ymd' => $YMDate,
+							'users' => array(),
+							'holidays' => $holiday_list,
+							'arr_hash' => md5(serialize($twoweek_bookings_arr)),
+						));
+						die;
+					}
 				}
 			}
 
@@ -641,21 +663,26 @@ class QuestController extends Controller
 
 		$user_city_id = Yii::app()->getModule('user')->user()->city_id;
 
+		/*if (Yii::app()->getModule('user')->user()->superuser == 3) {
+
+			if (Yii::app()->getModule('user')->user()->locations != '') {
+				$criteria = new CDbCriteria();
+				$criteria->addInCondition('location_id',explode(',', Yii::app()->getModule('user')->user()->locations));
+				$criteria->order="sort ASC";
+			}
+		}*/
+
+		$criteria = new CDbCriteria();
+		$criteria->condition='city_id='.(int)$user_city_id;
+		$criteria->order="sort ASC";
+
 		$model=new Quest('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Quest']))
 			$model->attributes=$_GET['Quest'];
 
 		$this->render('admin',array(
-			'models'=>Quest::model()->findAll(
-						array(
-						    // "condition" => "status>1 AND city_id=".(int)$user_city_id,
-						    "condition" => "city_id=".(int)$user_city_id,
-						    // "order" => "status ASC, sort ASC",
-						    "order" => "sort ASC",
-						    "limit" => 20,
-						)
-					),
+			'models'=>Quest::model()->findAll($criteria),
 			'model'=>$model
 		));
 	}
