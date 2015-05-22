@@ -43,7 +43,7 @@ foreach ($quests as $quest) {
 						<i class="icon icon-user noactive"></i>
 						<i class="icon icon-user noactive"></i><strong>2 - 4</strong> <?=Yii::t('app','players')?>
 					</span>
-					<span><i class="icon icon-Pin"></i><?=CHtml::encode($quest->addres)?></span>
+					<span><i class="icon icon-Pin"></i><?=CHtml::encode($locations[$quest->location_id]->address)?></span>
 				</p>
 				<? if (in_array($quest->id, $quests_with_promo)) {
 					echo '<span class="promo-flag promo-flag-right">Акция</span>';

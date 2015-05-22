@@ -100,17 +100,17 @@
       <div id="quest_description_right" class="col-md-5 col-lg-4 col-lg-offset-3 col-xlg-3 col-xlg-offset-5 col-xs-12">
         <div class="container-fluid quest_description_right">
           <div class="row">
-            <? if ($model->metro!= '') { ?><div class="col-xs-12 col-md-12 col-sm-3 text-left">
+            <? if ($location->metro!= '') { ?><div class="col-xs-12 col-md-12 col-sm-3 text-left">
               <i class="icon icon-metro"></i>
-              <p><span class="metro-title"><?=$model->metro?></span></p>
+              <p><span class="metro-title"><?=$location->metro?></span></p>
             </div><? } ?>
             <div class="col-xs-12 col-md-12 col-sm-9 text-left">
               <i class="icon icon-point"></i>
-              <p><?=$model->addres?>
+              <p><?=$location->address?>
                 <br>
-                <?=$model->addres_additional?>
+                <?=$location->address_additional?>
                 <br>
-                <a href="https://www.google.com/maps/preview?q=<?=$cities[$model->city_id]->name?>,+<?=urlencode($model->addres)?>" target="_blank"><?=Yii::t('app','How to get there')?>?</a>
+                <a href="https://www.google.com/maps/preview?q=<?=$cities[$location->city_id]->name?>,+<?=urlencode($location->address)?>" target="_blank"><?=Yii::t('app','How to get there')?>?</a>
               </p>
             </div>
           </div>
@@ -456,7 +456,7 @@
                 <i class="icon icon-user noactive"></i>
                 <i class="icon icon-user noactive"></i><strong>2 - 4</strong> <?=Yii::t('app','players')?>
             </span>
-            <span><i class="icon icon-point"></i><?=CHtml::encode($quest->addres)?></span>
+            <span><i class="icon icon-point"></i><?=CHtml::encode($locations[$quest->location_id]->address)?></span>
         </p>
       </a>
     </div>  

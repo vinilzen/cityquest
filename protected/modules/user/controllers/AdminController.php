@@ -30,7 +30,7 @@ class AdminController extends Controller
 			),
 			array('allow',
 				'actions'=>array('view'),
-				'expression'=>"Yii::app()->getModule('user')->user()->superuser == 2",
+				'expression'=>"Yii::app()->getModule('user')->user()->superuser > 1",
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),

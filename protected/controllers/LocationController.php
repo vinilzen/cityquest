@@ -70,11 +70,14 @@ class LocationController extends Controller
 			if($model->save())
 				$this->redirect(array('admin'));
 		}
+
+		$users = User::model()->findAll(array('condition' => 'superuser = 3'));
 		
 		$cities = City::model()->findAllByAttributes( array('active'=>1) );
 
 		$this->render('create',array(
 			'model'=>$model,
+			'users'=>$users,
 			'cities' => $cities,
 			'errors'=>$model->getErrors(),
 			'message_success' => $message_success,

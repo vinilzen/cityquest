@@ -169,6 +169,15 @@ class QuestController extends Controller
 			throw new CHttpException(404, 'Квест не найден!');
 		}
 
+
+		$locations_array = array();
+		$locations = Location::model()->findAll();
+		$location = Location::model()->findByPk($model->location_id);
+		
+		foreach ($locations as $l) {
+			$locations_array[$l->id] = $l;
+		}
+
 		if (!$next) {
 			reset($quests);
 			$next = current($quests);
@@ -225,6 +234,8 @@ class QuestController extends Controller
 
 		header("Last-Modified: " . gmdate("D, d M Y H:i:s", $model->update_time) . " GMT");
 		$this->render('view',array(
+			'location'=>$location,
+			'locations'=>$locations_array,
 			'promo_days'=>$promo_days_array,
 			'model'=>$model,
 			'cities'=>$city_array,
@@ -451,8 +462,15 @@ class QuestController extends Controller
 		// foreach ($quests as $key => $value) { echo $value->id.'#'.$value->title.', '.$value->sort.' - '.$value->status.'<br>';	}
         
         $this->layout = '//layouts/index';
+        
+        $locations_array = array();
+		$locations = Location::model()->findAll();
+		foreach ($locations as $location) {
+			$locations_array[$location->id] = $location;
+		}
 		$this->render('index',array(
 			'quests'=>$quests,
+			'locations'=>$locations_array,
 			'quests_with_promo'=>$quests_with_promo,
 		));
 	}
