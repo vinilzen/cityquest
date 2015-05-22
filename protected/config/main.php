@@ -86,10 +86,10 @@ return array(
 					'levels'=>'profile',
 					'logFile'=>'profile.log',
 				),
-		        array(
+		        /*array(
 			    	'class'=>'CWebLogRoute',
 			        'levels'=>'error, warning, trace, log, vardump',
-		        ),
+		        ),*/
 			),
 		),
 	),

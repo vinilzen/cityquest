@@ -46,13 +46,11 @@ $('.search-form form').submit(function(){
 				'columns'=>array(
 					'id',
 					'name',
-					'address',
 					'tel',
 					'notification_email',
-					'contact_email',
 					'metro',
+					'address',
 					'address_additional',
-					'parking',
 					'city_id',
 					array(
 						'class'=>'CButtonColumn',

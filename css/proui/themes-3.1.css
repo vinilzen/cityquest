@@ -145,5 +145,5 @@
 }
 
 #times-table .btn-default.btn-gray {
-  background-color:rgb(233, 233, 233);
+  background-color:rgba(233, 233, 233, .6);
 }

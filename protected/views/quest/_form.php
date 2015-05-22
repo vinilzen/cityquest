@@ -77,7 +77,7 @@
 		</div>
 	</div>
 
-	<div class="form-group<?=(isset($errors['addres']))?' has-error':''?>">
+	<!-- <div class="form-group<?=(isset($errors['addres']))?' has-error':''?>">
 		<?=$form->labelEx($model,'addres', array('class' => 'control-label col-sm-3'))?>
 		<div class="col-sm-9">
 			<?=$form->textField($model,'addres',array('size'=>60,'maxlength'=>128,'class'=>'form-control'))?>
@@ -99,7 +99,7 @@
 			<?=$form->textField($model,'metro',array('size'=>60,'maxlength'=>128,'class'=>'form-control'))?>
 			<?=$form->error($model,'metro', array('class'=>'help-block'))?>
 		</div>
-	</div>
+	</div> -->
 
 
 	<div class="form-group<?=(isset($errors['location_id']))?' has-error':''?>">

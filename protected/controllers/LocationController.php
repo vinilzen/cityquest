@@ -102,10 +102,13 @@ class LocationController extends Controller
 			}
 		}
 
+		$users = User::model()->findAll(array('condition' => 'superuser = 3'));
+
 		$cities = City::model()->findAllByAttributes( array('active'=>1) );
 
 		$this->render('update',array(
 			'model'=>$model,
+			'users'=>$users,
 			'cities' => $cities,
 			'errors'=>$model->getErrors(),
 			'message_success' => $message_success,

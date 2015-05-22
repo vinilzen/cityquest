@@ -26,6 +26,7 @@ $this->menu=array(
 		<div class="col-sm-12">
 			<?php $this->renderPartial('_form', array(
             'model'=>$model, 
+            'users'=>$users, 
             'errors'=>$errors,
             'cities'=>$cities,
             'message_success'=>$message_success

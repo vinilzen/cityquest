@@ -336,7 +336,11 @@ if (strpos($_SERVER['HTTP_HOST'], '.kz') > 0){
 (function (d, w, c) {
     (w[c] = w[c] || []).push(function() {
         try {
+          <? if ($this->city_model->id != 2 ) { ?>
             w.yaCounter25221941 = new Ya.Metrika({id:25221941,
+          <? } else { ?>
+            w.yaCounter30465552 = new Ya.Metrika({id:30465552,
+          <? } ?>
                     webvisor:true,
                     clickmap:true,
                     trackLinks:true});

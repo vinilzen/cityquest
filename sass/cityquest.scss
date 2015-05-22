@@ -762,7 +762,7 @@ a.descr {
 		}
 	}
 }
- .ModalBook a.descr p.quest_info {
+.ModalBook a.descr p.quest_info {
 	padding-right: 0;
 	width: 100%;
 	left:0;
@@ -1206,8 +1206,6 @@ hr.gradient {
 		}
 	}
 }
-
-
 
 /* Страница квеста */
 body.inner .jumbotron.quest {
@@ -3245,6 +3243,11 @@ a:hover, a:focus {
 			top:-10px;
 			color:#78c5ea;
 			font-size: 32px;
+			&.icon-Mail {
+				font-size: 24px;
+				left: -5px;
+				top: -2px;
+			}
 		}
 		.ya-phone {
 			color:#fff;
@@ -3316,6 +3319,10 @@ a:hover, a:focus {
 			top:-5px;
 			font-size: 24px;
 			color:#7fc9ec;
+			&.icon-Mobile {
+				left: 7px;
+				top: -3px;
+			}
 		}
 
 	}
@@ -3393,5 +3400,11 @@ a:hover, a:focus {
 .rules h1.h3.contactH1 {
 	@media (max-width: 480px) {
 		margin-bottom: 10px;
+	}
+}
+a {	
+	&:hover, &:focus {
+		color:#afe1f9;
+		text-decoration: none;
 	}
 }

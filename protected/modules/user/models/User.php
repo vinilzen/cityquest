@@ -159,8 +159,8 @@ class User extends CActiveRecord
 			'AdminStatus' => array(
 				'0' => UserModule::t('Пользователь'),
 				'1' => UserModule::t('Суперадмин'),
-				'2' => UserModule::t('Модератор'),
-				'3' => UserModule::t('Админ'),
+				// '2' => UserModule::t('Модератор квеста'),
+				'3' => UserModule::t('Модератор'),
 			),
 		);
 		if (isset($code))

@@ -38,18 +38,18 @@
 	</div>
 
 	<div class="form-group">
-		<?=$form->labelEx($model,'tel', array('class' => 'control-label col-sm-3'))?>
+		<?=$form->labelEx($model,'address_additional', array('class' => 'control-label col-sm-3'))?>
 		<div class="col-sm-9">
-			<?=$form->textField($model,'tel', array('class'=>'form-control'))?>
-			<?=$form->error($model,'tel')?>
+			<?=$form->textField($model,'address_additional', array('class'=>'form-control'))?>
+			<?=$form->error($model,'address_additional')?>
 		</div>
 	</div>
 
 	<div class="form-group">
-		<?=$form->labelEx($model,'contact_email', array('class' => 'control-label col-sm-3'))?>
+		<?=$form->labelEx($model,'tel', array('class' => 'control-label col-sm-3'))?>
 		<div class="col-sm-9">
-			<?=$form->textField($model,'contact_email', array('class'=>'form-control'))?>
-			<?=$form->error($model,'contact_email')?>
+			<?=$form->textField($model,'tel', array('class'=>'form-control'))?>
+			<?=$form->error($model,'tel')?>
 		</div>
 	</div>
 
@@ -69,22 +69,6 @@
 		</div>
 	</div>
 
-	<div class="form-group">
-		<?=$form->labelEx($model,'address_additional', array('class' => 'control-label col-sm-3'))?>
-		<div class="col-sm-9">
-			<?=$form->textField($model,'address_additional', array('class'=>'form-control'))?>
-			<?=$form->error($model,'address_additional')?>
-		</div>
-	</div>
-
-	<div class="form-group">
-		<?=$form->labelEx($model,'parking', array('class' => 'control-label col-sm-3'))?>
-		<div class="col-sm-9">
-			<?=$form->textField($model,'parking', array('class'=>'form-control'))?>
-			<?=$form->error($model,'parking')?>
-		</div>
-	</div>
-
 	<div class="form-group<?=(isset($errors['city_id']))?' has-error':''?>">
 		<label class="control-label col-sm-3 required" for="city_id">Город <span class="required">*</span></label>
 		<div class="col-sm-9">
@@ -92,6 +76,27 @@
 		</div>
 	</div>
 
+	<div class="row buttons">
+		<? 	$str = array();
+			foreach ($users as $user) { 
+				if ($user->locations!='' ) {
+					$location_ids = explode(',',$user->locations);
+					if (in_array($model->id, $location_ids)) {
+						$str[] = '<a href="/user/admin/update/id/'.$user->id.'">'.$user->username.'</a>';
+					}
+				}
+			}
+			if (count($str)>0)
+				echo '<label class="control-label  col-sm-3" >Модераторы</label>';
+			else 
+				echo '<div class="col-sm-3"></div>'
+			?>
+		<div class="col-sm-9">
+			<?=implode(', ', $str)?>
+			<br>
+			<br>
+		</div>
+	</div>
 	<div class="row buttons">
 		<div class="col-sm-3"></div>
 		<div class="col-sm-9">

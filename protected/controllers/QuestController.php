@@ -491,33 +491,17 @@ class QuestController extends Controller
 		$start_date = date('Ymd', strtotime( '+'.$prev.' day' ));
 		$end_date = date('Ymd', strtotime( '+'.$next.' day' ));
 
-		$twoweek_bookings = Booking::model()->findAllByAttributes(
-			array(),
-			'date >=:today && date < :twoweek && competitor_id > -1 ',
-			array(
-				'today'=>$start_date,
-				'twoweek'=> $end_date
-			)
-		);
-
-		$twoweek_bookings_arr = array();
-		if (count($twoweek_bookings)>0){
-			foreach ($twoweek_bookings as $booking) {
-
-				if (!isset($twoweek_bookings_arr[$booking->date])){
-					$twoweek_bookings_arr[$booking->date] = array();
-				}
-					$twoweek_bookings_arr[$booking->date][] = $booking;
-			}
-		}
-
 		if(Yii::app()->request->isAjaxRequest){
 			echo md5(serialize($twoweek_bookings_arr));
 			Yii::app()->end();
 		} else {
 
+			/*if (Yii::app()->getModule('user')->user()->superuser > 1){
+				$user_city_id = $this->city_model->id;
+			}*/
+			
 			$criteria=new CDbCriteria(array(
-				'condition'=>"status = 2 && city_id = ".$this->city_model->id,
+				'condition'=>"status = 2 && city_id = ".$user_city_id,
 				'limit'=>20,
 				'order'=>"status ASC, sort ASC"
 			));
@@ -532,12 +516,12 @@ class QuestController extends Controller
 						$criteria->addInCondition("id", explode(',', $moderator_quests));
 					} else {
 						$this->render('adminschedule',array(
-							'twoweek_bookings_arr' => $twoweek_bookings_arr,
+							'twoweek_bookings_arr' => array(),
 							'quests' => array(),
 							'ymd' => $YMDate,
 							'users' => array(),
 							'holidays' => $holiday_list,
-							'arr_hash' => md5(serialize($twoweek_bookings_arr)),
+							'arr_hash' => 0,
 						));
 						die;
 					}
@@ -551,12 +535,12 @@ class QuestController extends Controller
 					} else {
 
 						$this->render('adminschedule',array(
-							'twoweek_bookings_arr' => $twoweek_bookings_arr,
+							'twoweek_bookings_arr' => array(),
 							'quests' => array(),
 							'ymd' => $YMDate,
 							'users' => array(),
 							'holidays' => $holiday_list,
-							'arr_hash' => md5(serialize($twoweek_bookings_arr)),
+							'arr_hash' => 0,
 						));
 						die;
 					}
@@ -568,10 +552,10 @@ class QuestController extends Controller
 
 			$quests = Quest::model()->findAll($criteria);
 			$quests_array = array();
+			$quest_ids = array();
 
 			if (count($quests)>0){
 
-				$quest_ids = array();
 
 				foreach ($quests AS $quest){
 					$quest_ids[] = $quest->id;
@@ -593,8 +577,9 @@ class QuestController extends Controller
 						$quests_array[$b->quest_id]['bookings'][$b->time] = $b;
 					}
 				}
-
 			}
+
+			$twoweek_bookings_arr = $this->getTwoWeekBookings($start_date, $end_date, $quest_ids);
 
 			$this->render('adminschedule',array(
 				'twoweek_bookings_arr' => $twoweek_bookings_arr,
@@ -608,6 +593,33 @@ class QuestController extends Controller
 				'payments' => Payments::model()->findALL(),
 			));
 		}
+	}
+
+
+	private function getTwoWeekBookings($start_date, $end_date, $quest_ids){
+
+		$criteria=new CDbCriteria(array(
+			'condition' => 'date >=:today && date < :twoweek && competitor_id > -1 ',
+			'params' => array(
+				'today'=>$start_date,
+				'twoweek'=> $end_date
+			)
+		));
+		$criteria->addInCondition('quest_id', $quest_ids);
+
+		$twoweek_bookings = Booking::model()->findAll($criteria);
+
+		$twoweek_bookings_arr = array();
+		if (count($twoweek_bookings)>0){
+			foreach ($twoweek_bookings as $booking) {
+
+				if (!isset($twoweek_bookings_arr[$booking->date])){
+					$twoweek_bookings_arr[$booking->date] = array();
+				}
+				$twoweek_bookings_arr[$booking->date][] = $booking;
+			}
+		}
+		return $twoweek_bookings_arr;
 	}
 
 	/**
@@ -664,7 +676,6 @@ class QuestController extends Controller
 		$user_city_id = Yii::app()->getModule('user')->user()->city_id;
 
 		/*if (Yii::app()->getModule('user')->user()->superuser == 3) {
-
 			if (Yii::app()->getModule('user')->user()->locations != '') {
 				$criteria = new CDbCriteria();
 				$criteria->addInCondition('location_id',explode(',', Yii::app()->getModule('user')->user()->locations));
