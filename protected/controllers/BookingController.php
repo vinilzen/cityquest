@@ -408,8 +408,18 @@ class BookingController extends Controller
 
 								if (!isset($_POST['user']) || (isset($_POST['user']) && $_POST['user'] != -1)){
 									
+
+
 									$notification_mails = explode(',', $this->city_model->booking_alert_mail);
 
+									$locations = Location::model()->findAll();
+									if ($locations && count($locations)>0){
+										foreach ($locations as $l){
+											if ($l->id == $quest->location_id) {
+												$notification_mails = array_merge($notification_mails, explode(',',$l->notification_email));					
+											}
+										}
+									}
 									if ($quest->mail_for_notifications!='') {
 										$notification_mails = array_merge($notification_mails, explode(',',$quest->mail_for_notifications));
 									}

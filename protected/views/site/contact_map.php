@@ -38,7 +38,7 @@
       <i class="icon icon-Pin"></i>
       <span><?=($this->city_model->id > 1) ? 'Адрес':'Адрес офиса'?>:</span><?=$this->city_model->addres?>
     </p>
-    <?=(!strpos($_SERVER['HTTP_HOST'], '.kz') > 0)?'<p>ООО «Сити Квест»   ОГРН  5147746030900</p>':''?>
+    <?=($this->city_model->id == 1)?'<p>ООО «Сити Квест»   ОГРН  5147746030900</p>':''?>
   </div>
   <div class="clearfix"></div>
   <? if ($this->city_model->id < 2) { ?>

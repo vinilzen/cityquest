@@ -106,7 +106,7 @@
 								</a>
 							</li>
 						</ul>
-						<? } elseif (Yii::app()->getModule('user')->user()->superuser == 2) { ?>
+						<? } elseif (Yii::app()->getModule('user')->user()->superuser > 1) { ?>
 							<ul class="sidebar-nav">
 								<li class="">
 									<a href="/quest/adminschedule/ymd">

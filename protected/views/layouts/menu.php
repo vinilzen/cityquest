@@ -25,7 +25,7 @@
 	<a href="/contact"><?=Yii::t('app','Contacts')?></a>
 </li>
 
-<? if (Yii::app()->getModule('user')->user()->superuser > 0) { ?>
+<? if (!Yii::app()->user->isGuest && Yii::app()->getModule('user')->user()->superuser > 0) { ?>
 	<li style="margin:0;">
 		<a href="/quest/adminschedule/ymd" style="opacity: 1;" title="<?=Yii::t('app','Admin panel')?>">
 			<i style="font-size: 18px;" class="glyphicon glyphicon-cog"></i>

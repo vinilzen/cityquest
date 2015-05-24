@@ -534,14 +534,10 @@ class QuestController extends Controller
 						$criteria->addInCondition("id", explode(',', $moderator_quests));
 					} else {
 						$this->render('adminschedule',array(
-							'twoweek_bookings_arr' => array(),
-							'quests' => array(),
 							'ymd' => $YMDate,
-							'users' => array(),
 							'holidays' => $holiday_list,
-							'arr_hash' => 0,
 						));
-						die;
+						Yii::app()->end();
 					}
 				} else if (Yii::app()->getModule('user')->user()->superuser == 3) {
 					if (Yii::app()->getModule('user')->user()->locations != '') {
@@ -553,14 +549,10 @@ class QuestController extends Controller
 					} else {
 
 						$this->render('adminschedule',array(
-							'twoweek_bookings_arr' => array(),
-							'quests' => array(),
 							'ymd' => $YMDate,
-							'users' => array(),
-							'holidays' => $holiday_list,
-							'arr_hash' => 0,
+							'holidays' => $holiday_list
 						));
-						die;
+						Yii::app()->end();
 					}
 				}
 			}
