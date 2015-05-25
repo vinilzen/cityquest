@@ -366,6 +366,9 @@ class BookingController extends Controller
 							if (isset(Yii::app()->request->cookies['from'])){
 								$model->affiliate = Yii::app()->request->cookies['from'];
 							}
+							if (isset(Yii::app()->request->cookies['admitad_uid'])){
+								$model->affiliate = Yii::app()->request->cookies['admitad_uid'];
+							}
 
 							if ( $user_model->save() && $model->save() ){
 								if ( !Yii::app()->getModule('user')->user()->superuser > 0) {

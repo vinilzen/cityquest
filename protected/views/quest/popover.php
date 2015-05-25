@@ -138,13 +138,15 @@
           <div class="progress progress-striped active hide">
             <div class="progress-bar progress-bar-success" id="progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">0%</div>
           </div>
-          <div id="affilate_container"></div>
         </div>
         <div class="col-xs-6">
           <div id="picbox" class="clear text-center">
             <a href="/images/winner_photo/<%= id %>.jpg" target="_blank">
               <img class="img-responsive" style="max-height: 100px; height: 200px;" src="/images/winner_photo/<%= id %>.jpg" alt="Нет фото"></a>
           </div>
+        </div>
+        <div class="col-xs-12">
+          <div id="affilate_container"></div>
         </div>
       </div>
       <% } %>
