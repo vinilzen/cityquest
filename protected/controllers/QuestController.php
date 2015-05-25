@@ -629,6 +629,8 @@ class QuestController extends Controller
 				$twoweek_bookings_arr[$booking->date][] = $booking;
 			}
 		}
+
+		//var_dump($twoweek_bookings_arr[20150523]); die;
 		return $twoweek_bookings_arr;
 	}
 

@@ -321,7 +321,11 @@ class BookingController extends Controller
 						);
 						Yii::endProfile('get_booking');
 
-						if (!$booking) {
+						if (!$booking || ($booking && $booking->name == 'CQ' && $booking->competitor_id == -1)) {
+
+							if ($booking && $booking->name == 'CQ' && $booking->competitor_id == -1) {
+								$booking->delete();
+							}
 
 							$model=new Booking;
 
