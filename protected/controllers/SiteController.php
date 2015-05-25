@@ -225,7 +225,11 @@ Sitemap: http://cityquest.ru/sitemap.xml
 		foreach ($locations as $location) {
 			$city = City::model()->findByPk($location->city_id);
 			$cities[$city->id] = $city->name;
-			$qs = Quest::model()->findAllByAttributes(array('location_id'=>$location->id));
+			$qs = Quest::model()->findAllByAttributes(array(
+				'location_id'=>$location->id,
+				'status'=>2
+				)
+			);
 			if ($qs){
 				$locations_with_quest[$location->id] = $location;
 				$quests[$location->id] = $qs;
