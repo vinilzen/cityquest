@@ -107,7 +107,7 @@
                     <div class="col-md-12 col-sm-6 col-xs-12">
                       <h3>Квесты на этой локации</h3>
                       <p class="text-center local_quests">
-                      <? foreach ($quests[$location->id] as $q)
+                      <? if (isset($quests[$location->id])) foreach ($quests[$location->id] as $q)
                         echo '<a href="/quest/'.$q->link.'" target="_blank">'.$q->title.'</a>';
                       ?>
                       </p>

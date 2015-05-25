@@ -221,14 +221,19 @@ Sitemap: http://cityquest.ru/sitemap.xml
 			array('city_id'=>$this->city_model->id)
 		);
 
+		$locations_with_quest = array();
 		foreach ($locations as $location) {
 			$city = City::model()->findByPk($location->city_id);
 			$cities[$city->id] = $city->name;
-			$quests[$location->id] = Quest::model()->findAllByAttributes(array('location_id'=>$location->id));
+			$qs = Quest::model()->findAllByAttributes(array('location_id'=>$location->id));
+			if ($qs){
+				$locations_with_quest[$location->id] = $location;
+				$quests[$location->id] = $qs;
+			}
 		}
 
 		$this->render('contact_map', array(
-				'locations' => $locations,
+				'locations' => $locations_with_quest,
 				'cities' => $cities,
 				'quests' => $quests,
 			)

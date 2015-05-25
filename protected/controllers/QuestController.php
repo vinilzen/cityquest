@@ -66,8 +66,17 @@ class QuestController extends Controller
 						foreach ($_POST['sort'] as $key => $value) {
 							$model=$this->loadModel((int)$key);
 							$model->sort = (int)$value;
-							$model->save();
+							echo $model->id.' - '.$value.'<br>';
+							if ($model->save()){
+								echo 'save'.$model->id.'!';
+							} else {
+								echo 'BUG '.$model->id.'!';
+								var_dump($model->getErrors());
+								die;
+							}
 						}
+
+						die;
 
 						echo CJavaScript::jsonEncode(array('success'=>1));
 
