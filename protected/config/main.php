@@ -69,6 +69,8 @@ return array(
 				'quest/admin'=>'quest/admin',
 				'quest/view'=>'quest/redirect',
 				'quest/sort'=>'quest/sort',
+				'quest/getavailablequest'=>'quest/getavailablequest',
+				'quest/getseances'=>'quest/getseances',
 				'quest/<link:\w+>'=>'quest/view',
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 			),

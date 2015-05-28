@@ -71,7 +71,7 @@ var PopoverView = Backbone.View.extend({
 								: '#';
 
 		this.attr.action = 'add';
-		if (($(this.parent).hasClass('btn-info') || $(this.parent).hasClass('btn-success')) && this.attr.name !== '') {
+		if (($(this.parent).hasClass('btn-info') || $(this.parent).hasClass('btn-success') || $(this.parent).hasClass('btn-gray')) && this.attr.name !== '') {
 			this.attr.action = 'edit';
 		}
 
@@ -107,8 +107,6 @@ var PopoverView = Backbone.View.extend({
 		$('.popover-title .close').before(
 			'&nbsp;-&nbsp;'+$('#q_id_'+self.attr.quest_id).text()//+' ('+self.attr.price+'р)'
 		);
-
-
 	},
 
 	showUserList:function(){
@@ -159,6 +157,7 @@ var PopoverView = Backbone.View.extend({
 
 		return false;
 	},
+
 	removeBooking:function(){
 		var self = this;
 

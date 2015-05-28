@@ -220,7 +220,7 @@
 
 														'data-comment="'.$quest['bookings'][$time]->comment.'" '.
 														'data-affiliate="'.$quest['bookings'][$time]->affiliate.'" '.
-														'data-user-id="'. $competitor_id .'" '.
+														'data-user-id="'. (($quest['bookings'][$time]->name == 'CQ')?'-1':$competitor_id) .'" '.
 														'data-fb-id="'. $competitor_fb_id .'" '.
 														'data-vk-id="'. $competitor_vk_id .'" '.
 														'data-winner-photo="'. $quest['bookings'][$time]->winner_photo .'" '.

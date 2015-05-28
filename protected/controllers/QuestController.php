@@ -33,11 +33,11 @@ class QuestController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','admin','delete', 'sort', 'adminschedule'),
+				'actions'=>array('create','update','admin','delete', 'sort','adminschedule', 'ajaxschedule', 'getavailablequest', 'getseances'),
 				'expression'=>"Yii::app()->getModule('user')->user()->superuser == 1",
 			),
 			array('allow',
-				'actions'=>array('adminschedule'),
+				'actions'=>array('adminschedule', 'ajaxschedule', 'getavailablequest', 'getseances'),
 				'expression'=>"Yii::app()->getModule('user')->user()->superuser > 1",
 			),
 			array('deny',  // deny all users
@@ -487,6 +487,33 @@ class QuestController extends Controller
 	/**
 	 *  all schedule for models.
 	 */
+	public function actionAjaxschedule($ymd = '')
+	{
+		$this->layout='//layouts/admin_column';
+
+
+		$user_city_id = Yii::app()->getModule('user')->user()->city_id;
+		$holidays = Holiday::model()->findAllByAttributes( array('city'=>$user_city_id));
+		$holiday_list = array();
+		foreach ($holidays as $holiday) {
+			array_push($holiday_list, $holiday->holiday_date);
+		}
+		
+		if ($ymd === '' || !is_numeric($ymd) || strlen($ymd) !== 8){
+			$YMDate = date('Ymd', strtotime( "now" ));
+		} else {
+			$YMDate = (int)$ymd;
+		}
+
+		$this->render('ajaxschedule', array(
+			'ymd' => $YMDate,
+			'holidays' => $holiday_list,
+		));
+	}
+
+	/**
+	 *  all schedule for models.
+	 */
 	public function actionAdminschedule($ymd = '')
 	{
 		$this->layout='//layouts/admin_column';
@@ -612,6 +639,82 @@ class QuestController extends Controller
 				'payments' => Payments::model()->findALL(),
 			));
 		}
+	}
+
+	public function actionGetseances($qid) {
+		$this->layout=false;
+
+		$quest = $this->loadModel($qid);
+
+		//var_dump(Yii::app()->params['times'][(int)$quest->times]); die;
+
+		header('Content-type: application/json');
+		echo CJavaScript::jsonEncode(
+			array(
+				'success'=>1,
+				'seances'=>Yii::app()->params['times'][(int)$quest->times]
+			)
+		);
+
+        Yii::app()->end();
+	}
+
+	public function actionGetavailablequest() {
+
+		$user_city_id = Yii::app()->getModule('user')->user()->city_id;
+		$empty = false;
+
+		$criteria=new CDbCriteria(array(
+			'condition'=>"status = 2 && city_id = ".$user_city_id,
+			'limit'=>20,
+			'order'=>"status ASC, sort ASC"
+		));
+
+		$user = Yii::app()->getModule('user')->user();
+		
+		if ( $user->superuser > 1){
+
+			if ( $user->superuser == 2 ){
+
+				$moderator_quests = $user->quests;
+
+				if ($moderator_quests && $moderator_quests != ''){
+					$criteria->addInCondition("id", explode(',', $moderator_quests));
+					$empty = false;
+				} else $empty = true;
+
+			} else if ($user->superuser == 3) {
+				if ($user->locations != '') {
+
+					$criteria->addInCondition(
+						'location_id',explode(',', $user->locations)
+					);
+
+					$empty = false;
+
+				} else $empty = true;
+			}
+
+		}
+
+		if (!$empty){
+			$quests = Quest::model()->findAll($criteria);
+		} else {
+			$quests = array();
+		}
+
+
+		$this->layout=false;
+		header('Content-type: application/json');
+		echo CJavaScript::jsonEncode(
+			array(
+				'success'=>1,
+				'quests'=>$quests
+			)
+		);
+
+        Yii::app()->end();
+
 	}
 
 

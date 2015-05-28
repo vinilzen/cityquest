@@ -293,5 +293,13 @@
 </noscript>
 <!-- /Yandex.Metrika counter -->
 <? } ?>
+
+<?	if (Yii::app()->controller->action->id == 'ajaxschedule') {
+		echo '<script src="/js/bb_seance.js"></script>';
+		echo '<script src="/js/bb_quest.js"></script>';
+		echo '<script src="/js/bb_day.js"></script>';
+		echo '<script src="/js/bb_booking.js"></script>';
+		echo '<script src="/js/bb.js"></script>';
+	} ?>
 </body>
 </html>

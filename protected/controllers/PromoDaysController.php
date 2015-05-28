@@ -23,7 +23,7 @@ class PromoDaysController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view', 'get'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -143,6 +143,25 @@ class PromoDaysController extends Controller
         $this->layout=false;
         header('Content-type: application/json');
         echo CJSON::encode( array('days'=>$models) );
+        Yii::app()->end();
+	}
+
+	/**
+	 * Lists all models.
+	 */
+	public function actionGet($start, $end)
+	{
+		$criteria = new CDbCriteria;
+		$criteria->addBetweenCondition('day', $start, $end);
+		$models = PromoDays::model()->findAll($criteria);
+
+        $this->layout=false;
+        header('Content-type: application/json');
+        echo CJSON::encode( array(
+        		'success'=>1,
+        		'days'=>$models
+        	)
+        );
         Yii::app()->end();
 	}
 

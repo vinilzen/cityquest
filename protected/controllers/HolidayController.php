@@ -21,6 +21,10 @@ class HolidayController extends Controller
 	public function accessRules()
 	{
 		return array(
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('get'),
+				'users'=>array('*'),
+			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete', 'create','update'),
 				'expression'=>"Yii::app()->getModule('user')->user()->superuser == 1",
@@ -139,6 +143,25 @@ class HolidayController extends Controller
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
+	}
+
+	/**
+	 * Lists all models.
+	 */
+	public function actionGet($start, $end)
+	{
+		$criteria = new CDbCriteria;
+		$criteria->addBetweenCondition('holiday_date', $start, $end);
+		$models = Holiday::model()->findAll($criteria);
+
+        $this->layout=false;
+        header('Content-type: application/json');
+        echo CJSON::encode( array(
+        		'success'=>1,
+        		'days'=>$models
+        	)
+        );
+        Yii::app()->end();
 	}
 
 	/**

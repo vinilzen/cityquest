@@ -147,3 +147,12 @@
 #times-table .btn-default.btn-gray {
   background-color:rgba(233, 233, 233, .6);
 }
+.btn-day {
+  margin-right: 5px;
+}
+.btn-day small, .btn-day span {
+  display: block;
+}
+.btn-day span.badge {
+  display: inline-block;
+}
