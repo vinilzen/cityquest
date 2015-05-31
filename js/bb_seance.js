@@ -1,32 +1,41 @@
+
 var SeanceView = Backbone.View.extend({
 	tagName:'button',
 	className:'btn btn-xs btn-default',
+  template:_.template('<%= time %><br><small><%= price %><%= unit %>.</small>'),
 	initialize:function(){
 		this.render();
 	},
 	render:function(){
-		var self = this; 
+		var self = this;
 		this.$el.html(
-			self.model.get('time')+'<br><small>2500р.</small>'
-		);
+      this.template(this.model.attributes)
+    );
 		return this;
 	}
 });
 
 var Seance = Backbone.Model.extend({
+  defaults:{
+    time:'00:00',
+    price:0,
+    unit: 'руб',
+  },
   initialize:function(){
   	
   	this.view = new SeanceView({model:this});
 
   	$('.bb_times',this.collection.quest.view.$el).append(this.view.el);
 
+    this.on('change', function(){ this.view.render(); }, this);
+
   }
 });
 var Seances = Backbone.Collection.extend({
   model: Seance,
   initialize:function(models,options){
+    var self = this;
   	this.quest = options.quest;
-  	this.fetch();
   },
   parse: function(response) {
   	if (response && response.success) {

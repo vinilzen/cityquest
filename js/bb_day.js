@@ -1,12 +1,10 @@
-var d_holidays = $.Deferred();
-var d_promo = $.Deferred();
-
 var Holidays = Backbone.Collection.extend({
 	initialize:function(options) {
+		this.app = options.app;
 		this.url = '/holiday/get?start='+options.start+'&end='+options.end;
 		this.fetch({
 			success:function(a,b,c){
-				d_holidays.resolve(a);
+				options.deferred_holidays.resolve(a);
 			},	
 			error:function(){}
 		});
@@ -21,10 +19,11 @@ var Holidays = Backbone.Collection.extend({
 });
 var PromoDays = Backbone.Collection.extend({
 	initialize:function(options) {
+		this.app = options.app;
 		this.url = '/promoDays/get?start='+options.start+'&end='+options.end;
 		this.fetch({
 			success:function(a,b,c){
-				d_promo.resolve(a);
+				options.deferred_promo.resolve(a);
 			},	
 			error:function(){}
 		});
@@ -51,7 +50,7 @@ var DayView = Backbone.View.extend({
 		"click":"activate",
 	},
 	initialize:function(){
-		this.render()
+		this.render();
 	},
 	render:function(){
 
@@ -107,6 +106,7 @@ var Day = Backbone.Model.extend({
 	},
 	initialize:function(){
 		this.view = new DayView({model:this});
+
 		this.on('change:active', function(){
 			this.view.render();
 		});
@@ -117,25 +117,35 @@ var Day = Backbone.Model.extend({
 });
 
 var Days = Backbone.Collection.extend({
-	model:Day,
-	days_of_week:['Вс','Пн','Вт','Ср','Чт','Пт','Сб'],
-	months:['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Ноя','Окт','Дек'],
-	period:12,
-	day_offset:-1,
-	initialize:function(){
-		var i = 0;
+	model: Day,
+	days_of_week: ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'],
+	months: ['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Ноя','Окт','Дек'],
+	period: 12,
+	day_offset: -1,
+	holidays_ready:false,
+	promo_ready:false,
+	initialize:function(models, options){
+		this.app = options.app;
+		this.deferred_holidays = $.Deferred();
+		this.deferred_promo = $.Deferred();
+		this.deferred = $.Deferred();
+	},
+	fill:function(){
 		var date = new Date(),
 			today_date = new Date(),
-			active_date = new Date();
+			active_date = new Date(),
+			i = 0,
+			self = this;
 
 		date.setDate(date.getDate() + this.day_offset);
 
 		while (i < this.period) {
 			i++;
-			var y = date.getFullYear();
-			var m = ((date.getMonth()+1) < 10) ? ('0'+(date.getMonth()+1)) : date.getMonth()+1;
-			var d = (date.getDate() < 10 ) ? ('0'+date.getDate())  : date.getDate();
-			this.push({
+			var y = date.getFullYear(),
+				m = ((date.getMonth()+1) < 10) ? ('0'+(date.getMonth()+1)) : date.getMonth()+1,
+				d = (date.getDate() < 10 ) ? ('0'+date.getDate())  : date.getDate();
+
+			self.add({
 				'dayOfTheWeek': this.days_of_week[date.getDay()],
 				'day': date.getDate(),
 				'month': this.months[date.getMonth()],
@@ -150,6 +160,8 @@ var Days = Backbone.Collection.extend({
 
 			date.setDate(date.getDate() + 1);
 		}
+
+		models = this.models;
 
 		this.render();
 	},
@@ -166,17 +178,16 @@ var Days = Backbone.Collection.extend({
 
 		this.holidays = new Holidays({
 			start: first_day.get('ymd'),
-			end: last_day.get('ymd')
+			end: last_day.get('ymd'),
+			app: self.app,
+			deferred_holidays: self.deferred_holidays
 		});
 
 		this.promodays = new PromoDays({
 			start: first_day.get('ymd'),
-			end: last_day.get('ymd')
-		});
-
-		$.when( d_holidays, d_promo ).done(function ( holidays, promodays ) {
-			self.markHolidays();
-			self.markPromo();
+			end: last_day.get('ymd'),
+			app: self.app,
+			deferred_promo: self.deferred_promo
 		});
 	},
 	markPromo:function(){
@@ -186,9 +197,8 @@ var Days = Backbone.Collection.extend({
 			var day = self.find(function(model) {
 				return model.get('ymd') == promo.get('day');
 			});
-
-			if (day) day.view.$el.attr('data-promo',1);
 		});
+		this.promo_ready = true;
 	},
 	markHolidays:function(){
 		var self = this;
@@ -203,21 +213,58 @@ var Days = Backbone.Collection.extend({
 				day.set('holiday',1);
 			}
 		});
-
+		this.holidays_ready = true;
 	},
+
 	removeActive:function(){
 		this.each(function(model){
 			model.set('active',false);
 		});
 	},
-	setDate: function(ymd){
-		this.each(function(model){
 
+	getActiveDate:function(){
+		return this.find(function(m){
+			return m.get('active');
+		});
+	},
+
+	setDate: function(ymd){
+		var self = this;
+
+		this.each(function(model){
 			if (model.get('ymd') == ymd) {
 				model.set('active', true);
 			} else {
 				model.set('active', false);
 			}
-		})
+		});
+
+		var active_day = self.getActiveDate();
+
+		if (this.holidays_ready && this.promo_ready){
+
+			self.app.quests.each(function(quest){
+				quest.setPrice(active_day);
+			});
+
+		} else {
+
+			$.when( this.deferred_holidays, this.deferred_promo, self.app.quests.deferred ).done(function( holidays, promodays, quests ){
+				
+				holidays.app.days.markHolidays();
+				promodays.app.days.markPromo();
+
+				quests.each(function(quest){
+					quest.seances.fetch({success:function(collection,response){
+						if (response && response.success){
+							quest.setPrice(active_day);
+						}
+					}});
+
+					quest.setPrice(active_day);
+				});
+
+			});
+		}
 	}
 });

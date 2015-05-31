@@ -20,9 +20,53 @@ var QuestView = Backbone.View.extend({
 var Quest = Backbone.Model.extend({
 	initialize:function(){
 		this.view = new QuestView({model:this});
+		this.deferred = $.Deferred();
 		this.seances = new Seances([],{
 			url: '/quest/getseances/qid/'+this.id,
 			quest: this
+		});
+	},
+	setPrice: function(active_day){
+		
+  		var q = this,
+			promodays = q.collection.app.days.promodays,
+			promoDay = promodays.find(function(model){
+				return parseInt(model.get('quest_id')) == parseInt(q.id) &&
+						model.get('day') == active_day.get('ymd');
+			});
+
+		this.seances.each(function(seance){
+			var hour = parseInt(seance.get('time').split(':'));
+
+			var price_weekend_am = q.get('price_weekend_am'),
+				price_weekend_pm = q.get('price_weekend_pm'),
+				price_am = q.get('price_am'),
+				price_pm = q.get('price_pm');
+
+			if ( typeof(promoDay)!='undefined' ){
+
+				if (hour > 9 && hour < 17) {
+					seance.set('price', promoDay.get('price_am'));
+				} else {
+					seance.set('price', promoDay.get('price_pm'));
+				}
+
+			} else if (active_day.get('weekend') || active_day.get('holiday')) {
+				
+				if (hour > 9 && hour < 17) {
+					seance.set('price', price_weekend_am);
+				} else {
+					seance.set('price', price_weekend_pm);
+				}
+
+			} else {
+				
+				if (hour > 9 && hour < 17) {
+					seance.set('price', price_am);
+				} else {
+					seance.set('price', price_pm);
+				}
+			}
 		});
 	}
 });
@@ -30,20 +74,10 @@ var Quest = Backbone.Model.extend({
 var Quests = Backbone.Collection.extend({
   model: Quest,
   url:'/quest/getavailablequest',
-  initialize:function(){
-
+  initialize:function(models, options){
+  	this.app = options.app;
+  	this.deferred = $.Deferred();
   	this.fetch();
-
-	/*{
-        success: function(collection){
-	  		console.log('success');
-	  		collection.render();
-	  	},
-	  	error: function(a,b,c){
-	  		console.log(a,b,c);
-			console.log('error');
-		}
-  	}*/
   },
 
   fetch:function(options){
@@ -51,7 +85,7 @@ var Quests = Backbone.Collection.extend({
   	if (typeof(options) == 'undefined'){
   		options = {};
   		options.success = function(collection){
-	  		console.log('success');
+	  		collection.deferred.resolve(collection);
 	  		collection.render();
 	  	}
   	}
@@ -65,6 +99,15 @@ var Quests = Backbone.Collection.extend({
 
   		quests.append(model.view.el);
 
+  	});
+  },
+
+  setPrice:function(){
+
+  	var active_day = this.app.days.getActiveDate();
+
+	this.each(function(quest){
+  		quest.setPrice(active_day);
   	});
   },
 
