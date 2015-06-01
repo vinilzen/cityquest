@@ -11,6 +11,12 @@ var SeanceView = Backbone.View.extend({
 		this.$el.html(
       this.template(this.model.attributes)
     );
+    if (this.model.has('booking') && this.model.get('booking')){
+      console.log(this.model);
+      this.$el.addClass('btn-gray');
+    } else {
+      this.$el.removeClass('btn-gray');
+    }
 		return this;
 	}
 });

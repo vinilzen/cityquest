@@ -29,7 +29,7 @@ class BookingController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view', 'get'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' actions
@@ -49,6 +49,28 @@ class BookingController extends Controller
 			),
 		);
 	}
+
+	public function actionGet($day,$quest)
+	{
+
+		$bookings = Booking::model()->findAllByAttributes(
+			array(
+				'quest_id'=>$quest,
+				'date'=>$day
+			)
+		);
+
+		header('Content-type: application/json');
+		echo CJavaScript::jsonEncode(
+			array(
+				'success'=>1,
+				'bookings'=>$bookings
+			)
+		);
+
+        Yii::app()->end();
+	}
+
 
 	/**
 	 * Displays a particular model.

@@ -41,13 +41,9 @@
 ?>
 <div class="block">
 	<div class="block-title">
-		<h2 data-toggle="tooltip" data-placement="left" title="<?=$today_holiday ? 'Выходной' : 'Рабочий'?> день">
-			Квесты на <?=date('d', $selectedDate)?> <?=$month[date('n', $selectedDate)-1]?> <?=date('Y', $selectedDate)?>
-			<span	class="hi hi-star<?=$today_holiday ? '' : '-empty'?> setHoliday"
-					data-holiday="<?=$today_holiday?>" 
-					style="cursor:pointer;" data-toggle="tooltip" 
-					data-date="<?=date('Ymd', $selectedDate)?>"
-					title="<?=$today_holiday ? 'Сделать рабочим' : 'Сделать выходным'?>"></span>
+		<h2 data-toggle="tooltip">
+			Квесты на <span class="today_is"></span>
+			<span data-toggle="tooltip" class="hi setHoliday"></span>
 		</h2>
 	</div>
 	<h3 class="sub-header hide"><?=$month_f[date('n', $selectedDate)-1]?></h3>

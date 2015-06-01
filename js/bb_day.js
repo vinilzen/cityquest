@@ -213,7 +213,38 @@ var Days = Backbone.Collection.extend({
 				day.set('holiday',1);
 			}
 		});
+
 		this.holidays_ready = true;
+	},
+
+	setDayOff: function(active_day){
+		$('.today_is')
+			.html(active_day.get('day')+' '+active_day.get('month')+'. '+active_day.get('Y'));
+
+
+		$('.setHoliday')
+			.attr({
+				'data-date':active_day.get('ymd'),
+				'data-holiday':(active_day.get('holiday') || active_day.get('weekend'))?1:0
+			});
+
+		if (active_day.get('holiday') || active_day.get('weekend')) {
+			
+			$('.setHoliday').addClass('hi-star').removeClass('hi-star-empty')
+				.attr('title','Сделать рабочим');
+			$('.block-title h2').attr('title','Выходной день');
+
+		} else {
+			
+			$('.setHoliday').addClass('hi-star-empty').removeClass('hi-star')
+				.attr('title','Сделать выходным');
+			$('.block-title h2').attr('title','Рабочий день');
+
+		}
+
+		$('.setHoliday, .block-title h2')
+			.tooltip('destroy')
+			.tooltip({ container:'body'});
 	},
 
 	removeActive:function(){
@@ -243,6 +274,8 @@ var Days = Backbone.Collection.extend({
 
 		if (this.holidays_ready && this.promo_ready){
 
+			self.setDayOff(active_day);
+
 			self.app.quests.each(function(quest){
 				quest.setPrice(active_day);
 			});
@@ -252,6 +285,7 @@ var Days = Backbone.Collection.extend({
 			$.when( this.deferred_holidays, this.deferred_promo, self.app.quests.deferred ).done(function( holidays, promodays, quests ){
 				
 				holidays.app.days.markHolidays();
+				holidays.app.days.setDayOff(active_day);
 				promodays.app.days.markPromo();
 
 				quests.each(function(quest){

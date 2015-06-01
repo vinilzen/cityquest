@@ -42,13 +42,13 @@
 ?>
 <div class="block">
 	<div class="block-title">
-		<h2 data-toggle="tooltip" data-placement="left" title="<? echo $today_holiday ? 'Выходной' : 'Рабочий'; ?> день">
-			Квесты на <? echo date('d', $selectedDate); ?> <? echo $month[date('n', $selectedDate)-1]; ?> <? echo date('Y', $selectedDate); ?>
-			<span	class="hi hi-star<? echo $today_holiday ? '' : '-empty'; ?> setHoliday"
-					data-holiday="<? echo $today_holiday; ?>" 
+		<h2 data-toggle="tooltip" data-placement="left" title="<?= $today_holiday ? 'Выходной' : 'Рабочий'; ?> день">
+			Квесты на <?= date('d', $selectedDate) ?> <?= $month[date('n', $selectedDate)-1] ?> <?= date('Y', $selectedDate) ?>
+			<span	class="hi hi-star<?= $today_holiday ? '' : '-empty'; ?> setHoliday"
+					data-holiday="<?= $today_holiday ?>" 
 					style="cursor:pointer;" data-toggle="tooltip" 
-					data-date="<? echo date('Ymd', $selectedDate) ?>"
-					title="<? echo $today_holiday ? 'Сделать рабочим' : 'Сделать выходным'; ?>"></span>
+					data-date="<?= date('Ymd', $selectedDate) ?>"
+					title="<?= $today_holiday ? 'Сделать рабочим' : 'Сделать выходным'; ?>"></span>
 		</h2>
 	</div>
 	<h3 class="sub-header hide"><?=$month_f[date('n', $selectedDate)-1]?></h3>

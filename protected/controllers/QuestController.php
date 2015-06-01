@@ -646,8 +646,6 @@ class QuestController extends Controller
 
 		$quest = $this->loadModel($qid);
 
-		//var_dump(Yii::app()->params['times'][(int)$quest->times]); die;
-
 		header('Content-type: application/json');
 		echo CJavaScript::jsonEncode(
 			array(

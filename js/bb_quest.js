@@ -68,6 +68,14 @@ var Quest = Backbone.Model.extend({
 				}
 			}
 		});
+
+		q.bookings = new Bookings([], {
+			quest:q,
+			day:active_day
+		});
+		this.bookings.fetch({success:function(collection){
+			q.bookings.setupBookings();
+		}});
 	}
 });
 
