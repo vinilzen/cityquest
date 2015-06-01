@@ -65,5 +65,21 @@
 				<p>В День Победы в Москве, неподалеку от станции метро «Павелецкая», для посетителей откроет свои двери квест в реальности «Диверсант» (организатор игры — CityQuest).</p>
 			</dd>
 		</dl>
+		<dl class="dl-horizontal">
+			<dt>
+				<a target="_blank" href="http://www.mhealth.ru/events/1574006/">
+					<img src="/img/logo_mh.png" alt="" width="106" height="22">
+				</a>
+				<a target="_blank" href="http://www.mhealth.ru/events/1574006/">www.mhealth.ru</a>
+			</dt>
+			<dd>
+				<h4>
+					<a target="_blank" href="http://www.mhealth.ru/events/1574006/">
+						Квест в реальности «Ночь в музее»
+					</a>
+				</h4>
+				<p>Если ты проспал «Ночь в музее» в Москве и 16, и 23 мая, то знай: у тебя все еще есть возможность наверстать упущенное, посетив одноименный квест в реальности.</p>
+			</dd>
+		</dl>
 	</div>
 </div>

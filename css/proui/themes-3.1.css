@@ -158,6 +158,8 @@
 }
 .bb_times .btn-default {
   background-color:#fff;
+}
+.bb_times .btn-xs {
   margin-right:3px;
 }
 .bb_times .btn-default.btn-gray {
@@ -165,4 +167,8 @@
 }
 .setHoliday {
   cursor:pointer;
+}
+.bb_times .btn-default.btn-gr {
+  background-color: #d2d2d2;
+  border-color: #D4D4D4;
 }

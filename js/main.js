@@ -1048,4 +1048,12 @@ $(function() {
 		$('.map_info').animate({ left: '0' }, 500);
 		return false;
 	});
+
+
+	$('.btn-month').click(function(){
+		$('.btn-month').removeClass('active');
+		var m  = $(this).addClass('active').attr('data-month');
+		$('.month-pane').hide();
+		$('#month_'+m).fadeIn();
+	})
 });

@@ -3408,3 +3408,9 @@ a {
 		text-decoration: none;
 	}
 }
+.month-pane {
+	display:none;
+	&.active {
+		display: block;
+	}
+}

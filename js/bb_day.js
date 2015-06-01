@@ -44,7 +44,7 @@ var DayView = Backbone.View.extend({
 		'<span><%= day %></span>'+
 		'<small><%= dayOfTheWeek %></small>'+
 		'<small><%= month %></small>'+
-		'<span class="badge"></span>'
+		'<span class="badge"><%= amount %></span>'
 	),
 	events:{
 		"click":"activate",
@@ -86,6 +86,7 @@ var DayView = Backbone.View.extend({
 	activate:function(){
 		this.model.collection.removeActive();
 		this.model.set('active',true);
+		this.model.checkBookins();
 	}
 });
 
@@ -101,18 +102,41 @@ var Day = Backbone.Model.extend({
 		weekend:false,
 		holiday:false,
 		Y:2015,
+		amount:0,
 		m:00,
 		d:00,
 	},
 	initialize:function(){
 		this.view = new DayView({model:this});
 
-		this.on('change:active', function(){
+		this.on('change:active change:holiday change:amount', function(){
 			this.view.render();
 		});
-		this.on('change:holiday', function(){
-			this.view.render();
-		});
+	},
+	getBookins:function(){
+		var ymd = this.get('ymd'),
+			m = this,
+			v = this.view;
+
+		$.get('/booking/getbyday?day='+ymd+'&city='+city_id, function(r){
+			if (r.bookings.length != 0) {
+				m.set('amount',r.bookings.length);
+			}
+		})
+	},
+	checkBookins:function(){
+		var ymd = this.get('ymd'),
+			m = this,
+			v = this.view;
+
+		console.log('checkBookins');
+
+		$.get('/booking/getbyday?day='+ymd+'&city='+city_id, function(r){
+			m.set('amount',r.bookings.length);
+			if (m.get('amount') != r.bookings.length) {
+				console.log('setup bookings');
+			}
+		})
 	}
 });
 
@@ -120,8 +144,8 @@ var Days = Backbone.Collection.extend({
 	model: Day,
 	days_of_week: ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'],
 	months: ['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Ноя','Окт','Дек'],
-	period: 12,
-	day_offset: -1,
+	period: 14,
+	day_offset: -2,
 	holidays_ready:false,
 	promo_ready:false,
 	initialize:function(models, options){
@@ -145,7 +169,7 @@ var Days = Backbone.Collection.extend({
 				m = ((date.getMonth()+1) < 10) ? ('0'+(date.getMonth()+1)) : date.getMonth()+1,
 				d = (date.getDate() < 10 ) ? ('0'+date.getDate())  : date.getDate();
 
-			self.add({
+			var day = new Day({
 				'dayOfTheWeek': this.days_of_week[date.getDay()],
 				'day': date.getDate(),
 				'month': this.months[date.getMonth()],
@@ -157,6 +181,9 @@ var Days = Backbone.Collection.extend({
 				'd': d,
 				'ymd': y + '' + m + '' + d
 			});
+
+			self.add(day);
+			day.getBookins()
 
 			date.setDate(date.getDate() + 1);
 		}

@@ -13,17 +13,26 @@ var Bookings = Backbone.Collection.extend({
 	},
 	setupBookings:function(){
 		var q = this.quest;
+
+		q.seances.each(function(s){
+			s.set('booking', false);
+		});
+
 		this.each(function(model){
-			
-			q.seances.each(function(s){
-				if (s.get('time') == model.get('time')){
-					s.booking = model;
-					s.set('booking', true);
-				} else {
-					delete s.booking;
-					s.set('booking', false);
-				}
+
+
+			var seance = q.seances.find(function(s){
+				return s.get('time') == model.get('time');
 			});
+
+/*			if (q.id == 15){
+				console.log(s.get('time'), model.get('time'));
+			}*/
+
+			if (seance) {
+				seance.booking = model;
+				seance.set('booking', true);
+			}
 		});
 	},
 	parse:function(response){

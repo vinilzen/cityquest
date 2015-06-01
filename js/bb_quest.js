@@ -67,6 +67,10 @@ var Quest = Backbone.Model.extend({
 					seance.set('price', price_pm);
 				}
 			}
+
+			if (hour > 2 && hour < 9) {
+				seance.view.$el.hide();
+			}
 		});
 
 		q.bookings = new Bookings([], {

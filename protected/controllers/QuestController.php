@@ -132,7 +132,7 @@ class QuestController extends Controller
 		$quests = Quest::model()->findAll(array(
 		    "condition" => "status = 2 AND city_id = ".$this->city,
 		    "order" => "sort ASC",
-		    "limit" => 20,
+		    "limit" => 200,
 		));
 
 		$cities = City::model()->findAll();
@@ -218,20 +218,33 @@ class QuestController extends Controller
 			array(
 				'condition'=>'date LIKE :month AND winner_photo != "" AND result != "" AND result != "0"',
 				'order'=>'date DESC',
+				'params'=>array('month'=>'%201505%')
+			)
+		);
+
+		$bookings_winner_jun = Booking::model()->findAllByAttributes(
+			array('quest_id'=>$model->id),
+			array(
+				'condition'=>'date LIKE :month AND winner_photo != "" AND result != "" AND result != "0"',
+				'order'=>'date DESC',
 				'params'=>array('month'=>'%'.(int)date("Ym").'%')
 			)
 		);
 		
 		$bookings_winner_array = array();
+		$bookings_winner_array_jun = array();
 
 		foreach ($bookings_winner AS $b){
-			
 			if (!isset($bookings_winner_array[$b->date])) {
 				$bookings_winner_array[$b->date] = array();
 			}
-
 			$bookings_winner_array[$b->date][] = $b;
-
+		}
+		foreach ($bookings_winner_jun AS $b){
+			if (!isset($bookings_winner_array_jun[$b->date])) {
+				$bookings_winner_array_jun[$b->date] = array();
+			}
+			$bookings_winner_array_jun[$b->date][] = $b;
 		}
 
 		if (isset($model->times) && is_numeric($model->times) && isset(Yii::app()->params['times'][(int)$model->times]))
@@ -250,6 +263,7 @@ class QuestController extends Controller
 			'cities'=>$city_array,
 			'booking' => $bookings_by_date,
 			'bookings_winner_array' => $bookings_winner_array,
+			'bookings_winner_array_jun' => $bookings_winner_array_jun,
 			'times' => $times,
 			'holidays' => $holiday_list,
 			'other_quests' => $other_quests,

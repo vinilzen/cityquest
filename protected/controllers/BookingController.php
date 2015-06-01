@@ -29,7 +29,7 @@ class BookingController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view', 'get'),
+				'actions'=>array('index','view', 'get', 'getbyday'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' actions
@@ -65,6 +65,39 @@ class BookingController extends Controller
 			array(
 				'success'=>1,
 				'bookings'=>$bookings
+			)
+		);
+
+        Yii::app()->end();
+	}
+
+	public function actionGetByDay($day, $city)
+	{
+		
+		$quests = Quest::model()->findAll(array(
+		    "condition" => "status = 2 AND city_id = ".$city,
+		    "order" => "sort ASC",
+		    "limit" => 200,
+		));
+
+		$quests_ids = array();
+		foreach ($quests as $q) {
+			$quests_ids[] = $q->id;
+		}
+
+		$criteria=new CDbCriteria(array(
+			'condition'=>"date = ".$day." && name != 'CQ'"
+		));
+
+	    $criteria->addInCondition("quest_id", $quests_ids);
+		$bookings = Booking::model()->findAll($criteria);
+
+		header('Content-type: application/json');
+		echo CJavaScript::jsonEncode(
+			array(
+				'success'=>1,
+				'bookings'=>$bookings,
+				'quests'=>$quests
 			)
 		);
 
@@ -225,6 +258,8 @@ class BookingController extends Controller
 					$bookings_by_date[$booking->date][$booking->time] = $booking->attributes;
 				}
 
+				ksort($bookings_by_date);
+
 				foreach ($bookings_by_date as $date_key => $times) {
 					ksort($times);
 					$bookings_by_date[$date_key] = $times;
@@ -263,7 +298,7 @@ class BookingController extends Controller
 							->setCellValue('B'.$line_number, $time_key)
 							->setCellValue('C'.$line_number, $booking['price'])
 							->setCellValue('D'.$line_number, $booking['payment'] ? $payments_array[$booking['payment']] : '-')
-							->setCellValue('E'.$line_number, $booking['discount'] ? $discounts_array[$booking['discount']] : '-')
+							->setCellValue('E'.$line_number, (isset($discounts_array[$booking['discount']]) && $booking['discount']) ? $discounts_array[$booking['discount']] : '-')
 							->setCellValue('F'.$line_number, ($booking['source'] && isset($sources_array[$booking['source']])) ? $sources_array[$booking['source']] : '-')
 							->setCellValue('G'.$line_number, $booking['comment'])
 							->setCellValue('H'.$line_number, ($booking['result']!='' && $booking['result']!='0') ? 'Пришли' : 'Не пришли' )
@@ -393,6 +428,25 @@ class BookingController extends Controller
 							}
 
 							if ( $user_model->save() && $model->save() ){
+
+								$location_model = Location::model()->findByPk($quest->location_id);
+								$addr = $location_model->address;
+								$addr_additional = $location_model->address_additional;
+								$city_model = City::model()->findByPk($location_model->city_id);
+								$city_name = $city_model->name;
+
+								$subdomain = '';
+								$domain = 'ru';
+								if ($city_model->subdomain != '' ){
+									$subdomain = $city_model->subdomain.'.';
+								}
+								if ($city_model->id == 2){
+									$domain = 'kz';
+								}
+
+
+								$link = "http://".$subdomain."cityquest.".$domain."/quest/".$quest->link;
+
 								if ( !Yii::app()->getModule('user')->user()->superuser > 0) {
 									$email = Yii::app()->getModule('user')->user()->email;
 
@@ -401,11 +455,11 @@ class BookingController extends Controller
 										"CityQuest. Бронирование квеста «".$quest->title."» ".substr($model->date, -2, 2)."/".substr($model->date, -4, 2)."/".substr($model->date, 0, 4)." ".$model->time,
 										"Здравствуйте, ".Yii::app()->getModule('user')->user()->username."! <br><br>
 										
-										Вы записались на квест <a href='http://cityquest.ru/quest/".$quest->link."' target='_blank' >«".$quest->title."»</a> ".substr($model->date, -2, 2)."/".substr($model->date, -4, 2)."/".substr($model->date, 0, 4)." в ".$model->time." <br>
+										Вы записались на квест <a href='".$link."' target='_blank' >«".$quest->title."»</a> ".substr($model->date, -2, 2)."/".substr($model->date, -4, 2)."/".substr($model->date, 0, 4)." в ".$model->time." <br>
 										Не забудьте, для участия вам понадобится команда от 2 до 4 человек.<br><br>
 
-										Мы ждем вас по адресу <a href='https://www.google.com/maps/preview?q=".$this->city_model->name.",+".urlencode($quest->addres)."' target='_blank'>".$quest->addres.".</a><br>"
-										.$quest->addres_additional."<br><br>".
+										Мы ждем вас по адресу <a href='https://www.google.com/maps/preview?q=".$city_name.",+".urlencode($addr)."' target='_blank'>".$addr.".</a><br>"
+										.$addr_additional."<br><br>".
 										"Игра начнется, когда вся команда соберется. Мы просим не опаздывать, иначе у вас останется меньше времени на прохождение.<br><br>
 
 										До встречи,<br>
@@ -422,11 +476,11 @@ class BookingController extends Controller
 										"CityQuest. Бронирование квеста «".$quest->title."» ".substr($model->date, -2, 2)."/".substr($model->date, -4, 2)."/".substr($model->date, 0, 4)." ".$model->time,
 										"Здравствуйте, ".Yii::app()->getModule('user')->user()->username."! <br><br>
 										
-										Вы записались на квест <a href='http://cityquest.ru/quest/".$quest->link."' target='_blank' >«".$quest->title."»</a> ".substr($model->date, -2, 2)."/".substr($model->date, -4, 2)."/".substr($model->date, 0, 4)." в ".$model->time." <br>
+										Вы записались на квест <a href='".$link."' target='_blank' >«".$quest->title."»</a> ".substr($model->date, -2, 2)."/".substr($model->date, -4, 2)."/".substr($model->date, 0, 4)." в ".$model->time." <br>
 										Не забудьте, для участия вам понадобится команда от 2 до 4 человек.<br><br>
 
-										Мы ждем вас по адресу <a href='https://www.google.com/maps/preview?q=".$this->city_model->name.",+".urlencode($quest->addres)."' target='_blank'>".$quest->addres.".</a><br>
-										".$quest->addres_additional."<br><br>
+										Мы ждем вас по адресу <a href='https://www.google.com/maps/preview?q=".$city_name.",+".urlencode($addr)."' target='_blank'>".$addr.".</a><br>
+										".$addr_additional."<br><br>
 										Игра начнется, когда вся команда соберется. Мы просим не опаздывать, иначе у вас останется меньше времени на прохождение.<br><br>
 
 										До встречи,<br>
@@ -460,10 +514,10 @@ class BookingController extends Controller
 										"CityQuest. Бронирование квеста «".$quest->title."» ".substr($model->date, -2, 2)."/".substr($model->date, -4, 2)."/".substr($model->date, 0, 4)." ".$model->time,
 										"Здравствуйте, ".Yii::app()->getModule('user')->user()->username."! <br><br>
 										
-										Вы записались на квест <a href='http://cityquest.ru/quest/".$quest->link."' target='_blank' >«".$quest->title."»</a> ".substr($model->date, -2, 2)."/".substr($model->date, -4, 2)."/".substr($model->date, 0, 4)." в ".$model->time." <br>
+										Вы записались на квест <a href='".$link."' target='_blank' >«".$quest->title."»</a> ".substr($model->date, -2, 2)."/".substr($model->date, -4, 2)."/".substr($model->date, 0, 4)." в ".$model->time." <br>
 										Не забудьте, для участия вам понадобится команда от 2 до 4 человек.<br><br>
 
-										Мы ждем вас по адресу <a href='https://www.google.com/maps/preview?q=".$this->city_model->name.",+".urlencode($quest->addres)."' target='_blank'>".$quest->addres.".</a><br>"
+										Мы ждем вас по адресу <a href='https://www.google.com/maps/preview?q=".$city_name.",+".urlencode($addr)."' target='_blank'>".$addr.".</a><br>"
 										.$quest->addres_additional
 									);
 								}

@@ -1,7 +1,7 @@
 $(function() {
 
 	var app = app || {};
-
+	window.app = app;
 	app.quests = new Quests([],{app: app });
 	app.days = new Days([],{ app: app });
 	app.days.fill();

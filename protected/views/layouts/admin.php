@@ -295,6 +295,7 @@
 <? } ?>
 
 <?	if (Yii::app()->controller->action->id == 'ajaxschedule') {
+		echo '<script src="/js/bb_popover.js"></script>';
 		echo '<script src="/js/bb_seance.js"></script>';
 		echo '<script src="/js/bb_quest.js"></script>';
 		echo '<script src="/js/bb_day.js"></script>';
