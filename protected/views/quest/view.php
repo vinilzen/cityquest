@@ -235,7 +235,7 @@
                 }
 
                 $empty = '';
-                if ($k != 0 && $k<8 && $model->id != 15 && $model->id != 19) {
+                if ($k != 0 && $k<8 && $model->id != 15 && $model->id != 19 && $model->id != 21) {
                   $empty = ' empty_btn ';
                   $disabled = ' disabled="disabled"';
                 }
@@ -256,8 +256,8 @@
                   data-price="<?=$price?>" 
                   class="btn btn-q <?=$my_quest.$empty?>
                       <? echo ($near || $dis) ? 'disabled' : '';
-                      if ($workday && $k > 2 && $k < 7 && $model->id != 15 && $model->id != 19) echo ' invisible';?>" 
-                      <? if (($workday && $k > 2 && $k < 7 && $model->id != 15 && $model->id != 19) || ($empty != '')) echo ' style="display:none;" '; ?>
+                      if ($workday && $k > 2 && $k < 7 && $model->id != 15 && $model->id != 19 && $model->id != 21) echo ' invisible';?>" 
+                      <? if (($workday && $k > 2 && $k < 7 && $model->id != 15 && $model->id != 19 && $model->id != 21) || ($empty != '')) echo ' style="display:none;" '; ?>
                       <?=$disabled?>><?=$time?>
                 </div>
               <? } ?>

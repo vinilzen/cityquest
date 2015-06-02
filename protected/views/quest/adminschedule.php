@@ -178,7 +178,7 @@
 								            if ($workday){
 								              if ($k>6 && $k<14) $price = $priceAm;
 								              else $price = $pricePm;
-								              if ($quest['q']->id == 15 ){
+								              if ($quest['q']->id == 15 || $quest['q']->id == 19 || $quest['q']->id == 21 ){
 							                    if ($k<7) $price = $priceAm;
 							                    else $price = $pricePm;
 							                    
@@ -256,7 +256,7 @@
 											}
 
 									        $invisible = '';
-									        if ($workday && $k > 2 && $k < 7 && $quest['q']->id!=15) $invisible = ' hidden';
+									        if ($workday && $k > 2 && $k < 7 && $quest['q']->id!=15 && $quest['q']->id!=19 && $quest['q']->id!=21) $invisible = ' hidden';
 
 									        ?>
 

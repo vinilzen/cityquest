@@ -2,8 +2,10 @@ var PopoverView = Backbone.View.extend({
 	
 	initialize:function(options){
 		console.log(options);
-		this.attr = options.attr;
+		this.attr = options.attr || {};
+		this.seance_view = options.seance_view;
 		this.render();
+		console.log('initialize popover finish');
 	},
 	
 	events: {
@@ -22,17 +24,20 @@ var PopoverView = Backbone.View.extend({
 	},
 	
 	render:function(){
+		console.log('render popover start');
+
 		var self = this,
 			name = '';
-		if ($('#addBookingRow .inputPhone').val() == '0000000' ) {
+
+		if (self.attr.phone == '0000000' ) {
 			name = 'CQ';
 		} else {
-			name = $(this.parent).attr('data-name') || '';
+			name = self.attr.name || '';
 		}
 
 		this.attr = {
 			id : self.attr.id || 0,
-			quest_id : self.attr.quest || 0,
+			quest_id : self.attr.quest_id || 0,
 			status : self.attr.status || 0,
 
 			payment : self.attr.payment || 0,
@@ -49,23 +54,23 @@ var PopoverView = Backbone.View.extend({
 			ymd :  self.attr.ymd || 0,
 			date :  self.attr.date || 0,
 			affiliate : self.attr.affiliate || '',
+			fb_id : self.attr.fb_id || '',
+			vk_id : self.attr.vk_id || '',
+			user_id : parseInt(self.attr.user_id) || '',
 		};
 
 
-		this.attr.user_url = $(this.parent).attr('data-user-id') != ''
-								? '/user/admin/view/id/'+$(this.parent).attr('data-user-id') 
+		this.attr.user_url = (this.attr.user_id != '' && this.attr.user_id != 0 )
+								? '/user/admin/view/id/'+this.attr.user_id 
 								: '#';
 
-		this.attr.action = 'add';
-		if (($(this.parent).hasClass('btn-info') || $(this.parent).hasClass('btn-success') || $(this.parent).hasClass('btn-gray')) && this.attr.name !== '') {
-			this.attr.action = 'edit';
-		}
-
+		this.attr.action = (this.attr.name !== '') ? 'edit' : 'add';
+	
 		this.$el.html( _.template($('#BookInfWrap').html(), this.attr) );
 
 		$('.pop-row', this.$el).hide();
 
-		this.showEdit(this.attr.action); // Add || Edit
+		this.showEdit(this.attr.action);
 
 		if (this.attr.affiliate != '' ){
 			$('#affilate_container', this.$el)
@@ -74,10 +79,11 @@ var PopoverView = Backbone.View.extend({
 
 		$('[data-toggle="tooltip"]', this.$el).tooltip();
 
+		console.log('render popover finish');
 		return this;
 	},
 
-	afterShow:function(btn){
+	/*afterShow:function(btn){
 		var self = this;
 
 		$('.popover').addClass('popover-booking');
@@ -93,7 +99,7 @@ var PopoverView = Backbone.View.extend({
 		$('.popover-title .close').before(
 			'&nbsp;-&nbsp;'+$('#q_id_'+self.attr.quest_id).text()//+' ('+self.attr.price+'р)'
 		);
-	},
+	},*/
 
 	showUserList:function(){
 		var self = this,
@@ -185,12 +191,9 @@ var PopoverView = Backbone.View.extend({
 			console.log(result);
 
 			if (result && result.success) {
-				console.log('confirmed');
-				// self.$el.removeClass('btn-info').addClass('btn-success');
-				location.reload();
-	
+				console.log('confirmed');	
 			} else {
-				console.log(result);// if (result && result.message) { }
+				console.log(result);
 				alert('Ошибка!');
 			}
 		});
@@ -231,7 +234,6 @@ var PopoverView = Backbone.View.extend({
 			}, function(result){
 				if (result && result.success) {
 					console.log('confirmed');
-					location.reload();
 				} else {
 					console.log(result);
 					alert('Ошибка!');
@@ -276,14 +278,7 @@ var PopoverView = Backbone.View.extend({
 				
 				if (val == '') $(this).val('+7(');
 
-				/*$(this).unmask().blur(function(){
-					$(this).mask('+7(000)-000-00-00');		
-				}).val(val);*/
-
-			});/*.on('keyup', function(){
-				// if ($(e.target).val() == '') $(e.target).val('+7(');
-				//$(this).mask('+7(000)-000-00-00');
-			});*/
+			});
 
 		$('#editBookingRow .inputResult', this.$el).val(self.attr.result);
 		$('#editBookingRow .inputComment', this.$el).val(self.attr.comment);
@@ -376,8 +371,6 @@ var PopoverView = Backbone.View.extend({
 	},
 
 	cancelEditBooking: function(){
-		// $('.pop-row', this.$el).hide();
-		// $('#BookInf h3, #btnRow, #phoneRow', this.$el).show();
 		$(this.parent).popover('hide');
 		return false;
 	},

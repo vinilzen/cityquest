@@ -522,6 +522,9 @@ class QuestController extends Controller
 		$this->render('ajaxschedule', array(
 			'ymd' => $YMDate,
 			'holidays' => $holiday_list,
+			'discounts' => Discounts::model()->findALL(),
+			'sources' => Sources::model()->findALL(),
+			'payments' => Payments::model()->findALL(),
 		));
 	}
 

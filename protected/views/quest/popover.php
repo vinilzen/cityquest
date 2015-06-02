@@ -31,8 +31,8 @@
         <label for="inputName" class="col-xs-4 text-left control-label">
           <?=Yii::t('app','Name')?>
           <% if (action == 'edit') { %>
-            <% if ( name != 'CQ') { %>
-              <a href="<%= user_url %>" title="Посмотреть пользователя '<%= name %>' "  data-toggle="tooltip">
+            <% if ( name != 'CQ' && user_url != '#') { %>
+              <a href="<%= user_url %>" target="_blank" title="Посмотреть пользователя '<%= name %>' " data-toggle="tooltip">
                 <i class="hi hi-link"></i>
               </a>
             <% } %>

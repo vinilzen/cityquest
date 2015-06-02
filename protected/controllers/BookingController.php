@@ -53,6 +53,8 @@ class BookingController extends Controller
 	public function actionGet($day,$quest)
 	{
 
+		$bookings_arr = array();
+
 		$bookings = Booking::model()->findAllByAttributes(
 			array(
 				'quest_id'=>$quest,
@@ -60,11 +62,29 @@ class BookingController extends Controller
 			)
 		);
 
+		foreach ($bookings as $b) {
+			$attr = $b->getAttributes();
+			if ($b->competitor_id > 0){
+				$user = User::model()->findByPk($b->competitor_id);
+				/*echo 'b'; var_dump($b);
+				echo '<br>u'; var_dump($user);
+				echo '<hr>';*/
+				$attr['fb_id'] = $user->fb_id;
+				$attr['vk_id'] = $user->vk_id;
+				$attr['user_id'] = $user->id;
+			} else {
+				$attr['fb_id'] = 0;
+				$attr['vk_id'] = 0;
+				$attr['user_id'] = 0;
+			}
+			$bookings_arr[] = $attr;
+		}
+
 		header('Content-type: application/json');
 		echo CJavaScript::jsonEncode(
 			array(
 				'success'=>1,
-				'bookings'=>$bookings
+				'bookings'=>$bookings_arr
 			)
 		);
 
