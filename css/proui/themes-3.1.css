@@ -174,7 +174,7 @@
 }
 .bb_times .popover {
   width: 392px;
-  height: 525px;
+  min-height: 525px;
   max-width: 400px;
   min-width: 300px;
 }

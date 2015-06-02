@@ -37,7 +37,7 @@ var PopoverView = Backbone.View.extend({
 
 		this.attr = {
 			id : self.attr.id || 0,
-			quest_id : self.attr.quest_id || 0,
+			quest_id : self.seance_view.model.collection.quest.id || 0,
 			status : self.attr.status || 0,
 
 			payment : self.attr.payment || 0,
@@ -49,9 +49,9 @@ var PopoverView = Backbone.View.extend({
 			phone :  self.attr.phone || '',
 			result :  self.attr.result || '',
 			comment :  self.attr.comment || '',
-			price :  self.attr.price || 0,
-			time :  self.attr.time || 0,
-			ymd :  self.attr.ymd || 0,
+			price :  self.seance_view.model.get('price') || 0,
+			time :  self.seance_view.model.get('time') || 0,
+			ymd :  self.seance_view.model.day.get('ymd') || 0,
 			date :  self.attr.date || 0,
 			affiliate : self.attr.affiliate || '',
 			fb_id : self.attr.fb_id || '',
@@ -174,7 +174,6 @@ var PopoverView = Backbone.View.extend({
 		$.post('/booking/update', {
 			id : self.attr.id,
 			ymd : self.attr.ymd,
-			date : self.attr.date,
 			time : self.attr.time,
 			price : $('#editBookingRow .inputPrice').val(),
 			result : $('#editBookingRow .inputResult').val(),
@@ -191,7 +190,19 @@ var PopoverView = Backbone.View.extend({
 			console.log(result);
 
 			if (result && result.success) {
-				console.log('confirmed');	
+				console.log('confirmed update');
+
+				var quest = self.seance_view.model.collection.quest;
+				var bookings = quest.bookings;
+
+				console.log(bookings);
+
+				bookings.fetch({success:function(collection){
+					quest.bookings.setupBookings();
+				}});
+
+				self.seance_view.destroyPopover();
+
 			} else {
 				console.log(result);
 				alert('Ошибка!');
@@ -218,7 +229,6 @@ var PopoverView = Backbone.View.extend({
 			$.post('/booking/create', {
 				quest_id : self.attr.quest_id,
 				ymd : self.attr.ymd,
-				date : self.attr.date,
 				time : self.attr.time,
 				
 				payment : $('#payment').val(),
@@ -233,7 +243,19 @@ var PopoverView = Backbone.View.extend({
 				user : reservation ? -1 : $('#selectUser_id').val(),
 			}, function(result){
 				if (result && result.success) {
-					console.log('confirmed');
+					console.log('confirmed create');
+
+					var quest = self.seance_view.model.collection.quest;
+					var bookings = quest.bookings;
+
+					console.log(bookings);
+
+					bookings.fetch({success:function(collection){
+						quest.bookings.setupBookings();
+					}});
+
+					self.seance_view.destroyPopover();
+
 				} else {
 					console.log(result);
 					alert('Ошибка!');

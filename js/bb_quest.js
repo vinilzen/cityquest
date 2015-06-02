@@ -36,6 +36,7 @@ var Quest = Backbone.Model.extend({
 			});
 
 		this.seances.each(function(seance){
+			seance.day = active_day;
 			var hour = parseInt(seance.get('time').split(':'));
 
 			var price_weekend_am = q.get('price_weekend_am'),
