@@ -57,8 +57,12 @@ var SeanceView = Backbone.View.extend({
     return this.popover_view.el;
   },
   destroyPopover:function(){
-      this.$el.popover('destroy');
-      this.$el.attr('data-haspopover', 0);
+    var q = this.model.collection.quest;
+
+    q.set('haspopover',0);
+
+    this.$el.popover('destroy');
+    this.$el.attr('data-haspopover', 0);
   },
   showPopover:function(){
     var self = this,
@@ -66,14 +70,15 @@ var SeanceView = Backbone.View.extend({
 
     if ( parseInt( self.$el.attr('data-haspopover') ) == 1 ) {
 
-      this.$el.popover('destroy');
-      this.$el.attr('data-haspopover', 0);
+      this.destroyPopover();
 
     } else {
 
       $('.bb_times .btn.btn-xs')
         .popover('destroy')
         .attr('data-haspopover', 0);
+
+      q.set('haspopover',1);
 
       this.$el.popover({
 

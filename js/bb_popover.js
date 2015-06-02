@@ -158,7 +158,17 @@ var PopoverView = Backbone.View.extend({
 		}, function(result){
 			if (result && result.success) {
 				console.log('removed');
-				location.reload();
+				
+
+				var quest = self.seance_view.model.collection.quest;
+				var bookings = quest.bookings;
+
+				bookings.fetch({success:function(collection){
+					quest.bookings.setupBookings();
+				}});
+
+				self.seance_view.destroyPopover();
+
 			} else {
 				console.log(result);
 				alert('Ошибка!');
@@ -270,14 +280,13 @@ var PopoverView = Backbone.View.extend({
 	showRemoveBooking:function(){
 		$('#btnRow, #BookInf h3, #phoneRow', this.$el).hide();
 		$('#confirmRow', this.$el).show();
-		$(this.parent).popover('setPosition');
+		this.seance_view.$el.popover('setPosition');
 		return false;
 	},
 
 	cancelDelete:function(){
 		$('#confirmRow', this.$el).hide();
-		$('#btnRow, #BookInf h3, #phoneRow', this.$el).show();
-		$(this.parent).popover('setPosition');
+		this.seance_view.$el.popover('setPosition');
 		return false;
 	},
 
