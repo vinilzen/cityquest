@@ -33,6 +33,7 @@ return array(
 	'Confirm reservation'=>'Подтвердить бронь',
 	'Confirm the reservation'=>'Подтвердить бронь',
 	'Contacts'=>'Контакты',
+	'Contact mail'=>'Email для контактов',
 	'Contact details of office in'=>'Контактные данные офиса в',
 	'Confirmation'=>'Подтверждение',
 	'Country'=>'Страна',

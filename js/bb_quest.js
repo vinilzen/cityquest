@@ -82,7 +82,7 @@ var Quest = Backbone.Model.extend({
 			q.bookings.setupBookings();
 		}});
 
-		setTimeout(this.autoUpdate, 5000, q);
+		setTimeout(this.autoUpdate, 10000, q);
 	},
 	autoUpdate: function(q) {
 		if (!q.has('haspopover') || (q.has('haspopover') && q.get('haspopover') == 0)){
@@ -91,7 +91,7 @@ var Quest = Backbone.Model.extend({
 			}});
 		}
 
-		setTimeout(q.autoUpdate, 10000, q);
+		setTimeout(q.autoUpdate, 20000, q);
 	}
 });
 

@@ -149,12 +149,15 @@
 }
 .btn-day {
   margin-right: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 .btn-day small, .btn-day span {
   display: block;
 }
 .btn-day span.badge {
   display: inline-block;
+  line-height: 1;
 }
 .bb_times .btn-default {
   background-color:#fff;

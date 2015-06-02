@@ -36,12 +36,12 @@ $('.search-form form').submit(function(){
 				'columns'=>array(
 					'id',
 					'name',
-					'active',
 					'country',
 					'languages',
 					'subdomain',
 					'tel',
 					'addres',
+					'contact_mail',
 					'giftcard_mail',
 					'booking_alert_mail',
 					array(

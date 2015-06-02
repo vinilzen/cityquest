@@ -28,7 +28,7 @@
     </p>
     <p>
       <i class="icon icon-Mail"></i>
-      <span><span><?=Yii::t('app','General questions')?>:&nbsp;</span><a itemprop="email" href="mailto:hello@cityquest.ru" target="_blank"><?=$this->city_model->giftcard_mail?></a></span>
+      <span><span><?=Yii::t('app','General questions')?>:&nbsp;</span><a itemprop="email" href="mailto:hello@cityquest.ru" target="_blank"><?=$this->city_model->contact_mail?></a></span>
       <span><span><?=Yii::t('app','Franchise')?>:&nbsp;</span><a itemprop="email" href="mailto:franchise@cityquest.ru" target="_blank">franchise@cityquest.ru</a></span>
       <? if ($this->city_model->subdomain == '') { ?>
       <span><span><?=Yii::t('app','For journalists')?>:&nbsp;</span><a itemprop="email" href="mailto:pr@cityquest.ru" target="_blank">pr@cityquest.ru</a></span>

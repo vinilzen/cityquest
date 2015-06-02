@@ -643,21 +643,21 @@ $(function() {
 
 		function refresh() {
 			
-			if(new Date().getTime() - time >= 10000){
+			if(new Date().getTime() - time >= 60000){
 
 				$.get('', {'hash':hash}, function(a,b,c){
 					if (a != hash){
 			    		window.location.reload(true);
 					} else {
-			    		setTimeout(refresh, 10000);
+			    		setTimeout(refresh, 60000);
 					}
 				});				
 			} else {
-			    setTimeout(refresh, 10000);
+			    setTimeout(refresh, 60000);
 			}
 		}
 
-		setTimeout(refresh, 10000);
+		setTimeout(refresh, 60000);
 	}
 
 	if ($('#User_superuser').length > 0){

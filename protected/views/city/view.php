@@ -20,6 +20,7 @@
 		'giftcard_text',
 		'franchise_text',
 		'giftcard_mail',
+		'contact_mail',
 		'booking_alert_mail',
 		'vk_link',
 		'fb_link',

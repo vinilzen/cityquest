@@ -99,6 +99,14 @@
 	</div>
 
 	<div class="form-group">
+		<?=$form->labelEx($model,'contact_mail', array('class' => 'control-label col-sm-3'))?>
+		<div class="col-sm-9">
+			<?=$form->textField($model,'contact_mail', array( 'class'=>'form-control'))?>
+			<?=$form->error($model,'contact_mail')?>
+		</div>
+	</div>
+
+	<div class="form-group">
 		<?=$form->labelEx($model,'booking_alert_mail', array('class' => 'control-label col-sm-3'))?>
 		<div class="col-sm-9">
 			<?=$form->textField($model,'booking_alert_mail', array( 'class'=>'form-control'))?>
