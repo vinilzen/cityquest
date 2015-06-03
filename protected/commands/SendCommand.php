@@ -8,7 +8,7 @@ USAGE
   yiic send <params>
 
 DESCRIPTION
-  This command send mails for user 
+  Выборка прошедших квест вчера и отправка им ссылки на фото или сочувствующее письмо если не прошли квест
 
 PARAMETERS
 
@@ -18,17 +18,18 @@ PARAMETERS
 
    The following options are available:
 
-   - 123
-   - qwe
+   - print печать в консоль списка пользователей прошедших вчера квест
 
 EOD;
 	}
-
+    //  protected vin$ php yiic send print
     public function run($args)
     {
     	$args = array_flip($args);
 
     	$date = date('Ymd', mktime(0, 0, 0, date("m")  , date("d")-1, date("Y")));
+
+      // выборка прошедших квест за вчера
     	$sql = "SELECT DISTINCT b.id AS id, b.winner_photo AS winner_photo, q.title, u.email, u.username, u.id AS user_id, b.result, b.quest_id ".
     			"FROM tbl_users AS u ".
 					"JOIN tbl_booking AS b ON b.competitor_id = u.id ".
@@ -42,7 +43,7 @@ EOD;
     	if (isset($args['print'])){
 	    	if ($list) {
 	    		foreach ($list as $r) {
-	    			echo "#".$r['quest_id']." ".$r['title']."	|	".$r['email']."		|	".$r['result']."\r\n";
+	    			echo "#".$r['quest_id']." ".$r['title']."   |	  ".$r['email']."		 |	".$r['result']."\r\n";
 	    		}
 	    		echo "\r\nCount: ".count($list)."\r\n";
 	    	}
@@ -50,7 +51,15 @@ EOD;
 	    		echo "null!\r\n";
     	} else {
     		if ($list){
+
+          Yii::import('application.models.Quest');
+
     			foreach ($list as $r) {
+
+
+            $q = Quest::model()->findByPk($r['quest_id']);
+
+            // echo $q->title.":\r\n";
 
             $sql = "SELECT * FROM tbl_booking WHERE competitor_id = ".$r['user_id'].
                     " AND date <= ".$date." AND quest_id != ".$r['quest_id'].";";
@@ -64,7 +73,7 @@ EOD;
               foreach ($old_quests as $oq) $old_quests_ids[] = $oq['quest_id'];
             }
 
-            $sql = "SELECT * FROM tbl_quest WHERE status = 2 AND id NOT IN ( " . implode($old_quests_ids, ', ') . " );";
+            $sql = "SELECT * FROM tbl_quest WHERE status = 2 AND city_id = ".$q->city_id." AND id NOT IN ( " . implode($old_quests_ids, ', ') . " );";
 
             $quests = Yii::app()->db->createCommand($sql)->queryAll();
 
@@ -72,10 +81,12 @@ EOD;
             if ($quests && count($quests) > 0){
               foreach ($quests as $row){
                 $list_quests[] = '"<a href="http://cityquest.ru/quest/view?id='.$row['id'].'">'.$row['title'].'</a>"';
+                // echo $row['title'].", ";
               }
             }
             $r['count_quests'] = count($list_quests);
             $r['list_quests'] = implode(", ",$list_quests);
+            // echo $r['email']." send\r\n";
     				$this->sendYiiMail($r);
     			}
     		}
@@ -116,7 +127,7 @@ EOD;
           $mail = new YiiMailer($tamplate_name, $options);
           $mail->setFrom(Yii::app()->params['helloEmail'], 'CityQuest');
           $mail->setTo($options['email']);
-          // $mail->setTo('marchukilya@gmail.com');
+          //$mail->setTo('marchukilya@gmail.com');
           //$mail->setBcc('marchukilya@gmail.com');
           $mail->setBcc('ilya@cityquest.ru');
           $mail->setSubject($subj);

@@ -214,6 +214,16 @@
 		</div>
 	</div>
 
+
+	
+	<div class="form-group<?=(isset($errors['schedule']))?' has-error':''?>">
+		<?=$form->labelEx($model,'schedule', array('class' => 'control-label col-sm-3'))?>
+		<div class="col-sm-9">
+			<?=$form->textArea($model,'schedule',array('rows'=>2, 'cols'=>50,'class'=>'form-control'))?>
+			<?=$form->error($model,'schedule', array('class'=>'help-block'))?>
+		</div>
+	</div>
+
 	<div class="form-group<?=(isset($errors['mail_for_notifications']))?' has-error':''?>">
 		<?=$form->labelEx($model,'mail_for_notifications', array('class' => 'control-label col-sm-3'))?>
 		<div class="col-sm-9">

@@ -5,8 +5,8 @@
 	<meta name="viewport" content="width=device-width"/>
 </head>
 <body>
-  <h1>Здравствуйте, <?php echo $data['username']; ?>!</h1>
-  <?php echo $content ?>
+  <h1>Здравствуйте, <?=$data['username']?>!</h1>
+  <?=$content?>
    
   <? if ($data['count_quests'] > 0) { ?>
   <p>Приглашаем Вас посетить <?
@@ -14,7 +14,7 @@
       echo 'другие наши квесты';
     } else { 
       echo 'другой наш квест';
-    } ?>: <?php echo $data['list_quests']; ?>. <br>
+    } ?>: <?=$data['list_quests']?>. <br>
   <? } ?>
   Следите за открытием новых квестов на нашем сайте и в наших соц. сетях:<br>
   <a target="_blank" href="https://www.facebook.com/cityquestru">https://www.facebook.com/cityquestru</a><br>

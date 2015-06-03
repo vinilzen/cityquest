@@ -247,10 +247,18 @@ class QuestController extends Controller
 			$bookings_winner_array_jun[$b->date][] = $b;
 		}
 
-		if (isset($model->times) && is_numeric($model->times) && isset(Yii::app()->params['times'][(int)$model->times]))
-			$times = Yii::app()->params['times'][(int)$model->times];
-		else 
-			$times = Yii::app()->params['times'][1];
+		if ($model->schedule == '') {
+
+			if (isset($model->times) && is_numeric($model->times) && isset(Yii::app()->params['times'][(int)$model->times]))
+				$times = Yii::app()->params['times'][(int)$model->times];
+			else 
+				$times = Yii::app()->params['times'][1];
+
+		} else {
+
+			$times = explode(',', $model->schedule);
+			
+		}
 
 		$promo_days_array = $this->getPromoDays($model->id, $start_date, $end_date);
 

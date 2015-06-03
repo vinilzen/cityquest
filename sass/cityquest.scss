@@ -1516,7 +1516,7 @@ h2.twotab, a.h2.twotab {
 	.curent_date {
 		padding-top: 6px;
 		padding-left: 0;
-		padding-right: 0;
+		padding-right: 16px;
 		small, .quest_date {
 			text-align: left;
 		}
@@ -3413,4 +3413,16 @@ a {
 	&.active {
 		display: block;
 	}
+}
+.table.borderless {
+	background-color:rgba(0,0,0,0);
+	border: none;
+	margin: 0 auto;
+	td, th {
+		border: none;
+	}
+}
+
+td .priceTbl  {
+	width: 98%;
 }
