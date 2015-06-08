@@ -65,6 +65,7 @@ var SeanceView = Backbone.View.extend({
     this.$el.attr('data-haspopover', 0);
   },
   showPopover:function(){
+
     var self = this,
         q = this.model.collection.quest;
 

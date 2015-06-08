@@ -15,7 +15,7 @@ class ProfileController extends Controller
 	public function actionProfile()
 	{
 		$model = $this->loadUser();
-		$bookings = Booking::model()->with('quest')->findAllByAttributes(
+		$bookings = Booking::model()->findAllByAttributes(
 			array('competitor_id'=>Yii::app()->user->id),
 			'date >:today OR (date = :today AND time >:time) ',
 			array(
@@ -23,8 +23,18 @@ class ProfileController extends Controller
 				'time'=>date('H:i'),
 			)
 		);
-		
-		$bookings_old = Booking::model()->with('quest')->findAllByAttributes(
+
+		$bookings_array = array();
+		foreach ($bookings as $booking) {
+			$bookings_array[$booking->id] = $booking->attributes;
+			$qid = $booking->quest_id;
+			$quest = Quest::model()->findbyPk($qid);
+			$lid = $quest->location_id;
+			$bookings_array[$booking->id]['quest'] = $quest->attributes;
+			$bookings_array[$booking->id]['location'] = Location::model()->findbyPk($lid)->attributes;
+		}
+
+		$bookings_old = Booking::model()->findAllByAttributes(
 			array('competitor_id'=>Yii::app()->user->id),
 			'date < :today OR (date = :today AND time < :time) ',
 			array(
@@ -33,10 +43,21 @@ class ProfileController extends Controller
 			)
 		);
 
+
+		$bookings_old_array = array();
+		foreach ($bookings_old as $booking) {
+			$bookings_old_array[$booking->id] = $booking->attributes;
+			$qid = $booking->quest_id;
+			$quest = Quest::model()->findbyPk($qid);
+			$lid = $quest->location_id;
+			$bookings_old_array[$booking->id]['quest'] = $quest->attributes;
+			$bookings_old_array[$booking->id]['location'] = Location::model()->findbyPk($lid)->attributes;
+		}
+
 	    $this->render('profile',array(
 	    	'model'=>$model,
-	    	'bookings'=>$bookings,
-	    	'bookings_old'=>$bookings_old,
+	    	'bookings'=>$bookings_array,
+	    	'bookings_old'=>$bookings_old_array,
 	    ));
 	}
 

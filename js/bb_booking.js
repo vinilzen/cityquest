@@ -16,10 +16,10 @@ var Bookings = Backbone.Collection.extend({
 
 		q.seances.each(function(s){
 			s.set('booking', false);
+			s.booking = false;
 		});
 
 		this.each(function(model){
-
 
 			var seance = q.seances.find(function(s){
 				return s.get('time') == model.get('time');

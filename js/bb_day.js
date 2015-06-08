@@ -153,13 +153,17 @@ var Days = Backbone.Collection.extend({
 		this.deferred_holidays = $.Deferred();
 		this.deferred_promo = $.Deferred();
 		this.deferred = $.Deferred();
+
 	},
-	fill:function(){
+	fill:function(day_offset){
 		var date = new Date(),
 			today_date = new Date(),
 			active_date = new Date(),
 			i = 0,
 			self = this;
+
+		this.reset();
+		this.day_offset = day_offset || this.day_offset;
 
 		date.setDate(date.getDate() + this.day_offset);
 
@@ -196,9 +200,28 @@ var Days = Backbone.Collection.extend({
 		var days_container = $('#bb_days'),
 			self = this;
 
+		days_container.html(' ');
+
+		$('<a class="text-center btn btn-default btn-day">'+
+			'<span class="hi hi-chevron-left"></span>'+
+		  '</a>')
+				.click(function(){
+					self.fill(self.day_offset - self.period);
+				})
+				.appendTo(days_container);
+
 		this.each(function(model){
 			days_container.append(model.view.el)
 		});
+		
+		$('<a class="text-center btn btn-default btn-day">'+
+			'<span class="hi hi-chevron-right"></span>'+
+		  '</a>')
+				.click(function(){
+					self.fill(self.day_offset + self.period);
+				})
+				.appendTo(days_container);
+
 		
 		var last_day = this.last(),
 			first_day = this.first();
@@ -245,6 +268,7 @@ var Days = Backbone.Collection.extend({
 	},
 
 	setDayOff: function(active_day){
+
 		$('.today_is')
 			.html(active_day.get('day')+' '+active_day.get('month')+'. '+active_day.get('Y'));
 
@@ -298,6 +322,12 @@ var Days = Backbone.Collection.extend({
 		});
 
 		var active_day = self.getActiveDate();
+
+		if ( typeof(active_day) == 'undefined' ) {
+			self.fill(-2);
+			self.app.workspace.navigate("", {trigger: false});
+			active_day = self.getActiveDate();
+		}
 
 		if (this.holidays_ready && this.promo_ready){
 

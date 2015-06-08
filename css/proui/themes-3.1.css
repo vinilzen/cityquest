@@ -151,6 +151,8 @@
   margin-right: 5px;
   padding-left: 5px;
   padding-right: 5px;
+  /*min-height: 88px;*/
+  min-width: 35px;
 }
 .btn-day small, .btn-day span {
   display: block;
