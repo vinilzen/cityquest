@@ -5,13 +5,8 @@ $instagram_link = $this->city_model->instagram_link;
 $vk_link = $this->city_model->vk_link;
 
 if (strpos($_SERVER['HTTP_HOST'], '.kz') > 0){
-
   $currency = '<em itemprop="priceCurrency" class="currency" content="〒"><em style="font-style:normal;">〒</em></em>';
-
-}
-
-?>
-
+} ?>
 
 <div class="footer">
   <div class="row">
@@ -361,17 +356,7 @@ if (strpos($_SERVER['HTTP_HOST'], '.kz') > 0){
 </script>
 <noscript><div><img src="//mc.yandex.ru/watch/25221941" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
-  <? if ($this->city_model->id != 2 ) { ?>
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-56033342-1', 'auto');
-    ga('send', 'pageview');
-  </script>
-  <? } else { ?>
+  <? if ($this->city_model->id == 2 ) { ?>
     <script>
      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -380,10 +365,8 @@ if (strpos($_SERVER['HTTP_HOST'], '.kz') > 0){
       ga('create', 'UA-63164129-1', 'auto');
       ga('send', 'pageview');
     </script>
-
-  <? } ?>
-
-<? } ?>
+  <? }
+} ?>
 <script src="/js/jq.elastic.js"></script>
 <script src="/js/bootstrap.js"></script>
 <script src="/js/jquery.mask.min.js"></script>

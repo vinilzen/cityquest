@@ -246,7 +246,7 @@ $(function() {
 		}
 
 		if ( typeof yaCounter25221941 != 'undefined') yaCounter25221941.reachGoal('openBookWindow');
-		if ( typeof ga != 'undefined') ga('send', 'event', 'book', 'openWindow');
+		//if ( typeof ga != 'undefined') ga('send', 'event', 'book', 'openWindow');
 	});
 
 
@@ -312,7 +312,7 @@ $(function() {
 						function(result){
 							if (result && result.success) {
 								if ( typeof yaCounter25221941 != 'undefined') yaCounter25221941.reachGoal('confirmBook');
-								if ( typeof ga != 'undefined') ga('send', 'event', 'book', 'confirmBook');
+								//if ( typeof ga != 'undefined') ga('send', 'event', 'book', 'confirmBook');
 
 								var order_id = result.id,
 									uid = result.uid,
@@ -385,7 +385,7 @@ $(function() {
 										}).tooltip('show');
 								}
 
-								alert('Ошибка!');
+								alert('Ошибка!' + "\r\n" + result.message);
 							}
 						}
 					);
@@ -453,7 +453,7 @@ $(function() {
 								if (data.success && data.success == 1) {
 
 									yaCounter25221941.reachGoal('registrationSuccess');
-									ga('send', 'event', 'registration', 'registrationSuccess');
+									//ga('send', 'event', 'registration', 'registrationSuccess');
 
 									$('#reg-form button')
 										.attr({ 'title': 'Вы успешно зарегистрировались' })
@@ -988,7 +988,7 @@ $(function() {
 	$(window).load(function() {
 		if (typeof ordergiftcard != 'undefined' && ordergiftcard == 1){
 			yaCounter25221941.reachGoal("ordergiftcard");
-			ga("send", "event", "order", "giftcard");
+			//ga("send", "event", "order", "giftcard");
 		}
 	});
 
