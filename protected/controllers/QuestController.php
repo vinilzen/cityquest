@@ -675,7 +675,7 @@ class QuestController extends Controller
 		echo CJavaScript::jsonEncode(
 			array(
 				'success'=>1,
-				'seances'=>Yii::app()->params['times'][(int)$quest->times]
+				'seances'=> ($quest->schedule == '') ? Yii::app()->params['times'][(int)$quest->times] : explode(',', $quest->schedule) 
 			)
 		);
 
