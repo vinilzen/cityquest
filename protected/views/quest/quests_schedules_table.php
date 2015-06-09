@@ -119,6 +119,22 @@ foreach ($next_2week as $value) {
 						$line_through = 'through';
 
 					if ($workday) { ?>
+						<? if ($model->id == 21) { // колонка для цены, для квеста у которого естсь сеанс после полуночи 00:*  ?> 
+							<td>
+								<div class="priceTbl priceTbl_onecol" title="Цена за команду" data-toggle="tooltip">
+									<div class="priceRow">
+										<span class="price" itemprop="price" content="<?=$price_original_Pm?>"><em class="<?=$line_through?>"><?=$price_original_Pm?></em> <?=$currency?></span>
+									</div>
+								</div>
+								<? if (isset($promo_days[$value['date']])) { ?>
+									<div class="priceTbl priceTbl_onecol" title="Цена за команду" data-toggle="tooltip">
+										<div class="priceRow">
+											<span class="price" itemprop="price" content="<?=$promo_days[$value['date']]->price_pm?>"><em><?=$promo_days[$value['date']]->price_pm?></em> <?=$currency?></span>
+										</div>
+									</div>
+								<? } ?>
+							</td>
+						<? } ?>
 						<td colspan="<?=($model->id == 21)?5:7?>">
 							<div class="priceTbl" title="Цена за команду" data-toggle="tooltip">
 								<div class="priceRow">
@@ -137,7 +153,7 @@ foreach ($next_2week as $value) {
 								</div>
 							<? } ?>
 						</td>
-						<td colspan="<?=($model->id == 21)?6:3?>">
+						<td colspan="<?=($model->id == 21)?5:3?>">
 							<div class="priceTbl" title="Цена за команду" data-toggle="tooltip">
 								<div class="priceRow">
 									<span class="dashed">&nbsp;</span>

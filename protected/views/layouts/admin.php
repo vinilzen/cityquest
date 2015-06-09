@@ -19,7 +19,7 @@
 			<div id="sidebar">
 				<div id="sidebar-scroll">
 					<div class="sidebar-content">
-						<a href="/quest/adminschedule/ymd" class="sidebar-brand">
+						<a href="/" class="sidebar-brand">
 							<span class="sidebar-nav-mini-hide">
 								<strong>CityQuest</strong>
 							</span>
@@ -27,7 +27,7 @@
 						<? if (Yii::app()->getModule('user')->user()->superuser == 1) { ?>
 						<ul class="sidebar-nav">
 							<li class="">
-								<a href="/quest/adminschedule/ymd">
+								<a href="/quest/ajaxschedule/ymd">
 									<i class="hi hi-tasks sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide"><?=Yii::t('app','Bookings')?></span>
 								</a>
 							</li>

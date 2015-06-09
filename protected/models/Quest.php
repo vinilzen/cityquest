@@ -13,7 +13,7 @@
  * @property string $addres_additional
  * 
  * @property string $metro
- * @property integer $times
+ * @property string $times
  * @property integer $status
  * @property integer $sort
  * @property integer $create_time

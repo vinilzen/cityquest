@@ -3,8 +3,8 @@ var QuestView = Backbone.View.extend({
 	template: _.template(
 		'<td>'+
 			'<%= title %> <a href="/quest/update?id=<%= id %>" target="_blank">#</a>'+
-			'<small><br>(<%= price_am %>-<%= price_pm %>)'+
-			'<br>(<%= price_weekend_am %>-<%= price_weekend_pm %>)</small>'+
+			/*'<small><br>(<%= price_am %>-<%= price_pm %>)'+
+			'<br>(<%= price_weekend_am %>-<%= price_weekend_pm %>)</small>'+*/
 		'</td>'+
 		'<td class="bb_times"></td>'),
 	initialize:function(){

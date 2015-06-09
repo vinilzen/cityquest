@@ -1175,6 +1175,11 @@ hr.gradient {
 			}
 		}
 	}
+	&.priceTbl_onecol {
+		.priceRow span.price {
+			padding: 0;
+		}
+	}
 }
 .promo-day {
 	/* &.price-line {

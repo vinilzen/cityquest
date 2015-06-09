@@ -6,7 +6,7 @@
           <div class="col-xs-12">
             <div class="dropdown" id="dropdown_users">
               <button type="button" id="dLabel_users" class="btn btn-sm btn-block btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                Выбрать из зарегестрированных <span class="caret"></span>
+                Выбрать из зарегистрированных <span class="caret"></span>
               </button>
               <input type="hidden" id="selectUser_id" value="0" />
               
